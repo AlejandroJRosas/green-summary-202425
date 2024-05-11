@@ -1,0 +1,13 @@
+{
+  "name": "green-summary-202425",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "pnpm --parallel -r start"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
