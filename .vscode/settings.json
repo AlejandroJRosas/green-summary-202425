@@ -1,3 +1,8 @@
 {
-  "eslint.experimental.useFlatConfig": true
+  "eslint.enable": true,
+  "eslint.validate": ["html", "javascript", "typescript"],
+  "eslint.experimental.useFlatConfig": true,
+  "editor.insertSpaces": true,
+  "editor.tabSize": 2,
+  "editor.tabCompletion": "on"
 }

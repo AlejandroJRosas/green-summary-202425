@@ -6,16 +6,28 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "pnpm --parallel -r start:dev",
-    "build": "pnpm --parallel -r build"
+    "build": "pnpm --parallel -r build",
+    "prepare": "husky"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@eslint/js": "9.2.0",
+    "cz-conventional-changelog": "^3.3.0",
     "eslint": "^8.42.0",
     "globals": "15.2.0",
+    "husky": "9.0.11",
+    "lint-staged": "15.2.2",
     "prettier": "3.2.5",
     "typescript-eslint": "7.8.0"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
   }
 }
