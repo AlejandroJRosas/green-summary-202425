@@ -1,8 +1,19 @@
 {
   "eslint.enable": true,
-  "eslint.validate": ["html", "javascript", "typescript"],
   "eslint.experimental.useFlatConfig": true,
   "editor.insertSpaces": true,
   "editor.tabSize": 2,
-  "editor.tabCompletion": "on"
+  "editor.tabCompletion": "on",
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "ms-vsliveshare.vsliveshare"
+  },
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  }
 }
