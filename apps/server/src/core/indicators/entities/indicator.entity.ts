@@ -1,4 +1,5 @@
 import { Category } from 'src/core/categories/entities/category.entity'
+import { Criterion } from 'src/core/criteria/entities/criterion.entity'
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 
 @Entity('indicators')
@@ -17,4 +18,7 @@ export class Indicator {
 
   @OneToMany(() => Category, (category) => category.indicator)
   category: Category[]
+
+  @OneToMany(() => Criterion, (criteria) => criteria.indicator)
+  criteria: Criterion[]
 }

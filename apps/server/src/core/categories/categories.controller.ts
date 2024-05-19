@@ -4,7 +4,6 @@ import {
   Delete,
   Get,
   HttpCode,
-  NotFoundException,
   Param,
   Post,
   Put,
@@ -29,15 +28,8 @@ export class CategoriesController {
 
   @Get('/:id')
   async getCategory(@Param('id') id: string, @Res() response: Response) {
-    try {
-      const category = await this.categoriesService.getOneCategory(Number(id))
-      return response.json(category)
-    } catch (error) {
-      if (error instanceof NotFoundException) {
-        return response.status(404).json({ message: error.message })
-      }
-      return response.status(500).json({ message: 'Internal Server Error' })
-    }
+    const category = await this.categoriesService.getOneCategory(Number(id))
+    return response.json(category)
   }
 
   @Post()
@@ -58,31 +50,17 @@ export class CategoriesController {
     @Body() updatedCategory: UpdateCategoryDto,
     @Res() response: Response
   ) {
-    try {
-      const category = await this.categoriesService.updateCategory(
-        Number(id),
-        updatedCategory
-      )
-      return response.json(category)
-    } catch (error) {
-      if (error instanceof NotFoundException) {
-        return response.status(404).json({ message: error.message })
-      }
-      return response.status(500).json({ message: 'Internal Server Error' })
-    }
+    const category = await this.categoriesService.updateCategory(
+      Number(id),
+      updatedCategory
+    )
+    return response.json(category)
   }
 
   @Delete('/:id')
   async deleteCategory(@Param('id') id: string, @Res() response: Response) {
-    try {
-      await this.categoriesService.deleteCategory(Number(id))
-      return response.status(204).send()
-    } catch (error) {
-      if (error instanceof NotFoundException) {
-        return response.status(404).json({ message: error.message })
-      }
-      return response.status(500).json({ message: 'Internal Server Error' })
-    }
+    await this.categoriesService.deleteCategory(Number(id))
+    return response.status(204).send()
   }
 
   @Get('/indicator/:idIndicator')
@@ -90,16 +68,9 @@ export class CategoriesController {
     @Param('idIndicator') idIndicator: string,
     @Res() response: Response
   ) {
-    try {
-      const categories = await this.categoriesService.categoryByIndicator(
-        Number(idIndicator)
-      )
-      return response.json(categories)
-    } catch (error) {
-      if (error instanceof NotFoundException) {
-        return response.status(404).json({ message: error.message })
-      }
-      return response.status(500).json({ message: 'Internal Server Error' })
-    }
+    const categories = await this.categoriesService.categoryByIndicator(
+      Number(idIndicator)
+    )
+    return response.json(categories)
   }
 }

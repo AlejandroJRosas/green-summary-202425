@@ -16,15 +16,9 @@ export class CategoriesService {
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
-    const indicator = await this.indicatorRepository.findOne({
-      where: {
-        index: createCategoryDto.idIndicator
-      }
+    const indicator = await this.indicatorRepository.findOneByOrFail({
+      index: createCategoryDto.idIndicator
     })
-
-    if (!indicator) {
-      throw new NotFoundException('Indicator not found')
-    }
 
     const category = this.categoryRepository.create({
       ...createCategoryDto,
@@ -72,8 +66,8 @@ export class CategoriesService {
   }
 
   async categoryByIndicator(idIndicator: number): Promise<Category[]> {
-    const indicator = await this.indicatorRepository.findOne({
-      where: { index: idIndicator }
+    const indicator = await this.indicatorRepository.findOneByOrFail({
+      index: idIndicator
     })
 
     if (!indicator) {

@@ -24,12 +24,7 @@ export class IndicatorsService {
   }
 
   async getOneIndicator(index: number): Promise<Indicator> {
-    const indicator = await this.indicatorRepository.findOne({
-      where: { index }
-    })
-    if (!indicator) {
-      throw new NotFoundException(`Indicator with ID ${index} not found`)
-    }
+    const indicator = await this.indicatorRepository.findOneByOrFail({ index })
     return indicator
   }
 
@@ -38,12 +33,9 @@ export class IndicatorsService {
     updateIndicatorDto: UpdateIndicatorDto
   ): Promise<Indicator> {
     await this.indicatorRepository.update(index, updateIndicatorDto)
-    const updatedIndicador = await this.indicatorRepository.findOne({
-      where: { index }
+    const updatedIndicador = await this.indicatorRepository.findOneByOrFail({
+      index
     })
-    if (!updatedIndicador) {
-      throw new NotFoundException(`Indicador with ID ${index} not found`)
-    }
     return updatedIndicador
   }
 

@@ -5,6 +5,7 @@ import * as path from 'path'
 import { ConfigModule, ConfigService } from 'nestjs-config'
 import { IndicatorsModule } from './core/indicators/indicators.module'
 import { CategoriesModule } from './core/categories/categories.module'
+import { CriteriaModule } from './core/criteria/criteria.module'
 
 @Module({
   imports: [
@@ -24,7 +25,8 @@ import { CategoriesModule } from './core/categories/categories.module'
     }),
     UsersModule,
     IndicatorsModule,
-    CategoriesModule
+    CategoriesModule,
+    CriteriaModule
   ]
 })
 export class AppModule {}
