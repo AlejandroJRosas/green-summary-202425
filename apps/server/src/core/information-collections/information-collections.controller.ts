@@ -13,7 +13,9 @@ import { Response } from 'express'
 import { InformationCollectionsService } from './information-collections.service'
 import { CreateInformationCollectionDto } from './dto/create-information-collection.dto'
 import { UpdateInformationCollectionDto } from './dto/update-information-collection.dto'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Information Collections')
 @Controller('information-collections')
 export class InformationCollectionsController {
   constructor(
