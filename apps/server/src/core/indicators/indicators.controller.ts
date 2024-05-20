@@ -13,7 +13,9 @@ import { IndicatorsService } from './indicators.service'
 import { Response } from 'express'
 import { CreateIndicatorDto } from './dto/create-indicator.dto'
 import { UpdateIndicatorDto } from './dto/update-indicator.dto'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Indicators')
 @Controller('indicators')
 export class IndicatorsController {
   constructor(private readonly indicatorsService: IndicatorsService) {}

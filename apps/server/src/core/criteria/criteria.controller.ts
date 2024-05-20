@@ -14,7 +14,9 @@ import { CriterionService } from './criteria.service'
 import { CreateCriterionDto } from './dto/create-criterion.dto'
 import { UpdateCriterionDto } from './dto/update-criterion.dto'
 import { Response } from 'express'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Criteria')
 @Controller('criteria')
 export class CriterionController {
   constructor(private readonly criterionService: CriterionService) {}
