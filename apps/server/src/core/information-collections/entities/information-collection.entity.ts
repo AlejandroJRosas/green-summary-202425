@@ -1,5 +1,11 @@
 import { Evidence } from 'src/core/evidences/entities/evidence.entity'
-import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  OneToMany,
+  CreateDateColumn
+} from 'typeorm'
 
 @Entity('information_collections')
 export class InformationCollection {
@@ -9,8 +15,11 @@ export class InformationCollection {
   @Column({ type: 'text' })
   summary: string
 
-  @Column({ type: 'date' })
-  creationDate: Date
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)'
+  })
+  createdAt: Date
 
   @OneToMany(() => Evidence, (evidence) => evidence.collection)
   evidences: Evidence[]
