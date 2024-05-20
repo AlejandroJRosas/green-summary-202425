@@ -29,4 +29,6 @@ export class Criterion {
 
   @ManyToOne(() => Indicator, (indicator) => indicator.criteria)
   indicator: Indicator
+
+  //TODO: RELATION WITH CATEGORIZED CRITERIA (RECOPILATION AND CATEGORY)
 }

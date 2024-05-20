@@ -21,4 +21,6 @@ export class Indicator {
 
   @OneToMany(() => Criterion, (criteria) => criteria.indicator)
   criteria: Criterion[]
+
+  //TODO: RELATION WITH RECOPILATION
 }
