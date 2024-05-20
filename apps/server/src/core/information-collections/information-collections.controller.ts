@@ -7,7 +7,8 @@ import {
   Delete,
   Put,
   Res,
-  HttpStatus
+  HttpStatus,
+  HttpCode
 } from '@nestjs/common'
 import { Response } from 'express'
 import { InformationCollectionsService } from './information-collections.service'
@@ -25,20 +26,19 @@ export class InformationCollectionsController {
   @Get()
   async findAll(@Res() res: Response): Promise<void> {
     const collections = await this.informationCollectionsService.findAll()
+
     res.status(HttpStatus.OK).json(collections)
   }
 
   @Get(':id')
   async findOne(@Param('id') id: number, @Res() res: Response): Promise<void> {
     const collection = await this.informationCollectionsService.findOne(id)
-    if (collection) {
-      res.status(HttpStatus.OK).json(collection)
-    } else {
-      res.status(HttpStatus.NOT_FOUND).json({ message: 'Collection not found' })
-    }
+
+    res.json(collection)
   }
 
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   async create(
     @Body() createInformationCollectionDto: CreateInformationCollectionDto,
     @Res() res: Response
@@ -46,7 +46,7 @@ export class InformationCollectionsController {
     const newCollection = await this.informationCollectionsService.create(
       createInformationCollectionDto
     )
-    res.status(HttpStatus.CREATED).json(newCollection)
+    res.json(newCollection)
   }
 
   @Put(':id')
@@ -67,8 +67,8 @@ export class InformationCollectionsController {
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number, @Res() res: Response): Promise<void> {
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async remove(@Param('id') id: number): Promise<void> {
     await this.informationCollectionsService.remove(id)
-    res.status(HttpStatus.NO_CONTENT).send()
   }
 }
