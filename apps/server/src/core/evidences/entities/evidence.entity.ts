@@ -3,17 +3,26 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
-  JoinColumn
+  JoinColumn,
+  CreateDateColumn,
+  TableInheritance
 } from 'typeorm'
 import { InformationCollection } from 'src/core/information-collections/entities/information-collection.entity'
+import { EvidenceType } from '../constants'
 
 @Entity('evidences')
+@TableInheritance({
+  column: { type: 'enum', enum: EvidenceType, name: 'type' }
+})
 export class Evidence {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ type: 'date' })
-  uploadDate: Date
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)'
+  })
+  createdAt: Date
 
   @Column({ type: 'text' })
   description: string
@@ -21,16 +30,13 @@ export class Evidence {
   @Column({ type: 'text' })
   error: string
 
-  @Column({ type: 'varchar', length: 25 })
-  type: string
-
-  @Column({ type: 'text', nullable: true })
-  externalLink: string
-
-  @Column({ type: 'text', nullable: true })
-  fileLink: string
+  @Column({
+    type: 'enum',
+    enum: EvidenceType
+  })
+  type: EvidenceType
 
   @ManyToOne(() => InformationCollection, (collection) => collection.evidences)
-  @JoinColumn({ name: 'id_collection' })
+  @JoinColumn({ name: 'collection_id' })
   collection: InformationCollection
 }

@@ -3,8 +3,10 @@ import {
   IsString,
   IsOptional,
   IsNotEmpty,
-  IsInt
+  IsInt,
+  IsEnum
 } from 'class-validator'
+import { EvidenceType } from '../constants'
 
 export class CreateEvidenceDto {
   @IsDateString()
@@ -19,9 +21,9 @@ export class CreateEvidenceDto {
   @IsNotEmpty()
   error: string
 
-  @IsString()
+  @IsEnum(EvidenceType)
   @IsNotEmpty()
-  type: string
+  type: EvidenceType
 
   @IsOptional()
   @IsString()
