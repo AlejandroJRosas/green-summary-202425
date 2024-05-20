@@ -13,7 +13,9 @@ import { Response } from 'express'
 import { EvidencesService } from './evidences.service'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
 import { UpdateEvidenceDto } from './dto/update-evidence.dto'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Evidences')
 @Controller('evidences')
 export class EvidencesController {
   constructor(private readonly evidencesService: EvidencesService) {}
