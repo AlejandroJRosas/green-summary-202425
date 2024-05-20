@@ -23,4 +23,6 @@ export class InformationCollection {
 
   @OneToMany(() => Evidence, (evidence) => evidence.collection)
   evidences: Evidence[]
+
+  //TODO: RELATION WITH DEPARTMENT_CATEGORY_RECOPILATION (A TABLE TO RESOLVE TERTIARY RELATION)
 }
