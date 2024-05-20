@@ -5,6 +5,10 @@ import * as path from 'path'
 import { ConfigModule, ConfigService } from 'nestjs-config'
 import { InformationCollectionsModule } from './core/information-collections/information-collections.module'
 import { EvidencesModule } from './core/evidences/evidences.module'
+import { IndicatorsModule } from './core/indicators/indicators.module'
+import { CategoriesModule } from './core/categories/categories.module'
+import { CriteriaModule } from './core/criteria/criteria.module'
+
 
 @Module({
   imports: [
@@ -24,7 +28,10 @@ import { EvidencesModule } from './core/evidences/evidences.module'
     }),
     UsersModule,
     InformationCollectionsModule,
-    EvidencesModule
+    EvidencesModule,
+    IndicatorsModule,
+    CategoriesModule,
+    CriteriaModule
   ]
 })
 export class AppModule {}
