@@ -40,7 +40,5 @@ export class UsersService {
     const user = await this.usersRepository.findOneByOrFail({ id })
 
     await this.usersRepository.remove([user])
-
-    return `User with id ${id} has been removed successfully`
   }
 }
