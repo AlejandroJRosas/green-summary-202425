@@ -7,7 +7,7 @@ export class UpdateCategoryDto {
 
   @IsString()
   @IsOptional()
-  textHelp?: string
+  helpText?: string
 
   @IsInt()
   @IsOptional()

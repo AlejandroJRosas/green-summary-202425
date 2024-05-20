@@ -7,7 +7,7 @@ import {
 } from 'typeorm'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
 
-@Entity()
+@Entity('criteria')
 export class Criterion {
   @PrimaryColumn()
   indicatorIndex: number
@@ -24,7 +24,7 @@ export class Criterion {
   @Column('text')
   helpText: string
 
-  @Column()
+  @Column({ default: false })
   requiresEvidence: boolean
 
   @ManyToOne(() => Indicator, (indicator) => indicator.criteria)

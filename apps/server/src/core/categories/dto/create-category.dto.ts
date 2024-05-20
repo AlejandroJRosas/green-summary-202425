@@ -7,7 +7,7 @@ export class CreateCategoryDto {
 
   @IsNotEmpty()
   @IsString()
-  textHelp: string
+  helpText: string
 
   @IsNumber()
   @IsNotEmpty()

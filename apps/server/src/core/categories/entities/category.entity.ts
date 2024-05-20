@@ -10,7 +10,7 @@ export class Category {
   name: string
 
   @Column({ type: 'text' })
-  textHelp: string
+  helpText: string
 
   @ManyToOne(() => Indicator, (indicator) => indicator.category)
   indicator: Indicator

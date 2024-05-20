@@ -1,18 +1,29 @@
-import { IsNumber, IsString, IsBoolean } from 'class-validator'
+import {
+  IsNumber,
+  IsString,
+  IsBoolean,
+  IsNotEmpty,
+  IsOptional
+} from 'class-validator'
 
 export class CreateCriterionDto {
   @IsNumber()
-  readonly indicatorIndex: number
+  @IsNotEmpty()
+  indicatorIndex: number
 
   @IsString()
-  readonly name: string
+  @IsNotEmpty()
+  name: string
 
   @IsString()
-  readonly alias: string
+  @IsNotEmpty()
+  alias: string
 
   @IsString()
-  readonly helpText: string
+  @IsNotEmpty()
+  helpText: string
 
   @IsBoolean()
-  readonly requiresEvidence: boolean
+  @IsOptional()
+  requiresEvidence?: boolean
 }
