@@ -65,7 +65,7 @@ export class CategoriesService {
     }
   }
 
-  async categoryByIndicator(idIndicator: number): Promise<Category[]> {
+  async categoriesByIndicator(idIndicator: number): Promise<Category[]> {
     const indicator = await this.indicatorRepository.findOneByOrFail({
       index: idIndicator
     })

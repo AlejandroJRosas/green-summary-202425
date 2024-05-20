@@ -65,13 +65,13 @@ export class CategoriesController {
     return response.status(204).send()
   }
 
-  @Get('/indicator/:idIndicator')
+  @Get('/indicator/:indicatorIndex')
   async getCategoriesByIndicator(
-    @Param('idIndicator') idIndicator: string,
+    @Param('indicatorIndex') indicatorIndex: string,
     @Res() response: Response
   ) {
-    const categories = await this.categoriesService.categoryByIndicator(
-      Number(idIndicator)
+    const categories = await this.categoriesService.categoriesByIndicator(
+      Number(indicatorIndex)
     )
     return response.json(categories)
   }
