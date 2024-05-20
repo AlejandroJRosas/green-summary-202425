@@ -7,7 +7,8 @@ import {
   Delete,
   Put,
   Res,
-  HttpStatus
+  HttpStatus,
+  HttpCode
 } from '@nestjs/common'
 import { Response } from 'express'
 import { EvidencesService } from './evidences.service'
@@ -23,26 +24,26 @@ export class EvidencesController {
   @Get()
   async findAll(@Res() res: Response): Promise<void> {
     const evidences = await this.evidencesService.findAll()
-    res.status(HttpStatus.OK).json(evidences)
+
+    res.json(evidences)
   }
 
   @Get(':id')
   async findOne(@Param('id') id: string, @Res() res: Response): Promise<void> {
     const evidence = await this.evidencesService.findOne(+id)
-    if (evidence) {
-      res.status(HttpStatus.OK).json(evidence)
-    } else {
-      res.status(HttpStatus.NOT_FOUND).json({ message: 'Evidence not found' })
-    }
+
+    res.json(evidence)
   }
 
   @Post()
+  @HttpCode(HttpStatus.CREATED)
   async create(
     @Body() createEvidenceDto: CreateEvidenceDto,
     @Res() res: Response
   ): Promise<void> {
     const newEvidence = await this.evidencesService.create(createEvidenceDto)
-    res.status(HttpStatus.CREATED).json(newEvidence)
+
+    res.json(newEvidence)
   }
 
   @Put(':id')
@@ -55,16 +56,13 @@ export class EvidencesController {
       +id,
       updateEvidenceDto
     )
-    if (updatedEvidence) {
-      res.status(HttpStatus.OK).json(updatedEvidence)
-    } else {
-      res.status(HttpStatus.NOT_FOUND).json({ message: 'Evidence not found' })
-    }
+
+    res.json(updatedEvidence)
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: string, @Res() res: Response): Promise<void> {
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async remove(@Param('id') id: string): Promise<void> {
     await this.evidencesService.remove(+id)
-    res.status(HttpStatus.NO_CONTENT).send()
   }
 }
