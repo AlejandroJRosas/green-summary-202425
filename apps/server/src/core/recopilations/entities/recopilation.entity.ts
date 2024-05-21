@@ -19,4 +19,6 @@ export class Recopilation {
 
   @Column({ type: 'date' })
   endDate: Date
+
+  //TODO: RELATIONS
 }
