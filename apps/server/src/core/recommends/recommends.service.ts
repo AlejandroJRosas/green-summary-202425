@@ -56,17 +56,20 @@ export class RecommendService {
     IDCategoria: number,
     updateRecommendDto: UpdateRecommendDto
   ): Promise<Recommend> {
-    const recommend = await this.recommendRepository.findOneByOrFail({ IDDepartamento, IDCategoria })
-    if (!recommend) {
-      throw new NotFoundException('Recommendation not found')
-    }
+    const recommend = await this.recommendRepository.findOneByOrFail({
+      IDDepartamento,
+      IDCategoria
+    })
 
     Object.assign(recommend, updateRecommendDto)
     return this.recommendRepository.save(recommend)
   }
 
   async remove(IDDepartamento: number, IDCategoria: number): Promise<void> {
-    const recommend = await this.recommendRepository.findOneByOrFail({ IDDepartamento, IDCategoria })
+    const recommend = await this.recommendRepository.findOneByOrFail({
+      IDDepartamento,
+      IDCategoria
+    })
 
     await this.recommendRepository.remove(recommend)
   }
