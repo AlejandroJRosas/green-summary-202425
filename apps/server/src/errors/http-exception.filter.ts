@@ -5,7 +5,7 @@ import {
   HttpException
 } from '@nestjs/common'
 import { Response } from 'express'
-import { HttpErrorResponse } from './http-error-response'
+import { constructHttpResponse } from 'src/shared/construct-http-response'
 
 @Catch(HttpException)
 export class HttpExceptionFilter implements ExceptionFilter {
@@ -22,6 +22,7 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     return response
       .status(statusCode)
-      .json(new HttpErrorResponse(error, message))
+      .json(constructHttpResponse(statusCode, error, message))
+    /* .json(new HttpErrorResponse(error, message)) */
   }
 }
