@@ -31,9 +31,11 @@ export class UsersService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.usersRepository.update(id, updateUserDto)
+    await this.usersRepository.findOneByOrFail({ id })
 
-    return user
+    await this.usersRepository.update(id, updateUserDto)
+
+    return this.usersRepository.findOneByOrFail({ id })
   }
 
   async remove(id: number) {
