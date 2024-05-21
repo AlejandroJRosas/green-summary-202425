@@ -11,7 +11,7 @@ import {
   TypeORMError
 } from 'typeorm'
 import { Response } from 'express'
-import { HttpErrorResponse } from './http-error-response'
+import { constructHttpResponse } from 'src/shared/construct-http-response'
 
 @Catch(TypeORMError)
 export class TypeORMExceptionFilter implements ExceptionFilter {
@@ -44,6 +44,6 @@ export class TypeORMExceptionFilter implements ExceptionFilter {
 
     return response
       .status(statusCode)
-      .json(new HttpErrorResponse(error, message))
+      .json(constructHttpResponse(statusCode, error, message))
   }
 }
