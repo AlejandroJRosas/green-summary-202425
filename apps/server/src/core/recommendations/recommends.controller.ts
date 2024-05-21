@@ -3,7 +3,6 @@ import {
   Get,
   Post,
   Body,
-  Patch,
   Param,
   Delete,
   Res,
@@ -11,16 +10,17 @@ import {
 } from '@nestjs/common'
 import { Response } from 'express'
 import { RecommendService } from './recommends.service'
-import { CreateRecommendDto } from './dto/create-recommend.dto'
-import { UpdateRecommendDto } from './dto/update-recommend.dto'
+import { CreateRecommendationDto } from './dto/create-recommendation.dto'
+import { ApiTags } from '@nestjs/swagger'
 
-@Controller('recommends')
+@ApiTags('Recommendations')
+@Controller('recommendations')
 export class RecommendController {
   constructor(private readonly recommendService: RecommendService) {}
 
   @Post()
   async create(
-    @Body() createRecommendDto: CreateRecommendDto,
+    @Body() createRecommendDto: CreateRecommendationDto,
     @Res() res: Response
   ) {
     const result = await this.recommendService.create(createRecommendDto)
@@ -33,41 +33,15 @@ export class RecommendController {
     return res.status(HttpStatus.OK).json(result)
   }
 
-  @Get(':IDDepartamento/:IDCategoria')
-  async findOne(
-    @Param('IDDepartamento') IDDepartamento: number,
-    @Param('IDCategoria') IDCategoria: number,
-    @Res() res: Response
-  ) {
-    const result = await this.recommendService.findOne(
-      IDDepartamento,
-      IDCategoria
-    )
+  @Get(':id')
+  async findOne(@Param('id') id: number, @Res() res: Response) {
+    const result = await this.recommendService.findOne(id)
     return res.status(HttpStatus.OK).json(result)
   }
 
-  @Patch(':IDDepartamento/:IDCategoria')
-  async update(
-    @Param('IDDepartamento') IDDepartamento: number,
-    @Param('IDCategoria') IDCategoria: number,
-    @Body() updateRecommendDto: UpdateRecommendDto,
-    @Res() res: Response
-  ) {
-    const result = await this.recommendService.update(
-      IDDepartamento,
-      IDCategoria,
-      updateRecommendDto
-    )
-    return res.status(HttpStatus.OK).json(result)
-  }
-
-  @Delete(':IDDepartamento/:IDCategoria')
-  async remove(
-    @Param('IDDepartamento') IDDepartamento: number,
-    @Param('IDCategoria') IDCategoria: number,
-    @Res() res: Response
-  ) {
-    await this.recommendService.remove(IDDepartamento, IDCategoria)
+  @Delete(':id')
+  async remove(@Param('id') id: number, @Res() res: Response) {
+    await this.recommendService.remove(id)
     return res.status(HttpStatus.NO_CONTENT).send()
   }
 }

@@ -1,11 +1,11 @@
 import { IsNotEmpty, IsNumber } from 'class-validator'
 
-export class CreateRecommendDto {
-  @IsNotEmpty()
+export class CreateRecommendationDto {
   @IsNumber()
-  IDDepartamento: number
+  @IsNotEmpty()
+  departmentId: number
 
-  @IsNotEmpty()
   @IsNumber()
-  IDCategoria: number
+  @IsNotEmpty()
+  categoryId: number
 }

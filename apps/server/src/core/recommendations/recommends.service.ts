@@ -1,76 +1,60 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { Recommend } from './entities/recommend.entity'
-import { CreateRecommendDto } from './dto/create-recommend.dto'
-import { UpdateRecommendDto } from './dto/update-recommend.dto'
-import { User } from 'src/core/users/entities/user.entity'
+import { Recommendation } from './entities/recommendation.entity'
+import { CreateRecommendationDto } from './dto/create-recommendation.dto'
 import { Category } from 'src/core/categories/entities/category.entity'
-import { UserTypes } from '../users/constants'
+import { Department } from '../users/entities/department.entity'
 
 @Injectable()
 export class RecommendService {
   constructor(
-    @InjectRepository(Recommend)
-    private readonly recommendRepository: Repository<Recommend>,
-    @InjectRepository(User)
-    private readonly userRepository: Repository<User>,
+    @InjectRepository(Recommendation)
+    private readonly recommendationsRepository: Repository<Recommendation>,
+    @InjectRepository(Department)
+    private readonly departmentsRepository: Repository<Department>,
     @InjectRepository(Category)
-    private readonly categoryRepository: Repository<Category>
+    private readonly categoriesRepository: Repository<Category>
   ) {}
 
-  async create(createRecommendDto: CreateRecommendDto): Promise<Recommend> {
-    const { IDDepartamento, IDCategoria } = createRecommendDto
+  async create(
+    createRecommendationDto: CreateRecommendationDto
+  ): Promise<Recommendation> {
+    const { departmentId, categoryId } = createRecommendationDto
 
-    const departamento = await this.userRepository.findOneOrFail({
-      where: { id: IDDepartamento, type: UserTypes.DEPARTMENT }
+    const department = await this.departmentsRepository.findOneByOrFail({
+      id: departmentId
     })
-    const categoria = await this.categoryRepository.findOneOrFail({
-      where: { id: IDCategoria }
+    const category = await this.categoriesRepository.findOneByOrFail({
+      id: categoryId
     })
 
-    const recommend = new Recommend()
-    recommend.IDDepartamento = IDDepartamento
-    recommend.IDCategoria = IDCategoria
-    recommend.departamento = departamento
-    recommend.categoria = categoria
+    const recommendation = this.recommendationsRepository.create({
+      department,
+      category
+    })
 
-    return this.recommendRepository.save(recommend)
+    return this.recommendationsRepository.save(recommendation)
   }
 
-  findAll(): Promise<Recommend[]> {
-    return this.recommendRepository.find({
+  findAll(): Promise<Recommendation[]> {
+    return this.recommendationsRepository.find({
       relations: ['departamento', 'categoria']
     })
   }
 
-  findOne(IDDepartamento: number, IDCategoria: number): Promise<Recommend> {
-    return this.recommendRepository.findOneOrFail({
-      where: { IDDepartamento, IDCategoria },
+  findOne(id: number): Promise<Recommendation> {
+    return this.recommendationsRepository.findOneOrFail({
+      where: { id },
       relations: ['departamento', 'categoria']
     })
   }
 
-  async update(
-    IDDepartamento: number,
-    IDCategoria: number,
-    updateRecommendDto: UpdateRecommendDto
-  ): Promise<Recommend> {
-    const recommend = await this.recommendRepository.findOneByOrFail({
-      IDDepartamento,
-      IDCategoria
+  async remove(id: number): Promise<void> {
+    const recommend = await this.recommendationsRepository.findOneByOrFail({
+      id
     })
 
-    Object.assign(recommend, updateRecommendDto)
-    return this.recommendRepository.save(recommend)
-  }
-
-  async remove(IDDepartamento: number, IDCategoria: number): Promise<void> {
-    const recommend = await this.recommendRepository.findOneByOrFail({
-      IDDepartamento,
-      IDCategoria
-    })
-
-    await this.recommendRepository.remove(recommend)
+    await this.recommendationsRepository.remove(recommend)
   }
 }
