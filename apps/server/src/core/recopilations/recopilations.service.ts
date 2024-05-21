@@ -2,6 +2,8 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Recopilation } from './entities/recopilation.entity'
+import { UpdateRecopilationDto } from './dto/update-recopilation.dto'
+import { CreateRecopilationDto } from './dto/create-recopilation.dto'
 
 @Injectable()
 export class RecopilationsService {
@@ -18,26 +20,30 @@ export class RecopilationsService {
     return this.recopilationsRepository.findOneByOrFail({ id })
   }
 
-  async create(recopilationData: Partial<Recopilation>): Promise<Recopilation> {
+  async create(recopilationData: CreateRecopilationDto): Promise<Recopilation> {
     const recopilation = this.recopilationsRepository.create(recopilationData)
+
     return this.recopilationsRepository.save(recopilation)
   }
 
   async update(
     id: number,
-    recopilationData: Partial<Recopilation>
+    recopilationData: UpdateRecopilationDto
   ): Promise<Recopilation> {
-    const recopilation = await this.recopilationsRepository.findOneByOrFail({
+    await this.recopilationsRepository.findOneByOrFail({
       id
     })
-    const updatedRecopilation = Object.assign(recopilation, recopilationData)
-    return this.recopilationsRepository.save(updatedRecopilation)
+
+    await this.recopilationsRepository.update(id, recopilationData)
+
+    return this.recopilationsRepository.findOneByOrFail({ id })
   }
 
   async remove(id: number): Promise<void> {
     const recopilation = await this.recopilationsRepository.findOneByOrFail({
       id
     })
+
     await this.recopilationsRepository.remove([recopilation])
   }
 }
