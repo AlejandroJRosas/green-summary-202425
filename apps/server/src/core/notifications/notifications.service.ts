@@ -19,7 +19,7 @@ export class NotificationsService {
     createNotificationDto: CreateNotificationDto
   ): Promise<Notification> {
     const user = await this.userRepository.findOneByOrFail({
-      id: createNotificationDto.idUser
+      id: createNotificationDto.userId
     })
 
     const notification = this.notificationRepository.create({
