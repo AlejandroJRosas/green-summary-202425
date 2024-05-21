@@ -13,7 +13,7 @@ export class Notification {
   id: number
 
   @Column()
-  view: string
+  seen: boolean
 
   @CreateDateColumn({
     type: 'timestamp',
