@@ -45,7 +45,7 @@ export class RecommendService {
   }
 
   findOne(IDDepartamento: number, IDCategoria: number): Promise<Recommend> {
-    return this.recommendRepository.findOne({
+    return this.recommendRepository.findOneOrFail({
       where: { IDDepartamento, IDCategoria },
       relations: ['departamento', 'categoria']
     })
@@ -56,9 +56,7 @@ export class RecommendService {
     IDCategoria: number,
     updateRecommendDto: UpdateRecommendDto
   ): Promise<Recommend> {
-    const recommend = await this.recommendRepository.findOneOrFail({
-      where: { IDDepartamento, IDCategoria }
-    })
+    const recommend = await this.recommendRepository.findOneByOrFail({ IDDepartamento, IDCategoria })
     if (!recommend) {
       throw new NotFoundException('Recommendation not found')
     }
@@ -68,12 +66,7 @@ export class RecommendService {
   }
 
   async remove(IDDepartamento: number, IDCategoria: number): Promise<void> {
-    const recommend = await this.recommendRepository.findOne({
-      where: { IDDepartamento, IDCategoria }
-    })
-    if (!recommend) {
-      throw new NotFoundException('Recommendation not found')
-    }
+    const recommend = await this.recommendRepository.findOneByOrFail({ IDDepartamento, IDCategoria })
 
     await this.recommendRepository.remove(recommend)
   }
