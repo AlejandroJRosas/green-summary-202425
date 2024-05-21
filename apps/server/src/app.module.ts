@@ -4,6 +4,12 @@ import { UsersModule } from './core/users/users.module'
 import * as path from 'path'
 import { ConfigModule, ConfigService } from 'nestjs-config'
 import { NotificationsModule } from './core/notifications/notifications.module'
+import { InformationCollectionsModule } from './core/information-collections/information-collections.module'
+import { EvidencesModule } from './core/evidences/evidences.module'
+import { IndicatorsModule } from './core/indicators/indicators.module'
+import { CategoriesModule } from './core/categories/categories.module'
+import { CriteriaModule } from './core/criteria/criteria.module'
+import { RecopilationsModule } from './core/recopilations/recopilations.module'
 
 @Module({
   imports: [
@@ -22,7 +28,13 @@ import { NotificationsModule } from './core/notifications/notifications.module'
       inject: [ConfigService]
     }),
     UsersModule,
-    NotificationsModule
+    NotificationsModule,
+    InformationCollectionsModule,
+    EvidencesModule,
+    IndicatorsModule,
+    CategoriesModule,
+    CriteriaModule,
+    RecopilationsModule
   ]
 })
 export class AppModule {}
