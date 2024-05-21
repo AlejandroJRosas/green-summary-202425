@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { UsersModule } from './core/users/users.module'
 import * as path from 'path'
 import { ConfigModule, ConfigService } from 'nestjs-config'
+import { NotificationsModule } from './core/notifications/notifications.module'
 
 @Module({
   imports: [
@@ -20,7 +21,8 @@ import { ConfigModule, ConfigService } from 'nestjs-config'
       },
       inject: [ConfigService]
     }),
-    UsersModule
+    UsersModule,
+    NotificationsModule
   ]
 })
 export class AppModule {}

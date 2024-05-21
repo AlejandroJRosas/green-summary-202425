@@ -1,4 +1,5 @@
-import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm'
+import { Notification } from 'src/core/notifications/entities/notification.entity'
+import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 
 @Entity({ name: 'users' })
 export class User {
@@ -13,4 +14,7 @@ export class User {
 
   @Column()
   password: string
+
+  @OneToMany(() => Notification, (notifications) => notifications.user)
+  notifications: Notification[]
 }
