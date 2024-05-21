@@ -3,6 +3,7 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { UsersModule } from './core/users/users.module'
 import * as path from 'path'
 import { ConfigModule, ConfigService } from 'nestjs-config'
+import { NotificationsModule } from './core/notifications/notifications.module'
 import { InformationCollectionsModule } from './core/information-collections/information-collections.module'
 import { EvidencesModule } from './core/evidences/evidences.module'
 import { IndicatorsModule } from './core/indicators/indicators.module'
@@ -27,6 +28,7 @@ import { RecopilationsModule } from './core/recopilations/recopilations.module'
       inject: [ConfigService]
     }),
     UsersModule,
+    NotificationsModule,
     InformationCollectionsModule,
     EvidencesModule,
     IndicatorsModule,
