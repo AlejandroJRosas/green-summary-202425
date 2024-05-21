@@ -47,6 +47,6 @@ export class UsersController {
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param() { id }: FindOneParams) {
-    this.usersService.remove(+id)
+    await this.usersService.remove(+id)
   }
 }
