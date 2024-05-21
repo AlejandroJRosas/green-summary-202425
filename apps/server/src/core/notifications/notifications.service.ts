@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { CreateNotificationDto } from './dto/create-notification.dto'
 import { UpdateNotificationDto } from './dto/update-notification.dto'
 import { Notification } from './entities/notification.entity'
@@ -35,14 +35,11 @@ export class NotificationsService {
   }
 
   async getOne(id: number): Promise<Notification> {
-    const notification = await this.notificationRepository.findOne({
+    const notification = await this.notificationRepository.findOneOrFail({
       where: { id },
       relations: ['user']
     })
 
-    if (!notification) {
-      throw new NotFoundException(`Notification with ID ${id} not found`)
-    }
     return notification
   }
 
@@ -52,22 +49,17 @@ export class NotificationsService {
   ): Promise<Notification> {
     await this.notificationRepository.update(id, updateNotificationDto)
 
-    const notification = await this.notificationRepository.findOne({
+    const notification = await this.notificationRepository.findOneOrFail({
       where: { id },
       relations: ['user']
     })
 
-    if (!notification) {
-      throw new NotFoundException(`Notification with ID ${id} not found`)
-    }
     return notification
   }
 
   async delete(id: number): Promise<void> {
-    const result = await this.notificationRepository.delete(id)
+    await this.notificationRepository.findOneByOrFail({ id })
 
-    if (result.affected === 0) {
-      throw new NotFoundException(`Notification with ID ${id} not found`)
-    }
+    await this.notificationRepository.delete(id)
   }
 }
