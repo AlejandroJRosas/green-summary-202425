@@ -1,5 +1,11 @@
 import { User } from 'src/core/users/entities/user.entity'
-import { PrimaryGeneratedColumn, Column, ManyToOne, Entity } from 'typeorm'
+import {
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  Entity,
+  CreateDateColumn
+} from 'typeorm'
 
 @Entity({ name: 'notifications' })
 export class Notification {
@@ -9,8 +15,11 @@ export class Notification {
   @Column()
   view: string
 
-  @Column()
-  creationDate: string
+  @CreateDateColumn({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP(6)'
+  })
+  createdAt: Date
 
   @ManyToOne(() => User, (user) => user.notifications)
   user: User

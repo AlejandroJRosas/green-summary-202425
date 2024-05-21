@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsNumber, IsString } from 'class-validator'
+import { IsDateString, IsNotEmpty, IsNumber, IsString } from 'class-validator'
 
 export class CreateNotificationDto {
   @IsNotEmpty()
@@ -6,8 +6,8 @@ export class CreateNotificationDto {
   view: string
 
   @IsNotEmpty()
-  @IsString()
-  creationDate: string
+  @IsDateString()
+  createdAt: string
 
   @IsNotEmpty()
   @IsNumber()
