@@ -8,7 +8,7 @@ import { EvidencesModule } from './core/evidences/evidences.module'
 import { IndicatorsModule } from './core/indicators/indicators.module'
 import { CategoriesModule } from './core/categories/categories.module'
 import { CriteriaModule } from './core/criteria/criteria.module'
-
+import { RecopilationsModule } from './core/recopilations/recopilations.module'
 
 @Module({
   imports: [
@@ -31,7 +31,8 @@ import { CriteriaModule } from './core/criteria/criteria.module'
     EvidencesModule,
     IndicatorsModule,
     CategoriesModule,
-    CriteriaModule
+    CriteriaModule,
+    RecopilationsModule
   ]
 })
 export class AppModule {}
