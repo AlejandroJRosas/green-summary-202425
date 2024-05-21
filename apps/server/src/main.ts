@@ -4,6 +4,7 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger'
 import { ValidationPipe } from '@nestjs/common'
 import { TypeORMExceptionFilter } from './errors/type-orm-exception.filter'
 import { HttpExceptionFilter } from './errors/http-exception.filter'
+import { SuccessfulResponseBuilderInterceptor } from './succesful-response-builder/successful-response-builder'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
@@ -15,6 +16,8 @@ async function bootstrap() {
       whitelist: true
     })
   )
+
+  app.useGlobalInterceptors(new SuccessfulResponseBuilderInterceptor())
 
   const config = new DocumentBuilder()
     .setTitle('Green Summary Backend')
