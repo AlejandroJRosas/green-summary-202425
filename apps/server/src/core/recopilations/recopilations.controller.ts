@@ -14,7 +14,9 @@ import { Response } from 'express'
 import { RecopilationsService } from './recopilations.service'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
 import { UpdateRecopilationDto } from './dto/update-recopilation.dto'
+import { ApiTags } from '@nestjs/swagger'
 
+@ApiTags('Recopilations')
 @Controller('recopilations')
 export class RecopilationsController {
   constructor(private readonly recopilationsService: RecopilationsService) {}
