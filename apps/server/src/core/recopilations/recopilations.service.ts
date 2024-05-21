@@ -27,11 +27,17 @@ export class RecopilationsService {
     id: number,
     recopilationData: Partial<Recopilation>
   ): Promise<Recopilation> {
-    await this.recopilationsRepository.update(id, recopilationData)
-    return this.recopilationsRepository.findOneByOrFail({ id })
+    const recopilation = await this.recopilationsRepository.findOneByOrFail({
+      id
+    })
+    const updatedRecopilation = Object.assign(recopilation, recopilationData)
+    return this.recopilationsRepository.save(updatedRecopilation)
   }
 
   async remove(id: number): Promise<void> {
-    await this.recopilationsRepository.delete(id)
+    const recopilation = await this.recopilationsRepository.findOneByOrFail({
+      id
+    })
+    await this.recopilationsRepository.remove([recopilation])
   }
 }
