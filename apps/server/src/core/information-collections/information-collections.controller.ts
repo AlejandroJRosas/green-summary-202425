@@ -8,13 +8,16 @@ import {
   Put,
   Res,
   HttpStatus,
-  HttpCode
+  HttpCode,
+  Query
 } from '@nestjs/common'
 import { Response } from 'express'
 import { InformationCollectionsService } from './information-collections.service'
 import { CreateInformationCollectionDto } from './dto/create-information-collection.dto'
 import { UpdateInformationCollectionDto } from './dto/update-information-collection.dto'
 import { ApiTags } from '@nestjs/swagger'
+import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @ApiTags('Information Collections')
 @Controller('information-collections')
@@ -24,10 +27,23 @@ export class InformationCollectionsController {
   ) {}
 
   @Get()
-  async findAll(@Res() res: Response): Promise<void> {
-    const collections = await this.informationCollectionsService.findAll()
+  async findAll(
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Res() response: Response
+  ) {
+    const { informationCollection, count } =
+      await this.informationCollectionsService.findAll({
+        page,
+        itemsPerPage
+      })
 
-    res.status(HttpStatus.OK).json(collections)
+    const paginatedItems = constructPaginatedItemsDto(
+      informationCollection,
+      count,
+      page,
+      itemsPerPage
+    )
+    return response.status(HttpStatus.OK).json(paginatedItems)
   }
 
   @Get(':id')
