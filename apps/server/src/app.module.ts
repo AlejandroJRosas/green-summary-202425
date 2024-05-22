@@ -10,8 +10,7 @@ import { IndicatorsModule } from './core/indicators/indicators.module'
 import { CategoriesModule } from './core/categories/categories.module'
 import { CriteriaModule } from './core/criteria/criteria.module'
 import { RecopilationsModule } from './core/recopilations/recopilations.module'
-import { RecommendModule } from './core/recommends/recommends.module'
-
+import { RecommendationsModule } from './core/recommendations/recommendations.module'
 
 @Module({
   imports: [
@@ -37,7 +36,7 @@ import { RecommendModule } from './core/recommends/recommends.module'
     CategoriesModule,
     CriteriaModule,
     RecopilationsModule,
-    RecommendModule
+    RecommendationsModule
   ]
 })
 export class AppModule {}

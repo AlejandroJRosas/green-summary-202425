@@ -8,7 +8,7 @@ import { Department } from '../users/entities/department.entity'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
-export class RecommendService {
+export class RecommendationsService {
   constructor(
     @InjectRepository(Recommendation)
     private readonly recommendationsRepository: Repository<Recommendation>,

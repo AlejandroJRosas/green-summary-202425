@@ -10,7 +10,7 @@ import {
   Query
 } from '@nestjs/common'
 import { Response } from 'express'
-import { RecommendService } from './recommends.service'
+import { RecommendationsService } from './recommendations.service'
 import { CreateRecommendationDto } from './dto/create-recommendation.dto'
 import { ApiTags } from '@nestjs/swagger'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
@@ -18,8 +18,8 @@ import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-pagi
 
 @ApiTags('Recommendations')
 @Controller('recommendations')
-export class RecommendController {
-  constructor(private readonly recommendService: RecommendService) {}
+export class RecommendationsController {
+  constructor(private readonly recommendService: RecommendationsService) {}
 
   @Post()
   async create(
