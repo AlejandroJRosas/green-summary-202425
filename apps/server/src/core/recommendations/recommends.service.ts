@@ -37,14 +37,22 @@ export class RecommendService {
     return this.recommendationsRepository.save(recommendation)
   }
 
-  findAll(): Promise<Recommendation[]> {
-    return this.recommendationsRepository.find({
-      relations: ['departamento', 'categoria']
-    })
+  async findAll(): Promise<{
+    recommendations: Recommendation[]
+    count: number
+  }> {
+    const [recommendations, count] =
+      await this.recommendationsRepository.findAndCount({
+        relations: ['departamento', 'categoria'],
+        take: itemsPerPage,
+        skip: (page - 1) * itemsPerPage
+      })
+
+    return { recommendations, count }
   }
 
-  findOne(id: number): Promise<Recommendation> {
-    return this.recommendationsRepository.findOneOrFail({
+  async findOne(id: number): Promise<Recommendation> {
+    return await this.recommendationsRepository.findOneOrFail({
       where: { id },
       relations: ['departamento', 'categoria']
     })

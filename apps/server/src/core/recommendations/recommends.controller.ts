@@ -6,12 +6,15 @@ import {
   Param,
   Delete,
   Res,
-  HttpStatus
+  HttpStatus,
+  Query
 } from '@nestjs/common'
 import { Response } from 'express'
 import { RecommendService } from './recommends.service'
 import { CreateRecommendationDto } from './dto/create-recommendation.dto'
 import { ApiTags } from '@nestjs/swagger'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 
 @ApiTags('Recommendations')
 @Controller('recommendations')
@@ -28,9 +31,22 @@ export class RecommendController {
   }
 
   @Get()
-  async findAll(@Res() res: Response) {
-    const result = await this.recommendService.findAll()
-    return res.status(HttpStatus.OK).json(result)
+  async findAll(
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Res() res: Response
+  ) {
+    const { recommendations, count } = await this.recommendService.findAll({
+      page,
+      itemsPerPage
+    })
+
+    const paginatedItems = constructPaginatedItemsDto(
+      recommendations,
+      count,
+      page,
+      itemsPerPage
+    )
+    return res.json(paginatedItems)
   }
 
   @Get(':id')
