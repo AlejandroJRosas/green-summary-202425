@@ -7,6 +7,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   Res,
   UsePipes,
   ValidationPipe
@@ -16,6 +17,8 @@ import { Response } from 'express'
 import { CreateCategoryDto } from './dto/create-category.dto'
 import { UpdateCategoryDto } from './dto/update-category.dto'
 import { ApiTags } from '@nestjs/swagger'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -23,9 +26,24 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
-  async getAllCategories(@Res() response: Response) {
-    const categories = await this.categoriesService.getAllCategories()
-    return response.json(categories)
+  async getAllCategories(
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Res() response: Response
+  ) {
+    const { categories, count } = await this.categoriesService.getAllCategories(
+      {
+        page,
+        itemsPerPage
+      }
+    )
+
+    const paginatedItems = constructPaginatedItemsDto(
+      categories,
+      count,
+      page,
+      itemsPerPage
+    )
+    return response.json(paginatedItems)
   }
 
   @Get('/:id')

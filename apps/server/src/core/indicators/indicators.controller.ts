@@ -7,13 +7,16 @@ import {
   Param,
   Post,
   Put,
-  Res
+  Res,
+  Query
 } from '@nestjs/common'
 import { IndicatorsService } from './indicators.service'
 import { Response } from 'express'
 import { CreateIndicatorDto } from './dto/create-indicator.dto'
 import { UpdateIndicatorDto } from './dto/update-indicator.dto'
 import { ApiTags } from '@nestjs/swagger'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 
 @ApiTags('Indicators')
 @Controller('indicators')
@@ -21,9 +24,24 @@ export class IndicatorsController {
   constructor(private readonly indicatorsService: IndicatorsService) {}
 
   @Get()
-  async getAllIndicators(@Res() response: Response) {
-    const indicators = await this.indicatorsService.getAllIndicators()
-    return response.json(indicators)
+  async getAllIndicators(
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Res() response: Response
+  ) {
+    const { indicators, count } = await this.indicatorsService.getAllIndicators(
+      {
+        page,
+        itemsPerPage
+      }
+    )
+
+    const paginatedItems = constructPaginatedItemsDto(
+      indicators,
+      count,
+      page,
+      itemsPerPage
+    )
+    return response.json(paginatedItems)
   }
 
   @Get('/:id')

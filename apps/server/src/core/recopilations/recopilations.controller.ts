@@ -8,13 +8,16 @@ import {
   Delete,
   Res,
   HttpStatus,
-  HttpCode
+  HttpCode,
+  Query
 } from '@nestjs/common'
 import { Response } from 'express'
 import { RecopilationsService } from './recopilations.service'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
 import { UpdateRecopilationDto } from './dto/update-recopilation.dto'
 import { ApiTags } from '@nestjs/swagger'
+import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
@@ -22,10 +25,22 @@ export class RecopilationsController {
   constructor(private readonly recopilationsService: RecopilationsService) {}
 
   @Get()
-  async findAll(@Res() res: Response): Promise<void> {
-    const recopilations = await this.recopilationsService.findAll()
+  async findAll(
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Res() res: Response
+  ): Promise<void> {
+    const { recopilation, count } = await this.recopilationsService.findAll({
+      page,
+      itemsPerPage
+    })
 
-    res.status(HttpStatus.OK).json(recopilations)
+    const paginatedItems = constructPaginatedItemsDto(
+      recopilation,
+      count,
+      page,
+      itemsPerPage
+    )
+    res.status(HttpStatus.OK).json(paginatedItems)
   }
 
   @Get(':id')

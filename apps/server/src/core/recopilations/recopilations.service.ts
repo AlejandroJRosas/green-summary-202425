@@ -4,6 +4,7 @@ import { Repository } from 'typeorm'
 import { Recopilation } from './entities/recopilation.entity'
 import { UpdateRecopilationDto } from './dto/update-recopilation.dto'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
 export class RecopilationsService {
@@ -12,8 +13,20 @@ export class RecopilationsService {
     private recopilationsRepository: Repository<Recopilation>
   ) {}
 
-  async findAll(): Promise<Recopilation[]> {
-    return this.recopilationsRepository.find()
+  async findAll({
+    page,
+    itemsPerPage
+  }: PaginationParams): Promise<{
+    recopilation: Recopilation[]
+    count: number
+  }> {
+    const [recopilation, count] =
+      await this.recopilationsRepository.findAndCount({
+        take: itemsPerPage,
+        skip: (page - 1) * itemsPerPage
+      })
+
+    return { recopilation, count }
   }
 
   async findOne(id: number): Promise<Recopilation> {

@@ -8,13 +8,16 @@ import {
   Delete,
   Res,
   UsePipes,
-  ValidationPipe
+  ValidationPipe,
+  Query
 } from '@nestjs/common'
 import { CriterionService } from './criteria.service'
 import { CreateCriterionDto } from './dto/create-criterion.dto'
 import { UpdateCriterionDto } from './dto/update-criterion.dto'
 import { Response } from 'express'
 import { ApiTags } from '@nestjs/swagger'
+import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @ApiTags('Criteria')
 @Controller('criteria')
@@ -33,9 +36,22 @@ export class CriterionController {
   }
 
   @Get()
-  async getAllCriteria(@Res() response: Response) {
-    const criteria = await this.criterionService.getAllCriteria()
-    return response.json(criteria)
+  async getAllCriteria(
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Res() response: Response
+  ) {
+    const { criteria, count } = await this.criterionService.getAllCriteria({
+      page,
+      itemsPerPage
+    })
+
+    const paginatedItems = constructPaginatedItemsDto(
+      criteria,
+      count,
+      page,
+      itemsPerPage
+    )
+    return response.json(paginatedItems)
   }
 
   @Get(':indicatorIndex/:subIndex')

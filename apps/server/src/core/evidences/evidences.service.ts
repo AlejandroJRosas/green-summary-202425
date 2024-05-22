@@ -5,6 +5,7 @@ import { Evidence } from './entities/evidence.entity'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
 import { UpdateEvidenceDto } from './dto/update-evidence.dto'
 import { InformationCollection } from '../information-collections/entities/information-collection.entity'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
 export class EvidencesService {
@@ -15,8 +16,17 @@ export class EvidencesService {
     private readonly informationCollectionRepository: Repository<InformationCollection>
   ) {}
 
-  async findAll(): Promise<Evidence[]> {
-    return this.evidenceRepository.find({ relations: ['collection'] })
+  async findAll({
+    page,
+    itemsPerPage
+  }: PaginationParams): Promise<{ evidences: Evidence[]; count: number }> {
+    const [evidences, count] = await this.evidenceRepository.findAndCount({
+      relations: ['collection'],
+      take: itemsPerPage,
+      skip: (page - 1) * itemsPerPage
+    })
+
+    return { evidences, count }
   }
 
   async findOne(id: number): Promise<Evidence> {
