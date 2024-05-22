@@ -5,6 +5,7 @@ import { Recommendation } from './entities/recommendation.entity'
 import { CreateRecommendationDto } from './dto/create-recommendation.dto'
 import { Category } from 'src/core/categories/entities/category.entity'
 import { Department } from '../users/entities/department.entity'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
 export class RecommendService {
@@ -37,7 +38,7 @@ export class RecommendService {
     return this.recommendationsRepository.save(recommendation)
   }
 
-  async findAll(): Promise<{
+  async findAll({ page, itemsPerPage }: PaginationParams): Promise<{
     recommendations: Recommendation[]
     count: number
   }> {
