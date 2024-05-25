@@ -12,7 +12,7 @@ import { ConfigModule, ConfigService } from 'nestjs-config'
     TypeOrmModule.forFeature([User]),
     JwtModule.registerAsync({
       useFactory: (config: ConfigService) => {
-        const JWT_CONFIG = config.get('jwt.constants')
+        const JWT_CONFIG = config.get('jwt')
 
         return {
           global: true,
