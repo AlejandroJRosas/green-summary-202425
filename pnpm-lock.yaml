@@ -62,6 +62,15 @@ importers:
       '@angular/router':
         specifier: ^17.3.0
         version: 17.3.8(@angular/common@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(@angular/platform-browser@17.3.8(@angular/animations@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5)))(@angular/common@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5)))(rxjs@7.8.1)
+      primeflex:
+        specifier: ^3.3.1
+        version: 3.3.1
+      primeicons:
+        specifier: 7.0.0
+        version: 7.0.0
+      primeng:
+        specifier: 17.17.0
+        version: 17.17.0(@angular/common@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(@angular/forms@17.3.8(@angular/common@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(@angular/platform-browser@17.3.8(@angular/animations@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5)))(@angular/common@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5)))(rxjs@7.8.1))(rxjs@7.8.1)(zone.js@0.14.5)
       rxjs:
         specifier: ~7.8.0
         version: 7.8.1
@@ -84,6 +93,9 @@ importers:
       '@types/jasmine':
         specifier: ~5.1.0
         version: 5.1.4
+      '@types/node':
+        specifier: ^20.3.1
+        version: 20.12.11
       jasmine-core:
         specifier: ~5.1.0
         version: 5.1.2
@@ -4714,6 +4726,21 @@ packages:
   pretty-format@29.7.0:
     resolution: {integrity: sha512-Pdlw/oPxN+aXdmM9R00JVC9WVFoCLTKJvDVLgmJ+qAffBMxsV85l/Lu7sNx4zSzPyoL2euImuEwHhOXdEgNFZQ==}
     engines: {node: ^14.15.0 || ^16.10.0 || >=18.0.0}
+
+  primeflex@3.3.1:
+    resolution: {integrity: sha512-zaOq3YvcOYytbAmKv3zYc+0VNS9Wg5d37dfxZnveKBFPr7vEIwfV5ydrpiouTft8MVW6qNjfkaQphHSnvgQbpQ==}
+
+  primeicons@7.0.0:
+    resolution: {integrity: sha512-jK3Et9UzwzTsd6tzl2RmwrVY/b8raJ3QZLzoDACj+oTJ0oX7L9Hy+XnVwgo4QVKlKpnP/Ur13SXV/pVh4LzaDw==}
+
+  primeng@17.17.0:
+    resolution: {integrity: sha512-+lIfG2nVve5GJQXGBDi2YeVabg6E9RmG67LDw9Ol8XvMWuHwJXQAGfO+AKPhPPzFSdb1j2v44uJemuNcJLXUiw==}
+    peerDependencies:
+      '@angular/common': ^17.0.0
+      '@angular/core': ^17.0.0
+      '@angular/forms': ^17.0.0
+      rxjs: ^6.0.0 || ^7.8.1
+      zone.js: ~0.14.0
 
   proc-log@3.0.0:
     resolution: {integrity: sha512-++Vn7NS4Xf9NacaU9Xq3URUuqZETPsf8L4j5/ckhaRYsfPeRyzGw+iDjFhV/Jr3uNmTvvddEJFWh5R1gRgUH8A==}
@@ -11263,6 +11290,19 @@ snapshots:
       '@jest/schemas': 29.6.3
       ansi-styles: 5.2.0
       react-is: 18.3.1
+
+  primeflex@3.3.1: {}
+
+  primeicons@7.0.0: {}
+
+  primeng@17.17.0(@angular/common@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(@angular/forms@17.3.8(@angular/common@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(@angular/platform-browser@17.3.8(@angular/animations@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5)))(@angular/common@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5)))(rxjs@7.8.1))(rxjs@7.8.1)(zone.js@0.14.5):
+    dependencies:
+      '@angular/common': 17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1)
+      '@angular/core': 17.3.8(rxjs@7.8.1)(zone.js@0.14.5)
+      '@angular/forms': 17.3.8(@angular/common@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(@angular/platform-browser@17.3.8(@angular/animations@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5)))(@angular/common@17.3.8(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5))(rxjs@7.8.1))(@angular/core@17.3.8(rxjs@7.8.1)(zone.js@0.14.5)))(rxjs@7.8.1)
+      rxjs: 7.8.1
+      tslib: 2.6.2
+      zone.js: 0.14.5
 
   proc-log@3.0.0: {}
 

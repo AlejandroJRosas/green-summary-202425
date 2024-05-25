@@ -1,0 +1,53 @@
+<div class="flex flex-row w-full align-items-center justify-content-around">
+  <form action="#">
+    <div class="flex flex-column justify-content-center align-items-left gap-4">
+      <div>
+        <h1 class="m-0 font-semibold">Bienvenido a Green Summary</h1>
+        <h2 class="m-0 font-medium text-gray-700">
+          Sistema para la gestión de la sustentabilidad
+        </h2>
+      </div>
+      <div>
+        <label class="flex flex-column gap-2">
+          Correo Electrónico
+          <input
+            pInputText
+            name="email"
+            [(ngModel)]="loginPayload.email"
+            class="w-7"
+            required
+          />
+        </label>
+      </div>
+      <div>
+        <label class="flex flex-column gap-2">
+          Contraseña
+          <p-password
+            name="password"
+            feedback="false"
+            class="w-7"
+            [(ngModel)]="loginPayload.password"
+            [toggleMask]="true"
+            required
+          />
+        </label>
+      </div>
+      <button
+        pButton
+        pRipple
+        icon="pi pi-arrow-right"
+        iconPos="right"
+        class="p-button-success w-7"
+        style="background-color: #00ad7c; border-color: #00ad7c"
+        label="Iniciar Sesión"
+        (click)="onLogin()"
+      ></button>
+    </div>
+  </form>
+  <img
+    src="https://www.treehugger.com/thmb/8JpTnetsSGclxjD3cSwXryN8CX0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/__opt__aboutcom__coeus__resources__content_migration__mnn__images__2018__11__feathers-a51ccbea232e481cb263de664914305a.jpg"
+    alt="feathers"
+    width="40%"
+    class="hidden lg:inline"
+  />
+</div>
