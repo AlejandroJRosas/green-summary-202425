@@ -6,12 +6,10 @@ import {
   Param,
   Delete,
   Put,
-  Res,
   HttpStatus,
   HttpCode,
   Query
 } from '@nestjs/common'
-import { Response } from 'express'
 import { EvidencesService } from './evidences.service'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
 import { UpdateEvidenceDto } from './dto/update-evidence.dto'
@@ -25,10 +23,7 @@ export class EvidencesController {
   constructor(private readonly evidencesService: EvidencesService) {}
 
   @Get()
-  async findAll(
-    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
-    @Res() response: Response
-  ) {
+  async findAll(@Query() { page = 1, itemsPerPage = 10 }: PaginationParams) {
     const { evidences, count } = await this.evidencesService.findAll({
       page,
       itemsPerPage
@@ -40,44 +35,38 @@ export class EvidencesController {
       page,
       itemsPerPage
     )
-    return response.json(paginatedItems)
+    return paginatedItems
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string, @Res() res: Response): Promise<void> {
+  async findOne(@Param('id') id: string) {
     const evidence = await this.evidencesService.findOne(+id)
-
-    res.json(evidence)
+    return evidence
   }
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(
-    @Body() createEvidenceDto: CreateEvidenceDto,
-    @Res() res: Response
-  ): Promise<void> {
+  async create(@Body() createEvidenceDto: CreateEvidenceDto) {
     const newEvidence = await this.evidencesService.create(createEvidenceDto)
-
-    res.json(newEvidence)
+    return newEvidence
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() updateEvidenceDto: UpdateEvidenceDto,
-    @Res() res: Response
-  ): Promise<void> {
+    @Body() updateEvidenceDto: UpdateEvidenceDto
+  ) {
     const updatedEvidence = await this.evidencesService.update(
       +id,
       updateEvidenceDto
     )
 
-    res.json(updatedEvidence)
+    return updatedEvidence
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async remove(@Param('id') id: string): Promise<void> {
+  async remove(@Param('id') id: string) {
     await this.evidencesService.remove(+id)
   }
 }
