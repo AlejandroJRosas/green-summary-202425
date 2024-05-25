@@ -10,6 +10,8 @@ import { IndicatorsModule } from './core/indicators/indicators.module'
 import { CategoriesModule } from './core/categories/categories.module'
 import { CriteriaModule } from './core/criteria/criteria.module'
 import { RecopilationsModule } from './core/recopilations/recopilations.module'
+import { AuthModule } from './core/auth/auth.module'
+import { RecommendationsModule } from './core/recommendations/recommendations.module'
 
 @Module({
   imports: [
@@ -27,14 +29,16 @@ import { RecopilationsModule } from './core/recopilations/recopilations.module'
       },
       inject: [ConfigService]
     }),
+    AuthModule,
     UsersModule,
-    NotificationsModule,
-    InformationCollectionsModule,
-    EvidencesModule,
+    RecopilationsModule,
     IndicatorsModule,
     CategoriesModule,
     CriteriaModule,
-    RecopilationsModule
+    InformationCollectionsModule,
+    EvidencesModule,
+    RecommendationsModule,
+    NotificationsModule
   ]
 })
 export class AppModule {}

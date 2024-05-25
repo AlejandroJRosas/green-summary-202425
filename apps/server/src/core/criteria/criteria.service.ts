@@ -4,6 +4,7 @@ import { Repository } from 'typeorm'
 import { CreateCriterionDto } from './dto/create-criterion.dto'
 import { UpdateCriterionDto } from './dto/update-criterion.dto'
 import { Criterion } from './entities/criterion.entity'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
 export class CriterionService {
@@ -19,8 +20,16 @@ export class CriterionService {
     return this.criterionRepository.save(criterion)
   }
 
-  async getAllCriteria(): Promise<Criterion[]> {
-    return this.criterionRepository.find()
+  async getAllCriteria({
+    page,
+    itemsPerPage
+  }: PaginationParams): Promise<{ criteria: Criterion[]; count: number }> {
+    const [criteria, count] = await this.criterionRepository.findAndCount({
+      take: itemsPerPage,
+      skip: (page - 1) * itemsPerPage
+    })
+
+    return { criteria, count }
   }
 
   async getOneCriterion(

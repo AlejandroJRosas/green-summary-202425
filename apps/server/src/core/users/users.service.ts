@@ -4,6 +4,7 @@ import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectRepository } from '@nestjs/typeorm'
 import { User } from './entities/user.entity'
 import { Repository } from 'typeorm'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
 export class UsersService {
@@ -18,10 +19,13 @@ export class UsersService {
     return user
   }
 
-  async findAll() {
-    const users = await this.usersRepository.find()
+  async findAll({ page, itemsPerPage }: PaginationParams) {
+    const [users, count] = await this.usersRepository.findAndCount({
+      take: itemsPerPage,
+      skip: (page - 1) * itemsPerPage
+    })
 
-    return users
+    return { users, count }
   }
 
   async findOne(id: number) {

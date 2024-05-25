@@ -4,6 +4,7 @@ import { Repository } from 'typeorm'
 import { Indicator } from './entities/indicator.entity'
 import { CreateIndicatorDto } from './dto/create-indicator.dto'
 import { UpdateIndicatorDto } from './dto/update-indicator.dto'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
 export class IndicatorsService {
@@ -19,8 +20,16 @@ export class IndicatorsService {
     return this.indicatorRepository.save(indicador)
   }
 
-  async getAllIndicators(): Promise<Indicator[]> {
-    return this.indicatorRepository.find()
+  async getAllIndicators({
+    page,
+    itemsPerPage
+  }: PaginationParams): Promise<{ indicators: Indicator[]; count: number }> {
+    const [indicators, count] = await this.indicatorRepository.findAndCount({
+      take: itemsPerPage,
+      skip: (page - 1) * itemsPerPage
+    })
+
+    return { indicators, count }
   }
 
   async getOneIndicator(index: number): Promise<Indicator> {

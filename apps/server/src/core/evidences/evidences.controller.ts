@@ -8,13 +8,16 @@ import {
   Put,
   Res,
   HttpStatus,
-  HttpCode
+  HttpCode,
+  Query
 } from '@nestjs/common'
 import { Response } from 'express'
 import { EvidencesService } from './evidences.service'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
 import { UpdateEvidenceDto } from './dto/update-evidence.dto'
 import { ApiTags } from '@nestjs/swagger'
+import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @ApiTags('Evidences')
 @Controller('evidences')
@@ -22,10 +25,22 @@ export class EvidencesController {
   constructor(private readonly evidencesService: EvidencesService) {}
 
   @Get()
-  async findAll(@Res() res: Response): Promise<void> {
-    const evidences = await this.evidencesService.findAll()
+  async findAll(
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Res() response: Response
+  ) {
+    const { evidences, count } = await this.evidencesService.findAll({
+      page,
+      itemsPerPage
+    })
 
-    res.json(evidences)
+    const paginatedItems = constructPaginatedItemsDto(
+      evidences,
+      count,
+      page,
+      itemsPerPage
+    )
+    return response.json(paginatedItems)
   }
 
   @Get(':id')
