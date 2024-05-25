@@ -21,7 +21,7 @@ export class AuthService {
     if (password !== user.password) throw new WrongPasswordException()
 
     const payload = { id: user.id, name: user.fullName, type: user.type }
-    const token = await this.jwtService.sign(payload)
+    const token = this.jwtService.sign(payload)
     const data = {
       user: user,
       token
