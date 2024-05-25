@@ -3,8 +3,6 @@ import {
   Post,
   Body,
   HttpCode,
-  UsePipes,
-  ValidationPipe,
   UnauthorizedException
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
