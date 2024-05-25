@@ -5,12 +5,12 @@ import {
   HttpCode,
   UsePipes,
   ValidationPipe,
-  Res
+  UnauthorizedException
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { LoginAuthDto } from './dto/login-auth.dto'
 import { ApiTags } from '@nestjs/swagger'
-import { Response } from 'express'
+import { WrongPasswordException } from './errors/wrong-password.exception'
 
 @ApiTags('auth')
 @Controller('auth')
@@ -19,9 +19,16 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(200)
-  @UsePipes(new ValidationPipe())
-  async login(@Body() loginAuthDto: LoginAuthDto, @Res() response: Response) {
-    const logued = await this.authService.login(loginAuthDto)
-    return response.json(logued)
+  async login(@Body() loginAuthDto: LoginAuthDto) {
+    try {
+      const loginResult = await this.authService.login(loginAuthDto)
+      return loginResult
+    } catch (e) {
+      if (e instanceof WrongPasswordException) {
+        throw new UnauthorizedException('Contraseña inválida')
+      } else {
+        throw e
+      }
+    }
   }
 }
