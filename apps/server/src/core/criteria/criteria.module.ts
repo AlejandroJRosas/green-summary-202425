@@ -8,6 +8,7 @@ import { Criterion } from './entities/criterion.entity'
 @Module({
   imports: [TypeOrmModule.forFeature([Criterion, Indicator])],
   controllers: [CriterionController],
-  providers: [CriterionService]
+  providers: [CriterionService],
+  exports: [TypeOrmModule]
 })
 export class CriteriaModule {}

@@ -3,9 +3,11 @@ import {
   Column,
   PrimaryColumn,
   ManyToOne,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  OneToMany
 } from 'typeorm'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
+import { CriteriaPerRecopilation } from 'src/core/criteria_per_recopilations/entities/criteria_per_recopilation.entity'
 
 @Entity('criteria')
 export class Criterion {
@@ -29,6 +31,12 @@ export class Criterion {
 
   @ManyToOne(() => Indicator, (indicator) => indicator.criteria)
   indicator: Indicator
+
+  @OneToMany(
+    () => CriteriaPerRecopilation,
+    (criteriaPerRecopilation) => criteriaPerRecopilation.recopilation
+  )
+  criteriaPerRecopilations: CriteriaPerRecopilation[]
 
   //TODO: RELATION WITH CATEGORIZED CRITERIA (RECOPILATION AND CATEGORY)
 }

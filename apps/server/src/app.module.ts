@@ -11,6 +11,10 @@ import { CategoriesModule } from './core/categories/categories.module'
 import { CriteriaModule } from './core/criteria/criteria.module'
 import { RecopilationsModule } from './core/recopilations/recopilations.module'
 import { RecommendationsModule } from './core/recommendations/recommendations.module'
+import { IndicatorsPerRecopilationsModule } from './core/indicators_per_recopilations/indicators_per_recopilations.module'
+import { CategoriesPerRecopilationsModule } from './core/categories_per_recopilations/categories_per_recopilations.module'
+import { CriteriaPerRecopilationsModule } from './core/criteria_per_recopilations/criteria_per_recopilations.module'
+import { DepartmentsPerRecopilationsModule } from './core/departments_per_recopilations/departments_per_recopilations.module'
 
 @Module({
   imports: [
@@ -36,7 +40,11 @@ import { RecommendationsModule } from './core/recommendations/recommendations.mo
     CategoriesModule,
     CriteriaModule,
     RecopilationsModule,
-    RecommendationsModule
+    RecommendationsModule,
+    IndicatorsPerRecopilationsModule,
+    CategoriesPerRecopilationsModule,
+    CriteriaPerRecopilationsModule,
+    DepartmentsPerRecopilationsModule
   ]
 })
 export class AppModule {}

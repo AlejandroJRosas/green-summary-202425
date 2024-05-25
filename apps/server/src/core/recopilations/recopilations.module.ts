@@ -7,6 +7,7 @@ import { Recopilation } from './entities/recopilation.entity'
 @Module({
   imports: [TypeOrmModule.forFeature([Recopilation])],
   controllers: [RecopilationsController],
-  providers: [RecopilationsService]
+  providers: [RecopilationsService],
+  exports: [TypeOrmModule]
 })
 export class RecopilationsModule {}
