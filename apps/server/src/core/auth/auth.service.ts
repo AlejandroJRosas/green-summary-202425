@@ -15,15 +15,21 @@ export class AuthService {
   ) {}
 
   async login(loginAuthDto: LoginAuthDto) {
-    const { email, password } = loginAuthDto
-    const user = await this.usersRepository.findOneByOrFail({ email })
+    const user = await this.usersRepository.findOneByOrFail({
+      email: loginAuthDto.email
+    })
 
-    if (password !== user.password) throw new WrongPasswordException()
+    if (loginAuthDto.password !== user.password)
+      throw new WrongPasswordException()
 
     const payload = { id: user.id, name: user.fullName, type: user.type }
     const token = this.jwtService.sign(payload)
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...userWithoutPassword } = user
+
     const data = {
-      user: user,
+      user: userWithoutPassword,
       token
     }
     return data
