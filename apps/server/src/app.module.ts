@@ -15,6 +15,8 @@ import { IndicatorsPerRecopilationsModule } from './core/indicators_per_recopila
 import { CategoriesPerRecopilationsModule } from './core/categories_per_recopilations/categories_per_recopilations.module'
 import { CriteriaPerRecopilationsModule } from './core/criteria_per_recopilations/criteria_per_recopilations.module'
 import { DepartmentsPerRecopilationsModule } from './core/departments_per_recopilations/departments_per_recopilations.module'
+import { AnswersModule } from './core/answers/answers.module'
+import { CategorizedCriteriaModule } from './core/categorized_criteria/categorized_criteria.module'
 
 @Module({
   imports: [
@@ -44,7 +46,9 @@ import { DepartmentsPerRecopilationsModule } from './core/departments_per_recopi
     IndicatorsPerRecopilationsModule,
     CategoriesPerRecopilationsModule,
     CriteriaPerRecopilationsModule,
-    DepartmentsPerRecopilationsModule
+    DepartmentsPerRecopilationsModule,
+    AnswersModule,
+    CategorizedCriteriaModule
   ]
 })
 export class AppModule {}
