@@ -29,16 +29,16 @@ import { RecommendationsModule } from './core/recommendations/recommendations.mo
       },
       inject: [ConfigService]
     }),
+    AuthModule,
     UsersModule,
-    NotificationsModule,
-    InformationCollectionsModule,
-    EvidencesModule,
+    RecopilationsModule,
     IndicatorsModule,
     CategoriesModule,
     CriteriaModule,
-    RecopilationsModule,
-    AuthModule,
-    RecommendationsModule
+    InformationCollectionsModule,
+    EvidencesModule,
+    RecommendationsModule,
+    NotificationsModule
   ]
 })
 export class AppModule {}
