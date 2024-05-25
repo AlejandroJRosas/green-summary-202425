@@ -11,6 +11,7 @@ import { CategoriesModule } from './core/categories/categories.module'
 import { CriteriaModule } from './core/criteria/criteria.module'
 import { RecopilationsModule } from './core/recopilations/recopilations.module'
 import { AuthModule } from './core/auth/auth.module'
+import { RecommendationsModule } from './core/recommendations/recommendations.module'
 
 @Module({
   imports: [
@@ -36,7 +37,8 @@ import { AuthModule } from './core/auth/auth.module'
     CategoriesModule,
     CriteriaModule,
     RecopilationsModule,
-    AuthModule
+    AuthModule,
+    RecommendationsModule
   ]
 })
 export class AppModule {}
