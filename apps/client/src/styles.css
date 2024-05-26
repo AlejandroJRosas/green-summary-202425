@@ -4,14 +4,29 @@
 @import 'primeicons/primeicons.css';
 
 :root {
+  --background-color: #f7ffe6;
+  --text-color-secondary: #373737;
   --primary-color: #00ad7c;
+  --primary-color-text: #fff;
+  font-family:
+    'Inter var',
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif,
+    'Apple Color Emoji',
+    'Segoe UI Emoji',
+    'Segoe UI Symbol';
 }
 
 body {
   min-height: 100dvh;
   padding: 0px;
   margin: 0px;
-  background-color: #f7ffe6;
+  background-color: var(--background-color);
 }
 
 .p-toast-message {

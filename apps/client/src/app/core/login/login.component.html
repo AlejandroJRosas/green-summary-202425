@@ -1,5 +1,5 @@
 <div
-  class="flex flex-row w-full h-screen border align-items-center justify-content-around"
+  class="flex flex-row w-full h-screen border align-items-center justify-content-around px-4"
 >
   <form action="#">
     <div class="flex flex-column justify-content-center align-items-left gap-4">
@@ -10,7 +10,7 @@
         </h2>
       </div>
       <div>
-        <label class="flex flex-column gap-2 w-7">
+        <label class="flex flex-column gap-2 w-full lg:w-7">
           Correo Electrónico
           <input
             pInputText
@@ -22,7 +22,7 @@
         </label>
       </div>
       <div>
-        <label class="flex flex-column gap-2 w-7">
+        <label class="flex flex-column gap-2 w-full lg:w-7">
           Contraseña
           <p-password
             name="password"
@@ -38,12 +38,18 @@
       <p-button
         icon="pi pi-arrow-right"
         iconPos="right"
-        styleClass="bg-primary w-7"
+        styleClass="bg-primary border-primary w-full lg:w-7"
         label="Iniciar Sesión"
         (click)="onLogin()"
       ></p-button>
     </div>
   </form>
-  <img src="/assets/earth.png" alt="earth" width="500px" height="500px" />
+  <img
+    src="/assets/earth.png"
+    alt="earth"
+    width="500px"
+    height="500px"
+    class="hidden lg:inline"
+  />
   <!-- <ng-lottie [options]="options" /> -->
 </div>
