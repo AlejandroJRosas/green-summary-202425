@@ -1,4 +1,4 @@
-import { CategoriesPerRecopilation } from 'src/core/categories_per_recopilations/entities/categories_per_recopilation.entity'
+import { CategoryPerRecopilation } from 'src/core/categories-per-recopilations/entities/category-per-recopilation.entity'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
 import { Recommendation } from 'src/core/recommendations/entities/recommendation.entity'
 import {
@@ -27,8 +27,8 @@ export class Category {
   recommendations: Recommendation[]
 
   @OneToMany(
-    () => CategoriesPerRecopilation,
+    () => CategoryPerRecopilation,
     (categoriesPerRecopilations) => categoriesPerRecopilations.category
   )
-  categoriesPerRecopilations: CategoriesPerRecopilation[]
+  categoriesPerRecopilations: CategoryPerRecopilation[]
 }

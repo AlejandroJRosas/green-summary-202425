@@ -11,12 +11,12 @@ import { CategoriesModule } from './core/categories/categories.module'
 import { CriteriaModule } from './core/criteria/criteria.module'
 import { RecopilationsModule } from './core/recopilations/recopilations.module'
 import { RecommendationsModule } from './core/recommendations/recommendations.module'
-import { IndicatorsPerRecopilationsModule } from './core/indicators_per_recopilations/indicators_per_recopilations.module'
-import { CategoriesPerRecopilationsModule } from './core/categories_per_recopilations/categories_per_recopilations.module'
-import { CriteriaPerRecopilationsModule } from './core/criteria_per_recopilations/criteria_per_recopilations.module'
-import { DepartmentsPerRecopilationsModule } from './core/departments_per_recopilations/departments_per_recopilations.module'
+import { IndicatorsPerRecopilationsModule } from './core/indicators-per-recopilations/indicators-per-recopilations.module'
+import { CategoriesPerRecopilationsModule } from './core/categories-per-recopilations/categories-per-recopilations.module'
+import { CriteriaPerRecopilationsModule } from './core/criterion-per-recopilations/criterion-per-recopilations.module'
+import { DepartmentsPerRecopilationsModule } from './core/departments-per-recopilations/departments-per-recopilations.module'
 import { AnswersModule } from './core/answers/answers.module'
-import { CategorizedCriteriaModule } from './core/categorized_criteria/categorized_criteria.module'
+import { CategorizedCriteriaModule } from './core/categorized-criteria/categorized-criteria.module'
 
 @Module({
   imports: [

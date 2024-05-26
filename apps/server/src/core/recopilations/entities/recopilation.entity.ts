@@ -1,7 +1,7 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
-import { IndicatorsPerRecopilations } from 'src/core/indicators_per_recopilations/entities/indicators_per_recopilation.entity'
-import { CategoriesPerRecopilation } from 'src/core/categories_per_recopilations/entities/categories_per_recopilation.entity'
-import { CriteriaPerRecopilation } from 'src/core/criteria_per_recopilations/entities/criteria_per_recopilation.entity'
+import { IndicatorPerRecopilation } from 'src/core/indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
+import { CategoryPerRecopilation } from 'src/core/categories-per-recopilations/entities/category-per-recopilation.entity'
+import { CriteriaPerRecopilation } from 'src/core/criteria-per-recopilations/entities/criteria-per-recopilation.entity'
 
 @Entity('recopilations')
 export class Recopilation {
@@ -24,16 +24,16 @@ export class Recopilation {
   endDate: Date
 
   @OneToMany(
-    () => IndicatorsPerRecopilations,
+    () => IndicatorPerRecopilation,
     (indicatorsPerRecopilations) => indicatorsPerRecopilations.indicator
   )
-  indicatorsPerRecopilations: IndicatorsPerRecopilations[]
+  indicatorsPerRecopilations: IndicatorPerRecopilation[]
 
   @OneToMany(
-    () => CategoriesPerRecopilation,
+    () => CategoryPerRecopilation,
     (categoriesPerRecopilations) => categoriesPerRecopilations.category
   )
-  categoriesPerRecopilations: CategoriesPerRecopilation[]
+  categoriesPerRecopilations: CategoryPerRecopilation[]
 
   @OneToMany(
     () => CriteriaPerRecopilation,
