@@ -1,5 +1,12 @@
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
-import { PrimaryGeneratedColumn, Column, ManyToOne, Entity } from 'typeorm'
+import { Recommendation } from 'src/core/recommendations/entities/recommendation.entity'
+import {
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  Entity,
+  OneToMany
+} from 'typeorm'
 
 @Entity('categories')
 export class Category {
@@ -14,4 +21,7 @@ export class Category {
 
   @ManyToOne(() => Indicator, (indicator) => indicator.category)
   indicator: Indicator
+
+  @OneToMany(() => Recommendation, (recommendation) => recommendation.category)
+  recommendations: Recommendation[]
 }

@@ -4,6 +4,7 @@ import { Repository } from 'typeorm'
 import { InformationCollection } from './entities/information-collection.entity'
 import { CreateInformationCollectionDto } from './dto/create-information-collection.dto'
 import { UpdateInformationCollectionDto } from './dto/update-information-collection.dto'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
 export class InformationCollectionsService {
@@ -12,21 +13,36 @@ export class InformationCollectionsService {
     private informationCollectionsRepository: Repository<InformationCollection>
   ) {}
 
-  findAll(): Promise<InformationCollection[]> {
-    return this.informationCollectionsRepository.find()
+  async findAll({
+    page,
+    itemsPerPage
+  }: PaginationParams): Promise<{
+    informationCollection: InformationCollection[]
+    count: number
+  }> {
+    const [informationCollection, count] =
+      await this.informationCollectionsRepository.findAndCount({
+        take: itemsPerPage,
+        skip: (page - 1) * itemsPerPage
+      })
+
+    return { informationCollection, count }
   }
 
-  findOne(id: number): Promise<InformationCollection> {
-    return this.informationCollectionsRepository.findOneByOrFail({ id })
+  async findOne(id: number): Promise<InformationCollection> {
+    return await this.informationCollectionsRepository.findOneByOrFail({ id })
   }
 
-  create(
+  async create(
     createInformationCollectionDto: CreateInformationCollectionDto
   ): Promise<InformationCollection> {
-    const informationCollection = this.informationCollectionsRepository.create(
-      createInformationCollectionDto
+    const informationCollection =
+      await this.informationCollectionsRepository.create(
+        createInformationCollectionDto
+      )
+    return await this.informationCollectionsRepository.save(
+      informationCollection
     )
-    return this.informationCollectionsRepository.save(informationCollection)
   }
 
   async update(

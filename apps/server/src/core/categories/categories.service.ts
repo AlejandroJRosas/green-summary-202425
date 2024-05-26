@@ -5,6 +5,7 @@ import { Category } from './entities/category.entity'
 import { Indicator } from '../indicators/entities/indicator.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
 export class CategoriesService {
@@ -28,8 +29,17 @@ export class CategoriesService {
     return this.categoryRepository.save(category)
   }
 
-  async getAllCategories(): Promise<Category[]> {
-    return this.categoryRepository.find({ relations: ['indicator'] })
+  async getAllCategories({
+    page,
+    itemsPerPage
+  }: PaginationParams): Promise<{ categories: Category[]; count: number }> {
+    const [categories, count] = await this.categoryRepository.findAndCount({
+      relations: ['indicator'],
+      take: itemsPerPage,
+      skip: (page - 1) * itemsPerPage
+    })
+
+    return { categories, count }
   }
 
   async getOneCategory(id: number): Promise<Category> {

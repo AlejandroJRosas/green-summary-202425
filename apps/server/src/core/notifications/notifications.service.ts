@@ -5,6 +5,7 @@ import { Notification } from './entities/notification.entity'
 import { User } from '../users/entities/user.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
 export class NotificationsService {
@@ -30,8 +31,21 @@ export class NotificationsService {
     return this.notificationRepository.save(notification)
   }
 
-  async getAll(): Promise<Notification[]> {
-    return this.notificationRepository.find({ relations: ['user'] })
+  async getAll({
+    page,
+    itemsPerPage
+  }: PaginationParams): Promise<{
+    notifications: Notification[]
+    count: number
+  }> {
+    const [notifications, count] =
+      await this.notificationRepository.findAndCount({
+        relations: ['user'],
+        take: itemsPerPage,
+        skip: (page - 1) * itemsPerPage
+      })
+
+    return { notifications, count }
   }
 
   async getOne(id: number): Promise<Notification> {

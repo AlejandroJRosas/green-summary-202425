@@ -4,18 +4,18 @@ import {
   Delete,
   Get,
   HttpCode,
+  HttpStatus,
   Param,
   Post,
   Put,
-  Res,
-  UsePipes,
-  ValidationPipe
+  Query
 } from '@nestjs/common'
 import { CategoriesService } from './categories.service'
-import { Response } from 'express'
 import { CreateCategoryDto } from './dto/create-category.dto'
 import { UpdateCategoryDto } from './dto/update-category.dto'
 import { ApiTags } from '@nestjs/swagger'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 
 @ApiTags('Categories')
 @Controller('categories')
@@ -23,56 +23,63 @@ export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
   @Get()
-  async getAllCategories(@Res() response: Response) {
-    const categories = await this.categoriesService.getAllCategories()
-    return response.json(categories)
+  async getAllCategories(
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams
+  ) {
+    const { categories, count } = await this.categoriesService.getAllCategories(
+      {
+        page,
+        itemsPerPage
+      }
+    )
+
+    const paginatedItems = constructPaginatedItemsDto(
+      categories,
+      count,
+      page,
+      itemsPerPage
+    )
+    return paginatedItems
   }
 
   @Get('/:id')
-  async getCategory(@Param('id') id: string, @Res() response: Response) {
+  async getCategory(@Param('id') id: string) {
     const category = await this.categoriesService.getOneCategory(Number(id))
-    return response.json(category)
+    return category
   }
 
   @Post()
-  @HttpCode(201)
-  @UsePipes(new ValidationPipe())
-  async createCategory(
-    @Body() newCategory: CreateCategoryDto,
-    @Res() response: Response
-  ) {
+  @HttpCode(HttpStatus.CREATED)
+  async createCategory(@Body() newCategory: CreateCategoryDto) {
     const createdCategory = await this.categoriesService.create(newCategory)
-    return response.json(createdCategory)
+    return createdCategory
   }
 
   @Put('/:id')
-  @UsePipes(new ValidationPipe())
   async updateCategory(
     @Param('id') id: string,
-    @Body() updatedCategory: UpdateCategoryDto,
-    @Res() response: Response
+    @Body() updatedCategory: UpdateCategoryDto
   ) {
     const category = await this.categoriesService.updateCategory(
       Number(id),
       updatedCategory
     )
-    return response.json(category)
+    return category
   }
 
   @Delete('/:id')
-  async deleteCategory(@Param('id') id: string, @Res() response: Response) {
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteCategory(@Param('id') id: string) {
     await this.categoriesService.deleteCategory(Number(id))
-    return response.status(204).send()
   }
 
   @Get('/indicator/:indicatorIndex')
   async getCategoriesByIndicator(
-    @Param('indicatorIndex') indicatorIndex: string,
-    @Res() response: Response
+    @Param('indicatorIndex') indicatorIndex: string
   ) {
     const categories = await this.categoriesService.categoriesByIndicator(
       Number(indicatorIndex)
     )
-    return response.json(categories)
+    return categories
   }
 }

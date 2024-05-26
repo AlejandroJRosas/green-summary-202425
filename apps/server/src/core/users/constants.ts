@@ -1,4 +1,5 @@
 export enum UserTypes {
   COORDINATOR = 'coordinator',
-  DEPARTMENT = 'department'
+  DEPARTMENT = 'department',
+  ADMIN = 'admin'
 }

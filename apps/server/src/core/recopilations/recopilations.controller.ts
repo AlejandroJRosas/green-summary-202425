@@ -6,15 +6,16 @@ import {
   Param,
   Put,
   Delete,
-  Res,
   HttpStatus,
-  HttpCode
+  HttpCode,
+  Query
 } from '@nestjs/common'
-import { Response } from 'express'
 import { RecopilationsService } from './recopilations.service'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
 import { UpdateRecopilationDto } from './dto/update-recopilation.dto'
 import { ApiTags } from '@nestjs/swagger'
+import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
@@ -22,48 +23,53 @@ export class RecopilationsController {
   constructor(private readonly recopilationsService: RecopilationsService) {}
 
   @Get()
-  async findAll(@Res() res: Response): Promise<void> {
-    const recopilations = await this.recopilationsService.findAll()
+  async findAll(@Query() { page = 1, itemsPerPage = 10 }: PaginationParams) {
+    const { recopilation, count } = await this.recopilationsService.findAll({
+      page,
+      itemsPerPage
+    })
 
-    res.status(HttpStatus.OK).json(recopilations)
+    const paginatedItems = constructPaginatedItemsDto(
+      recopilation,
+      count,
+      page,
+      itemsPerPage
+    )
+    return paginatedItems
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: string, @Res() res: Response): Promise<void> {
+  async findOne(@Param('id') id: string) {
     const recopilation = await this.recopilationsService.findOne(+id)
 
-    res.json(recopilation)
+    return recopilation
   }
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(
-    @Body() recopilationData: CreateRecopilationDto,
-    @Res() res: Response
-  ): Promise<void> {
+  async create(@Body() recopilationData: CreateRecopilationDto) {
     const createdRecopilation =
       await this.recopilationsService.create(recopilationData)
 
-    res.json(createdRecopilation)
+    return createdRecopilation
   }
 
   @Put(':id')
   async update(
     @Param('id') id: string,
-    @Body() recopilationData: UpdateRecopilationDto,
-    @Res() res: Response
-  ): Promise<void> {
+    @Body() recopilationData: UpdateRecopilationDto
+  ) {
     const updatedRecopilation = await this.recopilationsService.update(
       +id,
       recopilationData
     )
 
-    res.json(updatedRecopilation)
+    return updatedRecopilation
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async remove(@Param('id') id: string): Promise<void> {
+  async remove(@Param('id') id: string) {
     return await this.recopilationsService.remove(+id)
   }
 }

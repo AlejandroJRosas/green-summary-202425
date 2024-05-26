@@ -7,13 +7,16 @@ import {
   Param,
   Delete,
   HttpStatus,
-  HttpCode
+  HttpCode,
+  Query
 } from '@nestjs/common'
 import { UsersService } from './users.service'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { FindOneParams } from './dto/find-one-params.dto'
 import { ApiTags } from '@nestjs/swagger'
+import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 
 @ApiTags('Users')
 @Controller('users')
@@ -27,8 +30,13 @@ export class UsersController {
   }
 
   @Get()
-  findAll() {
-    return this.usersService.findAll()
+  async findAll(@Query() { page = 1, itemsPerPage = 10 }: PaginationParams) {
+    const { users, count } = await this.usersService.findAll({
+      page,
+      itemsPerPage
+    })
+
+    return constructPaginatedItemsDto(users, count, page, itemsPerPage)
   }
 
   @Get(':id')
