@@ -3,7 +3,8 @@ import {
   Post,
   Body,
   HttpCode,
-  UnauthorizedException
+  UnauthorizedException,
+  HttpStatus
 } from '@nestjs/common'
 import { AuthService } from './auth.service'
 import { LoginAuthDto } from './dto/login-auth.dto'
@@ -16,7 +17,7 @@ export class AuthController {
   constructor(private readonly authService: AuthService) {}
 
   @Post('login')
-  @HttpCode(200)
+  @HttpCode(HttpStatus.OK)
   async login(@Body() loginAuthDto: LoginAuthDto) {
     try {
       const loginResult = await this.authService.login(loginAuthDto)

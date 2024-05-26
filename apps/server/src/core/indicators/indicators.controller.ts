@@ -7,11 +7,10 @@ import {
   Param,
   Post,
   Put,
-  Res,
-  Query
+  Query,
+  HttpStatus
 } from '@nestjs/common'
 import { IndicatorsService } from './indicators.service'
-import { Response } from 'express'
 import { CreateIndicatorDto } from './dto/create-indicator.dto'
 import { UpdateIndicatorDto } from './dto/update-indicator.dto'
 import { ApiTags } from '@nestjs/swagger'
@@ -25,8 +24,7 @@ export class IndicatorsController {
 
   @Get()
   async getAllIndicators(
-    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
-    @Res() response: Response
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams
   ) {
     const { indicators, count } = await this.indicatorsService.getAllIndicators(
       {
@@ -41,42 +39,38 @@ export class IndicatorsController {
       page,
       itemsPerPage
     )
-    return response.json(paginatedItems)
+    return paginatedItems
   }
 
   @Get('/:id')
-  async getIndicator(@Param('id') id: string, @Res() response: Response) {
+  async getIndicator(@Param('id') id: string) {
     const indicator = await this.indicatorsService.getOneIndicator(Number(id))
-    return response.json(indicator)
+    return indicator
   }
 
   @Post()
-  @HttpCode(201)
-  async createIndicator(
-    @Body() newIndicador: CreateIndicatorDto,
-    @Res() response: Response
-  ) {
+  @HttpCode(HttpStatus.CREATED)
+  async createIndicator(@Body() newIndicador: CreateIndicatorDto) {
     const createdIndicator =
       await this.indicatorsService.createIndicator(newIndicador)
-    return response.json(createdIndicator)
+    return createdIndicator
   }
 
   @Put('/:id')
   async updateIndicator(
     @Param('id') id: string,
-    @Body() updatedIndicador: UpdateIndicatorDto,
-    @Res() response: Response
+    @Body() updatedIndicador: UpdateIndicatorDto
   ) {
     const indicator = await this.indicatorsService.updateIndicator(
       Number(id),
       updatedIndicador
     )
-    return response.json(indicator)
+    return indicator
   }
 
   @Delete('/:id')
-  async deleteIndicator(@Param('id') id: string, @Res() response: Response) {
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteIndicator(@Param('id') id: string) {
     await this.indicatorsService.deleteIndicator(Number(id))
-    return response.status(204).send()
   }
 }

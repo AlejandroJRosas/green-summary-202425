@@ -5,11 +5,10 @@ import {
   Body,
   Param,
   Delete,
-  Res,
   HttpStatus,
-  Query
+  Query,
+  HttpCode
 } from '@nestjs/common'
-import { Response } from 'express'
 import { RecommendationsService } from './recommendations.service'
 import { CreateRecommendationDto } from './dto/create-recommendation.dto'
 import { ApiTags } from '@nestjs/swagger'
@@ -22,19 +21,14 @@ export class RecommendationsController {
   constructor(private readonly recommendService: RecommendationsService) {}
 
   @Post()
-  async create(
-    @Body() createRecommendDto: CreateRecommendationDto,
-    @Res() res: Response
-  ) {
+  @HttpCode(HttpStatus.CREATED)
+  async create(@Body() createRecommendDto: CreateRecommendationDto) {
     const result = await this.recommendService.create(createRecommendDto)
-    return res.status(HttpStatus.CREATED).json(result)
+    return result
   }
 
   @Get()
-  async findAll(
-    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
-    @Res() res: Response
-  ) {
+  async findAll(@Query() { page = 1, itemsPerPage = 10 }: PaginationParams) {
     const { recommendations, count } = await this.recommendService.findAll({
       page,
       itemsPerPage
@@ -46,18 +40,18 @@ export class RecommendationsController {
       page,
       itemsPerPage
     )
-    return res.json(paginatedItems)
+    return paginatedItems
   }
 
   @Get(':id')
-  async findOne(@Param('id') id: number, @Res() res: Response) {
+  async findOne(@Param('id') id: number) {
     const result = await this.recommendService.findOne(id)
-    return res.status(HttpStatus.OK).json(result)
+    return result
   }
 
   @Delete(':id')
-  async remove(@Param('id') id: number, @Res() res: Response) {
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async remove(@Param('id') id: number) {
     await this.recommendService.remove(id)
-    return res.status(HttpStatus.NO_CONTENT).send()
   }
 }
