@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Inject } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { ButtonModule } from 'primeng/button'
@@ -10,6 +9,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http'
 import { BaseUrl } from '../../../config'
 import { Toast } from '../../common/toast/toast.component'
 import { LottieComponent, AnimationOptions } from 'ngx-lottie'
+import { LoginPayload } from './login.component'
 
 @Component({
   selector: 'app-login',
@@ -62,15 +62,5 @@ export class LoginComponent {
         console.log(error)
       }
     })
-  }
-}
-
-export class LoginPayload {
-  email: string
-  password: string
-
-  constructor() {
-    this.email = ''
-    this.password = ''
   }
 }

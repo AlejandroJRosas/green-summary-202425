@@ -3,6 +3,17 @@
 @import 'primeng/resources/primeng.css';
 @import 'primeicons/primeicons.css';
 
+:root {
+  --primary-color: #00ad7c;
+}
+
+body {
+  min-height: 100dvh;
+  padding: 0px;
+  margin: 0px;
+  background-color: #f7ffe6;
+}
+
 .p-toast-message {
   border: 1px solid;
 }
