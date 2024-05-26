@@ -1,0 +1,55 @@
+<div
+  class="flex flex-row w-full h-screen border align-items-center justify-content-around px-4"
+>
+  <form action="#">
+    <div class="flex flex-column justify-content-center align-items-left gap-4">
+      <div>
+        <h1 class="m-0 font-semibold">Bienvenido a Green Summary</h1>
+        <h2 class="m-0 font-medium text-gray-700">
+          Sistema para la gestión de la sustentabilidad
+        </h2>
+      </div>
+      <div>
+        <label class="flex flex-column gap-2 w-full lg:w-7">
+          Correo Electrónico
+          <input
+            pInputText
+            name="email"
+            class="w-full"
+            [(ngModel)]="loginPayload.email"
+            required
+          />
+        </label>
+      </div>
+      <div>
+        <label class="flex flex-column gap-2 w-full lg:w-7">
+          Contraseña
+          <p-password
+            name="password"
+            feedback="false"
+            inputStyleClass="w-full"
+            styleClass="w-full"
+            [(ngModel)]="loginPayload.password"
+            [toggleMask]="true"
+            required
+          />
+        </label>
+      </div>
+      <p-button
+        icon="pi pi-arrow-right"
+        iconPos="right"
+        styleClass="bg-primary border-primary w-full lg:w-7"
+        label="Iniciar Sesión"
+        (click)="onLogin()"
+      ></p-button>
+    </div>
+  </form>
+  <img
+    src="/assets/earth.png"
+    alt="earth"
+    width="500px"
+    height="500px"
+    class="hidden lg:inline"
+  />
+  <!-- <ng-lottie [options]="options" /> -->
+</div>
