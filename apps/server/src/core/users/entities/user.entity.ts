@@ -8,17 +8,16 @@ import {
 import { UserTypes } from '../constants'
 import { Notification } from 'src/core/notifications/entities/notification.entity'
 
-
 @Entity({ name: 'users' })
 @TableInheritance({ column: { type: 'enum', enum: UserTypes, name: 'type' } })
 export class User {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ unique: true })
   fullName: string
 
-  @Column()
+  @Column({ unique: true })
   email: string
 
   @Column()
