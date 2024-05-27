@@ -6,7 +6,7 @@ import { CreateCategorizedCriteriaDto } from './dto/create-categorized-criterion
 import { UpdateCategorizedCriterionDto } from './dto/update-categorized-criterion.dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
-import { Criterion } from '../criteria/entities/criterion.entity'
+import { Criteria } from '../criterion/entities/criteria.entity'
 import { Category } from '../categories/entities/category.entity'
 
 @Injectable()
@@ -16,8 +16,8 @@ export class CategorizedCriteriaService {
     private readonly categorizedCriteriaRepository: Repository<CategorizedCriteria>,
     @InjectRepository(Recopilation)
     private readonly recopilationRepository: Repository<Recopilation>,
-    @InjectRepository(Criterion)
-    private readonly criterionRepository: Repository<Criterion>,
+    @InjectRepository(Criteria)
+    private readonly criterionRepository: Repository<Criteria>,
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>
   ) {}

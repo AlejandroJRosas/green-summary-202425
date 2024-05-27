@@ -6,7 +6,7 @@ import { CreateCriteriaPerRecopilationDto } from './dto/create-criteria-per-reco
 import { UpdateCriteriaPerRecopilationDto } from './dto/update-criteria-per-recopilation.dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
-import { Criterion } from '../criteria/entities/criterion.entity'
+import { Criteria } from '../criterion/entities/criteria.entity'
 
 @Injectable()
 export class CriteriaPerRecopilationsService {
@@ -15,8 +15,8 @@ export class CriteriaPerRecopilationsService {
     private readonly criteriaPerRecopilationsRepository: Repository<CriteriaPerRecopilation>,
     @InjectRepository(Recopilation)
     private readonly recopilationRepository: Repository<Recopilation>,
-    @InjectRepository(Criterion)
-    private readonly criterionRepository: Repository<Criterion>
+    @InjectRepository(Criteria)
+    private readonly criterionRepository: Repository<Criteria>
   ) {}
 
   async findAll({ page, itemsPerPage }: PaginationParams): Promise<{

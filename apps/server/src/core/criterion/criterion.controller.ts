@@ -11,7 +11,7 @@ import {
   ValidationPipe,
   Query
 } from '@nestjs/common'
-import { CriterionService } from './criteria.service'
+import { CriterionService } from './criterion.service'
 import { CreateCriteriaDto } from './dto/create-criteria.dto'
 import { UpdateCriteriaDto } from './dto/update-criteria.dto'
 import { Response } from 'express'

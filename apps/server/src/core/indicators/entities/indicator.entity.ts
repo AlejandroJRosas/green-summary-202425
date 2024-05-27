@@ -1,5 +1,5 @@
 import { Category } from 'src/core/categories/entities/category.entity'
-import { Criterion } from 'src/core/criteria/entities/criterion.entity'
+import { Criteria } from 'src/core/criterion/entities/criteria.entity'
 import { IndicatorPerRecopilation } from 'src/core/indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
 import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm'
 
@@ -20,8 +20,8 @@ export class Indicator {
   @OneToMany(() => Category, (category) => category.indicator)
   category: Category[]
 
-  @OneToMany(() => Criterion, (criteria) => criteria.indicator)
-  criteria: Criterion[]
+  @OneToMany(() => Criteria, (criteria) => criteria.indicator)
+  criteria: Criteria[]
 
   @OneToMany(
     () => IndicatorPerRecopilation,

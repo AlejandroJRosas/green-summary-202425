@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common'
-import { CriterionService } from './criteria.service'
-import { CriterionController } from './criteria.controller'
+import { CriterionService } from './criterion.service'
+import { CriterionController } from './criterion.controller'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Indicator } from '../indicators/entities/indicator.entity'
 import { Criteria } from './entities/criteria.entity'
@@ -11,4 +11,4 @@ import { Criteria } from './entities/criteria.entity'
   providers: [CriterionService],
   exports: [TypeOrmModule]
 })
-export class CriteriaModule {}
+export class CriterionModule {}

@@ -8,7 +8,7 @@ import { InformationCollectionsModule } from './core/information-collections/inf
 import { EvidencesModule } from './core/evidences/evidences.module'
 import { IndicatorsModule } from './core/indicators/indicators.module'
 import { CategoriesModule } from './core/categories/categories.module'
-import { CriteriaModule } from './core/criteria/criteria.module'
+import { CriterionModule } from './core/criterion/criterion.module'
 import { RecopilationsModule } from './core/recopilations/recopilations.module'
 import { RecommendationsModule } from './core/recommendations/recommendations.module'
 import { IndicatorsPerRecopilationsModule } from './core/indicators-per-recopilations/indicators-per-recopilations.module'
@@ -40,7 +40,7 @@ import { CategorizedCriteriaModule } from './core/categorized-criteria/categoriz
     EvidencesModule,
     IndicatorsModule,
     CategoriesModule,
-    CriteriaModule,
+    CriterionModule,
     RecopilationsModule,
     RecommendationsModule,
     IndicatorsPerRecopilationsModule,

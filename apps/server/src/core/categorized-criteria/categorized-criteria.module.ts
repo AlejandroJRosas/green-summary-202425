@@ -4,7 +4,7 @@ import { CategorizedCriteria } from './entities/categorized-criterion.entity'
 import { CategorizedCriteriaService } from './categorized-criteria.service'
 import { CategorizedCriteriaController } from './categorized-criteria.controller'
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
-import { Criterion } from '../criteria/entities/criterion.entity'
+import { Criteria } from '../criterion/entities/criteria.entity'
 import { Category } from '../categories/entities/category.entity'
 
 @Module({
@@ -12,7 +12,7 @@ import { Category } from '../categories/entities/category.entity'
     TypeOrmModule.forFeature([
       CategorizedCriteria,
       Recopilation,
-      Criterion,
+      Criteria,
       Category
     ])
   ],
