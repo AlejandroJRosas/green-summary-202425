@@ -1,0 +1,67 @@
+<main class="flex flex-column p-4">
+  <header class="flex flex-row justify-content-between w-full pb-4">
+    <h2>Departamentos {{ isFetchingDepartments }}</h2>
+    <section
+      class="flex flex-row justify-content-end align-items-center gap-5 py-2 px-8"
+    >
+      <p-button
+        styleClass="bg-primary border-primary"
+        label="Crear"
+        icon="pi pi-plus"
+        size="small"
+      />
+      <p-button
+        label="Eliminar"
+        icon="pi pi-trash"
+        size="small"
+        [outlined]="true"
+        severity="danger"
+      />
+    </section>
+  </header>
+  <section class="flex flex-column">
+    <p-table
+      [value]="departments"
+      [(selection)]="selectedDepartment"
+      dataKey="id"
+      styleClass="w-full"
+    >
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width: 4rem"><p-tableHeaderCheckbox /></th>
+          <th>Nombre</th>
+          <th>Correo Electrónico</th>
+          <th>Contraseña</th>
+          <th style="width: 1rem"></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-department>
+        <tr>
+          <td><p-tableCheckbox [value]="department" /></td>
+          <td>{{ department.fullName }}</td>
+          <td>{{ department.email }}</td>
+          <td>{{ department.password }}</td>
+          <td>
+            <div
+              class="flex flex-row justify-content-center align-items-center gap-3"
+            >
+              <p-button
+                icon="pi pi-pencil"
+                [rounded]="true"
+                severity="success"
+                [outlined]="true"
+              />
+              <p-button
+                (click)="onDelete(department.id)"
+                icon="pi pi-trash"
+                [rounded]="true"
+                severity="danger"
+                [outlined]="true"
+              />
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </section>
+</main>
