@@ -3,10 +3,10 @@ import { CriterionService } from './criteria.service'
 import { CriterionController } from './criteria.controller'
 import { TypeOrmModule } from '@nestjs/typeorm'
 import { Indicator } from '../indicators/entities/indicator.entity'
-import { Criterion } from './entities/criterion.entity'
+import { Criteria } from './entities/criteria.entity'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Criterion, Indicator])],
+  imports: [TypeOrmModule.forFeature([Criteria, Indicator])],
   controllers: [CriterionController],
   providers: [CriterionService],
   exports: [TypeOrmModule]

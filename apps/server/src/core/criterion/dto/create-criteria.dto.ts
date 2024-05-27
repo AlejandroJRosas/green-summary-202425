@@ -6,7 +6,7 @@ import {
   IsOptional
 } from 'class-validator'
 
-export class CreateCriterionDto {
+export class CreateCriteriaDto {
   @IsNumber()
   @IsNotEmpty()
   indicatorIndex: number

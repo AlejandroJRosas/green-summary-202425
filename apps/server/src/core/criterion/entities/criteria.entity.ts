@@ -7,11 +7,11 @@ import {
   OneToMany
 } from 'typeorm'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
-import { CriteriaPerRecopilation } from 'src/core/criteria_per_recopilations/entities/criteria_per_recopilation.entity'
-import { CategorizedCriteria } from 'src/core/categorized_criteria/entities/categorized_criterion.entity'
+import { CriteriaPerRecopilation } from 'src/core/criterion-per-recopilations/entities/criteria-per-recopilation.entity'
+import { CategorizedCriteria } from 'src/core/categorized-criteria/entities/categorized-criterion.entity'
 
 @Entity('criteria')
-export class Criterion {
+export class Criteria {
   @PrimaryColumn()
   indicatorIndex: number
 
