@@ -9,6 +9,10 @@ import { Department } from './entities/department.entity'
 import { Admin } from './entities/admin.entity'
 import { USER_TYPES } from './constants'
 import { User } from './entities/user.entity'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-by-param.dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
 
 @Injectable()
 export class UsersService {
@@ -41,10 +45,21 @@ export class UsersService {
     }
   }
 
-  async findAll({ page, itemsPerPage }: PaginationParams) {
+  async findAll({
+    page,
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [users, count] = await this.usersRepository.findAndCount({
       take: itemsPerPage,
-      skip: (page - 1) * itemsPerPage
+      skip: (page - 1) * itemsPerPage,
+      order: { [orderBy]: orderType },
+      where: parseFiltersToTypeOrm(filters)
     })
 
     return { users, count }
