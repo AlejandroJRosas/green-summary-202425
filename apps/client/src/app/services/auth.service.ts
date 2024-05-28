@@ -10,7 +10,11 @@ import { LoginPayload } from '../core/login/login.component'
 export class AuthService {
   constructor(private http: HttpClient) {}
 
-  isAuth(roles: RoleType[]): boolean {
+  isAuth(): boolean {
+    return !!localStorage.getItem('token')
+  }
+
+  isRole(roles: RoleType[]): boolean {
     const user = localStorage.getItem('user')
     if (user) {
       const userRole = JSON.parse(user).type

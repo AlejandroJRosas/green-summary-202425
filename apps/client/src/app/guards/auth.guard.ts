@@ -1,10 +1,17 @@
-import { CanActivateFn } from '@angular/router'
-import { AuthService, RoleType } from '../services/auth.service'
+import { CanActivateFn, Router } from '@angular/router'
+import { AuthService } from '../services/auth.service'
 import { inject } from '@angular/core'
+import { Toast } from '../common/toast/toast.component'
 
-export const authGuard =
-  (roles: RoleType[]): CanActivateFn =>
-  (route, state) => {
-    const authService = inject(AuthService)
-    return authService.isAuth(roles)
+export const authGuard: CanActivateFn = () => {
+  const authService = inject(AuthService)
+  const router = inject(Router)
+  if (authService.isAuth()) {
+    return true
+  } else {
+    const url = router.createUrlTree(['/login'])
+    const toast = inject(Toast)
+    toast.show('error', 'Error', '¡Ups, parece que no has iniciado sesión aún!')
+    return url
   }
+}
