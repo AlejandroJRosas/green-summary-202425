@@ -9,7 +9,8 @@ import { ConfirmationService } from 'primeng/api'
 import { DialogModule } from 'primeng/dialog'
 import {
   CreateDepartmentPayload,
-  DepartmentService
+  DepartmentService,
+  EditDepartmentPayload
 } from '../../services/department.service'
 import { InputTextModule } from 'primeng/inputtext'
 import { Toast } from '../../common/toast/toast.component'
@@ -41,12 +42,21 @@ export class DepartmentComponent implements OnInit {
 
   isDeletingDepartments = false
   isFetchingDepartments = false
-  visible: boolean = false
+  visibleCreate: boolean = false
+  visibleEdit: boolean = false
 
   message: string = ''
   departments: Department[] = []
 
-  department: CreateDepartmentPayload = {
+  departmentCreate: CreateDepartmentPayload = {
+    fullName: '',
+    email: '',
+    password: '123',
+    type: 'department'
+  }
+
+  departmentEdit: EditDepartmentPayload = {
+    id: 0,
     fullName: '',
     email: '',
     password: '123',
@@ -57,24 +67,15 @@ export class DepartmentComponent implements OnInit {
 
   ngOnInit() {
     this.isFetchingDepartments = true
-    this.departmentService.getAll().subscribe({
-      next: (res) => {
-        // console.log(res);
-        this.isFetchingDepartments = false
-        this.departments = res.data.items
-      },
-      error: (e) => {
-        console.error(e)
-        this.isFetchingDepartments = false
-      }
-    })
+    this.getAll()
   }
 
   showDialogCreate() {
-    this.visible = true
+    this.visibleCreate = true
   }
-  showDialogEdit() {
-    this.visible = true
+  showDialogEdit(department: EditDepartmentPayload) {
+    this.visibleEdit = true
+    this.departmentEdit = department
   }
 
   confirmationDelete(event: Event, id: number, name: string) {
@@ -102,11 +103,23 @@ export class DepartmentComponent implements OnInit {
     })
   }
 
-  onCreate() {
-    this.departmentService.create(this.department).subscribe({
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  getAll() {
+    this.departmentService.getAll().subscribe({
       next: (res) => {
+        this.isFetchingDepartments = false
+        this.departments = res.data.items
+      },
+      error: (e) => {
+        console.error(e)
+        this.isFetchingDepartments = false
+      }
+    })
+  }
+  onCreate() {
+    this.departmentService.create(this.departmentCreate).subscribe({
+      next: () => {
         this.toast.show('success', 'Creado', 'Departamento creado con éxito')
+        this.getAll()
       },
       error: (e) => {
         console.error(e)
@@ -116,9 +129,8 @@ export class DepartmentComponent implements OnInit {
   }
 
   onEdit(id: number) {
-    this.departmentService.edit(id, this.department).subscribe({
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
-      next: (res) => {
+    this.departmentService.edit(id, this.departmentEdit).subscribe({
+      next: () => {
         this.toast.show('success', 'Editado', 'Departamento editado con éxito')
       },
       error: (e) => {
@@ -130,8 +142,7 @@ export class DepartmentComponent implements OnInit {
   onDelete(id: number) {
     this.isDeletingDepartments = true
     this.departmentService.delete(id).subscribe({
-      next: (res) => {
-        console.log(res)
+      next: () => {
         this.departments = this.departments.filter(
           (department) => department.id !== id
         )

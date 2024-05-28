@@ -1,26 +1,15 @@
 <main class="flex flex-column p-4">
   <div [innerHTML]="message"></div>
   <p-confirmDialog />
-  <header class="flex flex-row justify-content-between w-full pb-4">
+  <header class="flex flex-row justify-content-between align-items-center pb-4">
     <h2>Departamentos</h2>
-    <section
-      class="flex flex-row justify-content-end align-items-center gap-5 py-2 px-8"
-    >
-      <p-button
-        (click)="showDialogCreate()"
-        styleClass="bg-primary border-primary"
-        label="Crear"
-        icon="pi pi-plus"
-        size="small"
-      />
-      <p-button
-        label="Eliminar"
-        icon="pi pi-trash"
-        size="small"
-        [outlined]="true"
-        severity="danger"
-      />
-    </section>
+    <p-button
+      (click)="showDialogCreate()"
+      styleClass="bg-primary border-primary mr-4"
+      label="Crear"
+      icon="pi pi-plus"
+      size="small"
+    />
   </header>
   <section class="flex flex-column" *ngIf="!isFetchingDepartments">
     <p-table [value]="departments" dataKey="id" styleClass="w-full">
@@ -42,7 +31,7 @@
               class="flex flex-row justify-content-center align-items-center gap-3"
             >
               <p-button
-                (click)="showDialogCreate()"
+                (click)="showDialogEdit(department)"
                 icon="pi pi-pencil"
                 [rounded]="true"
                 severity="success"
@@ -93,7 +82,7 @@
   <p-dialog
     header="Crear Departamento"
     [modal]="true"
-    [(visible)]="visible"
+    [(visible)]="visibleCreate"
     [draggable]="false"
     [resizable]="false"
     [style]="{ width: '25rem' }"
@@ -106,7 +95,7 @@
           name="fullName"
           class="w-full"
           type="text"
-          [(ngModel)]="department.fullName"
+          [(ngModel)]="departmentCreate.fullName"
           required
         />
       </label>
@@ -119,7 +108,7 @@
           name="email"
           class="w-full"
           type="email"
-          [(ngModel)]="department.email"
+          [(ngModel)]="departmentCreate.email"
           required
         />
       </label>
@@ -131,7 +120,7 @@
         icon="pi pi-times"
         [outlined]="true"
         severity="danger"
-        (click)="visible = false"
+        (click)="visibleCreate = false"
       />
       <p-button
         label="Guardar"
@@ -140,14 +129,14 @@
         (click)="onCreate()"
         [outlined]="true"
         severity="success"
-        (click)="visible = false"
+        (click)="visibleCreate = false"
       />
     </div>
   </p-dialog>
   <p-dialog
-    header="Crear Departamento"
+    header="Editar Departamento"
     [modal]="true"
-    [(visible)]="visible"
+    [(visible)]="visibleEdit"
     [draggable]="false"
     [resizable]="false"
     [style]="{ width: '25rem' }"
@@ -160,8 +149,8 @@
           name="fullName"
           class="w-full"
           type="text"
-          [(ngModel)]="department.fullName"
-          [value]="department.fullName"
+          [(ngModel)]="departmentEdit.fullName"
+          [value]="departmentEdit.fullName"
           required
         />
       </label>
@@ -174,8 +163,8 @@
           name="email"
           class="w-full"
           type="email"
-          [(ngModel)]="department.email"
-          [value]="department.email"
+          [(ngModel)]="departmentEdit.email"
+          [value]="departmentEdit.email"
           required
         />
       </label>
@@ -187,15 +176,16 @@
         icon="pi pi-times"
         [outlined]="true"
         severity="danger"
-        (click)="visible = false"
+        (click)="visibleEdit = false"
       />
       <p-button
+        (click)="onEdit(departmentEdit.id)"
         label="Guardar"
         size="small"
         icon="pi pi-check"
         [outlined]="true"
         severity="success"
-        (click)="visible = false"
+        (click)="visibleEdit = false"
       />
     </div>
   </p-dialog>
