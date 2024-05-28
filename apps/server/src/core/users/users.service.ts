@@ -28,20 +28,15 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    try {
-      const { type, ...userData } = createUserDto
+    const { type, ...userData } = createUserDto
 
-      switch (type) {
-        case USER_TYPES.ADMIN:
-          return await this.adminRepository.save(userData)
-        case USER_TYPES.COORDINATOR:
-          return await this.coordinatorRepository.save(userData)
-        case USER_TYPES.DEPARTMENT:
-          return await this.departmentRepository.save(userData)
-      }
-    } catch (e) {
-      console.log(e)
-      throw e
+    switch (type) {
+      case USER_TYPES.ADMIN:
+        return await this.adminRepository.save(userData)
+      case USER_TYPES.COORDINATOR:
+        return await this.coordinatorRepository.save(userData)
+      case USER_TYPES.DEPARTMENT:
+        return await this.departmentRepository.save(userData)
     }
   }
 
