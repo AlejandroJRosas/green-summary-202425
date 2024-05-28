@@ -9,6 +9,8 @@ import { Department } from './entities/department.entity'
 import { Admin } from './entities/admin.entity'
 import { USER_TYPES } from './constants'
 import { User } from './entities/user.entity'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-by-param.dto'
 
 @Injectable()
 export class UsersService {
@@ -41,10 +43,16 @@ export class UsersService {
     }
   }
 
-  async findAll({ page, itemsPerPage }: PaginationParams) {
+  async findAll({
+    page,
+    itemsPerPage,
+    orderBy,
+    orderType
+  }: PaginationParams & OrderByParamDto & OrderTypeParamDto) {
     const [users, count] = await this.usersRepository.findAndCount({
       take: itemsPerPage,
-      skip: (page - 1) * itemsPerPage
+      skip: (page - 1) * itemsPerPage,
+      order: { [orderBy]: orderType }
     })
 
     return { users, count }

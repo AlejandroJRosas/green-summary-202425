@@ -17,6 +17,8 @@ import { FindOneParams } from './dto/find-one-params.dto'
 import { ApiTags } from '@nestjs/swagger'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-by-param.dto'
 
 @ApiTags('Users')
 @Controller('users')
@@ -30,10 +32,16 @@ export class UsersController {
   }
 
   @Get()
-  async findAll(@Query() { page = 1, itemsPerPage = 10 }: PaginationParams) {
+  async findAll(
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
+  ) {
     const { users, count } = await this.usersService.findAll({
       page,
-      itemsPerPage
+      itemsPerPage,
+      orderBy,
+      orderType
     })
 
     return constructPaginatedItemsDto(users, count, page, itemsPerPage)
