@@ -6,10 +6,9 @@ import { InputTextModule } from 'primeng/inputtext'
 import { PasswordModule } from 'primeng/password'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { CheckboxModule } from 'primeng/checkbox'
-import { HttpClient, HttpClientModule } from '@angular/common/http'
-import { BaseUrl } from '../../../config'
 import { Toast } from '../../common/toast/toast.component'
 import { LottieComponent, AnimationOptions } from 'ngx-lottie'
+import { AuthService } from '../../services/auth.service'
 
 @Component({
   selector: 'app-login',
@@ -17,7 +16,6 @@ import { LottieComponent, AnimationOptions } from 'ngx-lottie'
   animations: [],
   imports: [
     FormsModule,
-    HttpClientModule,
     ButtonModule,
     InputTextModule,
     PasswordModule,
@@ -32,8 +30,8 @@ export class LoginComponent {
   loginPayload: LoginPayload
 
   constructor(
-    private http: HttpClient,
-    @Inject(Toast) private toast: Toast
+    @Inject(Toast) private toast: Toast,
+    private authService: AuthService
   ) {
     this.loginPayload = new LoginPayload()
   }
@@ -43,9 +41,9 @@ export class LoginComponent {
   }
 
   onLogin() {
-    this.http.post(`${BaseUrl}/auth/login`, this.loginPayload).subscribe({
+    this.authService.login(this.loginPayload).subscribe({
       next: (res: any) => {
-        localStorage.setItem('user', res.data.user)
+        localStorage.setItem('user', JSON.stringify(res.data.user))
         localStorage.setItem('token', res.data.token)
         this.toast.show(
           'success',
@@ -54,12 +52,7 @@ export class LoginComponent {
         )
       },
       error: (error) => {
-        this.toast.show(
-          'error',
-          'Error',
-          'Correo electrónico o contraseña incorrecto'
-        )
-        console.log(error)
+        this.toast.show('error', 'Error', error.message)
       }
     })
   }
