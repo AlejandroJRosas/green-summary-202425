@@ -1,6 +1,6 @@
 import { ChildEntity } from 'typeorm'
 import { User } from './user.entity'
-import { UserTypes } from '../constants'
+import { USER_TYPES } from '../constants'
 
-@ChildEntity(UserTypes.COORDINATOR)
+@ChildEntity(USER_TYPES.COORDINATOR)
 export class Coordinator extends User {}

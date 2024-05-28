@@ -1,9 +1,9 @@
 import { ChildEntity, OneToMany } from 'typeorm'
 import { User } from './user.entity'
-import { UserTypes } from '../constants'
+import { USER_TYPES } from '../constants'
 import { Recommendation } from 'src/core/recommendations/entities/recommendation.entity'
 
-@ChildEntity(UserTypes.DEPARTMENT)
+@ChildEntity(USER_TYPES.DEPARTMENT)
 export class Department extends User {
   @OneToMany(
     () => Recommendation,

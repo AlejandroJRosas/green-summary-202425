@@ -2,21 +2,43 @@ import { Injectable } from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectRepository } from '@nestjs/typeorm'
-import { User } from './entities/user.entity'
 import { Repository } from 'typeorm'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { Coordinator } from './entities/coordinator.entity'
+import { Department } from './entities/department.entity'
+import { Admin } from './entities/admin.entity'
+import { USER_TYPES } from './constants'
+import { User } from './entities/user.entity'
 
 @Injectable()
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private usersRepository: Repository<User>
+    private usersRepository: Repository<User>,
+    @InjectRepository(Admin)
+    private adminRepository: Repository<Admin>,
+    @InjectRepository(Coordinator)
+    private coordinatorRepository: Repository<Coordinator>,
+    @InjectRepository(Department)
+    private departmentRepository: Repository<Department>
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const user = await this.usersRepository.save(createUserDto)
+    try {
+      const { type, ...userData } = createUserDto
 
-    return user
+      switch (type) {
+        case USER_TYPES.ADMIN:
+          return await this.adminRepository.save(userData)
+        case USER_TYPES.COORDINATOR:
+          return await this.coordinatorRepository.save(userData)
+        case USER_TYPES.DEPARTMENT:
+          return await this.departmentRepository.save(userData)
+      }
+    } catch (e) {
+      console.log(e)
+      throw e
+    }
   }
 
   async findAll({ page, itemsPerPage }: PaginationParams) {
