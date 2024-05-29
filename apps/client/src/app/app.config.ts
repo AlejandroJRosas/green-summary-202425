@@ -7,6 +7,7 @@ import player from 'lottie-web'
 import { routes } from './app.routes'
 import { Toast } from './common/toast/toast.component'
 import { MessageService } from 'primeng/api'
+import { provideHttpClient } from '@angular/common/http'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
       player: () => player
     }),
     Toast,
-    MessageService
+    MessageService,
+    provideHttpClient()
   ]
 }
