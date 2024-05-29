@@ -3,7 +3,6 @@ import {
   Column,
   PrimaryGeneratedColumn,
   ManyToOne,
-  JoinColumn,
   CreateDateColumn,
   TableInheritance
 } from 'typeorm'
@@ -14,7 +13,7 @@ import { EvidenceType } from '../constants'
 @TableInheritance({
   column: { type: 'enum', enum: EvidenceType, name: 'type' }
 })
-export class Evidence {
+export abstract class Evidence {
   @PrimaryGeneratedColumn()
   id: number
 
@@ -37,6 +36,5 @@ export class Evidence {
   type: EvidenceType
 
   @ManyToOne(() => InformationCollection, (collection) => collection.evidences)
-  @JoinColumn({ name: 'collection_id' })
   collection: InformationCollection
 }

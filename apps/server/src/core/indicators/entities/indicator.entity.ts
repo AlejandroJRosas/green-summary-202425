@@ -25,9 +25,7 @@ export class Indicator {
 
   @OneToMany(
     () => IndicatorPerRecopilation,
-    (indicatorsPorRecopilations) => indicatorsPorRecopilations.indicator
+    (indicatorPorRecopilations) => indicatorPorRecopilations.indicator
   )
-  indicatorsPerRecopilations: IndicatorPerRecopilation[]
-
-  //TODO: RELATION WITH RECOPILATION
+  recopilationsPerIndicator: IndicatorPerRecopilation[]
 }

@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
 import { Recopilation } from 'src/core/recopilations/entities/recopilation.entity'
 import { Department } from 'src/core/users/entities/department.entity'
 import { Category } from 'src/core/categories/entities/category.entity'
@@ -9,19 +9,18 @@ export class Answer {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne(() => Recopilation)
-  @JoinColumn({ name: 'IDRecopilation' })
+  @ManyToOne(() => Recopilation, (recopilation) => recopilation.answers)
   recopilation: Recopilation
 
-  @ManyToOne(() => Department)
-  @JoinColumn({ name: 'IDDepartment' })
+  @ManyToOne(() => Department, (department) => department.answers)
   department: Department
 
-  @ManyToOne(() => Category)
-  @JoinColumn({ name: 'IDCategory' })
+  @ManyToOne(() => Category, (category) => category.answers)
   category: Category
 
-  @ManyToOne(() => InformationCollection)
-  @JoinColumn({ name: 'IDCollection' })
+  @ManyToOne(
+    () => InformationCollection,
+    (informationCollection) => informationCollection.answers
+  )
   informationCollection: InformationCollection
 }

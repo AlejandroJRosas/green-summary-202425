@@ -37,13 +37,11 @@ export class Criteria {
     () => CriteriaPerRecopilation,
     (criteriaPerRecopilation) => criteriaPerRecopilation.recopilation
   )
-  criteriaPerRecopilations: CriteriaPerRecopilation[]
+  recopilationsPerCriteria: CriteriaPerRecopilation[]
 
   @OneToMany(
     () => CategorizedCriteria,
     (categorizedCriteria) => categorizedCriteria.criterion
   )
-  categorizedCriteria: CategorizedCriteria[]
-
-  //TODO: RELATION WITH CATEGORIZED CRITERIA (RECOPILATION AND CATEGORY)
+  categorizedCriterion: CategorizedCriteria[]
 }

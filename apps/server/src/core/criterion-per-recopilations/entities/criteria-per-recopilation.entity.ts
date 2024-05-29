@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
 import { Recopilation } from 'src/core/recopilations/entities/recopilation.entity'
 import { Criteria } from 'src/core/criterion/entities/criteria.entity'
 
@@ -9,16 +9,10 @@ export class CriteriaPerRecopilation {
 
   @ManyToOne(
     () => Recopilation,
-    (recopilation) => recopilation.criteriaPerRecopilations
+    (recopilation) => recopilation.criterionPerRecopilation
   )
-  @JoinColumn({ name: 'recopilation_id' })
   recopilation: Recopilation
 
-  @ManyToOne(() => Criteria, (criterion) => criterion.criteriaPerRecopilations)
-  @JoinColumn({
-    name: 'indicatorIndex',
-    referencedColumnName: 'indicatorIndex'
-  })
-  @JoinColumn({ name: 'subIndex', referencedColumnName: 'subIndex' })
+  @ManyToOne(() => Criteria, (criterion) => criterion.recopilationsPerCriteria)
   criterion: Criteria
 }

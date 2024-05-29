@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
 import { Recopilation } from 'src/core/recopilations/entities/recopilation.entity'
 
@@ -7,11 +7,15 @@ export class IndicatorPerRecopilation {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne(() => Recopilation, { eager: true })
-  @JoinColumn({ name: 'IDRecopilacion' })
+  @ManyToOne(
+    () => Recopilation,
+    (recopilation) => recopilation.indicatorsPerRecopilations
+  )
   recopilation: Recopilation
 
-  @ManyToOne(() => Indicator, { eager: true })
-  @JoinColumn({ name: 'IndiceIndicador' })
+  @ManyToOne(
+    () => Indicator,
+    (indicator) => indicator.recopilationsPerIndicator
+  )
   indicator: Indicator
 }

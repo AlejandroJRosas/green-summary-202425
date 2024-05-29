@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne, JoinColumn } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
 import { Recopilation } from 'src/core/recopilations/entities/recopilation.entity'
 import { Department } from 'src/core/users/entities/department.entity'
 
@@ -7,11 +7,15 @@ export class DepartmentPerRecopilation {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne(() => Recopilation, (recopilation) => recopilation.id)
-  @JoinColumn({ name: 'IDRecopilation' })
+  @ManyToOne(
+    () => Recopilation,
+    (recopilation) => recopilation.departmentsPerRecopilation
+  )
   recopilation: Recopilation
 
-  @ManyToOne(() => Department, (department) => department.id)
-  @JoinColumn({ name: 'IDDepartment' })
+  @ManyToOne(
+    () => Department,
+    (department) => department.recopilationsPerDepartment
+  )
   department: Department
 }
