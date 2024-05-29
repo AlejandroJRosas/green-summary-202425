@@ -9,6 +9,7 @@ import { CheckboxModule } from 'primeng/checkbox'
 import { Toast } from '../../common/toast/toast.component'
 import { LottieComponent, AnimationOptions } from 'ngx-lottie'
 import { AuthService } from '../../services/auth.service'
+import { Router } from '@angular/router'
 
 @Component({
   selector: 'app-login',
@@ -31,7 +32,8 @@ export class LoginComponent {
 
   constructor(
     @Inject(Toast) private toast: Toast,
-    private authService: AuthService
+    private authService: AuthService,
+    private router: Router
   ) {
     this.loginPayload = new LoginPayload()
   }
@@ -50,6 +52,7 @@ export class LoginComponent {
           'Éxito',
           'Usted ha iniciado sesión correctamente'
         )
+        this.router.navigate(['/home'])
       },
       error: (error) => {
         this.toast.show('error', 'Error', error.message)
