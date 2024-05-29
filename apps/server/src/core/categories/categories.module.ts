@@ -8,6 +8,7 @@ import { Indicator } from '../indicators/entities/indicator.entity'
 @Module({
   imports: [TypeOrmModule.forFeature([Category, Indicator])],
   controllers: [CategoriesController],
-  providers: [CategoriesService]
+  providers: [CategoriesService],
+  exports: [TypeOrmModule]
 })
 export class CategoriesModule {}

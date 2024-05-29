@@ -1,3 +1,4 @@
+import { Answer } from 'src/core/answers/entities/answer.entity'
 import { Evidence } from 'src/core/evidences/entities/evidence.entity'
 import {
   Entity,
@@ -24,5 +25,6 @@ export class InformationCollection {
   @OneToMany(() => Evidence, (evidence) => evidence.collection)
   evidences: Evidence[]
 
-  //TODO: RELATION WITH DEPARTMENT_CATEGORY_RECOPILATION (A TABLE TO RESOLVE TERTIARY RELATION)
+  @OneToMany(() => Answer, (answers) => answers.informationCollection)
+  answers: Answer[]
 }

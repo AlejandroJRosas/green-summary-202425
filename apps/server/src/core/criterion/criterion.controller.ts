@@ -10,9 +10,9 @@ import {
   HttpStatus,
   HttpCode
 } from '@nestjs/common'
-import { CriterionService } from './criteria.service'
-import { CreateCriterionDto } from './dto/create-criterion.dto'
-import { UpdateCriterionDto } from './dto/update-criterion.dto'
+import { CriterionService } from './criterion.service'
+import { CreateCriteriaDto } from './dto/create-criteria.dto'
+import { UpdateCriteriaDto } from './dto/update-criteria.dto'
 import { ApiTags } from '@nestjs/swagger'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
@@ -24,7 +24,7 @@ export class CriterionController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async reateCriterion(@Body() createCriterionDto: CreateCriterionDto) {
+  async reateCriterion(@Body() createCriterionDto: CreateCriteriaDto) {
     const criterion =
       await this.criterionService.createCriterion(createCriterionDto)
     return criterion
@@ -64,7 +64,7 @@ export class CriterionController {
   async updateCriterion(
     @Param('indicatorIndex') indicatorIndex: string,
     @Param('subIndex') subIndex: string,
-    @Body() updateCriterionDto: UpdateCriterionDto
+    @Body() updateCriterionDto: UpdateCriteriaDto
   ) {
     const criterion = await this.criterionService.updateCriterion(
       Number(indicatorIndex),

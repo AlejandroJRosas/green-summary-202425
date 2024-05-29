@@ -10,6 +10,7 @@ import { Admin } from './entities/admin.entity'
 @Module({
   imports: [TypeOrmModule.forFeature([User, Admin, Coordinator, Department])],
   controllers: [UsersController],
-  providers: [UsersService]
+  providers: [UsersService],
+  exports: [TypeOrmModule]
 })
 export class UsersModule {}

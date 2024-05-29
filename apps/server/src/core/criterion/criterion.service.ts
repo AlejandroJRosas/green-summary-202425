@@ -1,21 +1,21 @@
 import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
-import { CreateCriterionDto } from './dto/create-criterion.dto'
-import { UpdateCriterionDto } from './dto/update-criterion.dto'
-import { Criterion } from './entities/criterion.entity'
+import { CreateCriteriaDto } from './dto/create-criteria.dto'
+import { UpdateCriteriaDto } from './dto/update-criteria.dto'
+import { Criteria } from './entities/criteria.entity'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
 @Injectable()
 export class CriterionService {
   constructor(
-    @InjectRepository(Criterion)
-    private readonly criterionRepository: Repository<Criterion>
+    @InjectRepository(Criteria)
+    private readonly criterionRepository: Repository<Criteria>
   ) {}
 
   async createCriterion(
-    createCriterionDto: CreateCriterionDto
-  ): Promise<Criterion> {
+    createCriterionDto: CreateCriteriaDto
+  ): Promise<Criteria> {
     const criterion = this.criterionRepository.create(createCriterionDto)
     return this.criterionRepository.save(criterion)
   }
@@ -23,7 +23,7 @@ export class CriterionService {
   async getAllCriteria({
     page,
     itemsPerPage
-  }: PaginationParams): Promise<{ criteria: Criterion[]; count: number }> {
+  }: PaginationParams): Promise<{ criteria: Criteria[]; count: number }> {
     const [criteria, count] = await this.criterionRepository.findAndCount({
       take: itemsPerPage,
       skip: (page - 1) * itemsPerPage
@@ -35,7 +35,7 @@ export class CriterionService {
   async getOneCriterion(
     indicatorIndex: number,
     subIndex: number
-  ): Promise<Criterion> {
+  ): Promise<Criteria> {
     const criterion = await this.criterionRepository.findOneByOrFail({
       indicatorIndex,
       subIndex
@@ -46,8 +46,8 @@ export class CriterionService {
   async updateCriterion(
     indicatorIndex: number,
     subIndex: number,
-    updateCriterionDto: UpdateCriterionDto
-  ): Promise<Criterion> {
+    updateCriterionDto: UpdateCriteriaDto
+  ): Promise<Criteria> {
     await this.criterionRepository.update(
       { indicatorIndex, subIndex },
       updateCriterionDto
