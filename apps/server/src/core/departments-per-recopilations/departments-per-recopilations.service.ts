@@ -7,6 +7,10 @@ import { UpdateDepartmentPerRecopilationDto } from './dto/update-department-per-
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { Recopilation } from 'src/core/recopilations/entities/recopilation.entity'
 import { Department } from '../users/entities/department.entity'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-departments-per-recopilations-by-param.dto'
 
 @Injectable()
 export class DepartmentsPerRecopilationsService {
@@ -19,15 +23,23 @@ export class DepartmentsPerRecopilationsService {
     private readonly departmentRepository: Repository<Department>
   ) {}
 
-  async findAll({ page, itemsPerPage }: PaginationParams): Promise<{
-    departmentsPerRecopilations: DepartmentPerRecopilation[]
-    count: number
-  }> {
+  async findAll({
+    page,
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [departmentsPerRecopilations, count] =
       await this.departmentsPerRecopilationRepository.findAndCount({
         take: Number(itemsPerPage),
         skip: (Number(page) - 1) * Number(itemsPerPage),
-        relations: ['recopilation', 'department']
+        relations: ['recopilation', 'department'],
+        order: { [orderBy]: orderType },
+        where: parseFiltersToTypeOrm(filters)
       })
 
     return { departmentsPerRecopilations, count }

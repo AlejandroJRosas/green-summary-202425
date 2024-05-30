@@ -16,6 +16,9 @@ import { UpdateCriteriaDto } from './dto/update-criteria.dto'
 import { ApiTags } from '@nestjs/swagger'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-criteria-by-param.dto'
 
 @ApiTags('Criteria')
 @Controller('criteria')
@@ -32,11 +35,17 @@ export class CriterionController {
 
   @Get()
   async getAllCriteria(
-    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Query() { orderBy = 'indicatorIndex' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto,
+    @Query() { filters = [] }: FiltersSegmentDto
   ) {
     const { criteria, count } = await this.criterionService.getAllCriteria({
       page,
-      itemsPerPage
+      itemsPerPage,
+      orderBy,
+      orderType,
+      filters
     })
 
     const paginatedItems = constructPaginatedItemsDto(

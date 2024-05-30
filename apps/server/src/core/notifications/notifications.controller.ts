@@ -16,6 +16,9 @@ import { UpdateNotificationDto } from './dto/update-notification.dto'
 import { ApiTags } from '@nestjs/swagger'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-notifications-by-param.dto'
 
 @ApiTags('Notifications')
 @Controller('notifications')
@@ -32,10 +35,18 @@ export class NotificationsController {
   }
 
   @Get()
-  async getAll(@Query() { page = 1, itemsPerPage = 10 }: PaginationParams) {
+  async getAll(
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto,
+    @Query() { filters = [] }: FiltersSegmentDto
+  ) {
     const { notifications, count } = await this.notificationsService.getAll({
       page,
-      itemsPerPage
+      itemsPerPage,
+      orderBy,
+      orderType,
+      filters
     })
 
     const paginatedItems = constructPaginatedItemsDto(

@@ -6,6 +6,10 @@ import { CreateRecommendationDto } from './dto/create-recommendation.dto'
 import { Category } from 'src/core/categories/entities/category.entity'
 import { Department } from '../users/entities/department.entity'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-recommendations-by-param.dto'
 
 @Injectable()
 export class RecommendationsService {
@@ -38,15 +42,23 @@ export class RecommendationsService {
     return this.recommendationsRepository.save(recommendation)
   }
 
-  async findAll({ page, itemsPerPage }: PaginationParams): Promise<{
-    recommendations: Recommendation[]
-    count: number
-  }> {
+  async findAll({
+    page,
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [recommendations, count] =
       await this.recommendationsRepository.findAndCount({
         relations: ['departamento', 'categoria'],
         take: itemsPerPage,
-        skip: (page - 1) * itemsPerPage
+        skip: (page - 1) * itemsPerPage,
+        order: { [orderBy]: orderType },
+        where: parseFiltersToTypeOrm(filters)
       })
 
     return { recommendations, count }
