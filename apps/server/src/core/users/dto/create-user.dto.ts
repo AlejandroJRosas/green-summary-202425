@@ -1,5 +1,5 @@
 import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator'
-import { USER_TYPES, UserType } from '../constants'
+import { USER_TYPES, UserType } from '../users.constants'
 
 export class CreateUserDto {
   @IsString()

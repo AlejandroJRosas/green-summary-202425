@@ -18,7 +18,7 @@ import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-pagi
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
-import { OrderByParamDto } from './dto/order-by-param-recopilations.dto'
+import { OrderByParamDto } from './dto/order-recopilations-by-param.dto'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
