@@ -9,7 +9,7 @@ import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
-import { OrderByParamDto } from './dto/order-by-param-categories.dto'
+import { OrderByParamDto } from './dto/order-categories-by-param.dto'
 
 @Injectable()
 export class CategoriesService {

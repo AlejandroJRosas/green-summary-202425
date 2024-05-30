@@ -5,7 +5,7 @@ import {
   TableInheritance,
   OneToMany
 } from 'typeorm'
-import { USER_TYPES, UserType } from '../constants'
+import { USER_TYPES, UserType } from '../users.constants'
 import { Notification } from 'src/core/notifications/entities/notification.entity'
 
 @Entity({ name: 'users' })

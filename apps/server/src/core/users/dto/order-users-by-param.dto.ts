@@ -1,6 +1,6 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger'
 import { IsEnum, IsOptional, IsString } from 'class-validator'
-import { SORTABLE_FIELDS, SortableField } from '../constants'
+import { SORTABLE_FIELDS, SortableField } from '../users.constants'
 
 export class OrderByParamDto {
   @ApiProperty({ enum: SORTABLE_FIELDS })

@@ -18,7 +18,7 @@ import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
-import { OrderByParamDto } from './dto/order-by-param-categories.dto'
+import { OrderByParamDto } from './dto/order-categories-by-param.dto'
 
 @ApiTags('Categories')
 @Controller('categories')
