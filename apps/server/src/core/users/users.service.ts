@@ -13,6 +13,8 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-by-param.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import * as generator from 'generate-password'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UsersService {
@@ -29,14 +31,21 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     const { type, ...userData } = createUserDto
-
+    let generatedPassword = ''
     switch (type) {
       case USER_TYPES.ADMIN:
         return await this.adminRepository.save(userData)
       case USER_TYPES.COORDINATOR:
         return await this.coordinatorRepository.save(userData)
       case USER_TYPES.DEPARTMENT:
-        return await this.departmentRepository.save(userData)
+        generatedPassword = generator.generate({
+          length: 12,
+          numbers: true
+        })
+        userData.password = await bcrypt.hash(generatedPassword, 10)
+        await this.departmentRepository.save(userData)
+        userData.password = generatedPassword
+        return userData
     }
   }
 
