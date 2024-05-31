@@ -30,22 +30,31 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { type, ...userData } = createUserDto
+    const { type, ...createUserDtoWithoutType } = createUserDto
     let generatedPassword = ''
+    let user: User
+
     switch (type) {
       case USER_TYPES.ADMIN:
-        return await this.adminRepository.save(userData)
+        return await this.adminRepository.save({
+          ...createUserDtoWithoutType,
+          password: await this.encryptPassword(createUserDto.password)
+        })
       case USER_TYPES.COORDINATOR:
-        return await this.coordinatorRepository.save(userData)
+        return await this.coordinatorRepository.save({
+          ...createUserDtoWithoutType,
+          password: await this.encryptPassword(createUserDto.password)
+        })
       case USER_TYPES.DEPARTMENT:
         generatedPassword = generator.generate({
           length: 12,
           numbers: true
         })
-        userData.password = await bcrypt.hash(generatedPassword, 10)
-        await this.departmentRepository.save(userData)
-        userData.password = generatedPassword
-        return userData
+        createUserDtoWithoutType.password =
+          await this.encryptPassword(generatedPassword)
+        user = await this.departmentRepository.save(createUserDtoWithoutType)
+
+        return { ...user, password: user.password }
     }
   }
 
@@ -87,5 +96,9 @@ export class UsersService {
     const user = await this.usersRepository.findOneByOrFail({ id })
 
     await this.usersRepository.remove([user])
+  }
+
+  private encryptPassword(pass: string) {
+    return bcrypt.hash(pass, 10)
   }
 }
