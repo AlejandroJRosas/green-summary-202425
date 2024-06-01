@@ -5,10 +5,10 @@ import {
   Body,
   Param,
   Delete,
-  Put,
   HttpStatus,
   HttpCode,
-  Query
+  Query,
+  Patch
 } from '@nestjs/common'
 import { InformationCollectionsService } from './information-collections.service'
 import { CreateInformationCollectionDto } from './dto/create-information-collection.dto'
@@ -70,7 +70,7 @@ export class InformationCollectionsController {
     return newCollection
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') id: number,
     @Body() updateInformationCollectionDto: UpdateInformationCollectionDto

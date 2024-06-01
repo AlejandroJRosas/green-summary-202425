@@ -5,8 +5,8 @@ import {
   Body,
   Param,
   Delete,
-  Put,
-  Query
+  Query,
+  Patch
 } from '@nestjs/common'
 import { DepartmentsPerRecopilationsService } from './departments-per-recopilations.service'
 import { CreateDepartmentPerRecopilationDto } from './dto/create-department-per-recopilation.dto'
@@ -64,7 +64,7 @@ export class DepartmentsPerRecopilationsController {
     )
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') id: number,
     @Body()

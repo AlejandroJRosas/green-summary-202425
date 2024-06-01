@@ -4,11 +4,11 @@ import {
   Post,
   Body,
   Param,
-  Put,
   Delete,
   HttpStatus,
   HttpCode,
-  Query
+  Query,
+  Patch
 } from '@nestjs/common'
 import { RecopilationsService } from './recopilations.service'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
@@ -65,7 +65,7 @@ export class RecopilationsController {
     return createdRecopilation
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') id: string,
     @Body() recopilationData: UpdateRecopilationDto

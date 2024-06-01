@@ -5,8 +5,8 @@ import {
   Body,
   Param,
   Delete,
-  Put,
-  Query
+  Query,
+  Patch
 } from '@nestjs/common'
 import { CategoriesPerRecopilationsService } from '../categories-per-recopilations/categories-per-recopilations.service'
 import { CreateCategoryPerRecopilationDto } from './dto/create-category-per-recopilation.dto'
@@ -64,7 +64,7 @@ export class CategoriesPerRecopilationsController {
     )
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') id: number,
     @Body()

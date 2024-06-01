@@ -5,8 +5,8 @@ import {
   Body,
   Param,
   Delete,
-  Put,
-  Query
+  Query,
+  Patch
 } from '@nestjs/common'
 import { CategorizedCriteriaService } from './categorized-criteria.service'
 import { CreateCategorizedCriteriaDto } from './dto/create-categorized-criterion.dto'
@@ -61,7 +61,7 @@ export class CategorizedCriteriaController {
     return this.categorizedCriteriaService.create(createCategorizedCriteriaDto)
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') id: number,
     @Body() updateCategorizedCriteriaDto: UpdateCategorizedCriterionDto

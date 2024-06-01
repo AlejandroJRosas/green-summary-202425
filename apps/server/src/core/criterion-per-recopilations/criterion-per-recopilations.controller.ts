@@ -5,10 +5,10 @@ import {
   Body,
   Param,
   Delete,
-  Put,
   HttpCode,
   HttpStatus,
-  Query
+  Query,
+  Patch
 } from '@nestjs/common'
 import { CriteriaPerRecopilationsService } from './criterion-per-recopilations.service'
 import { CreateCriteriaPerRecopilationDto } from './dto/create-criteria-per-recopilation.dto'
@@ -66,7 +66,7 @@ export class CriteriaPerRecopilationsController {
     )
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') id: number,
     @Body() updateCriteriaPerRecopilationsDto: UpdateCriteriaPerRecopilationDto
