@@ -1,6 +1,11 @@
 import { CommonModule } from '@angular/common'
 import { Component, Inject, OnInit } from '@angular/core'
-import { FormsModule } from '@angular/forms'
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule
+} from '@angular/forms'
 import { TableModule } from 'primeng/table'
 import { ButtonModule } from 'primeng/button'
 import { SkeletonModule } from 'primeng/skeleton'
@@ -8,13 +13,12 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { ConfirmationService } from 'primeng/api'
 import { DialogModule } from 'primeng/dialog'
 import {
-  CreateDepartmentPayload,
-  DepartmentService,
-  EditDepartmentPayload
+  CreateUserDTO,
+  DepartmentService
 } from '../../services/department.service'
 import { InputTextModule } from 'primeng/inputtext'
 import { Toast } from '../../common/toast/toast.component'
-import { Department } from './department.type'
+import { User } from '../../../shared/types/user.type'
 
 @Component({
   selector: 'app-department',
@@ -28,7 +32,8 @@ import { Department } from './department.type'
     ConfirmDialogModule,
     Toast,
     DialogModule,
-    InputTextModule
+    InputTextModule,
+    ReactiveFormsModule
   ],
   templateUrl: './department.component.html',
   providers: [ConfirmationService]
@@ -40,44 +45,44 @@ export class DepartmentComponent implements OnInit {
     private departmentService: DepartmentService
   ) {}
 
+  departmentForm = new FormGroup({
+    fullName: new FormControl<string>(''),
+    email: new FormControl<string>('')
+  })
+
   isDeletingDepartments = false
   isFetchingDepartments = false
   visibleCreate: boolean = false
   visibleEdit: boolean = false
 
   message: string = ''
-  departments: Department[] = []
+  departments: User[] = []
 
-  departmentCreate: CreateDepartmentPayload = {
-    fullName: '',
-    email: '',
-    password: '123',
-    type: 'department'
-  }
+  skeletons: object[] = new Array(5).fill({})
 
-  departmentEdit: EditDepartmentPayload = {
+  departmentEdit: User = {
     id: 0,
     fullName: '',
     email: '',
-    password: '123',
+    password: '',
     type: 'department'
   }
-
-  skeletons: object[] = new Array(5).fill({})
 
   ngOnInit() {
     this.isFetchingDepartments = true
     this.getAll()
   }
 
+  closeDialogCreate() {
+    this.departmentForm.reset()
+  }
   showDialogCreate() {
     this.visibleCreate = true
   }
-  showDialogEdit(department: EditDepartmentPayload) {
+  showDialogEdit(department: User) {
     this.visibleEdit = true
     this.departmentEdit = department
   }
-
   confirmationDelete(event: Event, id: number, name: string) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
@@ -106,8 +111,10 @@ export class DepartmentComponent implements OnInit {
   getAll() {
     this.departmentService.getAll().subscribe({
       next: (res) => {
+        if (res.status === 'success') {
+          this.departments = res.data.items
+        }
         this.isFetchingDepartments = false
-        this.departments = res.data.items
       },
       error: (e) => {
         console.error(e)
@@ -116,7 +123,15 @@ export class DepartmentComponent implements OnInit {
     })
   }
   onCreate() {
-    this.departmentService.create(this.departmentCreate).subscribe({
+    const { fullName, email } = this.departmentForm.controls
+    if (!fullName.value || !email.value) return
+    const user: CreateUserDTO = {
+      fullName: fullName.value,
+      email: email.value,
+      password: '123',
+      type: 'department'
+    }
+    this.departmentService.create(user).subscribe({
       next: () => {
         this.toast.show('success', 'Creado', 'Departamento creado con éxito')
         this.getAll()
@@ -124,12 +139,22 @@ export class DepartmentComponent implements OnInit {
       error: (e) => {
         console.error(e)
         this.toast.show('error', 'Error', 'Error creando departamento')
+        console.log(this.departmentForm.value)
       }
     })
   }
-
-  onEdit(id: number) {
-    this.departmentService.edit(id, this.departmentEdit).subscribe({
+  onEdit() {
+    const { id, password, type } = this.departmentEdit
+    const { fullName, email } = this.departmentForm.controls
+    if (!fullName.value || !email.value) return
+    const user: User = {
+      id: id,
+      fullName: fullName.value,
+      email: email.value,
+      password: password,
+      type: type
+    }
+    this.departmentService.edit(user.id, user).subscribe({
       next: () => {
         this.toast.show('success', 'Editado', 'Departamento editado con éxito')
       },
