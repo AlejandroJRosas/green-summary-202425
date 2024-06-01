@@ -36,15 +36,17 @@ export class UsersService {
 
     switch (type) {
       case USER_TYPES.ADMIN:
-        return await this.adminRepository.save({
+        user = await this.adminRepository.save({
           ...createUserDtoWithoutType,
           password: await this.encryptPassword(createUserDto.password)
         })
+        break
       case USER_TYPES.COORDINATOR:
-        return await this.coordinatorRepository.save({
+        user = await this.coordinatorRepository.save({
           ...createUserDtoWithoutType,
           password: await this.encryptPassword(createUserDto.password)
         })
+        break
       case USER_TYPES.DEPARTMENT:
         generatedPassword = generator.generate({
           length: 12,
@@ -53,9 +55,15 @@ export class UsersService {
         createUserDtoWithoutType.password =
           await this.encryptPassword(generatedPassword)
         user = await this.departmentRepository.save(createUserDtoWithoutType)
-
-        return { ...user, password: user.password }
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...userWithoutPassword } = user
+
+    if (generatedPassword)
+      return { ...userWithoutPassword, password: generatedPassword }
+
+    return userWithoutPassword
   }
 
   async findAll({
