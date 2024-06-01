@@ -7,7 +7,7 @@ import {
   TableInheritance
 } from 'typeorm'
 import { InformationCollection } from 'src/core/information-collections/entities/information-collection.entity'
-import { EvidenceType } from '../constants'
+import { EvidenceType } from '../evidences.constants'
 
 @Entity('evidences')
 @TableInheritance({

@@ -7,6 +7,10 @@ import { UpdateCategoryPerRecopilationDto } from './dto/update-category-per-reco
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { Category } from '../categories/entities/category.entity'
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-by-categories-per-recopilations-by-param.dto'
 
 @Injectable()
 export class CategoriesPerRecopilationsService {
@@ -19,15 +23,23 @@ export class CategoriesPerRecopilationsService {
     private readonly recopilationRepository: Repository<Recopilation>
   ) {}
 
-  async findAll({ page, itemsPerPage }: PaginationParams): Promise<{
-    categoriesPerRecopilation: CategoryPerRecopilation[]
-    count: number
-  }> {
+  async findAll({
+    page,
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [categoriesPerRecopilation, count] =
       await this.categoriesPerRecopilationsRepository.findAndCount({
         take: Number(itemsPerPage),
         skip: (Number(page) - 1) * Number(itemsPerPage),
-        relations: ['recopilation', 'category']
+        relations: ['recopilation', 'category'],
+        order: { [orderBy]: orderType },
+        where: parseFiltersToTypeOrm(filters)
       })
 
     return { categoriesPerRecopilation, count }

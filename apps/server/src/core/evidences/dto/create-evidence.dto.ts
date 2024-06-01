@@ -6,7 +6,7 @@ import {
   IsInt,
   IsEnum
 } from 'class-validator'
-import { EvidenceType } from '../constants'
+import { EvidenceType } from '../evidences.constants'
 
 export class CreateEvidenceDto {
   @IsDateString()

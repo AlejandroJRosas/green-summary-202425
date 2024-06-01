@@ -1,6 +1,6 @@
 import { ChildEntity, OneToMany } from 'typeorm'
 import { User } from './user.entity'
-import { USER_TYPES } from '../constants'
+import { USER_TYPES } from '../users.constants'
 import { Recommendation } from 'src/core/recommendations/entities/recommendation.entity'
 import { Answer } from 'src/core/answers/entities/answer.entity'
 import { DepartmentPerRecopilation } from 'src/core/departments-per-recopilations/entities/departments-per-recopilation.entity'

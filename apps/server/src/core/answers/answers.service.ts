@@ -9,6 +9,10 @@ import { Department } from '../users/entities/department.entity'
 import { Category } from '../categories/entities/category.entity'
 import { InformationCollection } from '../information-collections/entities/information-collection.entity'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-anwsers-by-param.dto'
 
 @Injectable()
 export class AnswersService {
@@ -25,10 +29,16 @@ export class AnswersService {
     private readonly informationCollectionRepository: Repository<InformationCollection>
   ) {}
 
-  async findAll({ page, itemsPerPage }: PaginationParams): Promise<{
-    answers: Answer[]
-    count: number
-  }> {
+  async findAll({
+    page,
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [answers, count] = await this.answersRepository.findAndCount({
       take: Number(itemsPerPage),
       skip: (Number(page) - 1) * Number(itemsPerPage),
@@ -37,7 +47,9 @@ export class AnswersService {
         'department',
         'category',
         'informationCollection'
-      ]
+      ],
+      order: { [orderBy]: orderType },
+      where: parseFiltersToTypeOrm(filters)
     })
 
     return { answers, count }

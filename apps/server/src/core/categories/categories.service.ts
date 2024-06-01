@@ -6,6 +6,10 @@ import { Indicator } from '../indicators/entities/indicator.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-categories-by-param.dto'
 
 @Injectable()
 export class CategoriesService {
@@ -31,12 +35,20 @@ export class CategoriesService {
 
   async getAllCategories({
     page,
-    itemsPerPage
-  }: PaginationParams): Promise<{ categories: Category[]; count: number }> {
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [categories, count] = await this.categoryRepository.findAndCount({
       relations: ['indicator'],
       take: itemsPerPage,
-      skip: (page - 1) * itemsPerPage
+      skip: (page - 1) * itemsPerPage,
+      order: { [orderBy]: orderType },
+      where: parseFiltersToTypeOrm(filters)
     })
 
     return { categories, count }

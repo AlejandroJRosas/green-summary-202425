@@ -8,6 +8,10 @@ import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
 import { Criteria } from '../criterion/entities/criteria.entity'
 import { Category } from '../categories/entities/category.entity'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-categorized-criteria-by-param.dto'
 
 @Injectable()
 export class CategorizedCriteriaService {
@@ -22,15 +26,23 @@ export class CategorizedCriteriaService {
     private readonly categoryRepository: Repository<Category>
   ) {}
 
-  async findAll({ page, itemsPerPage }: PaginationParams): Promise<{
-    categorizedCriteria: CategorizedCriteria[]
-    count: number
-  }> {
+  async findAll({
+    page,
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [categorizedCriteria, count] =
       await this.categorizedCriteriaRepository.findAndCount({
         take: Number(itemsPerPage),
         skip: (Number(page) - 1) * Number(itemsPerPage),
-        relations: ['recopilation', 'criterion', 'category']
+        relations: ['recopilation', 'criterion', 'category'],
+        order: { [orderBy]: orderType },
+        where: parseFiltersToTypeOrm(filters)
       })
 
     return { categorizedCriteria, count }
