@@ -6,7 +6,7 @@ import {
   FormsModule,
   ReactiveFormsModule
 } from '@angular/forms'
-import { TableModule } from 'primeng/table'
+import { TableLazyLoadEvent, TableModule } from 'primeng/table'
 import { ButtonModule } from 'primeng/button'
 import { SkeletonModule } from 'primeng/skeleton'
 import { ConfirmDialogModule } from 'primeng/confirmdialog'
@@ -54,12 +54,19 @@ export class DepartmentComponent implements OnInit {
   isFetchingDepartments = false
   visibleCreate: boolean = false
   visibleEdit: boolean = false
+  visibleViewInformation: boolean = false
+  generatePassword: boolean = false
 
   message: string = ''
+  totalRecords: number = 0
   departments: User[] = []
-
-  skeletons: object[] = new Array(5).fill({})
-
+  department: User = {
+    id: 0,
+    fullName: '',
+    email: '',
+    password: '',
+    type: 'department'
+  }
   departmentEdit: User = {
     id: 0,
     fullName: '',
@@ -67,21 +74,35 @@ export class DepartmentComponent implements OnInit {
     password: '',
     type: 'department'
   }
+  paginated = {
+    first: 0,
+    rows: 5
+  }
+  header = `Departamento + ${this.department.fullName}`
+  skeletons: object[] = new Array(5).fill({})
 
   ngOnInit() {
     this.isFetchingDepartments = true
     this.getAll()
   }
 
-  closeDialogCreate() {
+  closeDialog() {
     this.departmentForm.reset()
   }
+
   showDialogCreate() {
     this.visibleCreate = true
+  }
+  showDialogViewInformation() {
+    this.visibleViewInformation = true
   }
   showDialogEdit(department: User) {
     this.visibleEdit = true
     this.departmentEdit = department
+    this.departmentForm.setValue({
+      fullName: department.fullName,
+      email: department.email
+    })
   }
   confirmationDelete(event: Event, id: number, name: string) {
     this.confirmationService.confirm({
@@ -109,10 +130,11 @@ export class DepartmentComponent implements OnInit {
   }
 
   getAll() {
-    this.departmentService.getAll().subscribe({
+    this.departmentService.getAll(this.paginated).subscribe({
       next: (res) => {
         if (res.status === 'success') {
           this.departments = res.data.items
+          this.totalRecords = res.data.totalItems
         }
         this.isFetchingDepartments = false
       },
@@ -122,18 +144,26 @@ export class DepartmentComponent implements OnInit {
       }
     })
   }
+  loadPaginatedData(event: TableLazyLoadEvent) {
+    this.paginated.first = event.first || 0
+    this.getAll()
+  }
   onCreate() {
+    this.generatePassword = true
     const { fullName, email } = this.departmentForm.controls
     if (!fullName.value || !email.value) return
     const user: CreateUserDTO = {
       fullName: fullName.value,
       email: email.value,
-      password: '123',
       type: 'department'
     }
     this.departmentService.create(user).subscribe({
-      next: () => {
+      next: (res) => {
+        this.department = res.status === 'success' ? res.data : this.department
         this.toast.show('success', 'Creado', 'Departamento creado con éxito')
+        this.generatePassword = false
+        this.visibleCreate = false
+        this.showDialogViewInformation()
         this.getAll()
       },
       error: (e) => {
@@ -157,6 +187,7 @@ export class DepartmentComponent implements OnInit {
     this.departmentService.edit(user.id, user).subscribe({
       next: () => {
         this.toast.show('success', 'Editado', 'Departamento editado con éxito')
+        this.getAll()
       },
       error: (e) => {
         console.error(e)
