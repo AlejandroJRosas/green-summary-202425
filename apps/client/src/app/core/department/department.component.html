@@ -12,7 +12,17 @@
     />
   </header>
   <section class="flex flex-column" *ngIf="!isFetchingDepartments">
-    <p-table [value]="departments" dataKey="id" styleClass="w-full">
+    <p-table
+      [value]="departments"
+      dataKey="id"
+      styleClass="w-full"
+      [lazy]="true"
+      (onLazyLoad)="loadPaginatedData($event)"
+      [paginator]="true"
+      [rows]="paginated.rows"
+      [first]="paginated.first"
+      [totalRecords]="totalRecords"
+    >
       <ng-template pTemplate="header">
         <tr>
           <th>Nombre</th>
@@ -80,7 +90,7 @@
     [draggable]="false"
     [resizable]="false"
     [style]="{ width: '25rem' }"
-    (onHide)="closeDialogCreate()"
+    (onHide)="closeDialog()"
   >
     <form [formGroup]="departmentForm">
       <div>
@@ -124,7 +134,7 @@
           [outlined]="true"
           severity="success"
           disabled="false"
-          (click)="visibleCreate = false"
+          [loading]="generatePassword"
         />
       </div>
     </form>
@@ -135,6 +145,7 @@
     [(visible)]="visibleEdit"
     [draggable]="false"
     [resizable]="false"
+    (onHide)="closeDialog()"
     [style]="{ width: '25rem' }"
   >
     <form [formGroup]="departmentForm">
@@ -186,5 +197,56 @@
         />
       </div>
     </form>
+  </p-dialog>
+  <p-dialog
+    header="Datos inicio de sesión"
+    [modal]="true"
+    [(visible)]="visibleViewInformation"
+    [draggable]="false"
+    [resizable]="false"
+    (onHide)="closeDialog()"
+    [style]="{ width: '25rem' }"
+  >
+    <div
+      class="flex flex-column justify-content-center align-items-start gap-2 mb-5"
+    >
+      <span class="text-base font-medium text-color-secondary">
+        Departamento {{ department.fullName }}
+      </span>
+      <span class="text-base text-color-secondary">
+        ¡Anota los datos! <strong> No podrás verlo de nuevo </strong>, pero se
+        enviarán por correo al departamento.
+      </span>
+    </div>
+    <section
+      class="flex flex-column gap-4 justify-content-center align-items-start"
+    >
+      <div
+        class="flex flex-column justify-content-center align-items-start gap-2"
+      >
+        <p class="text-base font-semibold text-color-secundary m-0">
+          Correo Electrónico
+        </p>
+        <span class="p-0">{{ department.email }}</span>
+      </div>
+      <div
+        class="flex flex-column justify-content-center align-items-start gap-2"
+      >
+        <p class="text-base font-semibold text-color-secundary m-0">
+          Contraseña Autogenerada
+        </p>
+        <span class="p-0">{{ department.password }}</span>
+      </div>
+    </section>
+    <footer class="flex justify-content-end mt-4">
+      <p-button
+        label="Aceptar"
+        size="small"
+        icon="pi pi-check"
+        [outlined]="true"
+        severity="success"
+        (click)="visibleViewInformation = false"
+      />
+    </footer>
   </p-dialog>
 </main>
