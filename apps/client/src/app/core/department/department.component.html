@@ -17,19 +17,15 @@
         <tr>
           <th>Nombre</th>
           <th>Correo Electrónico</th>
-          <th>Contraseña</th>
-          <th style="width: 1rem"></th>
+          <th>Acciones</th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-department>
         <tr>
           <td>{{ department.fullName }}</td>
           <td>{{ department.email }}</td>
-          <td>{{ department.password }}</td>
           <td>
-            <div
-              class="flex flex-row justify-content-center align-items-center gap-3"
-            >
+            <div class="flex flex-row gap-3">
               <p-button
                 (click)="showDialogEdit(department)"
                 icon="pi pi-pencil"
@@ -58,13 +54,11 @@
         <tr>
           <th>Nombre</th>
           <th>Correo Electrónico</th>
-          <th>Contraseña</th>
           <th style="width: 1rem"></th>
         </tr>
       </ng-template>
       <ng-template pTemplate="body" let-skeleton>
         <tr>
-          <td><p-skeleton /></td>
           <td><p-skeleton /></td>
           <td><p-skeleton /></td>
           <td>
@@ -86,52 +80,54 @@
     [draggable]="false"
     [resizable]="false"
     [style]="{ width: '25rem' }"
+    (onHide)="closeDialogCreate()"
   >
-    <div>
-      <label class="flex flex-column gap-2 w-full mb-3">
-        Nombre
-        <input
-          pInputText
-          name="fullName"
-          class="w-full"
-          type="text"
-          [(ngModel)]="departmentCreate.fullName"
-          required
+    <form [formGroup]="departmentForm">
+      <div>
+        <label class="flex flex-column gap-2 w-full mb-3">
+          Nombre
+          <input
+            pInputText
+            name="fullName"
+            class="w-full"
+            type="text"
+            formControlName="fullName"
+          />
+        </label>
+      </div>
+      <div class="w-full">
+        <label class="flex flex-column gap-2 w-full mb-5">
+          Correo Electrónico
+          <input
+            pInputText
+            name="email"
+            class="w-full"
+            type="email"
+            formControlName="email"
+          />
+        </label>
+      </div>
+      <div class="flex justify-content-end gap-2">
+        <p-button
+          label="Cancelar"
+          size="small"
+          icon="pi pi-times"
+          [outlined]="true"
+          severity="danger"
+          (click)="visibleCreate = false"
         />
-      </label>
-    </div>
-    <div class="w-full">
-      <label class="flex flex-column gap-2 w-full mb-5">
-        Correo Electrónico
-        <input
-          pInputText
-          name="email"
-          class="w-full"
-          type="email"
-          [(ngModel)]="departmentCreate.email"
-          required
+        <p-button
+          label="Guardar"
+          size="small"
+          icon="pi pi-check"
+          (click)="onCreate()"
+          [outlined]="true"
+          severity="success"
+          disabled="false"
+          (click)="visibleCreate = false"
         />
-      </label>
-    </div>
-    <div class="flex justify-content-end gap-2">
-      <p-button
-        label="Cancelar"
-        size="small"
-        icon="pi pi-times"
-        [outlined]="true"
-        severity="danger"
-        (click)="visibleCreate = false"
-      />
-      <p-button
-        label="Guardar"
-        size="small"
-        icon="pi pi-check"
-        (click)="onCreate()"
-        [outlined]="true"
-        severity="success"
-        (click)="visibleCreate = false"
-      />
-    </div>
+      </div>
+    </form>
   </p-dialog>
   <p-dialog
     header="Editar Departamento"
@@ -141,52 +137,54 @@
     [resizable]="false"
     [style]="{ width: '25rem' }"
   >
-    <div>
-      <label class="flex flex-column gap-2 w-full mb-3">
-        Nombre
-        <input
-          pInputText
-          name="fullName"
-          class="w-full"
-          type="text"
-          [(ngModel)]="departmentEdit.fullName"
-          [value]="departmentEdit.fullName"
-          required
+    <form [formGroup]="departmentForm">
+      <div>
+        <label class="flex flex-column gap-2 w-full mb-3">
+          Nombre
+          <input
+            pInputText
+            name="fullName"
+            class="w-full"
+            type="text"
+            formControlName="fullName"
+            [value]="departmentEdit.fullName"
+            required
+          />
+        </label>
+      </div>
+      <div class="w-full">
+        <label class="flex flex-column gap-2 w-full mb-5">
+          Correo Electrónico
+          <input
+            pInputText
+            name="email"
+            class="w-full"
+            type="email"
+            formControlName="email"
+            [value]="departmentEdit.email"
+            required
+          />
+        </label>
+      </div>
+      <div class="flex justify-content-end gap-2">
+        <p-button
+          label="Cancelar"
+          size="small"
+          icon="pi pi-times"
+          [outlined]="true"
+          severity="danger"
+          (click)="visibleEdit = false"
         />
-      </label>
-    </div>
-    <div class="w-full">
-      <label class="flex flex-column gap-2 w-full mb-5">
-        Correo Electrónico
-        <input
-          pInputText
-          name="email"
-          class="w-full"
-          type="email"
-          [(ngModel)]="departmentEdit.email"
-          [value]="departmentEdit.email"
-          required
+        <p-button
+          (click)="onEdit()"
+          label="Guardar"
+          size="small"
+          icon="pi pi-check"
+          [outlined]="true"
+          severity="success"
+          (click)="visibleEdit = false"
         />
-      </label>
-    </div>
-    <div class="flex justify-content-end gap-2">
-      <p-button
-        label="Cancelar"
-        size="small"
-        icon="pi pi-times"
-        [outlined]="true"
-        severity="danger"
-        (click)="visibleEdit = false"
-      />
-      <p-button
-        (click)="onEdit(departmentEdit.id)"
-        label="Guardar"
-        size="small"
-        icon="pi pi-check"
-        [outlined]="true"
-        severity="success"
-        (click)="visibleEdit = false"
-      />
-    </div>
+      </div>
+    </form>
   </p-dialog>
 </main>
