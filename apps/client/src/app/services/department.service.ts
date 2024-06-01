@@ -2,56 +2,47 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { BaseUrl } from '../../config'
 import { Observable } from 'rxjs'
+import { PaginatedResponse } from '../../shared/types/paginated-response.type'
+import { User } from '../../shared/types/user.type'
+import { BackendResponse } from '../../shared/types/http-response.type'
 
 @Injectable({
   providedIn: 'root'
 })
 export class DepartmentService {
   constructor(private http: HttpClient) {}
-  getAll(): Observable<ResponseType> {
-    return this.http.get<ResponseType>(`${BaseUrl}/users`)
+
+  getAll(): Observable<PaginatedResponse<User, unknown, unknown>> {
+    return this.http.get<PaginatedResponse<User, unknown, unknown>>(
+      `${BaseUrl}/users?orderBy=id&orderType=DESC&filters=type%3D%3Ddepartment`
+    )
   }
-  create(departmentPayload: CreateDepartmentPayload): Observable<any> {
-    return this.http.post<any>(`${BaseUrl}/users`, departmentPayload)
+
+  getById(id: number): Observable<BackendResponse<User, unknown, unknown>> {
+    return this.http.get<BackendResponse<User, unknown, unknown>>(
+      `${BaseUrl}/users/${id}`
+    )
   }
-  edit(id: number, departmentPayload: EditDepartmentPayload): Observable<any> {
-    return this.http.patch<any>(`${BaseUrl}/users/${id}`, departmentPayload)
+  create(
+    department: CreateUserDTO
+  ): Observable<BackendResponse<User, unknown, unknown>> {
+    return this.http.post<BackendResponse<User, unknown, unknown>>(
+      `${BaseUrl}/users`,
+      department
+    )
   }
-  delete(id: number): Observable<any> {
-    return this.http.delete<any>(`${BaseUrl}/users/${id}`)
+  edit(
+    id: number,
+    department: User
+  ): Observable<BackendResponse<User, unknown, unknown>> {
+    return this.http.patch<BackendResponse<User, unknown, unknown>>(
+      `${BaseUrl}/users/${id}`,
+      department
+    )
+  }
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${BaseUrl}/users/${id}`)
   }
 }
 
-export type CreateDepartmentPayload = {
-  fullName: string
-  email: string
-  password: string
-  type: 'department'
-}
-
-export type EditDepartmentPayload = {
-  id: number
-  fullName: string
-  email: string
-  password: string
-  type: 'department'
-}
-
-type ResponseType = {
-  status: string
-  data: {
-    currentPage: number
-    itemsPerPage: number
-    hasNextPage: boolean
-    hasPreviousPage: boolean
-    totalPages: number
-    totalItems: number
-    items: {
-      id: number
-      fullName: string
-      email: string
-      password: string
-      type: string
-    }[]
-  }
-}
+export type CreateUserDTO = Omit<User, 'id'>
