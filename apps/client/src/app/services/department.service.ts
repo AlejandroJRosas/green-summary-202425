@@ -12,9 +12,13 @@ import { BackendResponse } from '../../shared/types/http-response.type'
 export class DepartmentService {
   constructor(private http: HttpClient) {}
 
-  getAll(): Observable<PaginatedResponse<User, unknown, unknown>> {
+  getAll(
+    paginated: Paginated
+  ): Observable<PaginatedResponse<User, unknown, unknown>> {
+    const { first, rows } = paginated
+    const page = first / rows + 1
     return this.http.get<PaginatedResponse<User, unknown, unknown>>(
-      `${BaseUrl}/users?orderBy=id&orderType=DESC&filters=type%3D%3Ddepartment`
+      `${BaseUrl}/users?itemsPerPage=5&page=${page}&orderBy=id&orderType=DESC&filters=type%3D%3Ddepartment`
     )
   }
 
@@ -45,4 +49,8 @@ export class DepartmentService {
   }
 }
 
-export type CreateUserDTO = Omit<User, 'id'>
+export type CreateUserDTO = Omit<User, 'id' | 'password'>
+type Paginated = {
+  first: number
+  rows: number
+}
