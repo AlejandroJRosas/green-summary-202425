@@ -23,16 +23,16 @@ import { CategorizedCriteriaModule } from './core/categorized-criteria/categoriz
   imports: [
     ConfigModule.load(path.resolve(__dirname, 'config', '**/!(*.d).{ts,js}')),
     TypeOrmModule.forRootAsync({
-      useFactory: (config: ConfigService) => ({
-        type: 'postgres',
-        host: config.get('DATABASE_HOST', 'localhost'),
-        port: +config.get('DATABASE_PORT', 5432),
-        username: config.get('DATABASE_USERNAME', 'postgres'),
-        password: config.get('DATABASE_PASSWORD', '1234'),
-        database: config.get('DATABASE_NAME', 'green_db'),
-        entities: [__dirname + '/**/*.entity{.ts,.js}'],
-        synchronize: true
-      }),
+      useFactory: (config: ConfigService) => {
+        const DATABASE_CONFIG = config.get('database')
+
+        return {
+          type: 'postgres',
+          url: DATABASE_CONFIG.URL,
+          autoLoadEntities: true,
+          synchronize: true
+        }
+      },
       inject: [ConfigService]
     }),
     AuthModule,
