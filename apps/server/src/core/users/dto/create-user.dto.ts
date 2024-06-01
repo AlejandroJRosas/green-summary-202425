@@ -1,4 +1,10 @@
-import { IsEmail, IsEnum, IsNotEmpty, IsString } from 'class-validator'
+import {
+  IsEmail,
+  IsEnum,
+  IsNotEmpty,
+  IsOptional,
+  IsString
+} from 'class-validator'
 import { USER_TYPES, UserType } from '../users.constants'
 
 export class CreateUserDto {
@@ -11,8 +17,8 @@ export class CreateUserDto {
   email: string
 
   @IsString()
-  @IsNotEmpty()
-  password: string
+  @IsOptional()
+  password?: string
 
   @IsEnum(USER_TYPES)
   @IsNotEmpty()

@@ -31,36 +31,37 @@ export class UsersService {
 
   async create(createUserDto: CreateUserDto) {
     const { type, ...createUserDtoWithoutType } = createUserDto
-    let generatedPassword = ''
+
+    const generatedPassword = this.generatePassword()
+    const passwordToUse = createUserDto.password || generatedPassword
+    const encryptedPassword = await this.encryptPassword(passwordToUse)
+
     let user: User
 
     switch (type) {
       case USER_TYPES.ADMIN:
         user = await this.adminRepository.save({
           ...createUserDtoWithoutType,
-          password: await this.encryptPassword(createUserDto.password)
+          password: encryptedPassword
         })
         break
       case USER_TYPES.COORDINATOR:
         user = await this.coordinatorRepository.save({
           ...createUserDtoWithoutType,
-          password: await this.encryptPassword(createUserDto.password)
+          password: encryptedPassword
         })
         break
       case USER_TYPES.DEPARTMENT:
-        generatedPassword = generator.generate({
-          length: 12,
-          numbers: true
+        user = await this.departmentRepository.save({
+          ...createUserDtoWithoutType,
+          password: encryptedPassword
         })
-        createUserDtoWithoutType.password =
-          await this.encryptPassword(generatedPassword)
-        user = await this.departmentRepository.save(createUserDtoWithoutType)
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _, ...userWithoutPassword } = user
 
-    if (generatedPassword)
+    if (passwordToUse === generatedPassword)
       return { ...userWithoutPassword, password: generatedPassword }
 
     return userWithoutPassword
@@ -106,7 +107,14 @@ export class UsersService {
     await this.usersRepository.remove([user])
   }
 
-  private encryptPassword(pass: string) {
-    return bcrypt.hash(pass, 10)
+  private async encryptPassword(pass: string) {
+    return await bcrypt.hash(pass, 10)
+  }
+
+  private generatePassword() {
+    return generator.generate({
+      length: 12,
+      numbers: true
+    })
   }
 }
