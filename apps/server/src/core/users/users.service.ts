@@ -13,6 +13,8 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-by-param.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import * as generator from 'generate-password'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class UsersService {
@@ -28,16 +30,40 @@ export class UsersService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { type, ...userData } = createUserDto
+    const { type, ...createUserDtoWithoutType } = createUserDto
+    let generatedPassword = ''
+    let user: User
 
     switch (type) {
       case USER_TYPES.ADMIN:
-        return await this.adminRepository.save(userData)
+        user = await this.adminRepository.save({
+          ...createUserDtoWithoutType,
+          password: await this.encryptPassword(createUserDto.password)
+        })
+        break
       case USER_TYPES.COORDINATOR:
-        return await this.coordinatorRepository.save(userData)
+        user = await this.coordinatorRepository.save({
+          ...createUserDtoWithoutType,
+          password: await this.encryptPassword(createUserDto.password)
+        })
+        break
       case USER_TYPES.DEPARTMENT:
-        return await this.departmentRepository.save(userData)
+        generatedPassword = generator.generate({
+          length: 12,
+          numbers: true
+        })
+        createUserDtoWithoutType.password =
+          await this.encryptPassword(generatedPassword)
+        user = await this.departmentRepository.save(createUserDtoWithoutType)
     }
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password: _, ...userWithoutPassword } = user
+
+    if (generatedPassword)
+      return { ...userWithoutPassword, password: generatedPassword }
+
+    return userWithoutPassword
   }
 
   async findAll({
@@ -78,5 +104,9 @@ export class UsersService {
     const user = await this.usersRepository.findOneByOrFail({ id })
 
     await this.usersRepository.remove([user])
+  }
+
+  private encryptPassword(pass: string) {
+    return bcrypt.hash(pass, 10)
   }
 }
