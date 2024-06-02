@@ -1,0 +1,77 @@
+<main>
+  <header class="pb-3">
+    <h3 class="text-color-secondary">Información de una recopilación</h3>
+  </header>
+  <section class="flex flex-column">
+    <form>
+      <div>
+        <label class="flex flex-column gap-2 w-full mb-3">
+          Nombre
+          <input
+            [required]="true"
+            pInputText
+            name="fullName"
+            class="w-full"
+            type="text"
+            formControlName="fullName"
+          />
+        </label>
+      </div>
+      <div>
+        <label class="flex flex-column gap-2 w-full mb-5">
+          Descripción
+          <textarea
+            rows="5"
+            cols="40"
+            pInputTextarea
+            [required]="true"
+          ></textarea>
+        </label>
+      </div>
+      <div>
+        <label class="flex flex-column gap-2 mb-5">
+          Fecha de Inicio
+          <p-calendar
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            inputId="icondisplay"
+            dateFormat="dd/mm/yy"
+          />
+        </label>
+      </div>
+      <div>
+        <label class="flex flex-column gap-2 mb-5">
+          Fecha Final
+          <p-calendar
+            [style]="{ width: 'w-full' }"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            inputId="icondisplay"
+            dateFormat="dd/mm/yy"
+          />
+        </label>
+      </div>
+      <div>
+        <label class="flex flex-column gap-2 mb-5">
+          Fecha Final Departamental
+          <p-calendar
+            [style]="{ width: 'w-full' }"
+            [iconDisplay]="'input'"
+            [showIcon]="true"
+            inputId="icondisplay"
+            dateFormat="dd/mm/yy"
+          />
+        </label>
+      </div>
+    </form>
+  </section>
+  <footer class="flex justify-content-end pt-4">
+    <p-button
+      label="Siguiente"
+      icon="pi pi-angle-right"
+      iconPos="right"
+      size="small"
+      (click)="nextStep()"
+    />
+  </footer>
+</main>
