@@ -68,3 +68,18 @@ p-password.ng-invalid.ng-touched.ng-dirty > .p-password > .p-inputtext {
 p-password.ng-valid > .p-password > .p-inputtext {
   border-color: var(--blue-500);
 }
+
+.p-menuitem-link {
+  background-color: var(--background-color);
+}
+
+.p-steps .p-steps-item .p-menuitem-link .p-steps-title {
+  padding: 0 1rem 0 1rem;
+  color: #6b7280;
+  text-align: center;
+  white-space: normal;
+}
+
+.p-steps .p-steps-item.p-highlight .p-steps-number {
+  background: var(--primary-color);
+}
