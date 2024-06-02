@@ -167,9 +167,9 @@ export class DepartmentComponent implements OnInit {
         this.getAll()
       },
       error: (e) => {
+        this.visibleCreate = false
         console.error(e)
         this.toast.show('error', 'Error', 'Error creando departamento')
-        console.log(this.departmentForm.value)
       }
     })
   }
@@ -202,6 +202,7 @@ export class DepartmentComponent implements OnInit {
         this.departments = this.departments.filter(
           (department) => department.id !== id
         )
+        this.getAll()
       },
       error: (e) => {
         console.error(e)
