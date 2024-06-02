@@ -3,12 +3,12 @@ import {
   Get,
   Post,
   Body,
-  Put,
   Param,
   Delete,
   HttpCode,
   Query,
-  HttpStatus
+  HttpStatus,
+  Patch
 } from '@nestjs/common'
 import { NotificationsService } from './notifications.service'
 import { CreateNotificationDto } from './dto/create-notification.dto'
@@ -64,7 +64,7 @@ export class NotificationsController {
     return notification
   }
 
-  @Put('/:id')
+  @Patch('/:id')
   async update(
     @Param('id') id: string,
     @Body() updateNotificationDto: UpdateNotificationDto

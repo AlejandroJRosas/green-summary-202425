@@ -3,12 +3,12 @@ import {
   Get,
   Post,
   Body,
-  Put,
   Param,
   Delete,
   Query,
   HttpStatus,
-  HttpCode
+  HttpCode,
+  Patch
 } from '@nestjs/common'
 import { CriterionService } from './criterion.service'
 import { CreateCriteriaDto } from './dto/create-criteria.dto'
@@ -69,7 +69,7 @@ export class CriterionController {
     return criterion
   }
 
-  @Put(':indicatorIndex/:subIndex')
+  @Patch(':indicatorIndex/:subIndex')
   async updateCriterion(
     @Param('indicatorIndex') indicatorIndex: string,
     @Param('subIndex') subIndex: string,

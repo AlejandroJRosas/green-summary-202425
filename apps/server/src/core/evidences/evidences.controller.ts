@@ -5,10 +5,10 @@ import {
   Body,
   Param,
   Delete,
-  Put,
   HttpStatus,
   HttpCode,
-  Query
+  Query,
+  Patch
 } from '@nestjs/common'
 import { EvidencesService } from './evidences.service'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
@@ -62,7 +62,7 @@ export class EvidencesController {
     return newEvidence
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') id: string,
     @Body() updateEvidenceDto: UpdateEvidenceDto

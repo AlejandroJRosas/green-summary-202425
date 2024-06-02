@@ -5,8 +5,8 @@ import {
   Body,
   Param,
   Delete,
-  Put,
-  Query
+  Query,
+  Patch
 } from '@nestjs/common'
 import { AnswersService } from './answers.service'
 import { CreateAnswerDto } from './dto/create-answer.dto'
@@ -51,7 +51,7 @@ export class AnswersController {
     return this.answersService.create(createAnswerDto)
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') id: number,
     @Body() updateAnswerDto: UpdateAnswerDto

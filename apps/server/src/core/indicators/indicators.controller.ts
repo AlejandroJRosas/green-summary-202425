@@ -6,9 +6,9 @@ import {
   HttpCode,
   Param,
   Post,
-  Put,
   Query,
-  HttpStatus
+  HttpStatus,
+  Patch
 } from '@nestjs/common'
 import { IndicatorsService } from './indicators.service'
 import { CreateIndicatorDto } from './dto/create-indicator.dto'
@@ -65,7 +65,7 @@ export class IndicatorsController {
     return createdIndicator
   }
 
-  @Put('/:id')
+  @Patch('/:id')
   async updateIndicator(
     @Param('id') id: string,
     @Body() updatedIndicador: UpdateIndicatorDto

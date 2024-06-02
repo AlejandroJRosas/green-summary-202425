@@ -5,8 +5,8 @@ import {
   Body,
   Param,
   Delete,
-  Put,
-  Query
+  Query,
+  Patch
 } from '@nestjs/common'
 import { IndicatorsPerRecopilationsService } from './indicators-per-recopilations.service'
 import { CreateIndicatorPerRecopilationDto } from './dto/create-indicator-per-recopilation.dto'
@@ -53,7 +53,7 @@ export class IndicatorsPerRecopilationsController {
     )
   }
 
-  @Put(':id')
+  @Patch(':id')
   async update(
     @Param('id') id: number,
     @Body()
