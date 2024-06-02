@@ -7,7 +7,7 @@ import { PasswordModule } from 'primeng/password'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { CheckboxModule } from 'primeng/checkbox'
 import { Toast } from '../../common/toast/toast.component'
-import { LottieComponent, AnimationOptions } from 'ngx-lottie'
+// import { LottieComponent, AnimationOptions } from 'ngx-lottie'
 import { AuthService } from '../../services/auth.service'
 import { Router } from '@angular/router'
 
@@ -22,7 +22,7 @@ import { Router } from '@angular/router'
     PasswordModule,
     FloatLabelModule,
     CheckboxModule,
-    LottieComponent,
+    // LottieComponent,
     Toast
   ],
   templateUrl: './login.component.html'
@@ -38,9 +38,9 @@ export class LoginComponent {
     this.loginPayload = new LoginPayload()
   }
 
-  options: AnimationOptions = {
-    path: '/assets/home-img.json'
-  }
+  // options: AnimationOptions = {
+  //   path: '/assets/home-img.json'
+  // }
 
   onLogin() {
     this.authService.login(this.loginPayload).subscribe({
