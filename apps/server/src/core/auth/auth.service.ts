@@ -5,6 +5,7 @@ import { User } from '../users/entities/user.entity'
 import { Repository } from 'typeorm'
 import { JwtService } from '@nestjs/jwt'
 import { WrongPasswordException } from './errors/wrong-password.exception'
+import * as bcrypt from 'bcrypt'
 
 @Injectable()
 export class AuthService {
@@ -19,8 +20,11 @@ export class AuthService {
       email: loginAuthDto.email
     })
 
-    if (loginAuthDto.password !== user.password)
-      throw new WrongPasswordException()
+    const comparation = await bcrypt.compare(
+      loginAuthDto.password,
+      user.password
+    )
+    if (!comparation) throw new WrongPasswordException()
 
     const payload = { id: user.id, name: user.fullName, type: user.type }
     const token = this.jwtService.sign(payload)
