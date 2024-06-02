@@ -16,6 +16,9 @@ import { UpdateIndicatorDto } from './dto/update-indicator.dto'
 import { ApiTags } from '@nestjs/swagger'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-indicators-by-param.dto'
 
 @ApiTags('Indicators')
 @Controller('indicators')
@@ -24,12 +27,18 @@ export class IndicatorsController {
 
   @Get()
   async getAllIndicators(
-    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams
+    @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
+    @Query() { orderBy = 'index' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto,
+    @Query() { filters = [] }: FiltersSegmentDto
   ) {
     const { indicators, count } = await this.indicatorsService.getAllIndicators(
       {
         page,
-        itemsPerPage
+        itemsPerPage,
+        orderBy,
+        orderType,
+        filters
       }
     )
 

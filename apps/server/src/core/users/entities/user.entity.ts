@@ -5,20 +5,21 @@ import {
   TableInheritance,
   OneToMany
 } from 'typeorm'
-import { UserTypes } from '../constants'
+import { USER_TYPES, UserType } from '../users.constants'
 import { Notification } from 'src/core/notifications/entities/notification.entity'
 
-
 @Entity({ name: 'users' })
-@TableInheritance({ column: { type: 'enum', enum: UserTypes, name: 'type' } })
-export class User {
+@TableInheritance({
+  column: { type: 'enum', enum: Object.values(USER_TYPES), name: 'type' }
+})
+export abstract class User {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ unique: true })
   fullName: string
 
-  @Column()
+  @Column({ unique: true })
   email: string
 
   @Column()
@@ -27,6 +28,6 @@ export class User {
   @OneToMany(() => Notification, (notifications) => notifications.user)
   notifications: Notification[]
 
-  @Column({ type: 'enum', enum: UserTypes })
-  type: UserTypes
+  @Column({ type: 'enum', enum: Object.values(USER_TYPES) })
+  type: UserType
 }

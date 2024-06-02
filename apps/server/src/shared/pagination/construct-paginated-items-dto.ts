@@ -6,7 +6,6 @@ export function constructPaginatedItemsDto<T>(
   currentPage: number,
   itemsPerPage: number
 ): PaginatedItems<T> {
-  console.log(totalItems, itemsPerPage)
   return {
     currentPage,
     itemsPerPage,

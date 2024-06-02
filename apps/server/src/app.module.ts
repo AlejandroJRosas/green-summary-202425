@@ -8,10 +8,16 @@ import { InformationCollectionsModule } from './core/information-collections/inf
 import { EvidencesModule } from './core/evidences/evidences.module'
 import { IndicatorsModule } from './core/indicators/indicators.module'
 import { CategoriesModule } from './core/categories/categories.module'
-import { CriteriaModule } from './core/criteria/criteria.module'
+import { CriterionModule } from './core/criterion/criterion.module'
 import { RecopilationsModule } from './core/recopilations/recopilations.module'
 import { AuthModule } from './core/auth/auth.module'
 import { RecommendationsModule } from './core/recommendations/recommendations.module'
+import { IndicatorsPerRecopilationsModule } from './core/indicators-per-recopilations/indicators-per-recopilations.module'
+import { CategoriesPerRecopilationsModule } from './core/categories-per-recopilations/categories-per-recopilations.module'
+import { CriteriaPerRecopilationsModule } from './core/criterion-per-recopilations/criterion-per-recopilations.module'
+import { DepartmentsPerRecopilationsModule } from './core/departments-per-recopilations/departments-per-recopilations.module'
+import { AnswersModule } from './core/answers/answers.module'
+import { CategorizedCriteriaModule } from './core/categorized-criteria/categorized-criteria.module'
 
 @Module({
   imports: [
@@ -34,10 +40,18 @@ import { RecommendationsModule } from './core/recommendations/recommendations.mo
     RecopilationsModule,
     IndicatorsModule,
     CategoriesModule,
-    CriteriaModule,
+    CriterionModule,
+    RecopilationsModule,
+    RecommendationsModule,
+    IndicatorsPerRecopilationsModule,
+    CategoriesPerRecopilationsModule,
+    CriteriaPerRecopilationsModule,
+    CategorizedCriteriaModule,
+    DepartmentsPerRecopilationsModule,
+    AnswersModule,
+    RecommendationsModule,
     InformationCollectionsModule,
     EvidencesModule,
-    RecommendationsModule,
     NotificationsModule
   ]
 })

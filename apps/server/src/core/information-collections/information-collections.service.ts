@@ -5,6 +5,10 @@ import { InformationCollection } from './entities/information-collection.entity'
 import { CreateInformationCollectionDto } from './dto/create-information-collection.dto'
 import { UpdateInformationCollectionDto } from './dto/update-information-collection.dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-information-collections-by-param.dto'
 
 @Injectable()
 export class InformationCollectionsService {
@@ -15,15 +19,20 @@ export class InformationCollectionsService {
 
   async findAll({
     page,
-    itemsPerPage
-  }: PaginationParams): Promise<{
-    informationCollection: InformationCollection[]
-    count: number
-  }> {
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [informationCollection, count] =
       await this.informationCollectionsRepository.findAndCount({
         take: itemsPerPage,
-        skip: (page - 1) * itemsPerPage
+        skip: (page - 1) * itemsPerPage,
+        order: { [orderBy]: orderType },
+        where: parseFiltersToTypeOrm(filters)
       })
 
     return { informationCollection, count }

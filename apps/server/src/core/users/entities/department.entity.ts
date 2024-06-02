@@ -1,9 +1,11 @@
 import { ChildEntity, OneToMany } from 'typeorm'
 import { User } from './user.entity'
-import { UserTypes } from '../constants'
+import { USER_TYPES } from '../users.constants'
 import { Recommendation } from 'src/core/recommendations/entities/recommendation.entity'
+import { Answer } from 'src/core/answers/entities/answer.entity'
+import { DepartmentPerRecopilation } from 'src/core/departments-per-recopilations/entities/departments-per-recopilation.entity'
 
-@ChildEntity(UserTypes.DEPARTMENT)
+@ChildEntity(USER_TYPES.DEPARTMENT)
 export class Department extends User {
   @OneToMany(
     () => Recommendation,
@@ -11,5 +13,12 @@ export class Department extends User {
   )
   recommendations: Recommendation[]
 
-  //TODO: RELATIONS WITH OTHER ENTITIES
+  @OneToMany(() => Answer, (answer) => answer.department)
+  answers: Answer[]
+
+  @OneToMany(
+    () => DepartmentPerRecopilation,
+    (departmentPerRecopilation) => departmentPerRecopilation.department
+  )
+  recopilationsPerDepartment: DepartmentPerRecopilation[]
 }

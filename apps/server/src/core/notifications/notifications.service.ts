@@ -6,6 +6,10 @@ import { User } from '../users/entities/user.entity'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-notifications-by-param.dto'
 
 @Injectable()
 export class NotificationsService {
@@ -33,16 +37,21 @@ export class NotificationsService {
 
   async getAll({
     page,
-    itemsPerPage
-  }: PaginationParams): Promise<{
-    notifications: Notification[]
-    count: number
-  }> {
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [notifications, count] =
       await this.notificationRepository.findAndCount({
         relations: ['user'],
         take: itemsPerPage,
-        skip: (page - 1) * itemsPerPage
+        skip: (page - 1) * itemsPerPage,
+        order: { [orderBy]: orderType },
+        where: parseFiltersToTypeOrm(filters)
       })
 
     return { notifications, count }

@@ -5,6 +5,10 @@ import { Indicator } from './entities/indicator.entity'
 import { CreateIndicatorDto } from './dto/create-indicator.dto'
 import { UpdateIndicatorDto } from './dto/update-indicator.dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-indicators-by-param.dto'
 
 @Injectable()
 export class IndicatorsService {
@@ -22,11 +26,19 @@ export class IndicatorsService {
 
   async getAllIndicators({
     page,
-    itemsPerPage
-  }: PaginationParams): Promise<{ indicators: Indicator[]; count: number }> {
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [indicators, count] = await this.indicatorRepository.findAndCount({
       take: itemsPerPage,
-      skip: (page - 1) * itemsPerPage
+      skip: (page - 1) * itemsPerPage,
+      order: { [orderBy]: orderType },
+      where: parseFiltersToTypeOrm(filters)
     })
 
     return { indicators, count }

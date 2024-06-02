@@ -5,6 +5,10 @@ import { Recopilation } from './entities/recopilation.entity'
 import { UpdateRecopilationDto } from './dto/update-recopilation.dto'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-recopilations-by-param.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
 
 @Injectable()
 export class RecopilationsService {
@@ -15,15 +19,20 @@ export class RecopilationsService {
 
   async findAll({
     page,
-    itemsPerPage
-  }: PaginationParams): Promise<{
-    recopilation: Recopilation[]
-    count: number
-  }> {
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [recopilation, count] =
       await this.recopilationsRepository.findAndCount({
         take: itemsPerPage,
-        skip: (page - 1) * itemsPerPage
+        skip: (page - 1) * itemsPerPage,
+        order: { [orderBy]: orderType },
+        where: parseFiltersToTypeOrm(filters)
       })
 
     return { recopilation, count }

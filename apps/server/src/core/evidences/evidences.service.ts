@@ -6,6 +6,10 @@ import { CreateEvidenceDto } from './dto/create-evidence.dto'
 import { UpdateEvidenceDto } from './dto/update-evidence.dto'
 import { InformationCollection } from '../information-collections/entities/information-collection.entity'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
+import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
+import { OrderByParamDto } from './dto/order-evidences-by-param.dto'
 
 @Injectable()
 export class EvidencesService {
@@ -18,12 +22,20 @@ export class EvidencesService {
 
   async findAll({
     page,
-    itemsPerPage
-  }: PaginationParams): Promise<{ evidences: Evidence[]; count: number }> {
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &
+    OrderByParamDto &
+    OrderTypeParamDto &
+    FiltersSegmentDto) {
     const [evidences, count] = await this.evidenceRepository.findAndCount({
       relations: ['collection'],
       take: itemsPerPage,
-      skip: (page - 1) * itemsPerPage
+      skip: (page - 1) * itemsPerPage,
+      order: { [orderBy]: orderType },
+      where: parseFiltersToTypeOrm(filters)
     })
 
     return { evidences, count }

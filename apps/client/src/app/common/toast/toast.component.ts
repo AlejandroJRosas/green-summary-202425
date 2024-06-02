@@ -19,7 +19,7 @@ export class Toast {
       severity: type,
       summary: title,
       detail: message,
-      life: 3000000
+      life: 3000
     })
   }
 }
