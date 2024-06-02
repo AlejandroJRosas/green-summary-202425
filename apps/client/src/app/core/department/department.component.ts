@@ -114,6 +114,8 @@ export class DepartmentComponent implements OnInit {
       rejectButtonStyleClass: 'p-button-text p-button-text',
       acceptIcon: 'none',
       rejectIcon: 'none',
+      acceptLabel: 'Sí',
+      rejectLabel: 'No',
 
       accept: () => {
         this.toast.show(
