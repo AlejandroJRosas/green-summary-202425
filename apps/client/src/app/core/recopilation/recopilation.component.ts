@@ -10,7 +10,9 @@ import { ButtonModule } from 'primeng/button'
 })
 export class RecopilationComponent {
   constructor(private router: Router) {}
-  naviagateStepsCreate() {
-    this.router.navigateByUrl('/recopilations/steps-create')
+  navigateStepsCreate() {
+    this.router.navigateByUrl(
+      'recopilations/steps-create/information-recopilation'
+    )
   }
 }
