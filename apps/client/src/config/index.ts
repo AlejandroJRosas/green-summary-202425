@@ -1,1 +1,1 @@
-export const BaseUrl = 'http://vmi1893815.contaboserver.net'
+export const BaseUrl = 'https://summary-backend.sustentabilidadtech.lat'
