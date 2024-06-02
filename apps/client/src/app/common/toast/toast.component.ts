@@ -15,7 +15,6 @@ export class Toast {
   constructor(@Inject(MessageService) private messageService: MessageService) {}
 
   show(type: Severity, title: string, message: string) {
-    console.log('me estan tocando')
     this.messageService.add({
       severity: type,
       summary: title,

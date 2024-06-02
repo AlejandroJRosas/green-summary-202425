@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router'
-import { LoginComponent } from './core/login/login.component'
+import { LoginComponent } from './core/login/LoginComponent'
+import { DepartmentComponent } from './core/department/department.component'
 import { NotFoundComponent } from './core/not-found/not-found.component'
 import { HomeComponent } from './core/home/home.component'
 import { UnauthorizedComponent } from './core/unauthorized/unauthorized.component'
@@ -20,6 +21,11 @@ export const routes: Routes = [
     title: 'Home',
     component: HomeComponent,
     canActivate: [authGuard]
+  },
+  {
+    path: 'departments',
+    title: 'Departamentos',
+    component: DepartmentComponent
   },
   {
     path: 'unauthorized',
