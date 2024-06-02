@@ -20,4 +20,4 @@ jobs:
             cd /var/apps/green-summary-202425
             git pull
             pnpm build
-            pm2 restart summary-frontend & pm2 restart summary-backend && kill !$
+            pm2 restart summary-frontend & pm2 restart summary-backend && kill $!
