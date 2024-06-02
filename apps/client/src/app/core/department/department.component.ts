@@ -154,7 +154,7 @@ export class DepartmentComponent implements OnInit {
     if (!fullName.value || !email.value) return
     const user: CreateUserDTO = {
       fullName: fullName.value,
-      email: email.value,
+      email: email.value.toLowerCase(),
       type: 'department'
     }
     this.departmentService.create(user).subscribe({
@@ -169,7 +169,6 @@ export class DepartmentComponent implements OnInit {
       error: (e) => {
         console.error(e)
         this.toast.show('error', 'Error', 'Error creando departamento')
-        console.log(this.departmentForm.value)
       }
     })
   }
@@ -180,7 +179,7 @@ export class DepartmentComponent implements OnInit {
     const user: User = {
       id: id,
       fullName: fullName.value,
-      email: email.value,
+      email: email.value.toLowerCase(),
       password: password,
       type: type
     }
