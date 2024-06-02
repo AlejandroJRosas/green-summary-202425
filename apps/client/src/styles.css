@@ -29,6 +29,10 @@ body {
   background-color: var(--background-color);
 }
 
+fieldset {
+  border: none;
+}
+
 .p-toast-message {
   border: 1px solid;
 }
