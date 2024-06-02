@@ -8,6 +8,7 @@ import { loginGuard } from './guards/login.guard'
 import { authGuard } from './guards/auth.guard'
 import { RecopilationComponent } from './core/recopilation/recopilation.component'
 import { StepsRoutingComponent } from './core/recopilation/steps-routing/steps-routing.component'
+import { InformationRecopilationComponent } from './core/recopilation/steps-routing/steps/information-recopilation/information-recopilation.component'
 // Descomentar cuando lo necesiten
 // import { roleGuard } from './guards/role.guard'
 
@@ -37,7 +38,14 @@ export const routes: Routes = [
   {
     path: 'recopilations/steps-create',
     title: 'Pasos para crear una recopilación',
-    component: StepsRoutingComponent
+    component: StepsRoutingComponent,
+    children: [
+      {
+        path: 'information-recopilation',
+        title: 'Información de la recopilación',
+        component: InformationRecopilationComponent
+      }
+    ]
   },
   {
     path: 'unauthorized',

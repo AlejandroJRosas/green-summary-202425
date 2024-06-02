@@ -1,4 +1,8 @@
-<div class="card">
-  <p-steps [model]="items" [readonly]="false" />
-</div>
-<router-outlet></router-outlet>
+<main class="flex flex-column p-4">
+  <header class="flex justify-content-center align-items-center pb-4">
+    <p-steps [model]="items" [readonly]="false" />
+  </header>
+  <section class="flex flex-column">
+    <router-outlet></router-outlet>
+  </section>
+</main>
