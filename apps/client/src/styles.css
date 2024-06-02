@@ -41,3 +41,18 @@ body {
 .p-button-label {
   font-weight: 500;
 }
+
+.p-menuitem-link {
+  background-color: var(--background-color);
+}
+
+.p-steps .p-steps-item .p-menuitem-link .p-steps-title {
+  padding: 0 1rem 0 1rem;
+  color: #6b7280;
+  text-align: center;
+  white-space: normal;
+}
+
+.p-steps .p-steps-item.p-highlight .p-steps-number {
+  background: var(--primary-color);
+}
