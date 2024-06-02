@@ -18,7 +18,7 @@ import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-departments-per-recopilations-by-param.dto'
 
-@ApiTags('Departments-Per-Recopilations')
+@ApiTags('Departments Per Recopilations')
 @Controller('departments-per-recopilations')
 export class DepartmentsPerRecopilationsController {
   constructor(

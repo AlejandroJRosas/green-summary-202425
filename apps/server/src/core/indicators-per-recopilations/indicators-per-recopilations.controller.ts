@@ -15,7 +15,7 @@ import { ApiTags } from '@nestjs/swagger'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 
-@ApiTags('Indicators_Per_Recopilations')
+@ApiTags('Indicators Per Recopilations')
 @Controller('indicators-per-recopilations')
 export class IndicatorsPerRecopilationsController {
   constructor(

@@ -20,7 +20,7 @@ import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-criterion-per-recopilations-by-param.dto'
 
-@ApiTags('Criteria_Per_Recopilations')
+@ApiTags('Criterion Per Recopilations')
 @Controller('criteria-per-recopilations')
 export class CriteriaPerRecopilationsController {
   constructor(
