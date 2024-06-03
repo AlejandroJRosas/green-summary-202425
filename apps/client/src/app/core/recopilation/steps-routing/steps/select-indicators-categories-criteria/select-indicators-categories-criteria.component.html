@@ -1,0 +1,58 @@
+<main>
+  <header class="pb-3">
+    <h3 class="text-color-secondary">
+      Seleccionar y asociar indicadores, categorías y criterios
+    </h3>
+  </header>
+  <section class="flex flex-column">
+    <form>
+      <div>
+        <p-dropdown
+          [options]="recopilations"
+          optionLabel="name"
+          [showClear]="true"
+          placeholder="Selecciona la recopilación"
+        />
+      </div>
+      <div>
+        <p-tree
+          [value]="data"
+          selectionMode="checkbox"
+          [(selection)]="selectedData"
+        >
+          class="w-full md:w-30rem" [(selection)]="selectedFiles">
+          <ng-template let-node pTemplate="criteria">
+            <div class="flex flex-row gap-4">
+              <p>{{ node.label }}</p>
+              <p-dropdown
+                [panelStyle]="{ position: 'absolute' }"
+                [options]="node.parent.categories"
+                optionLabel="name"
+                [showClear]="true"
+                (onChange)="onSelectionChangeDropdown($event.value, node.key)"
+                placeholder="Selecciona la categoria"
+              />
+            </div>
+          </ng-template> </p-tree
+        >"
+      </div>
+    </form>
+  </section>
+  <footer class="flex justify-content-between pt-7">
+    <p-button
+      label="Atrás"
+      icon="pi pi-angle-left"
+      iconPos="left"
+      size="small"
+      [outlined]="true"
+      (click)="prevStep()"
+    />
+    <p-button
+      label="Siguiente"
+      icon="pi pi-angle-right"
+      iconPos="right"
+      size="small"
+      (click)="nextStep()"
+    />
+  </footer>
+</main>
