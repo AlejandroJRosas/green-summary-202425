@@ -1,11 +1,13 @@
-import { IsNotEmpty, IsNumber } from 'class-validator'
+import { ArrayNotEmpty, IsArray, IsNotEmpty, IsNumber } from 'class-validator'
 
-export class CreateDepartmentPerRecopilationDto {
-  @IsNotEmpty()
+export class CreateDepartmentsPerRecopilationDto {
   @IsNumber()
+  @IsNotEmpty()
   recopilationId: number
 
+  @IsNumber({}, { each: true })
+  @ArrayNotEmpty()
+  @IsArray()
   @IsNotEmpty()
-  @IsNumber()
-  departmentId: number
+  departmentsIds: number[]
 }

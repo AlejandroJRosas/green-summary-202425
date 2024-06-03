@@ -1,15 +1,15 @@
 import {
   Controller,
   Get,
-  Post,
   Body,
   Param,
   Delete,
   Query,
-  Patch
+  Patch,
+  Put
 } from '@nestjs/common'
 import { DepartmentsPerRecopilationsService } from './departments-per-recopilations.service'
-import { CreateDepartmentPerRecopilationDto } from './dto/create-department-per-recopilation.dto'
+import { CreateDepartmentsPerRecopilationDto } from './dto/create-department-per-recopilation.dto'
 import { UpdateDepartmentPerRecopilationDto } from './dto/update-department-per-recopilation.dto'
 import { ApiTags } from '@nestjs/swagger'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
@@ -54,10 +54,10 @@ export class DepartmentsPerRecopilationsController {
     return this.departmentsPerRecopilationsService.findOne(id)
   }
 
-  @Post()
+  @Put()
   async create(
     @Body()
-    createDepartmentsPerRecopilationDto: CreateDepartmentPerRecopilationDto
+    createDepartmentsPerRecopilationDto: CreateDepartmentsPerRecopilationDto
   ) {
     return this.departmentsPerRecopilationsService.create(
       createDepartmentsPerRecopilationDto

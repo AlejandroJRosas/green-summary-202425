@@ -1,6 +1,11 @@
-import { PartialType } from '@nestjs/swagger'
-import { CreateDepartmentPerRecopilationDto } from './create-department-per-recopilation.dto'
+import { IsNotEmpty, IsNumber } from 'class-validator'
 
-export class UpdateDepartmentPerRecopilationDto extends PartialType(
-  CreateDepartmentPerRecopilationDto
-) {}
+export class UpdateDepartmentPerRecopilationDto {
+  @IsNumber()
+  @IsNotEmpty()
+  recopilationId: number
+
+  @IsNumber()
+  @IsNotEmpty()
+  departmentsIds: number
+}

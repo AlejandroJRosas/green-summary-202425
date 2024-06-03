@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { EntityNotFoundError, In, Repository } from 'typeorm'
 import { DepartmentPerRecopilation } from './entities/departments-per-recopilation.entity'
-import { CreateDepartmentPerRecopilationDto } from './dto/create-department-per-recopilation.dto'
+import { CreateDepartmentsPerRecopilationDto } from './dto/create-department-per-recopilation.dto'
 import { UpdateDepartmentPerRecopilationDto } from './dto/update-department-per-recopilation.dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { Recopilation } from 'src/core/recopilations/entities/recopilation.entity'
@@ -53,26 +53,28 @@ export class DepartmentsPerRecopilationsService {
   }
 
   async create(
-    createDepartmentsPerRecopilationDto: CreateDepartmentPerRecopilationDto
-  ): Promise<DepartmentPerRecopilation> {
-    const { recopilationId, departmentId } = createDepartmentsPerRecopilationDto
+    createDepartmentsPerRecopilationDto: CreateDepartmentsPerRecopilationDto
+  ): Promise<Recopilation> {
+    const { recopilationId, departmentsIds } =
+      createDepartmentsPerRecopilationDto
 
     const recopilation = await this.recopilationRepository.findOneByOrFail({
       id: recopilationId
     })
-    const department = await this.departmentRepository.findOneByOrFail({
-      id: departmentId
+    const departments = await this.departmentRepository.findBy({
+      id: In(departmentsIds)
     })
 
-    const departmentsPerRecopilation =
-      this.departmentsPerRecopilationRepository.create({
-        recopilation,
-        department
-      })
+    if (departments.length !== departmentsIds.length) {
+      throw new EntityNotFoundError(Department, { id: In(departmentsIds) })
+    }
 
-    return this.departmentsPerRecopilationRepository.save(
-      departmentsPerRecopilation
-    )
+    const updatedRecopilation = this.recopilationRepository.create({
+      ...recopilation,
+      departmentsPerRecopilation: departments
+    })
+
+    return this.recopilationRepository.save(updatedRecopilation)
   }
 
   async update(
@@ -85,7 +87,8 @@ export class DepartmentsPerRecopilationsService {
         relations: ['recopilation', 'department']
       })
 
-    const { recopilationId, departmentId } = updateDepartmentsPerRecopilationDto
+    const { recopilationId, departmentsIds: departmentId } =
+      updateDepartmentsPerRecopilationDto
 
     const recopilation = await this.recopilationRepository.findOneByOrFail({
       id: recopilationId
