@@ -10,6 +10,7 @@ import { RecopilationComponent } from './core/recopilation/recopilation.componen
 import { StepsRoutingComponent } from './core/recopilation/steps-routing/steps-routing.component'
 import { InformationRecopilationComponent } from './core/recopilation/steps-routing/steps/information-recopilation/information-recopilation.component'
 import { SelectDepartmentsComponent } from './core/recopilation/steps-routing/steps/select-departments/select-departments.component'
+import { SelectIndicatorsCategoriesCriteriaComponent } from './core/recopilation/steps-routing/steps/select-indicators-categories-criteria/select-indicators-categories-criteria.component'
 // Descomentar cuando lo necesiten
 // import { roleGuard } from './guards/role.guard'
 
@@ -50,6 +51,11 @@ export const routes: Routes = [
         path: 'select-departments',
         title: 'Seleccionar departamentos',
         component: SelectDepartmentsComponent
+      },
+      {
+        path: 'select-indicators-categories-criteria',
+        title: 'Seleccionar indicadores, categorías y criterios',
+        component: SelectIndicatorsCategoriesCriteriaComponent
       }
     ]
   },
