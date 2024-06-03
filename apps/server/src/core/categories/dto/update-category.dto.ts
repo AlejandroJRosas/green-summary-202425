@@ -11,5 +11,5 @@ export class UpdateCategoryDto {
 
   @IsInt()
   @IsOptional()
-  idIndicator?: number
+  indicatorId?: number
 }

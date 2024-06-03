@@ -11,5 +11,5 @@ export class CreateCategoryDto {
 
   @IsNumber()
   @IsNotEmpty()
-  idIndicator: number
+  indicatorId: number
 }

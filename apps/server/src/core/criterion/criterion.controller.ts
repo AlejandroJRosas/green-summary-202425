@@ -27,7 +27,7 @@ export class CriterionController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async reateCriterion(@Body() createCriterionDto: CreateCriteriaDto) {
+  async createCriterion(@Body() createCriterionDto: CreateCriteriaDto) {
     const criterion =
       await this.criterionService.createCriterion(createCriterionDto)
     return criterion
