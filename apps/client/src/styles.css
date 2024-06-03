@@ -87,3 +87,7 @@ p-password.ng-valid > .p-password > .p-inputtext {
 .p-steps .p-steps-item.p-highlight .p-steps-number {
   background: var(--primary-color);
 }
+.p-tree {
+  background: var(--background-color);
+  border: none;
+}
