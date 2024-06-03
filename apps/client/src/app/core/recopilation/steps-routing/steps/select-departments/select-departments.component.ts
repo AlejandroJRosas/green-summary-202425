@@ -3,31 +3,19 @@ import { ButtonModule } from 'primeng/button'
 import { Router } from '@angular/router'
 import { DropdownModule } from 'primeng/dropdown'
 import { CheckboxModule } from 'primeng/checkbox'
-import { FormsModule } from '@angular/forms'
+import { recopilations } from '../recopilations.data'
 
 @Component({
   selector: 'app-select-departments',
   standalone: true,
-  imports: [ButtonModule, DropdownModule, CheckboxModule, FormsModule],
+  imports: [ButtonModule, DropdownModule, CheckboxModule],
   templateUrl: './select-departments.component.html',
   styles: ``
 })
 export class SelectDepartmentsComponent {
   constructor(private router: Router) {}
-  recopilations = [
-    {
-      id: 1,
-      name: 'Recopilación 1'
-    },
-    {
-      id: 2,
-      name: 'Recopilación 2'
-    },
-    {
-      id: 3,
-      name: 'Recopilación 3'
-    }
-  ]
+
+  recopilations = recopilations
   departments = [
     {
       name: 'Departamento 1',
@@ -72,10 +60,15 @@ export class SelectDepartmentsComponent {
   ]
   selectedRecopilation = {}
   selectedDepartments = []
-  test() {
-    console.log(this.selectedRecopilation)
-  }
+
   nextStep() {
-    this.router.navigateByUrl('recopilations/steps-create/select-departments')
+    this.router.navigateByUrl(
+      'recopilations/steps-create/select-indicators-categories-criteria'
+    )
+  }
+  prevStep() {
+    this.router.navigateByUrl(
+      'recopilations/steps-create/information-recopilation'
+    )
   }
 }
