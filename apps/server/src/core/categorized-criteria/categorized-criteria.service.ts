@@ -58,15 +58,14 @@ export class CategorizedCriteriaService {
   async create(
     createCategorizedCriteriaDto: CreateCategorizedCriteriaDto
   ): Promise<CategorizedCriteria> {
-    const { recopilationId, indicatorIndex, subIndex, categoryId } =
+    const { recopilationId, criteriaId, categoryId } =
       createCategorizedCriteriaDto
 
     const recopilation = await this.recopilationRepository.findOneByOrFail({
       id: recopilationId
     })
     const criterion = await this.criterionRepository.findOneByOrFail({
-      indicatorIndex,
-      subIndex
+      id: criteriaId
     })
     const category = await this.categoryRepository.findOneByOrFail({
       id: categoryId
@@ -91,7 +90,7 @@ export class CategorizedCriteriaService {
         relations: ['recopilation', 'criterion', 'category']
       })
 
-    const { recopilationId, indicatorIndex, subIndex, categoryId } =
+    const { recopilationId, criteriaId, categoryId } =
       updateCategorizedCriteriaDto
 
     const recopilation = await this.recopilationRepository.findOneByOrFail({
@@ -100,8 +99,7 @@ export class CategorizedCriteriaService {
     categorizedCriteria.recopilation = recopilation
 
     const criterion = await this.criterionRepository.findOneByOrFail({
-      indicatorIndex,
-      subIndex
+      id: criteriaId
     })
     categorizedCriteria.criterion = criterion
 

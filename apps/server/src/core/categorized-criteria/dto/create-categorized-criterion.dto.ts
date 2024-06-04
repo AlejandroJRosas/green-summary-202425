@@ -7,11 +7,7 @@ export class CreateCategorizedCriteriaDto {
 
   @IsNumber()
   @IsNotEmpty()
-  indicatorIndex: number
-
-  @IsNumber()
-  @IsNotEmpty()
-  subIndex: number
+  criteriaId: number
 
   @IsNumber()
   @IsNotEmpty()

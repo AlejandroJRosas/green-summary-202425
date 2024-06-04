@@ -55,15 +55,13 @@ export class CriteriaPerRecopilationsService {
   async create(
     createCriteriaPerRecopilationDto: CreateCriteriaPerRecopilationDto
   ): Promise<CriteriaPerRecopilation> {
-    const { recopilationId, indicatorIndex, subIndex } =
-      createCriteriaPerRecopilationDto
+    const { recopilationId, criteriaId } = createCriteriaPerRecopilationDto
 
     const recopilation = await this.recopilationRepository.findOneByOrFail({
       id: recopilationId
     })
     const criterion = await this.criterionRepository.findOneByOrFail({
-      indicatorIndex,
-      subIndex
+      id: criteriaId
     })
 
     const criteriaPerRecopilation =
@@ -85,8 +83,7 @@ export class CriteriaPerRecopilationsService {
         relations: ['recopilation', 'criterion']
       })
 
-    const { recopilationId, indicatorIndex, subIndex } =
-      updateCriteriaPerRecopilationDto
+    const { recopilationId, criteriaId } = updateCriteriaPerRecopilationDto
 
     const recopilation = await this.recopilationRepository.findOneByOrFail({
       id: recopilationId
@@ -94,8 +91,7 @@ export class CriteriaPerRecopilationsService {
     criteriaPerRecopilation.recopilation = recopilation
 
     const criterion = await this.criterionRepository.findOneByOrFail({
-      indicatorIndex,
-      subIndex
+      id: criteriaId
     })
     criteriaPerRecopilation.criterion = criterion
 

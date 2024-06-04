@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { CreateCriteriaDto } from './dto/create-criteria.dto'
@@ -9,18 +9,30 @@ import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-criteria-by-param.dto'
+import { Indicator } from '../indicators/entities/indicator.entity'
 
 @Injectable()
 export class CriterionService {
   constructor(
     @InjectRepository(Criteria)
-    private readonly criterionRepository: Repository<Criteria>
+    private readonly criterionRepository: Repository<Criteria>,
+    @InjectRepository(Indicator)
+    private readonly indicatorRepository: Repository<Indicator>
   ) {}
 
   async createCriterion(
     createCriterionDto: CreateCriteriaDto
   ): Promise<Criteria> {
     const criterion = this.criterionRepository.create(createCriterionDto)
+
+    if (createCriterionDto.indicatorIndex) {
+      const indicator = await this.indicatorRepository.findOneByOrFail({
+        index: createCriterionDto.indicatorIndex
+      })
+
+      criterion.indicator = indicator
+    }
+
     return this.criterionRepository.save(criterion)
   }
 
@@ -44,45 +56,29 @@ export class CriterionService {
     return { criteria, count }
   }
 
-  async getOneCriterion(
-    indicatorIndex: number,
-    subIndex: number
-  ): Promise<Criteria> {
+  async getOneCriterion(id: number): Promise<Criteria> {
     const criterion = await this.criterionRepository.findOneByOrFail({
-      indicatorIndex,
-      subIndex
+      id
     })
     return criterion
   }
 
   async updateCriterion(
-    indicatorIndex: number,
-    subIndex: number,
+    id: number,
     updateCriterionDto: UpdateCriteriaDto
   ): Promise<Criteria> {
-    await this.criterionRepository.update(
-      { indicatorIndex, subIndex },
-      updateCriterionDto
-    )
-    const updatedCriterion = await this.getOneCriterion(
-      indicatorIndex,
-      subIndex
-    )
-    return updatedCriterion
+    await this.criterionRepository.update({ id }, updateCriterionDto)
+
+    return await this.criterionRepository.findOneByOrFail({ id })
   }
 
-  async deleteCriterion(
-    indicatorIndex: number,
-    subIndex: number
-  ): Promise<void> {
-    const result = await this.criterionRepository.delete({
-      indicatorIndex,
-      subIndex
+  async deleteCriterion(id): Promise<void> {
+    await this.criterionRepository.findOneByOrFail({ id })
+
+    await this.criterionRepository.delete({
+      id
     })
-    if (result.affected === 0) {
-      throw new NotFoundException(
-        `Criterion with IndicatorIndex ${indicatorIndex} and SubIndex ${subIndex} not found`
-      )
-    }
+
+    return
   }
 }

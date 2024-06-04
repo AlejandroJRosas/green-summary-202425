@@ -22,7 +22,7 @@ export class Category {
   @Column({ type: 'text' })
   helpText: string
 
-  @ManyToOne(() => Indicator, (indicator) => indicator.category)
+  @ManyToOne(() => Indicator, (indicator) => indicator.categories)
   indicator: Indicator
 
   @OneToMany(() => Recommendation, (recommendation) => recommendation.category)

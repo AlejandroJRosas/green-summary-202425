@@ -9,12 +9,25 @@ import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-recopilations-by-param.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
+import { RelateIndicatorsToRecopilationDto } from './dto/relate-indicators-to-recopilation.dto'
+import { Indicator } from '../indicators/entities/indicator.entity'
+import { Criteria } from '../criterion/entities/criteria.entity'
+import { Category } from '../categories/entities/category.entity'
+import { IndicatorPerRecopilation } from '../indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
 
 @Injectable()
 export class RecopilationsService {
   constructor(
     @InjectRepository(Recopilation)
-    private recopilationsRepository: Repository<Recopilation>
+    private recopilationsRepository: Repository<Recopilation>,
+    @InjectRepository(Indicator)
+    private indicatorsRepository: Repository<Indicator>,
+    @InjectRepository(Criteria)
+    private criterionRepository: Repository<Criteria>,
+    @InjectRepository(Category)
+    private categoriesRepository: Repository<Category>,
+    @InjectRepository(IndicatorPerRecopilation)
+    private indicatorsPerRecopilationRepository: Repository<IndicatorPerRecopilation>
   ) {}
 
   async findAll({
@@ -67,5 +80,44 @@ export class RecopilationsService {
     })
 
     await this.recopilationsRepository.remove([recopilation])
+  }
+
+  async relateToIndicators(
+    relateIndicatorsToRecopilationDto: RelateIndicatorsToRecopilationDto
+  ) {
+    const { recopilationId, indicators } = relateIndicatorsToRecopilationDto
+
+    const recopilation = await this.recopilationsRepository.findOneByOrFail({
+      id: recopilationId
+    })
+
+    for (const i of indicators) {
+      const indicator = await this.indicatorsRepository.findOneOrFail({
+        where: { index: i.indicatorId },
+        relations: ['categories', 'criterion']
+      })
+
+      for (const c of i.criterion) {
+        const [criteria, category] = await Promise.all([
+          this.criterionRepository.findOneByOrFail({ id: c.criteriaId }),
+          this.categoriesRepository.findOneByOrFail({ id: c.categoryId })
+        ])
+
+        indicator.criterion.push(criteria)
+        indicator.categories.push(category)
+      }
+
+      const indicatorPerRepository =
+        this.indicatorsPerRecopilationRepository.create({
+          indicator,
+          recopilation
+        })
+
+      recopilation.indicatorsPerRecopilations.push(indicatorPerRepository)
+    }
+
+    const res = await this.recopilationsRepository.save(recopilation)
+
+    return res
   }
 }

@@ -7,9 +7,5 @@ export class CreateCriteriaPerRecopilationDto {
 
   @IsNotEmpty()
   @IsNumber()
-  indicatorIndex: number
-
-  @IsNotEmpty()
-  @IsNumber()
-  subIndex: number
+  criteriaId: number
 }
