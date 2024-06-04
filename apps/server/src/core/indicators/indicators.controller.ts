@@ -19,9 +19,12 @@ import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-pagi
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-indicators-by-param.dto'
+import { Roles } from '../auth/roles.decorator'
+import { Role } from '../auth/role.enum'
 
 @ApiTags('Indicators')
 @Controller('indicators')
+@Roles(Role.Coordinator, Role.Admin)
 export class IndicatorsController {
   constructor(private readonly indicatorsService: IndicatorsService) {}
 

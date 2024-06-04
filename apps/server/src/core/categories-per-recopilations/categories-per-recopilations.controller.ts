@@ -17,9 +17,12 @@ import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-by-categories-per-recopilations-by-param.dto'
+import { Roles } from '../auth/roles.decorator'
+import { Role } from '../auth/role.enum'
 
 @ApiTags('Categories Per Recopilations')
 @Controller('categories-per-recopilations')
+@Roles(Role.Coordinator, Role.Admin)
 export class CategoriesPerRecopilationsController {
   constructor(
     private readonly categoriesPerRecopilationsService: CategoriesPerRecopilationsService

@@ -19,9 +19,12 @@ import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-information-collections-by-param.dto'
+import { Roles } from '../auth/roles.decorator'
+import { Role } from '../auth/role.enum'
 
 @ApiTags('Information Collections')
 @Controller('information-collections')
+@Roles(Role.Coordinator, Role.Admin, Role.Department)
 export class InformationCollectionsController {
   constructor(
     private readonly informationCollectionsService: InformationCollectionsService
