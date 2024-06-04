@@ -1,50 +1,69 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Component, Inject } from '@angular/core'
-import { FormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 import { ButtonModule } from 'primeng/button'
 import { InputTextModule } from 'primeng/inputtext'
 import { PasswordModule } from 'primeng/password'
 import { FloatLabelModule } from 'primeng/floatlabel'
 import { CheckboxModule } from 'primeng/checkbox'
 import { Toast } from '../../common/toast/toast.component'
-// import { LottieComponent, AnimationOptions } from 'ngx-lottie'
-import { AuthService } from '../../services/auth.service'
+import { AuthResponse, AuthService } from '../../services/auth.service'
 import { Router } from '@angular/router'
+import * as Yup from 'yup'
+import { ValidatedFormGroup } from '../../common/validated-form-group/validated-form-group'
 
 @Component({
   selector: 'app-login',
   standalone: true,
   animations: [],
   imports: [
-    FormsModule,
+    ReactiveFormsModule,
     ButtonModule,
     InputTextModule,
     PasswordModule,
     FloatLabelModule,
     CheckboxModule,
-    // LottieComponent,
     Toast
   ],
   templateUrl: './login.component.html'
 })
-export class LoginComponent {
-  loginPayload: LoginPayload
+export class LoginComponent extends ValidatedFormGroup<ILoginComponent> {
+  errors = {
+    email: '',
+    password: ''
+  }
 
   constructor(
     @Inject(Toast) private toast: Toast,
     private authService: AuthService,
     private router: Router
   ) {
-    this.loginPayload = new LoginPayload()
+    const initialControlValues = {
+      email: '',
+      password: ''
+    }
+
+    const validationSchema = Yup.object({
+      email: Yup.string()
+        .required('El correo electrónico es requerido')
+        .email('El correo electrónico no tiene un formato válido'),
+      password: Yup.string().required('La contraseña es requerida')
+    })
+
+    super(initialControlValues, validationSchema)
   }
 
-  // options: AnimationOptions = {
-  //   path: '/assets/home-img.json'
-  // }
-
   onLogin() {
-    this.authService.login(this.loginPayload).subscribe({
-      next: (res: any) => {
+    if (this.formGroup.invalid) {
+      return
+    }
+
+    const {
+      email: { value: email },
+      password: { value: password }
+    } = this.formGroup.controls
+
+    this.authService.login({ email, password }).subscribe({
+      next: (res: AuthResponse) => {
         localStorage.setItem('user', JSON.stringify(res.data.user))
         localStorage.setItem('token', res.data.token)
         this.toast.show(
@@ -61,12 +80,7 @@ export class LoginComponent {
   }
 }
 
-export class LoginPayload {
+interface ILoginComponent {
   email: string
   password: string
-
-  constructor() {
-    this.email = ''
-    this.password = ''
-  }
 }

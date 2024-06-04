@@ -1,7 +1,7 @@
 <div
   class="flex flex-row w-full h-screen border align-items-center justify-content-around px-4"
 >
-  <form action="#">
+  <form action="#" [formGroup]="formGroup">
     <div class="flex flex-column justify-content-center align-items-left gap-4">
       <div>
         <h1 class="m-0 font-semibold">Bienvenido a Green Summary</h1>
@@ -16,10 +16,13 @@
             pInputText
             name="email"
             class="w-full"
-            [(ngModel)]="loginPayload.email"
-            required
+            formControlName="email"
+            placeholder="departamento@gmail.com"
+            (input)="errorsUpdate('email')"
+            (blur)="errorsUpdate('email')"
           />
         </label>
+        <small class="p-error">{{ errors.email }}</small>
       </div>
       <div>
         <label class="flex flex-column gap-2 w-full lg:w-7">
@@ -29,18 +32,23 @@
             feedback="false"
             inputStyleClass="w-full"
             styleClass="w-full"
-            [(ngModel)]="loginPayload.password"
+            formControlName="password"
+            placeholder="****************"
             [toggleMask]="true"
-            required
+            (input)="errorsUpdate('password')"
+            (onBlur)="errorsUpdate('password')"
           />
         </label>
+        <small class="p-error">{{ errors.password }}</small>
       </div>
       <p-button
+        type="submit"
         icon="pi pi-arrow-right"
         iconPos="right"
         styleClass="bg-primary border-primary w-full lg:w-7"
         label="Iniciar Sesión"
         (click)="onLogin()"
+        [disabled]="formGroup.invalid"
       ></p-button>
     </div>
   </form>

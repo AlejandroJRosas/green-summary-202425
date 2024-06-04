@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http'
 import { Injectable } from '@angular/core'
 import { Observable } from 'rxjs'
 import { BaseUrl } from '../../config'
-import { LoginPayload } from '../core/login/login.component'
 
 @Injectable({
   providedIn: 'root'
@@ -36,18 +35,23 @@ export const Role = {
 
 export type RoleType = (typeof Role)[keyof typeof Role]
 
+export type AuthResponse = {
+  status: string
+  data: {
+    user: User
+    token: string
+  }
+}
+
+type LoginPayload = {
+  email: string
+  password: string
+}
+
 type User = {
   id: number
   fullName: string
   email: string
   password: string
   type: string
-}
-
-type AuthResponse = {
-  status: string
-  data: {
-    user: User
-    token: string
-  }
 }
