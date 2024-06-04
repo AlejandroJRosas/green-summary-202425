@@ -19,5 +19,6 @@ jobs:
             export PATH="$PATH:/root/.nvm/versions/node/v22.2.0/bin/"
             cd /var/apps/green-summary-202425
             git pull
+            pnpm install
             pnpm build
             pm2 restart summary-frontend & pm2 restart summary-backend && kill $!
