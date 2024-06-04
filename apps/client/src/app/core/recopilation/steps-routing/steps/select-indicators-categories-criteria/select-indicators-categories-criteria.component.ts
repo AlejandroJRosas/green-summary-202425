@@ -55,7 +55,7 @@ export class SelectIndicatorsCategoriesCriteriaComponent {
 
   nextStep() {
     this.router.navigateByUrl(
-      'recopilations/steps-create/select-indicators-categories-criteria'
+      'recopilations/steps-create/recommend-categories-department'
     )
     console.log(this.formGroup?.value)
   }
