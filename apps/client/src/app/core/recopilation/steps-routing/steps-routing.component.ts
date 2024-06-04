@@ -30,7 +30,7 @@ export class StepsRoutingComponent implements OnInit {
       },
       {
         label: 'Recomendar categorías a departamentos',
-        routerLink: `${this.urlSteps}recommend-categories-criteria`
+        routerLink: `${this.urlSteps}recommend-categories-department`
       }
     ]
   }
