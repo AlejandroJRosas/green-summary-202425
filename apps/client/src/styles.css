@@ -41,3 +41,30 @@ body {
 .p-button-label {
   font-weight: 500;
 }
+
+/* Remove the default style of showing error border in PrimeNG text type input */
+.p-inputtext.ng-dirty.ng-invalid {
+  border-color: unset;
+}
+
+/* Set our style (when input is touched, dirty and invalid) to show error border in PrimeNG text input. */
+.p-inputtext.ng-dirty.ng-touched.ng-invalid {
+  border-color: #e24c4c;
+}
+
+/* Set our style to show correct border in PrimeNG text input type */
+.p-inputtext.ng-valid {
+  border-color: var(--blue-500);
+}
+
+p-password.ng-invalid.ng-dirty > .p-password > .p-inputtext {
+  border-color: unset;
+}
+
+p-password.ng-invalid.ng-touched.ng-dirty > .p-password > .p-inputtext {
+  border-color: #e24c4c;
+}
+
+p-password.ng-valid > .p-password > .p-inputtext {
+  border-color: var(--blue-500);
+}
