@@ -13,8 +13,6 @@ import { RecopilationsModule } from './core/recopilations/recopilations.module'
 import { AuthModule } from './core/auth/auth.module'
 import { RecommendationsModule } from './core/recommendations/recommendations.module'
 import { IndicatorsPerRecopilationsModule } from './core/indicators-per-recopilations/indicators-per-recopilations.module'
-import { CategoriesPerRecopilationsModule } from './core/categories-per-recopilations/categories-per-recopilations.module'
-import { CriteriaPerRecopilationsModule } from './core/criterion-per-recopilations/criterion-per-recopilations.module'
 import { DepartmentsPerRecopilationsModule } from './core/departments-per-recopilations/departments-per-recopilations.module'
 import { AnswersModule } from './core/answers/answers.module'
 import { CategorizedCriteriaModule } from './core/categorized-criteria/categorized-criteria.module'
@@ -44,8 +42,6 @@ import { CategorizedCriteriaModule } from './core/categorized-criteria/categoriz
     RecopilationsModule,
     RecommendationsModule,
     IndicatorsPerRecopilationsModule,
-    CategoriesPerRecopilationsModule,
-    CriteriaPerRecopilationsModule,
     CategorizedCriteriaModule,
     DepartmentsPerRecopilationsModule,
     AnswersModule,
