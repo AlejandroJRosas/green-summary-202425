@@ -1,0 +1,36 @@
+<main>
+  <header>
+    <h3 class="text-color-secondary">
+      Recomendación de categorías a departamentos
+    </h3>
+  </header>
+  <section class="flex flex-column pt-3">
+    <form>
+      <div class="flex flex-column gap-6">
+        @for (department of departments; track department.id) {
+          <app-category-selector
+            [department]="department"
+            [categories]="categories"
+          />
+        }
+      </div>
+    </form>
+  </section>
+  <footer class="flex justify-content-between pt-7">
+    <p-button
+      label="Atrás"
+      icon="pi pi-angle-left"
+      iconPos="left"
+      size="small"
+      [outlined]="true"
+      (click)="prevStep()"
+    />
+    <p-button
+      label="Siguiente"
+      icon="pi pi-angle-right"
+      iconPos="right"
+      size="small"
+      (click)="nextStep()"
+    />
+  </footer>
+</main>
