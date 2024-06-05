@@ -11,6 +11,7 @@ import { StepsRoutingComponent } from './core/recopilation/steps-routing/steps-r
 import { InformationRecopilationComponent } from './core/recopilation/steps-routing/steps/information-recopilation/information-recopilation.component'
 import { SelectDepartmentsComponent } from './core/recopilation/steps-routing/steps/select-departments/select-departments.component'
 import { SelectIndicatorsCategoriesCriteriaComponent } from './core/recopilation/steps-routing/steps/select-indicators-categories-criteria/select-indicators-categories-criteria.component'
+import { RecommendCategoriesDepartmentComponent } from './core/recopilation/steps-routing/steps/recommend-categories-department/recommend-categories-department.component'
 // Descomentar cuando lo necesiten
 // import { roleGuard } from './guards/role.guard'
 
@@ -56,6 +57,11 @@ export const routes: Routes = [
         path: 'select-indicators-categories-criteria',
         title: 'Seleccionar indicadores, categorías y criterios',
         component: SelectIndicatorsCategoriesCriteriaComponent
+      },
+      {
+        path: 'recommend-categories-department',
+        title: 'Recomendar categorías a departamentos',
+        component: RecommendCategoriesDepartmentComponent
       }
     ]
   },
