@@ -9,38 +9,41 @@
       <div>
         <p-dropdown
           [options]="recopilations"
+          styleClass="w-4"
           optionLabel="name"
           [showClear]="true"
           placeholder="Selecciona la recopilación"
         />
       </div>
-      <div>
+      <div class="w-11">
         <p-tree
           [value]="data"
           selectionMode="checkbox"
           [(selection)]="selectedData"
         >
-          class="w-full md:w-30rem" [(selection)]="selectedFiles">
           <ng-template let-node pTemplate="criteria">
             <div class="flex flex-row gap-4">
               <p>{{ node.label }}</p>
               <p-dropdown
-                [panelStyle]="{ position: 'absolute' }"
+                appendTo="body"
                 [options]="node.parent.categories"
+                styleClass="w-20rem"
                 optionLabel="name"
                 [showClear]="true"
                 (onChange)="onSelectionChangeDropdown($event.value, node.key)"
                 placeholder="Selecciona la categoria"
+                (click)="$event.stopPropagation()"
               />
             </div>
-          </ng-template> </p-tree
-        >"
+          </ng-template>
+        </p-tree>
       </div>
     </form>
   </section>
   <footer class="flex justify-content-between pt-7">
     <p-button
       label="Atrás"
+      styleClass="bg-primary border-primary"
       icon="pi pi-angle-left"
       iconPos="left"
       size="small"
@@ -49,6 +52,7 @@
     />
     <p-button
       label="Siguiente"
+      styleClass="bg-primary border-primary"
       icon="pi pi-angle-right"
       iconPos="right"
       size="small"
