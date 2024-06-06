@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { EntityNotFoundError, Repository } from 'typeorm'
 import { Recopilation } from './entities/recopilation.entity'
 import { UpdateRecopilationDto } from './dto/update-recopilation.dto'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
@@ -14,6 +14,7 @@ import { Indicator } from '../indicators/entities/indicator.entity'
 import { Criteria } from '../criterion/entities/criteria.entity'
 import { Category } from '../categories/entities/category.entity'
 import { IndicatorPerRecopilation } from '../indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
+import { CategorizedCriteria } from '../categorized-criteria/entities/categorized-criterion.entity'
 
 @Injectable()
 export class RecopilationsService {
@@ -27,7 +28,9 @@ export class RecopilationsService {
     @InjectRepository(Category)
     private categoriesRepository: Repository<Category>,
     @InjectRepository(IndicatorPerRecopilation)
-    private indicatorsPerRecopilationRepository: Repository<IndicatorPerRecopilation>
+    private indicatorsPerRecopilationRepository: Repository<IndicatorPerRecopilation>,
+    @InjectRepository(CategorizedCriteria)
+    private categorizedCriteriaRepository: Repository<CategorizedCriteria>
   ) {}
 
   async findAll({
@@ -87,8 +90,9 @@ export class RecopilationsService {
   ) {
     const { recopilationId, indicators } = relateIndicatorsToRecopilationDto
 
-    const recopilation = await this.recopilationsRepository.findOneByOrFail({
-      id: recopilationId
+    const recopilation = await this.recopilationsRepository.findOneOrFail({
+      where: { id: recopilationId },
+      relations: ['categorizedCriterion', 'indicatorsPerRecopilations']
     })
 
     for (const i of indicators) {
@@ -103,8 +107,20 @@ export class RecopilationsService {
           this.categoriesRepository.findOneByOrFail({ id: c.categoryId })
         ])
 
-        indicator.criterion.push(criteria)
-        indicator.categories.push(category)
+        if (!indicator.criterion.some((c) => c.id === criteria.id)) {
+          throw new EntityNotFoundError(Criteria, criteria.id)
+        }
+
+        if (!indicator.categories.some((c) => c.id === category.id)) {
+          throw new EntityNotFoundError(Category, category.id)
+        }
+
+        const categorizedCriteria = this.categorizedCriteriaRepository.create({
+          criteria,
+          category
+        })
+
+        recopilation.categorizedCriterion.push(categorizedCriteria)
       }
 
       const indicatorPerRepository =

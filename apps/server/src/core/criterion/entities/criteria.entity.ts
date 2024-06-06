@@ -33,7 +33,7 @@ export class Criteria {
 
   @OneToMany(
     () => CategorizedCriteria,
-    (categorizedCriteria) => categorizedCriteria.criterion
+    (categorizedCriteria) => categorizedCriteria.criteria
   )
   categorizedCriterion: CategorizedCriteria[]
 }

@@ -7,6 +7,7 @@ import { Indicator } from '../indicators/entities/indicator.entity'
 import { Criteria } from '../criterion/entities/criteria.entity'
 import { Category } from '../categories/entities/category.entity'
 import { IndicatorPerRecopilation } from '../indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
+import { CategorizedCriteria } from '../categorized-criteria/entities/categorized-criterion.entity'
 
 @Module({
   imports: [
@@ -15,7 +16,8 @@ import { IndicatorPerRecopilation } from '../indicators-per-recopilations/entiti
       Indicator,
       Category,
       Criteria,
-      IndicatorPerRecopilation
+      IndicatorPerRecopilation,
+      CategorizedCriteria
     ])
   ],
   controllers: [RecopilationsController],

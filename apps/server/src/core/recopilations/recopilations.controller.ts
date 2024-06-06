@@ -90,8 +90,13 @@ export class RecopilationsController {
   async relateIndicatorsToRecopilation(
     @Body() relateIndicatorsToRecopilationDto: RelateIndicatorsToRecopilationDto
   ) {
-    return await this.recopilationsService.relateToIndicators(
-      relateIndicatorsToRecopilationDto
-    )
+    try {
+      return await this.recopilationsService.relateToIndicators(
+        relateIndicatorsToRecopilationDto
+      )
+    } catch (e) {
+      console.log(e)
+      throw e
+    }
   }
 }

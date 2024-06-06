@@ -15,7 +15,7 @@ export class CategorizedCriteria {
   recopilation: Recopilation
 
   @ManyToOne(() => Criteria, (criterion) => criterion.categorizedCriterion)
-  criterion: Criteria
+  criteria: Criteria
 
   @ManyToOne(() => Category, (category) => category.categorizedCriterion)
   category: Category

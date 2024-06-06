@@ -73,7 +73,7 @@ export class CategorizedCriteriaService {
 
     const categorizedCriteria = this.categorizedCriteriaRepository.create({
       recopilation,
-      criterion,
+      criteria: criterion,
       category
     })
 
@@ -101,7 +101,7 @@ export class CategorizedCriteriaService {
     const criterion = await this.criterionRepository.findOneByOrFail({
       id: criteriaId
     })
-    categorizedCriteria.criterion = criterion
+    categorizedCriteria.criteria = criterion
 
     const category = await this.categoryRepository.findOneByOrFail({
       id: categoryId

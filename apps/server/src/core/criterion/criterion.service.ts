@@ -50,15 +50,17 @@ export class CriterionService {
       take: itemsPerPage,
       skip: (page - 1) * itemsPerPage,
       order: { [orderBy]: orderType },
-      where: parseFiltersToTypeOrm(filters)
+      where: parseFiltersToTypeOrm(filters),
+      relations: ['indicator']
     })
 
     return { criteria, count }
   }
 
   async getOneCriterion(id: number): Promise<Criteria> {
-    const criterion = await this.criterionRepository.findOneByOrFail({
-      id
+    const criterion = await this.criterionRepository.findOneOrFail({
+      where: { id },
+      relations: ['indicator']
     })
     return criterion
   }
