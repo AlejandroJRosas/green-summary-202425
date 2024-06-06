@@ -60,6 +60,9 @@ fieldset {
 .p-steps .p-steps-item.p-highlight .p-steps-number {
   background: var(--primary-color);
 }
+.p-steps-item .p-steps-title {
+  font-size: 0.98rem;
+}
 .p-tree {
   background: var(--background-color);
   border: none;
@@ -69,17 +72,15 @@ fieldset {
   background-color: var(--primary-color);
   color: var(--primary-color-text);
 }
-
-.p-button {
-  background: var(--primary-color);
-  border: var(--primary-color);
-}
-
-.p-button.p-button-outlined {
-  color: var(--primary-color-text);
-}
-
 .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item.p-highlight {
   color: #4b5563;
   background: #fff;
+}
+
+.p-autocomplete .p-button {
+  background-color: var(--primary-color);
+  border: var(--primary-color);
+}
+.p-tree .p-tree-container .p-treenode:focus > .p-treenode-content {
+  box-shadow: none;
 }
