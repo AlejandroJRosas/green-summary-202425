@@ -9,14 +9,14 @@ export const data = [
     children: [
       {
         key: '0-0',
-        label: 'Criterio 1',
+        label: 'espacios verdes',
         data: 'Criteria 1',
         type: 'criteria',
         category: null
       },
       {
         key: '0-1',
-        label: 'Criterio 2',
+        label: 'Criterio áreas verdes en la universidad',
         data: 'Criteria 2',
         type: 'criteria',
         category: null
@@ -38,7 +38,7 @@ export const data = [
       },
       {
         key: '1-1',
-        label: 'Criterio 4',
+        label: 'areas en metro cuadraro',
         data: 'Criteria 4',
         type: 'criteria',
         category: null
