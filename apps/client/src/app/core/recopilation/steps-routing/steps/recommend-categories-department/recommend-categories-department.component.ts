@@ -37,7 +37,7 @@ export class RecommendCategoriesDepartmentComponent {
   }
   prevStep() {
     this.router.navigateByUrl(
-      'recopilations/steps-create/information-recopilation'
+      'recopilations/steps-create/select-indicators-categories-criteria'
     )
   }
 }
