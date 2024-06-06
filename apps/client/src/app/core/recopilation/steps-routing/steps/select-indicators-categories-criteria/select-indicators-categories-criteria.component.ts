@@ -5,7 +5,7 @@ import { TreeModule } from 'primeng/tree'
 import { recopilations } from '../recopilations.data'
 import { Router } from '@angular/router'
 import { CheckboxModule } from 'primeng/checkbox'
-import { ReactiveFormsModule, FormGroup } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 import {
   Category,
   categoriesIndicator1,
@@ -37,7 +37,6 @@ interface selectedData {
 })
 export class SelectIndicatorsCategoriesCriteriaComponent {
   constructor(private router: Router) {}
-  formGroup: FormGroup | undefined
   recopilations = recopilations
   categoriesIndicator1 = categoriesIndicator1
   categoriesIndicator2 = categoriesIndicator2
@@ -49,15 +48,12 @@ export class SelectIndicatorsCategoriesCriteriaComponent {
     if (node) {
       node.category = category
     }
-    console.log('Agregando la categoria al objeto del criterio seleccionado:')
-    console.log(this.selectedData)
   }
 
   nextStep() {
     this.router.navigateByUrl(
       'recopilations/steps-create/recommend-categories-department'
     )
-    console.log(this.formGroup?.value)
   }
   prevStep() {
     this.router.navigateByUrl('recopilations/steps-create/select-departments')
