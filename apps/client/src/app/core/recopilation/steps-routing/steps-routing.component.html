@@ -1,6 +1,16 @@
 <main class="flex flex-column p-4">
-  <header class="flex justify-content-center align-items-center pb-4">
-    <p-steps [model]="items" [readonly]="false" />
+  <header
+    class="flex flex-row justify-content-center align-items-center gap-3 pb-4"
+  >
+    <p-button
+      pTooltip="Terminar Después"
+      tooltipPosition="bottom"
+      [text]="true"
+      icon="pi pi-clock"
+      (click)="onFinishLater()"
+      size="large"
+    />
+    <p-steps [model]="items" [readonly]="true" />
   </header>
   <section class="flex flex-column">
     <router-outlet></router-outlet>
