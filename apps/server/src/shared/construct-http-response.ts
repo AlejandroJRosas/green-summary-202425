@@ -3,7 +3,7 @@ import { HttpResponse } from './http-response.type'
 
 export function constructHttpResponse<T>(
   statusCode: HttpStatus,
-  data: T,
+  data?: T,
   message?: string
 ): HttpResponse<T> {
   if (statusCode >= 200 && statusCode < 400) {
@@ -22,7 +22,7 @@ export function constructHttpResponse<T>(
 
   return {
     status: 'error',
-    message: message ?? 'An unexpected error occurred',
+    message: message,
     data
   }
 }
