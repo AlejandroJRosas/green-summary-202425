@@ -25,8 +25,6 @@ async function bootstrap() {
     .setTitle('Green Summary Backend')
     .setDescription('The API description')
     .setVersion('1.0')
-    .addBearerAuth()
-    .addSecurityRequirements('bearer')
     .build()
 
   const document = SwaggerModule.createDocument(app, config)

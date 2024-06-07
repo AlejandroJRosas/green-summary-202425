@@ -19,12 +19,9 @@ import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-pagi
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-notifications-by-param.dto'
-import { Roles } from '../auth/roles.decorator'
-import { Role } from '../auth/role.enum'
 
 @ApiTags('Notifications')
 @Controller('notifications')
-@Roles(Role.Coordinator, Role.Admin)
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 

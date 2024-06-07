@@ -14,12 +14,9 @@ import { UpdateIndicatorPerRecopilationDto } from './dto/update-indicator-per-re
 import { ApiTags } from '@nestjs/swagger'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
-import { Roles } from '../auth/roles.decorator'
-import { Role } from '../auth/role.enum'
 
 @ApiTags('Indicators Per Recopilations')
 @Controller('indicators-per-recopilations')
-@Roles(Role.Coordinator, Role.Admin)
 export class IndicatorsPerRecopilationsController {
   constructor(
     private readonly indicatorsPerRecopilationsService: IndicatorsPerRecopilationsService
