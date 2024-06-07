@@ -6,13 +6,14 @@ import { CriteriaService } from '../../services/criterion.service'
 import { Indicator } from '../../../shared/types/indicator.type'
 import { ButtonModule } from 'primeng/button'
 import { AccordionModule } from 'primeng/accordion'
+import { PanelModule } from 'primeng/panel'
 import { Category } from '../../../shared/types/category.type'
 import { Criteria } from '../../../shared/types/criterion.type'
 
 @Component({
   selector: 'app-scheme',
   standalone: true,
-  imports: [ButtonModule, AccordionModule],
+  imports: [ButtonModule, AccordionModule, PanelModule],
   templateUrl: './scheme.component.html'
 })
 export class SchemeComponent {

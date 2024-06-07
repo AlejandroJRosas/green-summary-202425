@@ -12,7 +12,112 @@
   ></p-button>
 </div>
 
-<p-accordion
+@for (scheme of schemes; track $index) {
+  <p-panel
+    expandIcon="pi pi-chevron-down"
+    collapseIcon="pi pi-chevron-up"
+    [toggleable]="true"
+    collapsed="true"
+    iconPos="start"
+    header="{{ scheme.index }} {{ scheme.name }} ({{ scheme.alias }})"
+  >
+    <ng-template pTemplate="header">
+      <div>
+        <button class="p-panel-header-icon p-link mr-2">
+          <span
+            class="pi pi-pencil"
+            style="
+              color: #22c55e;
+              border: solid 2px #22c55e;
+              border-radius: 100%;
+              padding: 5px;
+            "
+          ></span>
+        </button>
+        <button class="p-panel-header-icon p-link mr-2">
+          <span
+            class="pi pi-trash"
+            style="
+              color: #ef4444;
+              border: solid 2px #ef4444;
+              border-radius: 100%;
+              padding: 5px;
+            "
+          ></span>
+        </button>
+      </div>
+    </ng-template>
+    <p>{{ scheme.textHelp }}</p>
+    <p-panel
+      expandIcon="pi pi-chevron-down"
+      collapseIcon="pi pi-chevron-up"
+      [toggleable]="true"
+      collapsed="true"
+      iconPos="start"
+      header="Categorías"
+    >
+      <ng-template pTemplate="header">
+        <button class="p-panel-header-icon p-link mr-2">
+          <span
+            class="pi pi-plus-circle"
+            style="color: #3b82f6; font-size: 25px"
+          ></span>
+        </button>
+      </ng-template>
+      @for (category of scheme.categories; track category) {
+        <div class="flex justify-content-between align-items-center">
+          <h3>{{ category.name }}</h3>
+          <div>
+            <button class="p-panel-header-icon p-link mr-2">
+              <span
+                class="pi pi-pencil"
+                style="
+                  color: #22c55e;
+                  border: solid 2px #22c55e;
+                  border-radius: 100%;
+                  padding: 5px;
+                "
+              ></span>
+            </button>
+            <button class="p-panel-header-icon p-link mr-2">
+              <span
+                class="pi pi-trash"
+                style="
+                  color: #ef4444;
+                  border: solid 2px #ef4444;
+                  border-radius: 100%;
+                  padding: 5px;
+                "
+              ></span>
+            </button>
+          </div>
+        </div>
+        <p>{{ category.helpText }}</p>
+      }
+    </p-panel>
+    <p-panel
+      expandIcon="pi pi-chevron-down"
+      collapseIcon="pi pi-chevron-up"
+      [toggleable]="true"
+      collapsed="true"
+      iconPos="start"
+      header="Criterios"
+    >
+      <ng-template pTemplate="header">
+        <button class="p-panel-header-icon p-link mr-2">
+          <span
+            class="pi pi-plus-circle"
+            style="color: #3b82f6; font-size: 25px"
+          ></span>
+        </button>
+      </ng-template>
+    </p-panel>
+  </p-panel>
+}
+
+<!-- Accordions Approach -->
+
+<!-- <p-accordion
   class="w-full"
   expandIcon="pi pi-chevron-down"
   collapseIcon="pi pi-chevron-up"
@@ -62,4 +167,4 @@
       <p-accordionTab header="Criterios"></p-accordionTab>
     </p-accordionTab>
   }
-</p-accordion>
+</p-accordion> -->
