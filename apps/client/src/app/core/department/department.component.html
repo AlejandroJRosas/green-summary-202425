@@ -196,17 +196,17 @@
           icon="pi pi-times"
           [outlined]="true"
           severity="danger"
-          (click)="visibleCreate = false"
+          (click)="visibleEdit = false"
         />
         <p-button
+          (click)="onEdit()"
           label="Guardar"
           size="small"
           icon="pi pi-check"
-          (click)="onEdit()"
           [outlined]="true"
           severity="success"
           [disabled]="formGroup.invalid"
-          [loading]="generatePassword"
+          (click)="visibleEdit = false"
         />
       </footer>
     </form>

@@ -101,10 +101,8 @@ export class DepartmentComponent
 
   closeDialog() {
     this.formGroup.reset()
-    this.formGroup.controls.email.markAsUntouched()
-    this.formGroup.controls.email.markAsPristine()
-    this.formGroup.controls.fullName.markAsUntouched()
-    this.formGroup.controls.fullName.markAsPristine()
+    this.errors.fullName = ''
+    this.errors.email = ''
   }
 
   showDialogCreate() {
