@@ -28,7 +28,7 @@ export class StepsRoutingComponent implements OnInit {
         routerLink: `${this.urlSteps}information-recopilation`
       },
       {
-        label: 'Seleccionar departentos',
+        label: 'Seleccionar departamentos',
         routerLink: `${this.urlSteps}select-departments`
       },
       {
