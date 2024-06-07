@@ -19,7 +19,7 @@ export class IndicatorService {
     const { first, rows } = paginated
     const page = first / rows + 1
     return this.http.get<PaginatedResponse<Indicator, unknown, unknown>>(
-      `${BaseUrl}/indicators?itemsPerPage=5&page=${page}&orderBy=id&orderType=DESC`
+      `${BaseUrl}/indicators?itemsPerPage=${rows}&page=${page}&orderBy=index&orderType=ASC`
     )
   }
 

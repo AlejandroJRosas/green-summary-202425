@@ -6,6 +6,7 @@ import { HomeComponent } from './core/home/home.component'
 import { UnauthorizedComponent } from './core/unauthorized/unauthorized.component'
 import { loginGuard } from './guards/login.guard'
 import { authGuard } from './guards/auth.guard'
+import { SchemeComponent } from './core/scheme/scheme.component'
 // Descomentar cuando lo necesiten
 // import { roleGuard } from './guards/role.guard'
 
@@ -26,6 +27,11 @@ export const routes: Routes = [
     path: 'departments',
     title: 'Departamentos',
     component: DepartmentComponent
+  },
+  {
+    path: 'scheme',
+    title: 'Esquemas',
+    component: SchemeComponent
   },
   {
     path: 'unauthorized',
