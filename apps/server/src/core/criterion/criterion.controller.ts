@@ -85,4 +85,14 @@ export class CriterionController {
   async deleteCriterion(@Param('id') id: string) {
     await this.criterionService.deleteCriterion(Number(id))
   }
+
+  @Get('/indicator/:indicatorIndex')
+  async getCategoriesByIndicator(
+    @Param('indicatorIndex') indicatorIndex: string
+  ) {
+    const categories = await this.criterionService.criterionByIndicator(
+      Number(indicatorIndex)
+    )
+    return categories
+  }
 }

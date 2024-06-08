@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { EntityNotFoundError, Repository } from 'typeorm'
 import { CreateCriteriaDto } from './dto/create-criteria.dto'
 import { UpdateCriteriaDto } from './dto/update-criteria.dto'
 import { Criteria } from './entities/criteria.entity'
@@ -82,5 +82,23 @@ export class CriterionService {
     })
 
     return
+  }
+
+  async criterionByIndicator(indicatorId: number): Promise<Criteria[]> {
+    const indicator = await this.indicatorRepository.findOneByOrFail({
+      index: indicatorId
+    })
+
+    const criterion = await this.criterionRepository.find({
+      where: { indicator: indicator }
+    })
+
+    if (criterion.length === 0) {
+      throw new EntityNotFoundError(Criteria, {
+        indicatorIndex: indicator.index
+      })
+    }
+
+    return criterion
   }
 }
