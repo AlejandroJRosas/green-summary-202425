@@ -3,17 +3,19 @@ import {
   Column,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn
+  PrimaryGeneratedColumn,
+  Unique
 } from 'typeorm'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
 import { CategorizedCriteria } from 'src/core/categorized-criteria/entities/categorized-criterion.entity'
 
 @Entity('criterion')
+@Unique(['subIndex', 'indicator'])
 export class Criteria {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ unique: true })
+  @Column()
   subIndex: number
 
   @Column()
