@@ -4,7 +4,7 @@ import { UpdateCategoryDto } from './dto/update-category.dto'
 import { Category } from './entities/category.entity'
 import { Indicator } from '../indicators/entities/indicator.entity'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { EntityNotFoundError, Repository } from 'typeorm'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
@@ -92,13 +92,16 @@ export class CategoriesService {
       index: indicatorId
     })
 
-    if (!indicator) {
-      throw new NotFoundException(`Indicator with ID ${indicatorId} not found`)
+    const categories = await this.categoryRepository.find({
+      where: { indicator: indicator }
+    })
+
+    if (categories.length === 0) {
+      throw new EntityNotFoundError(Category, {
+        indicatorIndex: indicator.index
+      })
     }
 
-    return this.categoryRepository.find({
-      where: { indicator: indicator },
-      relations: ['indicator']
-    })
+    return categories
   }
 }
