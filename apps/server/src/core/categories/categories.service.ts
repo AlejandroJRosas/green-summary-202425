@@ -22,7 +22,7 @@ export class CategoriesService {
 
   async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
     const indicator = await this.indicatorRepository.findOneByOrFail({
-      index: createCategoryDto.indicatorId
+      index: createCategoryDto.indicatorIndex
     })
 
     const category = this.categoryRepository.create({
