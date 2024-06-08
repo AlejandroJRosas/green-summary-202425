@@ -12,6 +12,8 @@ import { Criteria } from '../../../shared/types/criterion.type'
 import { DialogModule } from 'primeng/dialog'
 import { InputTextModule } from 'primeng/inputtext'
 import { InputTextareaModule } from 'primeng/inputtextarea'
+import { ConfirmDialogModule } from 'primeng/confirmdialog'
+import { ConfirmationService } from 'primeng/api'
 
 @Component({
   selector: 'app-scheme',
@@ -22,21 +24,25 @@ import { InputTextareaModule } from 'primeng/inputtextarea'
     PanelModule,
     DialogModule,
     InputTextModule,
-    InputTextareaModule
+    InputTextareaModule,
+    ConfirmDialogModule
   ],
-  templateUrl: './scheme.component.html'
+  templateUrl: './scheme.component.html',
+  providers: [ConfirmationService]
 })
 export class SchemeComponent {
   constructor(
     @Inject(Toast) private toast: Toast,
     private indicatorService: IndicatorService,
     private categoryService: CategoryService,
-    private criteriaService: CriteriaService
+    private criteriaService: CriteriaService,
+    private confirmationService: ConfirmationService
   ) {}
 
   isFetching = false
   totalItems = 0
   visibleCreateIndicator: boolean = false
+  visibleEditIndicator: boolean = false
 
   schemes: Scheme[] = []
 
@@ -49,11 +55,39 @@ export class SchemeComponent {
     this.isFetching = true
     this.getAll()
   }
-  closeDialog() {
+  closeDialogCreateIndicator() {
     this.visibleCreateIndicator = false
+  }
+  closeDialogEditIndicator() {
+    this.visibleEditIndicator = false
   }
   showDialogCreateIndicator() {
     this.visibleCreateIndicator = true
+  }
+  showDialogEditIndicator() {
+    this.visibleEditIndicator = true
+  }
+  confirmationDelete(event: Event, id: number, name: string) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: `¿Estás seguro de que quieres eliminar el indicador <strong>${name}</strong>?`,
+      header: 'Eliminar indicador',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: 'p-button-danger p-button-text',
+      rejectButtonStyleClass: 'p-button-text p-button-text',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      acceptLabel: 'Sí',
+      rejectLabel: 'No',
+
+      accept: () => {
+        this.toast.show('success', 'Eliminado', 'Indicador eliminado con éxito')
+        this.onDelete(id)
+      },
+      reject: () => {
+        this.toast.show('error', 'Rechazado', 'Haz rechazado la eliminación')
+      }
+    })
   }
 
   getAll() {
@@ -102,6 +136,8 @@ export class SchemeComponent {
   }
 
   onCreateIndicator() {}
+  onEditIndicator() {}
+  onDelete(id: number) {}
 }
 
 type Scheme = Indicator & { categories: Category[]; criterias: Criteria[] }

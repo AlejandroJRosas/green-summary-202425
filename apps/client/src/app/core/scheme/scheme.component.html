@@ -25,7 +25,10 @@
       >
         <ng-template pTemplate="header">
           <div>
-            <button class="p-panel-header-icon p-link mr-2">
+            <button
+              class="p-panel-header-icon p-link mr-2"
+              (click)="showDialogEditIndicator()"
+            >
               <span
                 class="pi pi-pencil"
                 style="
@@ -36,7 +39,10 @@
                 "
               ></span>
             </button>
-            <button class="p-panel-header-icon p-link mr-2">
+            <button
+              class="p-panel-header-icon p-link mr-2"
+              (click)="confirmationDelete($event, 1, 'indicador 1')"
+            >
               <span
                 class="pi pi-trash"
                 style="
@@ -134,7 +140,7 @@
     [draggable]="false"
     [resizable]="false"
     [style]="{ width: '30rem' }"
-    (onHide)="closeDialog()"
+    (onHide)="closeDialogCreateIndicator()"
   >
     <form>
       <div class="flex flex-column gap-3">
@@ -211,6 +217,94 @@
       </footer>
     </form>
   </p-dialog>
+  <p-dialog
+    header="Editar Indicador"
+    [modal]="true"
+    [(visible)]="visibleEditIndicator"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '30rem' }"
+    (onHide)="closeDialogEditIndicator()"
+  >
+    <form>
+      <div class="flex flex-column gap-3">
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Índice
+            <input
+              pInputText
+              name="index"
+              class="w-full"
+              type="number"
+              [value]=""
+              formControlName="index"
+            />
+          </label>
+          <small class="p-error">error</small>
+        </div>
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Nombre
+            <input
+              pInputText
+              name="name"
+              class="w-full"
+              type="text"
+              [value]=""
+              formControlName="name"
+            />
+          </label>
+          <small class="p-error">error</small>
+        </div>
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Alias en español
+            <input
+              pInputText
+              name="alias"
+              class="w-full"
+              type="text"
+              [value]=""
+              formControlName="alias"
+            />
+          </label>
+          <small class="p-error">error</small>
+        </div>
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Descripción
+            <textarea
+              pInputTextarea
+              rows="5"
+              cols="40"
+              formControlName="description"
+              [value]=""
+            ></textarea>
+          </label>
+          <small class="p-error">error</small>
+        </div>
+      </div>
+      <footer class="flex justify-content-end gap-2 mt-4">
+        <p-button
+          label="Cancelar"
+          size="small"
+          icon="pi pi-times"
+          [outlined]="true"
+          severity="danger"
+          (click)="visibleEditIndicator = false"
+        />
+        <p-button
+          label="Guardar"
+          size="small"
+          icon="pi pi-check"
+          (click)="onEditIndicator()"
+          [outlined]="true"
+          severity="success"
+        />
+      </footer>
+    </form>
+  </p-dialog>
+  <p-confirmDialog />
 </main>
 
 <!-- Accordions Approach -->
