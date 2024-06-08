@@ -92,32 +92,39 @@
     [style]="{ width: '25rem' }"
     (onHide)="closeDialog()"
   >
-    <form [formGroup]="departmentForm">
-      <div>
-        <label class="flex flex-column gap-2 w-full mb-3">
-          Nombre
-          <input
-            pInputText
-            name="fullName"
-            class="w-full"
-            type="text"
-            formControlName="fullName"
-          />
-        </label>
+    <form [formGroup]="formGroup">
+      <div class="flex flex-column gap-3">
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Nombre
+            <input
+              pInputText
+              name="fullName"
+              class="w-full"
+              formControlName="fullName"
+              (input)="errorsUpdate('fullName')"
+              (blur)="errorsUpdate('fullName')"
+            />
+          </label>
+          <small class="p-error">{{ errors.fullName }}</small>
+        </div>
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Correo Electrónico
+            <input
+              pInputText
+              name="email"
+              class="w-full"
+              type="email"
+              formControlName="email"
+              (input)="errorsUpdate('email')"
+              (blur)="errorsUpdate('email')"
+            />
+          </label>
+          <small class="p-error">{{ errors.email }}</small>
+        </div>
       </div>
-      <div class="w-full">
-        <label class="flex flex-column gap-2 w-full mb-5">
-          Correo Electrónico
-          <input
-            pInputText
-            name="email"
-            class="w-full"
-            type="email"
-            formControlName="email"
-          />
-        </label>
-      </div>
-      <div class="flex justify-content-end gap-2">
+      <footer class="flex justify-content-end gap-2 mt-4">
         <p-button
           label="Cancelar"
           size="small"
@@ -133,10 +140,10 @@
           (click)="onCreate()"
           [outlined]="true"
           severity="success"
-          disabled="false"
+          [disabled]="formGroup.invalid"
           [loading]="generatePassword"
         />
-      </div>
+      </footer>
     </form>
   </p-dialog>
   <p-dialog
@@ -148,36 +155,41 @@
     (onHide)="closeDialog()"
     [style]="{ width: '25rem' }"
   >
-    <form [formGroup]="departmentForm">
-      <div>
-        <label class="flex flex-column gap-2 w-full mb-3">
-          Nombre
-          <input
-            pInputText
-            name="fullName"
-            class="w-full"
-            type="text"
-            formControlName="fullName"
-            [value]="departmentEdit.fullName"
-            required
-          />
-        </label>
+    <form [formGroup]="formGroup">
+      <div class="flex flex-column gap-3">
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Nombre
+            <input
+              pInputText
+              name="fullName"
+              class="w-full"
+              formControlName="fullName"
+              [value]="departmentEdit.fullName"
+              (input)="errorsUpdate('fullName')"
+              (blur)="errorsUpdate('fullName')"
+            />
+          </label>
+          <small class="p-error">{{ errors.fullName }}</small>
+        </div>
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Correo Electrónico
+            <input
+              pInputText
+              name="email"
+              class="w-full"
+              type="email"
+              formControlName="email"
+              [value]="departmentEdit.email"
+              (input)="errorsUpdate('email')"
+              (blur)="errorsUpdate('email')"
+            />
+          </label>
+          <small class="p-error">{{ errors.email }}</small>
+        </div>
       </div>
-      <div class="w-full">
-        <label class="flex flex-column gap-2 w-full mb-5">
-          Correo Electrónico
-          <input
-            pInputText
-            name="email"
-            class="w-full"
-            type="email"
-            formControlName="email"
-            [value]="departmentEdit.email"
-            required
-          />
-        </label>
-      </div>
-      <div class="flex justify-content-end gap-2">
+      <footer class="flex justify-content-end gap-2 mt-4">
         <p-button
           label="Cancelar"
           size="small"
@@ -193,9 +205,10 @@
           icon="pi pi-check"
           [outlined]="true"
           severity="success"
+          [disabled]="formGroup.invalid"
           (click)="visibleEdit = false"
         />
-      </div>
+      </footer>
     </form>
   </p-dialog>
   <p-dialog
