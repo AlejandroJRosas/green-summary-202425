@@ -15,5 +15,5 @@ export class UpdateIndicatorDto {
 
   @IsString()
   @IsOptional()
-  textHelp?: string
+  helpText?: string
 }

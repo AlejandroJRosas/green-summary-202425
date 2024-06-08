@@ -8,14 +8,14 @@ export class Indicator {
   @PrimaryColumn()
   index: number
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, unique: true })
   name: string
 
   @Column({ type: 'varchar', length: 255 })
   alias: string
 
   @Column({ type: 'text' })
-  textHelp: string
+  helpText: string
 
   @OneToMany(() => Category, (category) => category.indicator)
   categories: Category[]

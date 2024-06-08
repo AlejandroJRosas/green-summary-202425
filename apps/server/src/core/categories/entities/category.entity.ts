@@ -21,7 +21,9 @@ export class Category {
   @Column({ type: 'text' })
   helpText: string
 
-  @ManyToOne(() => Indicator, (indicator) => indicator.categories)
+  @ManyToOne(() => Indicator, (indicator) => indicator.categories, {
+    onDelete: 'CASCADE'
+  })
   indicator: Indicator
 
   @OneToMany(() => Recommendation, (recommendation) => recommendation.category)

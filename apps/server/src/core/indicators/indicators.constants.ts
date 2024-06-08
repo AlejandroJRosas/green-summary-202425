@@ -4,7 +4,7 @@ export const SORTABLE_FIELDS: Partial<keyof Indicator>[] = [
   'index',
   'name',
   'alias',
-  'textHelp'
+  'helpText'
 ] as const
 
 export type SortableField = (typeof SORTABLE_FIELDS)[number]

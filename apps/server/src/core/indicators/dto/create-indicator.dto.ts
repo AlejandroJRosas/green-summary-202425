@@ -15,5 +15,5 @@ export class CreateIndicatorDto {
 
   @IsString()
   @IsNotEmpty()
-  textHelp: string
+  helpText: string
 }
