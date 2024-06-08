@@ -68,3 +68,11 @@ p-password.ng-invalid.ng-touched.ng-dirty > .p-password > .p-inputtext {
 p-password.ng-valid > .p-password > .p-inputtext {
   border-color: var(--blue-500);
 }
+.p-panel .p-panel-header {
+  background: var(--background-color);
+  border: none;
+}
+.p-panel .p-panel-content {
+  background: var(--background-color);
+  border: none;
+}
