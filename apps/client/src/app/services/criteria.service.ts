@@ -12,6 +12,14 @@ import { Criteria } from '../../shared/types/criterion.type'
 export class CriteriaService {
   constructor(private http: HttpClient) {}
 
+  getAllCriterionByIndicatorIndex(
+    id: number
+  ): Observable<BackendResponse<Criteria[], unknown, unknown>> {
+    return this.http.get<BackendResponse<Criteria[], unknown, unknown>>(
+      `${BaseUrl}/criteria/indicator/${id}`
+    )
+  }
+
   getAll(
     paginated: Paginated
   ): Observable<PaginatedResponse<Criteria, unknown, unknown>> {

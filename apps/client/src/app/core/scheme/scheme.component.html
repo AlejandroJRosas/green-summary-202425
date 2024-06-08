@@ -17,7 +17,7 @@
     @for (scheme of schemes; track $index) {
       <p-panel
         expandIcon="pi pi-chevron-down"
-        collapseIcon="pi pi-chevron-up"
+        collapseIcon="pi pi-chevron-right"
         [toggleable]="true"
         collapsed="true"
         iconPos="start"
@@ -27,7 +27,14 @@
           <div>
             <button
               class="p-panel-header-icon p-link mr-2"
-              (click)="showDialogEditIndicator()"
+              (click)="
+                showDialogEditIndicator(
+                  scheme.index,
+                  scheme.name,
+                  scheme.alias,
+                  scheme.helpText
+                )
+              "
             >
               <span
                 class="pi pi-pencil"
@@ -41,7 +48,9 @@
             </button>
             <button
               class="p-panel-header-icon p-link mr-2"
-              (click)="confirmationDelete($event, 1, 'indicador 1')"
+              (click)="
+                confirmationDeleteIndicator($event, scheme.index, scheme.name)
+              "
             >
               <span
                 class="pi pi-trash"
@@ -55,17 +64,20 @@
             </button>
           </div>
         </ng-template>
-        <p>{{ scheme.textHelp }}</p>
+        <p>{{ scheme.helpText }}</p>
         <p-panel
           expandIcon="pi pi-chevron-down"
-          collapseIcon="pi pi-chevron-up"
+          collapseIcon="pi pi-chevron-right"
           [toggleable]="true"
           collapsed="true"
           iconPos="start"
           header="Categorías"
         >
           <ng-template pTemplate="header">
-            <button class="p-panel-header-icon p-link mr-2">
+            <button
+              class="p-panel-header-icon p-link mr-2"
+              (click)="showCreateCategory = true"
+            >
               <span
                 class="pi pi-plus"
                 style="
@@ -92,7 +104,16 @@
                     "
                   ></span>
                 </button>
-                <button class="p-panel-header-icon p-link mr-2">
+                <button
+                  class="p-panel-header-icon p-link mr-2"
+                  (click)="
+                    confirmationDeleteCategory(
+                      $event,
+                      category.id,
+                      category.name
+                    )
+                  "
+                >
                   <span
                     class="pi pi-trash"
                     style="
@@ -110,7 +131,7 @@
         </p-panel>
         <p-panel
           expandIcon="pi pi-chevron-down"
-          collapseIcon="pi pi-chevron-up"
+          collapseIcon="pi pi-chevron-right"
           [toggleable]="true"
           collapsed="true"
           iconPos="start"
@@ -129,6 +150,45 @@
               ></span>
             </button>
           </ng-template>
+          @for (criteria of scheme.criterias; track criteria) {
+            <div class="flex justify-content-between align-items-center">
+              <h3>{{ criteria.name }}</h3>
+              <div>
+                <button class="p-panel-header-icon p-link mr-2">
+                  <span
+                    class="pi pi-pencil"
+                    style="
+                      color: #22c55e;
+                      border: solid 1.5px #22c55e;
+                      border-radius: 100%;
+                      padding: 8px;
+                    "
+                  ></span>
+                </button>
+                <button
+                  class="p-panel-header-icon p-link mr-2"
+                  (click)="
+                    confirmationDeleteCriteria(
+                      $event,
+                      criteria.id,
+                      criteria.name
+                    )
+                  "
+                >
+                  <span
+                    class="pi pi-trash"
+                    style="
+                      color: #ef4444;
+                      border: solid 1.5px #ef4444;
+                      border-radius: 100%;
+                      padding: 8px;
+                    "
+                  ></span>
+                </button>
+              </div>
+            </div>
+            <p>{{ criteria.helpText }}</p>
+          }
         </p-panel>
       </p-panel>
     }
@@ -140,9 +200,9 @@
     [draggable]="false"
     [resizable]="false"
     [style]="{ width: '30rem' }"
-    (onHide)="closeDialogCreateIndicator()"
+    (onHide)="closeDialogIndicator()"
   >
-    <form>
+    <form [formGroup]="formGroup">
       <div class="flex flex-column gap-3">
         <div class="flex flex-column gap-2 w-full">
           <label class="flex flex-column gap-2 w-full">
@@ -153,9 +213,11 @@
               class="w-full"
               type="number"
               formControlName="index"
+              (input)="errorsUpdate('index')"
+              (blur)="errorsUpdate('index')"
             />
           </label>
-          <small class="p-error">error</small>
+          <small class="p-error">{{ errors.index }}</small>
         </div>
         <div class="flex flex-column gap-2 w-full">
           <label class="flex flex-column gap-2 w-full">
@@ -166,9 +228,11 @@
               class="w-full"
               type="text"
               formControlName="name"
+              (input)="errorsUpdate('name')"
+              (blur)="errorsUpdate('name')"
             />
           </label>
-          <small class="p-error">error</small>
+          <small class="p-error">{{ errors.name }}</small>
         </div>
         <div class="flex flex-column gap-2 w-full">
           <label class="flex flex-column gap-2 w-full">
@@ -179,22 +243,26 @@
               class="w-full"
               type="text"
               formControlName="alias"
+              (input)="errorsUpdate('alias')"
+              (blur)="errorsUpdate('alias')"
             />
           </label>
-          <small class="p-error">error</small>
+          <small class="p-error">{{ errors.alias }}</small>
         </div>
         <div class="flex flex-column gap-2 w-full">
           <label class="flex flex-column gap-2 w-full">
-            Descripción
+            Mensaje de ayuda
             <textarea
               pInputTextarea
               rows="5"
               cols="40"
-              formControlName="description"
+              formControlName="helpText"
               [required]="true"
+              (input)="errorsUpdate('helpText')"
+              (blur)="errorsUpdate('helpText')"
             ></textarea>
           </label>
-          <small class="p-error">error</small>
+          <small class="p-error">{{ errors.helpText }}</small>
         </div>
       </div>
       <footer class="flex justify-content-end gap-2 mt-4">
@@ -213,6 +281,7 @@
           (click)="onCreateIndicator()"
           [outlined]="true"
           severity="success"
+          [disabled]="formGroup.invalid"
         />
       </footer>
     </form>
@@ -224,9 +293,9 @@
     [draggable]="false"
     [resizable]="false"
     [style]="{ width: '30rem' }"
-    (onHide)="closeDialogEditIndicator()"
+    (onHide)="closeDialogIndicator()"
   >
-    <form>
+    <form [formGroup]="formGroup">
       <div class="flex flex-column gap-3">
         <div class="flex flex-column gap-2 w-full">
           <label class="flex flex-column gap-2 w-full">
@@ -236,11 +305,12 @@
               name="index"
               class="w-full"
               type="number"
-              [value]=""
               formControlName="index"
+              (input)="errorsUpdate('index')"
+              (blur)="errorsUpdate('index')"
             />
           </label>
-          <small class="p-error">error</small>
+          <small class="p-error">{{ errors.index }}</small>
         </div>
         <div class="flex flex-column gap-2 w-full">
           <label class="flex flex-column gap-2 w-full">
@@ -250,11 +320,12 @@
               name="name"
               class="w-full"
               type="text"
-              [value]=""
               formControlName="name"
+              (input)="errorsUpdate('name')"
+              (blur)="errorsUpdate('name')"
             />
           </label>
-          <small class="p-error">error</small>
+          <small class="p-error">{{ errors.name }}</small>
         </div>
         <div class="flex flex-column gap-2 w-full">
           <label class="flex flex-column gap-2 w-full">
@@ -264,24 +335,26 @@
               name="alias"
               class="w-full"
               type="text"
-              [value]=""
               formControlName="alias"
+              (input)="errorsUpdate('alias')"
+              (blur)="errorsUpdate('alias')"
             />
           </label>
-          <small class="p-error">error</small>
+          <small class="p-error">{{ errors.alias }}</small>
         </div>
         <div class="flex flex-column gap-2 w-full">
           <label class="flex flex-column gap-2 w-full">
-            Descripción
+            Texto de ayuda
             <textarea
               pInputTextarea
               rows="5"
               cols="40"
-              formControlName="description"
-              [value]=""
+              formControlName="helpText"
+              (input)="errorsUpdate('helpText')"
+              (blur)="errorsUpdate('helpText')"
             ></textarea>
           </label>
-          <small class="p-error">error</small>
+          <small class="p-error">{{ errors.helpText }}</small>
         </div>
       </div>
       <footer class="flex justify-content-end gap-2 mt-4">
@@ -300,63 +373,11 @@
           (click)="onEditIndicator()"
           [outlined]="true"
           severity="success"
+          [disabled]="formGroup.invalid"
         />
       </footer>
     </form>
   </p-dialog>
+  <category-form [visibleCreate]="showCreateCategory"></category-form>
   <p-confirmDialog />
 </main>
-
-<!-- Accordions Approach -->
-
-<!-- <p-accordion
-  class="w-full"
-  expandIcon="pi pi-chevron-down"
-  collapseIcon="pi pi-chevron-up"
-  [multiple]="true"
->
-  @for (scheme of schemes; track $index) {
-    <p-accordionTab
-      header="{{ scheme.index }} {{ scheme.name }} ({{ scheme.alias }})"
-    >
-      {{ scheme.textHelp }}
-      <p-accordionTab header="Categorías">
-        <ng-template pTemplate="header">
-          <div class="flex justify-content-end w-full">
-            <i
-              class="pi pi-plus-circle"
-              style="color: #3b82f6; font-size: 30px"
-            ></i>
-          </div>
-        </ng-template>
-        @for (category of scheme.categories; track category) {
-          <div class="flex justify-content-between align-items-center">
-            <h3>{{ category.name }}</h3>
-            <div class="flex gap-2">
-              <i
-                class="pi pi-pencil"
-                style="
-                  color: #22c55e;
-                  border: solid 2px #22c55e;
-                  border-radius: 100%;
-                  padding: 5px;
-                "
-              ></i>
-              <i
-                class="pi pi-trash"
-                style="
-                  color: #ef4444;
-                  border: solid 2px #ef4444;
-                  border-radius: 100%;
-                  padding: 5px;
-                "
-              ></i>
-            </div>
-          </div>
-          <p>{{ category.helpText }}</p>
-        }
-      </p-accordionTab>
-      <p-accordionTab header="Criterios"></p-accordionTab>
-    </p-accordionTab>
-  }
-</p-accordion> -->

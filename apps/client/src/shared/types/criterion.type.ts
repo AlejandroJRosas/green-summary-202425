@@ -1,7 +1,7 @@
 import { Indicator } from './indicator.type'
 
 export interface Criteria {
-  indicatorIndex: number
+  id: number
   subIndex: number
   name: string
   alias: string
