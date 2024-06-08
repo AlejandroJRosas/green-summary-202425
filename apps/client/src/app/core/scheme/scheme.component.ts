@@ -9,11 +9,21 @@ import { AccordionModule } from 'primeng/accordion'
 import { PanelModule } from 'primeng/panel'
 import { Category } from '../../../shared/types/category.type'
 import { Criteria } from '../../../shared/types/criterion.type'
+import { DialogModule } from 'primeng/dialog'
+import { InputTextModule } from 'primeng/inputtext'
+import { InputTextareaModule } from 'primeng/inputtextarea'
 
 @Component({
   selector: 'app-scheme',
   standalone: true,
-  imports: [ButtonModule, AccordionModule, PanelModule],
+  imports: [
+    ButtonModule,
+    AccordionModule,
+    PanelModule,
+    DialogModule,
+    InputTextModule,
+    InputTextareaModule
+  ],
   templateUrl: './scheme.component.html'
 })
 export class SchemeComponent {
@@ -26,6 +36,7 @@ export class SchemeComponent {
 
   isFetching = false
   totalItems = 0
+  visibleCreateIndicator: boolean = false
 
   schemes: Scheme[] = []
 
@@ -37,6 +48,12 @@ export class SchemeComponent {
   ngOnInit() {
     this.isFetching = true
     this.getAll()
+  }
+  closeDialog() {
+    this.visibleCreateIndicator = false
+  }
+  showDialogCreateIndicator() {
+    this.visibleCreateIndicator = true
   }
 
   getAll() {
