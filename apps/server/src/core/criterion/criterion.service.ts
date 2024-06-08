@@ -23,15 +23,14 @@ export class CriterionService {
   async createCriterion(
     createCriterionDto: CreateCriteriaDto
   ): Promise<Criteria> {
-    const criterion = this.criterionRepository.create(createCriterionDto)
+    const indicator = await this.indicatorRepository.findOneByOrFail({
+      index: createCriterionDto.indicatorIndex
+    })
 
-    if (createCriterionDto.indicatorIndex) {
-      const indicator = await this.indicatorRepository.findOneByOrFail({
-        index: createCriterionDto.indicatorIndex
-      })
-
-      criterion.indicator = indicator
-    }
+    const criterion = this.criterionRepository.create({
+      ...createCriterionDto,
+      indicator
+    })
 
     return this.criterionRepository.save(criterion)
   }
