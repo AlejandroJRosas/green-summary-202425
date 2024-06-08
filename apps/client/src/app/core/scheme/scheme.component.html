@@ -1,81 +1,38 @@
-<h1>Indicadores / Categorías / Criterios</h1>
-<div class="flex justify-content-between align-items-center">
-  <h2>Indicadores ({{ totalItems }})</h2>
-  <p-button
-    type="submit"
-    icon="pi pi-plus"
-    iconPos="left"
-    styleClass="bg-primary border-primary"
-    label="Crear"
-    (click)="onCreateIndicator()"
-    [disabled]=""
-  ></p-button>
-</div>
+<main class="flex flex-column p-4">
+  <header>
+    <h2>Indicadores / Categorías / Criterios</h2>
+  </header>
+  <section class="flex flex-column">
+    <div class="flex flex-row justify-content-between align-items-center">
+      <h3>Indicadores ({{ totalItems }})</h3>
+      <p-button
+        (click)="showDialogCreateIndicator()"
+        styleClass="bg-primary border-primary mr-4"
+        label="Crear"
+        icon="pi pi-plus"
+        size="small"
+      />
+    </div>
 
-@for (scheme of schemes; track $index) {
-  <p-panel
-    expandIcon="pi pi-chevron-down"
-    collapseIcon="pi pi-chevron-up"
-    [toggleable]="true"
-    collapsed="true"
-    iconPos="start"
-    header="{{ scheme.index }} {{ scheme.name }} ({{ scheme.alias }})"
-  >
-    <ng-template pTemplate="header">
-      <div>
-        <button class="p-panel-header-icon p-link mr-2">
-          <span
-            class="pi pi-pencil"
-            style="
-              color: #22c55e;
-              border: solid 2px #22c55e;
-              border-radius: 100%;
-              padding: 5px;
-            "
-          ></span>
-        </button>
-        <button class="p-panel-header-icon p-link mr-2">
-          <span
-            class="pi pi-trash"
-            style="
-              color: #ef4444;
-              border: solid 2px #ef4444;
-              border-radius: 100%;
-              padding: 5px;
-            "
-          ></span>
-        </button>
-      </div>
-    </ng-template>
-    <p>{{ scheme.textHelp }}</p>
-    <p-panel
-      expandIcon="pi pi-chevron-down"
-      collapseIcon="pi pi-chevron-up"
-      [toggleable]="true"
-      collapsed="true"
-      iconPos="start"
-      header="Categorías"
-    >
-      <ng-template pTemplate="header">
-        <button class="p-panel-header-icon p-link mr-2">
-          <span
-            class="pi pi-plus-circle"
-            style="color: #3b82f6; font-size: 25px"
-          ></span>
-        </button>
-      </ng-template>
-      @for (category of scheme.categories; track category) {
-        <div class="flex justify-content-between align-items-center">
-          <h3>{{ category.name }}</h3>
+    @for (scheme of schemes; track $index) {
+      <p-panel
+        expandIcon="pi pi-chevron-down"
+        collapseIcon="pi pi-chevron-up"
+        [toggleable]="true"
+        collapsed="true"
+        iconPos="start"
+        header="{{ scheme.index }} {{ scheme.name }} ({{ scheme.alias }})"
+      >
+        <ng-template pTemplate="header">
           <div>
             <button class="p-panel-header-icon p-link mr-2">
               <span
                 class="pi pi-pencil"
                 style="
                   color: #22c55e;
-                  border: solid 2px #22c55e;
+                  border: solid 1.5px #22c55e;
                   border-radius: 100%;
-                  padding: 5px;
+                  padding: 7px;
                 "
               ></span>
             </button>
@@ -84,36 +41,177 @@
                 class="pi pi-trash"
                 style="
                   color: #ef4444;
-                  border: solid 2px #ef4444;
+                  border: solid 1.5px #ef4444;
                   border-radius: 100%;
-                  padding: 5px;
+                  padding: 7px;
                 "
               ></span>
             </button>
           </div>
+        </ng-template>
+        <p>{{ scheme.textHelp }}</p>
+        <p-panel
+          expandIcon="pi pi-chevron-down"
+          collapseIcon="pi pi-chevron-up"
+          [toggleable]="true"
+          collapsed="true"
+          iconPos="start"
+          header="Categorías"
+        >
+          <ng-template pTemplate="header">
+            <button class="p-panel-header-icon p-link mr-2">
+              <span
+                class="pi pi-plus"
+                style="
+                  color: #3b82f6;
+                  border: solid 1.5px #3b82f6;
+                  border-radius: 100%;
+                  padding: 6px;
+                "
+              ></span>
+            </button>
+          </ng-template>
+          @for (category of scheme.categories; track category) {
+            <div class="flex justify-content-between align-items-center">
+              <h3>{{ category.name }}</h3>
+              <div>
+                <button class="p-panel-header-icon p-link mr-2">
+                  <span
+                    class="pi pi-pencil"
+                    style="
+                      color: #22c55e;
+                      border: solid 1.5px #22c55e;
+                      border-radius: 100%;
+                      padding: 8px;
+                    "
+                  ></span>
+                </button>
+                <button class="p-panel-header-icon p-link mr-2">
+                  <span
+                    class="pi pi-trash"
+                    style="
+                      color: #ef4444;
+                      border: solid 1.5px #ef4444;
+                      border-radius: 100%;
+                      padding: 8px;
+                    "
+                  ></span>
+                </button>
+              </div>
+            </div>
+            <p>{{ category.helpText }}</p>
+          }
+        </p-panel>
+        <p-panel
+          expandIcon="pi pi-chevron-down"
+          collapseIcon="pi pi-chevron-up"
+          [toggleable]="true"
+          collapsed="true"
+          iconPos="start"
+          header="Criterios"
+        >
+          <ng-template pTemplate="header">
+            <button class="p-panel-header-icon p-link mr-2">
+              <span
+                class="pi pi-plus"
+                style="
+                  color: #3b82f6;
+                  border: solid 1.5px #3b82f6;
+                  border-radius: 100%;
+                  padding: 6px;
+                "
+              ></span>
+            </button>
+          </ng-template>
+        </p-panel>
+      </p-panel>
+    }
+  </section>
+  <p-dialog
+    header="Crear Indicador"
+    [modal]="true"
+    [(visible)]="visibleCreateIndicator"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '30rem' }"
+    (onHide)="closeDialog()"
+  >
+    <form>
+      <div class="flex flex-column gap-3">
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Índice
+            <input
+              pInputText
+              name="index"
+              class="w-full"
+              type="number"
+              formControlName="index"
+            />
+          </label>
+          <small class="p-error">error</small>
         </div>
-        <p>{{ category.helpText }}</p>
-      }
-    </p-panel>
-    <p-panel
-      expandIcon="pi pi-chevron-down"
-      collapseIcon="pi pi-chevron-up"
-      [toggleable]="true"
-      collapsed="true"
-      iconPos="start"
-      header="Criterios"
-    >
-      <ng-template pTemplate="header">
-        <button class="p-panel-header-icon p-link mr-2">
-          <span
-            class="pi pi-plus-circle"
-            style="color: #3b82f6; font-size: 25px"
-          ></span>
-        </button>
-      </ng-template>
-    </p-panel>
-  </p-panel>
-}
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Nombre
+            <input
+              pInputText
+              name="name"
+              class="w-full"
+              type="text"
+              formControlName="name"
+            />
+          </label>
+          <small class="p-error">error</small>
+        </div>
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Alias en español
+            <input
+              pInputText
+              name="alias"
+              class="w-full"
+              type="text"
+              formControlName="alias"
+            />
+          </label>
+          <small class="p-error">error</small>
+        </div>
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Descripción
+            <textarea
+              pInputTextarea
+              rows="5"
+              cols="40"
+              formControlName="description"
+              [required]="true"
+            ></textarea>
+          </label>
+          <small class="p-error">error</small>
+        </div>
+      </div>
+      <footer class="flex justify-content-end gap-2 mt-4">
+        <p-button
+          label="Cancelar"
+          size="small"
+          icon="pi pi-times"
+          [outlined]="true"
+          severity="danger"
+          (click)="visibleCreateIndicator = false"
+        />
+        <p-button
+          label="Guardar"
+          size="small"
+          icon="pi pi-check"
+          (click)="onCreateIndicator()"
+          [outlined]="true"
+          severity="success"
+        />
+      </footer>
+    </form>
+  </p-dialog>
+</main>
 
 <!-- Accordions Approach -->
 
