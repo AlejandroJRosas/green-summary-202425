@@ -43,7 +43,7 @@ export class IndicatorsPerRecopilationsService {
   async create(
     createIndicatorsPerRecopilationsDto: CreateIndicatorPerRecopilationDto
   ): Promise<IndicatorPerRecopilation> {
-    const { IDRecopilacion, IndiceIndicador } =
+    const { recopilationId: IDRecopilacion, indicatorIndex: IndiceIndicador } =
       createIndicatorsPerRecopilationsDto
 
     const recopilation = await this.recopilationRepository.findOneByOrFail({
@@ -74,7 +74,7 @@ export class IndicatorsPerRecopilationsService {
         relations: ['recopilation', 'indicator']
       })
 
-    const { IDRecopilacion, IndiceIndicador } =
+    const { recopilationId: IDRecopilacion, indicatorIndex: IndiceIndicador } =
       updateIndicatorsPerRecopilationsDto
 
     const recopilation = await this.recopilationRepository.findOneByOrFail({
