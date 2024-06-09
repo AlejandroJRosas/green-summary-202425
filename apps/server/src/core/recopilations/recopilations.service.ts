@@ -132,8 +132,13 @@ export class RecopilationsService {
       recopilation.indicatorsPerRecopilations.push(indicatorPerRepository)
     }
 
-    const res = await this.recopilationsRepository.save(recopilation)
+    await this.indicatorsPerRecopilationRepository.save(
+      recopilation.indicatorsPerRecopilations
+    )
+    await this.categorizedCriteriaRepository.save(
+      recopilation.categorizedCriterion
+    )
 
-    return res
+    return recopilation
   }
 }
