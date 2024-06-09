@@ -15,7 +15,7 @@ export class Indicator {
   alias: string
 
   @Column({ type: 'text' })
-  textHelp: string
+  helpText: string
 
   @OneToMany(() => Category, (category) => category.indicator)
   category: Category[]

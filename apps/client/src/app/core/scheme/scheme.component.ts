@@ -80,6 +80,7 @@ export class SchemeComponent
   visibleEditIndicator: boolean = false
 
   @Output() showCreateCategory: boolean = false
+  @Output() showEditCategory: boolean = false
 
   schemes: IScheme[] = []
 
@@ -95,6 +96,7 @@ export class SchemeComponent
 
   closeDialogIndicator() {
     this.visibleCreateIndicator = false
+    this.visibleEditIndicator = false
     this.formGroup.reset()
     this.formGroup.controls.index.setValue(1)
     this.errors = {
@@ -113,13 +115,13 @@ export class SchemeComponent
     index: number,
     name: string,
     alias: string,
-    textHelp: string
+    helpText: string
   ) {
     this.visibleEditIndicator = true
     this.formGroup.controls.index.setValue(index)
     this.formGroup.controls.name.setValue(name)
     this.formGroup.controls.alias.setValue(alias)
-    this.formGroup.controls.helpText.setValue(textHelp)
+    this.formGroup.controls.helpText.setValue(helpText)
   }
 
   confirmationDeleteIndicator(event: Event, id: number, name: string) {
@@ -205,10 +207,10 @@ export class SchemeComponent
           })
         }
         this.isFetching = false
-        // for (const scheme of this.schemes) {
-        //   this.getCategoriesPerIndicator(scheme.index)
-        //   this.getCriterionPerIndicator(scheme.index)
-        // }
+        for (const scheme of this.schemes) {
+          this.getCategoriesPerIndicator(scheme.index)
+          this.getCriterionPerIndicator(scheme.index)
+        }
       },
       error: (e) => {
         console.error(e)
@@ -258,13 +260,13 @@ export class SchemeComponent
   }
 
   onCreateIndicator() {
-    const { index, name, alias, helpText: textHelp } = this.formGroup.controls
-    if (!index.value || !name.value || !alias.value || !textHelp.value) return
+    const { index, name, alias, helpText } = this.formGroup.controls
+    if (!index.value || !name.value || !alias.value || !helpText.value) return
     const indicator: Indicator = {
       index: index.value,
       name: name.value,
       alias: alias.value,
-      helpText: textHelp.value
+      helpText: helpText.value
     }
     this.indicatorService.create(indicator).subscribe({
       next: () => {
@@ -279,13 +281,13 @@ export class SchemeComponent
   }
 
   onEditIndicator() {
-    const { index, name, alias, helpText: textHelp } = this.formGroup.controls
-    if (!index.value || !name.value || !alias.value || !textHelp.value) return
+    const { index, name, alias, helpText: helpText } = this.formGroup.controls
+    if (!index.value || !name.value || !alias.value || !helpText.value) return
     const indicator: Indicator = {
       index: index.value,
       name: name.value,
       alias: alias.value,
-      helpText: textHelp.value
+      helpText: helpText.value
     }
     this.indicatorService.edit(index.value, indicator).subscribe({
       next: () => {

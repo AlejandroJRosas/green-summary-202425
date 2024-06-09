@@ -100,12 +100,19 @@
             </section>
           </ng-template>
           @for (category of scheme.categories; track category) {
+            <category-form
+              [category]="category"
+              [indicatorIndex]="scheme.index"
+              [visibleCreate]="showCreateCategory"
+              [visibleEdit]="showEditCategory"
+            ></category-form>
             <div class="flex justify-content-between align-items-center">
               <h3>{{ category.name }}</h3>
               <div>
                 <button class="p-panel-header-icon p-link mr-2">
                   <span
                     class="pi pi-pencil"
+                    (click)="showEditCategory = true"
                     style="
                       color: #22c55e;
                       border: solid 1.5px #22c55e;
@@ -392,6 +399,5 @@
       </footer>
     </form>
   </p-dialog>
-  <category-form [visibleCreate]="showCreateCategory"></category-form>
   <p-confirmDialog />
 </main>

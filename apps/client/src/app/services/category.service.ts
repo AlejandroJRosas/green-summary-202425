@@ -61,7 +61,7 @@ export class CategoryService {
 }
 
 export type CreateCategoryDTO = Omit<Category, 'id' | 'indicator'> & {
-  indicatorId: number
+  indicatorIndex: number
 }
 
 type Paginated = {

@@ -11,21 +11,6 @@
     <div class="flex flex-column gap-3">
       <div class="flex flex-column gap-2 w-full">
         <label class="flex flex-column gap-2 w-full">
-          Índice
-          <input
-            pInputText
-            name="index"
-            class="w-full"
-            type="number"
-            formControlName="indicatorIndex"
-            (input)="errorsUpdate('indicatorIndex')"
-            (blur)="errorsUpdate('indicatorIndex')"
-          />
-        </label>
-        <small class="p-error">{{ errors.indicatorIndex }}</small>
-      </div>
-      <div class="flex flex-column gap-2 w-full">
-        <label class="flex flex-column gap-2 w-full">
           Nombre
           <input
             pInputText
@@ -46,7 +31,7 @@
             pInputTextarea
             rows="5"
             cols="40"
-            formControlName="textHelp"
+            formControlName="helpText"
             (input)="errorsUpdate('helpText')"
             (blur)="errorsUpdate('helpText')"
           ></textarea>
@@ -67,7 +52,7 @@
         label="Guardar"
         size="small"
         icon="pi pi-check"
-        (click)="onEdit()"
+        (click)="onCreate()"
         [outlined]="true"
         severity="success"
         [disabled]="formGroup.invalid"
@@ -89,21 +74,6 @@
     <div class="flex flex-column gap-3">
       <div class="flex flex-column gap-2 w-full">
         <label class="flex flex-column gap-2 w-full">
-          Índice
-          <input
-            pInputText
-            name="index"
-            class="w-full"
-            type="number"
-            formControlName="indicatorIndex"
-            (input)="errorsUpdate('indicatorIndex')"
-            (blur)="errorsUpdate('indicatorIndex')"
-          />
-        </label>
-        <small class="p-error">{{ errors.indicatorIndex }}</small>
-      </div>
-      <div class="flex flex-column gap-2 w-full">
-        <label class="flex flex-column gap-2 w-full">
           Nombre
           <input
             pInputText
@@ -124,7 +94,7 @@
             pInputTextarea
             rows="5"
             cols="40"
-            formControlName="textHelp"
+            formControlName="helpText"
             (input)="errorsUpdate('helpText')"
             (blur)="errorsUpdate('helpText')"
           ></textarea>
