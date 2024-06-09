@@ -40,7 +40,7 @@ export class CategorizedCriteriaService {
       await this.categorizedCriteriaRepository.findAndCount({
         take: Number(itemsPerPage),
         skip: (Number(page) - 1) * Number(itemsPerPage),
-        relations: ['recopilation', 'criterion', 'category'],
+        relations: ['recopilation', 'criteria', 'category'],
         order: { [orderBy]: orderType },
         where: parseFiltersToTypeOrm(filters)
       })
