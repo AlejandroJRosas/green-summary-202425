@@ -52,7 +52,7 @@ export class DepartmentsPerRecopilationsService {
     })
   }
 
-  async create(
+  async set(
     createDepartmentsPerRecopilationDto: CreateDepartmentsPerRecopilationDto
   ): Promise<DepartmentPerRecopilation[]> {
     const { recopilationId, departmentsIds } =
@@ -68,6 +68,10 @@ export class DepartmentsPerRecopilationsService {
     if (departments.length !== departmentsIds.length) {
       throw new EntityNotFoundError(Department, { id: In(departmentsIds) })
     }
+
+    await this.departmentsPerRecopilationRepository.delete({
+      recopilation: { id: recopilationId }
+    })
 
     return await this.departmentsPerRecopilationRepository.save(
       departments.map((d) =>

@@ -59,7 +59,7 @@ export class DepartmentsPerRecopilationsController {
     @Body()
     createDepartmentsPerRecopilationDto: CreateDepartmentsPerRecopilationDto
   ) {
-    return this.departmentsPerRecopilationsService.create(
+    return this.departmentsPerRecopilationsService.set(
       createDepartmentsPerRecopilationDto
     )
   }
