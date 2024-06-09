@@ -6,6 +6,7 @@ import { CategorizedCriteriaController } from './categorized-criteria.controller
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
 import { Criteria } from '../criterion/entities/criteria.entity'
 import { Category } from '../categories/entities/category.entity'
+import { IndicatorPerRecopilation } from '../indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
 
 @Module({
   imports: [
@@ -13,7 +14,8 @@ import { Category } from '../categories/entities/category.entity'
       CategorizedCriteria,
       Recopilation,
       Criteria,
-      Category
+      Category,
+      IndicatorPerRecopilation
     ])
   ],
   controllers: [CategorizedCriteriaController],
