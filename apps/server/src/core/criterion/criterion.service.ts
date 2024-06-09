@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { EntityNotFoundError, Repository } from 'typeorm'
+import { Repository } from 'typeorm'
 import { CreateCriteriaDto } from './dto/create-criteria.dto'
 import { UpdateCriteriaDto } from './dto/update-criteria.dto'
 import { Criteria } from './entities/criteria.entity'
@@ -10,6 +10,7 @@ import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-typ
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-criteria-by-param.dto'
 import { Indicator } from '../indicators/entities/indicator.entity'
+import { CategorizedCriteria } from '../categorized-criteria/entities/categorized-criterion.entity'
 
 @Injectable()
 export class CriterionService {
@@ -17,7 +18,9 @@ export class CriterionService {
     @InjectRepository(Criteria)
     private readonly criterionRepository: Repository<Criteria>,
     @InjectRepository(Indicator)
-    private readonly indicatorRepository: Repository<Indicator>
+    private readonly indicatorRepository: Repository<Indicator>,
+    @InjectRepository(CategorizedCriteria)
+    private readonly categorizedCriteriaRepository: Repository<CategorizedCriteria>
   ) {}
 
   async createCriterion(
@@ -92,12 +95,17 @@ export class CriterionService {
       where: { indicator: indicator }
     })
 
-    if (criterion.length === 0) {
-      throw new EntityNotFoundError(Criteria, {
-        indicatorIndex: indicator.index
-      })
-    }
-
     return criterion
+  }
+
+  async criterionByRecopilation(recopilationId: number): Promise<Criteria[]> {
+    const categorizedCriterias = await this.categorizedCriteriaRepository.find({
+      where: { recopilation: { id: recopilationId } },
+      relations: ['criteria']
+    })
+
+    return categorizedCriterias.map(
+      (categorizedCriteria) => categorizedCriteria.criteria
+    )
   }
 }
