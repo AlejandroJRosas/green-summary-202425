@@ -25,7 +25,8 @@ export class RecommendationsService {
   async create(
     createRecommendationDto: CreateRecommendationDto
   ): Promise<Recommendation> {
-    const { departmentId, categoryId } = createRecommendationDto
+    const { departmentPerRecopilationId: departmentId, categoryId } =
+      createRecommendationDto
 
     const department = await this.departmentsRepository.findOneByOrFail({
       id: departmentId
@@ -35,7 +36,7 @@ export class RecommendationsService {
     })
 
     const recommendation = this.recommendationsRepository.create({
-      department,
+      departmentPerRecopilation: department,
       category
     })
 
