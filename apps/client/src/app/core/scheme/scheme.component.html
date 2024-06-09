@@ -27,7 +27,7 @@
             class="flex flex-row justify-content-between align-items-center w-full"
           >
             <h2 class="text-xl">
-              {{ scheme.index }} {{ scheme.name }} ({{ scheme.alias }})
+              {{ scheme.index }}. {{ scheme.name }} ({{ scheme.alias }})
             </h2>
             <div class="flex flex-row gap-1">
               <button
@@ -82,7 +82,9 @@
             <section
               class="flex flex-row justify-content-between align-items-center w-full"
             >
-              <h3 class="text-lg">Categorías</h3>
+              <h3 class="text-lg">
+                Categorías ({{ scheme.categories.length }})
+              </h3>
               <button
                 class="p-panel-header-icon p-link mr-2"
                 (click)="showCreateCategory = true"
@@ -112,7 +114,7 @@
                 <button class="p-panel-header-icon p-link mr-2">
                   <span
                     class="pi pi-pencil"
-                    (click)="showEditCategory = true"
+                    (click)="this.categoryComponent.showDialogEdit()"
                     style="
                       color: #22c55e;
                       border: solid 1.5px #22c55e;
@@ -157,7 +159,7 @@
             <section
               class="flex flex-row justify-content-between align-items-center w-full"
             >
-              <h3 class="text-lg">Criterios</h3>
+              <h3 class="text-lg">Criterios ({{ scheme.criterias.length }})</h3>
               <button class="p-panel-header-icon p-link mr-2">
                 <span
                   class="pi pi-plus"
@@ -173,7 +175,10 @@
           </ng-template>
           @for (criteria of scheme.criterias; track criteria) {
             <div class="flex justify-content-between align-items-center">
-              <h3>{{ criteria.name }}</h3>
+              <h3>
+                {{ scheme.index }}.{{ criteria.subIndex }}.
+                {{ criteria.name }} ({{ criteria.alias }})
+              </h3>
               <div>
                 <button class="p-panel-header-icon p-link mr-2">
                   <span

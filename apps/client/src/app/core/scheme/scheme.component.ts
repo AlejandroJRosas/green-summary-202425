@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Output } from '@angular/core'
+import { Component, Inject, OnInit, Output, ViewChild } from '@angular/core'
 import { Toast } from '../../common/toast/toast.component'
 import { IndicatorService } from '../../services/indicator.service'
 import { CategoryService } from '../../services/category.service'
@@ -79,6 +79,7 @@ export class SchemeComponent
   visibleCreateIndicator: boolean = false
   visibleEditIndicator: boolean = false
 
+  @ViewChild(CategoryComponent) categoryComponent!: CategoryComponent
   @Output() showCreateCategory: boolean = false
   @Output() showEditCategory: boolean = false
 
