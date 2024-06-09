@@ -21,73 +21,83 @@
         [toggleable]="true"
         collapsed="true"
         iconPos="start"
-        header="{{ scheme.index }} {{ scheme.name }} ({{ scheme.alias }})"
       >
         <ng-template pTemplate="header">
-          <div>
-            <button
-              class="p-panel-header-icon p-link mr-2"
-              (click)="
-                showDialogEditIndicator(
-                  scheme.index,
-                  scheme.name,
-                  scheme.alias,
-                  scheme.helpText
-                )
-              "
-            >
-              <span
-                class="pi pi-pencil"
-                style="
-                  color: #22c55e;
-                  border: solid 1.5px #22c55e;
-                  border-radius: 100%;
-                  padding: 7px;
+          <section
+            class="flex flex-row justify-content-between align-items-center w-full"
+          >
+            <h2 class="text-xl">
+              {{ scheme.index }} {{ scheme.name }} ({{ scheme.alias }})
+            </h2>
+            <div class="flex flex-row gap-1">
+              <button
+                class="p-panel-header-icon p-link mr-2"
+                (click)="
+                  showDialogEditIndicator(
+                    scheme.index,
+                    scheme.name,
+                    scheme.alias,
+                    scheme.helpText
+                  )
                 "
-              ></span>
-            </button>
-            <button
-              class="p-panel-header-icon p-link mr-2"
-              (click)="
-                confirmationDeleteIndicator($event, scheme.index, scheme.name)
-              "
-            >
-              <span
-                class="pi pi-trash"
-                style="
-                  color: #ef4444;
-                  border: solid 1.5px #ef4444;
-                  border-radius: 100%;
-                  padding: 7px;
+              >
+                <span
+                  class="pi pi-pencil"
+                  style="
+                    color: #22c55e;
+                    border: solid 1.5px #22c55e;
+                    border-radius: 100%;
+                    padding: 7px;
+                  "
+                ></span>
+              </button>
+              <button
+                class="p-panel-header-icon p-link mr-2"
+                (click)="
+                  confirmationDeleteIndicator($event, scheme.index, scheme.name)
                 "
-              ></span>
-            </button>
-          </div>
+              >
+                <span
+                  class="pi pi-trash"
+                  style="
+                    color: #ef4444;
+                    border: solid 1.5px #ef4444;
+                    border-radius: 100%;
+                    padding: 7px;
+                  "
+                ></span>
+              </button>
+            </div>
+          </section>
         </ng-template>
-        <p>{{ scheme.helpText }}</p>
+        <p class="m-0 pb-3">{{ scheme.helpText }}</p>
         <p-panel
           expandIcon="pi pi-chevron-down"
           collapseIcon="pi pi-chevron-right"
           [toggleable]="true"
           collapsed="true"
           iconPos="start"
-          header="Categorías"
         >
           <ng-template pTemplate="header">
-            <button
-              class="p-panel-header-icon p-link mr-2"
-              (click)="showCreateCategory = true"
+            <section
+              class="flex flex-row justify-content-between align-items-center w-full"
             >
-              <span
-                class="pi pi-plus"
-                style="
-                  color: #3b82f6;
-                  border: solid 1.5px #3b82f6;
-                  border-radius: 100%;
-                  padding: 6px;
-                "
-              ></span>
-            </button>
+              <h3 class="text-lg">Categorías</h3>
+              <button
+                class="p-panel-header-icon p-link mr-2"
+                (click)="showCreateCategory = true"
+              >
+                <span
+                  class="pi pi-plus"
+                  style="
+                    color: #3b82f6;
+                    border: solid 1.5px #3b82f6;
+                    border-radius: 100%;
+                    padding: 6px;
+                  "
+                ></span>
+              </button>
+            </section>
           </ng-template>
           @for (category of scheme.categories; track category) {
             <div class="flex justify-content-between align-items-center">
@@ -135,20 +145,24 @@
           [toggleable]="true"
           collapsed="true"
           iconPos="start"
-          header="Criterios"
         >
           <ng-template pTemplate="header">
-            <button class="p-panel-header-icon p-link mr-2">
-              <span
-                class="pi pi-plus"
-                style="
-                  color: #3b82f6;
-                  border: solid 1.5px #3b82f6;
-                  border-radius: 100%;
-                  padding: 6px;
-                "
-              ></span>
-            </button>
+            <section
+              class="flex flex-row justify-content-between align-items-center w-full"
+            >
+              <h3 class="text-lg">Criterios</h3>
+              <button class="p-panel-header-icon p-link mr-2">
+                <span
+                  class="pi pi-plus"
+                  style="
+                    color: #3b82f6;
+                    border: solid 1.5px #3b82f6;
+                    border-radius: 100%;
+                    padding: 6px;
+                  "
+                ></span>
+              </button>
+            </section>
           </ng-template>
           @for (criteria of scheme.criterias; track criteria) {
             <div class="flex justify-content-between align-items-center">

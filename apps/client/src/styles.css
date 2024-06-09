@@ -76,3 +76,13 @@ p-password.ng-valid > .p-password > .p-inputtext {
   background: var(--background-color);
   border: none;
 }
+.p-panel-header {
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+}
+.p-panel .p-panel-content {
+  padding: 0;
+  padding-left: 2.5rem;
+}

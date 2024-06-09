@@ -205,10 +205,10 @@ export class SchemeComponent
           })
         }
         this.isFetching = false
-        for (const scheme of this.schemes) {
-          this.getCategoriesPerIndicator(scheme.index)
-          this.getCriterionPerIndicator(scheme.index)
-        }
+        // for (const scheme of this.schemes) {
+        //   this.getCategoriesPerIndicator(scheme.index)
+        //   this.getCriterionPerIndicator(scheme.index)
+        // }
       },
       error: (e) => {
         console.error(e)
