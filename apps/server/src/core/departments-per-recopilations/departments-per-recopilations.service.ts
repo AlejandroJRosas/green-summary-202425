@@ -54,7 +54,7 @@ export class DepartmentsPerRecopilationsService {
 
   async create(
     createDepartmentsPerRecopilationDto: CreateDepartmentsPerRecopilationDto
-  ): Promise<Recopilation> {
+  ): Promise<DepartmentPerRecopilation[]> {
     const { recopilationId, departmentsIds } =
       createDepartmentsPerRecopilationDto
 
@@ -69,12 +69,14 @@ export class DepartmentsPerRecopilationsService {
       throw new EntityNotFoundError(Department, { id: In(departmentsIds) })
     }
 
-    const updatedRecopilation = this.recopilationRepository.create({
-      ...recopilation,
-      departmentsPerRecopilation: departments
-    })
-
-    return this.recopilationRepository.save(updatedRecopilation)
+    return await this.departmentsPerRecopilationRepository.save(
+      departments.map((d) =>
+        this.departmentsPerRecopilationRepository.create({
+          recopilation,
+          department: d
+        })
+      )
+    )
   }
 
   async update(
