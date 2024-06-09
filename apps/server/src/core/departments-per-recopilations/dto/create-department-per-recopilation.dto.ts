@@ -6,7 +6,7 @@ export class CreateDepartmentsPerRecopilationDto {
   recopilationId: number
 
   @IsNumber({}, { each: true })
-  @ArrayNotEmpty()
+  @ArrayNotEmpty({ message: 'departmentsIds should not be an empty array' })
   @IsArray()
   @IsNotEmpty()
   departmentsIds: number[]
