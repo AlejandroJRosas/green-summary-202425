@@ -106,13 +106,15 @@ export class CategoriesService {
   }
 
   async categoriesByRecopilation(recopilationId: number): Promise<Category[]> {
-    const categorizedCriterias = await this.categorizedCriteriaRepository.find({
-      where: { recopilation: { id: recopilationId } },
-      relations: ['category']
-    })
+    const criterion = this.categorizedCriteriaRepository
+      .createQueryBuilder()
+      .select('c.id, c.name, c.helpText, c.indicatorIndex')
+      .distinctOn(['c.id'])
+      .from('categorized_criterion', 'cc')
+      .innerJoin('cc.category', 'c')
+      .where('cc.recopilationId = :recopilationId', { recopilationId })
+      .execute()
 
-    return categorizedCriterias.map(
-      (categorizedCriteria) => categorizedCriteria.category
-    )
+    return criterion
   }
 }
