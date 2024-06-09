@@ -91,4 +91,14 @@ export class CategoriesController {
     )
     return categories
   }
+
+  @Get('/recopilation/:recopilationId')
+  async getCategoriesByRecopilation(
+    @Param('recopilationId') recopilationId: string
+  ) {
+    const categories = await this.categoriesService.categoriesByRecopilation(
+      Number(recopilationId)
+    )
+    return categories
+  }
 }

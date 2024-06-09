@@ -4,12 +4,14 @@ import { UpdateCategoryDto } from './dto/update-category.dto'
 import { Category } from './entities/category.entity'
 import { Indicator } from '../indicators/entities/indicator.entity'
 import { InjectRepository } from '@nestjs/typeorm'
-import { EntityNotFoundError, Repository } from 'typeorm'
+import { Repository } from 'typeorm'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-categories-by-param.dto'
+import { Recopilation } from '../recopilations/entities/recopilation.entity'
+import { CategorizedCriteria } from '../categorized-criteria/entities/categorized-criterion.entity'
 
 @Injectable()
 export class CategoriesService {
@@ -17,7 +19,11 @@ export class CategoriesService {
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
     @InjectRepository(Indicator)
-    private readonly indicatorRepository: Repository<Indicator>
+    private readonly indicatorRepository: Repository<Indicator>,
+    @InjectRepository(Recopilation)
+    private readonly recopilationRepository: Repository<Recopilation>,
+    @InjectRepository(CategorizedCriteria)
+    private readonly categorizedCriteriaRepository: Repository<CategorizedCriteria>
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
@@ -96,12 +102,17 @@ export class CategoriesService {
       where: { indicator: indicator }
     })
 
-    if (categories.length === 0) {
-      throw new EntityNotFoundError(Category, {
-        indicatorIndex: indicator.index
-      })
-    }
-
     return categories
+  }
+
+  async categoriesByRecopilation(recopilationId: number): Promise<Category[]> {
+    const categorizedCriterias = await this.categorizedCriteriaRepository.find({
+      where: { recopilation: { id: recopilationId } },
+      relations: ['category']
+    })
+
+    return categorizedCriterias.map(
+      (categorizedCriteria) => categorizedCriteria.category
+    )
   }
 }
