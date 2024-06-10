@@ -133,10 +133,13 @@ export class RecopilationsService {
     }
 
     await this.indicatorsPerRecopilationRepository.save(
-      recopilation.indicatorsPerRecopilations
+      recopilation.indicatorsPerRecopilations.map((ipr) => ({
+        ...ipr,
+        recopilation
+      }))
     )
     await this.categorizedCriteriaRepository.save(
-      recopilation.categorizedCriterion
+      recopilation.categorizedCriterion.map((cc) => ({ ...cc, recopilation }))
     )
 
     return recopilation
