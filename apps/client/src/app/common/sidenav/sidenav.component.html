@@ -1,0 +1,32 @@
+<div class="sidenav" [ngClass]="isCollapsed ? 'sidenav-collapsed' : ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">GS</button>
+    @if (isCollapsed) {
+      <div class="logo-text">Summary</div>
+    }
+    @if (isCollapsed) {
+      <button class="btn-close" (click)="closeSidenav()">
+        <i class="pi pi-times close-icon"></i>
+      </button>
+    }
+  </div>
+  <ul class="sidenav-nav">
+    <li class="sidenav-nav-item">
+      @for (item of navData; track $index) {
+        <a
+          class="sidenav-nav-link"
+          [routerLink]="item.routeLink"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: true }"
+        >
+          <i class="sidenav-link-icon" [class]="item.icon"></i>
+          @if (isCollapsed) {
+            <span class="sidenav-link-text">
+              {{ item.label }}
+            </span>
+          }
+        </a>
+      }
+    </li>
+  </ul>
+</div>
