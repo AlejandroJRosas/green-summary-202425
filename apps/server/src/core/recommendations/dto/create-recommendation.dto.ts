@@ -3,7 +3,11 @@ import { IsNotEmpty, IsNumber } from 'class-validator'
 export class CreateRecommendationDto {
   @IsNumber()
   @IsNotEmpty()
-  departmentPerRecopilationId: number
+  recopilationId: number
+
+  @IsNumber()
+  @IsNotEmpty()
+  departmentId: number
 
   @IsNumber()
   @IsNotEmpty()

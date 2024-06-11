@@ -32,14 +32,18 @@ export class DepartmentsService {
       take: itemsPerPage,
       skip: (page - 1) * itemsPerPage,
       order: { [orderBy]: orderType },
-      where: parseFiltersToTypeOrm(filters)
+      where: parseFiltersToTypeOrm(filters),
+      select: ['id', 'fullName', 'email', 'type']
     })
 
     return { departments, count }
   }
 
   async findOne(id: number) {
-    const department = await this.departmentsRepository.findOneByOrFail({ id })
+    const department = await this.departmentsRepository.findOneOrFail({
+      where: { id },
+      select: ['id', 'fullName', 'email', 'type']
+    })
 
     return department
   }
@@ -51,6 +55,10 @@ export class DepartmentsService {
         relations: ['department']
       })
 
-    return departmentsPerRecopilation.map((dpr) => dpr.department)
+    return departmentsPerRecopilation.map((dpr) => {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password: _, ...departmentWithoutPassword } = dpr.department
+      return departmentWithoutPassword
+    })
   }
 }
