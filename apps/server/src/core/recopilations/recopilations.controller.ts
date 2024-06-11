@@ -21,6 +21,7 @@ import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-recopilations-by-param.dto'
 import { RelateIndicatorsToRecopilationDto } from './dto/relate-indicators-to-recopilation.dto'
+import { RecommendCategoriesDto } from './dto/recommend-categories.dto'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
@@ -93,6 +94,20 @@ export class RecopilationsController {
     try {
       return await this.recopilationsService.relateToIndicators(
         relateIndicatorsToRecopilationDto
+      )
+    } catch (e) {
+      console.log(e)
+      throw e
+    }
+  }
+
+  @Put('recommend-categories')
+  async recommendCategoriesToDepartments(
+    @Body() recommendCategoriesDto: RecommendCategoriesDto
+  ) {
+    try {
+      return await this.recopilationsService.recommendCategories(
+        recommendCategoriesDto
       )
     } catch (e) {
       console.log(e)

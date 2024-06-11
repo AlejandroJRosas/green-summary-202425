@@ -8,6 +8,9 @@ import { Criteria } from '../criterion/entities/criteria.entity'
 import { Category } from '../categories/entities/category.entity'
 import { IndicatorPerRecopilation } from '../indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
 import { CategorizedCriteria } from '../categorized-criteria/entities/categorized-criterion.entity'
+import { Recommendation } from '../recommendations/entities/recommendation.entity'
+import { Department } from '../users/entities/department.entity'
+import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 
 @Module({
   imports: [
@@ -16,8 +19,11 @@ import { CategorizedCriteria } from '../categorized-criteria/entities/categorize
       Indicator,
       Category,
       Criteria,
+      Department,
       IndicatorPerRecopilation,
-      CategorizedCriteria
+      CategorizedCriteria,
+      Recommendation,
+      DepartmentPerRecopilation
     ])
   ],
   controllers: [RecopilationsController],
