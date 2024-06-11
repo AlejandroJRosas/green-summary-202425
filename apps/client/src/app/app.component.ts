@@ -1,25 +1,20 @@
 import { Component } from '@angular/core'
 import { RouterLink, RouterOutlet } from '@angular/router'
 import { Toast } from './common/toast/toast.component'
-import {
-  SideNavToggle,
-  SidenavComponent
-} from './common/sidenav/sidenav.component'
+import { LayoutComponent } from './common/layout/layout.component'
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterLink, RouterOutlet, Toast, SidenavComponent],
+  imports: [RouterLink, RouterOutlet, Toast, LayoutComponent],
   templateUrl: './app.component.html'
 })
 export class AppComponent {
   title = 'Green Summary'
+  currentPath: string
 
-  isSideNavCollapsed = false
-  screenWidth = 0
-
-  onToggleSidenav(data: SideNavToggle) {
-    this.isSideNavCollapsed = data.isCollapsed
-    this.screenWidth = data.screenWidth
+  constructor(private location: Location) {
+    this.currentPath = this.location.path()
   }
 }

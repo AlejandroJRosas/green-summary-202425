@@ -2,17 +2,17 @@
   <div class="logo-container">
     <button class="logo" (click)="toggleCollapse()">GS</button>
     @if (isCollapsed) {
-      <div class="logo-text">Summary</div>
+      <div class="logo-text" @fadeInOut>Summary</div>
     }
     @if (isCollapsed) {
-      <button class="btn-close" (click)="closeSidenav()">
+      <button class="btn-close" @rotate (click)="closeSidenav()">
         <i class="pi pi-times close-icon"></i>
       </button>
     }
   </div>
   <ul class="sidenav-nav">
-    <li class="sidenav-nav-item">
-      @for (item of navData; track $index) {
+    @for (item of navData; track $index) {
+      <li class="sidenav-nav-item">
         <a
           class="sidenav-nav-link"
           [routerLink]="item.routeLink"
@@ -21,12 +21,12 @@
         >
           <i class="sidenav-link-icon" [class]="item.icon"></i>
           @if (isCollapsed) {
-            <span class="sidenav-link-text">
+            <span class="sidenav-link-text" @fadeInOut>
               {{ item.label }}
             </span>
           }
         </a>
-      }
-    </li>
+      </li>
+    }
   </ul>
 </div>

@@ -1,3 +1,6 @@
 <toast position="top-right" />
-<sidenav (onToggleSidenav)="onToggleSidenav($event)" />
-<router-outlet />
+@if (currentPath !== '/login') {
+  <app-layout />
+} @else {
+  <router-outlet />
+}

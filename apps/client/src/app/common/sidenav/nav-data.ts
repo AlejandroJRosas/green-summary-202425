@@ -1,27 +1,32 @@
 export const navbarData = [
   {
     label: 'Home',
-    icon: 'pi pi-microchip',
+    icon: 'pi pi-home',
     routeLink: '/'
   },
   {
-    label: 'About',
-    icon: 'pi pi-microchip',
-    routeLink: '/about'
+    label: 'Departamentos',
+    icon: 'pi pi-building',
+    routeLink: '/departments'
   },
   {
-    label: 'Contact',
-    icon: 'pi pi-microchip',
-    routeLink: '/contact'
+    label: 'Esquemas',
+    icon: 'pi pi-sitemap',
+    routeLink: '/schemes'
   },
   {
-    label: 'Login',
-    icon: 'pi pi-microchip',
-    routeLink: '/login'
+    label: 'Recopilaciones',
+    icon: 'pi pi-copy',
+    routeLink: '/recopilations'
   },
   {
-    label: 'Register',
-    icon: 'pi pi-microchip',
-    routeLink: '/register'
+    label: 'Registros',
+    icon: 'pi pi-file-word',
+    routeLink: '/registers'
+  },
+  {
+    label: 'Notificaciones',
+    icon: 'pi pi-bell',
+    routeLink: '/notifications'
   }
 ]
