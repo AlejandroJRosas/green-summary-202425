@@ -11,6 +11,7 @@ import { navbarData } from './nav-data'
 import { Router, RouterLink, RouterModule } from '@angular/router'
 import { CommonModule } from '@angular/common'
 import { Toast } from '../toast/toast.component'
+import { RoleType } from '../../services/auth.service'
 
 export interface SideNavToggle {
   screenWidth: number
@@ -61,6 +62,15 @@ export class SidenavComponent implements OnInit {
 
   ngOnInit(): void {
     this.screenWidth = window.innerWidth
+  }
+
+  isVisible(roles: RoleType[]): boolean {
+    const userRole = localStorage.getItem('user')
+    if (userRole !== null) {
+      const user = JSON.parse(userRole)
+      return roles.includes(user.type)
+    }
+    return false
   }
 
   logout() {

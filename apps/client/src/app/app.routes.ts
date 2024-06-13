@@ -7,8 +7,8 @@ import { UnauthorizedComponent } from './core/unauthorized/unauthorized.componen
 import { loginGuard } from './guards/login.guard'
 import { authGuard } from './guards/auth.guard'
 import { LayoutComponent } from './common/layout/layout.component'
-// Descomentar cuando lo necesiten
-// import { roleGuard } from './guards/role.guard'
+import { roleGuard } from './guards/role.guard'
+import { Role } from './services/auth.service'
 
 export const routes: Routes = [
   {
@@ -20,6 +20,7 @@ export const routes: Routes = [
   {
     path: 'pages',
     component: LayoutComponent,
+    canActivate: [authGuard],
     children: [
       {
         path: 'home',
@@ -30,7 +31,8 @@ export const routes: Routes = [
       {
         path: 'departments',
         title: 'Departamentos',
-        component: DepartmentComponent
+        component: DepartmentComponent,
+        canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
       }
     ]
   },

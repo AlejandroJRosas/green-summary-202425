@@ -7,23 +7,25 @@
   </div>
   <ul class="sidenav-nav">
     @for (item of navData; track $index) {
-      <div
-        [routerLink]="item.routeLink"
-        routerLinkActive="active"
-        [routerLinkActiveOptions]="{ exact: false }"
-        style="width: 100%"
-      >
-        <li class="sidenav-nav-item">
-          <a class="sidenav-nav-link">
-            <i class="sidenav-link-icon" [class]="item.icon"></i>
-            @if (isCollapsed) {
-              <span class="sidenav-link-text" @fadeInOut>
-                {{ item.label }}
-              </span>
-            }
-          </a>
-        </li>
-      </div>
+      @if (isVisible(item.visibility)) {
+        <div
+          [routerLink]="item.routeLink"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          style="width: 100%; cursor: pointer"
+        >
+          <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link">
+              <i class="sidenav-link-icon" [class]="item.icon"></i>
+              @if (isCollapsed) {
+                <span class="sidenav-link-text" @fadeInOut>
+                  {{ item.label }}
+                </span>
+              }
+            </a>
+          </li>
+        </div>
+      }
     }
     <li class="sidenav-nav-item">
       <button class="sidenav-nav-link" (click)="logout()">
