@@ -1,9 +1,14 @@
-<p>401 unauthorized works!</p>
-<p-button
-  routerLink="/login"
-  label="Volver a Home"
-  styleClass="bg-primary border-primary"
-></p-button>
+<div style="display: grid; width: 100vw; height: 100vh; place-items: center">
+  <ng-lottie width="350px" height="350px" [options]="options" />
+  <h1 style="text-align: center; font-size: 2rem; color: var(--text-color)">
+    Acceso no autorizado
+  </h1>
+  <p-button
+    routerLink="/login"
+    label="Volver"
+    styleClass="bg-primary border-primary"
+  ></p-button>
+</div>
 <!-- <p-button
   (onClick)="goBackToPrevPage()"
   label="Volver a la página anterior"
