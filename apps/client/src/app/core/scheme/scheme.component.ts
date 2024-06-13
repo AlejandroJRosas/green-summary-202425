@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit, Output, ViewChild } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { Toast } from '../../common/toast/toast.component'
 import { IndicatorService } from '../../services/indicator.service'
 import { CategoryService } from '../../services/category.service'
@@ -17,11 +17,14 @@ import { ConfirmationService } from 'primeng/api'
 import { ValidatedFormGroup } from '../../common/validated-form-group/validated-form-group'
 import * as Yup from 'yup'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
-import { CategoryComponent } from './category/category.component'
+import { CategoryComponent } from './categories/categories.component'
+import { CriteriaComponent } from './criteria/criteria.component'
 
 @Component({
   selector: 'app-scheme',
   standalone: true,
+  templateUrl: './scheme.component.html',
+  providers: [ConfirmationService],
   imports: [
     ButtonModule,
     AccordionModule,
@@ -32,10 +35,9 @@ import { CategoryComponent } from './category/category.component'
     ConfirmDialogModule,
     FormsModule,
     ReactiveFormsModule,
-    CategoryComponent
-  ],
-  templateUrl: './scheme.component.html',
-  providers: [ConfirmationService]
+    CategoryComponent,
+    CriteriaComponent
+  ]
 })
 export class SchemeComponent
   extends ValidatedFormGroup<Indicator>
@@ -59,9 +61,9 @@ export class SchemeComponent
       index: Yup.number()
         .min(1, 'El indice debe ser mayor o igual a 1')
         .required('El indice es requerido'),
-      name: Yup.string().required('El correo electrónico es requerido'),
+      name: Yup.string().required('El nombre es requerido'),
       alias: Yup.string().required('El alias es requerido'),
-      helpText: Yup.string().required('La ayuda es requerida')
+      helpText: Yup.string().required('El texto de ayuda es requerido')
     })
 
     super(initialControlValues, validationSchema)
@@ -79,17 +81,12 @@ export class SchemeComponent
   visibleCreateIndicator: boolean = false
   visibleEditIndicator: boolean = false
 
-  @ViewChild(CategoryComponent) categoryComponent!: CategoryComponent
-  @Output() showCreateCategory: boolean = false
-  @Output() showEditCategory: boolean = false
-
   schemes: IScheme[] = []
 
   paginated = {
     first: 0,
     rows: 100
   }
-
   ngOnInit() {
     this.isFetching = true
     this.getAll()
@@ -147,53 +144,6 @@ export class SchemeComponent
       }
     })
   }
-
-  confirmationDeleteCategory(event: Event, id: number, name: string) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: `¿Estás seguro de que quieres eliminar la categoría <strong>${name}</strong>?`,
-      header: 'Eliminar categoría',
-      icon: 'pi pi-info-circle',
-      acceptButtonStyleClass: 'p-button-danger p-button-text',
-      rejectButtonStyleClass: 'p-button-text p-button-text',
-      acceptIcon: 'none',
-      rejectIcon: 'none',
-      acceptLabel: 'Sí',
-      rejectLabel: 'No',
-
-      accept: () => {
-        this.toast.show('success', 'Eliminado', 'Categoría eliminada con éxito')
-        this.onDeleteCategory(id)
-      },
-      reject: () => {
-        this.toast.show('error', 'Rechazado', 'Haz rechazado la eliminación')
-      }
-    })
-  }
-
-  confirmationDeleteCriteria(event: Event, id: number, name: string) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: `¿Estás seguro de que quieres eliminar el criterio <strong>${name}</strong>?`,
-      header: 'Eliminar criterio',
-      icon: 'pi pi-info-circle',
-      acceptButtonStyleClass: 'p-button-danger p-button-text',
-      rejectButtonStyleClass: 'p-button-text p-button-text',
-      acceptIcon: 'none',
-      rejectIcon: 'none',
-      acceptLabel: 'Sí',
-      rejectLabel: 'No',
-
-      accept: () => {
-        this.toast.show('success', 'Eliminado', 'Criterio eliminado con éxito')
-        this.onDeleteCriteria(id)
-      },
-      reject: () => {
-        this.toast.show('error', 'Rechazado', 'Haz rechazado la eliminación')
-      }
-    })
-  }
-
   getAll() {
     this.indicatorService.getAll(this.paginated).subscribe({
       next: (res) => {
@@ -206,6 +156,7 @@ export class SchemeComponent
               criterias: []
             }
           })
+          console.log(this.schemes)
         }
         this.isFetching = false
         for (const scheme of this.schemes) {
@@ -231,7 +182,6 @@ export class SchemeComponent
                 scheme.categories = res.data
               }
             })
-            console.log(res.data)
           }
         },
         error: (e) => {
@@ -249,7 +199,6 @@ export class SchemeComponent
             this.schemes.map((scheme) => {
               if (scheme.index === indicatorId) {
                 scheme.criterias = res.data
-                console.log(res.data, scheme.criterias)
               }
             })
           }
@@ -282,8 +231,7 @@ export class SchemeComponent
   }
 
   onEditIndicator() {
-    const { index, name, alias, helpText: helpText } = this.formGroup.controls
-    if (!index.value || !name.value || !alias.value || !helpText.value) return
+    const { index, name, alias, helpText } = this.formGroup.controls
     const indicator: Indicator = {
       index: index.value,
       name: name.value,
@@ -304,28 +252,6 @@ export class SchemeComponent
 
   onDeleteIndicator(id: number) {
     this.indicatorService.delete(id).subscribe({
-      next: () => {
-        this.getAll()
-      },
-      error: (e) => {
-        console.error(e)
-      }
-    })
-  }
-
-  onDeleteCategory(id: number) {
-    this.categoryService.delete(id).subscribe({
-      next: () => {
-        this.getAll()
-      },
-      error: (e) => {
-        console.error(e)
-      }
-    })
-  }
-
-  onDeleteCriteria(id: number) {
-    this.criteriaService.delete(id).subscribe({
       next: () => {
         this.getAll()
       },

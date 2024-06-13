@@ -4,7 +4,7 @@
   </header>
   <section class="flex flex-column">
     <div class="flex flex-row justify-content-between align-items-center">
-      <h3>Indicadores ({{ totalItems }})</h3>
+      <h3 class="text-xl">Indicadores ({{ totalItems }})</h3>
       <p-button
         (click)="showDialogCreateIndicator()"
         styleClass="bg-primary border-primary mr-4"
@@ -71,151 +71,15 @@
           </section>
         </ng-template>
         <p class="m-0 pb-3">{{ scheme.helpText }}</p>
-        <p-panel
-          expandIcon="pi pi-chevron-down"
-          collapseIcon="pi pi-chevron-right"
-          [toggleable]="true"
-          collapsed="true"
-          iconPos="start"
+        <categories
+          [categories]="scheme.categories"
+          [indicatorIndex]="scheme.index"
+        ></categories>
+        <criteria
+          [criterion]="scheme.criterias"
+          [indicatorIndex]="scheme.index"
         >
-          <ng-template pTemplate="header">
-            <section
-              class="flex flex-row justify-content-between align-items-center w-full"
-            >
-              <h3 class="text-lg">
-                Categorías ({{ scheme.categories.length }})
-              </h3>
-              <button
-                class="p-panel-header-icon p-link mr-2"
-                (click)="showCreateCategory = true"
-              >
-                <span
-                  class="pi pi-plus"
-                  style="
-                    color: #3b82f6;
-                    border: solid 1.5px #3b82f6;
-                    border-radius: 100%;
-                    padding: 6px;
-                  "
-                ></span>
-              </button>
-            </section>
-          </ng-template>
-          @for (category of scheme.categories; track category) {
-            <category-form
-              [category]="category"
-              [indicatorIndex]="scheme.index"
-              [visibleCreate]="showCreateCategory"
-              [visibleEdit]="showEditCategory"
-            ></category-form>
-            <div class="flex justify-content-between align-items-center">
-              <h3>{{ category.name }}</h3>
-              <div>
-                <button class="p-panel-header-icon p-link mr-2">
-                  <span
-                    class="pi pi-pencil"
-                    (click)="this.categoryComponent.showDialogEdit()"
-                    style="
-                      color: #22c55e;
-                      border: solid 1.5px #22c55e;
-                      border-radius: 100%;
-                      padding: 8px;
-                    "
-                  ></span>
-                </button>
-                <button
-                  class="p-panel-header-icon p-link mr-2"
-                  (click)="
-                    confirmationDeleteCategory(
-                      $event,
-                      category.id,
-                      category.name
-                    )
-                  "
-                >
-                  <span
-                    class="pi pi-trash"
-                    style="
-                      color: #ef4444;
-                      border: solid 1.5px #ef4444;
-                      border-radius: 100%;
-                      padding: 8px;
-                    "
-                  ></span>
-                </button>
-              </div>
-            </div>
-            <p>{{ category.helpText }}</p>
-          }
-        </p-panel>
-        <p-panel
-          expandIcon="pi pi-chevron-down"
-          collapseIcon="pi pi-chevron-right"
-          [toggleable]="true"
-          collapsed="true"
-          iconPos="start"
-        >
-          <ng-template pTemplate="header">
-            <section
-              class="flex flex-row justify-content-between align-items-center w-full"
-            >
-              <h3 class="text-lg">Criterios ({{ scheme.criterias.length }})</h3>
-              <button class="p-panel-header-icon p-link mr-2">
-                <span
-                  class="pi pi-plus"
-                  style="
-                    color: #3b82f6;
-                    border: solid 1.5px #3b82f6;
-                    border-radius: 100%;
-                    padding: 6px;
-                  "
-                ></span>
-              </button>
-            </section>
-          </ng-template>
-          @for (criteria of scheme.criterias; track criteria) {
-            <div class="flex justify-content-between align-items-center">
-              <h3>
-                {{ scheme.index }}.{{ criteria.subIndex }}.
-                {{ criteria.name }} ({{ criteria.alias }})
-              </h3>
-              <div>
-                <button class="p-panel-header-icon p-link mr-2">
-                  <span
-                    class="pi pi-pencil"
-                    style="
-                      color: #22c55e;
-                      border: solid 1.5px #22c55e;
-                      border-radius: 100%;
-                      padding: 8px;
-                    "
-                  ></span>
-                </button>
-                <button
-                  class="p-panel-header-icon p-link mr-2"
-                  (click)="
-                    confirmationDeleteCriteria(
-                      $event,
-                      criteria.id,
-                      criteria.name
-                    )
-                  "
-                >
-                  <span
-                    class="pi pi-trash"
-                    style="
-                      color: #ef4444;
-                      border: solid 1.5px #ef4444;
-                      border-radius: 100%;
-                      padding: 8px;
-                    "
-                  ></span>
-                </button>
-              </div>
-            </div>
-            <p>{{ criteria.helpText }}</p>
-          }
-        </p-panel>
+        </criteria>
       </p-panel>
     }
   </section>
