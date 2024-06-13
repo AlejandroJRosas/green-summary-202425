@@ -49,8 +49,12 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
       subIndex: Yup.number()
         .min(1, 'El subindice debe ser mayor o igual a 1')
         .required('El subíndice es requerido'),
-      name: Yup.string().required('El nombre es requerido'),
-      alias: Yup.string().required('El alias es requerido'),
+      name: Yup.string()
+        .required('El nombre es requerido')
+        .max(50, 'El nombre no puede superar los 50 caracteres'),
+      alias: Yup.string()
+        .required('El alias es requerido')
+        .max(50, 'El alias no puede superar los 50 caracteres'),
       requiresEvidence: Yup.boolean().required('La evidencia es requerida'),
       helpText: Yup.string().required('El texto de ayuda es requerido')
     })
@@ -67,6 +71,8 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
   @Input() indicatorIndex: number = 0
   visibleCreate = false
   visibleEdit = false
+  fetchCreateCriterion: boolean = false
+  fetchEditCriterion: boolean = false
   criteriaEdit: formPayloadEdit = {
     id: 0,
     subIndex: 0,
@@ -131,7 +137,7 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
         },
         error: (e) => {
           console.error(e)
-          this.toast.show('error', 'Error', e.message)
+          this.toast.show('error', 'Error', e.error.data.message)
         }
       })
   }
@@ -143,11 +149,12 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
       },
       error: (e) => {
         console.error(e)
-        this.toast.show('error', 'Error', e.message)
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
   onCreate() {
+    this.fetchCreateCriterion = true
     const { subIndex, name, alias, requiresEvidence, helpText } =
       this.formGroup.controls
     const criteria: CriteriaDTO = {
@@ -160,17 +167,20 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
     }
     this.criteriaService.create(criteria).subscribe({
       next: () => {
+        this.fetchCreateCriterion = false
         this.toast.show('success', 'Creado', 'Criterio creado con éxito')
         this.closeDialog()
         this.getCriterionPerIndicator(this.indicatorIndex)
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.message)
+        this.fetchCreateCriterion = false
+        this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
       }
     })
   }
   onEdit() {
+    this.fetchEditCriterion = true
     const { subIndex, name, alias, requiresEvidence, helpText } =
       this.formGroup.controls
     const criteria: CriteriaDTO = {
@@ -183,12 +193,14 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
     }
     this.criteriaService.edit(this.criteriaEdit.id, criteria).subscribe({
       next: () => {
+        this.fetchEditCriterion = false
         this.toast.show('success', 'Creado', 'Criterio editado con éxito')
         this.closeDialog()
         this.getCriterionPerIndicator(this.indicatorIndex)
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.message)
+        this.fetchEditCriterion = false
+        this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
       }
     })

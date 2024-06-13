@@ -25,11 +25,11 @@
     </section>
   </ng-template>
   @for (criterion of criterion; track criterion.id) {
-    <div class="flex justify-content-between align-items-center">
-      <h3>
+    <div class="flex justify-content-between align-items-center gap-4">
+      <h3 style="word-break: break-word">
         {{ this.indicatorIndex }}.{{ criterion.subIndex }} {{ criterion.name }}
       </h3>
-      <div>
+      <div class="flex flex-nowrap">
         <button class="p-panel-header-icon p-link mr-2">
           <span
             class="pi pi-pencil"
@@ -58,7 +58,7 @@
         </button>
       </div>
     </div>
-    <p>{{ criterion.helpText }}</p>
+    <p class="m-0" style="word-wrap: break-word">{{ criterion.helpText }}</p>
   }
 </p-panel>
 <p-dialog
@@ -176,6 +176,7 @@
         (click)="onCreate()"
         [outlined]="true"
         severity="success"
+        [loading]="fetchCreateCriterion"
         [disabled]="formGroup.invalid"
       />
     </footer>
@@ -296,6 +297,7 @@
         (click)="onEdit()"
         [outlined]="true"
         severity="success"
+        [loading]="fetchEditCriterion"
         [disabled]="formGroup.invalid"
       />
     </footer>
