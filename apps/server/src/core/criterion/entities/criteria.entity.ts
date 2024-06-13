@@ -30,7 +30,10 @@ export class Criteria {
   @Column({ default: false })
   requiresEvidence: boolean
 
-  @ManyToOne(() => Indicator, (indicator) => indicator.criterion)
+  @ManyToOne(() => Indicator, (indicator) => indicator.criterion, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE'
+  })
   indicator: Indicator
 
   @OneToMany(
