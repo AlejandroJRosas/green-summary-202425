@@ -71,11 +71,11 @@ export class CriterionController {
   @Patch(':id')
   async updateCriterion(
     @Param('id') id: string,
-    @Body() updateCriterionDto: UpdateCriteriaDto
+    @Body() updateCriteriaDto: UpdateCriteriaDto
   ) {
     const criterion = await this.criterionService.updateCriterion(
       Number(id),
-      updateCriterionDto
+      updateCriteriaDto
     )
     return criterion
   }

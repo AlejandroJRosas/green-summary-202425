@@ -69,9 +69,21 @@ export class CriterionService {
 
   async updateCriterion(
     id: number,
-    updateCriterionDto: UpdateCriteriaDto
+    updateCriteriaDto: UpdateCriteriaDto
   ): Promise<Criteria> {
-    await this.criterionRepository.update({ id }, updateCriterionDto)
+    const indicator = await this.indicatorRepository.findOneByOrFail({
+      index: updateCriteriaDto.indicatorIndex
+    })
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { indicatorIndex: _, ...dtoWithoutIndicatorIndex } = updateCriteriaDto
+
+    const updatedCriteria = this.criterionRepository.create({
+      ...dtoWithoutIndicatorIndex,
+      indicator
+    })
+
+    await this.criterionRepository.update({ id }, updatedCriteria)
 
     return await this.criterionRepository.findOneByOrFail({ id })
   }

@@ -26,8 +26,13 @@ export class RecommendationsController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async create(@Body() createRecommendDto: CreateRecommendationDto) {
-    const result = await this.recommendService.create(createRecommendDto)
-    return result
+    try {
+      const result = await this.recommendService.create(createRecommendDto)
+      return result
+    } catch (e) {
+      console.log(e)
+      throw e
+    }
   }
 
   @Get()
