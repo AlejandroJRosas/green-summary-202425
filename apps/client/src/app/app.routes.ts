@@ -6,8 +6,7 @@ import { HomeComponent } from './core/home/home.component'
 import { UnauthorizedComponent } from './core/unauthorized/unauthorized.component'
 import { loginGuard } from './guards/login.guard'
 import { authGuard } from './guards/auth.guard'
-// Descomentar cuando lo necesiten
-// import { roleGuard } from './guards/role.guard'
+import { roleGuard } from './guards/role.guard'
 
 export const routes: Routes = [
   {
@@ -25,7 +24,8 @@ export const routes: Routes = [
   {
     path: 'departments',
     title: 'Departamentos',
-    component: DepartmentComponent
+    component: DepartmentComponent,
+    canActivate: [authGuard, roleGuard(['coordinator'])]
   },
   {
     path: 'unauthorized',
