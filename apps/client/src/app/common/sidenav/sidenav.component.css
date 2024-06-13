@@ -1,12 +1,24 @@
 .sidenav {
-  background: #263238;
-  transition: all 0.5s ease;
+  /* reset button styles */
+  button {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+  }
+
   position: fixed;
-  z-index: 1;
-  top: 0;
+  display: flex;
+  flex-direction: column;
   width: 5rem;
   height: 100vh;
-  box-shadow: 0.063rem 0 1.25rem 0 #8690a3;
+  background-color: var(--background-color);
+  z-index: 1;
+  top: 0;
+  border-right: 1.5px solid #e0e0e0;
+  transition: all 0.5s ease;
 
   .logo-container {
     display: flex;
@@ -15,7 +27,6 @@
     width: 100%;
 
     .logo {
-      background: #fff;
       text-align: center;
       width: 3rem;
       min-width: 3rem;
@@ -29,24 +40,8 @@
 
     .logo-text {
       margin-left: 1.5rem;
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 700;
-      color: #fff;
-    }
-
-    .btn-close {
-      margin-left: auto;
-      cursor: pointer;
-      width: 2rem;
-      height: 2rem;
-      border-radius: 50%;
-      background-color: transparent;
-      border: none;
-
-      .pi-times {
-        color: #fff;
-        font-size: 24px;
-      }
     }
   }
 }
@@ -64,15 +59,24 @@
   align-items: center;
   height: calc(100% - 3.65rem);
 
+  .sidenav-nav-item:last-child {
+    margin-top: auto;
+  }
+
   .sidenav-nav-item {
+    position: relative;
     width: 100%;
     margin-bottom: 0.625rem;
+
+    button {
+      width: 100%;
+    }
 
     .sidenav-nav-link {
       display: flex;
       align-items: center;
       height: 3rem;
-      color: #f3f3f3;
+      color: black;
       text-decoration: none;
       border-radius: 0.625rem;
       transition: color 0.3s ease;
@@ -90,19 +94,39 @@
       }
     }
   }
+
+  .sidenav-nav-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -0.8rem;
+    transform: translateY(12.5%);
+    height: 75%;
+    width: 0;
+    border-radius: 0;
+    background-color: var(--primary-color);
+    transition: all 0.3s ease;
+    border-radius: 0 10px 10px 0;
+  }
+  .sidenav-nav-item:hover::before {
+    width: 0.3rem;
+  }
+
   .sidenav-nav-item:hover {
     .sidenav-nav-link {
-      background-color: #fff;
-      color: #000;
+      color: var(--primary-color);
     }
   }
 }
 
 .active {
-  background-color: #fff;
-
   .sidenav-link-icon,
   .sidenav-link-text {
-    color: #000;
+    color: var(--primary-color);
+  }
+
+  /* Arreglar que aparezca cuando esté active */
+  .sidenav-nav-item::before {
+    width: 0.3rem;
   }
 }

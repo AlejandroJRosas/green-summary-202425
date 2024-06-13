@@ -2,31 +2,36 @@
   <div class="logo-container">
     <button class="logo" (click)="toggleCollapse()">GS</button>
     @if (isCollapsed) {
-      <div class="logo-text" @fadeInOut>Summary</div>
-    }
-    @if (isCollapsed) {
-      <button class="btn-close" @rotate (click)="closeSidenav()">
-        <i class="pi pi-times close-icon"></i>
-      </button>
+      <div class="logo-text" @fadeInOut>Green Summary</div>
     }
   </div>
   <ul class="sidenav-nav">
     @for (item of navData; track $index) {
-      <li class="sidenav-nav-item">
-        <a
-          class="sidenav-nav-link"
-          [routerLink]="item.routeLink"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }"
-        >
-          <i class="sidenav-link-icon" [class]="item.icon"></i>
-          @if (isCollapsed) {
-            <span class="sidenav-link-text" @fadeInOut>
-              {{ item.label }}
-            </span>
-          }
-        </a>
-      </li>
+      <div
+        [routerLink]="item.routeLink"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: false }"
+        style="width: 100%"
+      >
+        <li class="sidenav-nav-item">
+          <a class="sidenav-nav-link">
+            <i class="sidenav-link-icon" [class]="item.icon"></i>
+            @if (isCollapsed) {
+              <span class="sidenav-link-text" @fadeInOut>
+                {{ item.label }}
+              </span>
+            }
+          </a>
+        </li>
+      </div>
     }
+    <li class="sidenav-nav-item">
+      <button class="sidenav-nav-link" (click)="logout()">
+        <i class="sidenav-link-icon pi pi-sign-out"></i>
+        @if (isCollapsed) {
+          <span class="sidenav-link-text" @fadeInOut> Cerrar sesión </span>
+        }
+      </button>
+    </li>
   </ul>
 </div>

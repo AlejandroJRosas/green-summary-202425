@@ -2,19 +2,15 @@ import {
   Component,
   EventEmitter,
   HostListener,
+  Inject,
   OnInit,
   Output
 } from '@angular/core'
-import {
-  animate,
-  keyframes,
-  style,
-  transition,
-  trigger
-} from '@angular/animations'
+import { animate, style, transition, trigger } from '@angular/animations'
 import { navbarData } from './nav-data'
-import { RouterLink, RouterModule } from '@angular/router'
+import { Router, RouterLink, RouterModule } from '@angular/router'
 import { CommonModule } from '@angular/common'
+import { Toast } from '../toast/toast.component'
 
 export interface SideNavToggle {
   screenWidth: number
@@ -37,21 +33,15 @@ export interface SideNavToggle {
         style({ opacity: 1 }),
         animate('150ms', style({ opacity: 0 }))
       ])
-    ]),
-    trigger('rotate', [
-      transition(':enter', [
-        animate(
-          '500ms',
-          keyframes([
-            style({ transform: 'rotate(0deg)', offset: '0' }),
-            style({ transform: 'rotate(1turn)', offset: '1' })
-          ])
-        )
-      ])
     ])
   ]
 })
 export class SidenavComponent implements OnInit {
+  constructor(
+    @Inject(Toast) private toast: Toast,
+    private router: Router
+  ) {}
+
   @Output() onToggleSidenav: EventEmitter<SideNavToggle> = new EventEmitter()
   isCollapsed = false
   screenWidth = 0
@@ -73,15 +63,15 @@ export class SidenavComponent implements OnInit {
     this.screenWidth = window.innerWidth
   }
 
+  logout() {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    this.toast.show('success', 'Éxito', 'Usted ha cerrado sesión correctamente')
+    this.router.navigate(['/login'])
+  }
+
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed
-    this.onToggleSidenav.emit({
-      isCollapsed: this.isCollapsed,
-      screenWidth: this.screenWidth
-    })
-  }
-  closeSidenav() {
-    this.isCollapsed = false
     this.onToggleSidenav.emit({
       isCollapsed: this.isCollapsed,
       screenWidth: this.screenWidth

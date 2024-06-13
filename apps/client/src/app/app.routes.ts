@@ -6,6 +6,7 @@ import { HomeComponent } from './core/home/home.component'
 import { UnauthorizedComponent } from './core/unauthorized/unauthorized.component'
 import { loginGuard } from './guards/login.guard'
 import { authGuard } from './guards/auth.guard'
+import { LayoutComponent } from './common/layout/layout.component'
 // Descomentar cuando lo necesiten
 // import { roleGuard } from './guards/role.guard'
 
@@ -17,15 +18,21 @@ export const routes: Routes = [
     canActivate: [loginGuard]
   },
   {
-    path: 'home',
-    title: 'Home',
-    component: HomeComponent,
-    canActivate: [authGuard]
-  },
-  {
-    path: 'departments',
-    title: 'Departamentos',
-    component: DepartmentComponent
+    path: 'pages',
+    component: LayoutComponent,
+    children: [
+      {
+        path: 'home',
+        title: 'Home',
+        component: HomeComponent,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'departments',
+        title: 'Departamentos',
+        component: DepartmentComponent
+      }
+    ]
   },
   {
     path: 'unauthorized',
