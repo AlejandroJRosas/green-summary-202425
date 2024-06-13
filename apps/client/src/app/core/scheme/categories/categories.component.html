@@ -25,9 +25,9 @@
     </section>
   </ng-template>
   @for (category of categories; track category.id) {
-    <div class="flex justify-content-between align-items-center">
-      <h3>{{ category.name }}</h3>
-      <div>
+    <div class="flex justify-content-between align-items-center gap-3">
+      <h3 style="word-break: break-word">{{ category.name }}</h3>
+      <div class="flex-nowrap">
         <button class="p-panel-header-icon p-link mr-2">
           <span
             class="pi pi-pencil"
@@ -56,7 +56,7 @@
         </button>
       </div>
     </div>
-    <p>{{ category.helpText }}</p>
+    <p class="m-0" style="word-wrap: break-word">{{ category.helpText }}</p>
   }
 </p-panel>
 <p-dialog
@@ -116,6 +116,7 @@
         (click)="onCreate()"
         [outlined]="true"
         severity="success"
+        [loading]="fetchCreateCategory"
         [disabled]="formGroup.invalid"
       />
     </footer>
@@ -178,6 +179,7 @@
         (click)="onEdit()"
         [outlined]="true"
         severity="success"
+        [loading]="fetchEditCategory"
         [disabled]="formGroup.invalid"
       />
     </footer>

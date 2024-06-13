@@ -40,7 +40,9 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
       helpText: ''
     }
     const validationSchema = Yup.object({
-      name: Yup.string().required('El nombre es requerido'),
+      name: Yup.string()
+        .required('El nombre es requerido')
+        .max(50, 'El nombre no puede superar los 50 caracteres'),
       helpText: Yup.string().required('La ayuda es requerida')
     })
 
@@ -55,6 +57,8 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
   @Input() indicatorIndex: number = 0
   visibleCreate = false
   visibleEdit = false
+  fetchCreateCategory: boolean = false
+  fetchEditCategory: boolean = false
   categoryEdit: formPayloadEdit = {
     name: '',
     helpText: '',
@@ -108,6 +112,7 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
         },
         error: (e) => {
           console.error(e)
+          this.toast.show('error', 'Error', e.error.data.message)
         }
       })
   }
@@ -119,11 +124,12 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
       },
       error: (e) => {
         console.error(e)
-        this.toast.show('error', 'Error', e.message)
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
   onCreate() {
+    this.fetchCreateCategory = true
     const { helpText, name } = this.formGroup.controls
     if (!name.value || !helpText.value) return
     const category: CategoryDTO = {
@@ -133,32 +139,39 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
     }
     this.categoryService.create(category).subscribe({
       next: () => {
+        this.fetchCreateCategory = false
         this.toast.show('success', 'Creado', 'Categoría creada con éxito')
         this.closeDialog()
         this.getCategoriesPerIndicator(this.indicatorIndex)
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.message)
+        this.fetchCreateCategory = false
+        this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
       }
     })
   }
   onEdit() {
+    this.fetchEditCategory = true
     const { helpText, name } = this.formGroup.controls
     const category: CategoryDTO = {
       indicatorIndex: this.indicatorIndex,
       name: name.value,
       helpText: helpText.value
     }
+    console.log(category)
     this.categoryService.edit(this.categoryEdit.id, category).subscribe({
       next: () => {
+        this.fetchEditCategory = false
         this.toast.show('success', 'Creado', 'Categoría editada con éxito')
         this.closeDialog()
         this.getCategoriesPerIndicator(this.indicatorIndex)
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.message)
+        this.fetchEditCategory = false
+        this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
+        console.log(e)
       }
     })
   }
