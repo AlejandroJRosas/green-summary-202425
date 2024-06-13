@@ -71,7 +71,7 @@ export class LoginComponent extends ValidatedFormGroup<ILoginComponent> {
           'Éxito',
           'Usted ha iniciado sesión correctamente'
         )
-        this.router.navigate(['/home'])
+        this.router.navigate(['/pages/home'])
       },
       error: (error) => {
         this.toast.show('error', 'Error', error.message)

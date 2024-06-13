@@ -1,0 +1,39 @@
+<div class="sidenav" [ngClass]="isCollapsed ? 'sidenav-collapsed' : ''">
+  <div class="logo-container">
+    <button class="logo" (click)="toggleCollapse()">GS</button>
+    @if (isCollapsed) {
+      <div class="logo-text" @fadeInOut>Green Summary</div>
+    }
+  </div>
+  <ul class="sidenav-nav">
+    @for (item of navData; track $index) {
+      @if (isVisible(item.visibility)) {
+        <div
+          [routerLink]="item.routeLink"
+          routerLinkActive="active"
+          [routerLinkActiveOptions]="{ exact: false }"
+          style="width: 100%; cursor: pointer"
+        >
+          <li class="sidenav-nav-item">
+            <a class="sidenav-nav-link">
+              <i class="sidenav-link-icon" [class]="item.icon"></i>
+              @if (isCollapsed) {
+                <span class="sidenav-link-text" @fadeInOut>
+                  {{ item.label }}
+                </span>
+              }
+            </a>
+          </li>
+        </div>
+      }
+    }
+    <li class="sidenav-nav-item">
+      <button class="sidenav-nav-link" (click)="logout()">
+        <i class="sidenav-link-icon pi pi-sign-out"></i>
+        @if (isCollapsed) {
+          <span class="sidenav-link-text" @fadeInOut> Cerrar sesión </span>
+        }
+      </button>
+    </li>
+  </ul>
+</div>
