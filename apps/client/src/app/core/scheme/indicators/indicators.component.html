@@ -20,12 +20,12 @@
     >
       <ng-template pTemplate="header">
         <section
-          class="flex flex-row justify-content-between align-items-center w-full"
+          class="flex flex-row justify-content-between align-items-center w-full gap-4"
         >
-          <h2 class="text-xl">
+          <h2 style="word-break: break-word" class="text-xl">
             {{ scheme.index }}. {{ scheme.name }} ({{ scheme.alias }})
           </h2>
-          <div class="flex flex-row gap-1">
+          <div class="flex flex-row gap-1 flex-nowrap">
             <button
               class="p-panel-header-icon p-link mr-2"
               (click)="
@@ -164,6 +164,7 @@
         (click)="onCreate()"
         [outlined]="true"
         severity="success"
+        [loading]="fetchCreateIndicator"
         [disabled]="formGroup.invalid"
       />
     </footer>
@@ -256,6 +257,7 @@
         (click)="onEdit()"
         [outlined]="true"
         severity="success"
+        [loading]="fetchEditIndicator"
         [disabled]="formGroup.invalid"
       />
     </footer>

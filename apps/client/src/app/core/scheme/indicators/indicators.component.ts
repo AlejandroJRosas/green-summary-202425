@@ -61,8 +61,12 @@ export class IndicatorsComponent
       index: Yup.number()
         .min(1, 'El indice debe ser mayor o igual a 1')
         .required('El indice es requerido'),
-      name: Yup.string().required('El nombre es requerido'),
-      alias: Yup.string().required('El alias es requerido'),
+      name: Yup.string()
+        .required('El nombre es requerido')
+        .max(50, 'El nombre no puede superar los 50 caracteres'),
+      alias: Yup.string()
+        .required('El alias es requerido')
+        .max(50, 'El alias no puede superar los 50 caracteres'),
       helpText: Yup.string().required('El texto de ayuda es requerido')
     })
 
@@ -80,6 +84,8 @@ export class IndicatorsComponent
   visibleCreate: boolean = false
   visibleEdit: boolean = false
   indexEdit: number = 1
+  fetchCreateIndicator: boolean = false
+  fetchEditIndicator: boolean = false
 
   schemes: IScheme[] = []
 
@@ -160,7 +166,7 @@ export class IndicatorsComponent
       },
       error: (e) => {
         console.error(e)
-        this.toast.show('error', 'Error', e.error.message)
+        this.toast.show('error', 'Error', e.error.data.message)
         this.isFetching = false
       }
     })
@@ -181,7 +187,7 @@ export class IndicatorsComponent
         },
         error: (e) => {
           console.error(e)
-          this.toast.show('error', 'Error', e.error.message)
+          this.toast.show('error', 'Error', e.error.data.message)
         }
       })
   }
@@ -201,12 +207,13 @@ export class IndicatorsComponent
         },
         error: (e) => {
           console.error(e)
-          this.toast.show('error', 'Error', e.error.message)
+          this.toast.show('error', 'Error', e.error.data.message)
         }
       })
   }
 
   onCreate() {
+    this.fetchCreateIndicator = true
     const { index, name, alias, helpText } = this.formGroup.controls
     if (!index.value || !name.value || !alias.value || !helpText.value) return
     const indicator: Indicator = {
@@ -217,18 +224,21 @@ export class IndicatorsComponent
     }
     this.indicatorService.create(indicator).subscribe({
       next: () => {
+        this.fetchCreateIndicator = false
         this.getAll()
         this.toast.show('success', 'Creado', 'Indicador creado con éxito')
         this.closeDialog()
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.message)
+        this.fetchCreateIndicator = false
+        this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
       }
     })
   }
 
   onEdit() {
+    this.fetchEditIndicator = true
     const { index, name, alias, helpText } = this.formGroup.controls
     const indicator: Indicator = {
       index: index.value,
@@ -238,12 +248,14 @@ export class IndicatorsComponent
     }
     this.indicatorService.edit(this.indexEdit, indicator).subscribe({
       next: () => {
+        this.fetchEditIndicator = false
         this.getAll()
         this.toast.show('success', 'Editado', 'Indicador editado con éxito')
         this.closeDialog()
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.message)
+        this.fetchEditIndicator = false
+        this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
       }
     })
@@ -257,6 +269,7 @@ export class IndicatorsComponent
       },
       error: (e) => {
         console.error(e)
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
