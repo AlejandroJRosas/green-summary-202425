@@ -88,20 +88,26 @@ export class CriterionController {
 
   @Get('/indicator/:indicatorIndex')
   async getCriterionByIndicator(
-    @Param('indicatorIndex') indicatorIndex: string
+    @Param('indicatorIndex') indicatorIndex: string,
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
   ) {
     const criterion = await this.criterionService.criterionByIndicator(
-      Number(indicatorIndex)
+      Number(indicatorIndex),
+      { orderBy, orderType }
     )
     return criterion
   }
 
   @Get('/recopilation/:recopilationId')
   async getCriterionByRecopilation(
-    @Param('recopilationId') recopilationId: string
+    @Param('recopilationId') recopilationId: string,
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
   ) {
     const criterion = await this.criterionService.criterionByRecopilation(
-      Number(recopilationId)
+      Number(recopilationId),
+      { orderBy, orderType }
     )
     return criterion
   }
