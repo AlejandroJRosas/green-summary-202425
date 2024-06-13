@@ -68,4 +68,9 @@ export class UsersController {
   async remove(@Param() { id }: FindOneParams) {
     await this.usersService.remove(+id)
   }
+
+  @Patch('password-change/:id')
+  async passwordChange(@Param() { id }: FindOneParams) {
+    return this.usersService.passwordChange(+id)
+  }
 }
