@@ -37,7 +37,7 @@ export class CriteriaService {
   }
 
   create(
-    criteria: CreateCriteriaDTO
+    criteria: CriteriaDTO
   ): Observable<BackendResponse<Criteria, unknown, unknown>> {
     return this.http.post<BackendResponse<Criteria, unknown, unknown>>(
       `${BaseUrl}/criteria`,
@@ -47,7 +47,7 @@ export class CriteriaService {
 
   edit(
     id: number,
-    criteria: CreateCriteriaDTO
+    criteria: CriteriaDTO
   ): Observable<BackendResponse<Criteria, unknown, unknown>> {
     return this.http.patch<BackendResponse<Criteria, unknown, unknown>>(
       `${BaseUrl}/criteria/${id}`,
@@ -60,8 +60,9 @@ export class CriteriaService {
   }
 }
 
-export type CreateCriteriaDTO = Omit<Criteria, 'indicator'>
-
+export type CriteriaDTO = Omit<Criteria, 'id' | 'indicator'> & {
+  indicatorIndex: number
+}
 type Paginated = {
   first: number
   rows: number
