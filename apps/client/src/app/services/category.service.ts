@@ -37,7 +37,7 @@ export class CategoryService {
   }
 
   create(
-    category: CreateCategoryDTO
+    category: CategoryDTO
   ): Observable<BackendResponse<Category, unknown, unknown>> {
     return this.http.post<BackendResponse<Category, unknown, unknown>>(
       `${BaseUrl}/categories`,
@@ -47,7 +47,7 @@ export class CategoryService {
 
   edit(
     id: number,
-    category: CreateCategoryDTO
+    category: CategoryDTO
   ): Observable<BackendResponse<Category, unknown, unknown>> {
     return this.http.patch<BackendResponse<Category, unknown, unknown>>(
       `${BaseUrl}/categories/${id}`,
@@ -60,7 +60,7 @@ export class CategoryService {
   }
 }
 
-export type CreateCategoryDTO = Omit<Category, 'id' | 'indicator'> & {
+export type CategoryDTO = Omit<Category, 'id' | 'indicator'> & {
   indicatorIndex: number
 }
 
