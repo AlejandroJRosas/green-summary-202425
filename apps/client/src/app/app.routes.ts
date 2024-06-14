@@ -6,6 +6,7 @@ import { HomeComponent } from './core/home/home.component'
 import { UnauthorizedComponent } from './core/unauthorized/unauthorized.component'
 import { loginGuard } from './guards/login.guard'
 import { authGuard } from './guards/auth.guard'
+import { SchemeComponent } from './core/scheme/scheme.component'
 import { LayoutComponent } from './common/layout/layout.component'
 import { roleGuard } from './guards/role.guard'
 import { Role } from './services/auth.service'
@@ -33,7 +34,12 @@ export const routes: Routes = [
         title: 'Departamentos',
         component: DepartmentComponent,
         canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
-      }
+      },
+      {
+        path: 'schemes',
+        title: 'Esquemas',
+        component: SchemeComponent
+      },
     ]
   },
   {
