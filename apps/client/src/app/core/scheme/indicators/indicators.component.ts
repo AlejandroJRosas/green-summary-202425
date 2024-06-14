@@ -215,6 +215,7 @@ export class IndicatorsComponent
   }
 
   onCreate() {
+    if (this.formGroup.invalid) return
     this.fetchCreateIndicator = true
     const { index, name, alias, helpText } = this.formGroup.controls
     if (!index.value || !name.value || !alias.value || !helpText.value) return
@@ -240,6 +241,7 @@ export class IndicatorsComponent
   }
 
   onEdit() {
+    if (this.formGroup.invalid) return
     this.fetchEditIndicator = true
     const { index, name, alias, helpText } = this.formGroup.controls
     const indicator: Indicator = {

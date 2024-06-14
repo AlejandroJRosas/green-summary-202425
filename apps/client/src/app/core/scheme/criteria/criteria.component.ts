@@ -156,6 +156,7 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
     })
   }
   onCreate() {
+    if (this.formGroup.invalid) return
     this.fetchCreateCriterion = true
     const { subIndex, name, alias, requiresEvidence, helpText } =
       this.formGroup.controls
@@ -182,6 +183,7 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
     })
   }
   onEdit() {
+    if (this.formGroup.invalid) return
     this.fetchEditCriterion = true
     const { subIndex, name, alias, requiresEvidence, helpText } =
       this.formGroup.controls

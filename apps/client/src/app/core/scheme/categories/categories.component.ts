@@ -131,6 +131,7 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
     })
   }
   onCreate() {
+    if (this.formGroup.invalid) return
     this.fetchCreateCategory = true
     const { helpText, name } = this.formGroup.controls
     if (!name.value || !helpText.value) return
@@ -154,6 +155,7 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
     })
   }
   onEdit() {
+    if (this.formGroup.invalid) return
     this.fetchEditCategory = true
     const { helpText, name } = this.formGroup.controls
     const category: CategoryDTO = {
