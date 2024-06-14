@@ -56,7 +56,9 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
         .required('El alias es requerido')
         .max(50, 'El alias no puede superar los 50 caracteres'),
       requiresEvidence: Yup.boolean().required('La evidencia es requerida'),
-      helpText: Yup.string().required('El texto de ayuda es requerido')
+      helpText: Yup.string()
+        .required('El texto de ayuda es requerido')
+        .max(140, 'El texto de ayuda no puede superar los 140 caracteres')
     })
     super(initialControlValues, validationSchema)
   }

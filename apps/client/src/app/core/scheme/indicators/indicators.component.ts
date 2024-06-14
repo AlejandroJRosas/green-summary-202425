@@ -60,14 +60,16 @@ export class IndicatorsComponent
     const validationSchema = Yup.object({
       index: Yup.number()
         .min(1, 'El indice debe ser mayor o igual a 1')
-        .required('El indice es requerido'),
+        .required('El índice es requerido'),
       name: Yup.string()
         .required('El nombre es requerido')
         .max(50, 'El nombre no puede superar los 50 caracteres'),
       alias: Yup.string()
         .required('El alias es requerido')
         .max(50, 'El alias no puede superar los 50 caracteres'),
-      helpText: Yup.string().required('El texto de ayuda es requerido')
+      helpText: Yup.string()
+        .required('El texto de ayuda es requerido')
+        .max(140, 'El texto de ayuda no puede superar los 140 caracteres')
     })
 
     super(initialControlValues, validationSchema)

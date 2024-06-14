@@ -43,7 +43,9 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
       name: Yup.string()
         .required('El nombre es requerido')
         .max(50, 'El nombre no puede superar los 50 caracteres'),
-      helpText: Yup.string().required('La ayuda es requerida')
+      helpText: Yup.string()
+        .required('El texto de ayuda es requerido')
+        .max(140, 'El texto de ayuda no puede superar los 140 caracteres')
     })
 
     super(initialControlValues, validationSchema)

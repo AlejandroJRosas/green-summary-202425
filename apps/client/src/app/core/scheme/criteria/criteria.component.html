@@ -25,40 +25,45 @@
     </section>
   </ng-template>
   @for (criterion of criterion; track criterion.id) {
-    <div class="flex justify-content-between align-items-center gap-4">
-      <h3 style="word-break: break-word">
-        {{ this.indicatorIndex }}.{{ criterion.subIndex }} {{ criterion.name }}
-      </h3>
-      <div class="flex flex-nowrap">
-        <button class="p-panel-header-icon p-link mr-2">
-          <span
-            class="pi pi-pencil"
-            (click)="showDialogEdit(criterion)"
-            style="
-              color: #22c55e;
-              border: solid 1.5px #22c55e;
-              border-radius: 100%;
-              padding: 8px;
-            "
-          ></span>
-        </button>
-        <button
-          class="p-panel-header-icon p-link mr-2"
-          (click)="confirmationDelete($event, criterion.id, criterion.name)"
-        >
-          <span
-            class="pi pi-trash"
-            style="
-              color: #ef4444;
-              border: solid 1.5px #ef4444;
-              border-radius: 100%;
-              padding: 8px;
-            "
-          ></span>
-        </button>
+    <div class="flex flex-column gap-3 mb-5">
+      <div class="flex justify-content-between align-items-center gap-4">
+        <h3 style="word-break: break-word" class="m-0">
+          {{ this.indicatorIndex }}.{{ criterion.subIndex }}
+          {{ criterion.name }}
+        </h3>
+        <div class="flex flex-nowrap">
+          <button class="p-panel-header-icon p-link mr-2">
+            <span
+              class="pi pi-pencil"
+              (click)="showDialogEdit(criterion)"
+              style="
+                color: #22c55e;
+                border: solid 1.5px #22c55e;
+                border-radius: 100%;
+                padding: 8px;
+              "
+            ></span>
+          </button>
+          <button
+            class="p-panel-header-icon p-link mr-2"
+            (click)="confirmationDelete($event, criterion.id, criterion.name)"
+          >
+            <span
+              class="pi pi-trash"
+              style="
+                color: #ef4444;
+                border: solid 1.5px #ef4444;
+                border-radius: 100%;
+                padding: 8px;
+              "
+            ></span>
+          </button>
+        </div>
       </div>
+      <p class="m-0" style="word-wrap: break-word; max-width: 80vw">
+        {{ criterion.helpText }}
+      </p>
     </div>
-    <p class="m-0" style="word-wrap: break-word">{{ criterion.helpText }}</p>
   }
 </p-panel>
 <p-dialog
