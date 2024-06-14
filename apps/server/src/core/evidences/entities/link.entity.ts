@@ -4,6 +4,6 @@ import { EvidenceType } from '../evidences.constants'
 
 @ChildEntity(EvidenceType.LINK)
 export class Link extends Evidence {
-  @Column()
+  @Column({ type: 'text' })
   externalLink: string
 }

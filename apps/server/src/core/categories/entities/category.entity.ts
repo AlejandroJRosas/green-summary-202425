@@ -15,10 +15,10 @@ export class Category {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ type: 'varchar', length: 50 })
+  @Column({ type: 'varchar', length: 50, nullable: false })
   name: string
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: false })
   helpText: string
 
   @ManyToOne(() => Indicator, (indicator) => indicator.categories, {
