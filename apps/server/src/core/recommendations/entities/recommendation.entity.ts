@@ -1,14 +1,18 @@
-import { Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm'
+import { Entity, ManyToOne, PrimaryGeneratedColumn, Unique } from 'typeorm'
 import { Category } from 'src/core/categories/entities/category.entity'
-import { Department } from 'src/core/users/entities/department.entity'
+import { DepartmentPerRecopilation } from 'src/core/departments-per-recopilations/entities/departments-per-recopilation.entity'
 
 @Entity('recommendations')
+@Unique(['departmentPerRecopilation', 'category'])
 export class Recommendation {
   @PrimaryGeneratedColumn()
   id: number
 
-  @ManyToOne(() => Department, (department) => department.recommendations)
-  department: Department
+  @ManyToOne(
+    () => DepartmentPerRecopilation,
+    (departmentPerRecopilation) => departmentPerRecopilation.recommendations
+  )
+  departmentPerRecopilation: DepartmentPerRecopilation
 
   @ManyToOne(() => Category, (category) => category.recommendations)
   category: Category

@@ -20,8 +20,9 @@ export class IndicatorsService {
   async createIndicator(
     createIndicatorDto: CreateIndicatorDto
   ): Promise<Indicator> {
-    const indicador = this.indicatorRepository.create(createIndicatorDto)
-    return this.indicatorRepository.save(indicador)
+    const indicator = this.indicatorRepository.create(createIndicatorDto)
+    await this.indicatorRepository.insert(indicator)
+    return indicator
   }
 
   async getAllIndicators({
@@ -55,7 +56,7 @@ export class IndicatorsService {
   ): Promise<Indicator> {
     await this.indicatorRepository.update(index, updateIndicatorDto)
     const updatedIndicador = await this.indicatorRepository.findOneByOrFail({
-      index
+      index: updateIndicatorDto.index ?? index
     })
     return updatedIndicador
   }

@@ -8,8 +8,12 @@ import {
 
 export class CreateCriteriaDto {
   @IsNumber()
+  @IsOptional()
+  indicatorIndex?: number
+
+  @IsNumber()
   @IsNotEmpty()
-  indicatorIndex: number
+  subIndex: number
 
   @IsString()
   @IsNotEmpty()

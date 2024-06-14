@@ -21,19 +21,18 @@ export class TypeORMExceptionFilter implements ExceptionFilter {
 
     let error: string
     let statusCode: number
-    const message = exception.message
 
     switch (exception.constructor) {
       case EntityNotFoundError:
-        error = 'Entity Not Found'
+        error = 'Entity not found'
         statusCode = HttpStatus.NOT_FOUND
         break
       case QueryFailedError:
-        error = 'Query Failed Error'
+        error = 'Query failed error'
         statusCode = HttpStatus.UNPROCESSABLE_ENTITY
         break
       case CannotCreateEntityIdMapError:
-        error = 'Cannot Create Entity Id Map Error'
+        error = 'Cannot create entity id map error'
         statusCode = HttpStatus.UNPROCESSABLE_ENTITY
         break
       default:
@@ -42,8 +41,11 @@ export class TypeORMExceptionFilter implements ExceptionFilter {
         break
     }
 
-    return response
-      .status(statusCode)
-      .json(constructHttpResponse(statusCode, error, message))
+    return response.status(statusCode).json(
+      constructHttpResponse(statusCode, {
+        error,
+        message: exception.message
+      })
+    )
   }
 }

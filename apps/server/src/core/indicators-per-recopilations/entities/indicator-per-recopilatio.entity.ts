@@ -1,8 +1,9 @@
-import { Entity, PrimaryGeneratedColumn, ManyToOne } from 'typeorm'
+import { Entity, PrimaryGeneratedColumn, ManyToOne, Unique } from 'typeorm'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
 import { Recopilation } from 'src/core/recopilations/entities/recopilation.entity'
 
 @Entity('indicators_per_recopilations')
+@Unique(['recopilation', 'indicator'])
 export class IndicatorPerRecopilation {
   @PrimaryGeneratedColumn()
   id: number
@@ -15,7 +16,10 @@ export class IndicatorPerRecopilation {
 
   @ManyToOne(
     () => Indicator,
-    (indicator) => indicator.recopilationsPerIndicator
+    (indicator) => indicator.recopilationsPerIndicator,
+    {
+      onUpdate: 'CASCADE'
+    }
   )
   indicator: Indicator
 }

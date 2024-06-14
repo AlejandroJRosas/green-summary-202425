@@ -3,9 +3,9 @@ import { IsNotEmpty, IsNumber } from 'class-validator'
 export class CreateIndicatorPerRecopilationDto {
   @IsNotEmpty()
   @IsNumber()
-  IDRecopilacion: number
+  recopilationId: number
 
   @IsNotEmpty()
   @IsNumber()
-  IndiceIndicador: number
+  indicatorIndex: number
 }

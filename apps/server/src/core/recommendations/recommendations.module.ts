@@ -5,9 +5,19 @@ import { RecommendationsController } from './recommendations.controller'
 import { Recommendation } from './entities/recommendation.entity'
 import { Category } from '../categories/entities/category.entity'
 import { Department } from '../users/entities/department.entity'
+import { Recopilation } from '../recopilations/entities/recopilation.entity'
+import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 
 @Module({
-  imports: [TypeOrmModule.forFeature([Recommendation, Department, Category])],
+  imports: [
+    TypeOrmModule.forFeature([
+      Recommendation,
+      Department,
+      Category,
+      Recopilation,
+      DepartmentPerRecopilation
+    ])
+  ],
   providers: [RecommendationsService],
   controllers: [RecommendationsController]
 })

@@ -5,17 +5,26 @@ import { ValidationPipe } from '@nestjs/common'
 import { TypeORMExceptionFilter } from './errors/type-orm-exception.filter'
 import { HttpExceptionFilter } from './errors/http-exception.filter'
 import { SuccessfulResponseBuilderInterceptor } from './succesful-response-builder/successful-response-builder'
+import { ClassValidatorValidationsException } from './errors/class-validator-validations.exception'
+import { ClassValidatorValidationsExceptionFilter } from './errors/class-validator-validations-exception.filter'
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
   app.enableCors()
 
-  app.useGlobalFilters(new HttpExceptionFilter(), new TypeORMExceptionFilter())
+  app.useGlobalFilters(
+    new HttpExceptionFilter(),
+    new TypeORMExceptionFilter(),
+    new ClassValidatorValidationsExceptionFilter()
+  )
 
   app.useGlobalPipes(
     new ValidationPipe({
-      whitelist: true
+      whitelist: true,
+      exceptionFactory: (errors) => {
+        return new ClassValidatorValidationsException(errors)
+      }
     })
   )
 

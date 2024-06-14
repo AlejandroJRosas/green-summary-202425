@@ -10,6 +10,8 @@ import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-categories-by-param.dto'
+import { Recopilation } from '../recopilations/entities/recopilation.entity'
+import { CategorizedCriteria } from '../categorized-criteria/entities/categorized-criterion.entity'
 
 @Injectable()
 export class CategoriesService {
@@ -17,12 +19,16 @@ export class CategoriesService {
     @InjectRepository(Category)
     private readonly categoryRepository: Repository<Category>,
     @InjectRepository(Indicator)
-    private readonly indicatorRepository: Repository<Indicator>
+    private readonly indicatorRepository: Repository<Indicator>,
+    @InjectRepository(Recopilation)
+    private readonly recopilationRepository: Repository<Recopilation>,
+    @InjectRepository(CategorizedCriteria)
+    private readonly categorizedCriteriaRepository: Repository<CategorizedCriteria>
   ) {}
 
   async create(createCategoryDto: CreateCategoryDto): Promise<Category> {
     const indicator = await this.indicatorRepository.findOneByOrFail({
-      index: createCategoryDto.indicatorId
+      index: createCategoryDto.indicatorIndex
     })
 
     const category = this.categoryRepository.create({
@@ -69,7 +75,23 @@ export class CategoriesService {
     id: number,
     updateCategoryDto: UpdateCategoryDto
   ): Promise<Category> {
-    await this.categoryRepository.update(id, updateCategoryDto)
+    if (updateCategoryDto.indicatorIndex) {
+      const indicator = await this.indicatorRepository.findOneByOrFail({
+        index: updateCategoryDto.indicatorIndex
+      })
+
+      await this.categoryRepository.update(id, {
+        name: updateCategoryDto.name,
+        helpText: updateCategoryDto.helpText,
+        indicator
+      })
+    } else {
+      await this.categoryRepository.update(id, {
+        name: updateCategoryDto.name,
+        helpText: updateCategoryDto.helpText
+      })
+    }
+
     const updatedCategory = await this.categoryRepository.findOne({
       where: { id },
       relations: ['indicator']
@@ -92,13 +114,23 @@ export class CategoriesService {
       index: indicatorId
     })
 
-    if (!indicator) {
-      throw new NotFoundException(`Indicator with ID ${indicatorId} not found`)
-    }
-
-    return this.categoryRepository.find({
-      where: { indicator: indicator },
-      relations: ['indicator']
+    const categories = await this.categoryRepository.find({
+      where: { indicator: indicator }
     })
+
+    return categories
+  }
+
+  async categoriesByRecopilation(recopilationId: number): Promise<Category[]> {
+    const criterion = this.categorizedCriteriaRepository
+      .createQueryBuilder()
+      .select('c.id, c.name, c.helpText, c.indicatorIndex')
+      .distinctOn(['c.id'])
+      .from('categorized_criterion', 'cc')
+      .innerJoin('cc.category', 'c')
+      .where('cc.recopilationId = :recopilationId', { recopilationId })
+      .execute()
+
+    return criterion
   }
 }

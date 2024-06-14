@@ -107,6 +107,15 @@ export class UsersService {
     await this.usersRepository.remove([user])
   }
 
+  async passwordChange(id: number) {
+    const user = await this.usersRepository.findOneByOrFail({ id })
+    const generatedPassword = this.generatePassword()
+    const encryptedPassword = await this.encryptPassword(generatedPassword)
+    user.password = encryptedPassword
+    await this.usersRepository.update(id, user)
+    return generatedPassword
+  }
+
   private async encryptPassword(pass: string) {
     return await bcrypt.hash(pass, 10)
   }

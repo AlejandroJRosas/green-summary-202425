@@ -15,14 +15,12 @@ export class HttpExceptionFilter implements ExceptionFilter {
 
     const exceptionResponse = exception.getResponse()
 
-    const error = exceptionResponse['error'] ?? 'Internal Server Error'
     const message =
       exceptionResponse['message'] ?? 'An unexpected error occurred'
     const statusCode = exception.getStatus()
 
     return response
       .status(statusCode)
-      .json(constructHttpResponse(statusCode, error, message))
-    /* .json(new HttpErrorResponse(error, message)) */
+      .json(constructHttpResponse(statusCode, exceptionResponse, message))
   }
 }

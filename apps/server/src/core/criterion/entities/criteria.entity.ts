@@ -1,21 +1,21 @@
 import {
   Entity,
   Column,
-  PrimaryColumn,
   ManyToOne,
+  OneToMany,
   PrimaryGeneratedColumn,
-  OneToMany
+  Unique
 } from 'typeorm'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
-import { CriteriaPerRecopilation } from 'src/core/criterion-per-recopilations/entities/criteria-per-recopilation.entity'
 import { CategorizedCriteria } from 'src/core/categorized-criteria/entities/categorized-criterion.entity'
 
-@Entity('criteria')
+@Entity('criterion')
+@Unique(['subIndex', 'indicator'])
 export class Criteria {
-  @PrimaryColumn()
-  indicatorIndex: number
-
   @PrimaryGeneratedColumn()
+  id: number
+
+  @Column()
   subIndex: number
 
   @Column()
@@ -30,18 +30,15 @@ export class Criteria {
   @Column({ default: false })
   requiresEvidence: boolean
 
-  @ManyToOne(() => Indicator, (indicator) => indicator.criteria)
+  @ManyToOne(() => Indicator, (indicator) => indicator.criterion, {
+    onUpdate: 'CASCADE',
+    onDelete: 'CASCADE'
+  })
   indicator: Indicator
 
   @OneToMany(
-    () => CriteriaPerRecopilation,
-    (criteriaPerRecopilation) => criteriaPerRecopilation.recopilation
-  )
-  recopilationsPerCriteria: CriteriaPerRecopilation[]
-
-  @OneToMany(
     () => CategorizedCriteria,
-    (categorizedCriteria) => categorizedCriteria.criterion
+    (categorizedCriteria) => categorizedCriteria.criteria
   )
   categorizedCriterion: CategorizedCriteria[]
 }

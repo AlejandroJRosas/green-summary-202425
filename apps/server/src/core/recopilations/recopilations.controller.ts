@@ -8,7 +8,8 @@ import {
   HttpStatus,
   HttpCode,
   Query,
-  Patch
+  Patch,
+  Put
 } from '@nestjs/common'
 import { RecopilationsService } from './recopilations.service'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
@@ -19,6 +20,8 @@ import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-recopilations-by-param.dto'
+import { RelateIndicatorsToRecopilationDto } from './dto/relate-indicators-to-recopilation.dto'
+import { RecommendCategoriesDto } from './dto/recommend-categories.dto'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
@@ -82,5 +85,33 @@ export class RecopilationsController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string) {
     return await this.recopilationsService.remove(+id)
+  }
+
+  @Put('relate-indicators')
+  async relateIndicatorsToRecopilation(
+    @Body() relateIndicatorsToRecopilationDto: RelateIndicatorsToRecopilationDto
+  ) {
+    try {
+      return await this.recopilationsService.relateToIndicators(
+        relateIndicatorsToRecopilationDto
+      )
+    } catch (e) {
+      console.log(e)
+      throw e
+    }
+  }
+
+  @Put('recommend-categories')
+  async recommendCategoriesToDepartments(
+    @Body() recommendCategoriesDto: RecommendCategoriesDto
+  ) {
+    try {
+      return await this.recopilationsService.recommendCategories(
+        recommendCategoriesDto
+      )
+    } catch (e) {
+      console.log(e)
+      throw e
+    }
   }
 }

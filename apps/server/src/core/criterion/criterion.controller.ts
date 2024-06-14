@@ -28,15 +28,20 @@ export class CriterionController {
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async createCriterion(@Body() createCriterionDto: CreateCriteriaDto) {
-    const criterion =
-      await this.criterionService.createCriterion(createCriterionDto)
-    return criterion
+    try {
+      const criterion =
+        await this.criterionService.createCriterion(createCriterionDto)
+      return criterion
+    } catch (e) {
+      console.log(e)
+      throw e
+    }
   }
 
   @Get()
   async getAllCriteria(
     @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
-    @Query() { orderBy = 'indicatorIndex' }: OrderByParamDto,
+    @Query() { orderBy = 'id' }: OrderByParamDto,
     @Query() { orderType = 'ASC' }: OrderTypeParamDto,
     @Query() { filters = [] }: FiltersSegmentDto
   ) {
@@ -57,41 +62,53 @@ export class CriterionController {
     return paginatedItems
   }
 
-  @Get(':indicatorIndex/:subIndex')
-  async getOneCriterion(
-    @Param('indicatorIndex') indicatorIndex: string,
-    @Param('subIndex') subIndex: string
-  ) {
-    const criterion = await this.criterionService.getOneCriterion(
-      Number(indicatorIndex),
-      Number(subIndex)
-    )
+  @Get(':id')
+  async getOneCriterion(@Param('id') id: string) {
+    const criterion = await this.criterionService.getOneCriterion(Number(id))
     return criterion
   }
 
-  @Patch(':indicatorIndex/:subIndex')
+  @Patch(':id')
   async updateCriterion(
-    @Param('indicatorIndex') indicatorIndex: string,
-    @Param('subIndex') subIndex: string,
-    @Body() updateCriterionDto: UpdateCriteriaDto
+    @Param('id') id: string,
+    @Body() updateCriteriaDto: UpdateCriteriaDto
   ) {
     const criterion = await this.criterionService.updateCriterion(
-      Number(indicatorIndex),
-      Number(subIndex),
-      updateCriterionDto
+      Number(id),
+      updateCriteriaDto
     )
     return criterion
   }
 
-  @Delete(':indicatorIndex/:subIndex')
+  @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
-  async deleteCriterion(
+  async deleteCriterion(@Param('id') id: string) {
+    await this.criterionService.deleteCriterion(Number(id))
+  }
+
+  @Get('/indicator/:indicatorIndex')
+  async getCriterionByIndicator(
     @Param('indicatorIndex') indicatorIndex: string,
-    @Param('subIndex') subIndex: string
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
   ) {
-    await this.criterionService.deleteCriterion(
+    const criterion = await this.criterionService.criterionByIndicator(
       Number(indicatorIndex),
-      Number(subIndex)
+      { orderBy, orderType }
     )
+    return criterion
+  }
+
+  @Get('/recopilation/:recopilationId')
+  async getCriterionByRecopilation(
+    @Param('recopilationId') recopilationId: string,
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
+  ) {
+    const criterion = await this.criterionService.criterionByRecopilation(
+      Number(recopilationId),
+      { orderBy, orderType }
+    )
+    return criterion
   }
 }

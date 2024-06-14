@@ -1,11 +1,6 @@
 import { CommonModule } from '@angular/common'
 import { Component, Inject, OnInit } from '@angular/core'
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { TableLazyLoadEvent, TableModule } from 'primeng/table'
 import { ButtonModule } from 'primeng/button'
 import { SkeletonModule } from 'primeng/skeleton'
@@ -19,6 +14,8 @@ import {
 import { InputTextModule } from 'primeng/inputtext'
 import { Toast } from '../../common/toast/toast.component'
 import { User } from '../../../shared/types/user.type'
+import { ValidatedFormGroup } from '../../common/validated-form-group/validated-form-group'
+import * as Yup from 'yup'
 
 @Component({
   selector: 'app-department',
@@ -38,17 +35,33 @@ import { User } from '../../../shared/types/user.type'
   templateUrl: './department.component.html',
   providers: [ConfirmationService]
 })
-export class DepartmentComponent implements OnInit {
+export class DepartmentComponent
+  extends ValidatedFormGroup<IDepartmentComponent>
+  implements OnInit
+{
+  errors = {
+    fullName: '',
+    email: ''
+  }
   constructor(
     @Inject(Toast) private toast: Toast,
     private confirmationService: ConfirmationService,
     private departmentService: DepartmentService
-  ) {}
+  ) {
+    const initialControlValues = {
+      fullName: '',
+      email: ''
+    }
 
-  departmentForm = new FormGroup({
-    fullName: new FormControl<string>(''),
-    email: new FormControl<string>('')
-  })
+    const validationSchema = Yup.object({
+      fullName: Yup.string().required('El nombre completo es requerido'),
+      email: Yup.string()
+        .required('El correo electrónico es requerido')
+        .email('El correo electrónico no tiene un formato válido')
+    })
+
+    super(initialControlValues, validationSchema)
+  }
 
   isDeletingDepartments = false
   isFetchingDepartments = false
@@ -87,7 +100,9 @@ export class DepartmentComponent implements OnInit {
   }
 
   closeDialog() {
-    this.departmentForm.reset()
+    this.formGroup.reset()
+    this.errors.fullName = ''
+    this.errors.email = ''
   }
 
   showDialogCreate() {
@@ -99,7 +114,7 @@ export class DepartmentComponent implements OnInit {
   showDialogEdit(department: User) {
     this.visibleEdit = true
     this.departmentEdit = department
-    this.departmentForm.setValue({
+    this.formGroup.setValue({
       fullName: department.fullName,
       email: department.email
     })
@@ -152,7 +167,7 @@ export class DepartmentComponent implements OnInit {
   }
   onCreate() {
     this.generatePassword = true
-    const { fullName, email } = this.departmentForm.controls
+    const { fullName, email } = this.formGroup.controls
     if (!fullName.value || !email.value) return
     const user: CreateUserDTO = {
       fullName: fullName.value,
@@ -177,7 +192,7 @@ export class DepartmentComponent implements OnInit {
   }
   onEdit() {
     const { id, password, type } = this.departmentEdit
-    const { fullName, email } = this.departmentForm.controls
+    const { fullName, email } = this.formGroup.controls
     if (!fullName.value || !email.value) return
     const user: User = {
       id: id,
@@ -212,4 +227,8 @@ export class DepartmentComponent implements OnInit {
       }
     })
   }
+}
+interface IDepartmentComponent {
+  fullName: string
+  email: string
 }

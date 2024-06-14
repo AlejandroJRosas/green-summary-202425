@@ -10,6 +10,8 @@ import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-recommendations-by-param.dto'
+import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
+import { Recopilation } from '../recopilations/entities/recopilation.entity'
 
 @Injectable()
 export class RecommendationsService {
@@ -19,23 +21,30 @@ export class RecommendationsService {
     @InjectRepository(Department)
     private readonly departmentsRepository: Repository<Department>,
     @InjectRepository(Category)
-    private readonly categoriesRepository: Repository<Category>
+    private readonly categoriesRepository: Repository<Category>,
+    @InjectRepository(Recopilation)
+    private readonly recopilationsRepository: Repository<Recopilation>,
+    @InjectRepository(DepartmentPerRecopilation)
+    private readonly departmentsPerRecopilationsRepository: Repository<DepartmentPerRecopilation>
   ) {}
 
   async create(
     createRecommendationDto: CreateRecommendationDto
   ): Promise<Recommendation> {
-    const { departmentId, categoryId } = createRecommendationDto
+    const { recopilationId, departmentId, categoryId } = createRecommendationDto
 
-    const department = await this.departmentsRepository.findOneByOrFail({
-      id: departmentId
-    })
-    const category = await this.categoriesRepository.findOneByOrFail({
-      id: categoryId
-    })
+    const [departmentPerRecopilation, category] = await Promise.all([
+      this.departmentsPerRecopilationsRepository.findOneByOrFail({
+        department: { id: departmentId },
+        recopilation: { id: recopilationId }
+      }),
+      this.categoriesRepository.findOneByOrFail({
+        id: categoryId
+      })
+    ])
 
     const recommendation = this.recommendationsRepository.create({
-      department,
+      departmentPerRecopilation,
       category
     })
 
@@ -54,7 +63,7 @@ export class RecommendationsService {
     FiltersSegmentDto) {
     const [recommendations, count] =
       await this.recommendationsRepository.findAndCount({
-        relations: ['departamento', 'categoria'],
+        relations: ['category', 'departmentPerRecopilation'],
         take: itemsPerPage,
         skip: (page - 1) * itemsPerPage,
         order: { [orderBy]: orderType },
@@ -67,7 +76,7 @@ export class RecommendationsService {
   async findOne(id: number): Promise<Recommendation> {
     return await this.recommendationsRepository.findOneOrFail({
       where: { id },
-      relations: ['departamento', 'categoria']
+      relations: ['categoria', 'departmentPerRecopilation']
     })
   }
 
