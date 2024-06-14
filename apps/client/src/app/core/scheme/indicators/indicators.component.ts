@@ -99,17 +99,20 @@ export class IndicatorsComponent
     this.isFetching = true
     this.getAll()
   }
-  closeDialog() {
-    this.visibleCreate = false
-    this.visibleEdit = false
+  reset() {
     this.formGroup.reset()
-    this.formGroup.controls.index.setValue(1)
     this.errors = {
       index: '',
       name: '',
       alias: '',
       helpText: ''
     }
+  }
+  closeDialog() {
+    this.visibleCreate = false
+    this.visibleEdit = false
+    this.reset()
+    this.formGroup.controls.index.setValue(1)
   }
   showDialogEditIndicator(
     index: number,

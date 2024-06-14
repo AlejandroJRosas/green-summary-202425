@@ -66,14 +66,17 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
     helpText: '',
     id: 0
   }
-  closeDialog() {
-    this.visibleCreate = false
-    this.visibleEdit = false
+  reset() {
     this.formGroup.reset()
     this.errors = {
       name: '',
       helpText: ''
     }
+  }
+  closeDialog() {
+    this.visibleCreate = false
+    this.visibleEdit = false
+    this.reset()
   }
 
   showDialogEdit(category: Category) {

@@ -83,12 +83,8 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
     requiresEvidence: false,
     helpText: ''
   }
-  closeDialog() {
-    this.visibleCreate = false
-    this.visibleEdit = false
+  reset() {
     this.formGroup.reset()
-    this.formGroup.controls.subIndex.setValue(1)
-    this.formGroup.controls.requiresEvidence.setValue(true)
     this.errors = {
       subIndex: '',
       name: '',
@@ -96,6 +92,13 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
       requiresEvidence: '',
       helpText: ''
     }
+  }
+  closeDialog() {
+    this.visibleCreate = false
+    this.visibleEdit = false
+    this.reset()
+    this.formGroup.controls.subIndex.setValue(1)
+    this.formGroup.controls.requiresEvidence.setValue(true)
   }
   showDialogEdit(criteria: Criteria) {
     this.visibleEdit = true
