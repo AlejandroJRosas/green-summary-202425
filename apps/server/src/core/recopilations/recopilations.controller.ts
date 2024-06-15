@@ -55,6 +55,20 @@ export class RecopilationsController {
     return paginatedItems
   }
 
+  @Get('active')
+  async findActive(
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
+  ) {
+    const activeRecopilations =
+      await this.recopilationsService.getActiveRecopilations({
+        orderBy,
+        orderType
+      })
+
+    return activeRecopilations
+  }
+
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const recopilation = await this.recopilationsService.findOne(+id)
