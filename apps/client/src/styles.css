@@ -87,9 +87,11 @@ p-password.ng-valid > .p-password > .p-inputtext {
 .p-steps .p-steps-item.p-highlight .p-steps-number {
   background: var(--primary-color);
 }
+
 .p-steps-item .p-steps-title {
   font-size: 0.98rem;
 }
+
 .p-tree {
   background: var(--background-color);
   border: none;
@@ -99,6 +101,7 @@ p-password.ng-valid > .p-password > .p-inputtext {
   background-color: var(--primary-color);
   color: var(--primary-color-text);
 }
+
 .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item.p-highlight {
   color: #4b5563;
   background: #fff;
