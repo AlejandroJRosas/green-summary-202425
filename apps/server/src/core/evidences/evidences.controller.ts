@@ -8,7 +8,9 @@ import {
   HttpStatus,
   HttpCode,
   Query,
-  Patch
+  Patch,
+  UseInterceptors,
+  UploadedFile
 } from '@nestjs/common'
 import { EvidencesService } from './evidences.service'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
@@ -21,6 +23,9 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-evidences-by-param.dto'
 import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { diskStorage } from 'multer'
+import { renameFile } from 'src/shared/file-upload'
 
 @ApiTags('Evidences')
 @Controller('evidences')
@@ -60,7 +65,19 @@ export class EvidencesController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(@Body() createEvidenceDto: CreateEvidenceDto) {
+  @UseInterceptors(
+    FileInterceptor('fileLink', {
+      storage: diskStorage({
+        destination: './upload',
+        filename: renameFile
+      })
+    })
+  )
+  async create(
+    @UploadedFile() fileLink: Express.Multer.File,
+    @Body() createEvidenceDto: CreateEvidenceDto
+  ) {
+    console.log(fileLink)
     const newEvidence = await this.evidencesService.create(createEvidenceDto)
     return newEvidence
   }
