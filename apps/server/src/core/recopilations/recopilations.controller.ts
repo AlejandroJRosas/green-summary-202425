@@ -27,11 +27,10 @@ import { Role } from '../auth/role.enum'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
-@Roles(Role.Coordinator, Role.Admin)
 export class RecopilationsController {
   constructor(private readonly recopilationsService: RecopilationsService) {}
 
-  @Roles(Role.Department)
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get()
   async findAll(
     @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
@@ -56,7 +55,7 @@ export class RecopilationsController {
     return paginatedItems
   }
 
-  @Roles(Role.Department)
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get('active')
   async findActive(
     @Query() { orderBy = 'id' }: OrderByParamDto,
@@ -71,7 +70,7 @@ export class RecopilationsController {
     return activeRecopilations
   }
 
-  @Roles(Role.Department)
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const recopilation = await this.recopilationsService.findOne(+id)
@@ -79,6 +78,7 @@ export class RecopilationsController {
     return recopilation
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async create(@Body() recopilationData: CreateRecopilationDto) {
@@ -88,6 +88,7 @@ export class RecopilationsController {
     return createdRecopilation
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -101,12 +102,14 @@ export class RecopilationsController {
     return updatedRecopilation
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string) {
     return await this.recopilationsService.remove(+id)
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Put('relate-indicators')
   async relateIndicatorsToRecopilation(
     @Body() relateIndicatorsToRecopilationDto: RelateIndicatorsToRecopilationDto
@@ -121,6 +124,7 @@ export class RecopilationsController {
     }
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Put('recommend-categories')
   async recommendCategoriesToDepartments(
     @Body() recommendCategoriesDto: RecommendCategoriesDto
