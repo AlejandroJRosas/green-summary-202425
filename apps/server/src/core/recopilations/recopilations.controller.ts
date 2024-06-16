@@ -31,6 +31,7 @@ import { Role } from '../auth/role.enum'
 export class RecopilationsController {
   constructor(private readonly recopilationsService: RecopilationsService) {}
 
+  @Roles(Role.Department)
   @Get()
   async findAll(
     @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
@@ -55,6 +56,7 @@ export class RecopilationsController {
     return paginatedItems
   }
 
+  @Roles(Role.Department)
   @Get('active')
   async findActive(
     @Query() { orderBy = 'id' }: OrderByParamDto,
@@ -69,6 +71,7 @@ export class RecopilationsController {
     return activeRecopilations
   }
 
+  @Roles(Role.Department)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const recopilation = await this.recopilationsService.findOne(+id)

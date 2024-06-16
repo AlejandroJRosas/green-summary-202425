@@ -28,6 +28,7 @@ import { Role } from '../auth/role.enum'
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
+  @Roles(Role.Department)
   @Get()
   async getAllCategories(
     @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
@@ -54,6 +55,7 @@ export class CategoriesController {
     return paginatedItems
   }
 
+  @Roles(Role.Department)
   @Get('/:id')
   async getCategory(@Param('id') id: string) {
     const category = await this.categoriesService.getOneCategory(Number(id))
@@ -85,6 +87,7 @@ export class CategoriesController {
     await this.categoriesService.deleteCategory(Number(id))
   }
 
+  @Roles(Role.Department)
   @Get('/indicator/:indicatorIndex')
   async getCategoriesByIndicator(
     @Param('indicatorIndex') indicatorIndex: string
@@ -95,6 +98,7 @@ export class CategoriesController {
     return categories
   }
 
+  @Roles(Role.Department)
   @Get('/recopilation/:recopilationId')
   async getCategoriesByRecopilation(
     @Param('recopilationId') recopilationId: string
