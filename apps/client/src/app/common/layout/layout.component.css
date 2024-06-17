@@ -1,0 +1,8 @@
+.sidenav-md-screen {
+  z-index: 1;
+  position: absolute;
+}
+
+.body-md-screen {
+  padding-left: 5rem;
+}
