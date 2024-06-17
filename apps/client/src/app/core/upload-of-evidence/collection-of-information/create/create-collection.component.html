@@ -1,0 +1,36 @@
+<main class="flex flex-column h-full justify-content-between">
+  <section>
+    <header>
+      <h2 class="text-color-secondary">Colección de información</h2>
+    </header>
+    <div class="flex flex-column gap-2 w-full">
+      <label class="flex flex-column gap-2 w-full">
+        Descripción
+        <textarea
+          pInputTextarea
+          rows="5"
+          cols="40"
+          formControlName="helpText"
+        ></textarea>
+      </label>
+      <small class="p-error"></small>
+    </div>
+    <evidence />
+  </section>
+  <footer class="flex justify-content-between">
+    <p-button
+      label="Cancelar"
+      size="small"
+      icon="pi pi-times"
+      [outlined]="true"
+      severity="danger"
+    />
+    <p-button
+      label="Guardar"
+      size="small"
+      icon="pi pi-check"
+      [outlined]="true"
+      severity="success"
+    />
+  </footer>
+</main>
