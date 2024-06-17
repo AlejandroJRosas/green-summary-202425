@@ -10,7 +10,7 @@ import { Recopilation } from '../../../../../../shared/types/recopilation.type'
 import { date, object, string } from 'yup'
 import { ReactiveFormsModule } from '@angular/forms'
 import { Toast } from '../../../../../common/toast/toast.component'
-import { RecopilationService } from '../../../../../services/recopilaton.service'
+import { RecopilationService } from '../../../../../services/recopilation.service'
 
 @Component({
   selector: 'app-information-recopilation',

@@ -27,6 +27,7 @@ export class DepartmentService {
       `${BaseUrl}/users/${id}`
     )
   }
+
   create(
     department: CreateUserDTO
   ): Observable<BackendResponse<User, unknown, unknown>> {

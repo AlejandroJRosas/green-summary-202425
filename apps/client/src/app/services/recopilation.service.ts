@@ -1,0 +1,113 @@
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs'
+import { BaseUrl } from '../../config'
+import { BackendResponse } from '../../shared/types/http-response.type'
+import { User } from '../../shared/types/user.type'
+import { Recopilation } from '../../shared/types/recopilation.type'
+import { PaginatedResponse } from '../../shared/types/paginated-response.type'
+
+@Injectable({
+  providedIn: 'root'
+})
+export class RecopilationService {
+  constructor(private http: HttpClient) {}
+
+  getPaginated(
+    paginated: Paginated
+  ): Observable<PaginatedResponse<Recopilation, unknown, unknown>> {
+    const { first, rows } = paginated
+    const page = first / rows + 1
+    return this.http.get<PaginatedResponse<Recopilation, unknown, unknown>>(
+      `${BaseUrl}/recopilations?itemsPerPage=5&page=${page}&orderBy=id&orderType=DESC&filters=type%3D%3Ddepartment`
+    )
+  }
+
+  getActive(): Observable<BackendResponse<Recopilation, unknown, unknown>> {
+    return this.http.get<BackendResponse<Recopilation, unknown, unknown>>(
+      `${BaseUrl}/recopilations/active`
+    )
+  }
+
+  getById(
+    id: number
+  ): Observable<BackendResponse<Recopilation, unknown, unknown>> {
+    return this.http.get<BackendResponse<Recopilation, unknown, unknown>>(
+      `${BaseUrl}/recopilations/${id}`
+    )
+  }
+
+  create(
+    recopilation: Recopilation
+  ): Observable<BackendResponse<CreateRecopilationDto, unknown, unknown>> {
+    return this.http.post<
+      BackendResponse<CreateRecopilationDto, unknown, unknown>
+    >(`${BaseUrl}/recopilations`, {
+      name: recopilation.name,
+      description: recopilation.description,
+      startDate: recopilation.startDate.toISOString(),
+      departmentEndDate: recopilation.departmentEndDate.toISOString(),
+      endDate: recopilation.endDate.toISOString()
+    })
+  }
+
+  // TODO: Preguntar funcionamiento en backend ya que la interfaz no la entendi
+  // AJRosas
+  // relateIndicators()
+
+  recommendCategories(recommendations: RecommendationsDto): Observable<void> {
+    return this.http.put<void>(
+      `${BaseUrl}/recopilations/recommend-categories`,
+      recommendations
+    )
+  }
+
+  edit(
+    id: number,
+    recopilation: Recopilation
+  ): Observable<BackendResponse<Recopilation, unknown, unknown>> {
+    return this.http.patch<BackendResponse<Recopilation, unknown, unknown>>(
+      `${BaseUrl}/recopilations/${id}`,
+      {
+        name: recopilation.name,
+        description: recopilation.description,
+        startDate: recopilation.startDate.toISOString(),
+        departmentEndDate: recopilation.departmentEndDate.toISOString(),
+        endDate: recopilation.endDate.toISOString()
+      }
+    )
+  }
+
+  delete(id: number): Observable<void> {
+    return this.http.delete<void>(`${BaseUrl}/recopilations/${id}`)
+  }
+}
+
+//! This should not be exported
+export type CreateRecopilationDto = {
+  name: string
+  description: string
+  startDate: string
+  departmentEndDate: string
+  endDate: string
+}
+
+export type CreateUserDTO = Omit<User, 'id' | 'password'>
+type Paginated = {
+  first: number
+  rows: number
+}
+
+interface RecommendationsDto {
+  recopilationId: number
+  departments: [
+    {
+      departmentId: number
+      categories: [
+        {
+          categoryId: number
+        }
+      ]
+    }
+  ]
+}
