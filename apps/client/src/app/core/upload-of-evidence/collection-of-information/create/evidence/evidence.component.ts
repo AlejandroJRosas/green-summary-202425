@@ -1,6 +1,6 @@
 import { Component } from '@angular/core'
 import { ButtonModule } from 'primeng/button'
-import { DropdownChangeEvent, DropdownModule } from 'primeng/dropdown'
+import { DropdownModule } from 'primeng/dropdown'
 import { EvidenceDocumentComponent } from './types/evidence-document/evidence-document.component'
 import { EvidenceImageComponent } from './types/evidence-image/evidence-image.component'
 import { EvidenceLinkComponent } from './types/evidence-link/evidence-link.component'
@@ -44,9 +44,6 @@ export class EvidenceComponent {
   evidences: number[] = []
   addEvidence() {
     this.evidences.push(this.evidences.length + 1)
-  }
-  onChange(event: DropdownChangeEvent) {
-    console.log(event)
   }
 }
 

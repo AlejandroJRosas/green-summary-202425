@@ -27,10 +27,9 @@
           [showClear]="true"
           placeholder="Selecciona un tipo de evidencia"
           formControlName="selectedType"
-          (onChange)="onChange($event)"
           required="true"
         />
-        @switch {
+        @switch (formGroup.controls.selectedType.value?.code ?? '') {
           @case ('image') {
             <evidence-image />
           }

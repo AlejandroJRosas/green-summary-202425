@@ -7,6 +7,7 @@
         rows="5"
         cols="40"
         formControlName="helpText"
+        [autoResize]="true"
       ></textarea>
     </label>
     <small class="p-error"></small>
@@ -29,7 +30,7 @@
     name="demo[]"
     (onSelect)="onSelect($event)"
     [multiple]="false"
-    accept=".pdf,.doc,.docx,.xls,.xlsx"
+    accept="image/*"
     maxFileSize="1000000"
     chooseLabel="Seleccionar"
     cancelLabel="Cancelar"
