@@ -1,0 +1,19 @@
+<main>
+  <section>
+    <header class="flex flex-column">
+      <h2>Recopilación 1</h2>
+    </header>
+    <section class="flex align-items-center justify-content-center">
+      @if (fetchCategoryById){
+      <div class="flex align-content-center justify-content-center">
+        <p-progressSpinner ariaLabel="loading" />
+      </div>
+      } @else {
+      <collection-of-information
+        [categoryName]="categoryName"
+        [indicatorName]="indicatorName"
+      />
+      }
+    </section>
+  </section>
+</main>
