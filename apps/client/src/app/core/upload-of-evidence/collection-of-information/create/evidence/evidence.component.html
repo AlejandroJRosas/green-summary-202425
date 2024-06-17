@@ -15,28 +15,36 @@
     </button>
   </div>
   @for (evidence of evidences; track evidence) {
-    <p-fieldset
-      styleClass="mb-5"
-      legend="Evidencia {{ evidence }}"
-      [toggleable]="true"
-    >
-      <p-dropdown
-        [options]="typesOfEvidence"
-        optionLabel="name"
-        [showClear]="true"
-        placeholder="Selecciona un tipo de evidencia"
-      />
-      @switch (selectedType) {
-        @case ('image') {
-          <evidence-image />
+    <form [formGroup]="formGroup">
+      <p-fieldset
+        styleClass="mb-5"
+        legend="Evidencia {{ evidence }}"
+        [toggleable]="true"
+      >
+        <p-dropdown
+          [options]="typesOfEvidence"
+          optionLabel="name"
+          [showClear]="true"
+          placeholder="Selecciona un tipo de evidencia"
+          formControlName="selectedType"
+          (onChange)="onChange($event)"
+          required="true"
+        />
+        @switch {
+          @case ('image') {
+            <evidence-image />
+          }
+          @case ('link') {
+            <evidence-link />
+          }
+          @case ('document') {
+            <evidence-document />
+          }
+          @default {
+            <p>No hay un tipo de evidencia seleccionado</p>
+          }
         }
-        @case ('link') {
-          <evidence-link />
-        }
-        @case ('document') {
-          <evidence-document />
-        }
-      }
-    </p-fieldset>
+      </p-fieldset>
+    </form>
   }
 </section>
