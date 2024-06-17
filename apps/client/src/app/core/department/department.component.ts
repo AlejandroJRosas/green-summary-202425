@@ -16,6 +16,7 @@ import { Toast } from '../../common/toast/toast.component'
 import { User } from '../../../shared/types/user.type'
 import { ValidatedFormGroup } from '../../common/validated-form-group/validated-form-group'
 import * as Yup from 'yup'
+import { Loading } from '../../common/loading/loading.component'
 
 @Component({
   selector: 'app-department',
@@ -45,6 +46,7 @@ export class DepartmentComponent
   }
   constructor(
     @Inject(Toast) private toast: Toast,
+    @Inject(Loading) private loading: Loading,
     private confirmationService: ConfirmationService,
     private departmentService: DepartmentService
   ) {
@@ -95,6 +97,7 @@ export class DepartmentComponent
   skeletons: object[] = new Array(5).fill({})
 
   ngOnInit() {
+    this.loading.setIsLoading(true)
     this.isFetchingDepartments = true
     this.getAll()
   }
