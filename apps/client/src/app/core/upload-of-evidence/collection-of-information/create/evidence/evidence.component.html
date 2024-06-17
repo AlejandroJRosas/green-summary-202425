@@ -1,0 +1,42 @@
+<section class="h-full">
+  <div class="flex flex-row gap-4">
+    <h3 class="text-color-secondary">Evidencias</h3>
+    <button class="p-panel-header-icon p-link mr-2">
+      <span
+        (click)="addEvidence()"
+        class="pi pi-plus"
+        style="
+          color: #3b82f6;
+          border: solid 1.5px #3b82f6;
+          border-radius: 100%;
+          padding: 6px;
+        "
+      ></span>
+    </button>
+  </div>
+  @for (evidence of evidences; track evidence) {
+    <p-fieldset
+      styleClass="mb-5"
+      legend="Evidencia {{ evidence }}"
+      [toggleable]="true"
+    >
+      <p-dropdown
+        [options]="typesOfEvidence"
+        optionLabel="name"
+        [showClear]="true"
+        placeholder="Selecciona un tipo de evidencia"
+      />
+      @switch (selectedType) {
+        @case ('image') {
+          <evidence-image />
+        }
+        @case ('link') {
+          <evidence-link />
+        }
+        @case ('document') {
+          <evidence-document />
+        }
+      }
+    </p-fieldset>
+  }
+</section>
