@@ -36,8 +36,7 @@ import { Criteria } from '../../../../shared/types/criterion.type'
     CategoryComponent,
     CriteriaComponent
   ],
-  templateUrl: './indicators.component.html',
-  styles: ``
+  templateUrl: './indicators.component.html'
 })
 export class IndicatorsComponent
   extends ValidatedFormGroup<Indicator>
