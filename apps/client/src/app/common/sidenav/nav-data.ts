@@ -24,7 +24,7 @@ export const navbarData = [
   {
     label: 'Recopilaciones',
     icon: 'pi pi-copy',
-    routeLink: `${BASE_LAYOUT_ROUTE}/compilations`,
+    routeLink: `${BASE_LAYOUT_ROUTE}/recopilations`,
     visibility: [Role.ADMIN, Role.COORDINATOR]
   },
   {
