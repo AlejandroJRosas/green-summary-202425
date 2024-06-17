@@ -10,6 +10,8 @@ import { SchemeComponent } from './core/scheme/scheme.component'
 import { LayoutComponent } from './common/layout/layout.component'
 import { roleGuard } from './guards/role.guard'
 import { Role } from './services/auth.service'
+import { UploadOfEvidenceComponent } from './core/upload-of-evidence/upload-of-evidence.component'
+import { CreateCollectionComponent } from './core/upload-of-evidence/collection-of-information/create/create-collection.component'
 
 export const routes: Routes = [
   {
@@ -40,6 +42,17 @@ export const routes: Routes = [
         title: 'Esquemas',
         component: SchemeComponent
       },
+      {
+        path: 'collection-of-information/:recopilationId/:categoryId',
+        title: 'Colecciones de información',
+        component: UploadOfEvidenceComponent,
+        canActivate: [roleGuard([Role.DEPARTMENT])]
+      },
+      {
+        path: 'create/collection-of-information/:recopilationId/:categoryId',
+        title: 'Crear Colección de información',
+        component: CreateCollectionComponent
+      }
     ]
   },
   {
