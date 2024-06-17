@@ -15,12 +15,33 @@
     </button>
   </div>
   @for (evidence of evidences; track evidence) {
-    <form [formGroup]="formGroup">
-      <p-fieldset
-        styleClass="mb-5"
-        legend="Evidencia {{ evidence }}"
-        [toggleable]="true"
-      >
+    <p-panel
+      expandIcon="pi pi-minus"
+      collapseIcon="pi pi-plus"
+      [toggleable]="true"
+      collapsed="true"
+      iconPos="start"
+      styleClass="m-0"
+    >
+      <ng-template pTemplate="header" class="p-0">
+        <section
+          class="flex flex-row justify-content-start align-items-center gap-4 w-full"
+        >
+          <h3 class="text-lg">Evidencia {{ evidence }}</h3>
+          <button class="p-panel-header-icon p-link mr-2">
+            <span
+              class="pi pi-trash"
+              style="
+                color: #ef4444;
+                border: solid 1.5px #ef4444;
+                border-radius: 100%;
+                padding: 6px;
+              "
+            ></span>
+          </button>
+        </section>
+      </ng-template>
+      <form [formGroup]="formGroup">
         <p-dropdown
           [options]="typesOfEvidence"
           optionLabel="name"
@@ -28,6 +49,7 @@
           placeholder="Selecciona un tipo de evidencia"
           formControlName="selectedType"
           required="true"
+          [className]=""
         />
         @switch (formGroup.controls.selectedType.value?.code ?? '') {
           @case ('image') {
@@ -43,7 +65,7 @@
             <p>No hay un tipo de evidencia seleccionado</p>
           }
         }
-      </p-fieldset>
-    </form>
+      </form>
+    </p-panel>
   }
 </section>

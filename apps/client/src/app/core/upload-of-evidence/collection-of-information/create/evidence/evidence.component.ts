@@ -5,6 +5,7 @@ import { EvidenceDocumentComponent } from './types/evidence-document/evidence-do
 import { EvidenceImageComponent } from './types/evidence-image/evidence-image.component'
 import { EvidenceLinkComponent } from './types/evidence-link/evidence-link.component'
 import { FieldsetModule } from 'primeng/fieldset'
+import { PanelModule } from 'primeng/panel'
 import {
   FormControl,
   FormGroup,
@@ -23,7 +24,8 @@ import {
     EvidenceLinkComponent,
     FieldsetModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    PanelModule
   ],
   templateUrl: './evidence.component.html',
   styles: ``
