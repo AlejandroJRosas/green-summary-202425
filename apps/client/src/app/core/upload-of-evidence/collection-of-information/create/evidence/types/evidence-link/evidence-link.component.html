@@ -1,0 +1,27 @@
+<section class="mt-3 mb-5">
+  <div class="flex flex-column gap-2 w-full">
+    <label class="flex flex-column gap-2 w-full">
+      Descripción
+      <textarea
+        pInputTextarea
+        rows="5"
+        cols="40"
+        formControlName="helpText"
+      ></textarea>
+    </label>
+    <small class="p-error"></small>
+  </div>
+  <div class="flex flex-column gap-2 w-full">
+    <label class="flex flex-column gap-2 w-full">
+      Link externo
+      <input
+        pInputText
+        name="externalLInk"
+        class="w-full"
+        type="text"
+        formControlName="externalLInk"
+      />
+    </label>
+    <small class="p-error"></small>
+  </div>
+</section>
