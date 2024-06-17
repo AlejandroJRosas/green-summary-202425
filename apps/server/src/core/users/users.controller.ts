@@ -20,9 +20,12 @@ import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-pagi
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-users-by-param.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
+import { Roles } from '../auth/roles.decorator'
+import { Role } from '../auth/role.enum'
 
 @ApiTags('Users')
 @Controller('users')
+@Roles(Role.Coordinator, Role.Admin)
 export class UsersController {
   constructor(private readonly usersService: UsersService) {}
 
@@ -67,5 +70,10 @@ export class UsersController {
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param() { id }: FindOneParams) {
     await this.usersService.remove(+id)
+  }
+
+  @Patch('password-change/:id')
+  async passwordChange(@Param() { id }: FindOneParams) {
+    return this.usersService.passwordChange(+id)
   }
 }

@@ -75,7 +75,23 @@ export class CategoriesService {
     id: number,
     updateCategoryDto: UpdateCategoryDto
   ): Promise<Category> {
-    await this.categoryRepository.update(id, updateCategoryDto)
+    if (updateCategoryDto.indicatorIndex) {
+      const indicator = await this.indicatorRepository.findOneByOrFail({
+        index: updateCategoryDto.indicatorIndex
+      })
+
+      await this.categoryRepository.update(id, {
+        name: updateCategoryDto.name,
+        helpText: updateCategoryDto.helpText,
+        indicator
+      })
+    } else {
+      await this.categoryRepository.update(id, {
+        name: updateCategoryDto.name,
+        helpText: updateCategoryDto.helpText
+      })
+    }
+
     const updatedCategory = await this.categoryRepository.findOne({
       where: { id },
       relations: ['indicator']

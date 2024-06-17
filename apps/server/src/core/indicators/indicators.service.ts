@@ -56,7 +56,7 @@ export class IndicatorsService {
   ): Promise<Indicator> {
     await this.indicatorRepository.update(index, updateIndicatorDto)
     const updatedIndicador = await this.indicatorRepository.findOneByOrFail({
-      index
+      index: updateIndicatorDto.index ?? index
     })
     return updatedIndicador
   }

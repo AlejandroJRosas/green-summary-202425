@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { CreateCriteriaDto } from './dto/create-criteria.dto'
 import { UpdateCriteriaDto } from './dto/update-criteria.dto'
 import { Criteria } from './entities/criteria.entity'
@@ -69,9 +69,21 @@ export class CriterionService {
 
   async updateCriterion(
     id: number,
-    updateCriterionDto: UpdateCriteriaDto
+    updateCriteriaDto: UpdateCriteriaDto
   ): Promise<Criteria> {
-    await this.criterionRepository.update({ id }, updateCriterionDto)
+    const indicator = await this.indicatorRepository.findOneByOrFail({
+      index: updateCriteriaDto.indicatorIndex
+    })
+
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { indicatorIndex: _, ...dtoWithoutIndicatorIndex } = updateCriteriaDto
+
+    const updatedCriteria = this.criterionRepository.create({
+      ...dtoWithoutIndicatorIndex,
+      indicator
+    })
+
+    await this.criterionRepository.update({ id }, updatedCriteria)
 
     return await this.criterionRepository.findOneByOrFail({ id })
   }
@@ -86,26 +98,38 @@ export class CriterionService {
     return
   }
 
-  async criterionByIndicator(indicatorId: number): Promise<Criteria[]> {
+  async criterionByIndicator(
+    indicatorId: number,
+    { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto
+  ): Promise<Criteria[]> {
     const indicator = await this.indicatorRepository.findOneByOrFail({
       index: indicatorId
     })
 
-    const criterion = await this.criterionRepository.find({
-      where: { indicator: indicator }
+    const criteria = await this.criterionRepository.find({
+      where: { indicator: indicator },
+      order: { [orderBy]: orderType }
     })
 
-    return criterion
+    return criteria
   }
 
-  async criterionByRecopilation(recopilationId: number): Promise<Criteria[]> {
+  async criterionByRecopilation(
+    recopilationId: number,
+    { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto
+  ): Promise<Criteria[]> {
     const categorizedCriterias = await this.categorizedCriteriaRepository.find({
       where: { recopilation: { id: recopilationId } },
       relations: ['criteria']
     })
 
-    return categorizedCriterias.map(
-      (categorizedCriteria) => categorizedCriteria.criteria
-    )
+    const criteria = await this.criterionRepository.find({
+      where: {
+        id: In(categorizedCriterias.map((c) => c.criteria.id))
+      },
+      order: { [orderBy]: orderType }
+    })
+
+    return criteria
   }
 }

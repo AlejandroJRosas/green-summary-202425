@@ -12,8 +12,10 @@ import { InformationRecopilationComponent } from './core/recopilation/steps-rout
 import { SelectDepartmentsComponent } from './core/recopilation/steps-routing/steps/select-departments/select-departments.component'
 import { SelectIndicatorsCategoriesCriteriaComponent } from './core/recopilation/steps-routing/steps/select-indicators-categories-criteria/select-indicators-categories-criteria.component'
 import { RecommendCategoriesDepartmentComponent } from './core/recopilation/steps-routing/steps/recommend-categories-department/recommend-categories-department.component'
-// Descomentar cuando lo necesiten
-// import { roleGuard } from './guards/role.guard'
+import { SchemeComponent } from './core/scheme/scheme.component'
+import { LayoutComponent } from './common/layout/layout.component'
+import { roleGuard } from './guards/role.guard'
+import { Role } from './services/auth.service'
 
 export const routes: Routes = [
   {
@@ -23,15 +25,60 @@ export const routes: Routes = [
     canActivate: [loginGuard]
   },
   {
-    path: 'home',
-    title: 'Home',
-    component: HomeComponent,
-    canActivate: [authGuard]
+    path: 'pages',
+    component: LayoutComponent,
+    canActivate: [authGuard],
+    children: [
+      {
+        path: 'home',
+        title: 'Home',
+        component: HomeComponent,
+        canActivate: [authGuard]
+      },
+      {
+        path: 'departments',
+        title: 'Departamentos',
+        component: DepartmentComponent,
+        canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
+      },
+      {
+        path: 'schemes',
+        title: 'Esquemas',
+        component: SchemeComponent
+      }
+    ]
   },
   {
-    path: 'departments',
-    title: 'Departamentos',
-    component: DepartmentComponent
+    path: 'recopilations',
+    title: 'Recopilaciones',
+    component: RecopilationComponent
+  },
+  {
+    path: 'recopilations/steps-create',
+    title: 'Pasos para crear una recopilación',
+    component: StepsRoutingComponent,
+    children: [
+      {
+        path: 'information-recopilation',
+        title: 'Información de la recopilación',
+        component: InformationRecopilationComponent
+      },
+      {
+        path: 'select-departments',
+        title: 'Seleccionar departamentos',
+        component: SelectDepartmentsComponent
+      },
+      {
+        path: 'select-indicators-categories-criteria',
+        title: 'Seleccionar indicadores, categorías y criterios',
+        component: SelectIndicatorsCategoriesCriteriaComponent
+      },
+      {
+        path: 'recommend-categories-department',
+        title: 'Recomendar categorías a departamentos',
+        component: RecommendCategoriesDepartmentComponent
+      }
+    ]
   },
   {
     path: 'recopilations',

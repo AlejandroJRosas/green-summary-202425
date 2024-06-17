@@ -7,7 +7,8 @@ import player from 'lottie-web'
 import { routes } from './app.routes'
 import { Toast } from './common/toast/toast.component'
 import { MessageService } from 'primeng/api'
-import { provideHttpClient } from '@angular/common/http'
+import { provideHttpClient, withInterceptors } from '@angular/common/http'
+import { authorizationInterceptor } from './interceptors/authorization.interceptor'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +19,6 @@ export const appConfig: ApplicationConfig = {
     }),
     Toast,
     MessageService,
-    provideHttpClient()
+    provideHttpClient(withInterceptors([authorizationInterceptor]))
   ]
 }

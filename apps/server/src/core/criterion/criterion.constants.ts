@@ -1,6 +1,7 @@
 import { Criteria } from './entities/criteria.entity'
 
 export const SORTABLE_FIELDS: Partial<keyof Criteria>[] = [
+  'id',
   'subIndex',
   'name',
   'requiresEvidence',

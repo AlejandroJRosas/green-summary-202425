@@ -1,6 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { EntityNotFoundError, Repository } from 'typeorm'
+import {
+  EntityNotFoundError,
+  In,
+  LessThan,
+  MoreThan,
+  Repository
+} from 'typeorm'
 import { Recopilation } from './entities/recopilation.entity'
 import { UpdateRecopilationDto } from './dto/update-recopilation.dto'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
@@ -15,6 +21,10 @@ import { Criteria } from '../criterion/entities/criteria.entity'
 import { Category } from '../categories/entities/category.entity'
 import { IndicatorPerRecopilation } from '../indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
 import { CategorizedCriteria } from '../categorized-criteria/entities/categorized-criterion.entity'
+import { RecommendCategoriesDto } from './dto/recommend-categories.dto'
+import { Department } from '../users/entities/department.entity'
+import { Recommendation } from '../recommendations/entities/recommendation.entity'
+import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 
 @Injectable()
 export class RecopilationsService {
@@ -27,10 +37,16 @@ export class RecopilationsService {
     private criterionRepository: Repository<Criteria>,
     @InjectRepository(Category)
     private categoriesRepository: Repository<Category>,
+    @InjectRepository(Department)
+    private departmentsRepository: Repository<Department>,
     @InjectRepository(IndicatorPerRecopilation)
     private indicatorsPerRecopilationRepository: Repository<IndicatorPerRecopilation>,
     @InjectRepository(CategorizedCriteria)
-    private categorizedCriteriaRepository: Repository<CategorizedCriteria>
+    private categorizedCriteriaRepository: Repository<CategorizedCriteria>,
+    @InjectRepository(Recommendation)
+    private recommendationRepository: Repository<Recommendation>,
+    @InjectRepository(DepartmentPerRecopilation)
+    private departmentsPerRecopilationsRepository: Repository<DepartmentPerRecopilation>
   ) {}
 
   async findAll({
@@ -143,5 +159,68 @@ export class RecopilationsService {
     )
 
     return recopilation
+  }
+
+  async recommendCategories(recommendCategoriesDto: RecommendCategoriesDto) {
+    const { recopilationId, departments } = recommendCategoriesDto
+
+    const recommendations: Recommendation[] = []
+
+    for (const dep of departments) {
+      const departmentPerRecopilation =
+        await this.departmentsPerRecopilationsRepository.findOneOrFail({
+          where: {
+            department: { id: dep.departmentId },
+            recopilation: { id: recopilationId }
+          }
+        })
+
+      for (const cat of dep.categories) {
+        const categorizedCriteria =
+          await this.categorizedCriteriaRepository.findOneOrFail({
+            where: {
+              recopilation: { id: recopilationId },
+              category: { id: cat.categoryId }
+            },
+            relations: ['category']
+          })
+
+        recommendations.push(
+          this.recommendationRepository.create({
+            category: categorizedCriteria.category,
+            departmentPerRecopilation
+          })
+        )
+      }
+    }
+
+    const oldRecommendations = await this.recommendationRepository.find({
+      relations: ['departmentPerRecopilation'],
+      where: {
+        departmentPerRecopilation: {
+          recopilation: { id: recopilationId },
+          department: { id: In(departments.map((d) => d.departmentId)) }
+        }
+      }
+    })
+
+    await this.recommendationRepository.remove(oldRecommendations)
+
+    return await this.recommendationRepository.save(recommendations)
+  }
+
+  async getActiveRecopilations({
+    orderBy,
+    orderType
+  }: OrderByParamDto & OrderTypeParamDto) {
+    const currentDateString = new Date()
+
+    return this.recopilationsRepository.find({
+      where: {
+        startDate: LessThan(currentDateString),
+        endDate: MoreThan(currentDateString)
+      },
+      order: { [orderBy]: orderType }
+    })
   }
 }

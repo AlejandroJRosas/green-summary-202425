@@ -19,9 +19,12 @@ import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-criteria-by-param.dto'
+import { Roles } from '../auth/roles.decorator'
+import { Role } from '../auth/role.enum'
 
 @ApiTags('Criteria')
 @Controller('criteria')
+@Roles(Role.Coordinator, Role.Admin)
 export class CriterionController {
   constructor(private readonly criterionService: CriterionService) {}
 
@@ -71,11 +74,11 @@ export class CriterionController {
   @Patch(':id')
   async updateCriterion(
     @Param('id') id: string,
-    @Body() updateCriterionDto: UpdateCriteriaDto
+    @Body() updateCriteriaDto: UpdateCriteriaDto
   ) {
     const criterion = await this.criterionService.updateCriterion(
       Number(id),
-      updateCriterionDto
+      updateCriteriaDto
     )
     return criterion
   }
@@ -88,20 +91,26 @@ export class CriterionController {
 
   @Get('/indicator/:indicatorIndex')
   async getCriterionByIndicator(
-    @Param('indicatorIndex') indicatorIndex: string
+    @Param('indicatorIndex') indicatorIndex: string,
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
   ) {
     const criterion = await this.criterionService.criterionByIndicator(
-      Number(indicatorIndex)
+      Number(indicatorIndex),
+      { orderBy, orderType }
     )
     return criterion
   }
 
   @Get('/recopilation/:recopilationId')
   async getCriterionByRecopilation(
-    @Param('recopilationId') recopilationId: string
+    @Param('recopilationId') recopilationId: string,
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
   ) {
     const criterion = await this.criterionService.criterionByRecopilation(
-      Number(recopilationId)
+      Number(recopilationId),
+      { orderBy, orderType }
     )
     return criterion
   }

@@ -22,6 +22,7 @@ export class Category {
   helpText: string
 
   @ManyToOne(() => Indicator, (indicator) => indicator.categories, {
+    onUpdate: 'CASCADE',
     onDelete: 'CASCADE'
   })
   indicator: Indicator

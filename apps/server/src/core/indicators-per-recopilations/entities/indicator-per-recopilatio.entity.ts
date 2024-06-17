@@ -16,7 +16,10 @@ export class IndicatorPerRecopilation {
 
   @ManyToOne(
     () => Indicator,
-    (indicator) => indicator.recopilationsPerIndicator
+    (indicator) => indicator.recopilationsPerIndicator,
+    {
+      onUpdate: 'CASCADE'
+    }
   )
   indicator: Indicator
 }
