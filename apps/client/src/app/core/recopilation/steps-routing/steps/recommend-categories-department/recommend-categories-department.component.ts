@@ -32,12 +32,12 @@ export class RecommendCategoriesDepartmentComponent {
   departments = departments
   categories = categoriesTotal
   nextStep() {
-    this.router.navigateByUrl('recopilations')
+    this.router.navigateByUrl('pages/recopilations')
     this.toast.show('success', 'Éxito', 'Recopilación creada con éxito')
   }
   prevStep() {
     this.router.navigateByUrl(
-      'recopilations/steps-create/select-indicators-categories-criteria'
+      'pages/recopilations/steps-create/select-indicators-categories-criteria'
     )
   }
 }

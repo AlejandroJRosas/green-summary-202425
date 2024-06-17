@@ -23,12 +23,12 @@ export class SelectDepartmentsComponent {
 
   nextStep() {
     this.router.navigateByUrl(
-      'recopilations/steps-create/select-indicators-categories-criteria'
+      'pages/recopilations/steps-create/select-indicators-categories-criteria'
     )
   }
   prevStep() {
     this.router.navigateByUrl(
-      'recopilations/steps-create/information-recopilation'
+      'pages/recopilations/steps-create/information-recopilation'
     )
   }
 }

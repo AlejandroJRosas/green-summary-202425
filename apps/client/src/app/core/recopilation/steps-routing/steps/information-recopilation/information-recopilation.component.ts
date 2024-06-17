@@ -68,11 +68,13 @@ export class InformationRecopilationComponent extends ValidatedFormGroup<Recopil
   }
 
   nextStep() {
-    this.router.navigateByUrl('recopilations/steps-create/select-departments')
+    this.router.navigateByUrl(
+      'pages/recopilations/steps-create/select-departments'
+    )
   }
 
   prevStep() {
-    this.router.navigateByUrl('recopilations')
+    this.router.navigateByUrl('pages/recopilations')
   }
 
   submitAndContinueOrFail() {

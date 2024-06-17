@@ -52,10 +52,12 @@ export class SelectIndicatorsCategoriesCriteriaComponent {
 
   nextStep() {
     this.router.navigateByUrl(
-      'recopilations/steps-create/recommend-categories-department'
+      'pages/recopilations/steps-create/recommend-categories-department'
     )
   }
   prevStep() {
-    this.router.navigateByUrl('recopilations/steps-create/select-departments')
+    this.router.navigateByUrl(
+      'pages/recopilations/steps-create/select-departments'
+    )
   }
 }

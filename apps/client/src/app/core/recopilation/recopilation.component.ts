@@ -12,7 +12,7 @@ export class RecopilationComponent {
   constructor(private router: Router) {}
   navigateStepsCreate() {
     this.router.navigateByUrl(
-      'recopilations/steps-create/information-recopilation'
+      'pages/recopilations/steps-create/information-recopilation'
     )
   }
 }

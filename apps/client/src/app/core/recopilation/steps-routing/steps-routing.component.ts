@@ -10,8 +10,7 @@ import { Toast } from '../../../common/toast/toast.component'
   selector: 'app-steps-routing',
   standalone: true,
   imports: [RouterOutlet, RouterLink, StepsModule, ButtonModule],
-  templateUrl: './steps-routing.component.html',
-  styles: ``
+  templateUrl: './steps-routing.component.html'
 })
 export class StepsRoutingComponent implements OnInit {
   constructor(
@@ -19,34 +18,35 @@ export class StepsRoutingComponent implements OnInit {
     @Inject(Toast) private toast: Toast
   ) {}
   items: MenuItem[] = []
-  urlSteps = '/recopilations/steps-create/'
+  urlSteps = '/pages/recopilations/steps-create'
 
   ngOnInit() {
     this.items = [
       {
         label: 'Crear recopilación',
-        routerLink: `${this.urlSteps}information-recopilation`
+        routerLink: `${this.urlSteps}/information-recopilation`
       },
       {
         label: 'Seleccionar departamentos',
-        routerLink: `${this.urlSteps}select-departments`
+        routerLink: `${this.urlSteps}/select-departments`
       },
       {
         label: 'Seleccionar esquema y asociar',
-        routerLink: `${this.urlSteps}select-indicators-categories-criteria`
+        routerLink: `${this.urlSteps}/select-indicators-categories-criteria`
       },
       {
         label: 'Recomendar categorías a departamentos',
-        routerLink: `${this.urlSteps}recommend-categories-department`
+        routerLink: `${this.urlSteps}/recommend-categories-department`
       },
       {
         label: 'Previsualizar',
-        routerLink: `${this.urlSteps}preview`
+        routerLink: `${this.urlSteps}/preview`
       }
     ]
   }
+
   onFinishLater() {
-    this.router.navigateByUrl('recopilations')
+    this.router.navigateByUrl('pages/recopilations')
     this.toast.show(
       'info',
       'Terminar Después',
