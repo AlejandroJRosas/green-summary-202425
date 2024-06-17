@@ -1,0 +1,48 @@
+<section class="mt-3 mb-5">
+  <div class="flex flex-column gap-2 w-full">
+    <label class="flex flex-column gap-2 w-full">
+      Descripción
+      <textarea
+        pInputTextarea
+        rows="5"
+        cols="40"
+        formControlName="helpText"
+      ></textarea>
+    </label>
+    <small class="p-error"></small>
+  </div>
+  <div class="flex flex-column gap-2 w-full">
+    <label class="flex flex-column gap-2 w-full">
+      Link externo (opcional)
+      <input
+        pInputText
+        name="externalLInk"
+        class="w-full"
+        type="text"
+        formControlName="externalLInk"
+      />
+    </label>
+    <small class="p-error"></small>
+  </div>
+  <h1 class="text-color-secondary text-xl">Selecciona el documento a subir</h1>
+  <p-fileUpload
+    name="demo[]"
+    (onSelect)="onSelect($event)"
+    [multiple]="false"
+    accept=".pdf,.doc,.docx,.xls,.xlsx"
+    maxFileSize="1000000"
+    chooseLabel="Seleccionar"
+    cancelLabel="Cancelar"
+    uploadLabel="Subir"
+  >
+    <ng-template pTemplate="content">
+      <!-- @if(uploadFiles.length !== 0){
+                <ul>
+                  <li>
+                    {{uploadFiles[0].name}} - {{uploadFiles[0].size}}
+                  </li>
+                </ul>
+              } -->
+    </ng-template>
+  </p-fileUpload>
+</section>
