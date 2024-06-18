@@ -1,5 +1,17 @@
+@starting-style {
+  .hidden {
+    opacity: 100%;
+    display: block;
+  }
+}
+
 .hidden {
   display: none;
+  opacity: 0;
+  transition:
+    opacity 1.9s,
+    display 2s;
+  transition-behavior: allow-discrete;
 }
 
 .loading {
