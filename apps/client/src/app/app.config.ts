@@ -8,8 +8,9 @@ import { routes } from './app.routes'
 import { Toast } from './common/toast/toast.component'
 import { MessageService } from 'primeng/api'
 import { provideHttpClient, withInterceptors } from '@angular/common/http'
+import { LoadingComponent } from './common/loading/loading.component'
 import { authorizationInterceptor } from './interceptors/authorization.interceptor'
-import { Loading } from './common/loading/loading.component'
+import { loadingInterceptor } from './interceptors/loading.interceptor'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,8 +20,10 @@ export const appConfig: ApplicationConfig = {
       player: () => player
     }),
     Toast,
-    Loading,
+    LoadingComponent,
     MessageService,
-    provideHttpClient(withInterceptors([authorizationInterceptor]))
+    provideHttpClient(
+      withInterceptors([authorizationInterceptor, loadingInterceptor])
+    )
   ]
 }

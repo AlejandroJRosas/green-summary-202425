@@ -1,28 +1,15 @@
 import { CommonModule } from '@angular/common'
 import { Component } from '@angular/core'
+import { BehaviorSubject } from 'rxjs'
+import { LoadingService } from '../../services/loading.service'
 
 @Component({
   selector: 'app-loading',
   standalone: true,
   imports: [CommonModule],
   templateUrl: './loading.component.html',
-  styleUrl: './loading.component.css'
+  styleUrls: ['./loading.component.css']
 })
-export class Loading {
-  isLoading = false
-
-  setIsLoading(bool: boolean) {
-    this.isLoading = bool
-  }
-
-  getIsLoadingClass() {
-    let styleClass = ''
-    if (this.isLoading) {
-      styleClass = ''
-    } else {
-      styleClass = 'hidden'
-    }
-
-    return styleClass
-  }
+export class LoadingComponent {
+  constructor(public loader: LoadingService) {}
 }

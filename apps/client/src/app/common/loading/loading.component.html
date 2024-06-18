@@ -1,4 +1,8 @@
-<div class="loading" [ngClass]="getIsLoadingClass()" role="progressbar">
+<div
+  class="loading"
+  [ngClass]="this.loader.getLoading() ? '' : 'hidden'"
+  role="progressbar"
+>
   <div class="container">
     <div class="yellow-bright">
       <svg class="hive yellow-hive" viewBox="0 0 75 277">
