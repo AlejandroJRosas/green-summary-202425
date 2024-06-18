@@ -63,13 +63,10 @@ export class DepartmentComponent
     super(initialControlValues, validationSchema)
   }
 
-  isDeletingDepartments = false
   isFetchingDepartments = false
   visibleCreate: boolean = false
   visibleEdit: boolean = false
   visibleViewInformation: boolean = false
-  generatePassword: boolean = false
-
   message: string = ''
   totalRecords: number = 0
   departments: User[] = []
@@ -133,11 +130,7 @@ export class DepartmentComponent
       rejectLabel: 'No',
 
       accept: () => {
-        this.toast.show(
-          'success',
-          'Eliminado',
-          'Departamento eliminado con éxito'
-        )
+        this.toast.show('info', 'Eliminando..', 'Eliminando departamento..')
         this.onDelete(id)
       },
       reject: () => {
@@ -166,7 +159,6 @@ export class DepartmentComponent
     this.getAll()
   }
   onCreate() {
-    this.generatePassword = true
     const { fullName, email } = this.formGroup.controls
     if (!fullName.value || !email.value) return
     const user: CreateUserDTO = {
@@ -174,19 +166,18 @@ export class DepartmentComponent
       email: email.value.toLowerCase(),
       type: 'department'
     }
+    this.visibleCreate = false
     this.departmentService.create(user).subscribe({
       next: (res) => {
         this.department = res.status === 'success' ? res.data : this.department
         this.toast.show('success', 'Creado', 'Departamento creado con éxito')
-        this.generatePassword = false
-        this.visibleCreate = false
         this.showDialogViewInformation()
         this.getAll()
       },
       error: (e) => {
         this.visibleCreate = false
         console.error(e)
-        this.toast.show('error', 'Error', 'Error creando departamento')
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
@@ -208,14 +199,18 @@ export class DepartmentComponent
       },
       error: (e) => {
         console.error(e)
-        this.toast.show('error', 'Error', 'Error editando el departamento')
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
   onDelete(id: number) {
-    this.isDeletingDepartments = true
     this.departmentService.delete(id).subscribe({
       next: () => {
+        this.toast.show(
+          'success',
+          'Eliminado',
+          'Departamento eliminado con éxito'
+        )
         this.departments = this.departments.filter(
           (department) => department.id !== id
         )
@@ -223,7 +218,7 @@ export class DepartmentComponent
       },
       error: (e) => {
         console.error(e)
-        this.isDeletingDepartments = false
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }

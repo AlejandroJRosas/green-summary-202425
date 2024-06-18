@@ -99,7 +99,7 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
       rejectLabel: 'No',
 
       accept: () => {
-        this.toast.show('info', 'Eliminando..', 'Eliminando criterio..')
+        this.toast.show('info', 'Eliminando..', 'Eliminando categoría..')
         this.onDelete(id)
       },
       reject: () => {
