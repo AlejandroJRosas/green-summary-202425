@@ -1,9 +1,13 @@
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
+import { ButtonModule } from 'primeng/button'
+import { LoadingService } from '../../services/loading.service'
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [],
+  imports: [ButtonModule],
   templateUrl: './home.component.html'
 })
-export class HomeComponent {}
+export class HomeComponent {
+  loadingService = inject(LoadingService)
+}

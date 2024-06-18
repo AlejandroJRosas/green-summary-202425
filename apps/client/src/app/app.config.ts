@@ -10,6 +10,7 @@ import { MessageService } from 'primeng/api'
 import { provideHttpClient, withInterceptors } from '@angular/common/http'
 import { authorizationInterceptor } from './interceptors/authorization.interceptor'
 import { loadingInterceptor } from './interceptors/loading.interceptor'
+import { LoadingService } from './services/loading.service'
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -19,6 +20,7 @@ export const appConfig: ApplicationConfig = {
       player: () => player
     }),
     Toast,
+    LoadingService,
     MessageService,
     provideHttpClient(
       withInterceptors([authorizationInterceptor, loadingInterceptor])

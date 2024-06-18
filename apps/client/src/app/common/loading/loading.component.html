@@ -1,8 +1,24 @@
-<div
-  class="loading"
-  [ngClass]="this.loader.getLoading() ? '' : 'hidden'"
+<!-- <div
   role="progressbar"
+  class="fixed left-0 top-0 z-50 h-screen w-screen bg-black bg-opacity-75"
 >
+  <div class="bright flex h-full w-full items-center justify-center gap-3">
+    <div class="yellow-bright">
+      <div
+        class="hive yellow-hive bright aspect-[65/220] w-[58px] bg-ucab-yellow"
+        [@combinedAnimation]
+      ></div>
+    </div>
+    <div class="blue-bright">
+      <div class="hive blue-hive aspect-[65/220] w-[58px] bg-ucab-blue"></div>
+    </div>
+    <div class="green-bright">
+      <div class="hive green-hive aspect-[65/220] w-[58px] bg-ucab-green"></div>
+    </div>
+  </div>
+</div> -->
+
+<button [@fade] class="loading" role="progressbar" (onclick)="loader.hide()">
   <div class="container">
     <div class="yellow-bright">
       <svg class="hive yellow-hive" viewBox="0 0 75 277">
@@ -37,4 +53,4 @@
       </svg>
     </div>
   </div>
-</div>
+</button>

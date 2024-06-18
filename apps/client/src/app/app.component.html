@@ -1,4 +1,6 @@
 <toast position="top-right" />
-<app-loading />
+@if (loadingService.getLoading()) {
+  <app-loading />
+}
 
 <router-outlet />

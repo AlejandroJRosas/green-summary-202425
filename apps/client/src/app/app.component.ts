@@ -1,7 +1,8 @@
-import { Component } from '@angular/core'
+import { Component, inject } from '@angular/core'
 import { RouterLink, RouterOutlet } from '@angular/router'
 import { Toast } from './common/toast/toast.component'
 import { LoadingComponent } from './common/loading/loading.component'
+import { LoadingService } from './services/loading.service'
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,6 @@ import { LoadingComponent } from './common/loading/loading.component'
 })
 export class AppComponent {
   title = 'Green Summary'
+
+  loadingService = inject(LoadingService)
 }
