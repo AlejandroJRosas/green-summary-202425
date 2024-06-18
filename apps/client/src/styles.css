@@ -4,6 +4,9 @@
 @import 'primeicons/primeicons.css';
 
 :root {
+  --ucab-yellow-hex: #fbc430;
+  --ucab-blue-hex: #37b4e3;
+  --ucab-green-hex: #007935;
   --background-color: #f7ffe6;
   --text-color-secondary: #373737;
   --primary-color: #00ad7c;
