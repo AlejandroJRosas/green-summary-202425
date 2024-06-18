@@ -71,19 +71,13 @@ p-password.ng-valid > .p-password > .p-inputtext {
 .p-panel .p-panel-header {
   background: var(--background-color);
   border: none;
+  padding: 0;
 }
 .p-panel .p-panel-content {
   background: var(--background-color);
   border: none;
 }
-.p-panel .p-panel-header-evidence {
-  background: var(--background-color);
-  border: none;
-}
-.p-panel .p-panel-content-evidence {
-  background: var(--background-color);
-  border: none;
-}
+
 .p-panel-header {
   display: flex;
   align-items: center;
