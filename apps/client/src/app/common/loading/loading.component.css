@@ -9,7 +9,7 @@
   display: none;
   opacity: 0;
   transition:
-    opacity 1.9s,
+    opacity 0.5s,
     display 2s;
   transition-behavior: allow-discrete;
 }
