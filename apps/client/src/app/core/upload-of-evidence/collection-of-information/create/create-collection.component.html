@@ -16,9 +16,26 @@
       </label>
       <small class="p-error"></small>
     </div>
-    <evidence />
+    <div class="flex flex-row gap-4">
+      <h3 class="text-color-secondary">Evidencias</h3>
+      <button class="p-panel-header-icon p-link mr-2">
+        <span
+          (click)="addEvidence()"
+          class="pi pi-plus"
+          style="
+            color: #3b82f6;
+            border: solid 1.5px #babbbe;
+            border-radius: 100%;
+            padding: 6px;
+          "
+        ></span>
+      </button>
+    </div>
+    @for (evidence of evidences; track evidence) {
+      <evidence />
+    }
   </section>
-  <footer class="flex justify-content-between">
+  <footer class="flex justify-content-between py-3">
     <p-button
       label="Cancelar"
       size="small"

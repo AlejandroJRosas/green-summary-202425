@@ -10,4 +10,9 @@ import { EvidenceComponent } from './evidence/evidence.component'
   templateUrl: './create-collection.component.html',
   styles: ``
 })
-export class CreateCollectionComponent {}
+export class CreateCollectionComponent {
+  evidences: number[] = []
+  addEvidence() {
+    this.evidences.push(this.evidences.length + 1)
+  }
+}

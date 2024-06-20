@@ -47,6 +47,12 @@ export class EvidenceComponent {
   addEvidence() {
     this.evidences.push(this.evidences.length + 1)
   }
+  onDelete(indexEvidence: number) {
+    this.evidences = this.evidences.filter(
+      (_, index) => index !== indexEvidence
+    )
+    console.log(this.evidences)
+  }
 }
 
 interface typeEvidence {
