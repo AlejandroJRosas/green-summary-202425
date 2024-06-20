@@ -9,19 +9,19 @@ export class Recopilation {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ type: 'varchar', length: 30 })
+  @Column({ type: 'varchar', length: 30, nullable: false })
   name: string
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: false })
   description: string
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: false })
   startDate: Date
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: false })
   departmentEndDate: Date
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: false })
   endDate: Date
 
   @OneToMany(

@@ -3,7 +3,8 @@ import {
   IsString,
   IsBoolean,
   IsNotEmpty,
-  IsOptional
+  IsOptional,
+  MaxLength
 } from 'class-validator'
 
 export class CreateCriteriaDto {
@@ -17,10 +18,12 @@ export class CreateCriteriaDto {
 
   @IsString()
   @IsNotEmpty()
+  @MaxLength(255)
   name: string
 
   @IsString()
   @IsNotEmpty()
+  @MaxLength(7)
   alias: string
 
   @IsString()
