@@ -39,7 +39,7 @@ export const routes: Routes = [
         path: 'schemes',
         title: 'Esquemas',
         component: SchemeComponent
-      },
+      }
     ]
   },
   {
