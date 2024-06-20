@@ -13,6 +13,10 @@ export interface Values {
   categoryNameMaxAmount: number
   criterionNameAliasMaxAmount: number
   errorTextAmount: number
+  recopilationsNameMaxAmount: number
+  informationCollectionsSummary: number
+  evidencesLinkMaxAmount: number
+  evidencesLinkMinAmount: number
 }
 
 export const VALUES: Values

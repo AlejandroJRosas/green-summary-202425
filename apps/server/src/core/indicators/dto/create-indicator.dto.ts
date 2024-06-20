@@ -5,6 +5,7 @@ import {
   MaxLength,
   MinLength
 } from 'class-validator'
+import { VALUES } from 'shared/validations'
 
 export class CreateIndicatorDto {
   @IsNumber()
@@ -13,17 +14,19 @@ export class CreateIndicatorDto {
 
   @IsString()
   @IsNotEmpty()
-  @MinLength(1)
-  @MaxLength(255)
+  @MinLength(VALUES.nameAliasMinAmount)
+  @MaxLength(VALUES.indicatorNameAliasMaxAmount)
   name: string
 
   @IsString()
   @IsNotEmpty()
-  @MinLength(1)
-  @MaxLength(255)
+  @MinLength(VALUES.nameAliasMinAmount)
+  @MaxLength(VALUES.indicatorNameAliasMaxAmount)
   alias: string
 
   @IsString()
   @IsNotEmpty()
+  @MinLength(VALUES.helpTextMinAmount)
+  @MaxLength(VALUES.helpTextMaxAmount)
   helpText: string
 }

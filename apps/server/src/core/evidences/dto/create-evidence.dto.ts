@@ -4,9 +4,12 @@ import {
   IsOptional,
   IsNotEmpty,
   IsInt,
-  IsEnum
+  IsEnum,
+  MaxLength,
+  MinLength
 } from 'class-validator'
 import { EvidenceType } from '../evidences.constants'
+import { VALUES } from 'shared/validations'
 
 export class CreateEvidenceDto {
   @IsDateString()
@@ -15,6 +18,8 @@ export class CreateEvidenceDto {
 
   @IsString()
   @IsNotEmpty()
+  @MinLength(VALUES.descriptionMinAmount)
+  @MaxLength(VALUES.descriptionMaxAmount)
   description: string
 
   @IsString()
@@ -27,10 +32,14 @@ export class CreateEvidenceDto {
 
   @IsOptional()
   @IsString()
+  @MinLength(VALUES.evidencesLinkMinAmount)
+  @MaxLength(VALUES.evidencesLinkMaxAmount)
   externalLink?: string
 
   @IsOptional()
   @IsString()
+  @MinLength(VALUES.evidencesLinkMinAmount)
+  @MaxLength(VALUES.evidencesLinkMaxAmount)
   fileLink?: string
 
   @IsNotEmpty()
