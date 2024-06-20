@@ -35,6 +35,10 @@ export abstract class Evidence {
   })
   type: EvidenceType
 
-  @ManyToOne(() => InformationCollection, (collection) => collection.evidences)
+  @ManyToOne(
+    () => InformationCollection,
+    (collection) => collection.evidences,
+    { onDelete: 'CASCADE' }
+  )
   collection: InformationCollection
 }

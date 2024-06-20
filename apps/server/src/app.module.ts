@@ -14,7 +14,6 @@ import { AuthModule } from './core/auth/auth.module'
 import { RecommendationsModule } from './core/recommendations/recommendations.module'
 import { IndicatorsPerRecopilationsModule } from './core/indicators-per-recopilations/indicators-per-recopilations.module'
 import { DepartmentsPerRecopilationsModule } from './core/departments-per-recopilations/departments-per-recopilations.module'
-import { AnswersModule } from './core/answers/answers.module'
 import { CategorizedCriteriaModule } from './core/categorized-criteria/categorized-criteria.module'
 
 @Module({
@@ -44,7 +43,6 @@ import { CategorizedCriteriaModule } from './core/categorized-criteria/categoriz
     IndicatorsPerRecopilationsModule,
     CategorizedCriteriaModule,
     DepartmentsPerRecopilationsModule,
-    AnswersModule,
     RecommendationsModule,
     InformationCollectionsModule,
     EvidencesModule,

@@ -1,8 +1,8 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 import { IndicatorPerRecopilation } from 'src/core/indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
-import { Answer } from 'src/core/answers/entities/answer.entity'
 import { CategorizedCriteria } from 'src/core/categorized-criteria/entities/categorized-criterion.entity'
 import { DepartmentPerRecopilation } from 'src/core/departments-per-recopilations/entities/departments-per-recopilation.entity'
+import { InformationCollection } from 'src/core/information-collections/entities/information-collection.entity'
 
 @Entity('recopilations')
 export class Recopilation {
@@ -36,8 +36,11 @@ export class Recopilation {
   )
   categorizedCriterion: CategorizedCriteria[]
 
-  @OneToMany(() => Answer, (answers) => answers.recopilation)
-  answers: Answer[]
+  @OneToMany(
+    () => InformationCollection,
+    (informationCollection) => informationCollection.recopilation
+  )
+  informationCollections: InformationCollection[]
 
   @OneToMany(
     () => DepartmentPerRecopilation,
