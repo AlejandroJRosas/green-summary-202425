@@ -8,11 +8,9 @@ import {
   PrimaryGeneratedColumn,
   OneToMany,
   CreateDateColumn,
-  ManyToOne,
-  Unique
+  ManyToOne
 } from 'typeorm'
 
-@Unique(['recopilation', 'department', 'category'])
 @Entity('information_collections')
 export class InformationCollection {
   @PrimaryGeneratedColumn()
