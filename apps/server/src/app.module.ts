@@ -16,6 +16,7 @@ import { IndicatorsPerRecopilationsModule } from './core/indicators-per-recopila
 import { DepartmentsPerRecopilationsModule } from './core/departments-per-recopilations/departments-per-recopilations.module'
 import { AnswersModule } from './core/answers/answers.module'
 import { CategorizedCriteriaModule } from './core/categorized-criteria/categorized-criteria.module'
+import { ServeStaticModule } from '@nestjs/serve-static/dist/serve-static.module'
 
 @Module({
   imports: [
@@ -32,6 +33,9 @@ import { CategorizedCriteriaModule } from './core/categorized-criteria/categoriz
         }
       },
       inject: [ConfigService]
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: path.join(__dirname, '..', 'uploads')
     }),
     AuthModule,
     UsersModule,
