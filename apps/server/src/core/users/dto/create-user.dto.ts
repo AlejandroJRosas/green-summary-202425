@@ -7,22 +7,25 @@ import {
   MinLength
 } from 'class-validator'
 import { USER_TYPES, UserType } from '../users.constants'
+import { VALUES } from 'shared/validations'
 
 export class CreateUserDto {
   @IsString()
   @IsNotEmpty()
-  @MaxLength(255)
+  @MinLength(VALUES.departmentFullNameMinAmount)
+  @MaxLength(VALUES.departmentFullNameMaxAmount)
   fullName: string
 
   @IsEmail()
   @IsNotEmpty()
-  @MaxLength(255)
+  @MinLength(VALUES.nameAliasMinAmount)
+  @MaxLength(VALUES.departmentEmailAmount)
   email: string
 
   @IsString()
   @IsNotEmpty()
-  @MinLength(3)
-  @MaxLength(255)
+  @MinLength(VALUES.nameAliasMinAmount)
+  @MaxLength(VALUES.departmentPasswordAmount)
   password: string
 
   @IsEnum(USER_TYPES)

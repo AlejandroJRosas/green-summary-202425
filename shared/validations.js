@@ -4,6 +4,7 @@ export const VALUES = {
   departmentFullNameMinAmount: 4,
   departmentFullNameMaxAmount: 100,
   departmentEmailAmount: 320,
+  departmentPasswordAmount: 64,
   helpTextMinAmount: 1,
   helpTextMaxAmount: 128,
   nameAliasMinAmount: 10,

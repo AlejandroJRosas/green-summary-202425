@@ -6,6 +6,7 @@ export interface Values {
   departmentFullNameMinAmount: number
   departmentFullNameMaxAmount: number
   departmentEmailAmount: number
+  departmentPasswordAmount: number
   helpTextMinAmount: number
   helpTextMaxAmount: number
   nameAliasMinAmount: number
