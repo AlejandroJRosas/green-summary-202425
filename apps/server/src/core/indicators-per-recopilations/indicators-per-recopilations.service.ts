@@ -1,6 +1,10 @@
-import { Injectable } from '@nestjs/common'
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException
+} from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { Repository } from 'typeorm'
+import { EntityNotFoundError, Repository } from 'typeorm'
 import { IndicatorPerRecopilation } from './entities/indicator-per-recopilatio.entity'
 import { CreateIndicatorPerRecopilationDto } from './dto/create-indicator-per-recopilation.dto'
 import { UpdateIndicatorPerRecopilationDto } from './dto/update-indicator-per-recopilation.dto'
@@ -34,10 +38,19 @@ export class IndicatorsPerRecopilationsService {
   }
 
   async findOne(id: number): Promise<IndicatorPerRecopilation> {
-    return this.indicatorsPerRecopilationsRepository.findOneOrFail({
-      where: { id },
-      relations: ['recopilation', 'indicator']
-    })
+    try {
+      return this.indicatorsPerRecopilationsRepository.findOneOrFail({
+        where: { id },
+        relations: ['recopilation', 'indicator']
+      })
+    } catch (error) {
+      if (error instanceof EntityNotFoundError) {
+        throw new NotFoundException(
+          `La relación entre recopilación e indicador con ID ${id} no fue encontrada.`
+        )
+      }
+      throw error // Propaga otros tipos de errores
+    }
   }
 
   async create(
@@ -49,9 +62,25 @@ export class IndicatorsPerRecopilationsService {
     const recopilation = await this.recopilationRepository.findOneByOrFail({
       id: IDRecopilacion
     })
+
     const indicator = await this.indicatorRepository.findOneByOrFail({
       index: IndiceIndicador
     })
+
+    // Verificar si ya existe una relación con el mismo recopilationId e indicatorIndex
+    const existingRelation =
+      await this.indicatorsPerRecopilationsRepository.findOne({
+        where: {
+          recopilation: { id: IDRecopilacion },
+          indicator: { index: IndiceIndicador }
+        }
+      })
+
+    if (existingRelation) {
+      throw new ConflictException(
+        `Ya existe una relación entre la recopilación ${IDRecopilacion} y el indicador ${IndiceIndicador}.`
+      )
+    }
 
     const indicatorsPerRecopilations =
       this.indicatorsPerRecopilationsRepository.create({
@@ -66,45 +95,74 @@ export class IndicatorsPerRecopilationsService {
 
   async update(
     id: number,
-    updateIndicatorsPerRecopilationsDto: UpdateIndicatorPerRecopilationDto
+    updateDto: UpdateIndicatorPerRecopilationDto
   ): Promise<IndicatorPerRecopilation> {
-    const indicatorsPerRecopilations =
-      await this.indicatorsPerRecopilationsRepository.findOneOrFail({
-        where: { id },
-        relations: ['recopilation', 'indicator']
-      })
+    const { recopilationId, indicatorIndex } = updateDto
 
-    const { recopilationId: IDRecopilacion, indicatorIndex: IndiceIndicador } =
-      updateIndicatorsPerRecopilationsDto
+    let relationToUpdate: IndicatorPerRecopilation
+    try {
+      relationToUpdate =
+        await this.indicatorsPerRecopilationsRepository.findOneOrFail({
+          where: { id },
+          relations: ['recopilation', 'indicator']
+        })
+    } catch (error) {
+      throw new NotFoundException(
+        `No se encontró el indicador per recopilación con el ID ${id}`
+      )
+    }
 
     const recopilation = await this.recopilationRepository.findOneByOrFail({
-      id: IDRecopilacion
+      id: recopilationId
     })
-    indicatorsPerRecopilations.recopilation = recopilation
+
+    // Verificar si ya existe otra relación con el mismo recopilationId e indicatorIndex
+    const existingRelation =
+      await this.indicatorsPerRecopilationsRepository.findOne({
+        where: {
+          recopilation: { id: recopilationId },
+          indicator: { index: indicatorIndex }
+        }
+      })
+
+    if (existingRelation) {
+      throw new ConflictException(
+        `Ya existe otra relación entre la recopilación ${recopilationId} y el indicador ${indicatorIndex}.`
+      )
+    }
+
+    relationToUpdate.recopilation = recopilation
 
     const indicator = await this.indicatorRepository.findOneByOrFail({
-      index: IndiceIndicador
+      index: indicatorIndex
     })
-    indicatorsPerRecopilations.indicator = indicator
+    relationToUpdate.indicator = indicator
 
-    await this.indicatorsPerRecopilationsRepository.save(
-      indicatorsPerRecopilations
-    )
+    await this.indicatorsPerRecopilationsRepository.save(relationToUpdate)
 
-    return this.indicatorsPerRecopilationsRepository.findOneOrFail({
+    return await this.indicatorsPerRecopilationsRepository.findOneOrFail({
       where: { id },
       relations: ['recopilation', 'indicator']
     })
   }
 
   async remove(id: number): Promise<void> {
-    const indicatorsPerRecopilations =
-      await this.indicatorsPerRecopilationsRepository.findOneOrFail({
-        where: { id },
-        relations: ['recopilation', 'indicator']
-      })
-    await this.indicatorsPerRecopilationsRepository.remove(
-      indicatorsPerRecopilations
-    )
+    try {
+      const indicatorsPerRecopilations =
+        await this.indicatorsPerRecopilationsRepository.findOneOrFail({
+          where: { id },
+          relations: ['recopilation', 'indicator']
+        })
+      await this.indicatorsPerRecopilationsRepository.remove(
+        indicatorsPerRecopilations
+      )
+    } catch (error) {
+      if (error instanceof EntityNotFoundError) {
+        throw new NotFoundException(
+          `La relación entre recopilación e indicador con ID ${id} no fue encontrada y no se pudo eliminar.`
+        )
+      }
+      throw error // Propaga otros tipos de errores
+    }
   }
 }
