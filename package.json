@@ -30,8 +30,5 @@
     "commitizen": {
       "path": "./node_modules/cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "multer": "1.4.5-lts.1"
   }
 }
