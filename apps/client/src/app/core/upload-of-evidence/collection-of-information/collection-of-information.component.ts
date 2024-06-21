@@ -6,6 +6,7 @@ import { DialogModule } from 'primeng/dialog'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ValidatedFormGroup } from '../../../common/validated-form-group/validated-form-group'
 import { string, object } from 'yup'
+import { InputTextModule } from 'primeng/inputtext'
 import {
   InformationCollectionDTO,
   InformationCollectionService
@@ -13,6 +14,8 @@ import {
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { Toast } from '../../../common/toast/toast.component'
 import { InformationCollection } from '../../../../shared/types/information-collection.type'
+import { Category } from '../../../../shared/types/category.type'
+import { Indicator } from '../../../../shared/types/indicator.type'
 
 @Component({
   selector: 'collection-of-information',
@@ -23,13 +26,14 @@ import { InformationCollection } from '../../../../shared/types/information-coll
     DialogModule,
     FormsModule,
     ReactiveFormsModule,
-    InputTextareaModule
+    InputTextareaModule,
+    InputTextModule
   ],
   templateUrl: './collection-of-information.component.html',
   styles: ``
 })
 export class CollectionOfInformationComponent
-  extends ValidatedFormGroup<InformationCollectionDTO>
+  extends ValidatedFormGroup<FormValues>
   implements OnInit
 {
   constructor(
@@ -39,14 +43,17 @@ export class CollectionOfInformationComponent
     private InformationCollectionService: InformationCollectionService
   ) {
     const initialControlValues = {
+      name: '',
       summary: ''
     }
     const validationSchema = object({
-      summary: string().required('La descripción es requerida')
+      summary: string().required('La descripción es requerida'),
+      name: string().required('El nombre es requerido')
     })
     super(initialControlValues, validationSchema)
   }
   errors = {
+    name: '',
     summary: ''
   }
   paginated = {
@@ -54,8 +61,18 @@ export class CollectionOfInformationComponent
     rows: 100
   }
   informationCollections: InformationCollection[] = []
-  @Input() indicatorName = ''
-  @Input() categoryName = ''
+  indicator: Indicator = {
+    index: 0,
+    alias: '',
+    helpText: '',
+    name: ''
+  }
+  @Input() category: Category = {
+    name: '',
+    helpText: '',
+    id: 0,
+    indicator: this.indicator
+  }
   currentUrl = ''
   visibleCreate: boolean = false
   ngOnInit() {
@@ -64,6 +81,7 @@ export class CollectionOfInformationComponent
   reset() {
     this.formGroup.reset()
     this.errors = {
+      name: '',
       summary: ''
     }
   }
@@ -86,9 +104,13 @@ export class CollectionOfInformationComponent
   }
   onCreate() {
     if (this.formGroup.invalid) return
-    const { summary } = this.formGroup.controls
+    const { name, summary } = this.formGroup.controls
     const collectionOfInformation: InformationCollectionDTO = {
-      summary: summary.value
+      name: name.value,
+      summary: summary.value,
+      recopilationId: 1,
+      categoryId: this.category.id,
+      departmentId: JSON.parse(localStorage.getItem('user')!).id as number
     }
     this.InformationCollectionService.create(collectionOfInformation).subscribe(
       {
@@ -118,3 +140,5 @@ export class CollectionOfInformationComponent
     // this.router.navigateByUrl(`pages/create/${this.currentUrl}`)
   }
 }
+
+type FormValues = Pick<InformationCollectionDTO, 'name' | 'summary'>

@@ -3,7 +3,8 @@
     class="flex flex-row justify-content-between align-items-center gap-6 pb-4 w-full"
   >
     <h2 class="text-color-secondary flex-1">
-      Subida de archivos para {{ this.indicatorName }} / {{ this.categoryName }}
+      Subida de archivos para {{ this.category.indicator.alias }} /
+      {{ this.category.name }}
     </h2>
     <p-button
       styleClass="bg-primary border-primary mr-4 flex-none"
@@ -71,6 +72,21 @@
   >
     <form [formGroup]="formGroup">
       <div class="flex flex-column gap-3">
+        <div class="flex flex-column gap-2 w-full">
+          <label class="flex flex-column gap-2 w-full">
+            Nombre
+            <input
+              pInputText
+              name="name"
+              class="w-full"
+              type="text"
+              formControlName="name"
+              (input)="errorsUpdate('name')"
+              (blur)="errorsUpdate('name')"
+            />
+          </label>
+          <small class="p-error">{{ errors.name }}</small>
+        </div>
         <div class="flex flex-column gap-2 w-full">
           <label class="flex flex-column gap-2 w-full">
             Descripción

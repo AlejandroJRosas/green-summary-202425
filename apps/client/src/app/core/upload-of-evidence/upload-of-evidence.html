@@ -9,11 +9,7 @@
         <p-progressSpinner ariaLabel="loading" />
       </div>
       } @else {
-      <collection-of-information
-        [categoryName]="categoryName"
-        [indicatorName]="indicatorName"
-        class="w-full"
-      />
+      <collection-of-information [category]="category" class="w-full" />
       }
     </section>
   </section>

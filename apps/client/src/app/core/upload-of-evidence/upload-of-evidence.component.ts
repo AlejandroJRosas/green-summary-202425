@@ -5,6 +5,8 @@ import { CategoryService } from '../../services/category.service'
 import { Router } from '@angular/router'
 import { CollectionOfInformationComponent } from './collection-of-information/collection-of-information.component'
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
+import { Indicator } from '../../../shared/types/indicator.type'
+import { Category } from '../../../shared/types/category.type'
 
 @Component({
   selector: 'app-upload-of-evidence',
@@ -30,8 +32,18 @@ export class UploadOfEvidenceComponent implements OnInit {
   }
   recopilationId: number = 0
   categoryId: number = 0
-  indicatorName: string = ''
-  categoryName: string = ''
+  indicator: Indicator = {
+    index: 0,
+    alias: '',
+    helpText: '',
+    name: ''
+  }
+  category: Category = {
+    name: '',
+    helpText: '',
+    id: 0,
+    indicator: this.indicator
+  }
   fetchCategoryById = false
   ngOnInit() {
     this.getCategoryById()
@@ -41,8 +53,7 @@ export class UploadOfEvidenceComponent implements OnInit {
     this.categoryService.getById(this.categoryId).subscribe({
       next: (res) => {
         if (res.status === 'success') {
-          this.indicatorName = res.data.indicator.alias
-          this.categoryName = res.data.name
+          this.category = res.data
           this.fetchCategoryById = false
         }
       },
