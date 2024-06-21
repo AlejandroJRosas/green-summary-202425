@@ -8,7 +8,9 @@ import {
   HttpStatus,
   HttpCode,
   Query,
-  Patch
+  Patch,
+  UseInterceptors,
+  UploadedFile
 } from '@nestjs/common'
 import { EvidencesService } from './evidences.service'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
@@ -21,12 +23,19 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-evidences-by-param.dto'
 import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
+import { FileInterceptor } from '@nestjs/platform-express'
+import { diskStorage } from 'multer'
+import { renameFile } from 'src/shared/file-upload'
+import { ConfigService } from 'nestjs-config'
 
 @ApiTags('Evidences')
 @Controller('evidences')
 @Roles(Role.Coordinator, Role.Admin, Role.Department)
 export class EvidencesController {
-  constructor(private readonly evidencesService: EvidencesService) {}
+  constructor(
+    private configService: ConfigService,
+    private readonly evidencesService: EvidencesService
+  ) {}
 
   @Get()
   async findAll(
@@ -60,16 +69,42 @@ export class EvidencesController {
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
-  async create(@Body() createEvidenceDto: CreateEvidenceDto) {
+  @UseInterceptors(
+    FileInterceptor('fileLink', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: renameFile
+      }),
+      limits: { fileSize: 2097152 }
+    })
+  )
+  async create(
+    @UploadedFile() fileLink: Express.Multer.File,
+    @Body() createEvidenceDto: CreateEvidenceDto
+  ) {
+    const name = this.configService.get('link')
+    createEvidenceDto.fileLink = `${name.URL_BACK}/uploads/${fileLink.filename}`
     const newEvidence = await this.evidencesService.create(createEvidenceDto)
     return newEvidence
   }
 
   @Patch(':id')
+  @UseInterceptors(
+    FileInterceptor('fileLink', {
+      storage: diskStorage({
+        destination: './uploads',
+        filename: renameFile
+      }),
+      limits: { fileSize: 2097152 }
+    })
+  )
   async update(
     @Param('id') id: string,
+    @UploadedFile() fileLink: Express.Multer.File,
     @Body() updateEvidenceDto: UpdateEvidenceDto
   ) {
+    const name = this.configService.get('link')
+    updateEvidenceDto.fileLink = `${name.URL_BACK}/uploads/${fileLink.filename}`
     const updatedEvidence = await this.evidencesService.update(
       +id,
       updateEvidenceDto
