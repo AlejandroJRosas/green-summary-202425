@@ -183,6 +183,9 @@ importers:
       rxjs:
         specifier: ^7.8.1
         version: 7.8.1
+      shared:
+        specifier: workspace:*
+        version: link:../../shared
       typeorm:
         specifier: ^0.3.20
         version: 0.3.20(pg@8.11.5)(ts-node@10.9.2(@types/node@20.12.12)(typescript@5.4.5))

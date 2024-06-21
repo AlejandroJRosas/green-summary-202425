@@ -18,10 +18,10 @@ export class Criteria {
   @Column()
   subIndex: number
 
-  @Column({ type: 'varchar', length: 255, nullable: false })
+  @Column({ nullable: false })
   name: string
 
-  @Column({ type: 'varchar', length: 7, nullable: false })
+  @Column({ nullable: false })
   alias: string
 
   @Column({ type: 'text', nullable: false })
