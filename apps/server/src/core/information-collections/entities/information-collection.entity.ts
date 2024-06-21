@@ -32,6 +32,9 @@ export class InformationCollection {
   category: Category
 
   @Column({ type: 'text' })
+  name: string
+
+  @Column({ type: 'text' })
   summary: string
 
   @CreateDateColumn({

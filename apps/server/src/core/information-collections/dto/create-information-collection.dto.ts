@@ -1,4 +1,4 @@
-import { IsString, IsNotEmpty, IsNumber } from 'class-validator'
+import { IsString, IsNotEmpty, IsNumber, MaxLength } from 'class-validator'
 
 export class CreateInformationCollectionDto {
   @IsNumber()
@@ -13,7 +13,13 @@ export class CreateInformationCollectionDto {
   @IsNotEmpty()
   categoryId: number
 
+  @MaxLength(280)
   @IsString()
   @IsNotEmpty()
   summary: string
+
+  @MaxLength(100)
+  @IsString()
+  @IsNotEmpty()
+  name: string
 }
