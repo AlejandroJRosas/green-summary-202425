@@ -34,13 +34,23 @@ export class RecommendationsService {
     const { recopilationId, departmentId, categoryId } = createRecommendationDto
 
     const [departmentPerRecopilation, category] = await Promise.all([
-      this.departmentsPerRecopilationsRepository.findOneByOrFail({
-        department: { id: departmentId },
-        recopilation: { id: recopilationId }
-      }),
-      this.categoriesRepository.findOneByOrFail({
-        id: categoryId
-      })
+      this.departmentsPerRecopilationsRepository
+        .findOneByOrFail({
+          department: { id: departmentId },
+          recopilation: { id: recopilationId }
+        })
+        .catch(() => {
+          throw new Error(
+            `No se encontró la combinación de departamento con ID ${departmentId} y recopilación con ID ${recopilationId}.`
+          )
+        }),
+      this.categoriesRepository
+        .findOneByOrFail({
+          id: categoryId
+        })
+        .catch(() => {
+          throw new Error(`No se encontró la categoría con ID ${categoryId}.`)
+        })
     ])
 
     const recommendation = this.recommendationsRepository.create({
@@ -74,17 +84,26 @@ export class RecommendationsService {
   }
 
   async findOne(id: number): Promise<Recommendation> {
-    return await this.recommendationsRepository.findOneOrFail({
-      where: { id },
-      relations: ['categoria', 'departmentPerRecopilation']
-    })
+    try {
+      return await this.recommendationsRepository.findOneOrFail({
+        where: { id },
+        relations: ['category', 'departmentPerRecopilation']
+      })
+    } catch (error) {
+      throw new Error(`No se encontró la recomendación con ID ${id}.`)
+    }
   }
 
   async remove(id: number): Promise<void> {
-    const recommend = await this.recommendationsRepository.findOneByOrFail({
-      id
-    })
-
-    await this.recommendationsRepository.remove(recommend)
+    try {
+      const recommend = await this.recommendationsRepository.findOneByOrFail({
+        id
+      })
+      await this.recommendationsRepository.remove(recommend)
+    } catch (error) {
+      throw new Error(
+        `No se encontró la recomendación con ID ${id} para eliminar.`
+      )
+    }
   }
 }

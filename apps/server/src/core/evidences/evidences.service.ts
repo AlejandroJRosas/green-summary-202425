@@ -42,25 +42,30 @@ export class EvidencesService {
   }
 
   async findOne(id: number): Promise<Evidence> {
-    return this.evidenceRepository.findOne({
-      where: { id },
-      relations: ['collection']
-    })
+    try {
+      return await this.evidenceRepository.findOneOrFail({
+        where: { id },
+        relations: ['collection']
+      })
+    } catch (error) {
+      throw new NotFoundException(`No se encontró la evidencia con ID ${id}.`)
+    }
   }
 
   async create(createEvidenceDto: CreateEvidenceDto): Promise<Evidence> {
-    const coleccion =
-      await this.informationCollectionRepository.findOneByOrFail({
+    const collection = await this.informationCollectionRepository
+      .findOneByOrFail({
         id: createEvidenceDto.collectionId
       })
-
-    if (!coleccion) {
-      throw new NotFoundException('Collection not found')
-    }
+      .catch(() => {
+        throw new NotFoundException(
+          `No se encontró la colección de información con ID ${createEvidenceDto.collectionId}.`
+        )
+      })
 
     const evidence = this.evidenceRepository.create({
       ...createEvidenceDto,
-      collection: coleccion
+      collection: collection
     })
 
     return this.evidenceRepository.save(evidence)
@@ -71,10 +76,21 @@ export class EvidencesService {
     updateEvidenceDto: UpdateEvidenceDto
   ): Promise<Evidence> {
     await this.evidenceRepository.update(id, updateEvidenceDto)
-    return this.evidenceRepository.findOneByOrFail({ id })
+    try {
+      return await this.evidenceRepository.findOneByOrFail({ id })
+    } catch (error) {
+      throw new NotFoundException(`No se encontró la evidencia con ID ${id}.`)
+    }
   }
 
   async remove(id: number): Promise<void> {
-    await this.evidenceRepository.delete(id)
+    try {
+      await this.evidenceRepository.findOneByOrFail({ id })
+      await this.evidenceRepository.delete(id)
+    } catch (error) {
+      throw new NotFoundException(
+        `No se encontró la evidencia con ID ${id} para eliminar.`
+      )
+    }
   }
 }

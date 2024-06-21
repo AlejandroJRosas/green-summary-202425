@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import {
   EntityNotFoundError,
@@ -71,156 +71,187 @@ export class RecopilationsService {
   }
 
   async findOne(id: number): Promise<Recopilation> {
-    return this.recopilationsRepository.findOneByOrFail({ id })
+    try {
+      return this.recopilationsRepository.findOneByOrFail({ id })
+    } catch (error) {
+      throw new NotFoundException(`Recopilación con ID ${id} no encontrada.`)
+    }
   }
 
   async create(recopilationData: CreateRecopilationDto): Promise<Recopilation> {
-    const recopilation = this.recopilationsRepository.create(recopilationData)
-
-    return this.recopilationsRepository.save(recopilation)
+    try {
+      const recopilation = this.recopilationsRepository.create(recopilationData)
+      return await this.recopilationsRepository.save(recopilation)
+    } catch (error) {
+      throw new Error('Error al crear la recopilación.')
+    }
   }
 
   async update(
     id: number,
     recopilationData: UpdateRecopilationDto
   ): Promise<Recopilation> {
-    await this.recopilationsRepository.findOneByOrFail({
-      id
-    })
-
-    await this.recopilationsRepository.update(id, recopilationData)
-
-    return this.recopilationsRepository.findOneByOrFail({ id })
+    try {
+      await this.recopilationsRepository.findOneByOrFail({ id })
+      await this.recopilationsRepository.update(id, recopilationData)
+      return await this.recopilationsRepository.findOneByOrFail({ id })
+    } catch (error) {
+      throw new NotFoundException(`Recopilación con ID ${id} no encontrada.`)
+    }
   }
 
   async remove(id: number): Promise<void> {
-    const recopilation = await this.recopilationsRepository.findOneByOrFail({
-      id
-    })
-
-    await this.recopilationsRepository.remove([recopilation])
+    try {
+      const recopilation = await this.recopilationsRepository.findOneByOrFail({
+        id
+      })
+      await this.recopilationsRepository.remove([recopilation])
+    } catch (error) {
+      throw new NotFoundException(`Recopilación con ID ${id} no encontrada.`)
+    }
   }
 
   async relateToIndicators(
     relateIndicatorsToRecopilationDto: RelateIndicatorsToRecopilationDto
   ) {
-    const { recopilationId, indicators } = relateIndicatorsToRecopilationDto
+    try {
+      const { recopilationId, indicators } = relateIndicatorsToRecopilationDto
 
-    const recopilation = await this.recopilationsRepository.findOneOrFail({
-      where: { id: recopilationId },
-      relations: ['categorizedCriterion', 'indicatorsPerRecopilations']
-    })
-
-    for (const i of indicators) {
-      const indicator = await this.indicatorsRepository.findOneOrFail({
-        where: { index: i.indicatorId },
-        relations: ['categories', 'criterion']
+      const recopilation = await this.recopilationsRepository.findOneOrFail({
+        where: { id: recopilationId },
+        relations: ['categorizedCriterion', 'indicatorsPerRecopilations']
       })
 
-      for (const c of i.criterion) {
-        const [criteria, category] = await Promise.all([
-          this.criterionRepository.findOneByOrFail({ id: c.criteriaId }),
-          this.categoriesRepository.findOneByOrFail({ id: c.categoryId })
-        ])
-
-        if (!indicator.criterion.some((c) => c.id === criteria.id)) {
-          throw new EntityNotFoundError(Criteria, criteria.id)
-        }
-
-        if (!indicator.categories.some((c) => c.id === category.id)) {
-          throw new EntityNotFoundError(Category, category.id)
-        }
-
-        const categorizedCriteria = this.categorizedCriteriaRepository.create({
-          criteria,
-          category
+      for (const i of indicators) {
+        const indicator = await this.indicatorsRepository.findOneOrFail({
+          where: { index: i.indicatorId },
+          relations: ['categories', 'criterion']
         })
 
-        recopilation.categorizedCriterion.push(categorizedCriteria)
+        for (const c of i.criterion) {
+          const [criteria, category] = await Promise.all([
+            this.criterionRepository.findOneByOrFail({ id: c.criteriaId }),
+            this.categoriesRepository.findOneByOrFail({ id: c.categoryId })
+          ])
+
+          if (!indicator.criterion.some((crit) => crit.id === criteria.id)) {
+            throw new EntityNotFoundError(
+              Criteria,
+              `Criteria ID ${criteria.id} not found in indicator.`
+            )
+          }
+
+          if (!indicator.categories.some((cat) => cat.id === category.id)) {
+            throw new EntityNotFoundError(
+              Category,
+              `Category ID ${category.id} not found in indicator.`
+            )
+          }
+
+          const categorizedCriteria = this.categorizedCriteriaRepository.create(
+            {
+              criteria,
+              category
+            }
+          )
+
+          recopilation.categorizedCriterion.push(categorizedCriteria)
+        }
+
+        const indicatorPerRepository =
+          this.indicatorsPerRecopilationRepository.create({
+            indicator,
+            recopilation
+          })
+
+        recopilation.indicatorsPerRecopilations.push(indicatorPerRepository)
       }
 
-      const indicatorPerRepository =
-        this.indicatorsPerRecopilationRepository.create({
-          indicator,
+      await this.indicatorsPerRecopilationRepository.save(
+        recopilation.indicatorsPerRecopilations.map((ipr) => ({
+          ...ipr,
           recopilation
-        })
+        }))
+      )
+      await this.categorizedCriteriaRepository.save(
+        recopilation.categorizedCriterion.map((cc) => ({ ...cc, recopilation }))
+      )
 
-      recopilation.indicatorsPerRecopilations.push(indicatorPerRepository)
+      return recopilation
+    } catch (error) {
+      throw new Error('Error relacionando indicadores a la recopilación.')
     }
-
-    await this.indicatorsPerRecopilationRepository.save(
-      recopilation.indicatorsPerRecopilations.map((ipr) => ({
-        ...ipr,
-        recopilation
-      }))
-    )
-    await this.categorizedCriteriaRepository.save(
-      recopilation.categorizedCriterion.map((cc) => ({ ...cc, recopilation }))
-    )
-
-    return recopilation
   }
 
   async recommendCategories(recommendCategoriesDto: RecommendCategoriesDto) {
-    const { recopilationId, departments } = recommendCategoriesDto
+    try {
+      const { recopilationId, departments } = recommendCategoriesDto
 
-    const recommendations: Recommendation[] = []
+      const recommendations: Recommendation[] = []
 
-    for (const dep of departments) {
-      const departmentPerRecopilation =
-        await this.departmentsPerRecopilationsRepository.findOneOrFail({
-          where: {
-            department: { id: dep.departmentId },
-            recopilation: { id: recopilationId }
-          }
-        })
-
-      for (const cat of dep.categories) {
-        const categorizedCriteria =
-          await this.categorizedCriteriaRepository.findOneOrFail({
+      for (const dep of departments) {
+        const departmentPerRecopilation =
+          await this.departmentsPerRecopilationsRepository.findOneOrFail({
             where: {
-              recopilation: { id: recopilationId },
-              category: { id: cat.categoryId }
-            },
-            relations: ['category']
+              department: { id: dep.departmentId },
+              recopilation: { id: recopilationId }
+            }
           })
 
-        recommendations.push(
-          this.recommendationRepository.create({
-            category: categorizedCriteria.category,
-            departmentPerRecopilation
-          })
-        )
-      }
-    }
+        for (const cat of dep.categories) {
+          const categorizedCriteria =
+            await this.categorizedCriteriaRepository.findOneOrFail({
+              where: {
+                recopilation: { id: recopilationId },
+                category: { id: cat.categoryId }
+              },
+              relations: ['category']
+            })
 
-    const oldRecommendations = await this.recommendationRepository.find({
-      relations: ['departmentPerRecopilation'],
-      where: {
-        departmentPerRecopilation: {
-          recopilation: { id: recopilationId },
-          department: { id: In(departments.map((d) => d.departmentId)) }
+          recommendations.push(
+            this.recommendationRepository.create({
+              category: categorizedCriteria.category,
+              departmentPerRecopilation
+            })
+          )
         }
       }
-    })
 
-    await this.recommendationRepository.remove(oldRecommendations)
+      const oldRecommendations = await this.recommendationRepository.find({
+        relations: ['departmentPerRecopilation'],
+        where: {
+          departmentPerRecopilation: {
+            recopilation: { id: recopilationId },
+            department: { id: In(departments.map((d) => d.departmentId)) }
+          }
+        }
+      })
 
-    return await this.recommendationRepository.save(recommendations)
+      await this.recommendationRepository.remove(oldRecommendations)
+
+      return await this.recommendationRepository.save(recommendations)
+    } catch (error) {
+      throw new Error('Error al recomendar categorías para la recopilación.')
+    }
   }
 
   async getActiveRecopilations({
     orderBy,
     orderType
   }: OrderByParamDto & OrderTypeParamDto) {
-    const currentDateString = new Date()
+    try {
+      const currentDateString = new Date()
 
-    return this.recopilationsRepository.find({
-      where: {
-        startDate: LessThan(currentDateString),
-        endDate: MoreThan(currentDateString)
-      },
-      order: { [orderBy]: orderType }
-    })
+      return this.recopilationsRepository.find({
+        where: {
+          startDate: LessThan(currentDateString),
+          endDate: MoreThan(currentDateString),
+          departmentEndDate: MoreThan(currentDateString)
+        },
+        order: { [orderBy]: orderType }
+      })
+    } catch (error) {
+      throw new Error('Error al recuperar las recopilaciones activas.')
+    }
   }
 }
