@@ -51,7 +51,6 @@ export class EvidenceComponent {
     this.evidences = this.evidences.filter(
       (_, index) => index !== indexEvidence
     )
-    console.log(this.evidences)
   }
 }
 

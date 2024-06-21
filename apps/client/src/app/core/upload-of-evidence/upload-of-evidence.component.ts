@@ -49,7 +49,7 @@ export class UploadOfEvidenceComponent implements OnInit {
       error: (e) => {
         console.error(e)
         this.fetchCategoryById = false
-        this.router.navigateByUrl('/404 Not Found')
+        // this.router.navigateByUrl('/404 Not Found')
       }
     })
   }

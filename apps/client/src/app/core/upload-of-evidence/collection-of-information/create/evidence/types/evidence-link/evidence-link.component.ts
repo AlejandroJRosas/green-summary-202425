@@ -1,7 +1,7 @@
-import { Component } from '@angular/core'
+import { Component, EventEmitter, Output } from '@angular/core'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { InputTextModule } from 'primeng/inputtext'
-import { FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ValidatedFormGroup } from '../../../../../../../common/validated-form-group/validated-form-group'
 import { string, object } from 'yup'
 
@@ -34,6 +34,11 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
   errors = {
     description: '',
     externalLink: ''
+  }
+  @Output()
+  spreadFormGroup = new EventEmitter<FormGroup>()
+  onSpread() {
+    this.spreadFormGroup.emit(this.formGroup)
   }
 }
 
