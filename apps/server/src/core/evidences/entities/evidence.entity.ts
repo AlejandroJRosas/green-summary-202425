@@ -27,7 +27,7 @@ export abstract class Evidence {
   @Column({ type: 'text', nullable: false })
   description: string
 
-  @Column({ type: 'text', nullable: false })
+  @Column({ type: 'text', nullable: true })
   error: string
 
   @Column({

@@ -1,5 +1,4 @@
 import {
-  IsDateString,
   IsString,
   IsOptional,
   IsNotEmpty,
@@ -9,16 +8,12 @@ import {
 import { EvidenceType } from '../evidences.constants'
 
 export class CreateEvidenceDto {
-  @IsDateString()
-  @IsNotEmpty()
-  uploadDate: string
-
   @IsString()
   @IsNotEmpty()
   description: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   error: string
 
   @IsEnum(EvidenceType)
