@@ -11,6 +11,8 @@ import { DocumentsController } from './document.controller'
 import { ImagesController } from './image.controller'
 import { DocumentsService } from './document.service'
 import { ImagesService } from './image.service'
+import { LinksController } from './link.controller'
+import { LinksService } from './link.service'
 
 @Module({
   imports: [
@@ -22,7 +24,12 @@ import { ImagesService } from './image.service'
       InformationCollection
     ])
   ],
-  controllers: [EvidencesController, DocumentsController, ImagesController],
-  providers: [EvidencesService, DocumentsService, ImagesService]
+  controllers: [
+    EvidencesController,
+    DocumentsController,
+    ImagesController,
+    LinksController
+  ],
+  providers: [EvidencesService, DocumentsService, ImagesService, LinksService]
 })
 export class EvidencesModule {}
