@@ -1,24 +1,19 @@
 import {
-  IsDateString,
   IsString,
   IsOptional,
   IsNotEmpty,
   IsEnum,
-  IsNumberString
+  IsNumber
 } from 'class-validator'
 import { EvidenceType } from '../evidences.constants'
 
 export class CreateEvidenceDto {
-  @IsDateString()
-  @IsNotEmpty()
-  uploadDate: string
-
   @IsString()
   @IsNotEmpty()
   description: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   error: string
 
   @IsEnum(EvidenceType)
@@ -34,6 +29,6 @@ export class CreateEvidenceDto {
   fileLink?: string
 
   @IsNotEmpty()
-  @IsNumberString()
+  @IsNumber()
   collectionId: number
 }
