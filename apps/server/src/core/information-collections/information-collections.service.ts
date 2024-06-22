@@ -93,7 +93,8 @@ export class InformationCollectionsService {
     ])
 
     await this.informationCollectionsRepository.update(id, {
-      ...updateInformationCollectionDto,
+      name: updateInformationCollectionDto.name,
+      summary: updateInformationCollectionDto.summary,
       recopilation,
       category,
       department
