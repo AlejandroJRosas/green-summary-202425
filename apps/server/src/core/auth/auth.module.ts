@@ -20,7 +20,7 @@ import { RolesGuard } from './roles.guard'
         return {
           global: true,
           secret: JWT_CONFIG.SECRET,
-          signOptions: { expiresIn: '2h' }
+          signOptions: { expiresIn: '10d' }
         }
       },
       inject: [ConfigService]
