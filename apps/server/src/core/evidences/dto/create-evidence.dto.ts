@@ -3,7 +3,7 @@ import {
   IsOptional,
   IsNotEmpty,
   IsEnum,
-  IsNumberString
+  IsNumber
 } from 'class-validator'
 import { EvidenceType } from '../evidences.constants'
 
@@ -29,6 +29,6 @@ export class CreateEvidenceDto {
   fileLink?: string
 
   @IsNotEmpty()
-  @IsNumberString()
+  @IsNumber()
   collectionId: number
 }
