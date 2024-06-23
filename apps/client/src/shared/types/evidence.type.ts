@@ -1,9 +1,11 @@
+import { InformationCollection } from './information-collection.type'
+
 export interface Evidence {
-  uploadDate: string
+  id: number
   description: string
-  error: string
+  error: string | null
   type: 'document' | 'link' | 'image'
-  externalLink: string
-  fileLink: string
-  collectionId: 0
+  externalLink: string | null
+  fileLink: string | null
+  collection: InformationCollection
 }

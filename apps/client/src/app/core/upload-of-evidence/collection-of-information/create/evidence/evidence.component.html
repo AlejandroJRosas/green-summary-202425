@@ -3,7 +3,6 @@
     expandIcon="pi pi-minus"
     collapseIcon="pi pi-plus"
     [toggleable]="true"
-    collapsed="true"
     iconPos="start"
     styleClass="pb-3"
   >
@@ -11,7 +10,7 @@
       <section
         class="flex flex-row justify-content-start align-items-center gap-4 w-full"
       >
-        <h3 class="text-lg">Evidencia</h3>
+        <h3 class="text-lg">Evidencia {{ index }}</h3>
         <button class="p-panel-header-icon p-link mr-2">
           <span
             class="pi pi-trash"

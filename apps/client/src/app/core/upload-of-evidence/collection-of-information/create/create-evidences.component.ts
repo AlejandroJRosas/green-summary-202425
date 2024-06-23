@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, OnInit } from '@angular/core'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { ButtonModule } from 'primeng/button'
 import { EvidenceComponent } from './evidence/evidence.component'
@@ -6,9 +6,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { string, object } from 'yup'
 import { ValidatedFormGroup } from '../../../../common/validated-form-group/validated-form-group'
 import { PanelModule } from 'primeng/panel'
+import { ActivatedRoute, Router } from '@angular/router'
+import { InformationCollectionService } from '../../../../services/information-collection.service'
+import { InformationCollection } from '../../../../../shared/types/information-collection.type'
 
 @Component({
-  selector: 'create-collection',
+  selector: 'create-evidences',
   standalone: true,
   imports: [
     InputTextareaModule,
@@ -18,11 +21,18 @@ import { PanelModule } from 'primeng/panel'
     ReactiveFormsModule,
     PanelModule
   ],
-  templateUrl: './create-collection.component.html',
+  templateUrl: './create-evidences.component.html',
   styles: ``
 })
-export class CreateCollectionComponent extends ValidatedFormGroup<FormValues> {
-  constructor() {
+export class CreateEvidencesComponent
+  extends ValidatedFormGroup<FormValues>
+  implements OnInit
+{
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private InformationCollectionService: InformationCollectionService
+  ) {
     const initialControlValues = {
       description: ''
     }
@@ -30,6 +40,12 @@ export class CreateCollectionComponent extends ValidatedFormGroup<FormValues> {
       description: string().required('La descripción es requerida')
     })
     super(initialControlValues, validationSchema)
+    this.route.params.subscribe((params) => {
+      this.informationCollection.id = parseInt(
+        params['informationCollectionId'],
+        10
+      )
+    })
   }
 
   errors = {
@@ -40,6 +56,34 @@ export class CreateCollectionComponent extends ValidatedFormGroup<FormValues> {
     evidences: []
   }
   evidences: number[] = []
+  informationCollection: InformationCollection = {
+    id: 0,
+    summary: '',
+    name: '',
+    evidences: [],
+    recopilationId: 0,
+    categoryId: 0,
+    departmentId: 0
+  }
+
+  ngOnInit() {
+    this.getInformationCollectionById()
+  }
+  getInformationCollectionById() {
+    this.InformationCollectionService.getById(
+      this.informationCollection.id
+    ).subscribe({
+      next: (res) => {
+        if (res.status === 'success') {
+          this.informationCollection = res.data
+        }
+      },
+      error: (e) => {
+        console.error(e)
+        this.router.navigateByUrl('/404 Not Found')
+      }
+    })
+  }
   addEvidence() {
     this.evidences.push(this.evidences.length + 1)
   }

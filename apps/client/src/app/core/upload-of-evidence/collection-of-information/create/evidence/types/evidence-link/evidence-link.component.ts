@@ -1,9 +1,13 @@
-import { Component, EventEmitter, Output } from '@angular/core'
+import { Component, Inject } from '@angular/core'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { InputTextModule } from 'primeng/inputtext'
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ValidatedFormGroup } from '../../../../../../../common/validated-form-group/validated-form-group'
+import { ButtonModule } from 'primeng/button'
 import { string, object } from 'yup'
+import { EvidenceDTO } from '../../../../../../../services/evidence/evidence.service'
+import { Toast } from '../../../../../../../common/toast/toast.component'
+import { LinkEvidenceService } from '../../../../../../../services/evidence/link-evidence.service'
 
 @Component({
   selector: 'evidence-link',
@@ -12,13 +16,17 @@ import { string, object } from 'yup'
     InputTextModule,
     InputTextareaModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ButtonModule
   ],
   templateUrl: './evidence-link.component.html',
   styles: ``
 })
 export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
-  constructor() {
+  constructor(
+    @Inject(Toast) private toast: Toast,
+    private LinkEvidenceService: LinkEvidenceService
+  ) {
     const initialControlValues = {
       description: '',
       externalLink: ''
@@ -31,14 +39,43 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
     })
     super(initialControlValues, validationSchema)
   }
+  createdEvidence: boolean = false
   errors = {
     description: '',
     externalLink: ''
   }
-  @Output()
-  spreadFormGroup = new EventEmitter<FormGroup>()
-  onSpread() {
-    this.spreadFormGroup.emit(this.formGroup)
+  disableForm() {
+    this.formGroup.get('description')?.disable()
+    this.formGroup.get('externalLink')?.disable()
+  }
+  onCreate() {
+    if (this.formGroup.invalid) return
+    const { description, externalLink } = this.formGroup.controls
+    const evidenceLink: EvidenceDTO = {
+      description: description.value,
+      error: 'error',
+      type: 'link',
+      externalLink: externalLink.value,
+      fileLink: null,
+      collectionId: '12'
+    }
+    this.LinkEvidenceService.create(evidenceLink).subscribe({
+      next: (res) => {
+        if (res.status === 'success') {
+          this.toast.show(
+            'success',
+            'Creado',
+            'Evidencia tipo link creada con éxito'
+          )
+          this.createdEvidence = true
+          this.disableForm()
+        }
+      },
+      error: (e) => {
+        console.error(e)
+        this.toast.show('error', 'Error', e.error.data.message)
+      }
+    })
   }
 }
 

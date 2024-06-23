@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { ButtonModule } from 'primeng/button'
 import { DropdownModule } from 'primeng/dropdown'
 import { EvidenceDocumentComponent } from './types/evidence-document/evidence-document.component'
@@ -37,7 +37,7 @@ export class EvidenceComponent {
       code: ''
     })
   })
-
+  @Input() index: number = 0
   typesOfEvidence = [
     { name: 'Imagen', code: 'image' },
     { name: 'Documento', code: 'document' },

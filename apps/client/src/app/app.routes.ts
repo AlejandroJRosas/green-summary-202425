@@ -11,7 +11,7 @@ import { LayoutComponent } from './common/layout/layout.component'
 import { roleGuard } from './guards/role.guard'
 import { Role } from './services/auth.service'
 import { UploadOfEvidenceComponent } from './core/upload-of-evidence/upload-of-evidence.component'
-import { CreateCollectionComponent } from './core/upload-of-evidence/collection-of-information/create/create-collection.component'
+import { CreateEvidencesComponent } from './core/upload-of-evidence/collection-of-information/create/create-evidences.component'
 
 export const routes: Routes = [
   {
@@ -43,15 +43,15 @@ export const routes: Routes = [
         component: SchemeComponent
       },
       {
-        path: 'collection-of-information/:recopilationId/:categoryId',
+        path: 'information-collection/:recopilationId/:categoryId',
         title: 'Colecciones de información',
         component: UploadOfEvidenceComponent,
         canActivate: [roleGuard([Role.DEPARTMENT])]
       },
       {
-        path: 'create/collection-of-information/:recopilationId/:categoryId',
-        title: 'Crear Colección de información',
-        component: CreateCollectionComponent
+        path: 'create/information-collection/:recopilationId/:categoryId/:informationCollectionId',
+        title: 'Agregar evidencias',
+        component: CreateEvidencesComponent
       }
     ]
   },

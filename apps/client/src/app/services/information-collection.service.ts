@@ -50,7 +50,10 @@ export class InformationCollectionService {
   }
 }
 
-export type InformationCollectionDTO = Omit<InformationCollection, 'id'>
+export type InformationCollectionDTO = Omit<
+  InformationCollection,
+  'id' | 'evidences'
+>
 type Paginated = {
   first: number
   rows: number

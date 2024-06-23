@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute } from '@angular/router'
+import { ConfirmationService } from 'primeng/api'
 import { ButtonModule } from 'primeng/button'
 import { CategoryService } from '../../services/category.service'
 import { Router } from '@angular/router'
@@ -16,6 +17,7 @@ import { Category } from '../../../shared/types/category.type'
     CollectionOfInformationComponent,
     ProgressSpinnerModule
   ],
+  providers: [ConfirmationService],
   templateUrl: './upload-of-evidence.html',
   styles: ``
 })
@@ -60,7 +62,7 @@ export class UploadOfEvidenceComponent implements OnInit {
       error: (e) => {
         console.error(e)
         this.fetchCategoryById = false
-        // this.router.navigateByUrl('/404 Not Found')
+        this.router.navigateByUrl('/404 Not Found')
       }
     })
   }

@@ -31,4 +31,15 @@
       <small class="p-error">{{ errors.externalLink }}</small>
     </div>
   </form>
+  <footer class="pt-3">
+    <p-button
+      label="Guardar"
+      (click)="onCreate()"
+      size="small"
+      icon="pi pi-check"
+      [outlined]="true"
+      severity="success"
+      [disabled]="formGroup.invalid || createdEvidence"
+    />
+  </footer>
 </section>

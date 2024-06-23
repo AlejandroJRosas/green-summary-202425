@@ -38,25 +38,72 @@
       (onSelect)="onSelect($event)"
       [multiple]="false"
       accept="image/*"
-      maxFileSize="1000000"
+      maxFileSize="2097152"
       chooseLabel="Seleccionar"
       showCancelButton="false"
       showUploadButton="false"
       formControlName="fileLink"
-      (input)="errorsUpdate('fileLink')"
-      (blur)="errorsUpdate('fileLink')"
+      auto="true"
+      [disabled]="createdEvidence"
+      invalidFileSizeMessageSummary="Tamaño de archivo inválido"
+      invalidFileSizeMessageDetail="El tamaño de la imágen es superior a 2Mb"
       ngDefaultControl
     >
-      <ng-template pTemplate="content">
-        <!-- @if(uploadFiles.length !== 0){
-                <ul>
-                  <li>
-                    {{uploadFiles[0].name}} - {{uploadFiles[0].size}}
-                  </li>
-                </ul>
-              } -->
+      <ng-template pTemplate="uploader">
+        @if (createdEvidence) {
+          <div
+            class="flex flex-row justify-content-between align-content-center w-9"
+          >
+            <p-image
+              [src]="imageBlobUrl"
+              alt="Image"
+              width="250"
+              [preview]="true"
+            />
+            <p style="word-break: break-word">
+              {{ this.formGroup.controls.fileLink.value?.name }}
+            </p>
+            <p>{{ this.formGroup.controls.fileLink.value?.size }}KB</p>
+          </div>
+        } @else if (removeFile === false) {
+          <div
+            class="flex flex-row justify-content-between align-content-center"
+          >
+            <p-image
+              [src]="imageBlobUrl"
+              alt="Image"
+              width="250"
+              [preview]="true"
+            >
+              <ng-template pTemplate="indicator">
+                <div class="flex flex-column">
+                  <i class="pi pi-eye"></i>
+                  <p>Ver preview de la imagen</p>
+                </div>
+              </ng-template>
+            </p-image>
+            <p style="word-break: break-word">
+              {{ this.formGroup.controls.fileLink.value?.name }}
+            </p>
+            <p>{{ this.formGroup.controls.fileLink.value?.size }}KB</p>
+            <p-button icon="pi pi-times" (click)="onRemove()" />
+          </div>
+        } @else {
+          <ng-template pTemplate="content" />
+        }
       </ng-template>
     </p-fileUpload>
     <small class="p-error">{{ errors.fileLink }}</small>
   </form>
+  <footer class="pt-3">
+    <p-button
+      label="Guardar"
+      (click)="onCreate()"
+      size="small"
+      icon="pi pi-check"
+      [outlined]="true"
+      severity="success"
+      [disabled]="formGroup.invalid || createdEvidence"
+    />
+  </footer>
 </section>
