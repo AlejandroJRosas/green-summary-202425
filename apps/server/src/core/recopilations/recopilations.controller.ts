@@ -103,6 +103,23 @@ export class RecopilationsController {
   }
 
   @Roles(Role.Coordinator, Role.Admin)
+  @Put()
+  async updateOrCreate(@Body() recopilationData: UpdateRecopilationDto) {
+    if (!recopilationData.id) {
+      return await this.recopilationsService.create(
+        recopilationData as CreateRecopilationDto
+      )
+    }
+
+    const updatedRecopilation = await this.recopilationsService.update(
+      recopilationData.id,
+      recopilationData
+    )
+
+    return updatedRecopilation
+  }
+
+  @Roles(Role.Coordinator, Role.Admin)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string) {
