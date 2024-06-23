@@ -8,6 +8,7 @@ import { string, object } from 'yup'
 import { EvidenceDTO } from '../../../../../../../services/evidence/evidence.service'
 import { Toast } from '../../../../../../../common/toast/toast.component'
 import { LinkEvidenceService } from '../../../../../../../services/evidence/link-evidence.service'
+import { PanelModule } from 'primeng/panel'
 
 @Component({
   selector: 'evidence-link',
@@ -17,7 +18,8 @@ import { LinkEvidenceService } from '../../../../../../../services/evidence/link
     InputTextareaModule,
     FormsModule,
     ReactiveFormsModule,
-    ButtonModule
+    ButtonModule,
+    PanelModule
   ],
   templateUrl: './evidence-link.component.html',
   styles: ``
@@ -40,6 +42,8 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
     super(initialControlValues, validationSchema)
   }
   createdEvidence: boolean = false
+  editedEvience: boolean = false
+  evidenceId: number = 0
   errors = {
     description: '',
     externalLink: ''
@@ -47,6 +51,10 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
   disableForm() {
     this.formGroup.get('description')?.disable()
     this.formGroup.get('externalLink')?.disable()
+  }
+  enableForm() {
+    this.formGroup.get('description')?.enable()
+    this.formGroup.get('externalLink')?.enable()
   }
   onCreate() {
     if (this.formGroup.invalid) return
@@ -69,10 +77,53 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
           )
           this.createdEvidence = true
           this.disableForm()
+          this.evidenceId = res.data.id
         }
       },
       error: (e) => {
         console.error(e)
+        this.toast.show('error', 'Error', e.error.data.message)
+      }
+    })
+  }
+  onEdit() {
+    if (this.formGroup.invalid) return
+    const { description, externalLink } = this.formGroup.controls
+    const evidenceLink: EvidenceDTO = {
+      description: description.value,
+      error: 'error',
+      type: 'link',
+      externalLink: externalLink.value,
+      fileLink: null,
+      collectionId: '12'
+    }
+    this.LinkEvidenceService.edit(this.evidenceId, evidenceLink).subscribe({
+      next: () => {
+        this.toast.show(
+          'success',
+          'Editado',
+          'Colección de información editado con éxito'
+        )
+        this.editedEvience = true
+        this.disableForm()
+      },
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
+      }
+    })
+  }
+  onDelete() {
+    this.LinkEvidenceService.delete(this.evidenceId).subscribe({
+      next: () => {
+        this.toast.show(
+          'success',
+          'Creado',
+          'Evidencia tipo link eliminada con éxito'
+        )
+      },
+      error: (e) => {
+        console.error(e)
+        this.editedEvience = false
         this.toast.show('error', 'Error', e.error.data.message)
       }
     })

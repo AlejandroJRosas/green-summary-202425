@@ -37,6 +37,9 @@ export class EvidenceComponent {
       code: ''
     })
   })
+  readonly: boolean = false
+  edit: boolean = false
+  delete: boolean = false
   @Input() index: number = 0
   typesOfEvidence = [
     { name: 'Imagen', code: 'image' },

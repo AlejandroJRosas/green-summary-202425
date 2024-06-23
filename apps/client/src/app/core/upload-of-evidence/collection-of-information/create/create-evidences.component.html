@@ -31,19 +31,12 @@
   </section>
   <footer class="flex justify-content-between py-3">
     <p-button
-      label="Cancelar"
+      label="Atrás"
+      (click)="goBack()"
       size="small"
-      icon="pi pi-times"
+      icon="pi pi-angle-left"
       [outlined]="true"
-      severity="danger"
-    />
-    <p-button
-      label="Guardar"
-      (click)="onCreate()"
-      size="small"
-      icon="pi pi-check"
-      [outlined]="true"
-      severity="success"
+      severity="info"
     />
   </footer>
 </main>

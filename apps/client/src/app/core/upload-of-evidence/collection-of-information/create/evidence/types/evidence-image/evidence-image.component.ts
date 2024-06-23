@@ -99,7 +99,7 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
           this.toast.show(
             'success',
             'Creado',
-            'Evidencia tipo imágen creada con éxito'
+            'Evidencia tipo imagen creada con éxito'
           )
           this.createdEvidence = true
           console.log(this.createdEvidence)

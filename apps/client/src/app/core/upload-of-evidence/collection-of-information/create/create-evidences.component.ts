@@ -41,13 +41,15 @@ export class CreateEvidencesComponent
     })
     super(initialControlValues, validationSchema)
     this.route.params.subscribe((params) => {
+      this.categoryId = parseInt(params['categoryId'], 10)
+      this.recopilationId = parseInt(params['recopilationId'], 10)
       this.informationCollection.id = parseInt(
         params['informationCollectionId'],
         10
       )
     })
   }
-
+  currentUrl = ''
   errors = {
     description: ''
   }
@@ -56,6 +58,8 @@ export class CreateEvidencesComponent
     evidences: []
   }
   evidences: number[] = []
+  recopilationId: number = 0
+  categoryId: number = 0
   informationCollection: InformationCollection = {
     id: 0,
     summary: '',
@@ -92,6 +96,11 @@ export class CreateEvidencesComponent
       this.formGroup.controls.description.value
     this.createColletionInformation.evidences = this.evidences
     console.log(this.createColletionInformation)
+  }
+  goBack() {
+    this.router.navigateByUrl(
+      `pages/information-collection/${this.recopilationId}/${this.categoryId}`
+    )
   }
 }
 type FormValues = {

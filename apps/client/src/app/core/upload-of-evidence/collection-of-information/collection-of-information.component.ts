@@ -184,7 +184,6 @@ export class CollectionOfInformationComponent
       recopilationId: 1,
       departmentId: JSON.parse(localStorage.getItem('user')!).id as number
     }
-    console.log(informationCollection)
     this.InformationCollectionService.edit(
       this.informationCollectionIdEdit,
       informationCollection
