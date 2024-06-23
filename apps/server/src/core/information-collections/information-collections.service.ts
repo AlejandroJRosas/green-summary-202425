@@ -49,7 +49,10 @@ export class InformationCollectionsService {
   }
 
   async findOne(id: number): Promise<InformationCollection> {
-    return await this.informationCollectionsRepository.findOneByOrFail({ id })
+    return await this.informationCollectionsRepository.findOneOrFail({
+      where: { id },
+      relations: ['evidences', 'recopilation', 'department', 'category']
+    })
   }
 
   async create(
