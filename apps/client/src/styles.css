@@ -31,6 +31,12 @@ body {
   margin: 0px;
   background-color: var(--background-color);
 }
+/* .body[_ngcontent-ng-c2102279284] {
+  z-index: 0;
+  transition: all 0.5s ease;
+  padding: 3rem;
+  height: 100%;
+} */
 
 .p-toast-message {
   border: 1px solid;

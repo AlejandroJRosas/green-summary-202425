@@ -10,6 +10,7 @@ import { file } from '../../../../../../../../utils/yup-file'
 import { EvidenceService } from '../../../../../../../services/evidence/evidence.service'
 import { Toast } from '../../../../../../../common/toast/toast.component'
 import { PanelModule } from 'primeng/panel'
+import { VALUES } from '../../../../../../../../../../../shared/validations'
 
 @Component({
   selector: 'evidence-image',
@@ -37,7 +38,16 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
       fileLink: null
     }
     const validationSchema = object({
-      description: string().required('La descripción es requerida'),
+      description: string()
+        .required('La descripción es requerida')
+        .max(
+          VALUES.descriptionMaxAmount,
+          'La descripción no debe superar los 280 caracteres'
+        )
+        .min(
+          VALUES.descriptionMinAmount,
+          'La descripción debe superar un mínimo de 30 caracteres'
+        ),
       externalLink: string().url('El formato debe ser de tipo URL').optional(),
       fileLink: file().required('La imagen es requerida')
     })

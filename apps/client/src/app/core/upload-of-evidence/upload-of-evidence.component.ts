@@ -46,22 +46,18 @@ export class UploadOfEvidenceComponent implements OnInit {
     id: 0,
     indicator: this.indicator
   }
-  fetchCategoryById = false
   ngOnInit() {
     this.getCategoryById()
   }
   getCategoryById() {
-    this.fetchCategoryById = true
     this.categoryService.getById(this.categoryId).subscribe({
       next: (res) => {
         if (res.status === 'success') {
           this.category = res.data
-          this.fetchCategoryById = false
         }
       },
       error: (e) => {
         console.error(e)
-        this.fetchCategoryById = false
         this.router.navigateByUrl('/404 Not Found')
       }
     })

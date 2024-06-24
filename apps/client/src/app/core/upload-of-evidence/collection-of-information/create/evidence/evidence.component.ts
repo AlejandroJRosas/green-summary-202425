@@ -5,7 +5,7 @@ import { EvidenceDocumentComponent } from './types/evidence-document/evidence-do
 import { EvidenceImageComponent } from './types/evidence-image/evidence-image.component'
 import { EvidenceLinkComponent } from './types/evidence-link/evidence-link.component'
 import { FieldsetModule } from 'primeng/fieldset'
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute } from '@angular/router'
 import { PanelModule } from 'primeng/panel'
 import {
   FormControl,
@@ -32,10 +32,7 @@ import {
   styles: ``
 })
 export class EvidenceComponent {
-  constructor(
-    private route: ActivatedRoute,
-    private router: Router
-  ) {
+  constructor(private route: ActivatedRoute) {
     this.route.params.subscribe((params) => {
       this.informationCollectionId = params['informationCollectionId']
     })

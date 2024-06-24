@@ -10,7 +10,7 @@
       <div
         class="flex flex-row justify-content-start align-items-center gap-4 w-full"
       >
-        <h3 class="text-lg">Evidencia 1</h3>
+        <h3 class="text-lg">Evidencia</h3>
         <div class="flex flex-row gap-1">
           <button class="p-panel-header-icon p-link mr-2" [disabled]="true">
             <span
@@ -68,9 +68,9 @@
         </label>
         <small class="p-error">{{ errors.externalLink }}</small>
       </div>
-      <h1 class="text-color-secondary text-xl">
+      <h3 class="text-color-secondary text-lg">
         Selecciona el documento a subir
-      </h1>
+      </h3>
       <p-fileUpload
         (onRemove)="onRemove()"
         (onSelect)="onSelect($event)"

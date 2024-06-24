@@ -1,4 +1,4 @@
-<section>
+<section class="h-full">
   <form [formGroup]="formGroup">
     <p-dropdown
       [options]="typesOfEvidence"
@@ -15,7 +15,9 @@
         <evidence-link [informationCollectionId]="informationCollectionId" />
       }
       @case ('document') {
-        <evidence-document />
+        <evidence-document
+          [informationCollectionId]="informationCollectionId"
+        />
       }
       @default {
         <p>No hay un tipo de evidencia seleccionado</p>

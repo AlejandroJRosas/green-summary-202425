@@ -12,6 +12,7 @@ import {
   LinkEvidenceService
 } from '../../../../../../../services/evidence/link-evidence.service'
 import { PanelModule } from 'primeng/panel'
+import { VALUES } from '../../../../../../../../../../../shared/validations'
 
 @Component({
   selector: 'evidence-link',
@@ -37,7 +38,16 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
       externalLink: ''
     }
     const validationSchema = object({
-      description: string().required('La descripción es requerida'),
+      description: string()
+        .required('La descripción es requerida')
+        .max(
+          VALUES.descriptionMaxAmount,
+          'La descripción no debe superar los 280 caracteres'
+        )
+        .min(
+          VALUES.descriptionMinAmount,
+          'La descripción debe superar un mínimo de 30 caracteres'
+        ),
       externalLink: string()
         .url('El formato debe ser de tipo URL')
         .required('El link es requerido')
