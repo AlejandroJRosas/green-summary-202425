@@ -1,118 +1,167 @@
 <section class="mt-3 mb-5">
-  <form [formGroup]="formGroup">
-    <div class="flex flex-column gap-2 w-full">
-      <label class="flex flex-column gap-2 w-full">
-        Descripción
-        <textarea
-          pInputTextarea
-          rows="5"
-          cols="40"
-          formControlName="description"
-          [autoResize]="true"
-          (input)="errorsUpdate('description')"
-          (blur)="errorsUpdate('description')"
-        ></textarea>
-      </label>
-      <small class="p-error">{{ errors.description }}</small>
-    </div>
-    <div class="flex flex-column gap-2 pt-4 w-full">
-      <label class="flex flex-column gap-2 w-full">
-        Link externo (opcional)
-        <input
-          pInputText
-          name="externalLink"
-          class="w-full"
-          type="text"
-          formControlName="externalLink"
-          (input)="errorsUpdate('externalLink')"
-          (blur)="errorsUpdate('externalLink')"
+  <p-panel
+    expandIcon="pi pi-minus"
+    collapseIcon="pi pi-plus"
+    [toggleable]="true"
+    iconPos="start"
+    styleClass="pb-3"
+  >
+    <ng-template pTemplate="header" class="p-0">
+      <div
+        class="flex flex-row justify-content-start align-items-center gap-4 w-full"
+      >
+        <h3 class="text-lg">Evidencia 1</h3>
+        <div class="flex flex-row gap-1">
+          <button class="p-panel-header-icon p-link mr-2" [disabled]="true">
+            <span
+              class="pi pi-pencil"
+              (click)="enableformEdit()"
+              [style.color]="createdEvidence ? '#22c55e' : 'darkgrey'"
+              [style.border]="
+                createdEvidence ? 'solid 1.5px #22c55e' : 'solid 1.5px darkgrey'
+              "
+              style="border-radius: 100%; padding: 7px"
+            ></span>
+          </button>
+          <button class="p-panel-header-icon p-link mr-2" [disabled]="true">
+            <span
+              class="pi pi-trash"
+              (click)="onDelete()"
+              [style.color]="createdEvidence ? '#ef4444' : 'darkgrey'"
+              [style.border]="
+                createdEvidence ? 'solid 1.5px #ef4444' : 'solid 1.5px darkgrey'
+              "
+              style="border-radius: 100%; padding: 6px"
+            ></span>
+          </button>
+        </div>
+      </div>
+    </ng-template>
+    <form [formGroup]="formGroup">
+      <div class="flex flex-column gap-2 w-full">
+        <label class="flex flex-column gap-2 w-full">
+          Descripción
+          <textarea
+            pInputTextarea
+            rows="5"
+            cols="40"
+            formControlName="description"
+            [autoResize]="true"
+            (input)="errorsUpdate('description')"
+            (blur)="errorsUpdate('description')"
+          ></textarea>
+        </label>
+        <small class="p-error">{{ errors.description }}</small>
+      </div>
+      <div class="flex flex-column gap-2 pt-4 w-full">
+        <label class="flex flex-column gap-2 w-full">
+          Link externo (opcional)
+          <input
+            pInputText
+            name="externalLink"
+            class="w-full"
+            type="text"
+            formControlName="externalLink"
+            (input)="errorsUpdate('externalLink')"
+            (blur)="errorsUpdate('externalLink')"
+          />
+        </label>
+        <small class="p-error">{{ errors.externalLink }}</small>
+      </div>
+      <h1 class="text-color-secondary text-xl">
+        Selecciona el documento a subir
+      </h1>
+      <p-fileUpload
+        (onRemove)="onRemove()"
+        (onSelect)="onSelect($event)"
+        [multiple]="false"
+        accept="image/*"
+        maxFileSize="2097152"
+        chooseLabel="Seleccionar"
+        showCancelButton="false"
+        showUploadButton="false"
+        formControlName="fileLink"
+        auto="true"
+        [disabled]="disableUploadFile"
+        invalidFileSizeMessageSummary="Tamaño de archivo inválido"
+        invalidFileSizeMessageDetail="El tamaño de la imagen es superior a 2Mb"
+        ngDefaultControl
+      >
+        <ng-template pTemplate="uploader">
+          @if (createdEvidence || editedEvience) {
+            <div
+              class="flex flex-row justify-content-between align-content-center w-9"
+            >
+              <p-image
+                [src]="imageBlobUrl"
+                alt="Image"
+                width="250"
+                [preview]="true"
+              >
+                <ng-template pTemplate="indicator">
+                  <div class="flex flex-column">
+                    <i class="pi pi-eye"></i>
+                    <p>Ver previsualización de la imagen</p>
+                  </div>
+                </ng-template>
+              </p-image>
+              <p style="word-break: break-word">
+                {{ this.formGroup.controls.fileLink.value?.name }}
+              </p>
+              <p>{{ this.formGroup.controls.fileLink.value?.size }}KB</p>
+            </div>
+          } @else if (removeFile === false) {
+            <div
+              class="flex flex-row justify-content-between align-content-center p-4"
+            >
+              <p-image
+                [src]="imageBlobUrl"
+                alt="Image"
+                width="250"
+                [preview]="true"
+              >
+                <ng-template pTemplate="indicator">
+                  <div class="flex flex-column">
+                    <i class="pi pi-eye"></i>
+                    <p>Ver previsualización de la imagen</p>
+                  </div>
+                </ng-template>
+              </p-image>
+              <p style="word-break: break-word">
+                {{ this.formGroup.controls.fileLink.value?.name }}
+              </p>
+              <p>{{ this.formGroup.controls.fileLink.value?.size }}KB</p>
+              <p-button icon="pi pi-times" (click)="onRemove()" />
+            </div>
+          } @else {
+            <ng-template pTemplate="content" />
+          }
+        </ng-template>
+      </p-fileUpload>
+      <small class="p-error">{{ errors.fileLink }}</small>
+    </form>
+    <footer class="pt-3">
+      @if (enableEdit) {
+        <p-button
+          label="Guardar"
+          (click)="onEdit()"
+          size="small"
+          icon="pi pi-check"
+          [outlined]="true"
+          severity="success"
+          [disabled]="formGroup.invalid || editedEvience"
         />
-      </label>
-      <small class="p-error">{{ errors.externalLink }}</small>
-    </div>
-    <h1 class="text-color-secondary text-xl">
-      Selecciona el documento a subir
-    </h1>
-    <p-fileUpload
-      (onRemove)="onRemove()"
-      (onSelect)="onSelect($event)"
-      [multiple]="false"
-      accept="image/*"
-      maxFileSize="2097152"
-      chooseLabel="Seleccionar"
-      showCancelButton="false"
-      showUploadButton="false"
-      formControlName="fileLink"
-      auto="true"
-      [disabled]="createdEvidence"
-      invalidFileSizeMessageSummary="Tamaño de archivo inválido"
-      invalidFileSizeMessageDetail="El tamaño de la imagen es superior a 2Mb"
-      ngDefaultControl
-    >
-      <ng-template pTemplate="uploader">
-        @if (createdEvidence) {
-          <div
-            class="flex flex-row justify-content-between align-content-center w-9"
-          >
-            <p-image
-              [src]="imageBlobUrl"
-              alt="Image"
-              width="250"
-              height="400"
-              [preview]="true"
-            >
-              <ng-template pTemplate="indicator">
-                <div class="flex flex-column">
-                  <i class="pi pi-eye"></i>
-                  <p>Ver previsualización de la imagen</p>
-                </div>
-              </ng-template>
-            </p-image>
-            <p style="word-break: break-word">
-              {{ this.formGroup.controls.fileLink.value?.name }}
-            </p>
-            <p>{{ this.formGroup.controls.fileLink.value?.size }}KB</p>
-          </div>
-        } @else if (removeFile === false) {
-          <div
-            class="flex flex-row justify-content-between align-content-center p-4"
-          >
-            <p-image
-              [src]="imageBlobUrl"
-              alt="Image"
-              width="250"
-              height="400"
-              [preview]="true"
-            >
-              <ng-template pTemplate="indicator">
-                <div class="flex flex-column">
-                  <i class="pi pi-eye"></i>
-                  <p>Ver previsualización de la imagen</p>
-                </div>
-              </ng-template>
-            </p-image>
-            <p style="word-break: break-word">
-              {{ this.formGroup.controls.fileLink.value?.name }}
-            </p>
-            <p>{{ this.formGroup.controls.fileLink.value?.size }}KB</p>
-            <p-button icon="pi pi-times" (click)="onRemove()" />
-          </div>
-        } @else {
-          <ng-template pTemplate="content" />
-        }
-      </ng-template>
-    </p-fileUpload>
-    <small class="p-error">{{ errors.fileLink }}</small>
-  </form>
-  <footer class="pt-3">
-    <p-button
-      label="Guardar"
-      (click)="onCreate()"
-      size="small"
-      icon="pi pi-check"
-      [outlined]="true"
-      severity="success"
-      [disabled]="formGroup.invalid || createdEvidence"
-    />
-  </footer>
+      } @else {
+        <p-button
+          label="Guardar"
+          (click)="onCreate()"
+          size="small"
+          icon="pi pi-check"
+          [outlined]="true"
+          severity="success"
+          [disabled]="formGroup.invalid || createdEvidence"
+        />
+      }
+    </footer>
+  </p-panel>
 </section>

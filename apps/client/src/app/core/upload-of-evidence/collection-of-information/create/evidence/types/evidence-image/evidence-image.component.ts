@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, Input } from '@angular/core'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { FileSelectEvent, FileUploadModule } from 'primeng/fileupload'
 import { InputTextModule } from 'primeng/inputtext'
@@ -9,6 +9,7 @@ import { ValidatedFormGroup } from '../../../../../../../common/validated-form-g
 import { file } from '../../../../../../../../utils/yup-file'
 import { EvidenceService } from '../../../../../../../services/evidence/evidence.service'
 import { Toast } from '../../../../../../../common/toast/toast.component'
+import { PanelModule } from 'primeng/panel'
 
 @Component({
   selector: 'evidence-image',
@@ -19,7 +20,8 @@ import { Toast } from '../../../../../../../common/toast/toast.component'
     InputTextModule,
     FormsModule,
     ReactiveFormsModule,
-    ImageModule
+    ImageModule,
+    PanelModule
   ],
   templateUrl: './evidence-image.component.html',
   styles: ``
@@ -42,9 +44,15 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
     super(initialControlValues, validationSchema)
   }
   formData = new FormData()
+  formDataEdit = new FormData()
   imageBlobUrl: string = ''
   createdEvidence: boolean = false
   removeFile: boolean = false
+  editedEvience: boolean = false
+  evidenceId: number = 0
+  enableEdit: boolean = false
+  disableUploadFile: boolean = false
+  @Input() informationCollectionId: string = ''
   errors = {
     description: '',
     externalLink: '',
@@ -54,6 +62,18 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
     this.formGroup.get('description')?.disable()
     this.formGroup.get('externalLink')?.disable()
     this.formGroup.get('fileLink')?.disable()
+    this.disableUploadFile = true
+  }
+  enableForm() {
+    this.formGroup.get('description')?.enable()
+    this.formGroup.get('externalLink')?.enable()
+    this.formGroup.get('fileLink')?.enable()
+    this.disableUploadFile = false
+  }
+  enableformEdit() {
+    this.enableEdit = true
+    this.enableForm()
+    this.createdEvidence = false
   }
   onRemove() {
     if (this.formGroup.controls.fileLink.value) {
@@ -67,6 +87,7 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
     this.removeFile = false
     this.errors.fileLink = ''
     this.formGroup.controls.fileLink.setValue(event.files[0])
+    console.log(this.formGroup.controls.fileLink.value)
     if (event.files[0]) {
       const reader = new FileReader()
       let imageBlobUrl: string = ''
@@ -88,7 +109,16 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
       )
     })
     this.formData.append('type', 'image')
-    this.formData.append('collectionId', '12')
+    this.formData.append('collectionId', this.informationCollectionId)
+  }
+  constructFormDataEdit() {
+    Object.keys(this.formGroup.controls).forEach((formControlName) => {
+      this.formDataEdit.append(
+        formControlName,
+        this.formGroup.get(formControlName)?.value
+      )
+    })
+    this.formData.append('type', 'image')
   }
   onCreate() {
     if (this.formGroup.invalid) return
@@ -102,14 +132,52 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
             'Evidencia tipo imagen creada con éxito'
           )
           this.createdEvidence = true
-          console.log(this.createdEvidence)
           this.disableForm()
+          this.evidenceId = res.data.id
         }
       },
       error: (e) => {
         console.error(e)
         this.toast.show('error', 'Error', e.error.data.message)
         this.createdEvidence = false
+      }
+    })
+  }
+  onEdit() {
+    if (this.formGroup.invalid) return
+    this.constructFormDataEdit()
+    this.EvidenceService.edit(this.evidenceId, this.formDataEdit).subscribe({
+      next: (res) => {
+        if (res.status === 'success') {
+          this.toast.show(
+            'success',
+            'Creado',
+            'Evidencia tipo imagen editada con éxito'
+          )
+          this.editedEvience = true
+          this.disableForm()
+        }
+      },
+      error: (e) => {
+        console.error(e)
+        this.toast.show('error', 'Error', e.error.data.message)
+        this.editedEvience = false
+      }
+    })
+  }
+  onDelete() {
+    this.EvidenceService.delete(this.evidenceId).subscribe({
+      next: () => {
+        this.toast.show(
+          'success',
+          'Creado',
+          'Evidencia tipo imagen eliminada con éxito'
+        )
+      },
+      error: (e) => {
+        console.error(e)
+        this.editedEvience = false
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }

@@ -36,7 +36,7 @@ export class LinkEvidenceService {
   }
   edit(
     id: number,
-    evidenceLink: EvidenceDTO
+    evidenceLink: EvidenceLinkDTO
   ): Observable<BackendResponse<Evidence, unknown, unknown>> {
     return this.http.patch<BackendResponse<Evidence, unknown, unknown>>(
       `${BaseUrl}/links/${id}`,
@@ -48,7 +48,7 @@ export class LinkEvidenceService {
     return this.http.delete<void>(`${BaseUrl}/links/${id}`)
   }
 }
-
+export type EvidenceLinkDTO = Omit<EvidenceDTO, 'fileLink' | 'collectionId'>
 type Paginated = {
   first: number
   rows: number

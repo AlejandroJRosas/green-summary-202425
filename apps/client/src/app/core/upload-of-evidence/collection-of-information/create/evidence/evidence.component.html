@@ -9,10 +9,10 @@
     />
     @switch (formGroup.controls.selectedType.value?.code ?? '') {
       @case ('image') {
-        <evidence-image />
+        <evidence-image [informationCollectionId]="informationCollectionId" />
       }
       @case ('link') {
-        <evidence-link />
+        <evidence-link [informationCollectionId]="informationCollectionId" />
       }
       @case ('document') {
         <evidence-document />

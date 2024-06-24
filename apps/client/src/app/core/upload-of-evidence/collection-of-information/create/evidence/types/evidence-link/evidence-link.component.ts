@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, Input } from '@angular/core'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { InputTextModule } from 'primeng/inputtext'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -7,7 +7,10 @@ import { ButtonModule } from 'primeng/button'
 import { string, object } from 'yup'
 import { EvidenceDTO } from '../../../../../../../services/evidence/evidence.service'
 import { Toast } from '../../../../../../../common/toast/toast.component'
-import { LinkEvidenceService } from '../../../../../../../services/evidence/link-evidence.service'
+import {
+  EvidenceLinkDTO,
+  LinkEvidenceService
+} from '../../../../../../../services/evidence/link-evidence.service'
 import { PanelModule } from 'primeng/panel'
 
 @Component({
@@ -44,6 +47,8 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
   createdEvidence: boolean = false
   editedEvience: boolean = false
   evidenceId: number = 0
+  enableEdit: boolean = false
+  @Input() informationCollectionId: string = ''
   errors = {
     description: '',
     externalLink: ''
@@ -65,7 +70,7 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
       type: 'link',
       externalLink: externalLink.value,
       fileLink: null,
-      collectionId: '12'
+      collectionId: this.informationCollectionId
     }
     this.LinkEvidenceService.create(evidenceLink).subscribe({
       next: (res) => {
@@ -89,20 +94,18 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
   onEdit() {
     if (this.formGroup.invalid) return
     const { description, externalLink } = this.formGroup.controls
-    const evidenceLink: EvidenceDTO = {
+    const evidenceLink: EvidenceLinkDTO = {
       description: description.value,
       error: 'error',
       type: 'link',
-      externalLink: externalLink.value,
-      fileLink: null,
-      collectionId: '12'
+      externalLink: externalLink.value
     }
     this.LinkEvidenceService.edit(this.evidenceId, evidenceLink).subscribe({
       next: () => {
         this.toast.show(
           'success',
           'Editado',
-          'Colección de información editado con éxito'
+          'Evidencia tipo link editada con éxito'
         )
         this.editedEvience = true
         this.disableForm()

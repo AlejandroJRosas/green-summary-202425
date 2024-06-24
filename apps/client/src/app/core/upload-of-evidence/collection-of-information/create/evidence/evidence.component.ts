@@ -5,6 +5,7 @@ import { EvidenceDocumentComponent } from './types/evidence-document/evidence-do
 import { EvidenceImageComponent } from './types/evidence-image/evidence-image.component'
 import { EvidenceLinkComponent } from './types/evidence-link/evidence-link.component'
 import { FieldsetModule } from 'primeng/fieldset'
+import { ActivatedRoute, Router } from '@angular/router'
 import { PanelModule } from 'primeng/panel'
 import {
   FormControl,
@@ -31,6 +32,14 @@ import {
   styles: ``
 })
 export class EvidenceComponent {
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router
+  ) {
+    this.route.params.subscribe((params) => {
+      this.informationCollectionId = params['informationCollectionId']
+    })
+  }
   formGroup = new FormGroup({
     selectedType: new FormControl<typeEvidence>({
       name: '',
@@ -40,6 +49,7 @@ export class EvidenceComponent {
   readonly: boolean = false
   edit: boolean = false
   delete: boolean = false
+  informationCollectionId: string = ''
   @Input() index: number = 0
   typesOfEvidence = [
     { name: 'Imagen', code: 'image' },

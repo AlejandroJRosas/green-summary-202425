@@ -35,7 +35,7 @@ export class EvidenceService {
   }
   edit(
     id: number,
-    evidence: EvidenceDTO
+    evidence: FormData
   ): Observable<BackendResponse<Evidence, unknown, unknown>> {
     return this.http.patch<BackendResponse<Evidence, unknown, unknown>>(
       `${BaseUrl}/evidences/${id}`,

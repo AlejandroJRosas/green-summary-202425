@@ -16,7 +16,7 @@
             <span
               class="pi pi-pencil"
               (click)="enableForm()"
-              (click)="editedEvience = true"
+              (click)="enableEdit = true"
               [style.color]="createdEvidence ? '#22c55e' : 'darkgrey'"
               [style.border]="
                 createdEvidence ? 'solid 1.5px #22c55e' : 'solid 1.5px darkgrey'
@@ -71,7 +71,7 @@
       </div>
     </form>
     <footer class="pt-3">
-      @if (editedEvience) {
+      @if (enableEdit) {
         <p-button
           label="Guardar"
           (click)="onEdit()"
@@ -79,7 +79,7 @@
           icon="pi pi-check"
           [outlined]="true"
           severity="success"
-          [disabled]="formGroup.invalid"
+          [disabled]="formGroup.invalid || editedEvience"
         />
       } @else {
         <p-button
