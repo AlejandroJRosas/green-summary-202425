@@ -110,27 +110,39 @@ export class CategoriesService {
   }
 
   async categoriesByIndicator(indicatorId: number): Promise<Category[]> {
-    const indicator = await this.indicatorRepository.findOneByOrFail({
-      index: indicatorId
-    })
+    try {
+      const indicator = await this.indicatorRepository.findOneByOrFail({
+        index: indicatorId
+      })
 
-    const categories = await this.categoryRepository.find({
-      where: { indicator: indicator }
-    })
+      const categories = await this.categoryRepository.find({
+        where: { indicator: indicator }
+      })
 
-    return categories
+      return categories
+    } catch (error) {
+      throw new NotFoundException(
+        'Indicador no encontrado o no tiene categorías asociadas.'
+      )
+    }
   }
 
   async categoriesByRecopilation(recopilationId: number): Promise<Category[]> {
-    const criterion = this.categorizedCriteriaRepository
-      .createQueryBuilder()
-      .select('c.id, c.name, c.helpText, c.indicatorIndex')
-      .distinctOn(['c.id'])
-      .from('categorized_criterion', 'cc')
-      .innerJoin('cc.category', 'c')
-      .where('cc.recopilationId = :recopilationId', { recopilationId })
-      .execute()
+    try {
+      const criterion = await this.categorizedCriteriaRepository
+        .createQueryBuilder()
+        .select('c.id, c.name, c.helpText, c.indicatorIndex')
+        .distinctOn(['c.id'])
+        .from('categorized_criterion', 'cc')
+        .innerJoin('cc.category', 'c')
+        .where('cc.recopilationId = :recopilationId', { recopilationId })
+        .execute()
 
-    return criterion
+      return criterion
+    } catch (error) {
+      throw new NotFoundException(
+        'No se encontraron categorías para esta recopilación.'
+      )
+    }
   }
 }

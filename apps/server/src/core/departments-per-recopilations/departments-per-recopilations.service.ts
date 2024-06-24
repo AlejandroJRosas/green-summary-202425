@@ -1,4 +1,8 @@
-import { Injectable } from '@nestjs/common'
+import {
+  ConflictException,
+  Injectable,
+  NotFoundException
+} from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { EntityNotFoundError, In, Repository } from 'typeorm'
 import { DepartmentPerRecopilation } from './entities/departments-per-recopilation.entity'
@@ -46,10 +50,19 @@ export class DepartmentsPerRecopilationsService {
   }
 
   async findOne(id: number): Promise<DepartmentPerRecopilation> {
-    return this.departmentsPerRecopilationRepository.findOneOrFail({
-      where: { id },
-      relations: ['recopilation', 'department']
-    })
+    try {
+      return await this.departmentsPerRecopilationRepository.findOneOrFail({
+        where: { id },
+        relations: ['recopilation', 'department']
+      })
+    } catch (error) {
+      if (error instanceof EntityNotFoundError) {
+        throw new NotFoundException(
+          `La relación entre recopilación y departamento con ID ${id} no fue encontrada.`
+        )
+      }
+      throw error
+    }
   }
 
   async set(
@@ -66,7 +79,21 @@ export class DepartmentsPerRecopilationsService {
     })
 
     if (departments.length !== departmentsIds.length) {
-      throw new EntityNotFoundError(Department, { id: In(departmentsIds) })
+      throw new NotFoundException('Uno o más departamentos no se encontraron.')
+    }
+
+    const existingEntries =
+      await this.departmentsPerRecopilationRepository.find({
+        where: {
+          recopilation: { id: recopilationId },
+          department: In(departmentsIds)
+        }
+      })
+
+    if (existingEntries.length > 0) {
+      throw new ConflictException(
+        'Ya existe una relación entre la recopilación y uno o más de los departamentos proporcionados.'
+      )
     }
 
     await this.departmentsPerRecopilationRepository.delete({
@@ -87,11 +114,21 @@ export class DepartmentsPerRecopilationsService {
     id: number,
     updateDepartmentsPerRecopilationDto: UpdateDepartmentPerRecopilationDto
   ): Promise<DepartmentPerRecopilation> {
-    const departmentsPerRecopilation =
-      await this.departmentsPerRecopilationRepository.findOneOrFail({
-        where: { id },
-        relations: ['recopilation', 'department']
-      })
+    let departmentPerRecopilationToUpdate: DepartmentPerRecopilation
+    try {
+      departmentPerRecopilationToUpdate =
+        await this.departmentsPerRecopilationRepository.findOneOrFail({
+          where: { id },
+          relations: ['recopilation', 'department']
+        })
+    } catch (error) {
+      if (error instanceof EntityNotFoundError) {
+        throw new NotFoundException(
+          `La relación entre recopilación y departamento con ID ${id} no fue encontrada.`
+        )
+      }
+      throw error // Propagar otros tipos de errores que podrían surgir
+    }
 
     const { recopilationId, departmentsIds: departmentId } =
       updateDepartmentsPerRecopilationDto
@@ -99,15 +136,29 @@ export class DepartmentsPerRecopilationsService {
     const recopilation = await this.recopilationRepository.findOneByOrFail({
       id: recopilationId
     })
-    departmentsPerRecopilation.recopilation = recopilation
+    departmentPerRecopilationToUpdate.recopilation = recopilation
 
     const department = await this.departmentRepository.findOneByOrFail({
       id: departmentId
     })
-    departmentsPerRecopilation.department = department
+    departmentPerRecopilationToUpdate.department = department
+
+    const existingEntry =
+      await this.departmentsPerRecopilationRepository.findOne({
+        where: {
+          recopilation: { id: recopilationId },
+          department: { id: departmentId }
+        }
+      })
+
+    if (existingEntry && existingEntry.id !== id) {
+      throw new ConflictException(
+        'Ya existe una relación entre la recopilación y el departamento proporcionado.'
+      )
+    }
 
     await this.departmentsPerRecopilationRepository.save(
-      departmentsPerRecopilation
+      departmentPerRecopilationToUpdate
     )
 
     return this.departmentsPerRecopilationRepository.findOneOrFail({
@@ -117,13 +168,22 @@ export class DepartmentsPerRecopilationsService {
   }
 
   async remove(id: number): Promise<void> {
-    const departmentsPerRecopilation =
-      await this.departmentsPerRecopilationRepository.findOneOrFail({
-        where: { id },
-        relations: ['recopilation', 'department']
-      })
-    await this.departmentsPerRecopilationRepository.remove(
-      departmentsPerRecopilation
-    )
+    try {
+      const departmentsPerRecopilation =
+        await this.departmentsPerRecopilationRepository.findOneOrFail({
+          where: { id },
+          relations: ['recopilation', 'department']
+        })
+      await this.departmentsPerRecopilationRepository.remove(
+        departmentsPerRecopilation
+      )
+    } catch (error) {
+      if (error instanceof EntityNotFoundError) {
+        throw new NotFoundException(
+          `La relación entre recopilación y departamento con ID ${id} no fue encontrada y no se pudo eliminar.`
+        )
+      }
+      throw error // Propagar otros tipos de errores que podrían surgir
+    }
   }
 }

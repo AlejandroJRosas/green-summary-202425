@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException
+} from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Indicator } from './entities/indicator.entity'
@@ -41,30 +45,48 @@ export class IndicatorsService {
       order: { [orderBy]: orderType },
       where: parseFiltersToTypeOrm(filters)
     })
-
     return { indicators, count }
   }
 
   async getOneIndicator(index: number): Promise<Indicator> {
-    const indicator = await this.indicatorRepository.findOneByOrFail({ index })
-    return indicator
+    try {
+      const indicator = await this.indicatorRepository.findOneByOrFail({
+        index
+      })
+      return indicator
+    } catch (error) {
+      throw new NotFoundException('Indicador ' + index + ' no encontrado.')
+    }
   }
 
   async updateIndicator(
     index: number,
     updateIndicatorDto: UpdateIndicatorDto
   ): Promise<Indicator> {
-    await this.indicatorRepository.update(index, updateIndicatorDto)
-    const updatedIndicador = await this.indicatorRepository.findOneByOrFail({
-      index: updateIndicatorDto.index ?? index
-    })
-    return updatedIndicador
+    try {
+      await this.indicatorRepository.update(index, updateIndicatorDto)
+      const updatedIndicator = await this.indicatorRepository.findOneByOrFail({
+        index: updateIndicatorDto.index ?? index
+      })
+      return updatedIndicator
+    } catch (error) {
+      if (error instanceof NotFoundException) {
+        throw new NotFoundException('Indicador no encontrado para actualizar.')
+      } else {
+        throw new BadRequestException(
+          'No se pudo actualizar el indicador ' + index + '.'
+        )
+      }
+    }
   }
 
   async deleteIndicator(index: number): Promise<void> {
-    const result = await this.indicatorRepository.delete(index)
-    if (result.affected === 0) {
-      throw new NotFoundException(`Indicador with ID ${index} not found`)
+    try {
+      await this.indicatorRepository.delete(index)
+    } catch (error) {
+      throw new NotFoundException(
+        'Indicador ' + index + ' no encontrado para eliminar.'
+      )
     }
   }
 }

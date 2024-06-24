@@ -26,16 +26,26 @@ export class CriterionService {
   async createCriterion(
     createCriterionDto: CreateCriteriaDto
   ): Promise<Criteria> {
-    const indicator = await this.indicatorRepository.findOneByOrFail({
-      index: createCriterionDto.indicatorIndex
-    })
+    try {
+      const indicator = await this.indicatorRepository.findOneByOrFail({
+        index: createCriterionDto.indicatorIndex
+      })
 
-    const criterion = this.criterionRepository.create({
-      ...createCriterionDto,
-      indicator
-    })
+      const criterion = this.criterionRepository.create({
+        ...createCriterionDto,
+        indicator
+      })
 
-    return this.criterionRepository.save(criterion)
+      return await this.criterionRepository.save(criterion)
+    } catch (error) {
+      if (error.name === 'EntityNotFound') {
+        throw new Error(
+          `No se encontró el indicador con el índice ${createCriterionDto.indicatorIndex}`
+        )
+      } else {
+        throw new Error('Error al crear el criterio.')
+      }
+    }
   }
 
   async getAllCriteria({
@@ -60,76 +70,114 @@ export class CriterionService {
   }
 
   async getOneCriterion(id: number): Promise<Criteria> {
-    const criterion = await this.criterionRepository.findOneOrFail({
-      where: { id },
-      relations: ['indicator']
-    })
-    return criterion
+    try {
+      const criterion = await this.criterionRepository.findOneOrFail({
+        where: { id },
+        relations: ['indicator']
+      })
+      return criterion
+    } catch (error) {
+      throw new Error(`No se encontró el criterio con ID ${id}.`)
+    }
   }
 
   async updateCriterion(
     id: number,
     updateCriteriaDto: UpdateCriteriaDto
   ): Promise<Criteria> {
-    const indicator = await this.indicatorRepository.findOneByOrFail({
-      index: updateCriteriaDto.indicatorIndex
-    })
+    try {
+      const { indicatorIndex, ...dtoWithoutIndicatorIndex } = updateCriteriaDto
 
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { indicatorIndex: _, ...dtoWithoutIndicatorIndex } = updateCriteriaDto
+      const indicator = await this.indicatorRepository.findOneByOrFail({
+        index: indicatorIndex
+      })
 
-    const updatedCriteria = this.criterionRepository.create({
-      ...dtoWithoutIndicatorIndex,
-      indicator
-    })
+      const updatedCriteria = this.criterionRepository.create({
+        ...dtoWithoutIndicatorIndex,
+        indicator
+      })
 
-    await this.criterionRepository.update({ id }, updatedCriteria)
+      await this.criterionRepository.update({ id }, updatedCriteria)
 
-    return await this.criterionRepository.findOneByOrFail({ id })
+      return await this.criterionRepository.findOneByOrFail({ id })
+    } catch (error) {
+      if (error.name === 'EntityNotFound') {
+        throw new Error(
+          `No se encontró el indicador con el índice ${updateCriteriaDto.indicatorIndex}`
+        )
+      } else {
+        throw new Error(`Error al actualizar el criterio con ID ${id}.`)
+      }
+    }
   }
 
-  async deleteCriterion(id): Promise<void> {
-    await this.criterionRepository.findOneByOrFail({ id })
+  async deleteCriterion(id: number): Promise<void> {
+    try {
+      await this.criterionRepository.findOneByOrFail({ id })
 
-    await this.criterionRepository.delete({
-      id
-    })
-
-    return
+      await this.criterionRepository.delete({ id })
+    } catch (error) {
+      if (error.name === 'EntityNotFound') {
+        throw new Error(`No se encontró el criterio con ID ${id}.`)
+      } else {
+        throw new Error(`Error al eliminar el criterio con ID ${id}.`)
+      }
+    }
   }
 
   async criterionByIndicator(
     indicatorId: number,
     { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto
   ): Promise<Criteria[]> {
-    const indicator = await this.indicatorRepository.findOneByOrFail({
-      index: indicatorId
-    })
+    try {
+      const indicator = await this.indicatorRepository.findOneByOrFail({
+        index: indicatorId
+      })
 
-    const criteria = await this.criterionRepository.find({
-      where: { indicator: indicator },
-      order: { [orderBy]: orderType }
-    })
+      const criteria = await this.criterionRepository.find({
+        where: { indicator: indicator },
+        order: { [orderBy]: orderType }
+      })
 
-    return criteria
+      return criteria
+    } catch (error) {
+      if (error.name === 'EntityNotFound') {
+        throw new Error(
+          `No se encontró el indicador con el índice ${indicatorId}.`
+        )
+      } else {
+        throw new Error(`Error al obtener criterios por indicador.`)
+      }
+    }
   }
 
   async criterionByRecopilation(
     recopilationId: number,
     { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto
   ): Promise<Criteria[]> {
-    const categorizedCriterias = await this.categorizedCriteriaRepository.find({
-      where: { recopilation: { id: recopilationId } },
-      relations: ['criteria']
-    })
+    try {
+      const categorizedCriterias =
+        await this.categorizedCriteriaRepository.find({
+          where: { recopilation: { id: recopilationId } },
+          relations: ['criteria']
+        })
 
-    const criteria = await this.criterionRepository.find({
-      where: {
-        id: In(categorizedCriterias.map((c) => c.criteria.id))
-      },
-      order: { [orderBy]: orderType }
-    })
+      const criteria = await this.criterionRepository.find({
+        where: {
+          id: In(categorizedCriterias.map((c) => c.criteria.id))
+        },
+        order: { [orderBy]: orderType }
+      })
 
-    return criteria
+      return criteria
+    } catch (error) {
+      if (error.name === 'EntityNotFound') {
+        throw new Error(
+          `No se encontraron criterios para la recopilación con ID ${recopilationId}.`
+        )
+      } else {
+        throw new Error(`Error al obtener criterios por recopilación.`)
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Injectable, BadRequestException } from '@nestjs/common'
 import { CreateUserDto } from './dto/create-user.dto'
 import { UpdateUserDto } from './dto/update-user.dto'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -56,6 +56,9 @@ export class UsersService {
           ...createUserDtoWithoutType,
           password: encryptedPassword
         })
+        break
+      default:
+        throw new BadRequestException('Tipo de usuario inválido')
     }
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
