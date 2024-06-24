@@ -26,11 +26,11 @@ export class ImagesService {
     OrderTypeParamDto &
     FiltersSegmentDto) {
     const [images, count] = await this.imagesRepository.findAndCount({
+      relations: ['collection'],
       take: itemsPerPage,
       skip: (page - 1) * itemsPerPage,
       order: { [orderBy]: orderType },
-      where: parseFiltersToTypeOrm(filters),
-      select: ['id', 'fileLink', 'description', 'type']
+      where: parseFiltersToTypeOrm(filters)
     })
 
     return { images, count }
@@ -39,7 +39,7 @@ export class ImagesService {
   async findOne(id: number) {
     const image = await this.imagesRepository.findOneOrFail({
       where: { id },
-      select: ['id', 'fileLink', 'description', 'type']
+      relations: ['collection']
     })
 
     return image
