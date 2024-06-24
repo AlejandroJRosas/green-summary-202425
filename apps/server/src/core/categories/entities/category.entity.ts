@@ -1,6 +1,6 @@
-import { Answer } from 'src/core/answers/entities/answer.entity'
 import { CategorizedCriteria } from 'src/core/categorized-criteria/entities/categorized-criterion.entity'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
+import { InformationCollection } from 'src/core/information-collections/entities/information-collection.entity'
 import { Recommendation } from 'src/core/recommendations/entities/recommendation.entity'
 import {
   PrimaryGeneratedColumn,
@@ -15,10 +15,10 @@ export class Category {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ type: 'varchar', length: 50 })
+  @Column({ type: 'varchar', length: 50, nullable: false })
   name: string
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: false })
   helpText: string
 
   @ManyToOne(() => Indicator, (indicator) => indicator.categories, {
@@ -30,8 +30,11 @@ export class Category {
   @OneToMany(() => Recommendation, (recommendation) => recommendation.category)
   recommendations: Recommendation[]
 
-  @OneToMany(() => Answer, (answers) => answers.category)
-  answers: Answer[]
+  @OneToMany(
+    () => InformationCollection,
+    (informationCollection) => informationCollection.category
+  )
+  informationCollections: InformationCollection[]
 
   @OneToMany(
     () => CategorizedCriteria,

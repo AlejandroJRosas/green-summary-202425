@@ -5,6 +5,9 @@ import { TypeOrmModule } from '@nestjs/typeorm'
 import { User } from '../users/entities/user.entity'
 import { JwtModule } from '@nestjs/jwt'
 import { ConfigModule, ConfigService } from 'nestjs-config'
+import { AuthGuard } from './auth.guard'
+import { APP_GUARD } from '@nestjs/core'
+import { RolesGuard } from './roles.guard'
 
 @Module({
   imports: [
@@ -17,13 +20,23 @@ import { ConfigModule, ConfigService } from 'nestjs-config'
         return {
           global: true,
           secret: JWT_CONFIG.SECRET,
-          signOptions: { expiresIn: '2h' }
+          signOptions: { expiresIn: '10d' }
         }
       },
       inject: [ConfigService]
     })
   ],
   controllers: [AuthController],
-  providers: [AuthService]
+  providers: [
+    {
+      provide: APP_GUARD,
+      useClass: AuthGuard
+    },
+    {
+      provide: APP_GUARD,
+      useClass: RolesGuard
+    },
+    AuthService
+  ]
 })
 export class AuthModule {}

@@ -2,6 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Evidence } from './entities/evidence.entity'
+import { Document } from './entities/document.entity'
+import { Image } from './entities/image.entity'
+import { Link } from './entities/link.entity'
+import { EvidenceType } from './evidences.constants'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
 import { UpdateEvidenceDto } from './dto/update-evidence.dto'
 import { InformationCollection } from '../information-collections/entities/information-collection.entity'
@@ -16,6 +20,12 @@ export class EvidencesService {
   constructor(
     @InjectRepository(Evidence)
     private readonly evidenceRepository: Repository<Evidence>,
+    @InjectRepository(Document)
+    private readonly documentRepository: Repository<Document>,
+    @InjectRepository(Image)
+    private readonly imageRepository: Repository<Image>,
+    @InjectRepository(Link)
+    private readonly linkRepository: Repository<Link>,
     @InjectRepository(InformationCollection)
     private readonly informationCollectionRepository: Repository<InformationCollection>
   ) {}
@@ -58,12 +68,29 @@ export class EvidencesService {
       throw new NotFoundException('Collection not found')
     }
 
-    const evidence = this.evidenceRepository.create({
-      ...createEvidenceDto,
-      collection: coleccion
-    })
+    const { type } = createEvidenceDto
+    let evidence: Evidence
 
-    return this.evidenceRepository.save(evidence)
+    switch (type) {
+      case EvidenceType.DOCUMENT:
+        evidence = this.documentRepository.create({
+          ...createEvidenceDto,
+          collection: coleccion
+        })
+        return this.documentRepository.save(evidence)
+      case EvidenceType.IMAGE:
+        evidence = this.imageRepository.create({
+          ...createEvidenceDto,
+          collection: coleccion
+        })
+        return this.imageRepository.save(evidence)
+      case EvidenceType.LINK:
+        evidence = this.linkRepository.create({
+          ...createEvidenceDto,
+          collection: coleccion
+        })
+        return this.linkRepository.save(evidence)
+    }
   }
 
   async update(

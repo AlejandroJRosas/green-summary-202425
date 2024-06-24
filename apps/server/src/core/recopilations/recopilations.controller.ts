@@ -22,12 +22,15 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-recopilations-by-param.dto'
 import { RelateIndicatorsToRecopilationDto } from './dto/relate-indicators-to-recopilation.dto'
 import { RecommendCategoriesDto } from './dto/recommend-categories.dto'
+import { Roles } from '../auth/roles.decorator'
+import { Role } from '../auth/role.enum'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
 export class RecopilationsController {
   constructor(private readonly recopilationsService: RecopilationsService) {}
 
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get()
   async findAll(
     @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
@@ -52,6 +55,22 @@ export class RecopilationsController {
     return paginatedItems
   }
 
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
+  @Get('active')
+  async findActive(
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
+  ) {
+    const activeRecopilations =
+      await this.recopilationsService.getActiveRecopilations({
+        orderBy,
+        orderType
+      })
+
+    return activeRecopilations
+  }
+
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get(':id')
   async findOne(@Param('id') id: string) {
     const recopilation = await this.recopilationsService.findOne(+id)
@@ -59,6 +78,7 @@ export class RecopilationsController {
     return recopilation
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async create(@Body() recopilationData: CreateRecopilationDto) {
@@ -68,6 +88,7 @@ export class RecopilationsController {
     return createdRecopilation
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Patch(':id')
   async update(
     @Param('id') id: string,
@@ -81,12 +102,31 @@ export class RecopilationsController {
     return updatedRecopilation
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
+  @Put()
+  async updateOrCreate(@Body() recopilationData: UpdateRecopilationDto) {
+    if (!recopilationData.id) {
+      return await this.recopilationsService.create(
+        recopilationData as CreateRecopilationDto
+      )
+    }
+
+    const updatedRecopilation = await this.recopilationsService.update(
+      recopilationData.id,
+      recopilationData
+    )
+
+    return updatedRecopilation
+  }
+
+  @Roles(Role.Coordinator, Role.Admin)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string) {
     return await this.recopilationsService.remove(+id)
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Put('relate-indicators')
   async relateIndicatorsToRecopilation(
     @Body() relateIndicatorsToRecopilationDto: RelateIndicatorsToRecopilationDto
@@ -101,6 +141,7 @@ export class RecopilationsController {
     }
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Put('recommend-categories')
   async recommendCategoriesToDepartments(
     @Body() recommendCategoriesDto: RecommendCategoriesDto

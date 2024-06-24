@@ -1,4 +1,4 @@
-import { IsNumber, IsOptional, IsString } from 'class-validator'
+import { IsNumber, IsOptional, IsString, MaxLength } from 'class-validator'
 
 export class UpdateIndicatorDto {
   @IsNumber()
@@ -7,10 +7,12 @@ export class UpdateIndicatorDto {
 
   @IsString()
   @IsOptional()
+  @MaxLength(255)
   name?: string
 
   @IsString()
   @IsOptional()
+  @MaxLength(255)
   alias?: string
 
   @IsString()

@@ -1,6 +1,12 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { EntityNotFoundError, In, Repository } from 'typeorm'
+import {
+  EntityNotFoundError,
+  In,
+  LessThan,
+  MoreThan,
+  Repository
+} from 'typeorm'
 import { Recopilation } from './entities/recopilation.entity'
 import { UpdateRecopilationDto } from './dto/update-recopilation.dto'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
@@ -201,5 +207,20 @@ export class RecopilationsService {
     await this.recommendationRepository.remove(oldRecommendations)
 
     return await this.recommendationRepository.save(recommendations)
+  }
+
+  async getActiveRecopilations({
+    orderBy,
+    orderType
+  }: OrderByParamDto & OrderTypeParamDto) {
+    const currentDateString = new Date()
+
+    return this.recopilationsRepository.find({
+      where: {
+        startDate: LessThan(currentDateString),
+        endDate: MoreThan(currentDateString)
+      },
+      order: { [orderBy]: orderType }
+    })
   }
 }

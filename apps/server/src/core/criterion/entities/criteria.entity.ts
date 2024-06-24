@@ -18,16 +18,16 @@ export class Criteria {
   @Column()
   subIndex: number
 
-  @Column()
+  @Column({ nullable: false })
   name: string
 
-  @Column()
+  @Column({ nullable: false })
   alias: string
 
-  @Column('text')
+  @Column({ type: 'text', nullable: false })
   helpText: string
 
-  @Column({ default: false })
+  @Column({ type: 'boolean', default: false })
   requiresEvidence: boolean
 
   @ManyToOne(() => Indicator, (indicator) => indicator.criterion, {

@@ -19,22 +19,28 @@ export abstract class Evidence {
 
   @CreateDateColumn({
     type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP(6)'
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    nullable: false
   })
   createdAt: Date
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: false })
   description: string
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: true })
   error: string
 
   @Column({
     type: 'enum',
-    enum: EvidenceType
+    enum: EvidenceType,
+    nullable: false
   })
   type: EvidenceType
 
-  @ManyToOne(() => InformationCollection, (collection) => collection.evidences)
+  @ManyToOne(
+    () => InformationCollection,
+    (collection) => collection.evidences,
+    { onDelete: 'CASCADE' }
+  )
   collection: InformationCollection
 }

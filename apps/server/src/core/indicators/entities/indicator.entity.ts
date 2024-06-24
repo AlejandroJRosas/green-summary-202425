@@ -8,13 +8,13 @@ export class Indicator {
   @PrimaryColumn()
   index: number
 
-  @Column({ type: 'varchar', length: 255, unique: true })
+  @Column({ type: 'varchar', length: 255, unique: true, nullable: false })
   name: string
 
-  @Column({ type: 'varchar', length: 255 })
+  @Column({ type: 'varchar', length: 255, nullable: false })
   alias: string
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: false })
   helpText: string
 
   @OneToMany(() => Category, (category) => category.indicator)

@@ -18,6 +18,7 @@ jobs:
           script: |
             export PATH="$PATH:/root/.nvm/versions/node/v22.2.0/bin/"
             cd /var/apps/green-summary-202425
+            git restore pnpm-lock.yaml
             git pull
             pnpm install
             pnpm build

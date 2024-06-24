@@ -12,7 +12,7 @@ export class Notification {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column()
+  @Column({ type: 'boolean', default: false, nullable: false })
   seen: boolean
 
   @CreateDateColumn({

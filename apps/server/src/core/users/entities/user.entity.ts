@@ -16,18 +16,18 @@ export abstract class User {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ unique: true })
+  @Column({ nullable: false })
   fullName: string
 
-  @Column({ unique: true })
+  @Column({ unique: true, nullable: false })
   email: string
 
-  @Column()
+  @Column({ nullable: false })
   password: string
 
   @OneToMany(() => Notification, (notifications) => notifications.user)
   notifications: Notification[]
 
-  @Column({ type: 'enum', enum: Object.values(USER_TYPES) })
+  @Column({ type: 'enum', enum: Object.values(USER_TYPES), nullable: false })
   type: UserType
 }

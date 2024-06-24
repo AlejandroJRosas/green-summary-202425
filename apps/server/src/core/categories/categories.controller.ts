@@ -19,12 +19,15 @@ import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-pagi
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-categories-by-param.dto'
+import { Roles } from '../auth/roles.decorator'
+import { Role } from '../auth/role.enum'
 
 @ApiTags('Categories')
 @Controller('categories')
 export class CategoriesController {
   constructor(private readonly categoriesService: CategoriesService) {}
 
+  @Roles(Role.Department, Role.Coordinator, Role.Admin)
   @Get()
   async getAllCategories(
     @Query() { page = 1, itemsPerPage = 10 }: PaginationParams,
@@ -51,12 +54,14 @@ export class CategoriesController {
     return paginatedItems
   }
 
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get('/:id')
   async getCategory(@Param('id') id: string) {
     const category = await this.categoriesService.getOneCategory(Number(id))
     return category
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async createCategory(@Body() newCategory: CreateCategoryDto) {
@@ -64,6 +69,7 @@ export class CategoriesController {
     return createdCategory
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Patch('/:id')
   async updateCategory(
     @Param('id') id: string,
@@ -76,12 +82,14 @@ export class CategoriesController {
     return category
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
   @Delete('/:id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async deleteCategory(@Param('id') id: string) {
     await this.categoriesService.deleteCategory(Number(id))
   }
 
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get('/indicator/:indicatorIndex')
   async getCategoriesByIndicator(
     @Param('indicatorIndex') indicatorIndex: string
@@ -92,6 +100,7 @@ export class CategoriesController {
     return categories
   }
 
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get('/recopilation/:recopilationId')
   async getCategoriesByRecopilation(
     @Param('recopilationId') recopilationId: string

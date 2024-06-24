@@ -4,9 +4,9 @@ import { EvidenceType } from '../evidences.constants'
 
 @ChildEntity(EvidenceType.IMAGE)
 export class Image extends Evidence {
-  @Column()
+  @Column({ type: 'text' })
   fileLink: string
 
-  @Column({ nullable: true })
+  @Column({ type: 'text', nullable: true })
   externalLink?: string
 }
