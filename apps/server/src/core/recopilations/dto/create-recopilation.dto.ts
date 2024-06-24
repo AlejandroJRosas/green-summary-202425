@@ -3,18 +3,23 @@ import {
   IsString,
   IsDateString,
   MaxLength,
-  ValidateIf
+  ValidateIf,
+  MinLength
 } from 'class-validator'
 import { isAfter, parseISO } from 'date-fns'
+import { VALUES } from 'shared/validations'
 
 export class CreateRecopilationDto {
   @IsNotEmpty()
   @IsString()
-  @MaxLength(30)
+  @MinLength(VALUES.nameAliasMinAmount)
+  @MaxLength(VALUES.recopilationsNameMaxAmount)
   name: string
 
   @IsNotEmpty()
   @IsString()
+  @MinLength(VALUES.descriptionMinAmount)
+  @MaxLength(VALUES.descriptionMaxAmount)
   description: string
 
   @IsNotEmpty()

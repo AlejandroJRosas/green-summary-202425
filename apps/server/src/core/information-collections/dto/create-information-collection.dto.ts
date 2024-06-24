@@ -1,4 +1,11 @@
-import { IsString, IsNotEmpty, IsNumber, MaxLength } from 'class-validator'
+import {
+  IsString,
+  IsNotEmpty,
+  IsNumber,
+  MaxLength,
+  MinLength
+} from 'class-validator'
+import { VALUES } from 'shared/validations'
 
 export class CreateInformationCollectionDto {
   @IsNumber()
@@ -16,6 +23,8 @@ export class CreateInformationCollectionDto {
   @MaxLength(280)
   @IsString()
   @IsNotEmpty()
+  @MinLength(VALUES.nameAliasMinAmount)
+  @MaxLength(VALUES.informationCollectionsSummary)
   summary: string
 
   @MaxLength(100)

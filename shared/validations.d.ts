@@ -6,6 +6,7 @@ export interface Values {
   departmentFullNameMinAmount: number
   departmentFullNameMaxAmount: number
   departmentEmailAmount: number
+  departmentPasswordAmount: number
   helpTextMinAmount: number
   helpTextMaxAmount: number
   nameAliasMinAmount: number
@@ -13,6 +14,10 @@ export interface Values {
   categoryNameMaxAmount: number
   criterionNameAliasMaxAmount: number
   errorTextAmount: number
+  recopilationsNameMaxAmount: number
+  informationCollectionsSummary: number
+  evidencesLinkMaxAmount: number
+  evidencesLinkMinAmount: number
 }
 
 export const VALUES: Values

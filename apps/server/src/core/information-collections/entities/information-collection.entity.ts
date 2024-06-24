@@ -31,10 +31,10 @@ export class InformationCollection {
   @ManyToOne(() => Category, (category) => category.informationCollections)
   category: Category
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: false })
   name: string
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: false })
   summary: string
 
   @CreateDateColumn({
