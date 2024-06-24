@@ -80,19 +80,19 @@ export class EvidencesService {
       case EvidenceType.DOCUMENT:
         evidence = this.documentRepository.create({
           ...createEvidenceDto,
-          collection: coleccion
+          collection
         })
         return this.documentRepository.save(evidence)
       case EvidenceType.IMAGE:
         evidence = this.imageRepository.create({
           ...createEvidenceDto,
-          collection: coleccion
+          collection
         })
         return this.imageRepository.save(evidence)
       case EvidenceType.LINK:
         evidence = this.linkRepository.create({
           ...createEvidenceDto,
-          collection: coleccion
+          collection
         })
         return this.linkRepository.save(evidence)
     }
