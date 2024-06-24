@@ -1,4 +1,4 @@
-export const VALUES = {
+const VALUES = {
   descriptionMinAmount: 30,
   descriptionMaxAmount: 280,
   departmentFullNameMinAmount: 4,
@@ -17,3 +17,5 @@ export const VALUES = {
   evidencesLinkMaxAmount: 1024,
   evidencesLinkMinAmount: 10
 }
+
+module.exports = { VALUES }
