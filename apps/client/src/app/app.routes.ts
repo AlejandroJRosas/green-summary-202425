@@ -26,6 +26,12 @@ import { RecommendCategoriesDepartmentComponent } from './core/recopilation/step
 
 export const routes: Routes = [
   {
+    path: '',
+    title: 'Green Summary',
+    component: LoginComponent,
+    canActivate: [loginGuard]
+  },
+  {
     path: 'login',
     title: 'Iniciar Sesión',
     component: LoginComponent,
@@ -73,19 +79,25 @@ export const routes: Routes = [
             canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
           },
           {
-            path: 'select-departments',
+            path: 'information-recopilation/:recopilationId',
+            title: 'Información de la recopilación',
+            component: InformationRecopilationComponent,
+            canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
+          },
+          {
+            path: 'select-departments/:recopilationId',
             title: 'Seleccionar departamentos',
             component: SelectDepartmentsComponent,
             canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
           },
           {
-            path: 'select-indicators-categories-criteria',
+            path: 'select-indicators-categories-criteria/:recopilationId',
             title: 'Seleccionar indicadores, categorías y criterios',
             component: SelectIndicatorsCategoriesCriteriaComponent,
             canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
           },
           {
-            path: 'recommend-categories-department',
+            path: 'recommend-categories-department/:recopilationId',
             title: 'Recomendar categorías a departamentos',
             component: RecommendCategoriesDepartmentComponent,
             canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]

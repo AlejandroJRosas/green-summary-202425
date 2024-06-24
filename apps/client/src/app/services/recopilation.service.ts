@@ -38,11 +38,14 @@ export class RecopilationService {
   }
 
   create(
-    recopilation: Recopilation
-  ): Observable<BackendResponse<CreateRecopilationDto, unknown, unknown>> {
-    return this.http.post<
-      BackendResponse<CreateRecopilationDto, unknown, unknown>
+    recopilation: Recopilation & { id: number }
+  ): Observable<
+    BackendResponse<CreateRecopilationDto & { id: number }, unknown, unknown>
+  > {
+    return this.http.put<
+      BackendResponse<CreateRecopilationDto & { id: number }, unknown, unknown>
     >(`${BaseUrl}/recopilations`, {
+      id: recopilation.id !== -1 ? recopilation.id : undefined,
       name: recopilation.name,
       description: recopilation.description,
       startDate: recopilation.startDate.toISOString(),
@@ -51,9 +54,19 @@ export class RecopilationService {
     })
   }
 
-  // TODO: Preguntar funcionamiento en backend ya que la interfaz no la entendi
-  // AJRosas
-  // relateIndicators()
+  relateDepartments(departments: RelateDepartmentsDto): Observable<void> {
+    return this.http.put<void>(
+      `${BaseUrl}/departments-per-recopilations`,
+      departments
+    )
+  }
+
+  relateIndicators(relations: RelateIndicatorsDto): Observable<void> {
+    return this.http.put<void>(
+      `${BaseUrl}/recopilations/relate-indicators`,
+      relations
+    )
+  }
 
   recommendCategories(recommendations: RecommendationsDto): Observable<void> {
     return this.http.put<void>(
@@ -98,16 +111,28 @@ type Paginated = {
   rows: number
 }
 
+interface RelateDepartmentsDto {
+  recopilationId: number
+  departmentsIds: number[]
+}
+
+interface RelateIndicatorsDto {
+  recopilationId: number
+  indicators: {
+    indicatorId: number
+    criterion: {
+      criteriaId: number
+      categoryId: number
+    }[]
+  }[]
+}
+
 interface RecommendationsDto {
   recopilationId: number
-  departments: [
-    {
-      departmentId: number
-      categories: [
-        {
-          categoryId: number
-        }
-      ]
-    }
-  ]
+  departments: {
+    departmentId: number
+    categories: {
+      categoryId: number
+    }[]
+  }[]
 }

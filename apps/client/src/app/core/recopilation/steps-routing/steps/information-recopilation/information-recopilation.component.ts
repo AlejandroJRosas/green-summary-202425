@@ -1,5 +1,5 @@
-import { Component, Inject } from '@angular/core'
-import { Router } from '@angular/router'
+import { Component, Inject, OnInit } from '@angular/core'
+import { ActivatedRoute, Router } from '@angular/router'
 import { ButtonModule } from 'primeng/button'
 import { CalendarModule } from 'primeng/calendar'
 import { InputTextModule } from 'primeng/inputtext'
@@ -26,7 +26,10 @@ import { RecopilationService } from '../../../../../services/recopilation.servic
   ],
   templateUrl: './information-recopilation.component.html'
 })
-export class InformationRecopilationComponent extends ValidatedFormGroup<RecopilationFormControls> {
+export class InformationRecopilationComponent
+  extends ValidatedFormGroup<RecopilationFormControls>
+  implements OnInit
+{
   errors = {
     name: '',
     description: '',
@@ -38,6 +41,7 @@ export class InformationRecopilationComponent extends ValidatedFormGroup<Recopil
   constructor(
     @Inject(Toast) private toast: Toast,
     private recopilationService: RecopilationService,
+    private route: ActivatedRoute,
     private router: Router
   ) {
     const initialControlValues = {
@@ -65,11 +69,41 @@ export class InformationRecopilationComponent extends ValidatedFormGroup<Recopil
     })
 
     super(initialControlValues, validationSchema)
+
+    this.route.params.subscribe((params) => {
+      this.recopilationId = parseInt(params['recopilationId'], 10) || -1
+    })
+  }
+
+  recopilationId: number = -1
+
+  ngOnInit() {
+    this.loadRecopilation()
+  }
+
+  loadRecopilation() {
+    if (this.recopilationId !== -1) {
+      this.recopilationService.getById(this.recopilationId).subscribe({
+        next: (response) => {
+          const recopilation = response.data as Recopilation
+          this.formGroup.patchValue({
+            name: recopilation.name,
+            description: recopilation.description,
+            startDate: new Date(recopilation.startDate),
+            departmentEndDate: new Date(recopilation.departmentEndDate),
+            endDate: new Date(recopilation.endDate)
+          })
+        },
+        error: (error) => {
+          console.error(error)
+        }
+      })
+    }
   }
 
   nextStep() {
     this.router.navigateByUrl(
-      'pages/recopilations/steps-create/select-departments'
+      `pages/recopilations/steps-create/select-departments/${this.recopilationId}`
     )
   }
 
@@ -84,7 +118,8 @@ export class InformationRecopilationComponent extends ValidatedFormGroup<Recopil
     }
 
     // We are sure that form control values are not null nor undefined 'cuz we only reach here if form group is valid, that's why we use '!'
-    const newRecopilation: Recopilation = {
+    const newRecopilation: Recopilation & { id: number } = {
+      id: this.recopilationId,
       name: this.formGroup.get('name')!.value!,
       description: this.formGroup.get('description')!.value!,
       startDate: this.formGroup.get('startDate')!.value!,
@@ -93,8 +128,17 @@ export class InformationRecopilationComponent extends ValidatedFormGroup<Recopil
     }
 
     this.recopilationService.create(newRecopilation).subscribe({
-      next: () => {
-        this.toast.show('success', 'Éxito', 'Recopilación creada correctamente')
+      next: (response) => {
+        const recopilation = response.data as Recopilation & { id: number }
+        const wasEdited = this.recopilationId !== -1
+        this.recopilationId = recopilation.id
+        this.toast.show(
+          'success',
+          'Éxito',
+          wasEdited
+            ? 'Recopilación editada correctamente'
+            : 'Recopilación creada correctamente'
+        )
         this.nextStep()
       },
       error: (error) => {

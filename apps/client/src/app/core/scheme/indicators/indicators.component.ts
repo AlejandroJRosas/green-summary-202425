@@ -151,7 +151,7 @@ export class IndicatorsComponent
     })
   }
   getAll() {
-    this.indicatorService.getAll(this.paginated).subscribe({
+    this.indicatorService.get(this.paginated).subscribe({
       next: (res) => {
         if (res.status === 'success') {
           this.totalItems = res.data.totalItems

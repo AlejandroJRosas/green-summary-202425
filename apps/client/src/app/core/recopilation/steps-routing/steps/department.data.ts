@@ -2,6 +2,7 @@ export type Departament = {
   id: number
   name: string
 }
+
 export const departments: Departament[] = [
   {
     name: 'Departamento 1',

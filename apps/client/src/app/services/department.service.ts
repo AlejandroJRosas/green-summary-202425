@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { BaseUrl } from '../../config'
-import { Observable } from 'rxjs'
+import { Observable, map } from 'rxjs'
 import { PaginatedResponse } from '../../shared/types/paginated-response.type'
 import { User } from '../../shared/types/user.type'
 import { BackendResponse } from '../../shared/types/http-response.type'
@@ -12,7 +12,7 @@ import { BackendResponse } from '../../shared/types/http-response.type'
 export class DepartmentService {
   constructor(private http: HttpClient) {}
 
-  getAll(
+  get(
     paginated: Paginated
   ): Observable<PaginatedResponse<User, unknown, unknown>> {
     const { first, rows } = paginated
@@ -20,6 +20,18 @@ export class DepartmentService {
     return this.http.get<PaginatedResponse<User, unknown, unknown>>(
       `${BaseUrl}/users?itemsPerPage=5&page=${page}&orderBy=id&orderType=DESC&filters=type%3D%3Ddepartment`
     )
+  }
+
+  getAll(): Observable<User[]> {
+    return this.http
+      .get<
+        PaginatedResponse<User, unknown, unknown>
+      >(`${BaseUrl}/departments?itemsPerPage=999&orderBy=fullName&orderType=ASC`)
+      .pipe(
+        map((response) =>
+          response.status === 'success' ? response.data.items : []
+        )
+      )
   }
 
   getById(id: number): Observable<BackendResponse<User, unknown, unknown>> {

@@ -110,6 +110,10 @@ p-password.ng-valid > .p-password > .p-inputtext {
   font-size: 0.98rem;
 }
 
+.p-panel-icons {
+  display: flex;
+}
+
 .p-tree {
   background: var(--background-color);
   border: none;
