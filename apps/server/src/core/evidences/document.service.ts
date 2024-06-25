@@ -26,11 +26,11 @@ export class DocumentsService {
     OrderTypeParamDto &
     FiltersSegmentDto) {
     const [documents, count] = await this.documentsRepository.findAndCount({
+      relations: ['collection'],
       take: itemsPerPage,
       skip: (page - 1) * itemsPerPage,
       order: { [orderBy]: orderType },
-      where: parseFiltersToTypeOrm(filters),
-      select: ['id', 'fileLink', 'description', 'type']
+      where: parseFiltersToTypeOrm(filters)
     })
 
     return { documents, count }
@@ -39,7 +39,7 @@ export class DocumentsService {
   async findOne(id: number) {
     const document = await this.documentsRepository.findOneOrFail({
       where: { id },
-      select: ['id', 'fileLink', 'description', 'type']
+      relations: ['collection']
     })
 
     return document
