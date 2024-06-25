@@ -52,26 +52,21 @@ export class EvidencesService {
   }
 
   async findOne(id: number): Promise<Evidence> {
-    try {
-      return await this.evidenceRepository.findOneOrFail({
-        where: { id },
-        relations: ['collection']
-      })
-    } catch (error) {
-      throw new NotFoundException(`No se encontró la evidencia con ID ${id}.`)
-    }
+    return this.evidenceRepository.findOne({
+      where: { id },
+      relations: ['collection']
+    })
   }
 
   async create(createEvidenceDto: CreateEvidenceDto): Promise<Evidence> {
-    const collection = await this.informationCollectionRepository
-      .findOneByOrFail({
+    const coleccion =
+      await this.informationCollectionRepository.findOneByOrFail({
         id: createEvidenceDto.collectionId
       })
-      .catch(() => {
-        throw new NotFoundException(
-          `No se encontró la colección de información con ID ${createEvidenceDto.collectionId}.`
-        )
-      })
+
+    if (!coleccion) {
+      throw new NotFoundException('Collection not found')
+    }
 
     const { type } = createEvidenceDto
     let evidence: Evidence
@@ -103,21 +98,10 @@ export class EvidencesService {
     updateEvidenceDto: UpdateEvidenceDto
   ): Promise<Evidence> {
     await this.evidenceRepository.update(id, updateEvidenceDto)
-    try {
-      return await this.evidenceRepository.findOneByOrFail({ id })
-    } catch (error) {
-      throw new NotFoundException(`No se encontró la evidencia con ID ${id}.`)
-    }
+    return this.evidenceRepository.findOneByOrFail({ id })
   }
 
   async remove(id: number): Promise<void> {
-    try {
-      await this.evidenceRepository.findOneByOrFail({ id })
-      await this.evidenceRepository.delete(id)
-    } catch (error) {
-      throw new NotFoundException(
-        `No se encontró la evidencia con ID ${id} para eliminar.`
-      )
-    }
+    await this.evidenceRepository.delete(id)
   }
 }

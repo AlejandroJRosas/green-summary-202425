@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common'
+import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 import { Repository } from 'typeorm'
@@ -40,16 +40,12 @@ export class DepartmentsService {
   }
 
   async findOne(id: number) {
-    try {
-      const department = await this.departmentsRepository.findOneOrFail({
-        where: { id },
-        select: ['id', 'fullName', 'email', 'type']
-      })
+    const department = await this.departmentsRepository.findOneOrFail({
+      where: { id },
+      select: ['id', 'fullName', 'email', 'type']
+    })
 
-      return department
-    } catch (error) {
-      throw new NotFoundException('Departamento ' + id + ' no encontrado')
-    }
+    return department
   }
 
   async departmentsByRecopilation(recopilationId: number) {
@@ -58,12 +54,6 @@ export class DepartmentsService {
         where: { recopilation: { id: recopilationId } },
         relations: ['department']
       })
-
-    if (!departmentsPerRecopilation.length) {
-      throw new NotFoundException(
-        'No se encontraron departamentos para esta recopilación'
-      )
-    }
 
     return departmentsPerRecopilation.map((dpr) => {
       // eslint-disable-next-line @typescript-eslint/no-unused-vars

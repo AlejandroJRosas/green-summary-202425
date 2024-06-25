@@ -49,16 +49,10 @@ export class InformationCollectionsService {
   }
 
   async findOne(id: number): Promise<InformationCollection> {
-    try {
-      return await this.informationCollectionsRepository.findOneOrFail({
-        where: { id },
-        relations: ['evidences', 'recopilation', 'department', 'category']
-      })
-    } catch (error) {
-      throw new Error(
-        `No se encontró la colección de información con ID ${id}.`
-      )
-    }
+    return await this.informationCollectionsRepository.findOneOrFail({
+      where: { id },
+      relations: ['evidences', 'recopilation', 'department', 'category']
+    })
   }
 
   async create(
@@ -68,23 +62,11 @@ export class InformationCollectionsService {
       createInformationCollectionDto
 
     const [recopilation, category, department] = await Promise.all([
-      this.recopilationRepository
-        .findOneByOrFail({ id: recopilationId })
-        .catch(() => {
-          throw new Error(
-            `No se encontró la recopilación con ID ${recopilationId}.`
-          )
-        }),
-      this.categoryRepository.findOneByOrFail({ id: categoryId }).catch(() => {
-        throw new Error(`No se encontró la categoría con ID ${categoryId}.`)
+      this.recopilationRepository.findOneByOrFail({
+        id: recopilationId
       }),
-      this.departmentRepository
-        .findOneByOrFail({ id: departmentId })
-        .catch(() => {
-          throw new Error(
-            `No se encontró el departamento con ID ${departmentId}.`
-          )
-        })
+      this.categoryRepository.findOneByOrFail({ id: categoryId }),
+      this.departmentRepository.findOneByOrFail({ id: departmentId })
     ])
 
     const informationCollection = this.informationCollectionsRepository.create({
@@ -93,7 +75,6 @@ export class InformationCollectionsService {
       category,
       department
     })
-
     return await this.informationCollectionsRepository.save(
       informationCollection
     )
@@ -107,56 +88,24 @@ export class InformationCollectionsService {
       updateInformationCollectionDto
 
     const [recopilation, category, department] = await Promise.all([
-      this.recopilationRepository
-        .findOneByOrFail({ id: recopilationId })
-        .catch(() => {
-          throw new Error(
-            `No se encontró la recopilación con ID ${recopilationId}.`
-          )
-        }),
-      this.categoryRepository.findOneByOrFail({ id: categoryId }).catch(() => {
-        throw new Error(`No se encontró la categoría con ID ${categoryId}.`)
+      this.recopilationRepository.findOneByOrFail({
+        id: recopilationId
       }),
-      this.departmentRepository
-        .findOneByOrFail({ id: departmentId })
-        .catch(() => {
-          throw new Error(
-            `No se encontró el departamento con ID ${departmentId}.`
-          )
-        })
+      this.categoryRepository.findOneByOrFail({ id: categoryId }),
+      this.departmentRepository.findOneByOrFail({ id: departmentId })
     ])
 
-    await this.informationCollectionsRepository
-      .update(id, {
-        name: updateInformationCollectionDto.name,
-        summary: updateInformationCollectionDto.summary,
-        recopilation,
-        category,
-        department
-      })
-      .catch(() => {
-        throw new Error(
-          `Error al actualizar la colección de información con ID ${id}.`
-        )
-      })
-
-    return this.informationCollectionsRepository
-      .findOneByOrFail({ id })
-      .catch(() => {
-        throw new Error(
-          `No se encontró la colección de información con ID ${id} después de la actualización.`
-        )
-      })
+    await this.informationCollectionsRepository.update(id, {
+      name: updateInformationCollectionDto.name,
+      summary: updateInformationCollectionDto.summary,
+      recopilation,
+      category,
+      department
+    })
+    return this.informationCollectionsRepository.findOneByOrFail({ id })
   }
 
   async remove(id: number): Promise<void> {
-    try {
-      await this.informationCollectionsRepository.findOneByOrFail({ id })
-      await this.informationCollectionsRepository.delete(id)
-    } catch (error) {
-      throw new Error(
-        `Error al eliminar la colección de información con ID ${id}.`
-      )
-    }
+    await this.informationCollectionsRepository.delete(id)
   }
 }

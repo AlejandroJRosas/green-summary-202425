@@ -1,8 +1,4 @@
-import {
-  ConflictException,
-  Injectable,
-  NotFoundException
-} from '@nestjs/common'
+import { ConflictException, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { CategorizedCriteria } from './entities/categorized-criterion.entity'
@@ -47,7 +43,7 @@ export class CategorizedCriteriaService {
       await this.categorizedCriteriaRepository.findAndCount({
         take: Number(itemsPerPage),
         skip: (Number(page) - 1) * Number(itemsPerPage),
-        relations: ['recopilation', 'criterion', 'category'],
+        relations: ['recopilation', 'criteria', 'category'],
         order: { [orderBy]: orderType },
         where: parseFiltersToTypeOrm(filters)
       })
@@ -56,16 +52,10 @@ export class CategorizedCriteriaService {
   }
 
   async findOne(id: number): Promise<CategorizedCriteria> {
-    try {
-      return await this.categorizedCriteriaRepository.findOneOrFail({
-        where: { id },
-        relations: ['recopilation', 'criterion', 'category']
-      })
-    } catch (error) {
-      throw new NotFoundException(
-        `No se encontró el criterio categorizado con ID ${id}.`
-      )
-    }
+    return this.categorizedCriteriaRepository.findOneOrFail({
+      where: { id },
+      relations: ['recopilation', 'criterion', 'category']
+    })
   }
 
   async create(
@@ -79,26 +69,14 @@ export class CategorizedCriteriaService {
         where: { recopilation: { id: recopilationId } },
         relations: ['indicator', 'recopilation']
       }),
-      this.criterionRepository
-        .findOneOrFail({
-          where: { id: criteriaId },
-          relations: ['indicator']
-        })
-        .catch(() => {
-          throw new NotFoundException(
-            `No se encontró el criterio con ID ${criteriaId}.`
-          )
-        }),
-      this.categoryRepository
-        .findOneOrFail({
-          where: { id: categoryId },
-          relations: ['indicator']
-        })
-        .catch(() => {
-          throw new NotFoundException(
-            `No se encontró la categoría con ID ${categoryId}.`
-          )
-        })
+      this.criterionRepository.findOneOrFail({
+        where: { id: criteriaId },
+        relations: ['indicator']
+      }),
+      this.categoryRepository.findOneOrFail({
+        where: { id: categoryId },
+        relations: ['indicator']
+      })
     ])
 
     const existsConflict =
@@ -111,28 +89,13 @@ export class CategorizedCriteriaService {
 
     if (existsConflict) {
       throw new ConflictException(
-        'La recopilación no tiene el indicador relacionado con el criterio y la categoría'
-      )
-    }
-
-    const existingCategorizedCriteria =
-      await this.categorizedCriteriaRepository.findOne({
-        where: {
-          criteria: { id: criteriaId },
-          category: { id: categoryId },
-          recopilation: { id: recopilationId }
-        }
-      })
-
-    if (existingCategorizedCriteria) {
-      throw new ConflictException(
-        'Ya existe un criterio categorizado con el mismo patrón de indicatorIndex, subIndex y categoryId'
+        'The recopilation does not have the indicator related to the criteria and category'
       )
     }
 
     const categorizedCriteria = this.categorizedCriteriaRepository.create({
       recopilation: indicatorsPerRecopilation[0].recopilation,
-      criteria: criteria,
+      criteria,
       category
     })
 
@@ -143,51 +106,28 @@ export class CategorizedCriteriaService {
     id: number,
     updateCategorizedCriteriaDto: UpdateCategorizedCriterionDto
   ): Promise<CategorizedCriteria> {
-    const categorizedCriteria = await this.categorizedCriteriaRepository
-      .findOneOrFail({
+    const categorizedCriteria =
+      await this.categorizedCriteriaRepository.findOneOrFail({
         where: { id },
         relations: ['recopilation', 'criterion', 'category']
-      })
-      .catch(() => {
-        throw new NotFoundException(
-          `No se encontró el criterio categorizado con ID ${id}.`
-        )
       })
 
     const { recopilationId, criteriaId, categoryId } =
       updateCategorizedCriteriaDto
 
     const [recopilation, criteria, category] = await Promise.all([
-      this.recopilationRepository
-        .findOneOrFail({
-          where: { id: recopilationId },
-          relations: ['indicatorsPerRecopilations']
-        })
-        .catch(() => {
-          throw new NotFoundException(
-            `No se encontró la recopilación con ID ${recopilationId}.`
-          )
-        }),
-      this.criterionRepository
-        .findOneOrFail({
-          where: { id: criteriaId },
-          relations: ['indicator']
-        })
-        .catch(() => {
-          throw new NotFoundException(
-            `No se encontró el criterio con ID ${criteriaId}.`
-          )
-        }),
-      this.categoryRepository
-        .findOneOrFail({
-          where: { id: categoryId },
-          relations: ['indicator']
-        })
-        .catch(() => {
-          throw new NotFoundException(
-            `No se encontró la categoría con ID ${categoryId}.`
-          )
-        })
+      this.recopilationRepository.findOneOrFail({
+        where: { id: recopilationId },
+        relations: ['indicatorsPerRecopilations']
+      }),
+      this.criterionRepository.findOneOrFail({
+        where: { id: criteriaId },
+        relations: ['indicator']
+      }),
+      this.categoryRepository.findOneOrFail({
+        where: { id: categoryId },
+        relations: ['indicator']
+      })
     ])
 
     const existsConflict =
@@ -200,7 +140,7 @@ export class CategorizedCriteriaService {
 
     if (existsConflict) {
       throw new ConflictException(
-        'La recopilación no tiene el indicador relacionado con el criterio y la categoría'
+        'The recopilation does not have the indicator related to the criteria and category'
       )
     }
 
@@ -217,16 +157,10 @@ export class CategorizedCriteriaService {
   }
 
   async remove(id: number): Promise<void> {
-    try {
-      const categorizedCriteria =
-        await this.categorizedCriteriaRepository.findOneOrFail({
-          where: { id }
-        })
-      await this.categorizedCriteriaRepository.remove(categorizedCriteria)
-    } catch (error) {
-      throw new NotFoundException(
-        `No se encontró el criterio categorizado con ID ${id} para eliminar.`
-      )
-    }
+    const categorizedCriteria =
+      await this.categorizedCriteriaRepository.findOneOrFail({
+        where: { id }
+      })
+    await this.categorizedCriteriaRepository.remove(categorizedCriteria)
   }
 }

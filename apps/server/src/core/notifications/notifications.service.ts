@@ -23,15 +23,9 @@ export class NotificationsService {
   async create(
     createNotificationDto: CreateNotificationDto
   ): Promise<Notification> {
-    const user = await this.userRepository
-      .findOneByOrFail({
-        id: createNotificationDto.userId
-      })
-      .catch(() => {
-        throw new Error(
-          `No se encontró el usuario con ID ${createNotificationDto.userId}.`
-        )
-      })
+    const user = await this.userRepository.findOneByOrFail({
+      id: createNotificationDto.userId
+    })
 
     const notification = this.notificationRepository.create({
       ...createNotificationDto,
@@ -64,46 +58,31 @@ export class NotificationsService {
   }
 
   async getOne(id: number): Promise<Notification> {
-    try {
-      return await this.notificationRepository.findOneOrFail({
-        where: { id },
-        relations: ['user']
-      })
-    } catch (error) {
-      throw new Error(`No se encontró la notificación con ID ${id}.`)
-    }
+    const notification = await this.notificationRepository.findOneOrFail({
+      where: { id },
+      relations: ['user']
+    })
+
+    return notification
   }
 
   async update(
     id: number,
     updateNotificationDto: UpdateNotificationDto
   ): Promise<Notification> {
-    await this.notificationRepository
-      .update(id, updateNotificationDto)
-      .catch(() => {
-        throw new Error(`Error al actualizar la notificación con ID ${id}.`)
-      })
+    await this.notificationRepository.update(id, updateNotificationDto)
 
-    const notification = await this.notificationRepository
-      .findOneOrFail({
-        where: { id },
-        relations: ['user']
-      })
-      .catch(() => {
-        throw new Error(
-          `No se encontró la notificación con ID ${id} después de la actualización.`
-        )
-      })
+    const notification = await this.notificationRepository.findOneOrFail({
+      where: { id },
+      relations: ['user']
+    })
 
     return notification
   }
 
   async delete(id: number): Promise<void> {
-    try {
-      await this.notificationRepository.findOneByOrFail({ id })
-      await this.notificationRepository.delete(id)
-    } catch (error) {
-      throw new Error(`Error al eliminar la notificación con ID ${id}.`)
-    }
+    await this.notificationRepository.findOneByOrFail({ id })
+
+    await this.notificationRepository.delete(id)
   }
 }
