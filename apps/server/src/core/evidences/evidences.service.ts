@@ -74,6 +74,21 @@ export class EvidencesService {
       })
 
     const { type } = createEvidenceDto
+    switch (type) {
+      case EvidenceType.DOCUMENT:
+        if (!createEvidenceDto.fileLink.match(/\.(xls|xlsx|doc|docx|pdf)$/)) {
+          throw new Error('Invalid format type')
+        }
+        break
+
+      case EvidenceType.IMAGE:
+        if (
+          !createEvidenceDto.fileLink.match(/\.(jpeg|jpg|webp|avif|png|svg)$/)
+        ) {
+          throw new Error('Invalid format type')
+        }
+        break
+    }
     let evidence: Evidence
 
     switch (type) {
