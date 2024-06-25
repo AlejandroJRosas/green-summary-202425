@@ -26,6 +26,7 @@ import { RecommendCategoriesDto } from './dto/recommend-categories.dto'
 import { Department } from '../users/entities/department.entity'
 import { Recommendation } from '../recommendations/entities/recommendation.entity'
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
+import { RecopilationDto } from './dto/recopilation.dto'
 
 @Injectable()
 export class RecopilationsService {
@@ -71,8 +72,56 @@ export class RecopilationsService {
     return { recopilation, count }
   }
 
-  async findOne(id: number): Promise<Recopilation> {
-    return this.recopilationsRepository.findOneByOrFail({ id })
+  async findOne(id: number): Promise<RecopilationDto> {
+    const recopilation = await this.recopilationsRepository.findOneOrFail({
+      where: { id },
+      relations: [
+        'departmentsPerRecopilation.department',
+        'departmentsPerRecopilation.recommendations',
+        'categorizedCriterion.criteria.indicator',
+        'categorizedCriterion.category',
+        'indicatorsPerRecopilations.indicator'
+      ]
+    })
+
+    const recommendations = recopilation.departmentsPerRecopilation.map(
+      (dpr) => ({
+        department: dpr.department,
+        recommendedCategories: dpr.recommendations.map((r) => r.category)
+      })
+    )
+
+    const indicators = recopilation.indicatorsPerRecopilations.map((ipr) => {
+      const { indicator } = ipr
+      const criteria = recopilation.categorizedCriterion
+        .filter((cc) => cc.criteria.indicator.index === indicator.index)
+        .map((cc) => {
+          const { indicator: _, ...criterionWithoutIndicator } = cc.criteria
+          return {
+            criterion: criterionWithoutIndicator as Criteria,
+            category: cc.category
+          }
+        })
+
+      return {
+        indicator,
+        criteria
+      }
+    })
+
+    const recopilationDto: RecopilationDto = {
+      id: recopilation.id,
+      name: recopilation.name,
+      description: recopilation.description,
+      startDate: recopilation.startDate,
+      endDate: recopilation.endDate,
+      departmentEndDate: recopilation.departmentEndDate,
+      isReady: recopilation.isReady,
+      departments: recommendations,
+      indicators: indicators
+    }
+
+    return recopilationDto
   }
 
   async create(recopilationData: CreateRecopilationDto): Promise<Recopilation> {
