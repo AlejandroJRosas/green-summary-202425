@@ -59,12 +59,12 @@ export class EvidencesService {
   }
 
   async create(createEvidenceDto: CreateEvidenceDto): Promise<Evidence> {
-    const coleccion =
+    const collection =
       await this.informationCollectionRepository.findOneByOrFail({
         id: createEvidenceDto.collectionId
       })
 
-    if (!coleccion) {
+    if (!collection) {
       throw new NotFoundException('Collection not found')
     }
 
