@@ -10,12 +10,15 @@
       <div
         class="flex flex-row justify-content-start align-items-center gap-4 w-full"
       >
-        <h3 class="text-lg">Evidencia 1</h3>
+        <h3 class="text-lg">Evidencia {{ index }}</h3>
         <div class="flex flex-row gap-1">
-          <button class="p-panel-header-icon p-link mr-2" [disabled]="true">
+          <button
+            class="p-panel-header-icon p-link mr-2"
+            [disabled]="!createdEvidence"
+          >
             <span
               class="pi pi-pencil"
-              (click)="enableForm()"
+              (click)="!createdEvidence ? '' : enableForm()"
               (click)="enableEdit = true"
               [style.color]="createdEvidence ? '#22c55e' : 'darkgrey'"
               [style.border]="
@@ -24,10 +27,13 @@
               style="border-radius: 100%; padding: 7px"
             ></span>
           </button>
-          <button class="p-panel-header-icon p-link mr-2" [disabled]="true">
+          <button
+            class="p-panel-header-icon p-link mr-2"
+            [disabled]="!createdEvidence"
+          >
             <span
               class="pi pi-trash"
-              (click)="onDelete()"
+              (click)="!createdEvidence ? '' : onDelete()"
               [style.color]="createdEvidence ? '#ef4444' : 'darkgrey'"
               [style.border]="
                 createdEvidence ? 'solid 1.5px #ef4444' : 'solid 1.5px darkgrey'

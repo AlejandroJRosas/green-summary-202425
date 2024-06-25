@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core'
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { FileSelectEvent, FileUploadModule } from 'primeng/fileupload'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -9,6 +9,7 @@ import { EvidenceService } from '../../../../../../../services/evidence/evidence
 import { Toast } from '../../../../../../../common/toast/toast.component'
 import { PanelModule } from 'primeng/panel'
 import { VALUES } from '../../../../../../../../../../../shared/validations'
+import { DataSharingEvidenceService } from '../../../../../../../services/evidence/data-sharing-evidence.service'
 
 @Component({
   selector: 'evidence-document',
@@ -26,7 +27,8 @@ import { VALUES } from '../../../../../../../../../../../shared/validations'
 export class EvidenceDocumentComponent extends ValidatedFormGroup<FormValues> {
   constructor(
     private EvidenceService: EvidenceService,
-    @Inject(Toast) private toast: Toast
+    @Inject(Toast) private toast: Toast,
+    private DataSharingEvidence: DataSharingEvidenceService
   ) {
     const initialControlValues = {
       description: '',
@@ -57,6 +59,8 @@ export class EvidenceDocumentComponent extends ValidatedFormGroup<FormValues> {
   enableEdit: boolean = false
   disableUploadFile: boolean = false
   @Input() informationCollectionId: string = ''
+  @Input() index: number = 0
+  @Output() disableSelect = new EventEmitter<boolean>()
   errors = {
     description: '',
     fileLink: ''
@@ -122,6 +126,7 @@ export class EvidenceDocumentComponent extends ValidatedFormGroup<FormValues> {
           this.createdEvidence = true
           this.disableForm()
           this.evidenceId = res.data.id
+          this.disableSelect.emit(true)
         }
       },
       error: (e) => {
@@ -161,6 +166,8 @@ export class EvidenceDocumentComponent extends ValidatedFormGroup<FormValues> {
           'Creado',
           'Evidencia tipo documento eliminado con éxito'
         )
+        this.DataSharingEvidence.removeEvidence(this.index)
+        this.disableSelect.emit(false)
       },
       error: (e) => {
         console.error(e)

@@ -1,27 +1,76 @@
 <section class="h-full">
-  <form [formGroup]="formGroup">
-    <p-dropdown
-      [options]="typesOfEvidence"
-      optionLabel="name"
-      placeholder="Selecciona un tipo de evidencia"
-      formControlName="selectedType"
-      [readonly]="readonly"
-    />
-    @switch (formGroup.controls.selectedType.value?.code ?? '') {
-      @case ('image') {
-        <evidence-image [informationCollectionId]="informationCollectionId" />
+  <div class="flex flex-row gap-4">
+    <h3 class="text-color-secondary">Evidencias</h3>
+    <button
+      class="p-panel-header-icon p-link mr-2"
+      [disabled]="this.DataSharingEvidence.getLenghtEvidences() !== 0"
+    >
+      <span
+        (click)="
+          this.DataSharingEvidence.getLenghtEvidences() !== 0
+            ? ''
+            : addEvidence()
+        "
+        class="pi pi-plus"
+        [style.color]="
+          this.DataSharingEvidence.getLenghtEvidences() === 0
+            ? '#3b82f6'
+            : 'darkgrey'
+        "
+        [style.border]="
+          this.DataSharingEvidence.getLenghtEvidences() === 0
+            ? 'solid 1.5px #3b82f6'
+            : 'solid 1.5px darkgrey'
+        "
+        style="border-radius: 100%; padding: 6px"
+      ></span>
+    </button>
+  </div>
+  @for (evidence of this.DataSharingEvidence.getEvidences(); track evidence) {
+    <form
+      [formGroup]="
+        this.DataSharingEvidence.getFormGroupByEvidence(evidence - 1)
+      "
+    >
+      <p-dropdown
+        [options]="typesOfEvidence"
+        optionLabel="name"
+        placeholder="Selecciona un tipo de evidencia"
+        formControlName="selectedType"
+        [readonly]="disableSelect"
+      />
+      @switch (
+        this.DataSharingEvidence.getFormGroupByEvidence(evidence - 1).controls[
+          'selectedType'
+        ].value?.code ?? ''
+      ) {
+        @case ('image') {
+          <evidence-image
+            [informationCollectionId]="informationCollectionId"
+            [index]="evidence - 1"
+            (disableSelect)="changeDisableSelect($event)"
+          />
+        }
+        @case ('link') {
+          <evidence-link
+            [informationCollectionId]="informationCollectionId"
+            [index]="evidence - 1"
+            (disableSelect)="changeDisableSelect($event)"
+          />
+        }
+        @case ('document') {
+          <evidence-document
+            [informationCollectionId]="informationCollectionId"
+            [index]="evidence - 1"
+            (disableSelect)="changeDisableSelect($event)"
+          />
+        }
+        @default {
+          <p class="text-color-secundary">
+            No hay un tipo de evidencia seleccionado
+          </p>
+        }
       }
-      @case ('link') {
-        <evidence-link [informationCollectionId]="informationCollectionId" />
-      }
-      @case ('document') {
-        <evidence-document
-          [informationCollectionId]="informationCollectionId"
-        />
-      }
-      @default {
-        <p>No hay un tipo de evidencia seleccionado</p>
-      }
-    }
-  </form>
+    </form>
+  }
 </section>

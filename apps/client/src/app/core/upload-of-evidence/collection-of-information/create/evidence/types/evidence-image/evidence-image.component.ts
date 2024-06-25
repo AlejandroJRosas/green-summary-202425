@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core'
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { FileSelectEvent, FileUploadModule } from 'primeng/fileupload'
 import { InputTextModule } from 'primeng/inputtext'
@@ -11,6 +11,7 @@ import { EvidenceService } from '../../../../../../../services/evidence/evidence
 import { Toast } from '../../../../../../../common/toast/toast.component'
 import { PanelModule } from 'primeng/panel'
 import { VALUES } from '../../../../../../../../../../../shared/validations'
+import { DataSharingEvidenceService } from '../../../../../../../services/evidence/data-sharing-evidence.service'
 
 @Component({
   selector: 'evidence-image',
@@ -30,6 +31,7 @@ import { VALUES } from '../../../../../../../../../../../shared/validations'
 export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
   constructor(
     private EvidenceService: EvidenceService,
+    private DataSharingEvidence: DataSharingEvidenceService,
     @Inject(Toast) private toast: Toast
   ) {
     const initialControlValues = {
@@ -63,6 +65,8 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
   enableEdit: boolean = false
   disableUploadFile: boolean = false
   @Input() informationCollectionId: string = ''
+  @Input() index: number = 0
+  @Output() disableSelect = new EventEmitter<boolean>()
   errors = {
     description: '',
     externalLink: '',
@@ -81,6 +85,7 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
     this.disableUploadFile = false
   }
   enableformEdit() {
+    console.log('hola')
     this.enableEdit = true
     this.enableForm()
     this.createdEvidence = false
@@ -144,6 +149,7 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
           this.createdEvidence = true
           this.disableForm()
           this.evidenceId = res.data.id
+          this.disableSelect.emit(true)
         }
       },
       error: (e) => {
@@ -183,6 +189,8 @@ export class EvidenceImageComponent extends ValidatedFormGroup<FormValues> {
           'Creado',
           'Evidencia tipo imagen eliminada con éxito'
         )
+        this.disableSelect.emit(false)
+        this.DataSharingEvidence.removeEvidence(this.index)
       },
       error: (e) => {
         console.error(e)

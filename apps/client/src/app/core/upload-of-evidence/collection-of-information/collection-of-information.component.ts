@@ -9,6 +9,7 @@ import { ValidatedFormGroup } from '../../../common/validated-form-group/validat
 import { string, object } from 'yup'
 import { InputTextModule } from 'primeng/inputtext'
 import { ConfirmDialogModule } from 'primeng/confirmdialog'
+import { LinkEvidenceService } from '../../../services/evidence/link-evidence.service'
 import {
   InformationCollectionDTO,
   InformationCollectionService
@@ -18,7 +19,9 @@ import { Toast } from '../../../common/toast/toast.component'
 import { InformationCollection } from '../../../../shared/types/information-collection.type'
 import { Category } from '../../../../shared/types/category.type'
 import { Indicator } from '../../../../shared/types/indicator.type'
-
+import { ImageModule } from 'primeng/image'
+import { DividerModule } from 'primeng/divider'
+import { EvidenceService } from '../../../services/evidence/evidence.service'
 @Component({
   selector: 'collection-of-information',
   standalone: true,
@@ -30,7 +33,9 @@ import { Indicator } from '../../../../shared/types/indicator.type'
     ReactiveFormsModule,
     InputTextareaModule,
     InputTextModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ImageModule,
+    DividerModule
   ],
   templateUrl: './collection-of-information.component.html',
   styles: ``
@@ -44,7 +49,9 @@ export class CollectionOfInformationComponent
     private currentRoute: ActivatedRoute,
     private router: Router,
     private confirmationService: ConfirmationService,
-    private InformationCollectionService: InformationCollectionService
+    private InformationCollectionService: InformationCollectionService,
+    private LinkEvidenceService: LinkEvidenceService,
+    private EvidenceService: EvidenceService
   ) {
     const initialControlValues = {
       name: '',
@@ -105,8 +112,17 @@ export class CollectionOfInformationComponent
     this.formGroup.controls.summary.setValue(summary)
     this.informationCollectionIdEdit = id
   }
+  translateType(type: string) {
+    switch (type) {
+      case 'image':
+        return 'Imagen'
+      case 'document':
+        return 'Documento'
+      default:
+        return 'Link'
+    }
+  }
   confirmationDelete(event: Event, id: number, name: string) {
-    console.log('hola')
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: `¿Estás seguro de que quieres eliminar la colección de información <strong>${name}</strong>?`,
@@ -132,11 +148,34 @@ export class CollectionOfInformationComponent
       }
     })
   }
+  confirmationDeleteEvidence(event: Event, id: number, type: string) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: `¿Estás seguro de que quieres eliminar esta evidencia?`,
+      header: 'Eliminar evidencia',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: 'p-button-danger p-button-text',
+      rejectButtonStyleClass: 'p-button-text p-button-text',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      acceptLabel: 'Sí',
+      rejectLabel: 'No',
+
+      accept: () => {
+        this.toast.show('info', 'Eliminando..', 'Eliminando evidencia..')
+        this.onDeleteEvidence(id, type)
+      },
+      reject: () => {
+        this.toast.show('error', 'Rechazado', 'Haz rechazado la eliminación')
+      }
+    })
+  }
   getAll() {
     this.InformationCollectionService.getAll(this.paginated).subscribe({
       next: (res) => {
         if (res.status === 'success') {
           this.informationCollections = res.data.items
+          console.log(this.informationCollections[0].evidences)
         }
       },
       error: (e) => {
@@ -218,6 +257,39 @@ export class CollectionOfInformationComponent
         this.toast.show('error', 'Error', e.error.data.message)
       }
     })
+  }
+  onDeleteEvidence(id: number, type: string) {
+    if (type === 'link') {
+      this.LinkEvidenceService.delete(id).subscribe({
+        next: () => {
+          this.toast.show(
+            'success',
+            'Creado',
+            'Evidencia tipo link eliminada con éxito'
+          )
+          this.getAll()
+        },
+        error: (e) => {
+          console.error(e)
+          this.toast.show('error', 'Error', e.error.data.message)
+        }
+      })
+    } else {
+      this.EvidenceService.delete(id).subscribe({
+        next: () => {
+          this.toast.show(
+            'success',
+            'Creado',
+            'Evidencia tipo imagen eliminada con éxito'
+          )
+          this.getAll()
+        },
+        error: (e) => {
+          console.error(e)
+          this.toast.show('error', 'Error', e.error.data.message)
+        }
+      })
+    }
   }
   createEvidences(informationCollectionId: number) {
     this.currentRoute.url.subscribe((url) => {

@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core'
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { InputTextModule } from 'primeng/inputtext'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -13,6 +13,7 @@ import {
 } from '../../../../../../../services/evidence/link-evidence.service'
 import { PanelModule } from 'primeng/panel'
 import { VALUES } from '../../../../../../../../../../../shared/validations'
+import { DataSharingEvidenceService } from '../../../../../../../services/evidence/data-sharing-evidence.service'
 
 @Component({
   selector: 'evidence-link',
@@ -31,7 +32,8 @@ import { VALUES } from '../../../../../../../../../../../shared/validations'
 export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
   constructor(
     @Inject(Toast) private toast: Toast,
-    private LinkEvidenceService: LinkEvidenceService
+    private LinkEvidenceService: LinkEvidenceService,
+    private DataSharingEvidence: DataSharingEvidenceService
   ) {
     const initialControlValues = {
       description: '',
@@ -58,7 +60,10 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
   editedEvience: boolean = false
   evidenceId: number = 0
   enableEdit: boolean = false
+  evidences: number[] = []
   @Input() informationCollectionId: string = ''
+  @Input() index: number = 0
+  @Output() disableSelect = new EventEmitter<boolean>()
   errors = {
     description: '',
     externalLink: ''
@@ -90,6 +95,7 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
             'Creado',
             'Evidencia tipo link creada con éxito'
           )
+          this.disableSelect.emit(true)
           this.createdEvidence = true
           this.disableForm()
           this.evidenceId = res.data.id
@@ -133,6 +139,8 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
           'Creado',
           'Evidencia tipo link eliminada con éxito'
         )
+        this.DataSharingEvidence.removeEvidence(this.index)
+        this.disableSelect.emit(false)
       },
       error: (e) => {
         console.error(e)

@@ -87,7 +87,7 @@
           <section
             class="flex flex-row justify-content-between align-items-center w-full"
           >
-            <h3 class="text-lg">Evidencias</h3>
+            <h3 class="text-xl">Evidencias</h3>
             <button class="p-panel-header-icon p-link mr-2">
               <span
                 class="pi pi-plus"
@@ -102,6 +102,104 @@
             </button>
           </section>
         </ng-template>
+        @for (evidence of informationCollection.evidences; track evidence.id) {
+          <div class="flex flex-column gap-3 mb-5">
+            <div class="flex justify-content-between align-items-center gap-4">
+              <h2
+                style="word-break: break-word"
+                class="m-0 text-xl text-color-secondary"
+              >
+                {{ evidence.description }} - tipo ({{
+                  translateType(evidence.type)
+                }})
+              </h2>
+              <div class="flex flex-nowrap">
+                <button class="p-panel-header-icon p-link mr-2">
+                  <span
+                    class="pi pi-pencil"
+                    style="
+                      color: #22c55e;
+                      border: solid 1.5px #22c55e;
+                      border-radius: 100%;
+                      padding: 8px;
+                    "
+                  ></span>
+                </button>
+                <button class="p-panel-header-icon p-link mr-2">
+                  <span
+                    class="pi pi-trash"
+                    (click)="
+                      confirmationDeleteEvidence(
+                        $event,
+                        evidence.id,
+                        evidence.type
+                      )
+                    "
+                    style="
+                      color: #ef4444;
+                      border: solid 1.5px #ef4444;
+                      border-radius: 100%;
+                      padding: 8px;
+                    "
+                  ></span>
+                </button>
+              </div>
+            </div>
+            @switch (evidence.type) {
+              @case ('link') {
+                <a
+                  [href]="evidence.externalLink"
+                  target="_blank"
+                  class="m-0 text-blue-600"
+                  style="word-wrap: break-word; max-width: 80vw"
+                >
+                  {{ evidence.externalLink }}
+                </a>
+              }
+              @case ('image') {
+                @if (evidence.externalLink) {
+                  <a
+                    [href]="evidence.externalLink"
+                    target="_blank"
+                    class="m-0 text-blue-600"
+                    style="word-wrap: break-word; max-width: 80vw"
+                  >
+                    {{ evidence.externalLink }}
+                  </a>
+                }
+                <p-image
+                  [src]="evidence.fileLink ?? ''"
+                  alt="Image"
+                  width="300"
+                  [preview]="true"
+                >
+                  <ng-template pTemplate="indicator">
+                    <div class="flex flex-column">
+                      <i class="pi pi-eye"></i>
+                      <p>Ver previsualización de la imagen</p>
+                    </div>
+                  </ng-template>
+                </p-image>
+              }
+              @case ('document') {
+                <a
+                  [href]="evidence.fileLink"
+                  target="_blank"
+                  class="m-0 text-blue-600"
+                  style="word-wrap: break-word; max-width: 80vw"
+                >
+                  {{ evidence.fileLink }}
+                </a>
+              }
+              @default {
+                <p class="m-0" style="word-wrap: break-word; max-width: 80vw">
+                  No hay evidencias creadas para esta colección de información
+                </p>
+              }
+            }
+          </div>
+          <p-divider />
+        }
       </p-panel>
     </p-panel>
   }

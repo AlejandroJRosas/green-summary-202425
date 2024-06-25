@@ -7,12 +7,8 @@ import { EvidenceLinkComponent } from './types/evidence-link/evidence-link.compo
 import { FieldsetModule } from 'primeng/fieldset'
 import { ActivatedRoute } from '@angular/router'
 import { PanelModule } from 'primeng/panel'
-import {
-  FormControl,
-  FormGroup,
-  FormsModule,
-  ReactiveFormsModule
-} from '@angular/forms'
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms'
+import { DataSharingEvidenceService } from '../../../../../services/evidence/data-sharing-evidence.service'
 
 @Component({
   selector: 'evidence',
@@ -32,39 +28,33 @@ import {
   styles: ``
 })
 export class EvidenceComponent {
-  constructor(private route: ActivatedRoute) {
+  constructor(
+    private route: ActivatedRoute,
+    public DataSharingEvidence: DataSharingEvidenceService
+  ) {
     this.route.params.subscribe((params) => {
       this.informationCollectionId = params['informationCollectionId']
     })
   }
-  formGroup = new FormGroup({
-    selectedType: new FormControl<typeEvidence>({
-      name: '',
-      code: ''
-    })
-  })
   readonly: boolean = false
   edit: boolean = false
   delete: boolean = false
   informationCollectionId: string = ''
+  disableSelect: boolean = false
+  type = 'image'
   @Input() index: number = 0
   typesOfEvidence = [
     { name: 'Imagen', code: 'image' },
     { name: 'Documento', code: 'document' },
     { name: 'Link', code: 'link' }
   ]
-  evidences: number[] = []
+  getFormGroup(evidence: number): FormGroup {
+    return this.DataSharingEvidence.getFormGroupByEvidence(evidence)
+  }
   addEvidence() {
-    this.evidences.push(this.evidences.length + 1)
+    this.DataSharingEvidence.addEvidence()
   }
-  onDelete(indexEvidence: number) {
-    this.evidences = this.evidences.filter(
-      (_, index) => index !== indexEvidence
-    )
+  changeDisableSelect(disable: boolean) {
+    this.disableSelect = disable
   }
-}
-
-interface typeEvidence {
-  name: string
-  code: string
 }
