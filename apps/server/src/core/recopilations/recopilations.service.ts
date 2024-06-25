@@ -2,6 +2,7 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import {
   EntityNotFoundError,
+  Equal,
   In,
   LessThan,
   MoreThan,
@@ -246,7 +247,8 @@ export class RecopilationsService {
         where: {
           startDate: LessThan(currentDateString),
           endDate: MoreThan(currentDateString),
-          departmentEndDate: MoreThan(currentDateString)
+          departmentEndDate: MoreThan(currentDateString),
+          isReady: Equal(true)
         },
         order: { [orderBy]: orderType }
       })
