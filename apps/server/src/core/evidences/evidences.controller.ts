@@ -10,7 +10,8 @@ import {
   Query,
   Patch,
   UseInterceptors,
-  UploadedFile
+  UploadedFile,
+  ParseFilePipeBuilder
 } from '@nestjs/common'
 import { EvidencesService } from './evidences.service'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
@@ -151,11 +152,18 @@ export class EvidencesController {
   })
   async update(
     @Param('id') id: string,
-    @UploadedFile() fileLink: Express.Multer.File,
-    @Body() updateEvidenceDto: UpdateEvidenceDto
+    @Body() updateEvidenceDto: UpdateEvidenceDto,
+    @UploadedFile(
+      new ParseFilePipeBuilder().build({
+        fileIsRequired: false
+      })
+    )
+    fileLink: Express.Multer.File
   ) {
     const name = this.configService.get('link')
-    updateEvidenceDto.fileLink = `${name.URL_BACK}/uploads/${fileLink.filename}`
+    if (updateEvidenceDto.fileLink) {
+      updateEvidenceDto.fileLink = `${name.URL_BACK}/uploads/${fileLink.filename}`
+    }
     const updatedEvidence = await this.evidencesService.update(
       +id,
       updateEvidenceDto
