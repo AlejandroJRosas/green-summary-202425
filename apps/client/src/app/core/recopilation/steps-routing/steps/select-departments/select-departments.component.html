@@ -19,7 +19,7 @@
             <p-checkbox
               [label]="department.fullName"
               name="group"
-              [(ngModel)]="selectedDepartments"
+              [(ngModel)]="selectedDepartmentsIds"
               [value]="department.id"
             />
           </fieldset>
@@ -45,7 +45,7 @@
       icon="pi pi-angle-right"
       iconPos="right"
       size="small"
-      [disabled]="selectedDepartments.length === 0"
+      [disabled]="selectedDepartmentsIds.length === 0"
       (click)="submitAndContinue()"
     />
   </footer>

@@ -35,19 +35,39 @@
             </ng-template>
             <ng-template pTemplate="icons">
               <p-checkbox
-                (onChange)="updateIndicatorId(scheme.index, $event.checked)"
-                binary="true"
+                (onChange)="
+                  onChangeIndicatorCheckbox(scheme.index, $event.checked)
+                "
+                [binary]="true"
               />
             </ng-template>
             @for (criteria of scheme.criterias; track $index) {
               <div class="flex">
                 <p class="m-2 pb-3" style="max-width: 80vw">
-                  <p-checkbox />
+                  <p-checkbox
+                    (onChange)="
+                      onChangeCriterionCheckbox(
+                        scheme.index,
+                        criteria.id,
+                        $event.checked
+                      )
+                    "
+                    [disabled]="!isSelectedIndicator(scheme.index)"
+                    [binary]="true"
+                  />
                   {{ scheme.index }}.{{ criteria.id }} {{ criteria.name }} ({{
                     criteria.alias
                   }})
                 </p>
                 <p-dropdown
+                  (onChange)="
+                    onChangeCategorySelection(
+                      scheme.index,
+                      criteria.id,
+                      $event.value.id
+                    )
+                  "
+                  [disabled]="!isSelectedIndicator(scheme.index)"
                   [options]="scheme.categories"
                   optionLabel="name"
                   placeholder="Selecciona una Categoría"

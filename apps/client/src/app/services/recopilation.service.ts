@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
-import { Observable } from 'rxjs'
+import { map, Observable } from 'rxjs'
 import { BaseUrl } from '../../config'
 import { BackendResponse } from '../../shared/types/http-response.type'
-import { User } from '../../shared/types/user.type'
+import { Department, User } from '../../shared/types/user.type'
 import { Recopilation } from '../../shared/types/recopilation.type'
 import { PaginatedResponse } from '../../shared/types/paginated-response.type'
+import { Category } from '../../shared/types/category.type'
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +36,22 @@ export class RecopilationService {
     return this.http.get<BackendResponse<Recopilation, unknown, unknown>>(
       `${BaseUrl}/recopilations/${id}`
     )
+  }
+
+  getSelectedDepartments(recopilationid: number) {
+    return this.http
+      .get<
+        BackendResponse<Department[], unknown, unknown>
+      >(`${BaseUrl}/departments/recopilation/${recopilationid}`)
+      .pipe(map((res) => (res.status === 'success' ? res.data : [])))
+  }
+
+  getCategories(recopilationId: number) {
+    return this.http
+      .get<
+        BackendResponse<Category[], unknown, unknown>
+      >(`${BaseUrl}/categories/recopilation/${recopilationId}`)
+      .pipe(map((res) => (res.status === 'success' ? res.data : [])))
   }
 
   create(

@@ -6,9 +6,7 @@ import {
   AutoCompleteModule,
   AutoCompleteSelectEvent
 } from 'primeng/autocomplete'
-import { Category } from '../../select-indicators-categories-criteria/categories.data'
-import { categoriesTotal } from '../categoriesTotal.data'
-import { Departament } from '../../department.data'
+import { Category } from '../../../../../../../shared/types/category.type'
 
 @Component({
   selector: 'app-category-selector',
@@ -17,16 +15,16 @@ import { Departament } from '../../department.data'
   templateUrl: './category-selector.component.html'
 })
 export class CategorySelectorComponent {
-  @Input() department: Departament = {
+  @Input() department = {
     id: 0,
     name: ''
   }
   // Todas las aategorias que se le pueden asignar a un departamento
   @Input() categories: Category[] = []
   // Arreglo en donde se le van agregando las categorías que se van seleccionando
-  selectedCategory: Category[] = []
+  @Input() selectedCategories: Category[] = []
   // Arreglo de categorías filtradas al comienzo tendrá todas
-  filteredCategories: Category[] = categoriesTotal
+  filteredCategories: Category[] = []
   // Mensaje que se muestra en el dropdown de categorías cuando no se encuentran y cuando ya se seleccionaron todas
   message = 'No se encontraron categorías'
 
@@ -43,10 +41,10 @@ export class CategorySelectorComponent {
     }
     //Si seleccionó una categoría no me la muestres en el dropdown del autocomplete
     this.filteredCategories = filtered.filter(
-      (category) => !this.selectedCategory.includes(category)
+      (category) => !this.selectedCategories.includes(category)
     )
     //Si ya seleccionó todas las categorías muestra el mensaje
-    if (this.selectedCategory.length === this.categories.length) {
+    if (this.selectedCategories.length === this.categories.length) {
       this.message = 'Todas las categorías han sido seleccionadas'
     } else {
       this.message = 'No se encontraron categorías'
@@ -54,12 +52,14 @@ export class CategorySelectorComponent {
   }
   //Función que se ejecuta cuando se selecciona una categoría
   onSelectCategory(event: AutoCompleteSelectEvent) {
-    this.selectedCategory.push(event.value)
+    this.selectedCategories.push(event.value)
   }
   //Función que se ejecuta cuando se elimina una categoría
   removeCategory(id: number) {
-    this.selectedCategory = this.selectedCategory.filter(
-      (category) => category.id !== id
+    const categoryToRemoveIndex = this.selectedCategories.findIndex(
+      (sc) => sc.id === id
     )
+
+    this.selectedCategories.splice(categoryToRemoveIndex, 1)
   }
 }

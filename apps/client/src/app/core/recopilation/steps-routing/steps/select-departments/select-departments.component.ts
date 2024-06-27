@@ -3,12 +3,12 @@ import { ButtonModule } from 'primeng/button'
 import { ActivatedRoute, Router } from '@angular/router'
 import { DropdownModule } from 'primeng/dropdown'
 import { CheckboxModule } from 'primeng/checkbox'
-import { recopilations } from '../recopilations.data'
 import { DepartmentService } from '../../../../../services/department.service'
-import { User } from '../../../../../../shared/types/user.type'
+import { Department } from '../../../../../../shared/types/user.type'
 import { RecopilationService } from '../../../../../services/recopilation.service'
 import { FormsModule } from '@angular/forms'
 import { Toast } from '../../../../../common/toast/toast.component'
+import { Recopilation } from '../../../../../../shared/types/recopilation.type'
 
 @Component({
   selector: 'app-select-departments',
@@ -26,24 +26,28 @@ export class SelectDepartmentsComponent implements OnInit {
     private recopilationService: RecopilationService
   ) {
     this.route.params.subscribe((params) => {
-      this.recopilationId = parseInt(params['recopilationId'], 10)
+      this.recopilationId = parseInt(params['recopilationId']) || -1
     })
   }
 
-  recopilationId: number = 0
+  recopilationId: number = -1
 
-  recopilations = recopilations
-  departments: User[] = []
-  selectedDepartments = []
+  recopilations: Recopilation[] = []
+
+  departments: Department[] = []
+  selectedDepartmentsIds: number[] = []
 
   ngOnInit() {
-    this.loadDepartments()
+    console.log(this.recopilationId)
+    this.loadDepartmentsList()
+    this.loadPreviousSelectedDepartments()
   }
 
-  loadDepartments() {
+  loadDepartmentsList() {
     this.departmentService.getAll().subscribe({
       next: (response) => {
         this.departments = response
+        console.log(response)
       },
       error: (error) => {
         console.log(error)
@@ -51,10 +55,21 @@ export class SelectDepartmentsComponent implements OnInit {
     })
   }
 
+  loadPreviousSelectedDepartments() {
+    this.recopilationService
+      .getSelectedDepartments(this.recopilationId)
+      .subscribe({
+        next: (departments) => {
+          console.log(departments)
+          this.selectedDepartmentsIds = departments.map((d) => d.id)
+        }
+      })
+  }
+
   submitAndContinue() {
     const payload = {
       recopilationId: this.recopilationId,
-      departmentsIds: this.selectedDepartments
+      departmentsIds: this.selectedDepartmentsIds
     }
     this.recopilationService.relateDepartments(payload).subscribe({
       next: (response) => {

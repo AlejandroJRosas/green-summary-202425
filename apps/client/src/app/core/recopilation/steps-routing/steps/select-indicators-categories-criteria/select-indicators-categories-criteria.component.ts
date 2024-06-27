@@ -1,35 +1,23 @@
 import { Component, Inject, OnInit } from '@angular/core'
 import { ButtonModule } from 'primeng/button'
 import { DropdownModule } from 'primeng/dropdown'
-import { recopilations } from '../recopilations.data'
 import { ActivatedRoute, Router } from '@angular/router'
 import { CheckboxModule } from 'primeng/checkbox'
-import { ReactiveFormsModule } from '@angular/forms'
-import {
-  Category,
-  categoriesIndicator1,
-  categoriesIndicator2
-} from './categories.data'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { Toast } from '../../../../../common/toast/toast.component'
 import { IndicatorService } from '../../../../../services/indicator.service'
 import { Indicator } from '../../../../../../shared/types/indicator.type'
 import { Criteria } from '../../../../../../shared/types/criterion.type'
 import { RecopilationService } from '../../../../../services/recopilation.service'
 import { PanelModule } from 'primeng/panel'
+import { Category } from '../../../../../../shared/types/category.type'
+import { Recopilation } from '../../../../../../shared/types/recopilation.type'
 
-interface selectedData {
-  key: string | number
-  label: string
-  data: string
-  categories: Category[]
-  children: Node[]
-  type: string
-  category: null | string
-}
 @Component({
   selector: 'app-select-indicators-categories-criteria',
   standalone: true,
   imports: [
+    FormsModule,
     ButtonModule,
     DropdownModule,
     CheckboxModule,
@@ -49,42 +37,33 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
     private indicatorService: IndicatorService
   ) {
     this.route.params.subscribe((params) => {
-      this.recopilationId = parseInt(params['recopilationId'], 10)
+      this.recopilationId = parseInt(params['recopilationId']) || -1
     })
   }
-  recopilations = recopilations
-  categoriesIndicator1 = categoriesIndicator1
-  categoriesIndicator2 = categoriesIndicator2
+  recopilations: Recopilation[] = []
 
-  selectedData: selectedData[] = []
-  onSelectionChangeDropdown(category: string, keyCriteria: string) {
-    const node = this.selectedData.find((file) => file.key === keyCriteria)
-    if (node) {
-      node.category = category
-    }
-  }
-
-  recopilationId = 0
+  recopilationId = -1
   schemes: Scheme[] = []
-  indicators: RelateIndicators[] = []
+  indicators: IndicatorToRelateFormValues[] = []
 
-  updateIndicatorId(indicatorIndex: number, isChecked: boolean): void {
+  onChangeIndicatorCheckbox(indicatorIndex: number, isChecked: boolean): void {
+    const alreadyInsertedIndicator = this.indicators.find(
+      (indicator) => indicator.indicatorId === indicatorIndex
+    )
+
     if (isChecked) {
-      const isPresent = this.indicators.some(
-        (indicator) => indicator.indicatorId === indicatorIndex
-      )
-      if (!isPresent) {
+      if (alreadyInsertedIndicator) {
+        alreadyInsertedIndicator.selected = true
+      } else {
         this.indicators.push({
           indicatorId: indicatorIndex,
-          criterion: []
+          criterion: [],
+          selected: true
         })
       }
     } else {
-      this.indicators = this.indicators.filter(
-        (indicator) => indicator.indicatorId !== indicatorIndex
-      )
+      alreadyInsertedIndicator!.selected = false
     }
-    console.log('Indicator Index: ', this.indicators)
   }
 
   ngOnInit() {
@@ -95,7 +74,6 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
     this.indicatorService.getAllIndicators().subscribe({
       next: (indicators) => {
         this.schemes = indicators
-        console.log('Schemes: ', this.schemes)
       },
       error: (error) => {
         console.log(error)
@@ -115,26 +93,137 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
   }
 
   onSubmit() {
-    const payload = {
+    const payload = this.adaptFormValuesToDto()
+
+    this.recopilationService.relateIndicators(payload).subscribe({
+      next: () => {
+        this.nextStep()
+        this.toast.show(
+          'success',
+          'Éxito',
+          'Esquema de recopilación agregado correctamente'
+        )
+      }
+    })
+  }
+
+  onChangeCriterionCheckbox(
+    indicatorIndex: number,
+    criteriaId: number,
+    isChecked: boolean
+  ) {
+    if (isChecked) {
+      this.addCriterionToIndicator(indicatorIndex, criteriaId)
+    } else {
+      this.removeCriterionFromIndicator(indicatorIndex, criteriaId)
+    }
+  }
+
+  onChangeCategorySelection(
+    indicatorIndex: number,
+    criterionId: number,
+    categoryId: number
+  ) {
+    const indicator = this.indicators.find(
+      (indicator) => indicator.indicatorId === indicatorIndex
+    )
+
+    if (!indicator) return
+
+    const alreadyInsertedCriterion = indicator?.criterion.find(
+      (c) => c.criteriaId === criterionId
+    )
+
+    if (alreadyInsertedCriterion) {
+      alreadyInsertedCriterion.categoryId = categoryId
+    } else {
+      indicator.criterion.push({
+        criteriaId: null,
+        categoryId
+      })
+    }
+  }
+
+  isSelectedIndicator(indicatorIndex: number) {
+    return this.indicators.some(
+      (indicator) =>
+        indicator.indicatorId === indicatorIndex && indicator.selected
+    )
+  }
+
+  private adaptFormValuesToDto() {
+    return {
       recopilationId: this.recopilationId,
       indicators: this.indicators
+        .filter((i) => i.selected && i.criterion.length > 0)
+        .map((i) => ({
+          indicatorId: i.indicatorId,
+          criterion: i.criterion.filter(
+            (c) => c.categoryId !== null && c.criteriaId !== null
+          ) as {
+            criteriaId: number
+            categoryId: number
+          }[]
+        })) as IndicatorToRelate[]
     }
-    this.recopilationService.relateIndicators(payload)
-    this.nextStep()
-    this.toast.show(
-      'success',
-      'Éxito',
-      'Esquema de recopilación agregado correctamente'
+  }
+
+  private addCriterionToIndicator(indicatorIndex: number, criteriaId: number) {
+    const indicator = this.indicators.find(
+      (indicator) => indicator.indicatorId === indicatorIndex
     )
+
+    if (!indicator) return
+
+    const alreadyInsertedCriterion = indicator.criterion.find(
+      (c) => c.criteriaId === criteriaId
+    )
+
+    if (alreadyInsertedCriterion) {
+      alreadyInsertedCriterion.criteriaId = criteriaId
+    } else {
+      indicator.criterion.push({
+        criteriaId,
+        categoryId: null
+      })
+    }
+  }
+
+  private removeCriterionFromIndicator(
+    indicatorIndex: number,
+    criterionId: number
+  ) {
+    const indicator = this.indicators.find(
+      (indicator) => indicator.indicatorId === indicatorIndex
+    )
+
+    if (!indicator) return
+
+    const criterionToRemove = indicator.criterion.find(
+      (i) => i.criteriaId === criterionId
+    )
+
+    if (!criterionToRemove) return
+
+    criterionToRemove.criteriaId = null
   }
 }
 
 type Scheme = Indicator & { categories: Category[]; criterias: Criteria[] }
 
-type RelateIndicators = {
+type IndicatorToRelate = {
   indicatorId: number
   criterion: {
     criteriaId: number
     categoryId: number
   }[]
+}
+
+type IndicatorToRelateFormValues = {
+  indicatorId: number
+  criterion: {
+    criteriaId: number | null
+    categoryId: number | null
+  }[]
+  selected: boolean
 }
