@@ -213,6 +213,7 @@ export class CollectionOfInformationComponent
       categoryId: this.category.id,
       departmentId: JSON.parse(localStorage.getItem('user')!).id as number
     }
+    this.closeDialogCreate()
     this.InformationCollectionService.create(informationCollection).subscribe({
       next: (res) => {
         if (res.status === 'success') {
@@ -221,7 +222,6 @@ export class CollectionOfInformationComponent
             'Creado',
             'Colección de información creado con éxito'
           )
-          this.closeDialogCreate()
           this.getAll()
         }
       },
@@ -242,6 +242,7 @@ export class CollectionOfInformationComponent
       recopilationId: 1,
       departmentId: JSON.parse(localStorage.getItem('user')!).id as number
     }
+    this.closeDialogEdit()
     this.InformationCollectionService.edit(
       this.informationCollectionIdEdit,
       informationCollection
@@ -253,7 +254,6 @@ export class CollectionOfInformationComponent
           'Editado',
           'Colección de información editado con éxito'
         )
-        this.closeDialogEdit()
       },
       error: (e) => {
         this.toast.show('error', 'Error', e.error.data.message)
