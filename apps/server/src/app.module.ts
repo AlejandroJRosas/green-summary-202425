@@ -16,6 +16,7 @@ import { IndicatorsPerRecopilationsModule } from './core/indicators-per-recopila
 import { DepartmentsPerRecopilationsModule } from './core/departments-per-recopilations/departments-per-recopilations.module'
 import { CategorizedCriteriaModule } from './core/categorized-criteria/categorized-criteria.module'
 import { ServeStaticModule } from '@nestjs/serve-static/dist/serve-static.module'
+import { WordModule } from './core/word/word.module'
 
 @Module({
   imports: [
@@ -50,7 +51,8 @@ import { ServeStaticModule } from '@nestjs/serve-static/dist/serve-static.module
     RecommendationsModule,
     InformationCollectionsModule,
     EvidencesModule,
-    NotificationsModule
+    NotificationsModule,
+    WordModule
   ]
 })
 export class AppModule {}
