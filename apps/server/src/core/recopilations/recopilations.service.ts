@@ -198,6 +198,13 @@ export class RecopilationsService {
       recopilation.indicatorsPerRecopilations.push(indicatorPerRepository)
     }
 
+    await this.indicatorsPerRecopilationRepository.remove(
+      recopilation.indicatorsPerRecopilations
+    )
+    await this.categorizedCriteriaRepository.remove(
+      recopilation.categorizedCriterion
+    )
+
     await this.indicatorsPerRecopilationRepository.save(
       recopilation.indicatorsPerRecopilations.map((ipr) => ({
         ...ipr,
