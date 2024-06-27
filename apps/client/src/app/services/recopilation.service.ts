@@ -92,6 +92,13 @@ export class RecopilationService {
     )
   }
 
+  setAsReady(recopilationId: number): Observable<void> {
+    return this.http.patch<void>(
+      `${BaseUrl}/recopilations/${recopilationId}/set-as-ready`,
+      {}
+    )
+  }
+
   edit(
     id: number,
     recopilation: Recopilation

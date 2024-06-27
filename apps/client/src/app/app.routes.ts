@@ -23,6 +23,7 @@ import { InformationRecopilationComponent } from './core/recopilation/steps-rout
 import { SelectDepartmentsComponent } from './core/recopilation/steps-routing/steps/select-departments/select-departments.component'
 import { SelectIndicatorsCategoriesCriteriaComponent } from './core/recopilation/steps-routing/steps/select-indicators-categories-criteria/select-indicators-categories-criteria.component'
 import { RecommendCategoriesDepartmentComponent } from './core/recopilation/steps-routing/steps/recommend-categories-department/recommend-categories-department.component'
+import { PreviewComponent } from './core/recopilation/steps-routing/steps/preview/preview.component'
 
 export const routes: Routes = [
   {
@@ -100,6 +101,12 @@ export const routes: Routes = [
             path: 'recommend-categories-department/:recopilationId',
             title: 'Recomendar categorías a departamentos',
             component: RecommendCategoriesDepartmentComponent,
+            canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
+          },
+          {
+            path: 'preview/:recopilationId',
+            title: 'Previzualizar recopilación',
+            component: PreviewComponent,
             canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
           }
         ]

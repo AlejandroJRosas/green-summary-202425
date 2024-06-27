@@ -11,7 +11,7 @@
           <app-category-selector
             [department]="{ id: department.id, name: department.fullName }"
             [categories]="categories"
-            [selectedCategories]="selectedCategories"
+            [selectedCategories]="getCategoriesArray(department.id)"
           />
         }
       </div>
@@ -33,7 +33,7 @@
       icon="pi pi-angle-right"
       iconPos="right"
       size="small"
-      (click)="nextStep()"
+      (click)="submitAndContinue()"
     />
   </footer>
 </main>

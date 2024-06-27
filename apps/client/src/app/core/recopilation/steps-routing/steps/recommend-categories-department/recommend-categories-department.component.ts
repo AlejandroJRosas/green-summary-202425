@@ -41,11 +41,23 @@ export class RecommendCategoriesDepartmentComponent {
   departments: Department[] = []
   categories: Category[] = []
 
+  recommendationsFormValues: recommendationFormValues[] = []
+
   selectedCategories: Category[] = []
 
   ngOnInit() {
     this.loadDepartments()
     this.loadCategories()
+  }
+
+  submitAndContinue() {
+    const payload = this.adaptFormValuesToDto()
+    this.recopilationService.recommendCategories(payload).subscribe({
+      next: () => {
+        this.nextStep()
+        this.toast.show('success', 'Éxito', 'Categorías recomendadas con éxito')
+      }
+    })
   }
 
   private loadDepartments() {
@@ -54,6 +66,10 @@ export class RecommendCategoriesDepartmentComponent {
       .subscribe({
         next: (departments) => {
           this.departments = departments
+          this.recommendationsFormValues = departments.map((department) => ({
+            departmentId: department.id,
+            categories: []
+          }))
         }
       })
   }
@@ -66,9 +82,30 @@ export class RecommendCategoriesDepartmentComponent {
     })
   }
 
+  private adaptFormValuesToDto() {
+    return {
+      recopilationId: this.recopilationId,
+      departments: this.recommendationsFormValues
+        .filter((rfv) => rfv.categories.length > 0)
+        .map((rfv) => ({
+          departmentId: rfv.departmentId,
+          categories: rfv.categories.map((category) => ({
+            categoryId: category.id
+          }))
+        }))
+    }
+  }
+
+  getCategoriesArray(departmentId: number) {
+    return this.recommendationsFormValues.find(
+      (recommendation) => recommendation.departmentId === departmentId
+    )?.categories as []
+  }
+
   nextStep() {
-    this.router.navigateByUrl('pages/recopilations')
-    this.toast.show('success', 'Éxito', 'Recopilación creada con éxito')
+    this.router.navigateByUrl(
+      `pages/recopilations/steps-create/preview/${this.recopilationId}`
+    )
   }
 
   prevStep() {
@@ -76,4 +113,9 @@ export class RecommendCategoriesDepartmentComponent {
       `pages/recopilations/steps-create/select-indicators-categories-criteria/${this.recopilationId}`
     )
   }
+}
+
+type recommendationFormValues = {
+  departmentId: number
+  categories: Category[]
 }
