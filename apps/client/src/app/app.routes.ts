@@ -52,12 +52,14 @@ export const routes: Routes = [
       {
         path: 'create/information-collection/:recopilationId/:categoryId/:informationCollectionId',
         title: 'Agregar evidencias',
-        component: CreateEvidencesComponent
+        component: CreateEvidencesComponent,
+        canActivate: [roleGuard([Role.DEPARTMENT])]
       },
       {
         path: 'edit/information-collection/:recopilationId/:categoryId/:informationCollectionId/:evidenceId',
         title: 'Agregar evidencias',
-        component: EditEvidenceComponent
+        component: EditEvidenceComponent,
+        canActivate: [roleGuard([Role.DEPARTMENT])]
       }
     ]
   },

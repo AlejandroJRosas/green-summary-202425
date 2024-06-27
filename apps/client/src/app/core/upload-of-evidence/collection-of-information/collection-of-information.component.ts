@@ -22,6 +22,7 @@ import { Indicator } from '../../../../shared/types/indicator.type'
 import { ImageModule } from 'primeng/image'
 import { DividerModule } from 'primeng/divider'
 import { EvidenceService } from '../../../services/evidence/evidence.service'
+import { VALUES } from '../../../../../../../shared/validations'
 @Component({
   selector: 'collection-of-information',
   standalone: true,
@@ -58,8 +59,26 @@ export class CollectionOfInformationComponent
       summary: ''
     }
     const validationSchema = object({
-      summary: string().required('La descripción es requerida'),
-      name: string().required('El nombre es requerido')
+      summary: string()
+        .required('La descripción es requerida')
+        .max(
+          VALUES.descriptionMaxAmount,
+          'La descripción no puede superar los 280 caracteres'
+        )
+        .min(
+          VALUES.descriptionMinAmount,
+          'La descripción debe superar los 30 caracteres'
+        ),
+      name: string()
+        .required('El nombre es requerido')
+        .max(
+          VALUES.indicatorNameAliasMaxAmount,
+          'El nombre no puede superar los 40 caracteres'
+        )
+        .min(
+          VALUES.nameAliasMinAmount,
+          'El nombre debe superar un mínimo de 10 caracteres'
+        )
     })
     super(initialControlValues, validationSchema)
   }
