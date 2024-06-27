@@ -12,6 +12,7 @@ import { roleGuard } from './guards/role.guard'
 import { Role } from './services/auth.service'
 import { UploadOfEvidenceComponent } from './core/upload-of-evidence/upload-of-evidence.component'
 import { CreateEvidencesComponent } from './core/upload-of-evidence/collection-of-information/create/create-evidences.component'
+import { EditEvidenceComponent } from './core/upload-of-evidence/collection-of-information/edit-evidence/edit-evidence.component'
 
 export const routes: Routes = [
   {
@@ -52,6 +53,11 @@ export const routes: Routes = [
         path: 'create/information-collection/:recopilationId/:categoryId/:informationCollectionId',
         title: 'Agregar evidencias',
         component: CreateEvidencesComponent
+      },
+      {
+        path: 'edit/information-collection/:recopilationId/:categoryId/:informationCollectionId/:evidenceId',
+        title: 'Agregar evidencias',
+        component: EditEvidenceComponent
       }
     ]
   },

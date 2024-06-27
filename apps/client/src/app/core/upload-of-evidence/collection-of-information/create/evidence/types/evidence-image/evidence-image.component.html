@@ -10,32 +10,40 @@
       <div
         class="flex flex-row justify-content-start align-items-center gap-4 w-full"
       >
-        <h3 class="text-lg">Evidencia {{ index }}</h3>
+        <h3 class="text-lg">Evidencia {{ index + 1 }}</h3>
         <div class="flex flex-row gap-1">
           <button
             class="p-panel-header-icon p-link mr-2"
-            [disabled]="!createdEvidence"
+            [disabled]="!(createdEvidence || editedEvience)"
           >
             <span
               class="pi pi-pencil"
-              (click)="!createdEvidence ? '' : enableformEdit()"
-              [style.color]="createdEvidence ? '#22c55e' : 'darkgrey'"
+              (click)="createdEvidence || editedEvience ? enableForm() : ''"
+              [style.color]="
+                createdEvidence || editedEvience ? '#22c55e' : 'darkgrey'
+              "
               [style.border]="
-                createdEvidence ? 'solid 1.5px #22c55e' : 'solid 1.5px darkgrey'
+                createdEvidence || editedEvience
+                  ? 'solid 1.5px #22c55e'
+                  : 'solid 1.5px darkgrey'
               "
               style="border-radius: 100%; padding: 7px"
             ></span>
           </button>
           <button
             class="p-panel-header-icon p-link mr-2"
-            [disabled]="!createdEvidence"
+            [disabled]="!(createdEvidence || editedEvience)"
           >
             <span
               class="pi pi-trash"
-              (click)="!createdEvidence ? '' : onDelete()"
-              [style.color]="createdEvidence ? '#ef4444' : 'darkgrey'"
+              (click)="!(createdEvidence || editedEvience) ? '' : onDelete()"
+              [style.color]="
+                createdEvidence || editedEvience ? '#ef4444' : 'darkgrey'
+              "
               [style.border]="
-                createdEvidence ? 'solid 1.5px #ef4444' : 'solid 1.5px darkgrey'
+                createdEvidence || editedEvience
+                  ? 'solid 1.5px #ef4444'
+                  : 'solid 1.5px darkgrey'
               "
               style="border-radius: 100%; padding: 6px"
             ></span>
@@ -93,6 +101,33 @@
         invalidFileSizeMessageDetail="El tamaño de la imagen es superior a 2Mb"
         ngDefaultControl
       >
+        <ng-template pTemplate="content">
+          @if (initialValueEdit) {
+            <div
+              class="flex flex-row justify-content-between align-content-center w-9"
+            >
+              <p-image
+                [src]="imageBlobUrl"
+                alt="Image"
+                width="250"
+                [preview]="true"
+              >
+                <ng-template pTemplate="indicator">
+                  <div class="flex flex-column">
+                    <i class="pi pi-eye"></i>
+                    <p>Ver previsualización de la imagen</p>
+                  </div>
+                </ng-template>
+              </p-image>
+              <p style="word-break: break-word">
+                {{ this.nameFileByUrl }}
+              </p>
+              <p-button icon="pi pi-times" (click)="onRemove()" />
+            </div>
+          } @else {
+            <p></p>
+          }
+        </ng-template>
         <ng-template pTemplate="uploader">
           @if (createdEvidence || editedEvience) {
             <div
@@ -155,7 +190,7 @@
           icon="pi pi-check"
           [outlined]="true"
           severity="success"
-          [disabled]="formGroup.invalid || editedEvience"
+          [disabled]="(edit ? false : formGroup.invalid) || editedEvience"
         />
       } @else {
         <p-button

@@ -10,15 +10,15 @@
       <div
         class="flex flex-row justify-content-start align-items-center gap-4 w-full"
       >
-        <h3 class="text-lg">Evidencia {{ index }}</h3>
+        <h3 class="text-lg">Evidencia {{ index + 1 }}</h3>
         <div class="flex flex-row gap-1">
           <button
             class="p-panel-header-icon p-link mr-2"
-            [disabled]="!createdEvidence"
+            [disabled]="!(createdEvidence || editedEvience)"
           >
             <span
               class="pi pi-pencil"
-              (click)="!createdEvidence ? '' : enableformEdit()"
+              (click)="createdEvidence || editedEvience ? enableForm() : ''"
               [style.color]="
                 createdEvidence || editedEvience ? '#22c55e' : 'darkgrey'
               "
@@ -32,11 +32,11 @@
           </button>
           <button
             class="p-panel-header-icon p-link mr-2"
-            [disabled]="!createdEvidence"
+            [disabled]="!(createdEvidence || editedEvience)"
           >
             <span
               class="pi pi-trash"
-              (click)="!createdEvidence ? '' : onDelete()"
+              (click)="!(createdEvidence || editedEvience) ? '' : onDelete()"
               [style.color]="
                 createdEvidence || editedEvience ? '#ef4444' : 'darkgrey'
               "
@@ -51,7 +51,7 @@
         </div>
       </div>
     </ng-template>
-    <form [formGroup]="formGroup" enctype="multipart/form-data">
+    <form [formGroup]="formGroup">
       <div class="flex flex-column gap-2 w-full">
         <label class="flex flex-column gap-2 w-full">
           Descripción
@@ -87,6 +87,19 @@
         invalidFileSizeMessageDetail="El tamaño del documento es superior a 2Mb"
         ngDefaultControl
       >
+        <ng-template pTemplate="content">
+          @if (initialValueEdit) {
+            <div
+              class="flex flex-row justify-content-between align-content-center w-9"
+            >
+              <p style="word-break: break-word">
+                {{ this.nameFileByUrl }}
+              </p>
+            </div>
+          } @else {
+            <p></p>
+          }
+        </ng-template>
         <ng-template pTemplate="uploader">
           @if (createdEvidence || editedEvience) {
             <div
@@ -123,7 +136,7 @@
           icon="pi pi-check"
           [outlined]="true"
           severity="success"
-          [disabled]="formGroup.invalid || editedEvience"
+          [disabled]="(edit ? false : formGroup.invalid) || editedEvience"
         />
       } @else {
         <p-button

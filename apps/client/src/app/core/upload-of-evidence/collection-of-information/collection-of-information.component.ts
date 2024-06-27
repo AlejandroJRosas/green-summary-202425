@@ -299,6 +299,14 @@ export class CollectionOfInformationComponent
       `pages/create/${this.currentUrl}/${informationCollectionId}`
     )
   }
+  onEditEvidence(evidenceId: number, informationCollectionId: number) {
+    this.currentRoute.url.subscribe((url) => {
+      this.currentUrl = url.map((segment) => segment.path).join('/')
+    })
+    this.router.navigateByUrl(
+      `pages/edit/${this.currentUrl}/${informationCollectionId}/${evidenceId}`
+    )
+  }
 }
 
 type FormValues = Pick<InformationCollectionDTO, 'name' | 'summary'>

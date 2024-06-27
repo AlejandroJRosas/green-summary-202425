@@ -1,4 +1,11 @@
-import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
+import {
+  Component,
+  EventEmitter,
+  Inject,
+  Input,
+  OnInit,
+  Output
+} from '@angular/core'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { InputTextModule } from 'primeng/inputtext'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -14,6 +21,8 @@ import {
 import { PanelModule } from 'primeng/panel'
 import { VALUES } from '../../../../../../../../../../../shared/validations'
 import { DataSharingEvidenceService } from '../../../../../../../services/evidence/data-sharing-evidence.service'
+import { Evidence } from '../../../../../../../../shared/types/evidence.type'
+import { ActivatedRoute, Router } from '@angular/router'
 
 @Component({
   selector: 'evidence-link',
@@ -29,8 +38,13 @@ import { DataSharingEvidenceService } from '../../../../../../../services/eviden
   templateUrl: './evidence-link.component.html',
   styles: ``
 })
-export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
+export class EvidenceLinkComponent
+  extends ValidatedFormGroup<FormValues>
+  implements OnInit
+{
   constructor(
+    private route: ActivatedRoute,
+    private router: Router,
     @Inject(Toast) private toast: Toast,
     private LinkEvidenceService: LinkEvidenceService,
     private DataSharingEvidence: DataSharingEvidenceService
@@ -55,18 +69,54 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
         .required('El link es requerido')
     })
     super(initialControlValues, validationSchema)
+    this.route.params.subscribe((params) => {
+      this.categoryId = parseInt(params['categoryId'], 10)
+      this.recopilationId = parseInt(params['recopilationId'], 10)
+    })
   }
   createdEvidence: boolean = false
   editedEvience: boolean = false
   evidenceId: number = 0
   enableEdit: boolean = false
   evidences: number[] = []
+  categoryId: number = 0
+  recopilationId: number = 0
   @Input() informationCollectionId: string = ''
+
+  @Input() evidence: EvidenceEdit = {
+    id: 0,
+    description: '',
+    externalLink: '',
+    fileLink: '',
+    type: 'link',
+    error: '',
+    collection: {
+      id: 0,
+      summary: '',
+      name: ''
+    }
+  }
   @Input() index: number = 0
+  @Input() edit: boolean = false
   @Output() disableSelect = new EventEmitter<boolean>()
   errors = {
     description: '',
     externalLink: ''
+  }
+  ngOnInit() {
+    if (this.edit) {
+      this.enableEdit = true
+      this.createdEvidence = true
+      this.evidenceId = this.evidence.id
+      this.formGroup.controls.description.setValue(this.evidence.description)
+      this.formGroup.controls.externalLink.setValue(
+        this.evidence.externalLink ?? ''
+      )
+    }
+  }
+  enableEditButton() {
+    this.enableEdit = true
+    this.editedEvience = false
   }
   disableForm() {
     this.formGroup.get('description')?.disable()
@@ -104,6 +154,7 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
       error: (e) => {
         console.error(e)
         this.toast.show('error', 'Error', e.error.data.message)
+        this.createdEvidence = false
       }
     })
   }
@@ -128,6 +179,7 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
       },
       error: (e) => {
         this.toast.show('error', 'Error', e.error.data.message)
+        this.editedEvience = false
       }
     })
   }
@@ -139,6 +191,9 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
           'Creado',
           'Evidencia tipo link eliminada con éxito'
         )
+        if (this.edit) {
+          this.redirect()
+        }
         this.DataSharingEvidence.removeEvidence(this.index)
         this.disableSelect.emit(false)
       },
@@ -149,9 +204,21 @@ export class EvidenceLinkComponent extends ValidatedFormGroup<FormValues> {
       }
     })
   }
+  redirect() {
+    this.router.navigateByUrl(
+      `pages/information-collection/${this.recopilationId}/${this.categoryId}`
+    )
+  }
 }
 
 type FormValues = {
   description: string
   externalLink: string
+}
+type EvidenceEdit = Omit<Evidence, 'collection'> & {
+  collection: {
+    id: number
+    name: string
+    summary: string
+  }
 }

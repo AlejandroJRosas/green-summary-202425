@@ -117,6 +117,9 @@
                 <button class="p-panel-header-icon p-link mr-2">
                   <span
                     class="pi pi-pencil"
+                    (click)="
+                      onEditEvidence(evidence.id, informationCollection.id)
+                    "
                     style="
                       color: #22c55e;
                       border: solid 1.5px #22c55e;
