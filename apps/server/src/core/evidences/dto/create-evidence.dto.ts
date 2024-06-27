@@ -2,7 +2,6 @@ import {
   IsString,
   IsOptional,
   IsNotEmpty,
-  IsInt,
   IsEnum,
   MaxLength,
   MinLength,
@@ -28,7 +27,6 @@ export class CreateEvidenceDto {
 
   @IsOptional()
   @IsString()
-  @MinLength(VALUES.evidencesLinkMinAmount)
   @MaxLength(VALUES.evidencesLinkMaxAmount)
   externalLink?: string
 
