@@ -186,7 +186,8 @@ export class RecopilationsService {
 
         const categorizedCriteria = this.categorizedCriteriaRepository.create({
           criteria,
-          category
+          category,
+          recopilation
         })
 
         categorizedCriteriaToInsert.push(categorizedCriteria)
