@@ -210,13 +210,19 @@ export class RecopilationsService {
       )
     ])
 
+    await Promise.all([
+      await this.categorizedCriteriaRepository.save(
+        categorizedCriteriaToInsert
+      ),
+      await this.indicatorsPerRecopilationRepository.save(
+        indicatorsPerRecopilationsToInsert
+      )
+    ])
+
     recopilation.categorizedCriterion = categorizedCriteriaToInsert
     recopilation.indicatorsPerRecopilations = indicatorsPerRecopilationsToInsert
 
-    const updatedRecopilation =
-      await this.recopilationsRepository.save(recopilation)
-
-    return updatedRecopilation
+    return recopilation
   }
 
   async recommendCategories(recommendCategoriesDto: RecommendCategoriesDto) {
