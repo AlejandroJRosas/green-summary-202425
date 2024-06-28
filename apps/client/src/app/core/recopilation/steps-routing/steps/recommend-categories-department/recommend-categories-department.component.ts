@@ -48,6 +48,7 @@ export class RecommendCategoriesDepartmentComponent {
   ngOnInit() {
     this.loadDepartments()
     this.loadCategories()
+    this.loadAlreadyInsertedRecommendations()
   }
 
   submitAndContinue() {
@@ -56,6 +57,19 @@ export class RecommendCategoriesDepartmentComponent {
       next: () => {
         this.nextStep()
         this.toast.show('success', 'Éxito', 'Categorías recomendadas con éxito')
+      }
+    })
+  }
+
+  private loadAlreadyInsertedRecommendations() {
+    this.recopilationService.getById(this.recopilationId).subscribe({
+      next: (recopilation) => {
+        if (!recopilation) return
+
+        this.recommendationsFormValues = recopilation.departments.map((d) => ({
+          departmentId: d.department.id,
+          categories: d.recommendedCategories
+        }))
       }
     })
   }
