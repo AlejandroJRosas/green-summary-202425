@@ -77,7 +77,7 @@ export class RecopilationsService {
       where: { id },
       relations: [
         'departmentsPerRecopilation.department',
-        'departmentsPerRecopilation.recommendations',
+        'departmentsPerRecopilation.recommendations.category',
         'categorizedCriterion.criteria.indicator',
         'categorizedCriterion.category',
         'indicatorsPerRecopilations.indicator'
