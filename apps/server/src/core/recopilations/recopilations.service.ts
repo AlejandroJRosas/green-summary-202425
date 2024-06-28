@@ -161,6 +161,9 @@ export class RecopilationsService {
       relations: ['categorizedCriterion', 'indicatorsPerRecopilations']
     })
 
+    let categorizedCriteriaToInsert: CategorizedCriteria[] = []
+    let indicatorsPerRecopilationsToInsert: IndicatorPerRecopilation[] = []
+
     for (const i of indicators) {
       const indicator = await this.indicatorsRepository.findOneOrFail({
         where: { index: i.indicatorId },
@@ -186,29 +189,34 @@ export class RecopilationsService {
           category
         })
 
-        recopilation.categorizedCriterion.push(categorizedCriteria)
+        categorizedCriteriaToInsert.push(categorizedCriteria)
       }
 
-      const indicatorPerRepository =
+      const indicatorPerRecopilation =
         this.indicatorsPerRecopilationRepository.create({
           indicator,
           recopilation
         })
 
-      recopilation.indicatorsPerRecopilations.push(indicatorPerRepository)
+      indicatorsPerRecopilationsToInsert.push(indicatorPerRecopilation)
     }
 
-    await this.indicatorsPerRecopilationRepository.save(
-      recopilation.indicatorsPerRecopilations.map((ipr) => ({
-        ...ipr,
-        recopilation
-      }))
-    )
-    await this.categorizedCriteriaRepository.save(
-      recopilation.categorizedCriterion.map((cc) => ({ ...cc, recopilation }))
-    )
+    await Promise.all([
+      await this.categorizedCriteriaRepository.remove(
+        recopilation.categorizedCriterion
+      ),
+      await this.indicatorsPerRecopilationRepository.remove(
+        recopilation.indicatorsPerRecopilations
+      )
+    ])
 
-    return recopilation
+    recopilation.categorizedCriterion = categorizedCriteriaToInsert
+    recopilation.indicatorsPerRecopilations = indicatorsPerRecopilationsToInsert
+
+    const updatedRecopilation =
+      await this.recopilationsRepository.save(recopilation)
+
+    return updatedRecopilation
   }
 
   async recommendCategories(recommendCategoriesDto: RecommendCategoriesDto) {

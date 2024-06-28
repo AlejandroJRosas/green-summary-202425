@@ -35,13 +35,15 @@ export class Recopilation {
 
   @OneToMany(
     () => CategorizedCriteria,
-    (categorizedCriteria) => categorizedCriteria.recopilation
+    (categorizedCriteria) => categorizedCriteria.recopilation,
+    { cascade: true }
   )
   categorizedCriterion: CategorizedCriteria[]
 
   @OneToMany(
     () => InformationCollection,
-    (informationCollection) => informationCollection.recopilation
+    (informationCollection) => informationCollection.recopilation,
+    { cascade: true }
   )
   informationCollections: InformationCollection[]
 
