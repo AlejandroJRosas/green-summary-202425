@@ -10,7 +10,8 @@ export class Recommendation {
 
   @ManyToOne(
     () => DepartmentPerRecopilation,
-    (departmentPerRecopilation) => departmentPerRecopilation.recommendations
+    (departmentPerRecopilation) => departmentPerRecopilation.recommendations,
+    { onDelete: 'CASCADE' }
   )
   departmentPerRecopilation: DepartmentPerRecopilation
 
