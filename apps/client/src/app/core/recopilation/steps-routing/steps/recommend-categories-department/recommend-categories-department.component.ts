@@ -80,10 +80,12 @@ export class RecommendCategoriesDepartmentComponent {
       .subscribe({
         next: (departments) => {
           this.departments = departments
-          this.recommendationsFormValues = departments.map((department) => ({
-            departmentId: department.id,
-            categories: []
-          }))
+          departments.forEach((department) =>
+            this.recommendationsFormValues.push({
+              departmentId: department.id,
+              categories: []
+            })
+          )
         }
       })
   }
