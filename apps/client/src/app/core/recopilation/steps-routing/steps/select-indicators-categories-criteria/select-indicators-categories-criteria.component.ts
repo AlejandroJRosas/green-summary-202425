@@ -214,12 +214,15 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
         .filter((i) => i.selected && i.criterion.length > 0)
         .map((i) => ({
           indicatorId: i.indicatorId,
-          criterion: i.criterion.filter(
-            (c) => c.categoryId !== null && c.criteriaId !== null && c.selected
-          ) as {
-            criteriaId: number
-            categoryId: number
-          }[]
+          criterion: i.criterion
+            .filter(
+              (c) =>
+                c.categoryId !== null && c.criteriaId !== null && c.selected
+            )
+            .map((c) => ({
+              criteriaId: c.criteriaId,
+              categoryId: c.categoryId
+            }))
         })) as IndicatorToRelate[]
     }
   }
