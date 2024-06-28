@@ -1,0 +1,37 @@
+<main class="flex flex-column h-full justify-content-between">
+  <section>
+    <header>
+      <h2 class="text-color-secondary">Colección de información</h2>
+      <h2 class="text-color-secondary">
+        {{ evidence.collection.name }}
+      </h2>
+    </header>
+    <p class="text-color-secondary">
+      {{ evidence.collection.summary }}
+    </p>
+  </section>
+  @switch (evidence.type) {
+    @case ('image') {
+      <evidence-image [evidence]="evidence" [edit]="true" />
+    }
+    @case ('link') {
+      <evidence-link [evidence]="evidence" [edit]="true" />
+    }
+    @case ('document') {
+      <evidence-document [evidence]="evidence" [edit]="true" />
+    }
+    @default {
+      <p class="text-color-secundary">No exite ese tipo de evidencia</p>
+    }
+  }
+  <footer class="flex justify-content-between py-3">
+    <p-button
+      label="Atrás"
+      (click)="goBack()"
+      size="small"
+      icon="pi pi-angle-left"
+      [outlined]="true"
+      severity="info"
+    />
+  </footer>
+</main>

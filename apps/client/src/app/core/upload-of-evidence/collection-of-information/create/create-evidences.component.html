@@ -1,0 +1,26 @@
+<main class="flex flex-column h-full justify-content-between">
+  <section>
+    <header>
+      <h2 class="text-color-secondary">Colección de información</h2>
+      <h2 class="text-color-secondary">
+        {{ informationCollection.name }}
+      </h2>
+    </header>
+    <form [formGroup]="formGroup">
+      <p class="text-color-secondary">
+        {{ informationCollection.summary }}
+      </p>
+      <evidence />
+    </form>
+  </section>
+  <footer class="flex justify-content-between py-3">
+    <p-button
+      label="Atrás"
+      (click)="goBack()"
+      size="small"
+      icon="pi pi-angle-left"
+      [outlined]="true"
+      severity="info"
+    />
+  </footer>
+</main>
