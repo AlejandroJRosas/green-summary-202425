@@ -10,12 +10,13 @@ import {
   Query,
   Patch,
   UseInterceptors,
-  UploadedFile
+  UploadedFile,
+  ParseFilePipeBuilder
 } from '@nestjs/common'
 import { EvidencesService } from './evidences.service'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
 import { UpdateEvidenceDto } from './dto/update-evidence.dto'
-import { ApiTags } from '@nestjs/swagger'
+import { ApiBody, ApiConsumes, ApiTags } from '@nestjs/swagger'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
@@ -78,6 +79,33 @@ export class EvidencesController {
       limits: { fileSize: 2097152 }
     })
   )
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        description: {
+          type: 'string'
+        },
+        error: {
+          type: 'string'
+        },
+        type: {
+          type: 'string'
+        },
+        externalLink: {
+          type: 'string'
+        },
+        fileLink: {
+          type: 'string',
+          format: 'binary'
+        },
+        collectionId: {
+          type: 'number'
+        }
+      }
+    }
+  })
   async create(
     @UploadedFile() fileLink: Express.Multer.File,
     @Body() createEvidenceDto: CreateEvidenceDto
@@ -98,13 +126,46 @@ export class EvidencesController {
       limits: { fileSize: 2097152 }
     })
   )
+  @ApiConsumes('multipart/form-data')
+  @ApiBody({
+    schema: {
+      type: 'object',
+      properties: {
+        description: {
+          type: 'string'
+        },
+        error: {
+          type: 'string'
+        },
+        type: {
+          type: 'string'
+        },
+        externalLink: {
+          type: 'string'
+        },
+        fileLink: {
+          type: 'string',
+          format: 'binary'
+        }
+      }
+    }
+  })
   async update(
     @Param('id') id: string,
-    @UploadedFile() fileLink: Express.Multer.File,
-    @Body() updateEvidenceDto: UpdateEvidenceDto
+    @Body() updateEvidenceDto: UpdateEvidenceDto,
+    @UploadedFile(
+      new ParseFilePipeBuilder().build({
+        fileIsRequired: false
+      })
+    )
+    fileLink: Express.Multer.File
   ) {
     const name = this.configService.get('link')
-    updateEvidenceDto.fileLink = `${name.URL_BACK}/uploads/${fileLink.filename}`
+    console.log(fileLink)
+    if (fileLink !== undefined) {
+      updateEvidenceDto.fileLink = `${name.URL_BACK}/uploads/${fileLink.filename}`
+    }
+    console.log(updateEvidenceDto.fileLink)
     const updatedEvidence = await this.evidencesService.update(
       +id,
       updateEvidenceDto

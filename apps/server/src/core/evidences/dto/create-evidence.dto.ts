@@ -3,13 +3,18 @@ import {
   IsOptional,
   IsNotEmpty,
   IsEnum,
+  MaxLength,
+  MinLength,
   IsNumberString
 } from 'class-validator'
 import { EvidenceType } from '../evidences.constants'
+import { VALUES } from 'shared/validations'
 
 export class CreateEvidenceDto {
   @IsString()
   @IsNotEmpty()
+  @MinLength(VALUES.descriptionMinAmount)
+  @MaxLength(VALUES.descriptionMaxAmount)
   description: string
 
   @IsString()
@@ -22,6 +27,7 @@ export class CreateEvidenceDto {
 
   @IsOptional()
   @IsString()
+  @MaxLength(VALUES.evidencesLinkMaxAmount)
   externalLink?: string
 
   @IsOptional()

@@ -24,6 +24,9 @@ export class Recopilation {
   @Column({ type: 'date', nullable: false })
   endDate: Date
 
+  @Column({ default: false })
+  isReady: boolean
+
   @OneToMany(
     () => IndicatorPerRecopilation,
     (indicatorsPerRecopilations) => indicatorsPerRecopilations.recopilation

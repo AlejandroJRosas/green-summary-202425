@@ -59,12 +59,12 @@ export class EvidencesService {
   }
 
   async create(createEvidenceDto: CreateEvidenceDto): Promise<Evidence> {
-    const coleccion =
+    const collection =
       await this.informationCollectionRepository.findOneByOrFail({
         id: createEvidenceDto.collectionId
       })
 
-    if (!coleccion) {
+    if (!collection) {
       throw new NotFoundException('Collection not found')
     }
 
@@ -75,19 +75,19 @@ export class EvidencesService {
       case EvidenceType.DOCUMENT:
         evidence = this.documentRepository.create({
           ...createEvidenceDto,
-          collection: coleccion
+          collection
         })
         return this.documentRepository.save(evidence)
       case EvidenceType.IMAGE:
         evidence = this.imageRepository.create({
           ...createEvidenceDto,
-          collection: coleccion
+          collection
         })
         return this.imageRepository.save(evidence)
       case EvidenceType.LINK:
         evidence = this.linkRepository.create({
           ...createEvidenceDto,
-          collection: coleccion
+          collection
         })
         return this.linkRepository.save(evidence)
     }

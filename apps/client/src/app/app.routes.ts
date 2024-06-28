@@ -41,7 +41,8 @@ export const routes: Routes = [
       {
         path: 'schemes',
         title: 'Esquemas',
-        component: SchemeComponent
+        component: SchemeComponent,
+        canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
       },
       {
         path: 'information-collection/:recopilationId/:categoryId',
