@@ -40,11 +40,47 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
       this.recopilationId = parseInt(params['recopilationId']) || -1
     })
   }
-  recopilations: Recopilation[] = []
+  previousRecopilations: Recopilation[] = []
 
   recopilationId = -1
   schemes: Scheme[] = []
   indicators: IndicatorToRelateFormValues[] = []
+
+  ngOnInit() {
+    this.loadScheme()
+    this.loadRecopilationPreviousData(this.recopilationId)
+    this.loadPreviousRecopilationsList()
+  }
+
+  onChangePreviousRecopilationSelection(recopilationId: number) {
+    this.loadRecopilationPreviousData(recopilationId)
+  }
+
+  private loadPreviousRecopilationsList() {
+    this.recopilationService.getAll().subscribe({
+      next: (recopilations) => {
+        this.previousRecopilations = recopilations
+      }
+    })
+  }
+
+  private loadRecopilationPreviousData(recopilationId: number) {
+    this.recopilationService.getById(recopilationId).subscribe({
+      next: (data) => {
+        if (!data) return
+
+        this.indicators = data.indicators.map((i) => ({
+          indicatorId: i.indicator.index,
+          criterion: i.criteria.map((c) => ({
+            criteriaId: c.criterion.id,
+            categoryId: c.category.id,
+            selected: true
+          })),
+          selected: true
+        }))
+      }
+    })
+  }
 
   onChangeIndicatorCheckbox(indicatorIndex: number, isChecked: boolean): void {
     const alreadyInsertedIndicator = this.indicators.find(
@@ -66,11 +102,7 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
-    this.loadScheme()
-  }
-
-  loadScheme() {
+  private loadScheme() {
     this.indicatorService.getAllIndicators().subscribe({
       next: (indicators) => {
         this.schemes = indicators
@@ -86,6 +118,7 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
       `pages/recopilations/steps-create/recommend-categories-department/${this.recopilationId}`
     )
   }
+
   prevStep() {
     this.router.navigateByUrl(
       `pages/recopilations/steps-create/select-departments/${this.recopilationId}`
@@ -130,17 +163,12 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
 
     if (!indicator) return
 
-    const alreadyInsertedCriterion = indicator?.criterion.find(
+    const alreadyInsertedCriterion = indicator.criterion.find(
       (c) => c.criteriaId === criterionId
     )
 
     if (alreadyInsertedCriterion) {
       alreadyInsertedCriterion.categoryId = categoryId
-    } else {
-      indicator.criterion.push({
-        criteriaId: null,
-        categoryId
-      })
     }
   }
 
@@ -151,6 +179,34 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
     )
   }
 
+  isCheckedCriterion(indicatorIndex: number, criteriaId: number) {
+    const indicator = this.indicators.find(
+      (indicator) => indicator.indicatorId === indicatorIndex
+    )
+
+    if (!indicator) return false
+
+    return indicator.criterion.some(
+      (c) => c.criteriaId === criteriaId && c.selected
+    )
+  }
+
+  getCategorySelection(indicatorIndex: number, criteriaId: number) {
+    const indicator = this.indicators.find(
+      (indicator) => indicator.indicatorId === indicatorIndex
+    )
+
+    if (!indicator) return null
+
+    const criterion = indicator.criterion.find(
+      (c) => c.criteriaId === criteriaId
+    )
+
+    if (!criterion) return null
+
+    return criterion.categoryId
+  }
+
   private adaptFormValuesToDto() {
     return {
       recopilationId: this.recopilationId,
@@ -159,7 +215,7 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
         .map((i) => ({
           indicatorId: i.indicatorId,
           criterion: i.criterion.filter(
-            (c) => c.categoryId !== null && c.criteriaId !== null
+            (c) => c.categoryId !== null && c.criteriaId !== null && c.selected
           ) as {
             criteriaId: number
             categoryId: number
@@ -176,7 +232,7 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
     if (!indicator) return
 
     const alreadyInsertedCriterion = indicator.criterion.find(
-      (c) => c.criteriaId === criteriaId
+      (c) => c.criteriaId === criteriaId && c.selected
     )
 
     if (alreadyInsertedCriterion) {
@@ -184,7 +240,8 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
     } else {
       indicator.criterion.push({
         criteriaId,
-        categoryId: null
+        categoryId: null,
+        selected: true
       })
     }
   }
@@ -205,7 +262,7 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
 
     if (!criterionToRemove) return
 
-    criterionToRemove.criteriaId = null
+    criterionToRemove.selected = false
   }
 }
 
@@ -224,6 +281,7 @@ type IndicatorToRelateFormValues = {
   criterion: {
     criteriaId: number | null
     categoryId: number | null
+    selected: boolean
   }[]
   selected: boolean
 }

@@ -84,8 +84,10 @@ export class InformationRecopilationComponent
   loadRecopilation() {
     if (this.recopilationId !== -1) {
       this.recopilationService.getById(this.recopilationId).subscribe({
-        next: (response) => {
-          const recopilation = response.data as Recopilation
+        next: (data) => {
+          if (!data) return
+
+          const recopilation = data
           this.formGroup.patchValue({
             name: recopilation.name,
             description: recopilation.description,

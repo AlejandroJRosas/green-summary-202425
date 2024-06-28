@@ -8,9 +8,11 @@
     <form>
       <div>
         <p-dropdown
-          [options]="recopilations"
+          (onChange)="onChangePreviousRecopilationSelection($event.value)"
+          [options]="previousRecopilations"
           styleClass="w-4"
           optionLabel="name"
+          optionValue="id"
           [showClear]="true"
           placeholder="Selecciona la recopilación"
         />
@@ -38,6 +40,8 @@
                 (onChange)="
                   onChangeIndicatorCheckbox(scheme.index, $event.checked)
                 "
+                [ngModel]="isSelectedIndicator(scheme.index)"
+                [ngModelOptions]="{ standalone: true }"
                 [binary]="true"
               />
             </ng-template>
@@ -52,6 +56,8 @@
                         $event.checked
                       )
                     "
+                    [ngModel]="isCheckedCriterion(scheme.index, criteria.id)"
+                    [ngModelOptions]="{ standalone: true }"
                     [disabled]="!isSelectedIndicator(scheme.index)"
                     [binary]="true"
                   />
@@ -64,12 +70,18 @@
                     onChangeCategorySelection(
                       scheme.index,
                       criteria.id,
-                      $event.value.id
+                      $event.value
                     )
                   "
-                  [disabled]="!isSelectedIndicator(scheme.index)"
+                  [ngModel]="getCategorySelection(scheme.index, criteria.id)"
+                  [ngModelOptions]="{ standalone: true }"
+                  [disabled]="
+                    !isSelectedIndicator(scheme.index) ||
+                    !isCheckedCriterion(scheme.index, criteria.id)
+                  "
                   [options]="scheme.categories"
                   optionLabel="name"
+                  optionValue="id"
                   placeholder="Selecciona una Categoría"
                 />
               </div>

@@ -8,7 +8,10 @@ import { TooltipModule } from 'primeng/tooltip'
 import { Recopilation } from '../../../../../../shared/types/recopilation.type'
 import { ReactiveFormsModule } from '@angular/forms'
 import { Toast } from '../../../../../common/toast/toast.component'
-import { RecopilationService } from '../../../../../services/recopilation.service'
+import {
+  DetailedRecopilation,
+  RecopilationService
+} from '../../../../../services/recopilation.service'
 import { JsonPipe } from '@angular/common'
 
 @Component({
@@ -40,7 +43,7 @@ export class PreviewComponent {
 
   recopilationId: number = -1
 
-  recopilationData: Recopilation | null = null
+  recopilationData: DetailedRecopilation | null = null
 
   ngOnInit() {
     this.loadRecopilation()
@@ -49,8 +52,8 @@ export class PreviewComponent {
   loadRecopilation() {
     if (this.recopilationId !== -1) {
       this.recopilationService.getById(this.recopilationId).subscribe({
-        next: (response) => {
-          this.recopilationData = response.data as Recopilation
+        next: (data) => {
+          if (data) this.recopilationData = data
         },
         error: (error) => {
           console.error(error)

@@ -7,6 +7,8 @@ import { Department, User } from '../../shared/types/user.type'
 import { Recopilation } from '../../shared/types/recopilation.type'
 import { PaginatedResponse } from '../../shared/types/paginated-response.type'
 import { Category } from '../../shared/types/category.type'
+import { Indicator } from '../../shared/types/indicator.type'
+import { Criteria } from '../../shared/types/criterion.type'
 
 @Injectable({
   providedIn: 'root'
@@ -20,8 +22,16 @@ export class RecopilationService {
     const { first, rows } = paginated
     const page = first / rows + 1
     return this.http.get<PaginatedResponse<Recopilation, unknown, unknown>>(
-      `${BaseUrl}/recopilations?itemsPerPage=5&page=${page}&orderBy=id&orderType=DESC&filters=type%3D%3Ddepartment`
+      `${BaseUrl}/recopilations?itemsPerPage=5&page=${page}&orderBy=id&orderType=DESC`
     )
+  }
+
+  getAll(): Observable<Recopilation[]> {
+    return this.http
+      .get<
+        PaginatedResponse<Recopilation, unknown, unknown>
+      >(`${BaseUrl}/recopilations?itemsPerPage=999&page=1&orderBy=id&orderType=DESC`)
+      .pipe(map((res) => (res.status === 'success' ? res.data.items : [])))
   }
 
   getActive(): Observable<BackendResponse<Recopilation, unknown, unknown>> {
@@ -30,12 +40,29 @@ export class RecopilationService {
     )
   }
 
-  getById(
-    id: number
-  ): Observable<BackendResponse<Recopilation, unknown, unknown>> {
-    return this.http.get<BackendResponse<Recopilation, unknown, unknown>>(
-      `${BaseUrl}/recopilations/${id}`
-    )
+  getById(id: number): Observable<DetailedRecopilation | null> {
+    return this.http
+      .get<
+        BackendResponse<DetailedRecopilationDto, unknown, unknown>
+      >(`${BaseUrl}/recopilations/${id}`)
+      .pipe(
+        map((res) =>
+          res.status === 'success'
+            ? this.parseDetailedRecopilationDto(res.data)
+            : null
+        )
+      )
+  }
+
+  private parseDetailedRecopilationDto(
+    dto: DetailedRecopilationDto
+  ): DetailedRecopilation {
+    return {
+      ...dto,
+      startDate: new Date(dto.startDate),
+      endDate: new Date(dto.endDate),
+      departmentEndDate: new Date(dto.departmentEndDate)
+    }
   }
 
   getSelectedDepartments(recopilationid: number) {
@@ -157,6 +184,48 @@ interface RecommendationsDto {
     departmentId: number
     categories: {
       categoryId: number
+    }[]
+  }[]
+}
+
+export interface DetailedRecopilation {
+  id: number
+  name: string
+  description: string
+  startDate: Date
+  endDate: Date
+  departmentEndDate: Date
+  isReady: boolean
+  departments: {
+    department: Department
+    recommendedCategories: Category[]
+  }[]
+  indicators: {
+    indicator: Indicator
+    criteria: {
+      criterion: Criteria
+      category: Category
+    }[]
+  }[]
+}
+
+interface DetailedRecopilationDto {
+  id: number
+  name: string
+  description: string
+  startDate: string
+  endDate: string
+  departmentEndDate: string
+  isReady: boolean
+  departments: {
+    department: Department
+    recommendedCategories: Category[]
+  }[]
+  indicators: {
+    indicator: Indicator
+    criteria: {
+      criterion: Criteria
+      category: Category
     }[]
   }[]
 }
