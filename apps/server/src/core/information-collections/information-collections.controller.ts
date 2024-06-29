@@ -62,6 +62,19 @@ export class InformationCollectionsController {
     return collection
   }
 
+  @Get('department-answer/:recopilationId/:categoryId/:departmentId')
+  async getDepartmentAnswer(
+    @Param('recopilationId') recopilationId: number,
+    @Param('categoryId') categoryId: number,
+    @Param('departmentId') departmentId: number
+  ) {
+    return this.informationCollectionsService.getDepartmentAnswer(
+      recopilationId,
+      categoryId,
+      departmentId
+    )
+  }
+
   @Post()
   @HttpCode(HttpStatus.CREATED)
   async create(
