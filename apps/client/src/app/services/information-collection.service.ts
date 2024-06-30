@@ -19,7 +19,20 @@ export class InformationCollectionService {
     return this.http.get<
       PaginatedResponse<InformationCollection, unknown, unknown>
     >(
-      `${BaseUrl}/information-collections?itemsPerPage=5&page=${page}&orderType=DESC`
+      `${BaseUrl}/information-collections?itemsPerPage=100&page=${page}&orderType=DESC`
+    )
+  }
+  getByDepartmentId(
+    recopilationId: number,
+    categoryId: number,
+    departmentId: number
+  ): Observable<
+    BackendResponse<InformationCollectionByDepartment[], unknown, unknown>
+  > {
+    return this.http.get<
+      BackendResponse<InformationCollectionByDepartment[], unknown, unknown>
+    >(
+      `${BaseUrl}/information-collections/department-answer/${recopilationId}/${categoryId}/${departmentId}`
     )
   }
   getById(
@@ -53,6 +66,10 @@ export class InformationCollectionService {
 export type InformationCollectionDTO = Omit<
   InformationCollection,
   'id' | 'evidences'
+>
+export type InformationCollectionByDepartment = Omit<
+  InformationCollection,
+  'recopilationId' | 'categoryId' | 'departmentId'
 >
 type Paginated = {
   first: number
