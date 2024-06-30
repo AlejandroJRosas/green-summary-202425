@@ -12,24 +12,25 @@ export class WordController {
 
   @Get(':idCrit/:idRecop')
   async generateWord(
-    @Param('idCrit') idCrit: number,
-    @Param('idRecop') idRecop: number,
+    @Param('idCrit') idCrit: string,
+    @Param('idRecop') idRecop: string,
     @Res() res
   ) {
     try {
-      const prueba = await this.wordService.findInformationCollections(
-        idCrit,
-        idRecop
-      )
-      //const buffer = await this.wordService.findCategory(idCrit,idRecop);
+      // const prueba = await this.wordService.findInformationCollections(
+      //   +idCrit,
+      //   +idRecop
+      // )
+      const buffer = await this.wordService.generateWord(+idCrit, +idRecop)
 
-      // res.set({
-      //   'Content-Type':'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-      //   'Content-Disposition': 'attachment; filename=archivo.docx',
-      //   'Content-Length': buffer.length
-      // })
-      //res.send(buffer)
-      res.send(prueba)
+      res.set({
+        'Content-Type':
+          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'Content-Disposition': 'attachment; filename=archivo.docx',
+        'Content-Length': buffer.length
+      })
+      res.send(buffer)
+      // res.send(prueba)
     } catch (e) {
       console.log(e)
       throw e

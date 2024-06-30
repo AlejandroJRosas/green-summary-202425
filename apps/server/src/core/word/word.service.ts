@@ -54,21 +54,49 @@ export class WordService {
   }
 
   async generateWord(idCrit: number, idRecop: number) {
+    const informationCollections = this.findInformationCollections(
+      idCrit,
+      idRecop
+    )
     const doc = new Document({
       sections: [
         {
           properties: {
-            type: SectionType.CONTINUOUS
+            type: SectionType.NEXT_COLUMN
           },
           children: [
             new Paragraph({
-              children: [new TextRun('HOLA MUNDO ' + idCrit)]
+              alignment: 'center',
+              children: [
+                new TextRun({
+                  text: 'Template for Evidence(s)',
+                  bold: true
+                })
+              ]
             }),
             new Paragraph({
-              children: [new TextRun('ADIOS MUNDO CRUEL! ' + idRecop)]
+              alignment: 'center',
+              children: [
+                new TextRun({
+                  text: 'UI GreenMetric Questionnaire',
+                  bold: true
+                })
+              ]
             }),
             new Paragraph({
-              children: [new TextRun('')]
+              children: [
+                new TextRun(
+                  'University:     Andres Bello Guayana Catholic University'
+                )
+              ]
+            }),
+            new Paragraph({
+              children: [new TextRun('Country:     Venezuela')]
+            }),
+            new Paragraph({
+              children: [
+                new TextRun('Web Address:     http://guayanaweb.ucab.edu.ve/')
+              ]
             })
           ]
         }
