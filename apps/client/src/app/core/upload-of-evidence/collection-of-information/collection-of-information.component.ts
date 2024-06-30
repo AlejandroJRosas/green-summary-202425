@@ -11,12 +11,12 @@ import { InputTextModule } from 'primeng/inputtext'
 import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { LinkEvidenceService } from '../../../services/evidence/link-evidence.service'
 import {
+  InformationCollectionByDepartment,
   InformationCollectionDTO,
   InformationCollectionService
 } from '../../../services/information-collection.service'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { Toast } from '../../../common/toast/toast.component'
-import { InformationCollection } from '../../../../shared/types/information-collection.type'
 import { Category } from '../../../../shared/types/category.type'
 import { Indicator } from '../../../../shared/types/indicator.type'
 import { ImageModule } from 'primeng/image'
@@ -47,7 +47,7 @@ export class CollectionOfInformationComponent
 {
   constructor(
     @Inject(Toast) private toast: Toast,
-    private currentRoute: ActivatedRoute,
+    private route: ActivatedRoute,
     private router: Router,
     private confirmationService: ConfirmationService,
     private InformationCollectionService: InformationCollectionService,
@@ -81,6 +81,10 @@ export class CollectionOfInformationComponent
         )
     })
     super(initialControlValues, validationSchema)
+    this.route.params.subscribe((params) => {
+      this.categoryId = parseInt(params['categoryId'], 10)
+      this.recopilationId = parseInt(params['recopilationId'], 10)
+    })
   }
   errors = {
     name: '',
@@ -90,7 +94,7 @@ export class CollectionOfInformationComponent
     first: 0,
     rows: 100
   }
-  informationCollections: InformationCollection[] = []
+  informationCollections: InformationCollectionByDepartment[] = []
   indicator: Indicator = {
     index: 0,
     alias: '',
@@ -107,8 +111,12 @@ export class CollectionOfInformationComponent
   visibleCreate: boolean = false
   visibleEdit: boolean = false
   informationCollectionIdEdit: number = 0
+  departmentId: number = 0
+  recopilationId: number = 0
+  categoryId: number = 0
   ngOnInit() {
-    this.getAll()
+    this.getDepartmentId()
+    this.getAllByDepartment()
   }
   reset() {
     this.formGroup.reset()
@@ -130,6 +138,9 @@ export class CollectionOfInformationComponent
     this.formGroup.controls.name.setValue(name)
     this.formGroup.controls.summary.setValue(summary)
     this.informationCollectionIdEdit = id
+  }
+  getDepartmentId() {
+    this.departmentId = JSON.parse(localStorage.getItem('user')!).id as number
   }
   translateType(type: string) {
     switch (type) {
@@ -189,12 +200,18 @@ export class CollectionOfInformationComponent
       }
     })
   }
-  getAll() {
-    this.InformationCollectionService.getAll(this.paginated).subscribe({
+  getAllByDepartment() {
+    console.log(this.recopilationId, this.categoryId, this.departmentId)
+    console.log(this.category)
+    this.InformationCollectionService.getByDepartmentId(
+      this.recopilationId,
+      this.categoryId,
+      this.departmentId
+    ).subscribe({
       next: (res) => {
         if (res.status === 'success') {
-          this.informationCollections = res.data.items
-          console.log(this.informationCollections[0].evidences)
+          this.informationCollections = res.data
+          console.log(res.data)
         }
       },
       error: (e) => {
@@ -209,9 +226,9 @@ export class CollectionOfInformationComponent
     const informationCollection: InformationCollectionDTO = {
       name: name.value,
       summary: summary.value,
-      recopilationId: 1,
+      recopilationId: this.recopilationId,
       categoryId: this.category.id,
-      departmentId: JSON.parse(localStorage.getItem('user')!).id as number
+      departmentId: this.departmentId
     }
     this.closeDialogCreate()
     this.InformationCollectionService.create(informationCollection).subscribe({
@@ -222,7 +239,7 @@ export class CollectionOfInformationComponent
             'Creado',
             'Colección de información creado con éxito'
           )
-          this.getAll()
+          this.getAllByDepartment()
         }
       },
       error: (e) => {
@@ -238,9 +255,9 @@ export class CollectionOfInformationComponent
     const informationCollection: InformationCollectionDTO = {
       name: name.value,
       summary: summary.value,
-      categoryId: this.category.id,
-      recopilationId: 1,
-      departmentId: JSON.parse(localStorage.getItem('user')!).id as number
+      categoryId: this.categoryId,
+      recopilationId: this.recopilationId,
+      departmentId: this.departmentId
     }
     this.closeDialogEdit()
     this.InformationCollectionService.edit(
@@ -248,7 +265,7 @@ export class CollectionOfInformationComponent
       informationCollection
     ).subscribe({
       next: () => {
-        this.getAll()
+        this.getAllByDepartment()
         this.toast.show(
           'success',
           'Editado',
@@ -269,7 +286,7 @@ export class CollectionOfInformationComponent
           'Eliminado',
           'Colección de información eliminada con éxito'
         )
-        this.getAll()
+        this.getAllByDepartment()
       },
       error: (e) => {
         console.error(e)
@@ -286,7 +303,7 @@ export class CollectionOfInformationComponent
             'Creado',
             'Evidencia tipo link eliminada con éxito'
           )
-          this.getAll()
+          this.getAllByDepartment()
         },
         error: (e) => {
           console.error(e)
@@ -301,7 +318,7 @@ export class CollectionOfInformationComponent
             'Creado',
             'Evidencia tipo imagen eliminada con éxito'
           )
-          this.getAll()
+          this.getAllByDepartment()
         },
         error: (e) => {
           console.error(e)
@@ -311,7 +328,7 @@ export class CollectionOfInformationComponent
     }
   }
   createEvidences(informationCollectionId: number) {
-    this.currentRoute.url.subscribe((url) => {
+    this.route.url.subscribe((url) => {
       this.currentUrl = url.map((segment) => segment.path).join('/')
     })
     this.router.navigateByUrl(
@@ -319,7 +336,7 @@ export class CollectionOfInformationComponent
     )
   }
   onEditEvidence(evidenceId: number, informationCollectionId: number) {
-    this.currentRoute.url.subscribe((url) => {
+    this.route.url.subscribe((url) => {
       this.currentUrl = url.map((segment) => segment.path).join('/')
     })
     this.router.navigateByUrl(
