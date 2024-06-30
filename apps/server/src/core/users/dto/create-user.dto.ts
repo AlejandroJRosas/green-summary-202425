@@ -25,7 +25,6 @@ export class CreateUserDto {
 
   @IsString()
   @IsOptional()
-  @MinLength(VALUES.nameAliasMinAmount)
   @MaxLength(VALUES.departmentPasswordAmount)
   password: string
 
