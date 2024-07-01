@@ -23,6 +23,8 @@ import { ImageModule } from 'primeng/image'
 import { DividerModule } from 'primeng/divider'
 import { EvidenceService } from '../../../services/evidence/evidence.service'
 import { VALUES } from '../../../../../../../shared/validations'
+import { DetailedRecopilation } from '../../../services/recopilation.service'
+import { RecopilationService } from '../../../services/recopilation.service'
 @Component({
   selector: 'collection-of-information',
   standalone: true,
@@ -52,7 +54,8 @@ export class CollectionOfInformationComponent
     private confirmationService: ConfirmationService,
     private InformationCollectionService: InformationCollectionService,
     private LinkEvidenceService: LinkEvidenceService,
-    private EvidenceService: EvidenceService
+    private EvidenceService: EvidenceService,
+    private RecopilationService: RecopilationService
   ) {
     const initialControlValues = {
       name: '',
@@ -114,9 +117,14 @@ export class CollectionOfInformationComponent
   departmentId: number = 0
   recopilationId: number = 0
   categoryId: number = 0
+  isValidDepartmentalDate: boolean = false
+  detailedRecopilation: DetailedRecopilation | null = null
+  currentDate = new Date()
+
   ngOnInit() {
     this.getDepartmentId()
     this.getAllByDepartment()
+    this.getRecopilationById()
   }
   reset() {
     this.formGroup.reset()
@@ -197,6 +205,29 @@ export class CollectionOfInformationComponent
       },
       reject: () => {
         this.toast.show('error', 'Rechazado', 'Haz rechazado la eliminación')
+      }
+    })
+  }
+  getRecopilationById() {
+    this.RecopilationService.getById(this.recopilationId).subscribe({
+      next: (res) => {
+        if (res) {
+          this.detailedRecopilation = res
+          if (
+            this.currentDate <= this.detailedRecopilation?.departmentEndDate
+          ) {
+            this.isValidDepartmentalDate = true
+          } else {
+            this.toast.show(
+              'warn',
+              'Cierre de Subidas de Información',
+              'El periodo de subida de información ha finalizado. Ya no se podrán subir nuevas colecciones de información ni evidencias.'
+            )
+          }
+        }
+      },
+      error: (e) => {
+        console.error(e)
       }
     })
   }

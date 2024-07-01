@@ -12,6 +12,7 @@
       label="Agregar Colección"
       icon="pi pi-plus"
       size="small"
+      [disabled]="!isValidDepartmentalDate"
     />
   </div>
   @for (
@@ -34,40 +35,52 @@
             {{ informationCollection.name }}
           </h2>
           <div class="flex flex-row gap-2 flex-nowrap">
-            <button class="p-panel-header-icon p-link mr-2">
+            <button
+              class="p-panel-header-icon p-link mr-2"
+              [disabled]="!isValidDepartmentalDate"
+            >
               <span
                 class="pi pi-pencil"
                 (click)="
-                  showDialogEdit(
-                    informationCollection.id,
-                    informationCollection.name,
-                    informationCollection.summary
-                  )
+                  isValidDepartmentalDate
+                    ? showDialogEdit(
+                        informationCollection.id,
+                        informationCollection.name,
+                        informationCollection.summary
+                      )
+                    : ''
                 "
-                style="
-                  color: #22c55e;
-                  border: solid 1.5px #22c55e;
-                  border-radius: 100%;
-                  padding: 7px;
+                [style.color]="isValidDepartmentalDate ? '#22c55e' : 'darkgrey'"
+                [style.border]="
+                  isValidDepartmentalDate
+                    ? 'solid 1.5px #22c55e'
+                    : 'solid 1.5px darkgrey'
                 "
+                style="border-radius: 100%; padding: 7px"
               ></span>
             </button>
-            <button class="p-panel-header-icon p-link mr-2">
+            <button
+              class="p-panel-header-icon p-link mr-2"
+              [disabled]="!isValidDepartmentalDate"
+            >
               <span
                 class="pi pi-trash"
                 (click)="
-                  confirmationDelete(
-                    $event,
-                    informationCollection.id,
-                    informationCollection.name
-                  )
+                  isValidDepartmentalDate
+                    ? confirmationDelete(
+                        $event,
+                        informationCollection.id,
+                        informationCollection.name
+                      )
+                    : ''
                 "
-                style="
-                  color: #ef4444;
-                  border: solid 1.5px #ef4444;
-                  border-radius: 100%;
-                  padding: 7px;
+                [style.color]="isValidDepartmentalDate ? '#ef4444' : 'darkgrey'"
+                [style.border]="
+                  isValidDepartmentalDate
+                    ? 'solid 1.5px #ef4444'
+                    : 'solid 1.5px darkgrey'
                 "
+                style="border-radius: 100%; padding: 7px"
               ></span>
             </button>
           </div>
@@ -90,16 +103,24 @@
             <h3 class="text-xl">
               Evidencias ({{ informationCollection.evidences.length }})
             </h3>
-            <button class="p-panel-header-icon p-link mr-2">
+            <button
+              class="p-panel-header-icon p-link mr-2"
+              [disabled]="!isValidDepartmentalDate"
+            >
               <span
                 class="pi pi-plus"
-                (click)="createEvidences(informationCollection.id)"
-                style="
-                  color: #3b82f6;
-                  border: solid 1.5px #3b82f6;
-                  border-radius: 100%;
-                  padding: 6px;
+                (click)="
+                  isValidDepartmentalDate
+                    ? createEvidences(informationCollection.id)
+                    : ''
                 "
+                [style.color]="isValidDepartmentalDate ? '#3b82f6' : 'darkgrey'"
+                [style.border]="
+                  isValidDepartmentalDate
+                    ? 'solid 1.5px #3b82f6'
+                    : 'solid 1.5px darkgrey'
+                "
+                style="border-radius: 100%; padding: 7px"
               ></span>
             </button>
           </section>
@@ -116,36 +137,52 @@
                 }})
               </h2>
               <div class="flex flex-nowrap">
-                <button class="p-panel-header-icon p-link mr-2">
+                <button
+                  class="p-panel-header-icon p-link mr-2"
+                  [disabled]="!isValidDepartmentalDate"
+                >
                   <span
                     class="pi pi-pencil"
                     (click)="
-                      onEditEvidence(evidence.id, informationCollection.id)
+                      isValidDepartmentalDate
+                        ? onEditEvidence(evidence.id, informationCollection.id)
+                        : ''
                     "
-                    style="
-                      color: #22c55e;
-                      border: solid 1.5px #22c55e;
-                      border-radius: 100%;
-                      padding: 8px;
+                    [style.color]="
+                      isValidDepartmentalDate ? '#22c55e' : 'darkgrey'
                     "
+                    [style.border]="
+                      isValidDepartmentalDate
+                        ? 'solid 1.5px #22c55e'
+                        : 'solid 1.5px darkgrey'
+                    "
+                    style="border-radius: 100%; padding: 7px"
                   ></span>
                 </button>
-                <button class="p-panel-header-icon p-link mr-2">
+                <button
+                  class="p-panel-header-icon p-link mr-2"
+                  [disabled]="!isValidDepartmentalDate"
+                >
                   <span
                     class="pi pi-trash"
                     (click)="
-                      confirmationDeleteEvidence(
-                        $event,
-                        evidence.id,
-                        evidence.type
-                      )
+                      isValidDepartmentalDate
+                        ? confirmationDeleteEvidence(
+                            $event,
+                            evidence.id,
+                            evidence.type
+                          )
+                        : ''
                     "
-                    style="
-                      color: #ef4444;
-                      border: solid 1.5px #ef4444;
-                      border-radius: 100%;
-                      padding: 8px;
+                    [style.color]="
+                      isValidDepartmentalDate ? '#ef4444' : 'darkgrey'
                     "
+                    [style.border]="
+                      isValidDepartmentalDate
+                        ? 'solid 1.5px #ef4444'
+                        : 'solid 1.5px darkgrey'
+                    "
+                    style="border-radius: 100%; padding: 7px"
                   ></span>
                 </button>
               </div>
