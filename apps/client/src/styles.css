@@ -4,6 +4,9 @@
 @import 'primeicons/primeicons.css';
 
 :root {
+  --ucab-yellow-hex: #fbc430;
+  --ucab-blue-hex: #37b4e3;
+  --ucab-green-hex: #007935;
   --background-color: #f7ffe6;
   --text-color-secondary: #373737;
   --primary-color: #00ad7c;
@@ -28,6 +31,12 @@ body {
   margin: 0px;
   background-color: var(--background-color);
 }
+/* .body[_ngcontent-ng-c2102279284] {
+  z-index: 0;
+  transition: all 0.5s ease;
+  padding: 3rem;
+  height: 100%;
+} */
 
 fieldset {
   border: none;
@@ -75,11 +84,13 @@ p-password.ng-valid > .p-password > .p-inputtext {
 .p-panel .p-panel-header {
   background: var(--background-color);
   border: none;
+  padding: 0;
 }
 .p-panel .p-panel-content {
   background: var(--background-color);
   border: none;
 }
+
 .p-panel-header {
   display: flex;
   align-items: center;
@@ -133,6 +144,23 @@ p-password.ng-valid > .p-password > .p-inputtext {
   background-color: var(--primary-color);
   border: var(--primary-color);
 }
+
 .p-tree .p-tree-container .p-treenode:focus > .p-treenode-content {
   box-shadow: none;
+
+.p-fileupload .p-fileupload-buttonbar .p-button {
+  background: var(--primary-color);
+  border: var(--primary-color);
+}
+  
+.p-fieldset {
+  background: var(--background-color);
+  border-radius: 4px;
+}
+  
+.p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
+  background: #fafff9;
+  color: #374151;
+  border-radius: 6px;
+  transition: box-shadow 0.2s;
 }

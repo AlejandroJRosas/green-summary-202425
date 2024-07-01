@@ -3,7 +3,7 @@ import { ButtonModule } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ValidatedFormGroup } from '../../../common/validated-form-group/validated-form-group'
-import * as Yup from 'yup'
+import { string, object } from 'yup'
 import {
   CategoryService,
   CategoryDTO as CategoryDTO
@@ -14,6 +14,7 @@ import { InputTextareaModule } from 'primeng/inputtextarea'
 import { Category } from '../../../../shared/types/category.type'
 import { ConfirmationService } from 'primeng/api'
 import { PanelModule } from 'primeng/panel'
+import { VALUES } from '../../../../../../../shared/validations'
 
 @Component({
   selector: 'categories',
@@ -39,13 +40,27 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
       name: '',
       helpText: ''
     }
-    const validationSchema = Yup.object({
-      name: Yup.string()
+    const validationSchema = object({
+      name: string()
         .required('El nombre es requerido')
-        .max(50, 'El nombre no puede superar los 50 caracteres'),
-      helpText: Yup.string()
+        .max(
+          VALUES.categoryNameMaxAmount,
+          'El nombre no puede superar los 128 caracteres'
+        )
+        .min(
+          VALUES.nameAliasMinAmount,
+          'El nombre debe superar un mínimo de 10 caracteres'
+        ),
+      helpText: string()
         .required('El texto de ayuda es requerido')
-        .max(140, 'El texto de ayuda no puede superar los 140 caracteres')
+        .max(
+          VALUES.helpTextMaxAmount,
+          'El texto de ayuda no puede superar los 128 caracteres'
+        )
+        .min(
+          VALUES.helpTextMinAmount,
+          'El texto de ayuda debe superar un mínimo de 1 caracter'
+        )
     })
 
     super(initialControlValues, validationSchema)
@@ -99,7 +114,7 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
       rejectLabel: 'No',
 
       accept: () => {
-        this.toast.show('info', 'Eliminando..', 'Eliminando criterio..')
+        this.toast.show('info', 'Eliminando..', 'Eliminando categoría..')
         this.onDelete(id)
       },
       reject: () => {

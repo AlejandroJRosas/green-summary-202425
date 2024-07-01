@@ -1,24 +1,24 @@
 import {
-  IsDateString,
   IsString,
   IsOptional,
   IsNotEmpty,
-  IsInt,
-  IsEnum
+  IsEnum,
+  MaxLength,
+  MinLength,
+  IsNumberString
 } from 'class-validator'
 import { EvidenceType } from '../evidences.constants'
+import { VALUES } from 'shared/validations'
 
 export class CreateEvidenceDto {
-  @IsDateString()
-  @IsNotEmpty()
-  uploadDate: string
-
   @IsString()
   @IsNotEmpty()
+  @MinLength(VALUES.descriptionMinAmount)
+  @MaxLength(VALUES.descriptionMaxAmount)
   description: string
 
   @IsString()
-  @IsNotEmpty()
+  @IsOptional()
   error: string
 
   @IsEnum(EvidenceType)
@@ -27,6 +27,7 @@ export class CreateEvidenceDto {
 
   @IsOptional()
   @IsString()
+  @MaxLength(VALUES.evidencesLinkMaxAmount)
   externalLink?: string
 
   @IsOptional()
@@ -34,6 +35,6 @@ export class CreateEvidenceDto {
   fileLink?: string
 
   @IsNotEmpty()
-  @IsInt()
+  @IsNumberString()
   collectionId: number
 }

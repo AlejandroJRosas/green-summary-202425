@@ -1,4 +1,4 @@
-<main class="flex flex-column p-4">
+<main class="flex flex-column p-4 pb-0">
   <div [innerHTML]="message"></div>
   <p-confirmDialog />
   <header class="flex flex-row justify-content-between align-items-center pb-4">
@@ -141,7 +141,6 @@
           [outlined]="true"
           severity="success"
           [disabled]="formGroup.invalid"
-          [loading]="generatePassword"
         />
       </footer>
     </form>

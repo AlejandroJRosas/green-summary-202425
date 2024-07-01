@@ -1,0 +1,125 @@
+@starting-style {
+  .hidden {
+    opacity: 100%;
+    display: block;
+  }
+}
+
+.hidden {
+  display: none;
+  opacity: 0;
+  transition:
+    opacity 0.5s,
+    display 2s;
+  transition-behavior: allow-discrete;
+}
+
+.loading {
+  z-index: 69;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+path {
+  stroke-width: 1px;
+}
+
+.hive {
+  width: 75px;
+  scale: 0.9;
+  opacity: 30%;
+}
+
+.yellow-hive {
+  animation:
+    2s fade infinite,
+    2s bounce infinite;
+  & path {
+    stroke: var(--ucab-yellow-hex);
+    fill: var(--ucab-yellow-hex);
+  }
+}
+
+.yellow-bright {
+  --color: #ffc526;
+  animation: 2s bright infinite;
+}
+
+.blue-hive {
+  animation:
+    2s fade 0.66s infinite,
+    2s bounce 0.66s infinite;
+  & path {
+    stroke: var(--ucab-blue-hex);
+    fill: var(--ucab-blue-hex);
+  }
+}
+
+.blue-bright {
+  --color: #40b4e5;
+  animation: 2s bright 0.66s infinite;
+}
+
+.green-hive {
+  animation:
+    2s fade 1.32s infinite,
+    2s bounce 1.32s infinite;
+  & path {
+    stroke: var(--ucab-green-hex);
+    fill: var(--ucab-green-hex);
+  }
+}
+
+.green-bright {
+  --color: #047732;
+  animation: 2s bright 1.32s infinite;
+}
+
+@keyframes fade {
+  0% {
+    opacity: 30%;
+  }
+  37.5% {
+    opacity: 100%;
+  }
+  75% {
+    opacity: 30%;
+  }
+}
+
+@keyframes bounce {
+  0% {
+    scale: 0.95;
+  }
+  37.5% {
+    scale: 1.1;
+  }
+  75% {
+    scale: 0.95;
+  }
+}
+
+@keyframes bright {
+  0% {
+    filter: drop-shadow(0px 0px 0px var(--color));
+  }
+  37.5% {
+    filter: drop-shadow(0px 0px 50px var(--color));
+  }
+  75% {
+    filter: drop-shadow(0px 0px 0px var(--color));
+  }
+}

@@ -51,7 +51,7 @@ export class DepartmentsService {
   async departmentsByRecopilation(recopilationId: number) {
     const departmentsPerRecopilation =
       await this.departmentsPerRecopilationRepository.find({
-        where: { department: { id: recopilationId } },
+        where: { recopilation: { id: recopilationId } },
         relations: ['department']
       })
 

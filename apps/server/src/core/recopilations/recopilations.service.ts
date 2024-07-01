@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import {
   EntityNotFoundError,
+  Equal,
   In,
   LessThan,
   MoreThan,
@@ -25,6 +26,7 @@ import { RecommendCategoriesDto } from './dto/recommend-categories.dto'
 import { Department } from '../users/entities/department.entity'
 import { Recommendation } from '../recommendations/entities/recommendation.entity'
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
+import { RecopilationDto } from './dto/recopilation.dto'
 
 @Injectable()
 export class RecopilationsService {
@@ -70,8 +72,56 @@ export class RecopilationsService {
     return { recopilation, count }
   }
 
-  async findOne(id: number): Promise<Recopilation> {
-    return this.recopilationsRepository.findOneByOrFail({ id })
+  async findOne(id: number): Promise<RecopilationDto> {
+    const recopilation = await this.recopilationsRepository.findOneOrFail({
+      where: { id },
+      relations: [
+        'departmentsPerRecopilation.department',
+        'departmentsPerRecopilation.recommendations.category',
+        'categorizedCriterion.criteria.indicator',
+        'categorizedCriterion.category',
+        'indicatorsPerRecopilations.indicator'
+      ]
+    })
+
+    const recommendations = recopilation.departmentsPerRecopilation.map(
+      (dpr) => ({
+        department: dpr.department,
+        recommendedCategories: dpr.recommendations.map((r) => r.category)
+      })
+    )
+
+    const indicators = recopilation.indicatorsPerRecopilations.map((ipr) => {
+      const { indicator } = ipr
+      const criteria = recopilation.categorizedCriterion
+        .filter((cc) => cc.criteria.indicator.index === indicator.index)
+        .map((cc) => {
+          const { indicator: _, ...criterionWithoutIndicator } = cc.criteria
+          return {
+            criterion: criterionWithoutIndicator as Criteria,
+            category: cc.category
+          }
+        })
+
+      return {
+        indicator,
+        criteria
+      }
+    })
+
+    const recopilationDto: RecopilationDto = {
+      id: recopilation.id,
+      name: recopilation.name,
+      description: recopilation.description,
+      startDate: recopilation.startDate,
+      endDate: recopilation.endDate,
+      departmentEndDate: recopilation.departmentEndDate,
+      isReady: recopilation.isReady,
+      departments: recommendations,
+      indicators: indicators
+    }
+
+    return recopilationDto
   }
 
   async create(recopilationData: CreateRecopilationDto): Promise<Recopilation> {
@@ -111,6 +161,9 @@ export class RecopilationsService {
       relations: ['categorizedCriterion', 'indicatorsPerRecopilations']
     })
 
+    let categorizedCriteriaToInsert: CategorizedCriteria[] = []
+    let indicatorsPerRecopilationsToInsert: IndicatorPerRecopilation[] = []
+
     for (const i of indicators) {
       const indicator = await this.indicatorsRepository.findOneOrFail({
         where: { index: i.indicatorId },
@@ -133,30 +186,42 @@ export class RecopilationsService {
 
         const categorizedCriteria = this.categorizedCriteriaRepository.create({
           criteria,
-          category
+          category,
+          recopilation
         })
 
-        recopilation.categorizedCriterion.push(categorizedCriteria)
+        categorizedCriteriaToInsert.push(categorizedCriteria)
       }
 
-      const indicatorPerRepository =
+      const indicatorPerRecopilation =
         this.indicatorsPerRecopilationRepository.create({
           indicator,
           recopilation
         })
 
-      recopilation.indicatorsPerRecopilations.push(indicatorPerRepository)
+      indicatorsPerRecopilationsToInsert.push(indicatorPerRecopilation)
     }
 
-    await this.indicatorsPerRecopilationRepository.save(
-      recopilation.indicatorsPerRecopilations.map((ipr) => ({
-        ...ipr,
-        recopilation
-      }))
-    )
-    await this.categorizedCriteriaRepository.save(
-      recopilation.categorizedCriterion.map((cc) => ({ ...cc, recopilation }))
-    )
+    await Promise.all([
+      await this.categorizedCriteriaRepository.remove(
+        recopilation.categorizedCriterion
+      ),
+      await this.indicatorsPerRecopilationRepository.remove(
+        recopilation.indicatorsPerRecopilations
+      )
+    ])
+
+    await Promise.all([
+      await this.categorizedCriteriaRepository.save(
+        categorizedCriteriaToInsert
+      ),
+      await this.indicatorsPerRecopilationRepository.save(
+        indicatorsPerRecopilationsToInsert
+      )
+    ])
+
+    recopilation.categorizedCriterion = categorizedCriteriaToInsert
+    recopilation.indicatorsPerRecopilations = indicatorsPerRecopilationsToInsert
 
     return recopilation
   }
@@ -218,7 +283,9 @@ export class RecopilationsService {
     return this.recopilationsRepository.find({
       where: {
         startDate: LessThan(currentDateString),
-        endDate: MoreThan(currentDateString)
+        endDate: MoreThan(currentDateString),
+        departmentEndDate: MoreThan(currentDateString),
+        isReady: Equal(true)
       },
       order: { [orderBy]: orderType }
     })

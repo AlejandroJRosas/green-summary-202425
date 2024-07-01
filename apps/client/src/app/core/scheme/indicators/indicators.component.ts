@@ -16,9 +16,10 @@ import { Toast } from '../../../common/toast/toast.component'
 import { CategoryService } from '../../../services/category.service'
 import { CriteriaService } from '../../../services/criteria.service'
 import { IndicatorService } from '../../../services/indicator.service'
-import * as Yup from 'yup'
+import { string, object, number } from 'yup'
 import { Category } from '../../../../shared/types/category.type'
 import { Criteria } from '../../../../shared/types/criterion.type'
+import { VALUES } from '../../../../../../../shared/validations'
 
 @Component({
   selector: 'indicators',
@@ -57,19 +58,40 @@ export class IndicatorsComponent
       helpText: ''
     }
 
-    const validationSchema = Yup.object({
-      index: Yup.number()
+    const validationSchema = object({
+      index: number()
         .min(1, 'El indice debe ser mayor o igual a 1')
         .required('El índice es requerido'),
-      name: Yup.string()
+      name: string()
         .required('El nombre es requerido')
-        .max(50, 'El nombre no puede superar los 50 caracteres'),
-      alias: Yup.string()
+        .max(
+          VALUES.indicatorNameAliasMaxAmount,
+          'El nombre no puede superar los 40 caracteres'
+        )
+        .min(
+          VALUES.nameAliasMinAmount,
+          'El nombre debe superar un mínimo de 10 caracteres'
+        ),
+      alias: string()
         .required('El alias es requerido')
-        .max(50, 'El alias no puede superar los 50 caracteres'),
-      helpText: Yup.string()
+        .max(
+          VALUES.indicatorNameAliasMaxAmount,
+          'El alias no puede superar los 40 caracteres'
+        )
+        .min(
+          VALUES.nameAliasMinAmount,
+          'El nombre debe superar un mínimo de 10 caracteres'
+        ),
+      helpText: string()
         .required('El texto de ayuda es requerido')
-        .max(140, 'El texto de ayuda no puede superar los 140 caracteres')
+        .max(
+          VALUES.helpTextMaxAmount,
+          'El texto de ayuda no puede superar los 128 caracteres'
+        )
+        .min(
+          VALUES.helpTextMinAmount,
+          'El mensaje de ayuda debe superar un mínimo de 1 caracteres'
+        )
     })
 
     super(initialControlValues, validationSchema)

@@ -1,28 +1,31 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm'
 import { IndicatorPerRecopilation } from 'src/core/indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
-import { Answer } from 'src/core/answers/entities/answer.entity'
 import { CategorizedCriteria } from 'src/core/categorized-criteria/entities/categorized-criterion.entity'
 import { DepartmentPerRecopilation } from 'src/core/departments-per-recopilations/entities/departments-per-recopilation.entity'
+import { InformationCollection } from 'src/core/information-collections/entities/information-collection.entity'
 
 @Entity('recopilations')
 export class Recopilation {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ type: 'varchar', length: 30 })
+  @Column({ type: 'varchar', length: 30, nullable: false })
   name: string
 
-  @Column({ type: 'text' })
+  @Column({ type: 'text', nullable: false })
   description: string
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: false })
   startDate: Date
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: false })
   departmentEndDate: Date
 
-  @Column({ type: 'date' })
+  @Column({ type: 'date', nullable: false })
   endDate: Date
+
+  @Column({ default: false })
+  isReady: boolean
 
   @OneToMany(
     () => IndicatorPerRecopilation,
@@ -36,8 +39,11 @@ export class Recopilation {
   )
   categorizedCriterion: CategorizedCriteria[]
 
-  @OneToMany(() => Answer, (answers) => answers.recopilation)
-  answers: Answer[]
+  @OneToMany(
+    () => InformationCollection,
+    (informationCollection) => informationCollection.recopilation
+  )
+  informationCollections: InformationCollection[]
 
   @OneToMany(
     () => DepartmentPerRecopilation,

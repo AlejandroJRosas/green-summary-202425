@@ -2,6 +2,10 @@ import { Injectable, NotFoundException } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { Evidence } from './entities/evidence.entity'
+import { Document } from './entities/document.entity'
+import { Image } from './entities/image.entity'
+import { Link } from './entities/link.entity'
+import { EvidenceType } from './evidences.constants'
 import { CreateEvidenceDto } from './dto/create-evidence.dto'
 import { UpdateEvidenceDto } from './dto/update-evidence.dto'
 import { InformationCollection } from '../information-collections/entities/information-collection.entity'
@@ -16,6 +20,12 @@ export class EvidencesService {
   constructor(
     @InjectRepository(Evidence)
     private readonly evidenceRepository: Repository<Evidence>,
+    @InjectRepository(Document)
+    private readonly documentRepository: Repository<Document>,
+    @InjectRepository(Image)
+    private readonly imageRepository: Repository<Image>,
+    @InjectRepository(Link)
+    private readonly linkRepository: Repository<Link>,
     @InjectRepository(InformationCollection)
     private readonly informationCollectionRepository: Repository<InformationCollection>
   ) {}
@@ -49,21 +59,53 @@ export class EvidencesService {
   }
 
   async create(createEvidenceDto: CreateEvidenceDto): Promise<Evidence> {
-    const coleccion =
+    const collection =
       await this.informationCollectionRepository.findOneByOrFail({
         id: createEvidenceDto.collectionId
       })
 
-    if (!coleccion) {
+    if (!collection) {
       throw new NotFoundException('Collection not found')
     }
 
-    const evidence = this.evidenceRepository.create({
-      ...createEvidenceDto,
-      collection: coleccion
-    })
+    const { type } = createEvidenceDto
+    switch (type) {
+      case EvidenceType.DOCUMENT:
+        if (!createEvidenceDto.fileLink.match(/\.(xls|xlsx|doc|docx|pdf)$/)) {
+          throw new Error('Invalid format type')
+        }
+        break
 
-    return this.evidenceRepository.save(evidence)
+      case EvidenceType.IMAGE:
+        if (
+          !createEvidenceDto.fileLink.match(/\.(jpeg|jpg|webp|avif|png|svg)$/)
+        ) {
+          throw new Error('Invalid format type')
+        }
+        break
+    }
+    let evidence: Evidence
+
+    switch (type) {
+      case EvidenceType.DOCUMENT:
+        evidence = this.documentRepository.create({
+          ...createEvidenceDto,
+          collection
+        })
+        return this.documentRepository.save(evidence)
+      case EvidenceType.IMAGE:
+        evidence = this.imageRepository.create({
+          ...createEvidenceDto,
+          collection
+        })
+        return this.imageRepository.save(evidence)
+      case EvidenceType.LINK:
+        evidence = this.linkRepository.create({
+          ...createEvidenceDto,
+          collection
+        })
+        return this.linkRepository.save(evidence)
+    }
   }
 
   async update(

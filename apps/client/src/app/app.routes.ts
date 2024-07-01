@@ -25,6 +25,10 @@ import { SelectIndicatorsCategoriesCriteriaComponent } from './core/recopilation
 import { RecommendCategoriesDepartmentComponent } from './core/recopilation/steps-routing/steps/recommend-categories-department/recommend-categories-department.component'
 import { PreviewComponent } from './core/recopilation/steps-routing/steps/preview/preview.component'
 
+import { UploadOfEvidenceComponent } from './core/upload-of-evidence/upload-of-evidence.component'
+import { CreateEvidencesComponent } from './core/upload-of-evidence/collection-of-information/create/create-evidences.component'
+import { EditEvidenceComponent } from './core/upload-of-evidence/collection-of-information/edit-evidence/edit-evidence.component'
+
 export const routes: Routes = [
   {
     path: '',
@@ -110,6 +114,24 @@ export const routes: Routes = [
             canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
           }
         ]
+      },
+      {
+        path: 'information-collection/:recopilationId/:categoryId',
+        title: 'Colecciones de información',
+        component: UploadOfEvidenceComponent,
+        canActivate: [roleGuard([Role.DEPARTMENT])]
+      },
+      {
+        path: 'create/information-collection/:recopilationId/:categoryId/:informationCollectionId',
+        title: 'Agregar evidencias',
+        component: CreateEvidencesComponent,
+        canActivate: [roleGuard([Role.DEPARTMENT])]
+      },
+      {
+        path: 'edit/information-collection/:recopilationId/:categoryId/:informationCollectionId/:evidenceId',
+        title: 'Agregar evidencias',
+        component: EditEvidenceComponent,
+        canActivate: [roleGuard([Role.DEPARTMENT])]
       }
     ]
   },

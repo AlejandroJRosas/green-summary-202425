@@ -1,2 +1,6 @@
 packages:
-  - 'apps/*'
+  # Client and server packages
+  - 'apps/client'
+  - 'apps/server'
+  # Config package is shared between client and server
+  - 'shared'

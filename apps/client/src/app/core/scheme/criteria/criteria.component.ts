@@ -5,7 +5,7 @@ import { DialogModule } from 'primeng/dialog'
 import { InputTextModule } from 'primeng/inputtext'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { RadioButtonModule } from 'primeng/radiobutton'
-import * as Yup from 'yup'
+import { string, object, number, boolean } from 'yup'
 import { ValidatedFormGroup } from '../../../common/validated-form-group/validated-form-group'
 import {
   CriteriaDTO,
@@ -15,6 +15,7 @@ import { Criteria } from '../../../../shared/types/criterion.type'
 import { PanelModule } from 'primeng/panel'
 import { ConfirmationService } from 'primeng/api'
 import { Toast } from '../../../common/toast/toast.component'
+import { VALUES } from '../../../../../../../shared/validations'
 
 @Component({
   selector: 'criteria',
@@ -45,20 +46,41 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
       helpText: ''
     }
 
-    const validationSchema = Yup.object({
-      subIndex: Yup.number()
+    const validationSchema = object({
+      subIndex: number()
         .min(1, 'El subindice debe ser mayor o igual a 1')
         .required('El subíndice es requerido'),
-      name: Yup.string()
+      name: string()
         .required('El nombre es requerido')
-        .max(50, 'El nombre no puede superar los 50 caracteres'),
-      alias: Yup.string()
+        .max(
+          VALUES.criterionNameAliasMaxAmount,
+          'El nombre no puede superar los 80 caracteres'
+        )
+        .min(
+          VALUES.nameAliasMinAmount,
+          'El nombre debe superar un mínimo de 10 caracteres'
+        ),
+      alias: string()
         .required('El alias es requerido')
-        .max(50, 'El alias no puede superar los 50 caracteres'),
-      requiresEvidence: Yup.boolean().required('La evidencia es requerida'),
-      helpText: Yup.string()
+        .max(
+          VALUES.criterionNameAliasMaxAmount,
+          'El alias no puede superar los 80 caracteres'
+        )
+        .min(
+          VALUES.nameAliasMinAmount,
+          'El alias debe superar un mínimo de 10 caracteres'
+        ),
+      requiresEvidence: boolean().required('La evidencia es requerida'),
+      helpText: string()
         .required('El texto de ayuda es requerido')
-        .max(140, 'El texto de ayuda no puede superar los 140 caracteres')
+        .max(
+          VALUES.helpTextMaxAmount,
+          'El texto de ayuda no puede superar los 128 caracteres'
+        )
+        .min(
+          VALUES.helpTextMinAmount,
+          'El texto de ayuda debe superar un mínimo de 1 caracter'
+        )
     })
     super(initialControlValues, validationSchema)
   }

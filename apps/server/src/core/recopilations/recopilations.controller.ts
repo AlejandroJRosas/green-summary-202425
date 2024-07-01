@@ -24,11 +24,18 @@ import { RelateIndicatorsToRecopilationDto } from './dto/relate-indicators-to-re
 import { RecommendCategoriesDto } from './dto/recommend-categories.dto'
 import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
+import { Repository } from 'typeorm'
+import { InjectRepository } from '@nestjs/typeorm'
+import { Recopilation } from './entities/recopilation.entity'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
 export class RecopilationsController {
-  constructor(private readonly recopilationsService: RecopilationsService) {}
+  constructor(
+    private readonly recopilationsService: RecopilationsService,
+    @InjectRepository(Recopilation)
+    private readonly recopilationsRepository: Repository<Recopilation>
+  ) {}
 
   @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get()
@@ -103,6 +110,23 @@ export class RecopilationsController {
   }
 
   @Roles(Role.Coordinator, Role.Admin)
+  @Put()
+  async updateOrCreate(@Body() recopilationData: UpdateRecopilationDto) {
+    if (!recopilationData.id) {
+      return await this.recopilationsService.create(
+        recopilationData as CreateRecopilationDto
+      )
+    }
+
+    const updatedRecopilation = await this.recopilationsService.update(
+      recopilationData.id,
+      recopilationData
+    )
+
+    return updatedRecopilation
+  }
+
+  @Roles(Role.Coordinator, Role.Admin)
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: string) {
@@ -137,5 +161,17 @@ export class RecopilationsController {
       console.log(e)
       throw e
     }
+  }
+
+  @Roles(Role.Coordinator, Role.Admin)
+  @Patch(':id/set-as-ready')
+  async setAsReady(@Param('id') id: string) {
+    const recopilation = await this.recopilationsRepository.findOneByOrFail({
+      id: +id
+    })
+
+    recopilation.isReady = true
+
+    await this.recopilationsRepository.save(recopilation)
   }
 }
