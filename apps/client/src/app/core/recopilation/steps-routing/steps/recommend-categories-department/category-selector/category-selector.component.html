@@ -1,0 +1,24 @@
+<section class="flex flex-column gap-3">
+  <h4 class="text-color-secondary m-0">{{ department.name }}</h4>
+  <p-autoComplete
+    name="selectedCategory"
+    [suggestions]="filteredCategories"
+    [dropdown]="true"
+    (onSelect)="onSelectCategory($event)"
+    optionValue="null"
+    (completeMethod)="filterCategories($event)"
+    [minLength]="3"
+    field="name"
+    placeholder="Buscar categoría"
+    [emptyMessage]="message"
+  />
+  <div class="flex flex-row gap-3 flex-wrap">
+    @for (category of selectedCategories; track category.id) {
+      <p-chip
+        label="{{ category.name }}"
+        [removable]="true"
+        (onRemove)="removeCategory(category.id)"
+      />
+    }
+  </div>
+</section>

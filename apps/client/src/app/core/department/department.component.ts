@@ -154,7 +154,7 @@ export class DepartmentComponent
   }
 
   getAll() {
-    this.departmentService.getAll(this.paginated).subscribe({
+    this.departmentService.get(this.paginated).subscribe({
       next: (res) => {
         if (res.status === 'success') {
           this.departments = res.data.items

@@ -1,0 +1,29 @@
+<main>
+  <header class="pb-3">
+    <h3 class="text-color-secondary">Previsualización de la recopilación</h3>
+  </header>
+  <section class="flex flex-col">
+    <pre>{{ this.recopilationData | json }}</pre>
+  </section>
+  <footer class="flex justify-content-between pt-7">
+    <p-button
+      label="Cancelar"
+      icon="pi pi-angle-left"
+      iconPos="left"
+      size="small"
+      severity="danger"
+      [outlined]="true"
+      (click)="prevStep()"
+    />
+    <div>
+      <p-button
+        label="Finalizar"
+        styleClass="bg-primary border-primary"
+        icon="pi pi-angle-right"
+        iconPos="right"
+        size="small"
+        (click)="finishRecopilationCreation()"
+      ></p-button>
+    </div>
+  </footer>
+</main>

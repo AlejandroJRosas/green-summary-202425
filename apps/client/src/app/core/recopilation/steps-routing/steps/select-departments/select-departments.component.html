@@ -1,0 +1,52 @@
+<main>
+  <header class="pb-3">
+    <h3 class="text-color-secondary">Departamentos</h3>
+  </header>
+  <section class="flex flex-column">
+    <form>
+      <!-- <div>
+        <p-dropdown
+          [options]="recopilations"
+          styleClass="w-4"
+          optionLabel="name"
+          [showClear]="true"
+          placeholder="Selecciona la recopilación"
+        />
+      </div> -->
+      <div class="flex flex-column gap-3 mt-4">
+        @for (department of departments; track department.id) {
+          <fieldset>
+            <p-checkbox
+              [label]="department.fullName"
+              name="group"
+              [(ngModel)]="selectedDepartmentsIds"
+              [value]="department.id"
+            />
+          </fieldset>
+        } @empty {
+          <span>No hay departamentos creados</span>
+        }
+      </div>
+    </form>
+  </section>
+  <footer class="flex justify-content-between pt-7">
+    <p-button
+      label="Atrás"
+      icon="pi pi-angle-left"
+      styleClass="bg-primary border-primary"
+      iconPos="left"
+      size="small"
+      [outlined]="true"
+      (click)="prevStep()"
+    />
+    <p-button
+      label="Siguiente"
+      styleClass="bg-primary border-primary"
+      icon="pi pi-angle-right"
+      iconPos="right"
+      size="small"
+      [disabled]="selectedDepartmentsIds.length === 0"
+      (click)="submitAndContinue()"
+    />
+  </footer>
+</main>
