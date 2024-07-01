@@ -7,3 +7,14 @@ export const renameFile = (req, file, callback) => {
 
   callback(null, `${randomName}-${fileName}`)
 }
+
+export const fileFilter = (req, file, callback) => {
+  if (
+    !file.originalname.match(
+      /\.(jpeg|jpg|webp|avif|png|svg|xls|xlsx|doc|docx|pdf)$/
+    )
+  ) {
+    return callback(new Error('Invalid format type'), false)
+  }
+  callback(null, true)
+}

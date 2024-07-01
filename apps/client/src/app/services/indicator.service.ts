@@ -1,25 +1,69 @@
 import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { BaseUrl } from '../../config'
-import { Observable } from 'rxjs'
+import { Observable, forkJoin, map, switchMap } from 'rxjs'
 import { PaginatedResponse } from '../../shared/types/paginated-response.type'
-import { User } from '../../shared/types/user.type'
 import { BackendResponse } from '../../shared/types/http-response.type'
 import { Indicator } from '../../shared/types/indicator.type'
+import { Category } from '../../shared/types/category.type'
+import { Criteria } from '../../shared/types/criterion.type'
+import { CategoryService } from './category.service'
+import { CriteriaService } from './criteria.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class IndicatorService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private categoryService: CategoryService,
+    private criterionService: CriteriaService
+  ) {}
 
-  getAll(
+  get(
     paginated: Paginated
   ): Observable<PaginatedResponse<Indicator, unknown, unknown>> {
     const { first, rows } = paginated
     const page = first / rows + 1
     return this.http.get<PaginatedResponse<Indicator, unknown, unknown>>(
       `${BaseUrl}/indicators?itemsPerPage=${rows}&page=${page}&orderBy=index&orderType=ASC`
+    )
+  }
+
+  getAll(): Observable<Indicator[]> {
+    return this.http
+      .get<
+        PaginatedResponse<Indicator, unknown, unknown>
+      >(`${BaseUrl}/indicators?itemsPerPage=999&orderBy=index&orderType=ASC`)
+      .pipe(
+        map((response) =>
+          response.status === 'success' ? response.data.items : []
+        )
+      )
+  }
+
+  getAllIndicators(): Observable<Scheme[]> {
+    return this.getAll().pipe(
+      switchMap((indicators) => {
+        const indicatorObservables = indicators.map((i) => {
+          const categories$ =
+            this.categoryService.getAllCategoriesByIndicatorIndex(i.index)
+          const criterias$ =
+            this.criterionService.getAllCriterionByIndicatorIndex(i.index)
+
+          return forkJoin([categories$, criterias$]).pipe(
+            map(([categories, criterias]) => ({
+              ...i,
+              categories:
+                categories.status === 'success' ? categories.data : [],
+              criterias: criterias.status === 'success' ? criterias.data : []
+            }))
+          )
+        })
+
+        const result = forkJoin(indicatorObservables)
+        return result
+      })
     )
   }
 
@@ -33,8 +77,8 @@ export class IndicatorService {
 
   create(
     indicator: CreateIndicatorDTO
-  ): Observable<BackendResponse<User, unknown, unknown>> {
-    return this.http.post<BackendResponse<User, unknown, unknown>>(
+  ): Observable<BackendResponse<Indicator, unknown, unknown>> {
+    return this.http.post<BackendResponse<Indicator, unknown, unknown>>(
       `${BaseUrl}/indicators`,
       indicator
     )
@@ -43,8 +87,8 @@ export class IndicatorService {
   edit(
     id: number,
     indicator: CreateIndicatorDTO
-  ): Observable<BackendResponse<User, unknown, unknown>> {
-    return this.http.patch<BackendResponse<User, unknown, unknown>>(
+  ): Observable<BackendResponse<Indicator, unknown, unknown>> {
+    return this.http.patch<BackendResponse<Indicator, unknown, unknown>>(
       `${BaseUrl}/indicators/${id}`,
       indicator
     )
@@ -60,4 +104,9 @@ export type CreateIndicatorDTO = Indicator
 type Paginated = {
   first: number
   rows: number
+}
+
+export type Scheme = Indicator & {
+  categories: Category[]
+  criterias: Criteria[]
 }
