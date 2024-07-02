@@ -8,6 +8,10 @@ import { CollectionOfInformationComponent } from './collection-of-information/co
 import { ProgressSpinnerModule } from 'primeng/progressspinner'
 import { Indicator } from '../../../shared/types/indicator.type'
 import { Category } from '../../../shared/types/category.type'
+import {
+  DetailedRecopilation,
+  RecopilationService
+} from '../../services/recopilation.service'
 
 @Component({
   selector: 'app-upload-of-evidence',
@@ -25,7 +29,8 @@ export class UploadOfEvidenceComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private categoryService: CategoryService,
-    private router: Router
+    private router: Router,
+    private RecopilationService: RecopilationService
   ) {
     this.route.params.subscribe((params) => {
       this.categoryId = parseInt(params['categoryId'], 10)
@@ -34,6 +39,7 @@ export class UploadOfEvidenceComponent implements OnInit {
   }
   recopilationId: number = 0
   categoryId: number = 0
+  detailedRecopilation: DetailedRecopilation | null = null
   indicator: Indicator = {
     index: 0,
     alias: '',
@@ -48,6 +54,20 @@ export class UploadOfEvidenceComponent implements OnInit {
   }
   ngOnInit() {
     this.getCategoryById()
+    this.getRecopilationById()
+  }
+  getRecopilationById() {
+    this.RecopilationService.getById(this.recopilationId).subscribe({
+      next: (res) => {
+        if (res) {
+          this.detailedRecopilation = res
+        }
+      },
+      error: (e) => {
+        console.error(e)
+        this.router.navigateByUrl('/404 Not Found')
+      }
+    })
   }
   getCategoryById() {
     this.categoryService.getById(this.categoryId).subscribe({

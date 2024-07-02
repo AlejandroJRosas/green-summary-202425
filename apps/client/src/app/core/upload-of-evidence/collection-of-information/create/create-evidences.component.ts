@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { ButtonModule } from 'primeng/button'
 import { EvidenceComponent } from './evidence/evidence.component'
@@ -9,6 +9,7 @@ import { PanelModule } from 'primeng/panel'
 import { ActivatedRoute, Router } from '@angular/router'
 import { InformationCollectionService } from '../../../../services/information-collection.service'
 import { InformationCollection } from '../../../../../shared/types/information-collection.type'
+import { Toast } from '../../../../common/toast/toast.component'
 
 @Component({
   selector: 'create-evidences',
@@ -29,6 +30,7 @@ export class CreateEvidencesComponent
   implements OnInit
 {
   constructor(
+    @Inject(Toast) private toast: Toast,
     private route: ActivatedRoute,
     private router: Router,
     private InformationCollectionService: InformationCollectionService
@@ -73,6 +75,7 @@ export class CreateEvidencesComponent
   ngOnInit() {
     this.getInformationCollectionById()
   }
+
   getInformationCollectionById() {
     this.InformationCollectionService.getById(
       this.informationCollection.id
