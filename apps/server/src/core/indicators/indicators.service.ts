@@ -50,6 +50,24 @@ export class IndicatorsService {
     return indicator
   }
 
+  async indicatorsByRecopilation(
+    recopilationId: number,
+    { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto
+  ) {
+    const indicators = this.indicatorRepository.find({
+      where: {
+        recopilationsPerIndicator: {
+          recopilation: {
+            id: recopilationId
+          }
+        }
+      },
+      order: { [orderBy]: orderType }
+    })
+
+    return indicators
+  }
+
   async updateIndicator(
     index: number,
     updateIndicatorDto: UpdateIndicatorDto
