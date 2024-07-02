@@ -65,6 +65,7 @@ export class UploadOfEvidenceComponent implements OnInit {
       },
       error: (e) => {
         console.error(e)
+        this.router.navigateByUrl('/404 Not Found')
       }
     })
   }
