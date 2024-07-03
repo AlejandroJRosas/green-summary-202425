@@ -10,6 +10,9 @@ import { SchemeComponent } from './core/scheme/scheme.component'
 import { LayoutComponent } from './common/layout/layout.component'
 import { roleGuard } from './guards/role.guard'
 import { Role } from './services/auth.service'
+import { UploadOfEvidenceComponent } from './core/upload-of-evidence/upload-of-evidence.component'
+import { CreateEvidencesComponent } from './core/upload-of-evidence/collection-of-information/create/create-evidences.component'
+import { EditEvidenceComponent } from './core/upload-of-evidence/collection-of-information/edit-evidence/edit-evidence.component'
 
 export const routes: Routes = [
   {
@@ -38,7 +41,26 @@ export const routes: Routes = [
       {
         path: 'schemes',
         title: 'Esquemas',
-        component: SchemeComponent
+        component: SchemeComponent,
+        canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
+      },
+      {
+        path: 'information-collection/:recopilationId/:categoryId',
+        title: 'Colecciones de información',
+        component: UploadOfEvidenceComponent,
+        canActivate: [roleGuard([Role.DEPARTMENT])]
+      },
+      {
+        path: 'create/information-collection/:recopilationId/:categoryId/:informationCollectionId',
+        title: 'Agregar evidencias',
+        component: CreateEvidencesComponent,
+        canActivate: [roleGuard([Role.DEPARTMENT])]
+      },
+      {
+        path: 'edit/information-collection/:recopilationId/:categoryId/:informationCollectionId/:evidenceId',
+        title: 'Agregar evidencias',
+        component: EditEvidenceComponent,
+        canActivate: [roleGuard([Role.DEPARTMENT])]
       }
     ]
   },

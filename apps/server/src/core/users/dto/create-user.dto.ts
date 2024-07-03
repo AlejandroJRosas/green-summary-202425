@@ -24,8 +24,7 @@ export class CreateUserDto {
   email: string
 
   @IsString()
-  @IsNotEmpty()
-  @MinLength(VALUES.nameAliasMinAmount)
+  @IsOptional()
   @MaxLength(VALUES.departmentPasswordAmount)
   password: string
 

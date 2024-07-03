@@ -15,7 +15,8 @@ import { InputTextModule } from 'primeng/inputtext'
 import { Toast } from '../../common/toast/toast.component'
 import { User } from '../../../shared/types/user.type'
 import { ValidatedFormGroup } from '../../common/validated-form-group/validated-form-group'
-import * as Yup from 'yup'
+import { string, object } from 'yup'
+import { VALUES } from '../../../../../../shared/validations'
 
 @Component({
   selector: 'app-department',
@@ -53,11 +54,24 @@ export class DepartmentComponent
       email: ''
     }
 
-    const validationSchema = Yup.object({
-      fullName: Yup.string().required('El nombre completo es requerido'),
-      email: Yup.string()
+    const validationSchema = object({
+      fullName: string()
+        .required('El nombre completo es requerido')
+        .max(
+          VALUES.departmentFullNameMaxAmount,
+          'El nombre no debe superar los 100 caracteres'
+        )
+        .min(
+          VALUES.departmentFullNameMinAmount,
+          'El nombre debe superar un mínimo de 4 caracteres'
+        ),
+      email: string()
         .required('El correo electrónico es requerido')
         .email('El correo electrónico no tiene un formato válido')
+        .max(
+          VALUES.departmentEmailAmount,
+          'El correo electrónico no debe superar los 320 caracteres'
+        )
     })
 
     super(initialControlValues, validationSchema)

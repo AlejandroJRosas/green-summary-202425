@@ -55,6 +55,23 @@ export class InformationCollectionsService {
     })
   }
 
+  async getDepartmentAnswer(
+    recopilationId: number,
+    categoryId: number,
+    departmentId: number
+  ) {
+    const informationCollections = this.informationCollectionsRepository.find({
+      relations: ['evidences'],
+      where: {
+        recopilation: { id: recopilationId },
+        category: { id: categoryId },
+        department: { id: departmentId }
+      }
+    })
+
+    return informationCollections
+  }
+
   async create(
     createInformationCollectionDto: CreateInformationCollectionDto
   ): Promise<InformationCollection> {
