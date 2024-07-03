@@ -72,7 +72,18 @@ export class IndicatorsService {
           }
         }
       },
-      order: { [orderBy]: orderType }
+      order: {
+        [orderBy]: orderType,
+        recopilationsPerIndicator: {
+          indicator: { index: 'ASC' },
+          recopilation: {
+            categorizedCriterion: {
+              category: { id: 'ASC' },
+              criteria: { id: 'ASC' }
+            }
+          }
+        }
+      }
     })
 
     const formattedIndicators = indicators.map((i) => {
