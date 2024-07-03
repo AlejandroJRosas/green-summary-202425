@@ -11,8 +11,8 @@
   <p-table
     [value]="matrixData.departments"
     [scrollable]="true"
-    scrollHeight="550px"
-    styleClass="mt-3"
+    scrollHeight="70vh"
+    styleClass="mt-2 w-11"
   >
     <ng-template pTemplate="header">
       <tr>
@@ -22,7 +22,7 @@
             pTooltip="{{ indicator.indicator.helpText }}"
             [attr.colspan]="indicator.categories.length"
           >
-            {{ indicator.indicator.index }} {{ indicator.indicator.alias }}
+            {{ indicator.indicator.alias }}
           </th>
         }
       </tr>
@@ -36,7 +36,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-row>
       <tr>
-        <td>{{ row.department.fullName }}</td>
+        <td pFrozenColumn>{{ row.department.fullName }}</td>
         @for (indicator of matrixData.indicators; track $index) {
           @for (category of indicator.categories; track $index) {
             <td>

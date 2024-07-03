@@ -61,9 +61,8 @@
                     [disabled]="!isSelectedIndicator(scheme.index)"
                     [binary]="true"
                   />
-                  {{ scheme.index }}.{{ criteria.id }} {{ criteria.name }} ({{
-                    criteria.alias
-                  }})
+                  {{ scheme.index }}.{{ criteria.subIndex }}
+                  {{ criteria.name }} ({{ criteria.alias }})
                 </p>
                 <p-dropdown
                   (onChange)="
