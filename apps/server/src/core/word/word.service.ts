@@ -1,13 +1,23 @@
 import { Injectable } from '@nestjs/common'
-import { Document, Packer, Paragraph, SectionType, TextRun } from 'docx'
-// import { saveAs } from 'file-saver';
-// import * as fs from 'fs'
+import {
+  Header,
+  Document,
+  Packer,
+  Paragraph,
+  SectionType,
+  TextRun,
+  ImageRun
+} from 'docx'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
 import { InformationCollection } from '../information-collections/entities/information-collection.entity'
 import { CategorizedCriteria } from '../categorized-criteria/entities/categorized-criterion.entity'
 import { Criteria } from '../criterion/entities/criteria.entity'
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
+import { Image } from '../evidences/entities/image.entity'
+import { Link } from '../evidences/entities/link.entity'
+import * as evidenceDocument from '../evidences/entities/document.entity'
+import * as fs from 'fs'
 
 @Injectable()
 export class WordService {
@@ -27,8 +37,11 @@ export class WordService {
       this.recopilationRepository.findOneByOrFail({
         id: idRecop
       }),
-      this.criteriaRepository.findOneByOrFail({
-        id: idCrit
+      this.criteriaRepository.findOneOrFail({
+        where: {
+          id: idCrit
+        },
+        relations: ['indicator']
       })
     ])
 
@@ -41,28 +54,185 @@ export class WordService {
         relations: ['recopilation', 'category', 'criteria']
       })
 
-    const informationCollections =
-      await this.informationCollectionsRepository.find({
-        where: {
-          recopilation: (await categorizedCriteria).recopilation,
-          category: (await categorizedCriteria).category
-        },
-        relations: ['department', 'evidences']
+    const arrayInfCol = await this.informationCollectionsRepository.find({
+      where: {
+        recopilation: categorizedCriteria.recopilation,
+        category: categorizedCriteria.category
+      },
+      relations: ['department', 'evidences']
+    })
+
+    const informationCollections: InformationCollection[] = []
+    let dep: string
+    let flag = 0
+
+    arrayInfCol.forEach((informationCollection, index) => {
+      if (index === 0) {
+        informationCollections.push(informationCollection)
+      }
+      dep = informationCollection.department.fullName
+
+      arrayInfCol.forEach((infCol) => {
+        if (dep === infCol.department.fullName) {
+          informationCollections.forEach((info) => {
+            if (info.id === infCol.id) {
+              flag = 1
+            }
+          })
+          if (flag === 0) {
+            informationCollections.push(infCol)
+          }
+          flag = 0
+        }
       })
+    })
 
     return { criterion, recopilation, informationCollections }
   }
 
+  private createEvidences(collections: InformationCollection[]): Paragraph[] {
+    let prevDepartment: string
+    let departmentName: string
+    let collectionName: string
+    let collectionDescription: string
+    let fileLink: string
+    let externalLink: string
+    let evidenceDescription: string
+    const parag: Paragraph[] = []
+
+    collections.forEach((collection) => {
+      departmentName = collection.department.fullName
+      collectionName = collection.name
+      collectionDescription = collection.summary
+      if (prevDepartment === departmentName) {
+        parag.push(
+          new Paragraph({
+            children: [new TextRun(collectionName)]
+          }),
+          new Paragraph({
+            children: [new TextRun(collectionDescription)]
+          }),
+          new Paragraph({})
+        )
+      } else {
+        parag.push(
+          new Paragraph({
+            children: [new TextRun(departmentName)]
+          }),
+          new Paragraph({
+            children: [new TextRun(collectionName)]
+          }),
+          new Paragraph({
+            children: [new TextRun(collectionDescription)]
+          }),
+          new Paragraph({})
+        )
+      }
+
+      collection.evidences.forEach((evidence) => {
+        if (evidence.type === 'image') {
+          fileLink = (evidence as Image).fileLink.split('uploads/')[1]
+          evidenceDescription = evidence.description
+          externalLink = (evidence as Image).externalLink
+
+          parag.push(
+            new Paragraph({
+              children: [new TextRun(evidenceDescription)]
+            }),
+            new Paragraph({
+              children: [
+                new ImageRun({
+                  data: fs.readFileSync('./uploads/' + fileLink),
+                  transformation: {
+                    width: 300,
+                    height: 168
+                  }
+                })
+              ]
+            }),
+            new Paragraph({
+              children: [new TextRun(externalLink)]
+            }),
+            new Paragraph({})
+          )
+        }
+
+        if (evidence.type === 'document') {
+          fileLink = (evidence as evidenceDocument.Document).fileLink
+          evidenceDescription = evidence.description
+
+          parag.push(
+            new Paragraph({
+              children: [new TextRun(evidenceDescription)]
+            }),
+            new Paragraph({
+              children: [new TextRun(fileLink)]
+            }),
+            new Paragraph({})
+          )
+        }
+
+        if (evidence.type === 'link') {
+          evidenceDescription = evidence.description
+          externalLink = (evidence as Link).externalLink
+
+          parag.push(
+            new Paragraph({
+              children: [new TextRun(evidenceDescription)]
+            }),
+            new Paragraph({
+              children: [new TextRun(externalLink)]
+            }),
+            new Paragraph({})
+          )
+        }
+      })
+      prevDepartment = departmentName
+    })
+    return parag
+  }
+
   async generateWord(idCrit: number, idRecop: number) {
-    const informationCollections = this.findInformationCollections(
-      idCrit,
-      idRecop
-    )
+    const summary = this.findInformationCollections(idCrit, idRecop)
+    const index = (await summary).criterion.indicator.index
+    const indicatorName = (await summary).criterion.indicator.name
+
+    const subIndex = (await summary).criterion.subIndex
+    const criterionName = (await summary).criterion.name
+
+    const collections = (await summary).informationCollections
+
+    const header = new Header({
+      children: [
+        new Paragraph({
+          children: [
+            new ImageRun({
+              data: fs.readFileSync('./word/Ucab.jpg'),
+              transformation: {
+                width: 300,
+                height: 43
+              }
+            }),
+            new ImageRun({
+              data: fs.readFileSync('./word/GM.jpg'),
+              transformation: {
+                width: 115,
+                height: 85
+              }
+            })
+          ]
+        })
+      ]
+    })
+
     const doc = new Document({
       sections: [
         {
+          headers: {
+            default: header
+          },
           properties: {
-            type: SectionType.NEXT_COLUMN
+            type: SectionType.CONTINUOUS
           },
           children: [
             new Paragraph({
@@ -70,7 +240,8 @@ export class WordService {
               children: [
                 new TextRun({
                   text: 'Template for Evidence(s)',
-                  bold: true
+                  bold: true,
+                  size: 36
                 })
               ]
             }),
@@ -79,10 +250,13 @@ export class WordService {
               children: [
                 new TextRun({
                   text: 'UI GreenMetric Questionnaire',
-                  bold: true
+                  bold: true,
+                  size: 36
                 })
               ]
             }),
+            new Paragraph({}),
+            new Paragraph({}),
             new Paragraph({
               children: [
                 new TextRun(
@@ -97,7 +271,28 @@ export class WordService {
               children: [
                 new TextRun('Web Address:     http://guayanaweb.ucab.edu.ve/')
               ]
-            })
+            }),
+            new Paragraph({}),
+            new Paragraph({}),
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text: '[' + index + ']' + indicatorName,
+                  bold: true
+                })
+              ]
+            }),
+            new Paragraph({}),
+            new Paragraph({
+              children: [
+                new TextRun({
+                  text: '[' + index + '.' + subIndex + ']' + criterionName,
+                  bold: true
+                })
+              ]
+            }),
+            new Paragraph({}),
+            ...this.createEvidences(collections)
           ]
         }
       ]

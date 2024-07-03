@@ -10,27 +10,29 @@ import { Role } from '../auth/role.enum'
 export class WordController {
   constructor(private readonly wordService: WordService) {}
 
-  @Get(':idCrit/:idRecop')
+  @Get(':CriterionId/:RecopilationId')
   async generateWord(
-    @Param('idCrit') idCrit: string,
-    @Param('idRecop') idRecop: string,
+    @Param('CriterionId') CriterionId: string,
+    @Param('RecopilationId') RecopilationId: string,
     @Res() res
   ) {
     try {
       // const prueba = await this.wordService.findInformationCollections(
-      //   +idCrit,
-      //   +idRecop
+      //   +CriterionId,
+      //   +RecopilationId
       // )
-      const buffer = await this.wordService.generateWord(+idCrit, +idRecop)
+      // res.send(prueba)
 
+      const buffer = await this.wordService.generateWord(
+        +CriterionId,
+        +RecopilationId
+      )
       res.set({
-        'Content-Type':
-          'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        'Content-Type': 'application/docx',
         'Content-Disposition': 'attachment; filename=archivo.docx',
         'Content-Length': buffer.length
       })
       res.send(buffer)
-      // res.send(prueba)
     } catch (e) {
       console.log(e)
       throw e
