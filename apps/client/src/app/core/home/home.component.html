@@ -1,1 +1,79 @@
-<p>home works!</p>
+<h2>Matriz de Seguimiento</h2>
+<p-dropdown
+  [options]="recopilations"
+  [(ngModel)]="selectedRecopilation"
+  (onChange)="getMatrixData()"
+  optionLabel="name"
+  optionValue="id"
+  placeholder="Selecciona una recopilación"
+/>
+@if (matrixData) {
+  <p-table
+    [value]="matrixData.departments"
+    [scrollable]="true"
+    scrollHeight="550px"
+    styleClass="mt-3"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th rowspan="2" pFrozenColumn>Departamentos</th>
+        @for (indicator of matrixData.indicators; track $index) {
+          <th
+            pTooltip="{{ indicator.indicator.helpText }}"
+            [attr.colspan]="indicator.categories.length"
+          >
+            {{ indicator.indicator.index }} {{ indicator.indicator.alias }}
+          </th>
+        }
+      </tr>
+      <tr>
+        @for (indicator of matrixData.indicators; track $index) {
+          @for (category of indicator.categories; track $index) {
+            <th pTooltip="{{ category.helpText }}">{{ category.name }}</th>
+          }
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td>{{ row.department.fullName }}</td>
+        @for (indicator of matrixData.indicators; track $index) {
+          @for (category of indicator.categories; track $index) {
+            <td>
+              <a
+                href="pages/information-collection/{{ selectedRecopilation }}/{{
+                  category.id
+                }}"
+                target="_blank"
+                rel="noreferrer"
+              >
+                <div style="width: 100%; height: 100%">
+                  @if (isRecommended(row.recommendedCategories, category)) {
+                    <tooltip-icon
+                      icon="pi pi-sparkles"
+                      tooltip="Recomendado para responder"
+                    ></tooltip-icon>
+                  } @else {
+                    -
+                  }
+                </div>
+                <!-- <tooltip-icon
+              icon="pi pi-file-check"
+              tooltip="Ha subido marcado como correcto"
+              ></tooltip-icon>
+              <tooltip-icon
+              icon="pi pi-file-arrow-up"
+                tooltip="Ha subido evidencias"
+                ></tooltip-icon>
+              <tooltip-icon
+              icon="pi pi-file-edit"
+              tooltip="Ha editado evidencias"
+              ></tooltip-icon> -->
+              </a>
+            </td>
+          }
+        }
+      </tr>
+    </ng-template>
+  </p-table>
+}
