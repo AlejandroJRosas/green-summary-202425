@@ -37,6 +37,7 @@ export class RecopilationComponent {
   }
 
   confirmRecopilationDeletion(event: Event, id: number, name: string) {
+    console.log(this.confirmationService.confirm)
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: `¿Estás seguro de que quieres eliminar el recopilación <strong>${name}</strong>?`,
