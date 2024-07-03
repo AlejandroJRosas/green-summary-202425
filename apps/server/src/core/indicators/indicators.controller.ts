@@ -85,4 +85,18 @@ export class IndicatorsController {
   async deleteIndicator(@Param('id') id: string) {
     await this.indicatorsService.deleteIndicator(Number(id))
   }
+
+  @Get('/recopilation/:recopilationId')
+  async getIndicatorsByRecopilation(
+    @Param('recopilationId') recopilationId: string,
+    @Query() { orderBy = 'index' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
+  ) {
+    const indicators = this.indicatorsService.indicatorsByRecopilation(
+      +recopilationId,
+      { orderBy, orderType }
+    )
+
+    return indicators
+  }
 }

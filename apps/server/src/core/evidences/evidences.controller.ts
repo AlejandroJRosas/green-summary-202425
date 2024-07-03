@@ -26,7 +26,7 @@ import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
 import { FileInterceptor } from '@nestjs/platform-express'
 import { diskStorage } from 'multer'
-import { renameFile } from 'src/shared/file-upload'
+import { renameFile, fileFilter } from 'src/shared/file-upload'
 import { ConfigService } from 'nestjs-config'
 
 @ApiTags('Evidences')
@@ -76,7 +76,8 @@ export class EvidencesController {
         destination: './uploads',
         filename: renameFile
       }),
-      limits: { fileSize: 2097152 }
+      limits: { fileSize: 2097152 },
+      fileFilter: fileFilter
     })
   )
   @ApiConsumes('multipart/form-data')

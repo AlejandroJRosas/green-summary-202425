@@ -38,6 +38,10 @@ body {
   height: 100%;
 } */
 
+fieldset {
+  border: none;
+}
+
 .p-toast-message {
   border: 1px solid;
 }
@@ -97,21 +101,67 @@ p-password.ng-valid > .p-password > .p-inputtext {
   padding: 0;
   padding-left: 2.5rem;
 }
-.p-fileupload .p-fileupload-buttonbar .p-button {
-  background: var(--primary-color);
-  border: var(--primary-color);
+
+.p-menuitem-link {
+  background-color: var(--background-color);
 }
-/* .p-button.p-button-icon-only {
+
+.p-steps .p-steps-item .p-menuitem-link .p-steps-title {
+  padding: 0 1rem 0 1rem;
+  color: #6b7280;
+  text-align: center;
+  white-space: normal;
+}
+
+.p-steps .p-steps-item.p-highlight .p-steps-number {
   background: var(--primary-color);
-  border: var(--primary-color);
-} */
-.p-fieldset {
+}
+
+.p-steps-item .p-steps-title {
+  font-size: 0.98rem;
+}
+
+.p-panel-icons {
+  display: flex;
+}
+
+.p-tree {
   background: var(--background-color);
-  border-radius: 4px;
+  border: none;
 }
-.p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
-  background: #fafff9;
-  color: #374151;
-  border-radius: 6px;
-  transition: box-shadow 0.2s;
+
+.p-chip {
+  background-color: var(--primary-color);
+  color: var(--primary-color-text);
+}
+
+.p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item.p-highlight {
+  color: #4b5563;
+  background: #fff;
+}
+
+.p-autocomplete .p-button {
+  background-color: var(--primary-color);
+  border: var(--primary-color);
+}
+
+.p-tree .p-tree-container .p-treenode:focus > .p-treenode-content {
+  box-shadow: none;
+
+  .p-fileupload .p-fileupload-buttonbar .p-button {
+    background: var(--primary-color);
+    border: var(--primary-color);
+  }
+
+  .p-fieldset {
+    background: var(--background-color);
+    border-radius: 4px;
+  }
+
+  .p-fieldset.p-fieldset-toggleable .p-fieldset-legend a {
+    background: #fafff9;
+    color: #374151;
+    border-radius: 6px;
+    transition: box-shadow 0.2s;
+  }
 }

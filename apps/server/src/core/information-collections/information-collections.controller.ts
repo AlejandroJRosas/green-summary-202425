@@ -66,12 +66,15 @@ export class InformationCollectionsController {
   async getDepartmentAnswer(
     @Param('recopilationId') recopilationId: number,
     @Param('categoryId') categoryId: number,
-    @Param('departmentId') departmentId: number
+    @Param('departmentId') departmentId: number,
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
   ) {
     return this.informationCollectionsService.getDepartmentAnswer(
       recopilationId,
       categoryId,
-      departmentId
+      departmentId,
+      { orderBy, orderType }
     )
   }
 

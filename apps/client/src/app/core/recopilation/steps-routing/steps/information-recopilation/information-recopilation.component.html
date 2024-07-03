@@ -1,0 +1,148 @@
+<main>
+  <header class="pb-3">
+    <h3 class="text-color-secondary">Información de una recopilación</h3>
+  </header>
+  <section class="flex">
+    <form class="flex flex-column gap-4 w-6" [formGroup]="formGroup">
+      <div class="flex flex-row flex-wrap gap-4">
+        <div class="flex flex-column flex-grow-1 gap-3">
+          <div class="flex flex-column gap-2 w-full">
+            <label>Nombre</label>
+            <input
+              pInputText
+              name="name"
+              class="w-full"
+              type="text"
+              formControlName="name"
+              (input)="errorsUpdate('name')"
+              (blur)="errorsUpdate('name')"
+            />
+            <small class="p-error w-7">{{ errors.name }}</small>
+          </div>
+          <div class="flex flex-column gap-2">
+            <label
+              for="recopilationEndDate"
+              class="flex flex-row align-items-center gap-2 w-full"
+            >
+              Fecha Final
+              <i
+                pTooltip="Fecha final de esta recopilación"
+                class="pi pi-question-circle text-color-secondary"
+                style="font-size: 1.2rem"
+              ></i>
+            </label>
+            <p-calendar
+              [inputId]="'recopilationEndDate'"
+              styleClass="w-full"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              [readonlyInput]="true"
+              dateFormat="dd/mm/yy"
+              formControlName="endDate"
+              (onClose)="errorsUpdate('endDate')"
+              (onClickOutside)="errorsUpdate('endDate')"
+              (onInput)="errorsUpdate('endDate')"
+              (onSelect)="errorsUpdate('endDate')"
+              (onBlur)="errorsUpdate('endDate')"
+            />
+            <small class="p-error">{{ errors.endDate }}</small>
+          </div>
+        </div>
+        <div class="flex flex-column flex-grow-1 gap-3">
+          <div class="flex flex-column gap-2">
+            <label
+              for="recopilationStartDate"
+              class="flex flex-row align-items-center gap-2 w-full"
+            >
+              Fecha de Inicio
+              <i
+                pTooltip="Fecha de inicio para la subida de información por los departamentos"
+                class="pi pi-question-circle text-color-secondary"
+                style="font-size: 1.2rem"
+              ></i>
+            </label>
+            <p-calendar
+              [inputId]="'recopilationStartDate'"
+              styleClass="w-full"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              [readonlyInput]="true"
+              dateFormat="dd/mm/yy"
+              formControlName="startDate"
+              (onClose)="errorsUpdate('startDate')"
+              (onClickOutside)="errorsUpdate('startDate')"
+              (onInput)="errorsUpdate('startDate')"
+              (onSelect)="errorsUpdate('startDate')"
+              (onBlur)="errorsUpdate('startDate')"
+            />
+            <small class="p-error">{{ errors.startDate }}</small>
+          </div>
+          <div class="flex flex-column gap-2">
+            <label
+              for="recopilationDepartmentEndDate"
+              class="flex flex-row align-items-center gap-2 w-full"
+            >
+              Fecha Final Departamental
+              <i
+                pTooltip="Fecha final de carga de información para los departamentos"
+                class="pi pi-question-circle text-color-secondary"
+                style="font-size: 1.2rem"
+              ></i>
+            </label>
+            <p-calendar
+              [inputId]="'recopilationDepartmentEndDate'"
+              styleClass="w-full"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              inputId="icondisplay"
+              dateFormat="dd/mm/yy"
+              formControlName="departmentEndDate"
+              (onClose)="errorsUpdate('departmentEndDate')"
+              (onClickOutside)="errorsUpdate('departmentEndDate')"
+              (onInput)="errorsUpdate('departmentEndDate')"
+              (onSelect)="errorsUpdate('departmentEndDate')"
+              (onBlur)="errorsUpdate('departmentEndDate')"
+            />
+            <small class="p-error">{{ errors.departmentEndDate }}</small>
+          </div>
+        </div>
+      </div>
+      <div class="flex flex-column w-full gap-2 mb-5">
+        <label for="recopilationDescription">Descripción</label>
+        <textarea
+          [id]="'recopilationDescription'"
+          rows="5"
+          cols="40"
+          pInputTextarea
+          [required]="true"
+          formControlName="description"
+          (input)="errorsUpdate('description')"
+          (blur)="errorsUpdate('description')"
+        ></textarea>
+        <small class="p-error">{{ errors.description }}</small>
+      </div>
+    </form>
+  </section>
+  <footer class="flex justify-content-between pt-7">
+    <p-button
+      label="Cancelar"
+      icon="pi pi-angle-left"
+      iconPos="left"
+      size="small"
+      severity="danger"
+      [outlined]="true"
+      (click)="prevStep()"
+    />
+    <div>
+      <p-button
+        label="Siguiente"
+        styleClass="bg-primary border-primary"
+        icon="pi pi-angle-right"
+        iconPos="right"
+        size="small"
+        (click)="submitAndContinueOrFail()"
+        [disabled]="formGroup.invalid"
+      ></p-button>
+    </div>
+  </footer>
+</main>

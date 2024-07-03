@@ -50,6 +50,78 @@ export class IndicatorsService {
     return indicator
   }
 
+  async indicatorsByRecopilation(
+    recopilationId: number,
+    { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto
+  ) {
+    const indicators = await this.indicatorRepository.find({
+      where: {
+        recopilationsPerIndicator: {
+          recopilation: {
+            id: recopilationId
+          }
+        }
+      },
+      relations: {
+        recopilationsPerIndicator: {
+          recopilation: {
+            categorizedCriterion: {
+              category: true,
+              criteria: {
+                indicator: true
+              }
+            }
+          }
+        }
+      },
+      order: {
+        [orderBy]: orderType,
+        recopilationsPerIndicator: {
+          indicator: { index: 'ASC' },
+          recopilation: {
+            categorizedCriterion: {
+              category: { id: 'ASC' },
+              criteria: { id: 'ASC' }
+            }
+          }
+        }
+      }
+    })
+
+    const formattedIndicators = indicators.map((i) => {
+      const categories = []
+      console.log(i.recopilationsPerIndicator)
+      i.recopilationsPerIndicator[0].recopilation.categorizedCriterion.forEach(
+        (cc) => {
+          if (cc.criteria.indicator.index !== i.index) return
+
+          const category = cc.category
+          const { indicator, ...criterion } = cc.criteria
+
+          const alreadyInsertedCategory = categories.find(
+            (c) => c.id === category.id
+          )
+
+          if (alreadyInsertedCategory) {
+            alreadyInsertedCategory.criteria.push(criterion)
+          } else {
+            categories.push({ ...category, criteria: [criterion] })
+          }
+        }
+      )
+
+      return {
+        index: i.index,
+        name: i.name,
+        alias: i.alias,
+        helpText: i.helpText,
+        categories: categories
+      }
+    })
+
+    return formattedIndicators
+  }
+
   async updateIndicator(
     index: number,
     updateIndicatorDto: UpdateIndicatorDto

@@ -58,7 +58,8 @@ export class InformationCollectionsService {
   async getDepartmentAnswer(
     recopilationId: number,
     categoryId: number,
-    departmentId: number
+    departmentId: number,
+    { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto
   ) {
     const informationCollections = this.informationCollectionsRepository.find({
       relations: ['evidences'],
@@ -66,6 +67,9 @@ export class InformationCollectionsService {
         recopilation: { id: recopilationId },
         category: { id: categoryId },
         department: { id: departmentId }
+      },
+      order: {
+        [orderBy]: orderType
       }
     })
 
