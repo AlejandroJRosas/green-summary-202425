@@ -67,7 +67,9 @@ export class IndicatorsService {
           recopilation: {
             categorizedCriterion: {
               category: true,
-              criteria: true
+              criteria: {
+                indicator: true
+              }
             }
           }
         }
@@ -88,11 +90,13 @@ export class IndicatorsService {
 
     const formattedIndicators = indicators.map((i) => {
       const categories = []
-
+      console.log(i.recopilationsPerIndicator)
       i.recopilationsPerIndicator[0].recopilation.categorizedCriterion.forEach(
         (cc) => {
+          if (cc.criteria.indicator.index !== i.index) return
+
           const category = cc.category
-          const criterion = cc.criteria
+          const { indicator, ...criterion } = cc.criteria
 
           const alreadyInsertedCategory = categories.find(
             (c) => c.id === category.id
