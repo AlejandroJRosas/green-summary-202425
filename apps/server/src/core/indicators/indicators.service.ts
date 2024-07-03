@@ -54,7 +54,7 @@ export class IndicatorsService {
     recopilationId: number,
     { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto
   ) {
-    const indicators = this.indicatorRepository.find({
+    const indicators = await this.indicatorRepository.find({
       where: {
         recopilationsPerIndicator: {
           recopilation: {
@@ -62,10 +62,49 @@ export class IndicatorsService {
           }
         }
       },
+      relations: {
+        recopilationsPerIndicator: {
+          recopilation: {
+            categorizedCriterion: {
+              category: true,
+              criteria: true
+            }
+          }
+        }
+      },
       order: { [orderBy]: orderType }
     })
 
-    return indicators
+    const formattedIndicators = indicators.map((i) => {
+      const categories = []
+
+      i.recopilationsPerIndicator[0].recopilation.categorizedCriterion.forEach(
+        (cc) => {
+          const category = cc.category
+          const criterion = cc.criteria
+
+          const alreadyInsertedCategory = categories.find(
+            (c) => c.id === category.id
+          )
+
+          if (alreadyInsertedCategory) {
+            alreadyInsertedCategory.criteria.push(criterion)
+          } else {
+            categories.push({ ...category, criteria: [criterion] })
+          }
+        }
+      )
+
+      return {
+        index: i.index,
+        name: i.name,
+        alias: i.alias,
+        helpText: i.helpText,
+        categories: categories
+      }
+    })
+
+    return formattedIndicators
   }
 
   async updateIndicator(
