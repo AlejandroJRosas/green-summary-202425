@@ -9,13 +9,18 @@ import {
   Entity,
   OneToMany
 } from 'typeorm'
+import { VALUES } from 'shared/validations'
 
 @Entity('categories')
 export class Category {
   @PrimaryGeneratedColumn()
   id: number
 
-  @Column({ type: 'varchar', length: 50, nullable: false })
+  @Column({
+    type: 'varchar',
+    length: VALUES.categoryNameMaxAmount,
+    nullable: false
+  })
   name: string
 
   @Column({ type: 'text', nullable: false })
