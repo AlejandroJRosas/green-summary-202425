@@ -222,14 +222,12 @@ export class WordService {
                   },
                   floating: {
                     horizontalPosition: {
-                      relative: HorizontalPositionRelativeFrom.PAGE,
-                      align: HorizontalPositionAlign.LEFT,
-                      offset: 10000
+                      relative: HorizontalPositionRelativeFrom.MARGIN,
+                      align: HorizontalPositionAlign.LEFT
                     },
                     verticalPosition: {
-                      relative: VerticalPositionRelativeFrom.PAGE,
-                      align: VerticalPositionAlign.TOP,
-                      offset: 10000
+                      relative: VerticalPositionRelativeFrom.MARGIN,
+                      align: VerticalPositionAlign.INSIDE
                     }
                   }
                 }),
@@ -241,19 +239,22 @@ export class WordService {
                   },
                   floating: {
                     horizontalPosition: {
-                      relative: HorizontalPositionRelativeFrom.PAGE,
-                      align: HorizontalPositionAlign.RIGHT,
-                      offset: 10000
+                      relative: HorizontalPositionRelativeFrom.MARGIN,
+                      align: HorizontalPositionAlign.RIGHT
                     },
                     verticalPosition: {
-                      relative: VerticalPositionRelativeFrom.PAGE,
-                      align: VerticalPositionAlign.TOP,
-                      offset: 10000
+                      relative: VerticalPositionRelativeFrom.MARGIN,
+                      align: VerticalPositionAlign.INSIDE
                     }
                   }
                 })
               ]
             }),
+            new Paragraph({}),
+            new Paragraph({}),
+            new Paragraph({}),
+            new Paragraph({}),
+            new Paragraph({}),
             new Paragraph({
               alignment: 'center',
               children: [
