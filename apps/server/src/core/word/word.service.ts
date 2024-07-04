@@ -151,7 +151,13 @@ export class WordService {
       } else {
         parag.push(
           new Paragraph({
-            children: [new TextRun(departmentName)]
+            children: [
+              new TextRun({
+                text: 'Departamento: ',
+                bold: true
+              }),
+              new TextRun(departmentName)
+            ]
           }),
           new Paragraph({
             children: [new TextRun(collectionName)]
