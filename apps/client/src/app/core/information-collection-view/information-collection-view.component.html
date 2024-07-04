@@ -1,0 +1,138 @@
+<main>
+  <section>
+    <header class="flex flex-column">
+      <h2>Recopilación 1 / {{ department.fullName }}</h2>
+    </header>
+    <section class="flex align-items-center justify-content-center w-full">
+      <section class="w-full h-full">
+        <div
+          class="flex flex-row justify-content-between align-items-center gap-6 pb-4 w-full"
+        >
+          <h2 class="text-color-secondary flex-1">
+            Archivos subidos para {{ this.category.indicator.alias }} /
+            {{ this.category.name }}
+          </h2>
+        </div>
+        @for (
+          informationCollection of informationCollections;
+          track informationCollection.id;
+          let idx = $index
+        ) {
+          <p-panel
+            expandIcon="pi pi-chevron-down"
+            collapseIcon="pi pi-chevron-right"
+            [toggleable]="true"
+            collapsed="true"
+            iconPos="start"
+          >
+            <ng-template pTemplate="header">
+              <section
+                class="flex flex-row justify-content-between align-items-center w-full gap-4"
+              >
+                <h2 style="word-break: break-word" class="text-xl">
+                  {{ informationCollection.name }}
+                </h2>
+              </section>
+            </ng-template>
+            <p class="m-0 pb-3" style="max-width: 80vw">
+              {{ informationCollection.summary }}
+            </p>
+            <p-panel
+              expandIcon="pi pi-chevron-down"
+              collapseIcon="pi pi-chevron-right"
+              [toggleable]="true"
+              collapsed="true"
+              iconPos="start"
+            >
+              <ng-template pTemplate="header" class="p-0">
+                <section
+                  class="flex flex-row justify-content-between align-items-center w-full"
+                >
+                  <h3 class="text-xl">
+                    Evidencias ({{ informationCollection.evidences.length }})
+                  </h3>
+                </section>
+              </ng-template>
+              @for (
+                evidence of informationCollection.evidences;
+                track evidence.id
+              ) {
+                <div class="flex flex-column gap-3 mb-5">
+                  <div
+                    class="flex justify-content-between align-items-center gap-4"
+                  >
+                    <h2
+                      style="word-break: break-word"
+                      class="m-0 text-xl text-color-secondary"
+                    >
+                      {{ evidence.description }} - tipo ({{
+                        translateType(evidence.type)
+                      }})
+                    </h2>
+                  </div>
+                  @switch (evidence.type) {
+                    @case ('link') {
+                      <a
+                        [href]="evidence.externalLink"
+                        target="_blank"
+                        class="m-0 text-blue-600"
+                        style="word-wrap: break-word; max-width: 80vw"
+                      >
+                        {{ evidence.externalLink }}
+                      </a>
+                    }
+                    @case ('image') {
+                      @if (evidence.externalLink) {
+                        <a
+                          [href]="evidence.externalLink"
+                          target="_blank"
+                          class="m-0 text-blue-600"
+                          style="word-wrap: break-word; max-width: 80vw"
+                        >
+                          {{ evidence.externalLink }}
+                        </a>
+                      }
+                      <p-image
+                        [src]="evidence.fileLink ?? ''"
+                        alt="Image"
+                        width="300"
+                        [preview]="true"
+                      >
+                        <ng-template pTemplate="indicator">
+                          <div class="flex flex-column">
+                            <i class="pi pi-eye"></i>
+                            <p>Ver previsualización de la imagen</p>
+                          </div>
+                        </ng-template>
+                      </p-image>
+                    }
+                    @case ('document') {
+                      <a
+                        [href]="evidence.fileLink"
+                        target="_blank"
+                        class="m-0 text-blue-600"
+                        style="word-wrap: break-word; max-width: 80vw"
+                      >
+                        {{ evidence.fileLink }}
+                      </a>
+                    }
+                    @default {
+                      <p
+                        class="m-0"
+                        style="word-wrap: break-word; max-width: 80vw"
+                      >
+                        No hay evidencias creadas para esta colección de
+                        información
+                      </p>
+                    }
+                  }
+                </div>
+                <p-divider />
+              }
+            </p-panel>
+          </p-panel>
+        }
+      </section>
+    </section>
+  </section>
+</main>

@@ -28,6 +28,7 @@ import { PreviewComponent } from './core/recopilation/steps-routing/steps/previe
 import { UploadOfEvidenceComponent } from './core/upload-of-evidence/upload-of-evidence.component'
 import { CreateEvidencesComponent } from './core/upload-of-evidence/collection-of-information/create/create-evidences.component'
 import { EditEvidenceComponent } from './core/upload-of-evidence/collection-of-information/edit-evidence/edit-evidence.component'
+import { InformationCollectionViewComponent } from './core/information-collection-view/information-collection-view.component'
 
 export const routes: Routes = [
   {
@@ -132,6 +133,12 @@ export const routes: Routes = [
         title: 'Agregar evidencias',
         component: EditEvidenceComponent,
         canActivate: [roleGuard([Role.DEPARTMENT])]
+      },
+      {
+        path: 'view/information-collection/:recopilationId/:categoryId/:departmentId',
+        title: 'Colecciones de información',
+        component: InformationCollectionViewComponent,
+        canActivate: [roleGuard([Role.COORDINATOR, Role.ADMIN])]
       }
     ]
   },
