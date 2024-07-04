@@ -34,8 +34,8 @@ export class RecopilationService {
       .pipe(map((res) => (res.status === 'success' ? res.data.items : [])))
   }
 
-  getActive(): Observable<BackendResponse<Recopilation, unknown, unknown>> {
-    return this.http.get<BackendResponse<Recopilation, unknown, unknown>>(
+  getActive(): Observable<BackendResponse<Recopilation[], unknown, unknown>> {
+    return this.http.get<BackendResponse<Recopilation[], unknown, unknown>>(
       `${BaseUrl}/recopilations/active`
     )
   }
