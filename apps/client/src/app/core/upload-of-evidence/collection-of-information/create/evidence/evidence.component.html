@@ -3,23 +3,33 @@
     <h3 class="text-color-secondary">Evidencias</h3>
     <button
       class="p-panel-header-icon p-link mr-2"
-      [disabled]="this.DataSharingEvidence.getLenghtEvidences() !== 0"
+      [disabled]="
+        !isValidDepartmentalDate
+          ? true
+          : this.DataSharingEvidence.getLenghtEvidences() !== 0
+      "
     >
       <span
         (click)="
-          this.DataSharingEvidence.getLenghtEvidences() !== 0
-            ? ''
-            : addEvidence()
+          isValidDepartmentalDate
+            ? this.DataSharingEvidence.getLenghtEvidences() !== 0
+              ? ''
+              : addEvidence()
+            : ''
         "
         class="pi pi-plus"
         [style.color]="
-          this.DataSharingEvidence.getLenghtEvidences() === 0
-            ? '#3b82f6'
+          isValidDepartmentalDate
+            ? this.DataSharingEvidence.getLenghtEvidences() === 0
+              ? '#3b82f6'
+              : 'darkgrey'
             : 'darkgrey'
         "
         [style.border]="
-          this.DataSharingEvidence.getLenghtEvidences() === 0
-            ? 'solid 1.5px #3b82f6'
+          isValidDepartmentalDate
+            ? this.DataSharingEvidence.getLenghtEvidences() === 0
+              ? 'solid 1.5px #3b82f6'
+              : 'solid 1.5px darkgrey'
             : 'solid 1.5px darkgrey'
         "
         style="border-radius: 100%; padding: 6px"
@@ -37,7 +47,7 @@
         optionLabel="name"
         placeholder="Selecciona un tipo de evidencia"
         formControlName="selectedType"
-        [readonly]="disableSelect"
+        [readonly]="disableSelect || !isValidDepartmentalDate"
       />
       @switch (
         this.DataSharingEvidence.getFormGroupByEvidence(evidence - 1).controls[
