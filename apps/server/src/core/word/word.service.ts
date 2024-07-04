@@ -21,6 +21,7 @@ import { Image } from '../evidences/entities/image.entity'
 import { Link } from '../evidences/entities/link.entity'
 import * as evidenceDocument from '../evidences/entities/document.entity'
 import * as fs from 'fs'
+import { Evidence } from '../evidences/entities/evidence.entity'
 
 @Injectable()
 export class WordService {
@@ -68,7 +69,11 @@ export class WordService {
     const informationCollections: InformationCollection[] = []
     let dep: string
     let flag = 0
+    let order: Evidence[]
+    let verify = 0
+    let type: string
 
+    //Para ordenar las colecciones de información por departamento
     arrayInfCol.forEach((informationCollection, index) => {
       if (index === 0) {
         informationCollections.push(informationCollection)
@@ -88,6 +93,32 @@ export class WordService {
           flag = 0
         }
       })
+    })
+
+    //Para ordenar las evidencias por tipo en cada colección de información
+    informationCollections.forEach((inforCollec) => {
+      order = []
+      inforCollec.evidences.forEach((evidence, index) => {
+        if (index === 0) {
+          order.push(evidence)
+        }
+        type = evidence.type
+
+        inforCollec.evidences.forEach((evid) => {
+          if (type === evid.type) {
+            order.forEach((info) => {
+              if (info.id === evid.id) {
+                verify = 1
+              }
+            })
+            if (verify === 0) {
+              order.push(evid)
+            }
+            verify = 0
+          }
+        })
+      })
+      inforCollec.evidences = order
     })
 
     return { criterion, recopilation, informationCollections }
