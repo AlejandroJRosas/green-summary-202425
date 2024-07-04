@@ -1,12 +1,15 @@
 import { Injectable } from '@nestjs/common'
 import {
-  Header,
   Document,
   Packer,
   Paragraph,
   SectionType,
   TextRun,
-  ImageRun
+  ImageRun,
+  HorizontalPositionAlign,
+  VerticalPositionAlign,
+  HorizontalPositionRelativeFrom,
+  VerticalPositionRelativeFrom
 } from 'docx'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
@@ -202,39 +205,55 @@ export class WordService {
 
     const collections = (await summary).informationCollections
 
-    const header = new Header({
-      children: [
-        new Paragraph({
-          children: [
-            new ImageRun({
-              data: fs.readFileSync('./word/Ucab.jpg'),
-              transformation: {
-                width: 300,
-                height: 43
-              }
-            }),
-            new ImageRun({
-              data: fs.readFileSync('./word/GM.jpg'),
-              transformation: {
-                width: 115,
-                height: 85
-              }
-            })
-          ]
-        })
-      ]
-    })
-
     const doc = new Document({
       sections: [
         {
-          headers: {
-            default: header
-          },
           properties: {
             type: SectionType.CONTINUOUS
           },
           children: [
+            new Paragraph({
+              children: [
+                new ImageRun({
+                  data: fs.readFileSync('./images/Ucab.jpg'),
+                  transformation: {
+                    width: 300,
+                    height: 43
+                  },
+                  floating: {
+                    horizontalPosition: {
+                      relative: HorizontalPositionRelativeFrom.PAGE,
+                      align: HorizontalPositionAlign.LEFT,
+                      offset: 10000
+                    },
+                    verticalPosition: {
+                      relative: VerticalPositionRelativeFrom.PAGE,
+                      align: VerticalPositionAlign.TOP,
+                      offset: 10000
+                    }
+                  }
+                }),
+                new ImageRun({
+                  data: fs.readFileSync('./images/GM.jpg'),
+                  transformation: {
+                    width: 115,
+                    height: 85
+                  },
+                  floating: {
+                    horizontalPosition: {
+                      relative: HorizontalPositionRelativeFrom.PAGE,
+                      align: HorizontalPositionAlign.RIGHT,
+                      offset: 10000
+                    },
+                    verticalPosition: {
+                      relative: VerticalPositionRelativeFrom.PAGE,
+                      align: VerticalPositionAlign.TOP,
+                      offset: 10000
+                    }
+                  }
+                })
+              ]
+            }),
             new Paragraph({
               alignment: 'center',
               children: [
