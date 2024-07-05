@@ -72,7 +72,15 @@ export class RecopilationsService {
     return { recopilation, count }
   }
 
-  async findOne(id: number): Promise<RecopilationDto> {
+  async findOne(id: number): Promise<Recopilation> {
+    const recopilation = await this.recopilationsRepository.findOneByOrFail({
+      id
+    })
+
+    return recopilation
+  }
+
+  async findOneDetailed(id: number): Promise<RecopilationDto> {
     const recopilation = await this.recopilationsRepository.findOneOrFail({
       where: { id },
       relations: [

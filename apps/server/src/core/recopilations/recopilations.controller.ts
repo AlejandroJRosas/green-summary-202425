@@ -85,6 +85,14 @@ export class RecopilationsController {
     return recopilation
   }
 
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
+  @Get(':id/detailed')
+  async findOneDetailed(@Param('id') id: string) {
+    const recopilation = await this.recopilationsService.findOneDetailed(+id)
+
+    return recopilation
+  }
+
   @Roles(Role.Coordinator, Role.Admin)
   @Post()
   @HttpCode(HttpStatus.CREATED)
