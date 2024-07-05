@@ -76,6 +76,45 @@ export class InformationCollectionsService {
     return informationCollections
   }
 
+  async getAllDepartmentsAnswers(
+    recopilationId: number,
+    categoryId: number,
+    { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto
+  ) {
+    const informationCollections =
+      await this.informationCollectionsRepository.find({
+        relations: { department: true, evidences: true },
+        where: {
+          recopilation: { id: recopilationId },
+          category: { id: categoryId }
+        },
+        order: {
+          [orderBy]: orderType
+        }
+      })
+
+    const formattedInformationCollections = []
+
+    informationCollections.forEach((ic) => {
+      const department = ic.department
+
+      const alreadyInsertedDepartment = formattedInformationCollections.find(
+        (d) => d.department.id === department.id
+      )
+
+      if (alreadyInsertedDepartment) {
+        alreadyInsertedDepartment.informationCollections.push(ic)
+      } else {
+        formattedInformationCollections.push({
+          department,
+          informationCollections: [ic]
+        })
+      }
+    })
+
+    return formattedInformationCollections
+  }
+
   async create(
     createInformationCollectionDto: CreateInformationCollectionDto
   ): Promise<InformationCollection> {

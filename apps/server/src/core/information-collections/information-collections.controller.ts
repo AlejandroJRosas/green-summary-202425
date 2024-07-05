@@ -62,6 +62,20 @@ export class InformationCollectionsController {
     return collection
   }
 
+  @Get('department-answer/:recopilationId/:categoryId')
+  async getAllDepartmentsAnswers(
+    @Param('recopilationId') recopilationId: number,
+    @Param('categoryId') categoryId: number,
+    @Query() { orderBy = 'id' }: OrderByParamDto,
+    @Query() { orderType = 'ASC' }: OrderTypeParamDto
+  ) {
+    return this.informationCollectionsService.getAllDepartmentsAnswers(
+      recopilationId,
+      categoryId,
+      { orderBy, orderType }
+    )
+  }
+
   @Get('department-answer/:recopilationId/:categoryId/:departmentId')
   async getDepartmentAnswer(
     @Param('recopilationId') recopilationId: number,
