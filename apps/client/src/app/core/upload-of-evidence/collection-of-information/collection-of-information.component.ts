@@ -363,7 +363,7 @@ export class CollectionOfInformationComponent
       this.currentUrl = url.map((segment) => segment.path).join('/')
     })
     this.router.navigateByUrl(
-      `pages/create/${this.currentUrl}/${informationCollectionId}`
+      `pages/create/${this.currentUrl}/information-collection/${informationCollectionId}`
     )
   }
   onEditEvidence(evidenceId: number, informationCollectionId: number) {
@@ -371,7 +371,7 @@ export class CollectionOfInformationComponent
       this.currentUrl = url.map((segment) => segment.path).join('/')
     })
     this.router.navigateByUrl(
-      `pages/edit/${this.currentUrl}/${informationCollectionId}/${evidenceId}`
+      `pages/edit/${this.currentUrl}/information-collection/${informationCollectionId}/evidence/${evidenceId}`
     )
   }
 }

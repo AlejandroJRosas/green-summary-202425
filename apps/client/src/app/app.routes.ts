@@ -117,25 +117,25 @@ export const routes: Routes = [
         ]
       },
       {
-        path: 'information-collection/:recopilationId/:categoryId',
+        path: 'information-collection/recopilation/:recopilationId/category/:categoryId',
         title: 'Colecciones de información',
         component: UploadOfEvidenceComponent,
         canActivate: [roleGuard([Role.DEPARTMENT])]
       },
       {
-        path: 'create/information-collection/:recopilationId/:categoryId/:informationCollectionId',
+        path: 'create/information-collection/recopilation/:recopilationId/category/:categoryId/information-collection/:informationCollectionId',
         title: 'Agregar evidencias',
         component: CreateEvidencesComponent,
         canActivate: [roleGuard([Role.DEPARTMENT])]
       },
       {
-        path: 'edit/information-collection/:recopilationId/:categoryId/:informationCollectionId/:evidenceId',
+        path: 'edit/information-collection/recopilation/:recopilationId/category/:categoryId/information-collection/:informationCollectionId/evidence/:evidenceId',
         title: 'Agregar evidencias',
         component: EditEvidenceComponent,
         canActivate: [roleGuard([Role.DEPARTMENT])]
       },
       {
-        path: 'view/information-collection/:recopilationId/:categoryId/:departmentId',
+        path: 'view/information-collection/recopilation/:recopilationId/category/:categoryId/department/:departmentId',
         title: 'Colecciones de información',
         component: InformationCollectionViewComponent,
         canActivate: [roleGuard([Role.COORDINATOR, Role.ADMIN])]
