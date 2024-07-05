@@ -18,7 +18,13 @@ export class AuthService {
   async login(loginAuthDto: LoginAuthDto) {
     const user = await this.usersRepository.findOneOrFail({
       where: { email: loginAuthDto.email },
-      select: { password: true }
+      select: {
+        id: true,
+        fullName: true,
+        email: true,
+        type: true,
+        password: true
+      }
     })
 
     const comparation = await bcrypt.compare(
