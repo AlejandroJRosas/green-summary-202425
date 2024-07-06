@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Transformation 2</name>
+    <name>facts</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -430,11 +430,62 @@
     <created_date>2024/07/06 16:26:41.466</created_date>
     <modified_user>-</modified_user>
     <modified_date>2024/07/06 16:26:41.466</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAA/wMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>datawarehouse</name>
+    <server>ep-rapid-mode-a5hp6ccx.us-east-2.aws.neon.tech</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>green_datawarehouse</database>
+    <port>5432</port>
+    <username>green_db_owner</username>
+    <password>Encrypted 2be98afc818d2aab2f910f655db94a2f9</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <connection>
     <name>Facts</name>
     <server>ep-rapid-mode-a5hp6ccx.us-east-2.aws.neon.tech</server>
@@ -470,7 +521,7 @@
       </attribute>
       <attribute>
         <code>QUOTE_ALL_FIELDS</code>
-        <attribute>N</attribute>
+        <attribute>Y</attribute>
       </attribute>
       <attribute>
         <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
@@ -545,11 +596,11 @@ LEFT JOIN recommendations AS rec ON
         <name>answerId</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input Facts</origin>
         <comments>answerId</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -558,7 +609,7 @@ LEFT JOIN recommendations AS rec ON
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -568,11 +619,11 @@ LEFT JOIN recommendations AS rec ON
         <name>recopilationId</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input Facts</origin>
         <comments>recopilationId</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -581,7 +632,7 @@ LEFT JOIN recommendations AS rec ON
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -591,11 +642,11 @@ LEFT JOIN recommendations AS rec ON
         <name>categoryId</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input Facts</origin>
         <comments>categoryId</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -604,7 +655,7 @@ LEFT JOIN recommendations AS rec ON
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -614,11 +665,11 @@ LEFT JOIN recommendations AS rec ON
         <name>departmentId</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input Facts</origin>
         <comments>departmentId</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -627,7 +678,7 @@ LEFT JOIN recommendations AS rec ON
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -637,11 +688,11 @@ LEFT JOIN recommendations AS rec ON
         <name>informationCollectionId</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input Facts</origin>
         <comments>informationCollectionId</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -650,7 +701,7 @@ LEFT JOIN recommendations AS rec ON
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -660,11 +711,11 @@ LEFT JOIN recommendations AS rec ON
         <name>evidenceId</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input Facts</origin>
         <comments>evidenceId</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -673,7 +724,7 @@ LEFT JOIN recommendations AS rec ON
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -683,11 +734,11 @@ LEFT JOIN recommendations AS rec ON
         <name>indicatorIndex</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input Facts</origin>
         <comments>indicatorIndex</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -696,7 +747,7 @@ LEFT JOIN recommendations AS rec ON
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -706,11 +757,11 @@ LEFT JOIN recommendations AS rec ON
         <name>subIndex</name>
         <length>9</length>
         <precision>0</precision>
-        <origin>Table input</origin>
+        <origin>Table input Facts</origin>
         <comments>subIndex</comments>
         <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -719,7 +770,7 @@ LEFT JOIN recommendations AS rec ON
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -729,11 +780,11 @@ LEFT JOIN recommendations AS rec ON
         <name>wasRecommended</name>
         <length>-1</length>
         <precision>-1</precision>
-        <origin>Table input</origin>
+        <origin>Table input Facts</origin>
         <comments>wasRecommended</comments>
         <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
         <currency_symbol/>
         <trim_type>none</trim_type>
         <case_insensitive>N</case_insensitive>
@@ -742,7 +793,7 @@ LEFT JOIN recommendations AS rec ON
         <sort_descending>N</sort_descending>
         <output_padding>N</output_padding>
         <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
+        <date_format_locale>es_US</date_format_locale>
         <date_format_timezone>America/Caracas</date_format_timezone>
         <lenient_string_to_number>N</lenient_string_to_number>
       </value-meta>
@@ -763,7 +814,7 @@ LEFT JOIN recommendations AS rec ON
   </step>
   <step>
     <name>Fact output</name>
-    <type>ExcelOutput</type>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -772,99 +823,61 @@ LEFT JOIN recommendations AS rec ON
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>C:\Users\Robinson\Desktop\Proyecto FI\fact_file</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-    </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
+    <connection>datawarehouse</connection>
+    <schema>public</schema>
+    <table>answers</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
       <field>
-        <name>answerId</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>answerId</column_name>
+        <stream_name>answerId</stream_name>
       </field>
       <field>
-        <name>recopilationId</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>recopilationId</column_name>
+        <stream_name>recopilationId</stream_name>
       </field>
       <field>
-        <name>categoryId</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>categoryId</column_name>
+        <stream_name>categoryId</stream_name>
       </field>
       <field>
-        <name>departmentId</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>departmentId</column_name>
+        <stream_name>departmentId</stream_name>
       </field>
       <field>
-        <name>informationCollectionId</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>collectionId</column_name>
+        <stream_name>informationCollectionId</stream_name>
       </field>
       <field>
-        <name>evidenceId</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>evidenceId</column_name>
+        <stream_name>evidenceId</stream_name>
       </field>
       <field>
-        <name>indicatorIndex</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>indicatorIndex</column_name>
+        <stream_name>indicatorIndex</stream_name>
       </field>
       <field>
-        <name>subIndex</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>subIndex</column_name>
+        <stream_name>subIndex</stream_name>
       </field>
       <field>
-        <name>wasRecommended</name>
-        <type>Boolean</type>
-        <format/>
+        <column_name>wasRecommended</column_name>
+        <stream_name>wasRecommended</stream_name>
       </field>
     </fields>
-    <custom>
-      <header_font_name>arial</header_font_name>
-      <header_font_size>10</header_font_size>
-      <header_font_bold>N</header_font_bold>
-      <header_font_italic>N</header_font_italic>
-      <header_font_underline>no</header_font_underline>
-      <header_font_orientation>horizontal</header_font_orientation>
-      <header_font_color>black</header_font_color>
-      <header_background_color>none</header_background_color>
-      <header_row_height>255</header_row_height>
-      <header_alignment>left</header_alignment>
-      <header_image/>
-      <row_font_name>arial</row_font_name>
-      <row_font_size>10</row_font_size>
-      <row_font_color>black</row_font_color>
-      <row_background_color>none</row_background_color>
-    </custom>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
