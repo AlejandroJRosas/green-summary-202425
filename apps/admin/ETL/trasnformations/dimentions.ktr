@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>Transformation 1</name>
+    <name>dimentions</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -430,11 +430,62 @@
     <created_date>2024/07/06 15:33:33.085</created_date>
     <modified_user>-</modified_user>
     <modified_date>2024/07/06 15:33:33.085</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
+  <connection>
+    <name>datawarehouse postgres</name>
+    <server>ep-rapid-mode-a5hp6ccx.us-east-2.aws.neon.tech</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>green_datawarehouse</database>
+    <port>5432</port>
+    <username>green_db_owner</username>
+    <password>Encrypted 2be98afc818d2aab2f910f655db94a2f9</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
   <connection>
     <name>postgres connection</name>
     <server>ep-rapid-mode-a5hp6ccx.us-east-2.aws.neon.tech</server>
@@ -499,17 +550,17 @@
     </hop>
     <hop>
       <from>Table input categories</from>
-      <to>Category output</to>
+      <to>Categories output</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input Criterion</from>
-      <to>Criterion output</to>
+      <to>criterion output</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Table input Information_collection</from>
-      <to>information_collection output</to>
+      <to>Information_collection output</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -517,10 +568,15 @@
       <to>evidences output</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Table input Recopilations</from>
+      <to>Recopilations output</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
-    <name>Table input department</name>
-    <type>TableInput</type>
+    <name>Categories output</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -529,115 +585,41 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>postgres connection</connection>
-    <sql>SELECT
-  "id"
-, "fullName"
-, "email"
-, type
-FROM "public"."users"
-WHERE type IN ('department')
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>fullName</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>fullName</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>email</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>email</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>type</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>type</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
+    <connection>datawarehouse postgres</connection>
+    <schema>public</schema>
+    <table>categories</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>categoryId</column_name>
+        <stream_name>id</stream_name>
+      </field>
+      <field>
+        <column_name>helpText</column_name>
+        <stream_name>helpText</stream_name>
+      </field>
+      <field>
+        <column_name>indicatorIndex</column_name>
+        <stream_name>indicatorIndex</stream_name>
+      </field>
+      <field>
+        <column_name>name</column_name>
+        <stream_name>name</stream_name>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -647,14 +629,14 @@ WHERE type IN ('department')
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>32</yloc>
+      <xloc>352</xloc>
+      <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
     <name>Department output</name>
-    <type>ExcelOutput</type>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -663,74 +645,37 @@ WHERE type IN ('department')
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>C:/Users/Robinson/Desktop/Proyecto FI/department_file</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-    </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
+    <connection>datawarehouse postgres</connection>
+    <schema>public</schema>
+    <table>departments</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
       <field>
-        <name>id</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>departmentId</column_name>
+        <stream_name>id</stream_name>
       </field>
       <field>
-        <name>fullName</name>
-        <type>String</type>
-        <format/>
+        <column_name>name</column_name>
+        <stream_name>fullName</stream_name>
       </field>
       <field>
-        <name>email</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>type</name>
-        <type>String</type>
-        <format/>
+        <column_name>email</column_name>
+        <stream_name>email</stream_name>
       </field>
     </fields>
-    <custom>
-      <header_font_name>arial</header_font_name>
-      <header_font_size>10</header_font_size>
-      <header_font_bold>N</header_font_bold>
-      <header_font_italic>N</header_font_italic>
-      <header_font_underline>no</header_font_underline>
-      <header_font_orientation>horizontal</header_font_orientation>
-      <header_font_color>black</header_font_color>
-      <header_background_color>none</header_background_color>
-      <header_row_height>255</header_row_height>
-      <header_alignment>left</header_alignment>
-      <header_image/>
-      <row_font_name>arial</row_font_name>
-      <row_font_size>10</row_font_size>
-      <row_font_color>black</row_font_color>
-      <row_background_color>none</row_background_color>
-    </custom>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -746,8 +691,8 @@ WHERE type IN ('department')
     </GUI>
   </step>
   <step>
-    <name>Table input Indicators</name>
-    <type>TableInput</type>
+    <name>Indicators output</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -756,114 +701,41 @@ WHERE type IN ('department')
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>postgres connection</connection>
-    <sql>SELECT
-  "index"
-, "name"
-, "alias"
-, "helpText"
-FROM "public"."indicators"
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>index</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>index</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>name</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>name</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>alias</name>
-        <length>255</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>alias</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>helpText</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>helpText</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
+    <connection>datawarehouse postgres</connection>
+    <schema>public</schema>
+    <table>indicators</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>index</column_name>
+        <stream_name>index</stream_name>
+      </field>
+      <field>
+        <column_name>name</column_name>
+        <stream_name>name</stream_name>
+      </field>
+      <field>
+        <column_name>alias</column_name>
+        <stream_name>alias</stream_name>
+      </field>
+      <field>
+        <column_name>helpText</column_name>
+        <stream_name>helpText</stream_name>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -873,14 +745,14 @@ FROM "public"."indicators"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
+      <xloc>352</xloc>
       <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Table input categories</name>
-    <type>TableInput</type>
+    <name>Information_collection output</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -889,114 +761,41 @@ FROM "public"."indicators"
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>postgres connection</connection>
-    <sql>SELECT
-  "id"
-, "helpText"
-, "indicatorIndex"
-, "name"
-FROM "public"."categories"
-</sql>
-    <limit>0</limit>
-    <lookup/>
-    <execute_each_row>N</execute_each_row>
-    <variables_active>N</variables_active>
-    <lazy_conversion_active>N</lazy_conversion_active>
-    <cached_row_meta_active>N</cached_row_meta_active>
-    <row-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>id</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>id</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>helpText</name>
-        <length>2147483647</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>helpText</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>Integer</type>
-        <storagetype>normal</storagetype>
-        <name>indicatorIndex</name>
-        <length>9</length>
-        <precision>0</precision>
-        <origin>Table input</origin>
-        <comments>indicatorIndex</comments>
-        <conversion_Mask>####0;-####0</conversion_Mask>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-      <value-meta>
-        <type>String</type>
-        <storagetype>normal</storagetype>
-        <name>name</name>
-        <length>128</length>
-        <precision>-1</precision>
-        <origin>Table input</origin>
-        <comments>name</comments>
-        <conversion_Mask/>
-        <decimal_symbol>,</decimal_symbol>
-        <grouping_symbol>.</grouping_symbol>
-        <currency_symbol/>
-        <trim_type>none</trim_type>
-        <case_insensitive>N</case_insensitive>
-        <collator_disabled>Y</collator_disabled>
-        <collator_strength>0</collator_strength>
-        <sort_descending>N</sort_descending>
-        <output_padding>N</output_padding>
-        <date_format_lenient>N</date_format_lenient>
-        <date_format_locale>es_VE</date_format_locale>
-        <date_format_timezone>America/Caracas</date_format_timezone>
-        <lenient_string_to_number>N</lenient_string_to_number>
-      </value-meta>
-    </row-meta>
+    <connection>datawarehouse postgres</connection>
+    <schema>public</schema>
+    <table>informationcollection</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>id</column_name>
+        <stream_name>id</stream_name>
+      </field>
+      <field>
+        <column_name>summary</column_name>
+        <stream_name>summary</stream_name>
+      </field>
+      <field>
+        <column_name>createdAt</column_name>
+        <stream_name>createdAt</stream_name>
+      </field>
+      <field>
+        <column_name>name</column_name>
+        <stream_name>name</stream_name>
+      </field>
+    </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1006,8 +805,80 @@ FROM "public"."categories"
       </output>
     </remotesteps>
     <GUI>
-      <xloc>112</xloc>
-      <yloc>224</yloc>
+      <xloc>800</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Recopilations output</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>datawarehouse postgres</connection>
+    <schema>public</schema>
+    <table>recopilations</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+      <field>
+        <column_name>recopilationId</column_name>
+        <stream_name>id</stream_name>
+      </field>
+      <field>
+        <column_name>name</column_name>
+        <stream_name>name</stream_name>
+      </field>
+      <field>
+        <column_name>description</column_name>
+        <stream_name>description</stream_name>
+      </field>
+      <field>
+        <column_name>startDate</column_name>
+        <stream_name>startDate</stream_name>
+      </field>
+      <field>
+        <column_name>departmentEndDate</column_name>
+        <stream_name>departmentEndDate</stream_name>
+      </field>
+      <field>
+        <column_name>endDate</column_name>
+        <stream_name>endDate</stream_name>
+      </field>
+      <field>
+        <column_name>isReady</column_name>
+        <stream_name>isReady</stream_name>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>352</xloc>
+      <yloc>320</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1217,6 +1088,139 @@ FROM "public"."criterion"
     </GUI>
   </step>
   <step>
+    <name>Table input Indicators</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres connection</connection>
+    <sql>SELECT
+  "index"
+, "name"
+, "alias"
+, "helpText"
+FROM "public"."indicators"
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>index</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>index</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>name</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>name</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>alias</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>alias</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>helpText</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>helpText</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>Table input Information_collection</name>
     <type>TableInput</type>
     <description/>
@@ -1418,6 +1422,454 @@ FROM "public"."information_collections"
     <GUI>
       <xloc>528</xloc>
       <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table input Recopilations</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres connection</connection>
+    <sql>SELECT
+  "id"
+, "name"
+, "description"
+, "startDate"
+, "departmentEndDate"
+, "endDate"
+, "isReady"
+FROM "public"."recopilations"
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Recopilations input</origin>
+        <comments>id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>name</name>
+        <length>30</length>
+        <precision>-1</precision>
+        <origin>Recopilations input</origin>
+        <comments>name</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>description</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>Recopilations input</origin>
+        <comments>description</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>startDate</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Recopilations input</origin>
+        <comments>startDate</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>departmentEndDate</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Recopilations input</origin>
+        <comments>departmentEndDate</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Date</type>
+        <storagetype>normal</storagetype>
+        <name>endDate</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Recopilations input</origin>
+        <comments>endDate</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Boolean</type>
+        <storagetype>normal</storagetype>
+        <name>isReady</name>
+        <length>-1</length>
+        <precision>-1</precision>
+        <origin>Recopilations input</origin>
+        <comments>isReady</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table input categories</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres connection</connection>
+    <sql>SELECT
+  "id"
+, "helpText"
+, "indicatorIndex"
+, "name"
+FROM "public"."categories"
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>helpText</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>helpText</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>indicatorIndex</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table input</origin>
+        <comments>indicatorIndex</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>name</name>
+        <length>128</length>
+        <precision>-1</precision>
+        <origin>Table input</origin>
+        <comments>name</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Table input department</name>
+    <type>TableInput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>postgres connection</connection>
+    <sql>SELECT
+  "id"
+, "fullName"
+, "email"
+FROM "public"."users"
+WHERE type IN ('department')
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>id</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Table input department</origin>
+        <comments>id</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>fullName</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>Table input department</origin>
+        <comments>fullName</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>email</name>
+        <length>2147483647</length>
+        <precision>-1</precision>
+        <origin>Table input department</origin>
+        <comments>email</comments>
+        <conversion_Mask/>
+        <decimal_symbol>,</decimal_symbol>
+        <grouping_symbol>.</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_VE</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>112</xloc>
+      <yloc>32</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1651,8 +2103,8 @@ FROM "public"."evidences"
     </GUI>
   </step>
   <step>
-    <name>Indicators output</name>
-    <type>ExcelOutput</type>
+    <name>criterion output</name>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -1661,275 +2113,53 @@ FROM "public"."evidences"
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>C:/Users/Robinson/Desktop/Proyecto FI/indicator_file</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-    </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
+    <connection>datawarehouse postgres</connection>
+    <schema>public</schema>
+    <table>criteria</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
       <field>
-        <name>index</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>criteriaId</column_name>
+        <stream_name>id</stream_name>
       </field>
       <field>
-        <name>name</name>
-        <type>String</type>
-        <format/>
+        <column_name>indicatorIndex</column_name>
+        <stream_name>indicatorIndex</stream_name>
       </field>
       <field>
-        <name>alias</name>
-        <type>String</type>
-        <format/>
+        <column_name>subIndex</column_name>
+        <stream_name>subIndex</stream_name>
       </field>
       <field>
-        <name>helpText</name>
-        <type>String</type>
-        <format/>
+        <column_name>name</column_name>
+        <stream_name>name</stream_name>
+      </field>
+      <field>
+        <column_name>alias</column_name>
+        <stream_name>alias</stream_name>
+      </field>
+      <field>
+        <column_name>helpText</column_name>
+        <stream_name>helpText</stream_name>
+      </field>
+      <field>
+        <column_name>requiresEvidence</column_name>
+        <stream_name>requiresEvidence</stream_name>
       </field>
     </fields>
-    <custom>
-      <header_font_name>arial</header_font_name>
-      <header_font_size>10</header_font_size>
-      <header_font_bold>N</header_font_bold>
-      <header_font_italic>N</header_font_italic>
-      <header_font_underline>no</header_font_underline>
-      <header_font_orientation>horizontal</header_font_orientation>
-      <header_font_color>black</header_font_color>
-      <header_background_color>none</header_background_color>
-      <header_row_height>255</header_row_height>
-      <header_alignment>left</header_alignment>
-      <header_image/>
-      <row_font_name>arial</row_font_name>
-      <row_font_size>10</row_font_size>
-      <row_font_color>black</row_font_color>
-      <row_background_color>none</row_background_color>
-    </custom>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Category output</name>
-    <type>ExcelOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>C:/Users/Robinson/Desktop/Proyecto FI/category_file</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-    </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
-    <fields>
-      <field>
-        <name>id</name>
-        <type>Integer</type>
-        <format/>
-      </field>
-      <field>
-        <name>helpText</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>indicatorIndex</name>
-        <type>Integer</type>
-        <format/>
-      </field>
-      <field>
-        <name>name</name>
-        <type>String</type>
-        <format/>
-      </field>
-    </fields>
-    <custom>
-      <header_font_name>arial</header_font_name>
-      <header_font_size>10</header_font_size>
-      <header_font_bold>N</header_font_bold>
-      <header_font_italic>N</header_font_italic>
-      <header_font_underline>no</header_font_underline>
-      <header_font_orientation>horizontal</header_font_orientation>
-      <header_font_color>black</header_font_color>
-      <header_background_color>none</header_background_color>
-      <header_row_height>255</header_row_height>
-      <header_alignment>left</header_alignment>
-      <header_image/>
-      <row_font_name>arial</row_font_name>
-      <row_font_size>10</row_font_size>
-      <row_font_color>black</row_font_color>
-      <row_background_color>none</row_background_color>
-    </custom>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>352</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Criterion output</name>
-    <type>ExcelOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>C:/Users/Robinson/Desktop/Proyecto FI/criterion_file</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-    </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
-    <fields>
-      <field>
-        <name>id</name>
-        <type>Integer</type>
-        <format/>
-      </field>
-      <field>
-        <name>subIndex</name>
-        <type>Integer</type>
-        <format/>
-      </field>
-      <field>
-        <name>name</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>alias</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>helpText</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>requiresEvidence</name>
-        <type>Boolean</type>
-        <format/>
-      </field>
-      <field>
-        <name>indicatorIndex</name>
-        <type>Integer</type>
-        <format/>
-      </field>
-    </fields>
-    <custom>
-      <header_font_name>arial</header_font_name>
-      <header_font_size>10</header_font_size>
-      <header_font_bold>N</header_font_bold>
-      <header_font_italic>N</header_font_italic>
-      <header_font_underline>no</header_font_underline>
-      <header_font_orientation>horizontal</header_font_orientation>
-      <header_font_color>black</header_font_color>
-      <header_background_color>none</header_background_color>
-      <header_row_height>255</header_row_height>
-      <header_alignment>left</header_alignment>
-      <header_image/>
-      <row_font_name>arial</row_font_name>
-      <row_font_size>10</row_font_size>
-      <row_font_color>black</row_font_color>
-      <row_background_color>none</row_background_color>
-    </custom>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1945,116 +2175,8 @@ FROM "public"."evidences"
     </GUI>
   </step>
   <step>
-    <name>information_collection output</name>
-    <type>ExcelOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>C:/Users/Robinson/Desktop/Proyecto FI/information_collection_file</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-    </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
-    <fields>
-      <field>
-        <name>id</name>
-        <type>Integer</type>
-        <format/>
-      </field>
-      <field>
-        <name>summary</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>createdAt</name>
-        <type>Timestamp</type>
-        <format/>
-      </field>
-      <field>
-        <name>name</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>recopilationId</name>
-        <type>Integer</type>
-        <format/>
-      </field>
-      <field>
-        <name>departmentId</name>
-        <type>Integer</type>
-        <format/>
-      </field>
-      <field>
-        <name>categoryId</name>
-        <type>Integer</type>
-        <format/>
-      </field>
-    </fields>
-    <custom>
-      <header_font_name>arial</header_font_name>
-      <header_font_size>10</header_font_size>
-      <header_font_bold>N</header_font_bold>
-      <header_font_italic>N</header_font_italic>
-      <header_font_underline>no</header_font_underline>
-      <header_font_orientation>horizontal</header_font_orientation>
-      <header_font_color>black</header_font_color>
-      <header_background_color>none</header_background_color>
-      <header_row_height>255</header_row_height>
-      <header_alignment>left</header_alignment>
-      <header_image/>
-      <row_font_name>arial</row_font_name>
-      <row_font_size>10</row_font_size>
-      <row_font_color>black</row_font_color>
-      <row_background_color>none</row_background_color>
-    </custom>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>800</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>evidences output</name>
-    <type>ExcelOutput</type>
+    <type>TableOutput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -2063,94 +2185,53 @@ FROM "public"."evidences"
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <header>Y</header>
-    <footer>N</footer>
-    <encoding/>
-    <append>N</append>
-    <add_to_result_filenames>Y</add_to_result_filenames>
-    <file>
-      <name>C:/Users/Robinson/Desktop/Proyecto FI/evidences_file</name>
-      <extention>xls</extention>
-      <do_not_open_newfile_init>N</do_not_open_newfile_init>
-      <create_parent_folder>N</create_parent_folder>
-      <split>N</split>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <sheetname>Sheet1</sheetname>
-      <autosizecolums>N</autosizecolums>
-      <nullisblank>N</nullisblank>
-      <protect_sheet>N</protect_sheet>
-      <password>Encrypted </password>
-      <splitevery>0</splitevery>
-      <usetempfiles>N</usetempfiles>
-      <tempdirectory/>
-    </file>
-    <template>
-      <enabled>N</enabled>
-      <append>N</append>
-      <filename>template.xls</filename>
-    </template>
+    <connection>datawarehouse postgres</connection>
+    <schema>public</schema>
+    <table>evidences</table>
+    <commit>1000</commit>
+    <truncate>N</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
     <fields>
       <field>
-        <name>id</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>evidenceId</column_name>
+        <stream_name>id</stream_name>
       </field>
       <field>
-        <name>description</name>
-        <type>String</type>
-        <format/>
+        <column_name>description</column_name>
+        <stream_name>description</stream_name>
       </field>
       <field>
-        <name>error</name>
-        <type>String</type>
-        <format/>
+        <column_name>error</column_name>
+        <stream_name>error</stream_name>
       </field>
       <field>
-        <name>collectionId</name>
-        <type>Integer</type>
-        <format/>
+        <column_name>uploadDate</column_name>
+        <stream_name>createdAt</stream_name>
       </field>
       <field>
-        <name>createdAt</name>
-        <type>Timestamp</type>
-        <format/>
+        <column_name>type</column_name>
+        <stream_name>type</stream_name>
       </field>
       <field>
-        <name>type</name>
-        <type>String</type>
-        <format/>
+        <column_name>fileLink</column_name>
+        <stream_name>fileLink</stream_name>
       </field>
       <field>
-        <name>fileLink</name>
-        <type>String</type>
-        <format/>
-      </field>
-      <field>
-        <name>externalLink</name>
-        <type>String</type>
-        <format/>
+        <column_name>externalLink</column_name>
+        <stream_name>externalLink</stream_name>
       </field>
     </fields>
-    <custom>
-      <header_font_name>arial</header_font_name>
-      <header_font_size>10</header_font_size>
-      <header_font_bold>N</header_font_bold>
-      <header_font_italic>N</header_font_italic>
-      <header_font_underline>no</header_font_underline>
-      <header_font_orientation>horizontal</header_font_orientation>
-      <header_font_color>black</header_font_color>
-      <header_background_color>none</header_background_color>
-      <header_row_height>255</header_row_height>
-      <header_alignment>left</header_alignment>
-      <header_image/>
-      <row_font_name>arial</row_font_name>
-      <row_font_size>10</row_font_size>
-      <row_font_color>black</row_font_color>
-      <row_background_color>none</row_background_color>
-    </custom>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
