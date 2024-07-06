@@ -80,28 +80,53 @@ export class RecopilationsService {
     return recopilation
   }
 
-  async findOneDetailed(id: number): Promise<RecopilationDto> {
+  async findOneDetailed(id: number) {
     const recopilation = await this.recopilationsRepository.findOneOrFail({
       where: { id },
-      relations: [
-        'departmentsPerRecopilation.department',
-        'departmentsPerRecopilation.recommendations.category',
-        'categorizedCriterion.criteria.indicator',
-        'categorizedCriterion.category',
-        'indicatorsPerRecopilations.indicator'
-      ]
+      relations: {
+        departmentsPerRecopilation: {
+          department: true,
+          recommendations: {
+            category: true
+          }
+        },
+        categorizedCriterion: {
+          category: true,
+          criteria: {
+            indicator: true
+          }
+        },
+        indicatorsPerRecopilations: {
+          indicator: true
+        }
+      },
+      order: {
+        departmentsPerRecopilation: {
+          recommendations: {
+            category: {
+              id: 'ASC'
+            }
+          }
+        },
+        indicatorsPerRecopilations: {
+          indicator: {
+            index: 'ASC'
+          }
+        },
+        categorizedCriterion: {
+          category: {
+            id: 'ASC'
+          },
+          criteria: {
+            id: 'ASC'
+          }
+        }
+      }
     })
-
-    const recommendations = recopilation.departmentsPerRecopilation.map(
-      (dpr) => ({
-        department: dpr.department,
-        recommendedCategories: dpr.recommendations.map((r) => r.category)
-      })
-    )
 
     const indicators = recopilation.indicatorsPerRecopilations.map((ipr) => {
       const { indicator } = ipr
-      const criteria = recopilation.categorizedCriterion
+      const categorizedCriteria = recopilation.categorizedCriterion
         .filter((cc) => cc.criteria.indicator.index === indicator.index)
         .map((cc) => {
           const { indicator: _, ...criterionWithoutIndicator } = cc.criteria
@@ -111,13 +136,43 @@ export class RecopilationsService {
           }
         })
 
+      const categories = []
+
+      categorizedCriteria.forEach((cc) => {
+        const alreadyInsertedCategory = categories.find(
+          (c) => c.id === cc.category.id
+        )
+
+        if (alreadyInsertedCategory) {
+          alreadyInsertedCategory.criteria.push(cc.criterion)
+        } else {
+          categories.push({ ...cc.category, criteria: [cc.criterion] })
+        }
+      })
+
       return {
-        indicator,
-        criteria
+        ...indicator,
+        categories
       }
     })
 
-    const recopilationDto: RecopilationDto = {
+    const allCategories = indicators
+      .map((i) => i.categories)
+      .flat()
+      .sort((a, b) => a.id - b.id)
+
+    const departments = recopilation.departmentsPerRecopilation.map((dpr) => ({
+      department: dpr.department,
+      answers: allCategories.map((c) => {
+        const isRecommended = dpr.recommendations.some(
+          (r) => r.category.id === c.id
+        )
+
+        return { categoryId: c.id, isRecommended }
+      })
+    }))
+
+    const recopilationDto = {
       id: recopilation.id,
       name: recopilation.name,
       description: recopilation.description,
@@ -125,8 +180,8 @@ export class RecopilationsService {
       endDate: recopilation.endDate,
       departmentEndDate: recopilation.departmentEndDate,
       isReady: recopilation.isReady,
-      departments: recommendations,
-      indicators: indicators
+      indicators,
+      departments
     }
 
     return recopilationDto
