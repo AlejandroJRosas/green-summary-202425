@@ -1,9 +1,3 @@
-ep-rapid-mode-a5hp6ccx.us-east-2.aws.neon.tech
-green_db
-5432
-green_db_owner
-ruXV2i8EefmC
-
 CREATE TABLE time (
   date TIMESTAMP PRIMARY KEY
 );
@@ -45,7 +39,8 @@ CREATE TABLE criteria (
   alias VARCHAR(255),
   'helpText' TEXT,
   'requiresEvidence' BOOLEAN,
-  PRIMARY KEY ('indicatorIndex', 'subIndex')
+  PRIMARY KEY ('indicatorIndex', 'subIndex'),
+  CONSTRAINT fk_indicator FOREIGN KEY ('indicatorIndex') REFERENCES indicators('index')
 );
 
 CREATE TABLE InformationCollection (
@@ -60,7 +55,7 @@ CREATE TABLE Evidences (
   type ,
   'externalLink' TEXT,
   'fileLink' TEXT,
-  UploadDate DATE,
+  'uploadDate' DATE,
   error TEXT
 );
 
