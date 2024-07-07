@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
-import { EntityNotFoundError, In, Repository } from 'typeorm'
+import { EntityNotFoundError, In, Not, Repository } from 'typeorm'
 import { DepartmentPerRecopilation } from './entities/departments-per-recopilation.entity'
 import { CreateDepartmentsPerRecopilationDto } from './dto/create-department-per-recopilation.dto'
 import { UpdateDepartmentPerRecopilationDto } from './dto/update-department-per-recopilation.dto'
@@ -70,11 +70,23 @@ export class DepartmentsPerRecopilationsService {
     }
 
     await this.departmentsPerRecopilationRepository.delete({
-      recopilation: { id: recopilationId }
+      recopilation: { id: recopilationId },
+      department: { id: Not(In(departmentsIds)) }
     })
 
+    const alreadyInsertedDepartments =
+      await this.departmentsPerRecopilationRepository.find({
+        where: { recopilation },
+        relations: { department: true }
+      })
+
+    const departmentsToInsert = departments.filter(
+      (d) =>
+        !alreadyInsertedDepartments.some((aid) => aid.department.id === d.id)
+    )
+
     return await this.departmentsPerRecopilationRepository.save(
-      departments.map((d) =>
+      departmentsToInsert.map((d) =>
         this.departmentsPerRecopilationRepository.create({
           recopilation,
           department: d
