@@ -27,6 +27,7 @@ import { Department } from '../users/entities/department.entity'
 import { Recommendation } from '../recommendations/entities/recommendation.entity'
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 import { RecopilationDto } from './dto/recopilation.dto'
+import { InformationCollection } from '../information-collections/entities/information-collection.entity'
 
 @Injectable()
 export class RecopilationsService {
@@ -48,7 +49,9 @@ export class RecopilationsService {
     @InjectRepository(Recommendation)
     private recommendationRepository: Repository<Recommendation>,
     @InjectRepository(DepartmentPerRecopilation)
-    private departmentsPerRecopilationsRepository: Repository<DepartmentPerRecopilation>
+    private departmentsPerRecopilationsRepository: Repository<DepartmentPerRecopilation>,
+    @InjectRepository(InformationCollection)
+    private informationCollectionsRepository: Repository<InformationCollection>
   ) {}
 
   async findAll({
@@ -159,18 +162,44 @@ export class RecopilationsService {
     const allCategories = indicators
       .map((i) => i.categories)
       .flat()
-      .sort((a, b) => a.id - b.id)
+      .sort((a, b) => a.id - b.id) as Category[]
 
-    const departments = recopilation.departmentsPerRecopilation.map((dpr) => ({
-      department: dpr.department,
-      answers: allCategories.map((c) => {
-        const isRecommended = dpr.recommendations.some(
-          (r) => r.category.id === c.id
+    const departments = await Promise.all(
+      recopilation.departmentsPerRecopilation.map(async (dpr) => ({
+        department: dpr.department,
+        answers: await Promise.all(
+          allCategories.map(async (c) => {
+            const isRecommended = dpr.recommendations.some(
+              (r) => r.category.id === c.id
+            )
+
+            const informationCollections = await this.getDepartmentAnswer(
+              recopilation.id,
+              c.id,
+              dpr.department.id
+            )
+
+            const isAnswered = informationCollections.length > 0
+
+            const isApproved =
+              isAnswered && informationCollections.every((ic) => ic.isApproved)
+
+            let hasError = false
+            informationCollections.forEach((ic) => {
+              if (ic.evidences.some((e) => e.error !== null)) hasError = true
+            })
+
+            return {
+              categoryId: c.id,
+              isRecommended,
+              isAnswered,
+              isApproved,
+              hasError
+            }
+          })
         )
-
-        return { categoryId: c.id, isRecommended }
-      })
-    }))
+      }))
+    )
 
     const recopilationDto = {
       id: recopilation.id,
@@ -180,11 +209,31 @@ export class RecopilationsService {
       endDate: recopilation.endDate,
       departmentEndDate: recopilation.departmentEndDate,
       isReady: recopilation.isReady,
-      indicators,
+      /* indicators, */
       departments
     }
 
     return recopilationDto
+  }
+
+  private async getDepartmentAnswer(
+    recopilationId: number,
+    categoryId: number,
+    departmentId: number
+  ) {
+    const informationCollections =
+      await this.informationCollectionsRepository.find({
+        where: {
+          recopilation: { id: recopilationId },
+          category: { id: categoryId },
+          department: { id: departmentId }
+        },
+        order: {
+          createdAt: 'ASC'
+        }
+      })
+
+    return informationCollections
   }
 
   async create(recopilationData: CreateRecopilationDto): Promise<Recopilation> {

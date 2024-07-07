@@ -37,6 +37,9 @@ export class InformationCollection {
   @Column({ type: 'text', nullable: false })
   summary: string
 
+  @Column({ type: 'bool', nullable: false, default: false })
+  isApproved: boolean
+
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)',
