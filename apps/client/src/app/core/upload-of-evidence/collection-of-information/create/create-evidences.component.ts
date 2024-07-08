@@ -102,7 +102,7 @@ export class CreateEvidencesComponent
   }
   goBack() {
     this.router.navigateByUrl(
-      `pages/information-collection/${this.recopilationId}/${this.categoryId}`
+      `pages/information-collection/recopilation/${this.recopilationId}/category/${this.categoryId}`
     )
   }
 }
