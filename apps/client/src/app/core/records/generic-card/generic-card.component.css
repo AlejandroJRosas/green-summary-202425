@@ -1,0 +1,13 @@
+article {
+  border: #000 solid 1px;
+  border-radius: 10px;
+  padding: 10px;
+  transition: all 0.1s ease-in-out;
+  &:hover {
+    background-color: #f0f0f0;
+  }
+}
+
+p {
+  margin: 0px;
+}

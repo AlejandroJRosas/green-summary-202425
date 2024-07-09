@@ -34,10 +34,12 @@ export class RecopilationService {
       .pipe(map((res) => (res.status === 'success' ? res.data.items : [])))
   }
 
-  getActive(): Observable<BackendResponse<Recopilation, unknown, unknown>> {
-    return this.http.get<BackendResponse<Recopilation, unknown, unknown>>(
-      `${BaseUrl}/recopilations/active`
-    )
+  getActive(): Observable<Recopilation[]> {
+    return this.http
+      .get<
+        BackendResponse<Recopilation[], unknown, unknown>
+      >(`${BaseUrl}/recopilations/active`)
+      .pipe(map((res) => (res.status === 'success' ? res.data : [])))
   }
 
   getById(id: number): Observable<DetailedRecopilation | null> {

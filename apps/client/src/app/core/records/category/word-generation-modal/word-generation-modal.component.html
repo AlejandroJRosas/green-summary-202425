@@ -1,0 +1,31 @@
+<p-dialog [(visible)]="visible" [modal]="true" [draggable]="false">
+  <ng-template pTemplate="header">
+    <header>
+      <h2>Generación de word para categoría 1</h2>
+    </header>
+  </ng-template>
+  <form [formGroup]="formGroup">
+    <p-listbox
+      [options]="criteria!"
+      [filter]="true"
+      [virtualScroll]="true"
+      [virtualScrollItemSize]="38"
+      optionLabel="alias"
+      formControlName="criterion"
+    />
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button
+      label="Cancelar"
+      [text]="true"
+      severity="danger"
+      (click)="hideDialog()"
+    />
+    <p-button
+      label="Generar word"
+      [outlined]="true"
+      severity="primary"
+      (click)="hideDialog()"
+    />
+  </ng-template>
+</p-dialog>
