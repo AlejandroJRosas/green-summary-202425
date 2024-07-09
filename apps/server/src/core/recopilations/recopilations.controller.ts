@@ -93,6 +93,14 @@ export class RecopilationsController {
     return recopilation
   }
 
+  @Roles(Role.Coordinator, Role.Admin, Role.Department)
+  @Get(':id/matrix')
+  async findOneMatrix(@Param('id') id: string) {
+    const recopilation = await this.recopilationsService.findOneMatrix(+id)
+
+    return recopilation
+  }
+
   @Roles(Role.Coordinator, Role.Admin)
   @Post()
   @HttpCode(HttpStatus.CREATED)

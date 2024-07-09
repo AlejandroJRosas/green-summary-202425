@@ -102,6 +102,31 @@ export class RecopilationsService {
         indicatorsPerRecopilations: {
           indicator: true
         }
+      }
+    })
+
+    return recopilation
+  }
+
+  async findOneMatrix(id: number) {
+    const recopilation = await this.recopilationsRepository.findOneOrFail({
+      where: { id },
+      relations: {
+        departmentsPerRecopilation: {
+          department: true,
+          recommendations: {
+            category: true
+          }
+        },
+        categorizedCriterion: {
+          category: true,
+          criteria: {
+            indicator: true
+          }
+        },
+        indicatorsPerRecopilations: {
+          indicator: true
+        }
       },
       order: {
         departmentsPerRecopilation: {
