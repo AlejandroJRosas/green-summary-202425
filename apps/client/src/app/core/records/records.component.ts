@@ -83,7 +83,7 @@ export class RecordsComponent implements OnInit {
   }
 
   private initializeRecopilations(): void {
-    this.recopilationService.getActive().subscribe((recopilations) => {
+    this.recopilationService.getActiveMapped().subscribe((recopilations) => {
       this.recopilations = recopilations
     })
   }
