@@ -86,26 +86,52 @@ export class RecopilationsService {
   async findOneDetailed(id: number) {
     const recopilation = await this.recopilationsRepository.findOneOrFail({
       where: { id },
-      relations: {
-        departmentsPerRecopilation: {
-          department: true,
-          recommendations: {
-            category: true
+      relations: [
+        'departmentsPerRecopilation.department',
+        'departmentsPerRecopilation.recommendations.category',
+        'categorizedCriterion.criteria.indicator',
+        'categorizedCriterion.category',
+        'indicatorsPerRecopilations.indicator'
+      ]
+    })
+
+    const recommendations = recopilation.departmentsPerRecopilation.map(
+      (dpr) => ({
+        department: dpr.department,
+        recommendedCategories: dpr.recommendations.map((r) => r.category)
+      })
+    )
+
+    const indicators = recopilation.indicatorsPerRecopilations.map((ipr) => {
+      const { indicator } = ipr
+      const categorizedCriteria = recopilation.categorizedCriterion
+        .filter((cc) => cc.criteria.indicator.index === indicator.index)
+        .map((cc) => {
+          const { indicator: _, ...criterionWithoutIndicator } = cc.criteria
+          return {
+            criterion: criterionWithoutIndicator as Criteria,
+            category: cc.category
           }
-        },
-        categorizedCriterion: {
-          category: true,
-          criteria: {
-            indicator: true
-          }
-        },
-        indicatorsPerRecopilations: {
-          indicator: true
-        }
+        })
+      return {
+        indicator,
+        criteria: categorizedCriteria
       }
     })
 
-    return recopilation
+    const recopilationDto: RecopilationDto = {
+      id: recopilation.id,
+      name: recopilation.name,
+      description: recopilation.description,
+      startDate: recopilation.startDate,
+      endDate: recopilation.endDate,
+      departmentEndDate: recopilation.departmentEndDate,
+      isReady: recopilation.isReady,
+      departments: recommendations,
+      indicators: indicators
+    }
+
+    return recopilationDto
   }
 
   async findOneMatrix(id: number) {
