@@ -30,7 +30,6 @@ import { CreateEvidencesComponent } from './core/upload-of-evidence/collection-o
 import { EditEvidenceComponent } from './core/upload-of-evidence/collection-of-information/edit-evidence/edit-evidence.component'
 import { InformationCollectionViewComponent } from './core/information-collection-view/information-collection-view.component'
 import { RecordsComponent } from './core/records/records.component'
-import { RecordsCategoryComponent } from './core/records/category/category.component'
 
 export const routes: Routes = [
   {
