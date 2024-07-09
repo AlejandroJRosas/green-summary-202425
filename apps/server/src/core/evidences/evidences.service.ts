@@ -68,6 +68,13 @@ export class EvidencesService {
       throw new NotFoundException('Collection not found')
     }
 
+    if (createEvidenceDto.error === '') {
+      createEvidenceDto.error = null
+    }
+    if (createEvidenceDto.externalLink === '') {
+      createEvidenceDto.externalLink = null
+    }
+
     const { type } = createEvidenceDto
     switch (type) {
       case EvidenceType.DOCUMENT:
