@@ -16,6 +16,10 @@ import { Category } from '../../../shared/types/category.type'
 import { Indicator } from '../../../shared/types/indicator.type'
 import { CategoryService } from '../../services/category.service'
 import { DepartmentService } from '../../services/department.service'
+import {
+  DetailedRecopilation,
+  RecopilationService
+} from '../../services/recopilation.service'
 import { User } from '../../../shared/types/user.type'
 import { ConfirmPopupModule } from 'primeng/confirmpopup'
 import { ConfirmationService, MessageService } from 'primeng/api'
@@ -53,7 +57,7 @@ export class InformationCollectionViewComponent implements OnInit {
     private DepartmentService: DepartmentService,
     private confirmationService: ConfirmationService,
     private EvidenceService: EvidenceService,
-    private messageService: MessageService
+    private RecopilationService: RecopilationService
   ) {
     this.route.params.subscribe((params) => {
       this.categoryId = parseInt(params['categoryId'], 10)
@@ -64,6 +68,7 @@ export class InformationCollectionViewComponent implements OnInit {
   recopilationId: number = 0
   categoryId: number = 0
   departmentId: number = 0
+  detailedRecopilation: DetailedRecopilation | null = null
   formGroup = new FormGroup({
     error: new FormControl('')
   })
@@ -91,6 +96,7 @@ export class InformationCollectionViewComponent implements OnInit {
     this.getDepartmentById()
     this.getCategoryById()
     this.getAllByDepartment()
+    this.getRecopilationById()
   }
   translateType(type: string) {
     switch (type) {
@@ -149,6 +155,19 @@ export class InformationCollectionViewComponent implements OnInit {
       error: (e) => {
         console.error(e)
         this.toast.show('error', 'Error', e.error.data.message)
+      }
+    })
+  }
+  getRecopilationById() {
+    this.RecopilationService.getById(this.recopilationId).subscribe({
+      next: (res) => {
+        if (res) {
+          this.detailedRecopilation = res
+        }
+      },
+      error: (e) => {
+        console.error(e)
+        this.router.navigateByUrl('/404 Not Found')
       }
     })
   }
