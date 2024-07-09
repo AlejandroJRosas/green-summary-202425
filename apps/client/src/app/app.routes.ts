@@ -29,7 +29,6 @@ import { UploadOfEvidenceComponent } from './core/upload-of-evidence/upload-of-e
 import { CreateEvidencesComponent } from './core/upload-of-evidence/collection-of-information/create/create-evidences.component'
 import { EditEvidenceComponent } from './core/upload-of-evidence/collection-of-information/edit-evidence/edit-evidence.component'
 import { RecordsComponent } from './core/records/records.component'
-import { RecordsCategoryComponent } from './core/records/category/category.component'
 
 export const routes: Routes = [
   {
