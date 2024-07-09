@@ -142,7 +142,6 @@ export class InformationCollectionViewComponent implements OnInit {
     })
   }
   editEvidenceById(evidence: Evidence) {
-    console.log(this.formGroup.controls.error.value)
     if (this.formGroup.controls.error.value === null) return
     const formData = new FormData()
     formData.set('error', this.formGroup.controls.error.value)
