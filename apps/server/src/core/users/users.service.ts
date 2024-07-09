@@ -15,6 +15,7 @@ import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
 import * as generator from 'generate-password'
 import * as bcrypt from 'bcrypt'
+import { MailsService } from '../mails/mails.service'
 
 @Injectable()
 export class UsersService {
@@ -26,7 +27,8 @@ export class UsersService {
     @InjectRepository(Coordinator)
     private coordinatorRepository: Repository<Coordinator>,
     @InjectRepository(Department)
-    private departmentRepository: Repository<Department>
+    private departmentRepository: Repository<Department>,
+    private mailsService: MailsService
   ) {}
 
   async create(createUserDto: CreateUserDto) {
@@ -58,6 +60,7 @@ export class UsersService {
         })
     }
 
+    this.mailsService.sendMail(createUserDto.email, passwordToUse)
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { password: _, ...userWithoutPassword } = user
 
