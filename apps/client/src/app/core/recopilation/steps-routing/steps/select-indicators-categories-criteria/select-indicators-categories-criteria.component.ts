@@ -65,9 +65,11 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
   }
 
   private loadRecopilationPreviousData(recopilationId: number) {
-    this.recopilationService.getById(recopilationId).subscribe({
+    this.recopilationService.getDetailedById(recopilationId).subscribe({
       next: (data) => {
         if (!data) return
+
+        console.log(data)
 
         this.indicators = data.indicators.map((i) => ({
           indicatorId: i.indicator.index,

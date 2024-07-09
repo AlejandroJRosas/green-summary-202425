@@ -54,6 +54,20 @@ export class RecopilationService {
       )
   }
 
+  getDetailedById(id: number): Observable<DetailedRecopilation | null> {
+    return this.http
+      .get<
+        BackendResponse<DetailedRecopilationDto, unknown, unknown>
+      >(`${BaseUrl}/recopilations/${id}/detailed`)
+      .pipe(
+        map((res) =>
+          res.status === 'success'
+            ? this.parseDetailedRecopilationDto(res.data)
+            : null
+        )
+      )
+  }
+
   private parseDetailedRecopilationDto(
     dto: DetailedRecopilationDto
   ): DetailedRecopilation {
