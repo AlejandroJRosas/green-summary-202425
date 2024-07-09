@@ -157,7 +157,6 @@ export class EvidenceDocumentComponent
     })
     this.formData.set('type', 'document')
     this.formData.set('collectionId', this.informationCollectionId)
-    this.formData.set('error', 'no error')
   }
   constructFormDataEdit() {
     Object.keys(this.formGroup.controls).forEach((formControlName) => {
@@ -167,7 +166,6 @@ export class EvidenceDocumentComponent
       )
     })
     this.formDataEdit.set('type', 'document')
-    this.formDataEdit.set('error', 'no error')
   }
   constructFormDataWithoutFileLink() {
     Object.keys(this.formGroup.controls).forEach((formControlName) => {
@@ -179,7 +177,6 @@ export class EvidenceDocumentComponent
       }
     })
     this.formDataWithoutFileLink.set('type', 'document')
-    this.formDataWithoutFileLink.set('error', 'no error')
   }
   onCreate() {
     if (this.formGroup.invalid) return
