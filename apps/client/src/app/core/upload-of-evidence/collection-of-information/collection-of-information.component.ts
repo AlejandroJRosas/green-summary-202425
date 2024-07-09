@@ -232,8 +232,6 @@ export class CollectionOfInformationComponent
     })
   }
   getAllByDepartment() {
-    console.log(this.recopilationId, this.categoryId, this.departmentId)
-    console.log(this.category)
     this.InformationCollectionService.getByDepartmentId(
       this.recopilationId,
       this.categoryId,

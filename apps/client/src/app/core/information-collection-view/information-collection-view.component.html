@@ -113,6 +113,7 @@
                         severity="danger"
                         icon="pi pi-times"
                         (click)="confirm($event, evidence)"
+                        [disabled]="!isValidEndDate"
                       />
                     }
                   </div>

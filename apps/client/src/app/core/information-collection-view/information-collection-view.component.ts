@@ -68,6 +68,8 @@ export class InformationCollectionViewComponent implements OnInit {
   recopilationId: number = 0
   categoryId: number = 0
   departmentId: number = 0
+  currentDate = new Date()
+  isValidEndDate: boolean = false
   detailedRecopilation: DetailedRecopilation | null = null
   formGroup = new FormGroup({
     error: new FormControl('')
@@ -163,6 +165,15 @@ export class InformationCollectionViewComponent implements OnInit {
       next: (res) => {
         if (res) {
           this.detailedRecopilation = res
+          if (this.currentDate <= this.detailedRecopilation?.endDate) {
+            this.isValidEndDate = true
+          } else {
+            this.toast.show(
+              'warn',
+              'Cierre de Recopilación',
+              'El periodo de la recopilación ya terminó, al igual que el de subidas de información y evidencias.'
+            )
+          }
         }
       },
       error: (e) => {
