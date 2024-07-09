@@ -20,6 +20,9 @@ import { User } from '../../../shared/types/user.type'
 import { ConfirmPopupModule } from 'primeng/confirmpopup'
 import { ConfirmationService, MessageService } from 'primeng/api'
 import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { EvidenceService } from '../../services/evidence/evidence.service'
+import { Evidence } from '../../../shared/types/evidence.type'
+import { TooltipModule } from 'primeng/tooltip'
 
 @Component({
   selector: 'app-information-collection-view',
@@ -33,7 +36,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
     ImageModule,
     DividerModule,
     ConfirmPopupModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TooltipModule
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './information-collection-view.component.html',
@@ -48,6 +52,7 @@ export class InformationCollectionViewComponent implements OnInit {
     private router: Router,
     private DepartmentService: DepartmentService,
     private confirmationService: ConfirmationService,
+    private EvidenceService: EvidenceService,
     private messageService: MessageService
   ) {
     this.route.params.subscribe((params) => {
@@ -97,7 +102,13 @@ export class InformationCollectionViewComponent implements OnInit {
         return 'Link'
     }
   }
-  confirm(event: Event) {
+  accept() {
+    console.log('aceptado')
+  }
+  reject() {
+    console.log('rechazado')
+  }
+  confirm(event: Event, evidence: Evidence) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
       message: 'Please confirm to proceed moving forward.',
@@ -110,6 +121,7 @@ export class InformationCollectionViewComponent implements OnInit {
       acceptButtonStyleClass: 'p-button-sm',
       accept: () => {
         this.toast.show('success', 'Guardando...', 'Guardando el error...')
+        this.editEvidenceById(evidence)
       },
       reject: () => {
         this.toast.show(
@@ -118,6 +130,25 @@ export class InformationCollectionViewComponent implements OnInit {
           'Ha rechazado la subida del error'
         )
         this.formGroup.controls.error.setValue('')
+      }
+    })
+  }
+  editEvidenceById(evidence: Evidence) {
+    console.log(this.formGroup.controls.error.value)
+    if (this.formGroup.controls.error.value === null) return
+    const formData = new FormData()
+    formData.set('error', this.formGroup.controls.error.value)
+    this.EvidenceService.edit(evidence.id, formData).subscribe({
+      next: (res) => {
+        if (res.status === 'success') {
+          this.toast.show('success', 'Guardado', 'error subido con éxito')
+          this.formGroup.controls.error.setValue('')
+          this.getAllByDepartment()
+        }
+      },
+      error: (e) => {
+        console.error(e)
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }

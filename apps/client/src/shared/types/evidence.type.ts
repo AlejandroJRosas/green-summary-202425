@@ -3,7 +3,7 @@ import { InformationCollection } from './information-collection.type'
 export interface Evidence {
   id: number
   description: string
-  error: string | null
+  error: string
   type: 'document' | 'link' | 'image' | ''
   externalLink: string | null
   fileLink: string | null

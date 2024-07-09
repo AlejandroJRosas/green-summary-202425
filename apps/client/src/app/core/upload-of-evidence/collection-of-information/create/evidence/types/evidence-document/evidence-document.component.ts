@@ -89,8 +89,8 @@ export class EvidenceDocumentComponent
     description: '',
     externalLink: '',
     fileLink: '',
-    type: 'link',
-    error: '',
+    type: 'document',
+    error: 'no error',
     collection: {
       id: 0,
       summary: '',
@@ -136,11 +136,6 @@ export class EvidenceDocumentComponent
     this.disableUploadFile = false
     this.createdEvidence = false
   }
-  // enableformEdit() {
-  //   this.enableEdit = true
-  //   this.enableForm()
-  //   this.createdEvidence = false
-  // }
   onRemove() {
     this.initialValueEdit = false
     this.removeFile = true
@@ -162,6 +157,7 @@ export class EvidenceDocumentComponent
     })
     this.formData.set('type', 'document')
     this.formData.set('collectionId', this.informationCollectionId)
+    this.formData.set('error', 'no error')
   }
   constructFormDataEdit() {
     Object.keys(this.formGroup.controls).forEach((formControlName) => {
@@ -170,7 +166,8 @@ export class EvidenceDocumentComponent
         this.formGroup.get(formControlName)?.value
       )
     })
-    this.formData.set('type', 'document')
+    this.formDataEdit.set('type', 'document')
+    this.formDataEdit.set('error', 'no error')
   }
   constructFormDataWithoutFileLink() {
     Object.keys(this.formGroup.controls).forEach((formControlName) => {
@@ -182,6 +179,7 @@ export class EvidenceDocumentComponent
       }
     })
     this.formDataWithoutFileLink.set('type', 'document')
+    this.formDataWithoutFileLink.set('error', 'no error')
   }
   onCreate() {
     if (this.formGroup.invalid) return

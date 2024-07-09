@@ -69,35 +69,52 @@
                         translateType(evidence.type)
                       }})
                     </h2>
-                    <form [formGroup]="formGroup">
-                      <p-confirmPopup>
-                        <ng-template pTemplate="content" let-message>
-                          <div
-                            class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3"
-                          >
-                            <div class="flex flex-column gap-2 w-full">
-                              <label class="flex flex-column gap-2 w-full">
-                                Error en la evidencia
-                                <textarea
-                                  rows="5"
-                                  cols="50"
-                                  pInputTextarea
-                                  [autoResize]="true"
-                                  formControlName="error"
-                                ></textarea>
-                              </label>
+                    @if (evidence.error !== 'no error') {
+                      <div
+                        class="flex flex-row gap-3 justify-content-center align-items-center"
+                        [pTooltip]="evidence.error"
+                        tooltipEvent="hover"
+                        tooltipPosition="top"
+                      >
+                        <i
+                          class="pi pi-ban"
+                          style="font-size: 1.5rem; color: #ef4444"
+                        ></i>
+                        <h1 style="color: #ef4444" class="text-xl">
+                          Evidencia con error
+                        </h1>
+                      </div>
+                    } @else {
+                      <form [formGroup]="formGroup">
+                        <p-confirmPopup>
+                          <ng-template pTemplate="content" let-message>
+                            <div
+                              class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3"
+                            >
+                              <div class="flex flex-column gap-2 w-full">
+                                <label class="flex flex-column gap-2 w-full">
+                                  Error en la evidencia
+                                  <textarea
+                                    rows="5"
+                                    cols="50"
+                                    pInputTextarea
+                                    [autoResize]="true"
+                                    formControlName="error"
+                                  ></textarea>
+                                </label>
+                              </div>
                             </div>
-                          </div>
-                        </ng-template>
-                      </p-confirmPopup>
-                    </form>
-                    <p-button
-                      label="Error en la evidencia"
-                      [outlined]="true"
-                      severity="danger"
-                      icon="pi pi-times"
-                      (click)="confirm($event)"
-                    />
+                          </ng-template>
+                        </p-confirmPopup>
+                      </form>
+                      <p-button
+                        label="Error en la evidencia"
+                        [outlined]="true"
+                        severity="danger"
+                        icon="pi pi-times"
+                        (click)="confirm($event, evidence)"
+                      />
+                    }
                   </div>
                   @switch (evidence.type) {
                     @case ('link') {

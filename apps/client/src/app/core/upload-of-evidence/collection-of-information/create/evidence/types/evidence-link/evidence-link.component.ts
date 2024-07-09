@@ -89,7 +89,7 @@ export class EvidenceLinkComponent
     externalLink: '',
     fileLink: '',
     type: 'link',
-    error: '',
+    error: 'no error',
     collection: {
       id: 0,
       summary: '',
@@ -131,7 +131,7 @@ export class EvidenceLinkComponent
     const { description, externalLink } = this.formGroup.controls
     const evidenceLink: EvidenceDTO = {
       description: description.value,
-      error: 'error',
+      error: 'no error',
       type: 'link',
       externalLink: externalLink.value,
       fileLink: null,
@@ -163,7 +163,7 @@ export class EvidenceLinkComponent
     const { description, externalLink } = this.formGroup.controls
     const evidenceLink: EvidenceLinkDTO = {
       description: description.value,
-      error: 'error',
+      error: 'no error',
       type: 'link',
       externalLink: externalLink.value
     }

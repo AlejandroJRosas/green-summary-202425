@@ -96,8 +96,8 @@ export class EvidenceImageComponent
     description: '',
     externalLink: '',
     fileLink: '',
-    type: 'link',
-    error: '',
+    type: 'image',
+    error: 'no error',
     collection: {
       id: 0,
       summary: '',
@@ -186,6 +186,7 @@ export class EvidenceImageComponent
     })
     this.formData.set('type', 'image')
     this.formData.set('collectionId', this.informationCollectionId)
+    this.formData.set('error', 'no error')
   }
   constructFormDataEdit() {
     Object.keys(this.formGroup.controls).forEach((formControlName) => {
@@ -195,6 +196,7 @@ export class EvidenceImageComponent
       )
     })
     this.formDataEdit.set('type', 'image')
+    this.formDataEdit.set('error', 'no error')
   }
   constructFormDataWithoutFileLink() {
     Object.keys(this.formGroup.controls).forEach((formControlName) => {
@@ -206,6 +208,7 @@ export class EvidenceImageComponent
       }
     })
     this.formDataWithoutFileLink.set('type', 'image')
+    this.formDataWithoutFileLink.set('error', 'no error')
   }
   onCreate() {
     if (this.formGroup.invalid) return
