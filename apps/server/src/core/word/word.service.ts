@@ -170,61 +170,63 @@ export class WordService {
       }
 
       collection.evidences.forEach((evidence) => {
-        if (evidence.type === 'image') {
-          fileLink = (evidence as Image).fileLink.split('uploads/')[1]
-          evidenceDescription = evidence.description
-          externalLink = (evidence as Image).externalLink
+        if (evidence.error !== null && evidence.error !== '') {
+          if (evidence.type === 'image') {
+            fileLink = (evidence as Image).fileLink.split('uploads/')[1]
+            evidenceDescription = evidence.description
+            externalLink = (evidence as Image).externalLink
 
-          parag.push(
-            new Paragraph({
-              children: [new TextRun(evidenceDescription)]
-            }),
-            new Paragraph({
-              children: [
-                new ImageRun({
-                  data: fs.readFileSync('./uploads/' + fileLink),
-                  transformation: {
-                    width: 300,
-                    height: 168
-                  }
-                })
-              ]
-            }),
-            new Paragraph({
-              children: [new TextRun(externalLink)]
-            }),
-            new Paragraph({})
-          )
-        }
+            parag.push(
+              new Paragraph({
+                children: [new TextRun(evidenceDescription)]
+              }),
+              new Paragraph({
+                children: [
+                  new ImageRun({
+                    data: fs.readFileSync('./uploads/' + fileLink),
+                    transformation: {
+                      width: 300,
+                      height: 168
+                    }
+                  })
+                ]
+              }),
+              new Paragraph({
+                children: [new TextRun(externalLink)]
+              }),
+              new Paragraph({})
+            )
+          }
 
-        if (evidence.type === 'document') {
-          fileLink = (evidence as evidenceDocument.Document).fileLink
-          evidenceDescription = evidence.description
+          if (evidence.type === 'document') {
+            fileLink = (evidence as evidenceDocument.Document).fileLink
+            evidenceDescription = evidence.description
 
-          parag.push(
-            new Paragraph({
-              children: [new TextRun(evidenceDescription)]
-            }),
-            new Paragraph({
-              children: [new TextRun(fileLink)]
-            }),
-            new Paragraph({})
-          )
-        }
+            parag.push(
+              new Paragraph({
+                children: [new TextRun(evidenceDescription)]
+              }),
+              new Paragraph({
+                children: [new TextRun(fileLink)]
+              }),
+              new Paragraph({})
+            )
+          }
 
-        if (evidence.type === 'link') {
-          evidenceDescription = evidence.description
-          externalLink = (evidence as Link).externalLink
+          if (evidence.type === 'link') {
+            evidenceDescription = evidence.description
+            externalLink = (evidence as Link).externalLink
 
-          parag.push(
-            new Paragraph({
-              children: [new TextRun(evidenceDescription)]
-            }),
-            new Paragraph({
-              children: [new TextRun(externalLink)]
-            }),
-            new Paragraph({})
-          )
+            parag.push(
+              new Paragraph({
+                children: [new TextRun(evidenceDescription)]
+              }),
+              new Paragraph({
+                children: [new TextRun(externalLink)]
+              }),
+              new Paragraph({})
+            )
+          }
         }
       })
       prevDepartment = departmentName
