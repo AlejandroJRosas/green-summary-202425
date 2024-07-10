@@ -96,8 +96,8 @@ export class EvidenceImageComponent
     description: '',
     externalLink: '',
     fileLink: '',
-    type: 'link',
-    error: '',
+    type: 'image',
+    error: 'no error',
     collection: {
       id: 0,
       summary: '',
