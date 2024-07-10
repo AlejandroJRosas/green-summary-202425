@@ -176,26 +176,46 @@ export class WordService {
             evidenceDescription = evidence.description
             externalLink = (evidence as Image).externalLink
 
-            parag.push(
-              new Paragraph({
-                children: [new TextRun(evidenceDescription)]
-              }),
-              new Paragraph({
-                children: [
-                  new ImageRun({
-                    data: fs.readFileSync('./uploads/' + fileLink),
-                    transformation: {
-                      width: 300,
-                      height: 168
-                    }
-                  })
-                ]
-              }),
-              new Paragraph({
-                children: [new TextRun(externalLink)]
-              }),
-              new Paragraph({})
-            )
+            if (externalLink === null) {
+              parag.push(
+                new Paragraph({
+                  children: [new TextRun(evidenceDescription)]
+                }),
+                new Paragraph({
+                  children: [
+                    new ImageRun({
+                      data: fs.readFileSync('./uploads/' + fileLink),
+                      transformation: {
+                        width: 300,
+                        height: 168
+                      }
+                    })
+                  ]
+                }),
+                new Paragraph({})
+              )
+            } else {
+              parag.push(
+                new Paragraph({
+                  children: [new TextRun(evidenceDescription)]
+                }),
+                new Paragraph({
+                  children: [
+                    new ImageRun({
+                      data: fs.readFileSync('./uploads/' + fileLink),
+                      transformation: {
+                        width: 300,
+                        height: 168
+                      }
+                    })
+                  ]
+                }),
+                new Paragraph({
+                  children: [new TextRun(externalLink)]
+                }),
+                new Paragraph({})
+              )
+            }
           }
 
           if (evidence.type === 'document') {
