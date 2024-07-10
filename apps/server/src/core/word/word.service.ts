@@ -170,7 +170,7 @@ export class WordService {
       }
 
       collection.evidences.forEach((evidence) => {
-        if (evidence.error !== null && evidence.error !== '') {
+        if (evidence.error === null || evidence.error === '') {
           if (evidence.type === 'image') {
             fileLink = (evidence as Image).fileLink.split('uploads/')[1]
             evidenceDescription = evidence.description
