@@ -25,6 +25,8 @@ import { EvidenceService } from '../../../services/evidence/evidence.service'
 import { VALUES } from '../../../../../../../shared/validations'
 import { DetailedRecopilation } from '../../../services/recopilation.service'
 import { RecopilationService } from '../../../services/recopilation.service'
+import { TooltipModule } from 'primeng/tooltip'
+
 @Component({
   selector: 'collection-of-information',
   standalone: true,
@@ -38,7 +40,8 @@ import { RecopilationService } from '../../../services/recopilation.service'
     InputTextModule,
     ConfirmDialogModule,
     ImageModule,
-    DividerModule
+    DividerModule,
+    TooltipModule
   ],
   templateUrl: './collection-of-information.component.html',
   styles: ``
@@ -125,6 +128,11 @@ export class CollectionOfInformationComponent
     this.getDepartmentId()
     this.getAllByDepartment()
     this.getRecopilationById()
+    this.toast.show(
+      'info',
+      'Evidencias con errores',
+      'Si hay alguna evidencia con error es necesario crear otra nueva para reemplazarla.'
+    )
   }
   reset() {
     this.formGroup.reset()
