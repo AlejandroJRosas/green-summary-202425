@@ -260,7 +260,7 @@ export class RecopilationsService {
       endDate: recopilation.endDate,
       departmentEndDate: recopilation.departmentEndDate,
       isReady: recopilation.isReady,
-      /* indicators, */
+      indicators,
       departments
     }
 
