@@ -50,18 +50,13 @@ CREATE TABLE "informationCollection" (
   "collectionId" INT PRIMARY KEY,
   name TEXT,
   summary TEXT,
-  "createdAt" DATE,
-  "recopilationId" INT,
-  "departmentId" INT,
-  "categoryId" INT
+  "createdAt" DATE
 );
 
 CREATE TABLE evidences (
   "evidenceId" INT PRIMARY KEY,
   description TEXT,
   type VARCHAR(32),
-  "externalLink" TEXT,
-  "fileLink" TEXT,
   "createdAt" DATE,
   error TEXT,
   "collectionId" INT
@@ -73,16 +68,15 @@ CREATE TABLE answers (
   "departmentId" INT,
   "categoryId" INT,
   "collectionId" INT,
-  "index" INT,
   "indicatorIndex" INT,
   "subIndex" INT,
   "evidenceId" INT,
   tiempo timestamp,
-  wasRecommended BOOLEAN,
+  "wasRecommended" BOOLEAN,
   FOREIGN KEY (tiempo) REFERENCES time (tiempo),
   FOREIGN KEY ("recopilationId") REFERENCES recopilations("recopilationId"),
   FOREIGN KEY ("departmentId") REFERENCES departments ("departmentId"),
-  FOREIGN KEY ("index") REFERENCES indicators ("index"),
+  FOREIGN KEY ("indicatorIndex") REFERENCES indicators ("index"),
   FOREIGN KEY ("indicatorIndex", "subIndex") REFERENCES criteria("indicatorIndex", "subIndex"),
   FOREIGN KEY ("indicatorIndex", "categoryId") REFERENCES categories("indicatorIndex", "categoryId"),
   FOREIGN KEY ("collectionId") REFERENCES "informationCollection"("collectionId"),

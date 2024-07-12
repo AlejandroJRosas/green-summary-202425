@@ -1,0 +1,73 @@
+evidenceId,description,type,externalLink,fileLink,createdAt,error,collectionId
+297,prueba del endpoint generador del word,image,http://localhost:3000/docs#/Evidences/EvidencesController_create,http://localhost:3000/uploads/8779-images.jpeg,2024-07-01,,15
+300,prueba 3 del endpoint generador del word,image,http://localhost:3000/docs#/Evidences/EvidencesController_create,http://localhost:3000/uploads/6313-i3.jpeg,2024-07-01,,16
+302,ESTA ES UNA PRUEVA PARA GENERAR EL DOC,document,,http://localhost:3000/uploads/ba39-Capitulo 7 - AnÃ¡lisis y Pruebas.pdf,2024-07-02,,19
+43,Probando el endpoint para Paula forero,image,http://localhost:3000/docs#/Evidences/EvidencesController_update,http://localhost:3000/uploads/5c4c-images.jpeg,2024-06-22,,8
+304,ESTA ES UNA PRUEVA NUEVA PARA GENERAR EL DOCumento,document,,http://localhost:3000/uploads/4bb3-ola.lkj.pdf,2024-07-02,,22
+41,Estoy probando esto por ultima vez a ver si funcioan,image,https://github.com/AlejandroJRosas/green-summary-202425/commit/865c06a5c1803a368bdc163c849b8d4b5d8ab08e,,2024-06-22,,8
+305,ESTA ES UNA PRUEVA NUEVA PARA GENERAR EL DOCumento,document,,http://localhost:3000/uploads/89e8-CedulaSolicitante.pdf,2024-07-02,,15
+306,Esto es una prueba de una evidencia,document,,https://summary-backend.sustentabilidadtech.lat/uploads/1378-foro3.xlsx,2024-07-04,,23
+47,Prueba,image,,http://localhost:3000/uploads/9d6d-images.jpeg,2024-06-23,,8
+78,Para probar el get,image,,http://localhost:3000/uploads/28c7-images.jpeg,2024-06-23,,8
+251,no se por que no se esta limpiando la respuesta dios miooooooo,document,,https://summary-backend.sustentabilidadtech.lat/uploads/4593-Carta de AceptaciÃ³n del Tutor Empresarial - PasantÃ­a (2).docx,2024-06-27,,8
+298,prueba 1 del endpoint generador del word,image,http://localhost:3000/docs#/Evidences/EvidencesController_create,http://localhost:3000/uploads/6bff-i1.jpeg,2024-07-01,,15
+303,ESTA ES UNA PRUEVA PARA GENERAR EL DOC,link,https://www.youtube.com/watch?v=ZooxleIOufM&list=RDPu2NABdpihw&index=24,,2024-07-02,,18
+269,PROBANDO EL MISMO ENDPOINT PARA VER SI FUNCIOAN,image,http://localhost:3000/docs#/Evidences/EvidencesController_create,http://localhost:3000/uploads/8fd9-images.jpeg,2024-06-27,,8
+178,Probando el endpoint para demostrarle a Paula forero,document,http://localhost:3000/docs#/,http://localhost:3000/uploads/fea7-Sem9Modals TS (1).pdf,2024-06-25,,8
+179,Endpoint para demostrarle a Paula forero,document,http://localhost:3000/docs#/,http://localhost:3000/uploads/80d10-SOLID_PatronesDiseÃ±oClases.pdf,2024-06-25,uno,8
+165,hEndpoint para demostrarle a Paula forero,image,http://localhost:3000/docs#/,http://localhost:3000/uploads/a417-images.jpeg,2024-06-24,ninguno,8
+299,prueba 2 del endpoint generador del word,image,http://localhost:3000/docs#/Evidences/EvidencesController_create,http://localhost:3000/uploads/a464-i2.jpeg,2024-07-01,,16
+267,Prueba de la validación de tipo otra vez,image,https://stackoverflow.com/questions/76243514/nestjs-option-to-make-file-in-endpoint-optional,http://localhost:3000/uploads/189e-images.jpeg,2024-06-27,,8
+164,Probando el endpoint para demostrarle a Paula forero,document,http://localhost:3000/docs#/,http://localhost:3000/uploads/0c5d-ola.lkj.pdf,2024-06-24,,8
+177,Prueba de la validación de tipo,document,,http://localhost:3000/uploads/243e-Capitulo 6 - Lab MetaSploitable.pdf,2024-06-25,,8
+180,Prueba de la validación de tipo otra vez,document,,http://localhost:3000/uploads/7b5e-ola.lkj.pdf,2024-06-25,,8
+181,Prueba de la validación de tipo otra vez,document,,http://localhost:3000/uploads/6af2-Capitulo 7 - Lab Explore Social Engineering Techniques (SET).pdf,2024-06-25,,8
+182,Prueba de la validación de tipo otra vez,image,,http://localhost:3000/uploads/5258-images.jpeg,2024-06-25,,8
+183,Prueba de la validación de tipo otra vez,image,,http://localhost:3000/uploads/512d-images.jpeg,2024-06-25,,8
+1,Environmental impact report,document,,,2024-01-01,,23
+2,Photo of recycling facility,image,,,2024-01-02,Blurry image,5
+3,Link to carbon footprint calculator,link,,,2024-01-03,,17
+4,Water usage analysis document,document,,,2024-01-04,,29
+5,Photo of solar panel installation,image,,,2024-01-05,Overexposed image,11
+6,Link to renewable energy usage stats,link,,,2024-01-06,,8
+7,Document on air quality index improvement,document,,,2024-01-07,Missing appendix,35
+8,Image of green building project,image,,,2024-01-08,,26
+9,Link to biodiversity conservation efforts,link,,,2024-01-09,,2
+10,Document on sustainable transport options,document,,,2024-01-10,,14
+11,Photo of electric vehicle charging station,image,,,2024-01-11,Low resolution,43
+12,Link to public awareness campaign,link,,,2024-01-12,,31
+13,Water quality assessment report,document,,,2024-01-13,,50
+14,Image of composting site,image,,,2024-01-14,Dark image,19
+15,Link to sustainable fisheries guidelines,link,,,2024-01-15,,7
+16,Document on organic farming practices,document,,,2024-01-16,,39
+17,Photo of marine protected area,image,,,2024-01-17,Glare on water,12
+18,Link to urban heat island study,link,,,2024-01-18,,28
+19,Environmental justice report,document,,,2024-01-19,,6
+20,Photo of sustainable packaging,image,,,2024-01-20,Out of focus,33
+21,Link to forest conservation project,link,,,2024-01-21,,9
+22,Document on green finance initiatives,document,,,2024-01-22,,25
+23,Image of environmental education workshop,image,,,2024-01-23,Participants not visible,18
+24,Link to climate resilience strategies,link,,,2024-01-24,,22
+25,Circular economy report,document,,,2024-01-25,,15
+26,Photo of pollution prevention equipment,image,,,2024-01-26,Equipment partially visible,47
+27,Link to natural capital accounting,link,,,2024-01-27,,10
+28,Document on sustainable supply chains,document,,,2024-01-28,,45
+29,Image of eco-friendly product line,image,,,2024-01-29,,13
+30,Link to carbon neutrality plan,link,,,2024-01-30,,30
+31,Forest health monitoring report,document,,,2024-01-31,,3
+32,Image of sustainable development goals meeting,image,,,2024-02-01,Low light conditions,42
+33,Link to green building materials guide,link,,,2024-02-02,,24
+34,Report on pollution control measures,document,,,2024-02-03,,1
+35,Photo of tree planting event,image,,,2024-02-04,Participants not in frame,32
+36,Link to e-waste recycling program,link,,,2024-02-05,,21
+37,Sustainable agriculture report,document,,,2024-02-06,,36
+38,Image of composting workshop,image,,,2024-02-07,Unclear focus,48
+39,Link to green innovation summit,link,,,2024-02-08,,4
+40,Climate action plan report,document,,,2024-02-09,,41
+42,Link to ocean cleanup project,link,,,2024-02-11,,44
+44,Image of wind energy farm,image,,,2024-02-13,,20
+45,Link to energy efficiency improvements,link,,,2024-02-14,,37
+46,Report on environmental regulations,document,,,2024-02-15,,27
+48,Link to zero waste community project,link,,,2024-02-17,,40
+49,Environmental education curriculum,document,,,2024-02-18,,49
+50,Image of wildlife sanctuary,image,,,2024-02-19,Animal not visible,46

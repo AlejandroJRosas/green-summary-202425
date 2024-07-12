@@ -1,0 +1,21 @@
+recopilationId,name,description,startDate,endDate,departmentEndDate,isReady
+2,Ejemplo Recopilación 2,Esta es una recopilación de ejemplo.,2024-05-22,2024-05-30,2024-05-25,f
+5,Green Metric 2024,Recopilacion para Green Metric 2024,2024-06-09,2024-06-30,2024-06-23,f
+6,Green Metric 2025,Esta recopilación represental la edición del año 2025 de Green Metric.,2025-01-01,2025-12-31,2025-11-30,f
+7,stringDX,stringXD,2022-06-15,2025-06-15,2023-06-15,f
+8,Test,Test,2024-06-24,2024-06-30,2024-06-29,f
+10,string,string,2011-10-05,2011-10-05,2011-10-05,f
+9,XD,string,2011-10-05,2011-10-05,2011-10-05,f
+11,Green Metric 2024,Recopilacion para Green Metric 2024,2024-06-09,2024-06-30,2024-06-23,f
+12,string,string,2024-06-21,2024-10-10,2024-10-10,f
+13,Green Metric 2024,Recopilacion para Green Metric 2024,2024-06-09,2024-06-30,2024-06-23,f
+14,string,string,2024-06-21,2024-10-10,2024-10-10,f
+16,Green Metric 2024,Recopilacion para Green Metric 2024,2024-06-09,2024-06-30,2024-06-23,f
+17,Green Metric 2024,Recopilacion para Green Metric 2024,2024-06-09,2024-06-30,2024-06-23,f
+15,Green Metric 2025,Recopilacion para Green Metric 2023,2024-06-09,2024-06-30,2024-06-23,f
+1,Ejemplo Recopilación,Esta es una recopilación de ejemplo.,2024-05-20,2024-05-30,2024-05-25,t
+19,Recopilation Test 2,Recopilation Description Test JAJAJAJAJAJAJAJA,2024-06-28,2024-07-04,2024-06-29,t
+20,Recopilation Test 321,My recopilation test XD123XD1`23XDXDXDXDXDXD,2024-06-06,2024-09-13,2024-09-12,f
+21,Recopilation Test 321,My recopilation test XD123XD1`23XDXDXDXDXDXD,2024-06-06,2024-09-13,2024-09-12,t
+22,Recopilation Test 2024,Reco Test Description 30 chars,2024-07-01,2024-07-24,2024-07-23,t
+23,GreenMetric 2025,La descripción de la recopilación es obligatoria,2024-07-02,2024-07-31,2024-07-24,t

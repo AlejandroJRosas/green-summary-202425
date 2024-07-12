@@ -1,0 +1,33 @@
+indicatorIndex,categoryId,name,helpText
+1,34,Área con Vegetación Plantada,"El área con vegetación plantada incluye todos los terrenos de una institución que han sido intencionalmente cultivados con plantas, arbustos, árboles y otras formas de vegetación."
+1,35,Facilidades para personas con discapacidades,Las facilidades para personas con discapacidades incluyen todas las infraestructuras y servicios diseñados para garantizar la accesibilidad y comodidad de las personas con discapacidades dentro de la institución.
+1,36,Facilidades y equipamiento de seguridad física y laboral,"Las facilidades y el equipamiento de seguridad física y laboral abarcan todas las medidas, instalaciones y equipos destinados a garantizar la seguridad y el bienestar de las personas dentro de la institución."
+1,37,Conservación y promoción de la vida silvestre en campus,La conservación y promoción de la vida silvestre en el campus incluye todas las iniciativas y prácticas destinadas a proteger y fomentar la biodiversidad local.
+2,38,Equipamiento para uso eficiente de la energía,Información sobre equipos y dispositivos que ayudan a utilizar la energía de manera más eficiente.
+2,39,Edificaciones inteligentes,Detalles sobre edificaciones que integran sistemas inteligentes para optimizar el uso de recursos.
+2,40,Fuentes de energía renovables,Información sobre las diversas fuentes de energía renovable disponibles.
+2,41,Consumo de electricidad,Datos sobre el consumo de electricidad y cómo se puede gestionar mejor.
+2,42,Consumo de agua,Detalles sobre el consumo de agua y métodos para conservar este recurso.
+2,43,Huella de Carbono,Información sobre cómo se mide la huella de carbono y su importancia.
+2,44,Programa reducción de GEI,Programas diseñados para reducir las emisiones de gases de efecto invernadero.
+2,45,Políticas Verdes,Políticas que fomentan la implementación de prácticas verdes en la organización.
+3,46,Programa 3R para papel y plástico,"El Programa 3R (Reducir, Reutilizar y Reciclar) para papel y plástico busca minimizar el impacto ambiental de estos materiales dentro de la institución."
+3,47,Programa 3R para materia orgánica,"El Programa 3R (Reducir, Reutilizar y Reciclar) para materia orgánica está diseñado para gestionar de manera sostenible los residuos orgánicos generados dentro de la institución."
+3,48,Programa 3R desechos tóxicos,"El Programa 3R (Reducir, Reutilizar y Reciclar) para desechos tóxicos está orientado a gestionar de manera segura y sostenible los residuos peligrosos generados en la institución."
+3,49,Programa Tratamiento de Aguas servidas,El Programa de Tratamiento de Aguas Servidas está diseñado para gestionar y tratar las aguas residuales generadas en la institución de manera eficiente y sostenible.
+4,50,Programa Conservación y uso eficiente del Agua,Información sobre cómo conservar el agua y utilizarla eficientemente.
+4,51,Programa Reciclaje del Agua,Detalles sobre cómo reciclar y reutilizar el agua de manera efectiva.
+5,52,Iniciativas de transporte de emisión cero,Las iniciativas de transporte de emisión cero están orientadas a promover el uso de medios de transporte sostenibles y libres de emisiones dentro de la institución.
+5,53,Iniciativas reducción uso vehículos,Las iniciativas de reducción del uso de vehículos buscan disminuir la dependencia de automóviles y promover alternativas de transporte más sostenibles dentro de la institución.
+6,54,Cursos académicos con contenidos de sostenibilidad,Evalúa el compromiso de la institución con la integración de principios y prácticas de sostenibilidad en la currícula académica.
+6,55,Publicaciones académicas en sostenibilidad,Evalúa el compromiso de la institución con la investigación y la difusión del conocimiento en el ámbito de la sostenibilidad.
+6,56,Eventos relacionados con sostenibilidad,"Evalúa el compromiso de la institución con la organización y participación en eventos que promuevan la educación, la sensibilización y la acción hacia la sostenibilidad."
+6,57,Actividades organizadas por estudiantes relacionadas con sostenibilidad,Evalúa el compromiso de la institución con el fomento de la participación estudiantil en iniciativas que promuevan la sostenibilidad.
+6,58,Sitio web con contenidos de sostenibilidad,Evalúa la existencia y calidad de los contenidos relacionados con la sostenibilidad en el sitio web de la institución.
+6,59,Reporte de sostenibilidad,"Evalúa la elaboración y publicación de informes que transparentan el desempeño ambiental, social y económico de la institución."
+6,60,Actividades culturales en el campus,Evalúa la promoción y desarrollo de actividades culturales que fomenten la vida universitaria y el bienestar de la comunidad.
+6,61,Programas de aprendizaje y enseñanza en sostenibilidad,Evalúa la existencia e implementación de programas y cursos que abordan temáticas relacionadas con el desarrollo sostenible.
+6,62,Actividades comunitarias con contenidos de sostenibilidad(involucren estudiantes),Evalúa la existencia y desarrollo de actividades comunitarias que promuevan el aprendizaje y la acción sostenible entre los estudiantes.
+6,63,Iniciativas emprendimientos,"Evalúa el apoyo y fomento que brinda la institución al desarrollo de iniciativas emprendedoras entre sus estudiantes, egresados y comunidad en general."
+7,64,"Póliticas, Lineamientos, estrategías.","Las políticas, lineamientos y estrategias establecen el marco normativo y de acción para la gestión y promoción de prácticas sostenibles dentro de la institución. Esta encuesta tiene como objetivo evaluar la existencia, implementación y efectividad de estas políticas."
+7,65,Inversiones en sistenibilidad,"Las inversiones en sostenibilidad se refieren a los recursos financieros destinados a proyectos y prácticas que promueven la sostenibilidad ambiental, social y económica dentro de la institución."
