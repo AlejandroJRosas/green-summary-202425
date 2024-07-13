@@ -133,6 +133,11 @@ export class CollectionOfInformationComponent
       'Evidencias con errores',
       'Si hay alguna evidencia con error es necesario crear otra nueva para reemplazarla.'
     )
+    this.toast.show(
+      'info',
+      'Colección de información no aprobadas',
+      'Recuerde que al crear una colección de información esta automaticamente estará no aprobada hasta que el coordinador diga lo contrario.'
+    )
   }
   reset() {
     this.formGroup.reset()
@@ -261,6 +266,7 @@ export class CollectionOfInformationComponent
     if (this.formGroup.invalid) return
     const { name, summary } = this.formGroup.controls
     const informationCollection: InformationCollectionDTO = {
+      isApproved: false,
       name: name.value,
       summary: summary.value,
       recopilationId: this.recopilationId,
@@ -290,6 +296,7 @@ export class CollectionOfInformationComponent
     if (this.formGroup.invalid) return
     const { name, summary } = this.formGroup.controls
     const informationCollection: InformationCollectionDTO = {
+      isApproved: false,
       name: name.value,
       summary: summary.value,
       categoryId: this.categoryId,
