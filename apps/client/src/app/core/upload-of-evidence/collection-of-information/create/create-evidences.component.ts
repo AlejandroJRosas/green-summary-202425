@@ -68,6 +68,7 @@ export class CreateEvidencesComponent
     name: '',
     evidences: [],
     recopilationId: 0,
+    isApproved: false,
     categoryId: 0,
     departmentId: 0
   }

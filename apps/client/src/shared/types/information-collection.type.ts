@@ -5,6 +5,7 @@ export interface InformationCollection {
   name: string
   summary: string
   evidences: Evidence[]
+  isApproved: boolean
   recopilationId: number
   categoryId: number
   departmentId: number

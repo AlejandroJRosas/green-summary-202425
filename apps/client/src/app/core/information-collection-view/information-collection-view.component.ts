@@ -27,6 +27,7 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { EvidenceService } from '../../services/evidence/evidence.service'
 import { Evidence } from '../../../shared/types/evidence.type'
 import { TooltipModule } from 'primeng/tooltip'
+import { ConfirmDialogModule } from 'primeng/confirmdialog'
 
 @Component({
   selector: 'app-information-collection-view',
@@ -41,7 +42,8 @@ import { TooltipModule } from 'primeng/tooltip'
     DividerModule,
     ConfirmPopupModule,
     ReactiveFormsModule,
-    TooltipModule
+    TooltipModule,
+    ConfirmDialogModule
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './information-collection-view.component.html',
@@ -110,16 +112,23 @@ export class InformationCollectionViewComponent implements OnInit {
         return 'Link'
     }
   }
-  accept() {
-    console.log('aceptado')
-  }
-  reject() {
-    console.log('rechazado')
+  confirmInformationCollection(
+    name: string,
+    informationCollection: InformationCollectionByDepartment
+  ) {
+    this.toast.show(
+      'info',
+      'Aprobando..',
+      `Aprobando colección de información ${name}`
+    )
+    this.editApprovedInformationById(
+      informationCollection.id,
+      informationCollection
+    )
   }
   confirm(event: Event, evidence: Evidence) {
     this.confirmationService.confirm({
       target: event.target as EventTarget,
-      message: 'Please confirm to proceed moving forward.',
       icon: 'pi pi-exclamation-circle',
       acceptIcon: 'pi pi-check mr-1',
       rejectIcon: 'pi pi-times mr-1',
@@ -129,7 +138,7 @@ export class InformationCollectionViewComponent implements OnInit {
       acceptButtonStyleClass: 'p-button-sm',
       accept: () => {
         this.toast.show('success', 'Guardando...', 'Guardando el error...')
-        this.editEvidenceById(evidence)
+        this.editEvidenceErrorById(evidence)
       },
       reject: () => {
         this.toast.show(
@@ -141,7 +150,33 @@ export class InformationCollectionViewComponent implements OnInit {
       }
     })
   }
-  editEvidenceById(evidence: Evidence) {
+  editApprovedInformationById(
+    informationCollectionId: number,
+    informationCollection: InformationCollectionByDepartment
+  ) {
+    informationCollection.isApproved = true
+    console.log()
+    this.InformationCollectionService.editInformationCollectionByDepartment(
+      informationCollectionId,
+      informationCollection
+    ).subscribe({
+      next: (res) => {
+        if (res.status === 'success') {
+          this.toast.show(
+            'success',
+            'Aprobado',
+            'Colección de información aprobada con éxito'
+          )
+          this.getAllByDepartment()
+        }
+      },
+      error: (e) => {
+        console.error(e)
+        this.toast.show('error', 'Error', e.error.data.message)
+      }
+    })
+  }
+  editEvidenceErrorById(evidence: Evidence) {
     if (this.formGroup.controls.error.value === null) return
     const formData = new FormData()
     formData.set('error', this.formGroup.controls.error.value)

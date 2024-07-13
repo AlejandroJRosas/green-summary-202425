@@ -34,9 +34,41 @@
                 </h2>
               </section>
             </ng-template>
-            <p class="m-0 pb-3" style="max-width: 80vw">
-              {{ informationCollection.summary }}
-            </p>
+            <div
+              class="flex flex-row justify-content-between align-items-center"
+            >
+              <p class="m-0 pb-3" style="max-width: 80vw">
+                {{ informationCollection.summary }}
+              </p>
+              @if (informationCollection.isApproved === false) {
+                <p-button
+                  label="Aprobar colección de información"
+                  [outlined]="true"
+                  severity="success"
+                  icon="pi pi-check"
+                  (click)="
+                    confirmInformationCollection(
+                      informationCollection.name,
+                      informationCollection
+                    )
+                  "
+                  [disabled]="!isValidEndDate"
+                />
+              } @else {
+                <div
+                  class="flex flex-row gap-3 justify-content-center align-items-center"
+                  pTooltip="Colección de información aprobada"
+                  tooltipEvent="hover"
+                  tooltipPosition="top"
+                >
+                  <i
+                    class="pi pi-check"
+                    style="font-size: 1.5rem; color: #22c55e"
+                  ></i>
+                  <h1 style="color: #22c55e" class="text-xl">Aprobado</h1>
+                </div>
+              }
+            </div>
             <p-panel
               expandIcon="pi pi-chevron-down"
               collapseIcon="pi pi-chevron-right"
