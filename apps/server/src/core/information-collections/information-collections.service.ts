@@ -163,6 +163,9 @@ export class InformationCollectionsService {
     if (updateInformationCollectionDto.summary) {
       dataToUpdate.summary = updateInformationCollectionDto.summary
     }
+    if (updateInformationCollectionDto.isApproved) {
+      dataToUpdate.isApproved = updateInformationCollectionDto.isApproved
+    }
     if (recopilation) {
       dataToUpdate.recopilation = recopilation
     }
