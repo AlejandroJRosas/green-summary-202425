@@ -5,7 +5,7 @@ import { IsBooleanString, IsOptional } from 'class-validator'
 export class UpdateInformationCollectionDto extends PartialType(
   CreateInformationCollectionDto
 ) {
-  @IsBooleanString()
+  @IsBoolean()
   @IsOptional()
   isApproved: boolean
 }
