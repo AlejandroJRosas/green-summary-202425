@@ -9,7 +9,9 @@ import {
   HorizontalPositionAlign,
   VerticalPositionAlign,
   HorizontalPositionRelativeFrom,
-  VerticalPositionRelativeFrom
+  VerticalPositionRelativeFrom,
+  ExternalHyperlink,
+  Header
 } from 'docx'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Repository } from 'typeorm'
@@ -141,10 +143,22 @@ export class WordService {
       if (prevDepartment === departmentName) {
         parag.push(
           new Paragraph({
-            children: [new TextRun(collectionName)]
+            children: [
+              new TextRun({
+                text: collectionName,
+                size: 22,
+                font: 'Calibri'
+              })
+            ]
           }),
           new Paragraph({
-            children: [new TextRun(collectionDescription)]
+            children: [
+              new TextRun({
+                text: collectionDescription,
+                size: 22,
+                font: 'Calibri'
+              })
+            ]
           }),
           new Paragraph({})
         )
@@ -154,16 +168,34 @@ export class WordService {
             children: [
               new TextRun({
                 text: 'Departamento: ',
-                bold: true
+                bold: true,
+                size: 22,
+                font: 'Calibri'
               }),
-              new TextRun(departmentName)
+              new TextRun({
+                text: departmentName,
+                size: 22,
+                font: 'Calibri'
+              })
             ]
           }),
           new Paragraph({
-            children: [new TextRun(collectionName)]
+            children: [
+              new TextRun({
+                text: collectionName,
+                size: 22,
+                font: 'Calibri'
+              })
+            ]
           }),
           new Paragraph({
-            children: [new TextRun(collectionDescription)]
+            children: [
+              new TextRun({
+                text: collectionDescription,
+                size: 22,
+                font: 'Calibri'
+              })
+            ]
           }),
           new Paragraph({})
         )
@@ -179,7 +211,13 @@ export class WordService {
             if (externalLink === null) {
               parag.push(
                 new Paragraph({
-                  children: [new TextRun(evidenceDescription)]
+                  children: [
+                    new TextRun({
+                      text: evidenceDescription,
+                      size: 22,
+                      font: 'Calibri'
+                    })
+                  ]
                 }),
                 new Paragraph({
                   children: [
@@ -197,7 +235,13 @@ export class WordService {
             } else {
               parag.push(
                 new Paragraph({
-                  children: [new TextRun(evidenceDescription)]
+                  children: [
+                    new TextRun({
+                      text: evidenceDescription,
+                      size: 22,
+                      font: 'Calibri'
+                    })
+                  ]
                 }),
                 new Paragraph({
                   children: [
@@ -211,7 +255,19 @@ export class WordService {
                   ]
                 }),
                 new Paragraph({
-                  children: [new TextRun(externalLink)]
+                  children: [
+                    new ExternalHyperlink({
+                      children: [
+                        new TextRun({
+                          text: externalLink,
+                          size: 22,
+                          style: 'Hyperlink',
+                          font: 'Calibri'
+                        })
+                      ],
+                      link: externalLink
+                    })
+                  ]
                 }),
                 new Paragraph({})
               )
@@ -224,10 +280,28 @@ export class WordService {
 
             parag.push(
               new Paragraph({
-                children: [new TextRun(evidenceDescription)]
+                children: [
+                  new TextRun({
+                    text: evidenceDescription,
+                    size: 22,
+                    font: 'Calibri'
+                  })
+                ]
               }),
               new Paragraph({
-                children: [new TextRun(fileLink)]
+                children: [
+                  new ExternalHyperlink({
+                    children: [
+                      new TextRun({
+                        text: fileLink,
+                        size: 22,
+                        style: 'Hyperlink',
+                        font: 'Calibri'
+                      })
+                    ],
+                    link: fileLink
+                  })
+                ]
               }),
               new Paragraph({})
             )
@@ -239,10 +313,28 @@ export class WordService {
 
             parag.push(
               new Paragraph({
-                children: [new TextRun(evidenceDescription)]
+                children: [
+                  new TextRun({
+                    text: evidenceDescription,
+                    size: 22,
+                    font: 'Calibri'
+                  })
+                ]
               }),
               new Paragraph({
-                children: [new TextRun(externalLink)]
+                children: [
+                  new ExternalHyperlink({
+                    children: [
+                      new TextRun({
+                        text: externalLink,
+                        size: 22,
+                        style: 'Hyperlink',
+                        font: 'Calibri'
+                      })
+                    ],
+                    link: externalLink
+                  })
+                ]
               }),
               new Paragraph({})
             )
@@ -264,54 +356,59 @@ export class WordService {
 
     const collections = (await summary).informationCollections
 
+    const header = new Header({
+      children: [
+        new Paragraph({
+          children: [
+            new ImageRun({
+              data: fs.readFileSync('./images/Ucab.png'),
+              transformation: {
+                width: 300,
+                height: 43
+              },
+              floating: {
+                horizontalPosition: {
+                  relative: HorizontalPositionRelativeFrom.MARGIN,
+                  align: HorizontalPositionAlign.LEFT
+                },
+                verticalPosition: {
+                  relative: VerticalPositionRelativeFrom.TOP_MARGIN,
+                  align: VerticalPositionAlign.BOTTOM
+                }
+              }
+            }),
+            new ImageRun({
+              data: fs.readFileSync('./images/GM.png'),
+              transformation: {
+                width: 115,
+                height: 85
+              },
+              floating: {
+                horizontalPosition: {
+                  relative: HorizontalPositionRelativeFrom.MARGIN,
+                  align: HorizontalPositionAlign.RIGHT
+                },
+                verticalPosition: {
+                  relative: VerticalPositionRelativeFrom.TOP_MARGIN,
+                  align: VerticalPositionAlign.BOTTOM
+                }
+              }
+            })
+          ]
+        })
+      ]
+    })
+
     const doc = new Document({
       sections: [
         {
           properties: {
             type: SectionType.CONTINUOUS
           },
+          headers: {
+            default: header
+          },
           children: [
-            new Paragraph({
-              children: [
-                new ImageRun({
-                  data: fs.readFileSync('./images/Ucab.jpg'),
-                  transformation: {
-                    width: 300,
-                    height: 43
-                  },
-                  floating: {
-                    horizontalPosition: {
-                      relative: HorizontalPositionRelativeFrom.MARGIN,
-                      align: HorizontalPositionAlign.LEFT
-                    },
-                    verticalPosition: {
-                      relative: VerticalPositionRelativeFrom.MARGIN,
-                      align: VerticalPositionAlign.INSIDE
-                    }
-                  }
-                }),
-                new ImageRun({
-                  data: fs.readFileSync('./images/GM.jpg'),
-                  transformation: {
-                    width: 115,
-                    height: 85
-                  },
-                  floating: {
-                    horizontalPosition: {
-                      relative: HorizontalPositionRelativeFrom.MARGIN,
-                      align: HorizontalPositionAlign.RIGHT
-                    },
-                    verticalPosition: {
-                      relative: VerticalPositionRelativeFrom.MARGIN,
-                      align: VerticalPositionAlign.INSIDE
-                    }
-                  }
-                })
-              ]
-            }),
-            new Paragraph({}),
-            new Paragraph({}),
-            new Paragraph({}),
             new Paragraph({}),
             new Paragraph({}),
             new Paragraph({
@@ -320,7 +417,8 @@ export class WordService {
                 new TextRun({
                   text: 'Template for Evidence(s)',
                   bold: true,
-                  size: 36
+                  size: 36,
+                  font: 'Calibri'
                 })
               ]
             }),
@@ -330,7 +428,8 @@ export class WordService {
                 new TextRun({
                   text: 'UI GreenMetric Questionnaire',
                   bold: true,
-                  size: 36
+                  size: 36,
+                  font: 'Calibri'
                 })
               ]
             }),
@@ -338,17 +437,29 @@ export class WordService {
             new Paragraph({}),
             new Paragraph({
               children: [
-                new TextRun(
-                  'University:     Andres Bello Guayana Catholic University'
-                )
+                new TextRun({
+                  text: 'University         :          Andrés Bello Guayana Catholic University',
+                  size: 22,
+                  font: 'Calibri'
+                })
               ]
             }),
             new Paragraph({
-              children: [new TextRun('Country:     Venezuela')]
+              children: [
+                new TextRun({
+                  text: 'Country             :          Venezuela',
+                  size: 22,
+                  font: 'Calibri'
+                })
+              ]
             }),
             new Paragraph({
               children: [
-                new TextRun('Web Address:     http://guayanaweb.ucab.edu.ve/')
+                new TextRun({
+                  text: 'Web Address    :          http://guayanaweb.ucab.edu.ve/',
+                  size: 22,
+                  font: 'Calibri'
+                })
               ]
             }),
             new Paragraph({}),
@@ -357,7 +468,9 @@ export class WordService {
               children: [
                 new TextRun({
                   text: '[' + index + ']' + indicatorName,
-                  bold: true
+                  bold: true,
+                  size: 22,
+                  font: 'Calibri'
                 })
               ]
             }),
@@ -366,7 +479,9 @@ export class WordService {
               children: [
                 new TextRun({
                   text: '[' + index + '.' + subIndex + ']' + criterionName,
-                  bold: true
+                  bold: true,
+                  size: 22,
+                  font: 'Calibri'
                 })
               ]
             }),
@@ -379,6 +494,6 @@ export class WordService {
 
     const buffer = await Packer.toBuffer(doc)
 
-    return buffer
+    return { buffer, index, subIndex, criterionName }
   }
 }
