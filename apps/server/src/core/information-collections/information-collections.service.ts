@@ -148,20 +148,32 @@ export class InformationCollectionsService {
       updateInformationCollectionDto
 
     const [recopilation, category, department] = await Promise.all([
-      this.recopilationRepository.findOneByOrFail({
+      this.recopilationRepository.findOneBy({
         id: recopilationId
       }),
-      this.categoryRepository.findOneByOrFail({ id: categoryId }),
-      this.departmentRepository.findOneByOrFail({ id: departmentId })
+      this.categoryRepository.findOneBy({ id: categoryId }),
+      this.departmentRepository.findOneBy({ id: departmentId })
     ])
 
-    await this.informationCollectionsRepository.update(id, {
-      name: updateInformationCollectionDto.name,
-      summary: updateInformationCollectionDto.summary,
-      recopilation,
-      category,
-      department
-    })
+    const dataToUpdate: Record<string, any> = {}
+
+    if (updateInformationCollectionDto.name) {
+      dataToUpdate.name = updateInformationCollectionDto.name
+    }
+    if (updateInformationCollectionDto.summary) {
+      dataToUpdate.summary = updateInformationCollectionDto.summary
+    }
+    if (recopilation) {
+      dataToUpdate.recopilation = recopilation
+    }
+    if (category) {
+      dataToUpdate.category = category
+    }
+    if (department) {
+      dataToUpdate.department = department
+    }
+
+    await this.informationCollectionsRepository.update(id, dataToUpdate)
     return this.informationCollectionsRepository.findOneByOrFail({ id })
   }
 
