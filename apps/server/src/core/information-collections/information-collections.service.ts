@@ -166,13 +166,13 @@ export class InformationCollectionsService {
     if (updateInformationCollectionDto.isApproved) {
       dataToUpdate.isApproved = updateInformationCollectionDto.isApproved
     }
-    if (recopilation) {
+    if (updateInformationCollectionDto.recopilationId) {
       dataToUpdate.recopilation = recopilation
     }
-    if (category) {
+    if (updateInformationCollectionDto.categoryId) {
       dataToUpdate.category = category
     }
-    if (department) {
+    if (updateInformationCollectionDto.departmentId) {
       dataToUpdate.department = department
     }
 
