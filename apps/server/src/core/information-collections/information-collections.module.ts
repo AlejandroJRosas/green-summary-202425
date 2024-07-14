@@ -6,6 +6,9 @@ import { InformationCollection } from './entities/information-collection.entity'
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
 import { Department } from '../users/entities/department.entity'
 import { Category } from '../categories/entities/category.entity'
+import { NotificationsService } from '../notifications/notifications.service'
+import { Notification } from '../notifications/entities/notification.entity'
+import { User } from '../users/entities/user.entity'
 
 @Module({
   imports: [
@@ -13,10 +16,12 @@ import { Category } from '../categories/entities/category.entity'
       InformationCollection,
       Recopilation,
       Department,
-      Category
+      Category,
+      Notification,
+      User
     ])
   ],
   controllers: [InformationCollectionsController],
-  providers: [InformationCollectionsService]
+  providers: [InformationCollectionsService, NotificationsService]
 })
 export class InformationCollectionsModule {}

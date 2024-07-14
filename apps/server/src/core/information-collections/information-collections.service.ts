@@ -12,6 +12,7 @@ import { OrderByParamDto } from './dto/order-information-collections-by-param.dt
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
 import { Department } from '../users/entities/department.entity'
 import { Category } from '../categories/entities/category.entity'
+import { NotificationsService } from '../notifications/notifications.service'
 
 @Injectable()
 export class InformationCollectionsService {
@@ -23,7 +24,8 @@ export class InformationCollectionsService {
     @InjectRepository(Department)
     private departmentRepository: Repository<Department>,
     @InjectRepository(Category)
-    private categoryRepository: Repository<Category>
+    private categoryRepository: Repository<Category>,
+    private notificationsService: NotificationsService
   ) {}
 
   async findAll({
@@ -135,6 +137,9 @@ export class InformationCollectionsService {
       category,
       department
     })
+    const descriptionNotification = `El departamento ${departmentId} ha creado una colección de información en la recopilación ${recopilationId} asociada a la categoría ${categoryId}`
+    await this.notificationsService.createAll(descriptionNotification)
+
     return await this.informationCollectionsRepository.save(
       informationCollection
     )
@@ -162,6 +167,10 @@ export class InformationCollectionsService {
       category,
       department
     })
+
+    const descriptionNotification = `El departamento ${departmentId} ha editado la colección de información ${id} de la recopilación ${recopilationId} asociada a la categoría ${categoryId}`
+    await this.notificationsService.createAll(descriptionNotification)
+
     return this.informationCollectionsRepository.findOneByOrFail({ id })
   }
 
