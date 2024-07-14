@@ -37,7 +37,8 @@ export class WordController {
           '_' +
           buffer.criterionName +
           '.docx',
-        'Content-Length': buffer.buffer.length
+        'Content-Length': buffer.buffer.length,
+        'Access-Control-Expose-Headers': 'Content-Disposition'
       })
       res.send(buffer.buffer)
     } catch (e) {
