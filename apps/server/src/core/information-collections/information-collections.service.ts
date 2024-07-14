@@ -182,6 +182,10 @@ export class InformationCollectionsService {
     }
 
     await this.informationCollectionsRepository.update(id, dataToUpdate)
+
+    const descriptionNotification = `El departamento ${departmentId} ha editado la colección de información ${id} de la recopilación ${recopilationId} asociada a la categoría ${categoryId}`
+    await this.notificationsService.createAll(descriptionNotification)
+
     return this.informationCollectionsRepository.findOneByOrFail({ id })
   }
 
