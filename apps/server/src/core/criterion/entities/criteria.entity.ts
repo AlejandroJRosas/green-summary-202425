@@ -4,13 +4,14 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  Unique
+  Unique,
+  DeleteDateColumn
 } from 'typeorm'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
 import { CategorizedCriteria } from 'src/core/categorized-criteria/entities/categorized-criterion.entity'
 
 @Entity('criterion')
-@Unique(['subIndex', 'indicator'])
+@Unique(['subIndex', 'indicator', 'deletedAt'])
 export class Criteria {
   @PrimaryGeneratedColumn()
   id: number
@@ -32,7 +33,8 @@ export class Criteria {
 
   @ManyToOne(() => Indicator, (indicator) => indicator.criterion, {
     onUpdate: 'CASCADE',
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
+    cascade: ['soft-remove']
   })
   indicator: Indicator
 
@@ -41,4 +43,7 @@ export class Criteria {
     (categorizedCriteria) => categorizedCriteria.criteria
   )
   categorizedCriterion: CategorizedCriteria[]
+
+  @DeleteDateColumn()
+  deletedAt: Date
 }

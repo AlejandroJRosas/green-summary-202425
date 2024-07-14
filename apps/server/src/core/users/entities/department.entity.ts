@@ -1,4 +1,4 @@
-import { ChildEntity, OneToMany } from 'typeorm'
+import { ChildEntity, DeleteDateColumn, OneToMany } from 'typeorm'
 import { User } from './user.entity'
 import { USER_TYPES } from '../users.constants'
 import { DepartmentPerRecopilation } from 'src/core/departments-per-recopilations/entities/departments-per-recopilation.entity'
@@ -17,4 +17,7 @@ export class Department extends User {
     (departmentPerRecopilation) => departmentPerRecopilation.department
   )
   recopilationsPerDepartment: DepartmentPerRecopilation[]
+
+  @DeleteDateColumn()
+  deletedAt: Date
 }

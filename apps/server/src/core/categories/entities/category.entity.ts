@@ -7,7 +7,8 @@ import {
   Column,
   ManyToOne,
   Entity,
-  OneToMany
+  OneToMany,
+  DeleteDateColumn
 } from 'typeorm'
 import { VALUES } from 'shared/validations'
 
@@ -28,7 +29,8 @@ export class Category {
 
   @ManyToOne(() => Indicator, (indicator) => indicator.categories, {
     onUpdate: 'CASCADE',
-    onDelete: 'CASCADE'
+    onDelete: 'CASCADE',
+    cascade: ['soft-remove']
   })
   indicator: Indicator
 
@@ -46,4 +48,7 @@ export class Category {
     (categorizedCriteria) => categorizedCriteria.category
   )
   categorizedCriterion: CategorizedCriteria[]
+
+  @DeleteDateColumn()
+  deletedAt: Date
 }

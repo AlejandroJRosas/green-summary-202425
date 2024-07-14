@@ -104,7 +104,11 @@ export class UsersService {
   async remove(id: number) {
     const user = await this.usersRepository.findOneByOrFail({ id })
 
-    await this.usersRepository.remove([user])
+    if (user.type === 'department') {
+      await this.usersRepository.softRemove(user)
+    } else {
+      await this.usersRepository.remove([user])
+    }
   }
 
   async passwordChange(id: number) {
