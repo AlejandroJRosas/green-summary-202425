@@ -31,7 +31,11 @@ export class Notification {
 
   @Column({
     type: 'json',
-    nullable: true
+    nullable: true,
+    transformer: {
+      to: (data: Record<string, unknown>) => JSON.stringify(data),
+      from: (data: string) => JSON.parse(data)
+    }
   })
   data: Record<string, unknown>
 
