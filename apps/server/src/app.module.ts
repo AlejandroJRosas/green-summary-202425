@@ -30,7 +30,7 @@ import { WordModule } from './core/word/word.module'
           type: 'postgres',
           url: DATABASE_CONFIG.URL,
           autoLoadEntities: true,
-          synchronize: true
+          synchronize: false
         }
       },
       inject: [ConfigService]
