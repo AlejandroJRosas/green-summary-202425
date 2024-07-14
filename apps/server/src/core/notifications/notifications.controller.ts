@@ -12,7 +12,6 @@ import {
 } from '@nestjs/common'
 import { NotificationsService } from './notifications.service'
 import { CreateNotificationDto } from './dto/create-notification.dto'
-import { UpdateNotificationDto } from './dto/update-notification.dto'
 import { ApiTags } from '@nestjs/swagger'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
@@ -68,14 +67,8 @@ export class NotificationsController {
   }
 
   @Patch('/:id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateNotificationDto: UpdateNotificationDto
-  ) {
-    const notification = await this.notificationsService.update(
-      Number(id),
-      updateNotificationDto
-    )
+  async update(@Param('id') id: string) {
+    const notification = await this.notificationsService.update(Number(id))
     return notification
   }
 

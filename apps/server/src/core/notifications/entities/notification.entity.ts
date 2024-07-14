@@ -15,6 +15,9 @@ export class Notification {
   @Column({ type: 'boolean', default: false, nullable: false })
   seen: boolean
 
+  @Column({ type: 'text', nullable: false })
+  description: string
+
   @CreateDateColumn({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP(6)'

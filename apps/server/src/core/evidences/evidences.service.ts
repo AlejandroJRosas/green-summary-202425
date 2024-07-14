@@ -14,6 +14,7 @@ import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-type-orm'
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-evidences-by-param.dto'
+import { NotificationsService } from '../notifications/notifications.service'
 
 @Injectable()
 export class EvidencesService {
@@ -27,7 +28,8 @@ export class EvidencesService {
     @InjectRepository(Link)
     private readonly linkRepository: Repository<Link>,
     @InjectRepository(InformationCollection)
-    private readonly informationCollectionRepository: Repository<InformationCollection>
+    private readonly informationCollectionRepository: Repository<InformationCollection>,
+    private notificationsService: NotificationsService
   ) {}
 
   async findAll({
@@ -59,10 +61,12 @@ export class EvidencesService {
   }
 
   async create(createEvidenceDto: CreateEvidenceDto): Promise<Evidence> {
-    const collection =
-      await this.informationCollectionRepository.findOneByOrFail({
-        id: createEvidenceDto.collectionId
-      })
+    const collection = await this.informationCollectionRepository.findOneOrFail(
+      {
+        where: { id: createEvidenceDto.collectionId },
+        relations: ['recopilation', 'department', 'category']
+      }
+    )
 
     if (!collection) {
       throw new NotFoundException('Collection not found')
@@ -93,6 +97,9 @@ export class EvidencesService {
     }
     let evidence: Evidence
 
+    const descriptionNotification = `El departamento ${collection.department.id} ha agregado una evidencia en la colección de información ${collection.id} de la recopilación ${collection.recopilation.id} asociada a la categoría ${collection.category.id}`
+    await this.notificationsService.createAll(descriptionNotification)
+
     switch (type) {
       case EvidenceType.DOCUMENT:
         evidence = this.documentRepository.create({
@@ -120,6 +127,29 @@ export class EvidencesService {
     updateEvidenceDto: UpdateEvidenceDto
   ): Promise<Evidence> {
     await this.evidenceRepository.update(id, updateEvidenceDto)
+
+    const collection = await this.informationCollectionRepository.findOneOrFail(
+      {
+        where: { id: updateEvidenceDto.collectionId },
+        relations: ['recopilation', 'department', 'category']
+      }
+    )
+
+    if (
+      updateEvidenceDto.error === null ||
+      updateEvidenceDto.error === '' ||
+      updateEvidenceDto.error === undefined
+    ) {
+      const descriptionNotification = `El departamento ${collection.department.id} ha editado una evidencia en la colección de información ${collection.id} de la recopilación ${collection.recopilation.id} asociada a la categoría ${collection.category.id}`
+      await this.notificationsService.createAll(descriptionNotification)
+    } else {
+      const notification = {
+        userId: collection.department.id,
+        description: `Tienes un error en la evidencia ${id} de la colección de información ${collection.id} de la recopilación ${collection.recopilation.id} asociada a la categoría ${collection.category.id}`
+      }
+      await this.notificationsService.create(notification)
+    }
+
     return this.evidenceRepository.findOneByOrFail({ id })
   }
 

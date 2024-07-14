@@ -12,6 +12,7 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-recommendations-by-param.dto'
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
+import { NotificationsService } from '../notifications/notifications.service'
 
 @Injectable()
 export class RecommendationsService {
@@ -25,7 +26,8 @@ export class RecommendationsService {
     @InjectRepository(Recopilation)
     private readonly recopilationsRepository: Repository<Recopilation>,
     @InjectRepository(DepartmentPerRecopilation)
-    private readonly departmentsPerRecopilationsRepository: Repository<DepartmentPerRecopilation>
+    private readonly departmentsPerRecopilationsRepository: Repository<DepartmentPerRecopilation>,
+    private notificationsService: NotificationsService
   ) {}
 
   async create(
@@ -47,6 +49,13 @@ export class RecommendationsService {
       departmentPerRecopilation,
       category
     })
+
+    const notification = {
+      userId: departmentId,
+      description: `Se te recomendó la categoría ${categoryId}`
+    }
+
+    await this.notificationsService.create(notification)
 
     return this.recommendationsRepository.save(recommendation)
   }
