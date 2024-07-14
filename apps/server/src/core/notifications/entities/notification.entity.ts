@@ -6,6 +6,10 @@ import {
   Entity,
   CreateDateColumn
 } from 'typeorm'
+import {
+  NOTIFICATION_TYPES,
+  NotificationType
+} from '../notifications.constants'
 
 @Entity({ name: 'notifications' })
 export class Notification {
@@ -17,6 +21,19 @@ export class Notification {
 
   @Column({ type: 'text', nullable: false })
   description: string
+
+  @Column({
+    type: 'enum',
+    nullable: false,
+    enum: Object.values(NOTIFICATION_TYPES)
+  })
+  type: NotificationType
+
+  @Column({
+    type: 'json',
+    nullable: true
+  })
+  data: Record<string, unknown>
 
   @CreateDateColumn({
     type: 'timestamp',
