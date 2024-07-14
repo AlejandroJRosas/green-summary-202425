@@ -98,7 +98,6 @@ export class CreateEvidencesComponent
     this.createColletionInformation.description =
       this.formGroup.controls.description.value
     this.createColletionInformation.evidences = this.evidences
-    console.log(this.createColletionInformation)
   }
   goBack() {
     this.router.navigateByUrl(

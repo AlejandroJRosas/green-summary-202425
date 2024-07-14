@@ -136,56 +136,76 @@
                   translateType(evidence.type)
                 }})
               </h2>
-              <div class="flex flex-nowrap">
-                <button
-                  class="p-panel-header-icon p-link mr-2"
-                  [disabled]="!isValidDepartmentalDate"
+              @if (evidence.error !== null) {
+                <div
+                  class="flex flex-row gap-3 justify-content-center align-items-center"
+                  [pTooltip]="evidence.error"
+                  tooltipEvent="hover"
+                  tooltipPosition="top"
                 >
-                  <span
-                    class="pi pi-pencil"
-                    (click)="
-                      isValidDepartmentalDate
-                        ? onEditEvidence(evidence.id, informationCollection.id)
-                        : ''
-                    "
-                    [style.color]="
-                      isValidDepartmentalDate ? '#22c55e' : 'darkgrey'
-                    "
-                    [style.border]="
-                      isValidDepartmentalDate
-                        ? 'solid 1.5px #22c55e'
-                        : 'solid 1.5px darkgrey'
-                    "
-                    style="border-radius: 100%; padding: 7px"
-                  ></span>
-                </button>
-                <button
-                  class="p-panel-header-icon p-link mr-2"
-                  [disabled]="!isValidDepartmentalDate"
-                >
-                  <span
-                    class="pi pi-trash"
-                    (click)="
-                      isValidDepartmentalDate
-                        ? confirmationDeleteEvidence(
-                            $event,
-                            evidence.id,
-                            evidence.type
-                          )
-                        : ''
-                    "
-                    [style.color]="
-                      isValidDepartmentalDate ? '#ef4444' : 'darkgrey'
-                    "
-                    [style.border]="
-                      isValidDepartmentalDate
-                        ? 'solid 1.5px #ef4444'
-                        : 'solid 1.5px darkgrey'
-                    "
-                    style="border-radius: 100%; padding: 7px"
-                  ></span>
-                </button>
-              </div>
+                  <i
+                    class="pi pi-ban"
+                    style="font-size: 1.5rem; color: #ef4444"
+                  ></i>
+                  <h1 style="color: #ef4444" class="text-xl">
+                    Evidencia con error
+                  </h1>
+                </div>
+              } @else {
+                <div class="flex flex-nowrap">
+                  <button
+                    class="p-panel-header-icon p-link mr-2"
+                    [disabled]="!isValidDepartmentalDate"
+                  >
+                    <span
+                      class="pi pi-pencil"
+                      (click)="
+                        isValidDepartmentalDate
+                          ? onEditEvidence(
+                              evidence.id,
+                              informationCollection.id
+                            )
+                          : ''
+                      "
+                      [style.color]="
+                        isValidDepartmentalDate ? '#22c55e' : 'darkgrey'
+                      "
+                      [style.border]="
+                        isValidDepartmentalDate
+                          ? 'solid 1.5px #22c55e'
+                          : 'solid 1.5px darkgrey'
+                      "
+                      style="border-radius: 100%; padding: 7px"
+                    ></span>
+                  </button>
+                  <button
+                    class="p-panel-header-icon p-link mr-2"
+                    [disabled]="!isValidDepartmentalDate"
+                  >
+                    <span
+                      class="pi pi-trash"
+                      (click)="
+                        isValidDepartmentalDate
+                          ? confirmationDeleteEvidence(
+                              $event,
+                              evidence.id,
+                              evidence.type
+                            )
+                          : ''
+                      "
+                      [style.color]="
+                        isValidDepartmentalDate ? '#ef4444' : 'darkgrey'
+                      "
+                      [style.border]="
+                        isValidDepartmentalDate
+                          ? 'solid 1.5px #ef4444'
+                          : 'solid 1.5px darkgrey'
+                      "
+                      style="border-radius: 100%; padding: 7px"
+                    ></span>
+                  </button>
+                </div>
+              }
             </div>
             @switch (evidence.type) {
               @case ('link') {
