@@ -1,0 +1,41 @@
+<div style="width: 100%; height: 100%">
+  <a
+    href="pages/information-collection/{{ selectedRecopilation }}/{{
+      answer?.categoryId
+    }}"
+    target="_blank"
+    rel="noreferrer"
+    class="custom-td-link"
+  >
+    <div style="width: 100%; height: 100%; position: relative">
+      @if (answer?.isRecommended) {
+        <div class="is-recommended-icon">
+          <tooltip-icon
+            icon="pi pi-sparkles"
+            tooltip="Recomendado para responder"
+          ></tooltip-icon>
+        </div>
+      }
+      <!-- @if (getAnswer(row.answers, category.id)?.isAnswered) { -->
+      <tooltip-icon
+        icon="pi pi-file-arrow-up"
+        tooltip="Ha subido evidencias"
+      ></tooltip-icon>
+      <!-- } -->
+      <!-- @if (getAnswer(row.answers, category.id)?.isApproved) { -->
+      <tooltip-icon
+        icon="pi pi-file-check"
+        tooltip="Ha sido marcado como correcto"
+      ></tooltip-icon>
+      <!-- } -->
+      <!-- @if (getAnswer(row.answers, category.id)?.hasError) { -->
+      <tooltip-icon
+        icon="pi pi-file-edit"
+        tooltip="Ha sido marcado con errores"
+      ></tooltip-icon>
+      <!-- } @else { -->
+      -
+      <!-- } -->
+    </div>
+  </a>
+</div>

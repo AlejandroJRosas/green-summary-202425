@@ -1,0 +1,53 @@
+@if (matrixData) {
+  <p-table
+    [value]="matrixData.departments"
+    [scrollable]="true"
+    [scrollHeight]="matrixScrollHeight"
+  >
+    <ng-template pTemplate="header">
+      <tr>
+        <th
+          rowspan="2"
+          pTooltip="Departamentos que forman parte de la recopilación"
+          pFrozenColumn
+        >
+          Departamentos
+        </th>
+        @for (indicator of matrixData.indicators; track $index) {
+          <th
+            pTooltip="{{ indicator.helpText }}"
+            [attr.colspan]="indicator.categories.length"
+          >
+            {{ indicator.alias }}
+          </th>
+        }
+      </tr>
+      <tr>
+        @for (indicator of matrixData.indicators; track $index) {
+          @for (category of indicator.categories; track $index) {
+            <th pTooltip="{{ category.helpText }}">
+              {{ category.name }}
+            </th>
+          }
+        }
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-row>
+      <tr>
+        <td pFrozenColumn>
+          {{ row.department.fullName }}
+        </td>
+        @for (indicator of matrixData.indicators; track $index) {
+          @for (category of indicator.categories; track $index) {
+            <td>
+              <custom-td
+                [selectedRecopilation]="selectedRecopilation"
+                [answer]="getAnswer(row.answers, category.id)"
+              ></custom-td>
+            </td>
+          }
+        }
+      </tr>
+    </ng-template>
+  </p-table>
+}
