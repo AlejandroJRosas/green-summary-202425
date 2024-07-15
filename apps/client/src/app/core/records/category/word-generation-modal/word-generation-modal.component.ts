@@ -9,6 +9,7 @@ import { ButtonModule } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
 import { ListboxModule } from 'primeng/listbox'
 import { Criteria } from '../../../../../shared/types/criterion.type'
+import { WordService } from '../../../../services/word.service'
 
 @Component({
   selector: 'app-word-generation-modal',
@@ -25,9 +26,24 @@ export class WordGenerationModalComponent {
 
   @Input() recopilationId: number | undefined
 
+  @Input() categoryName: string | undefined
+
   formGroup = new FormGroup({
-    criterion: new FormControl('', Validators.required)
+    criterion: new FormControl<Criteria | null>(null, Validators.required)
   })
+
+  constructor(private wordService: WordService) {}
+
+  generateWord() {
+    if (this.recopilationId == null) return
+    if (this.formGroup.invalid) return
+
+    this.wordService.downloadWordOf(
+      this.formGroup.controls.criterion.value!.id,
+      this.recopilationId
+    )
+    this.hideDialog()
+  }
 
   showDialog() {
     this.changeVisibility(true)

@@ -1,0 +1,11 @@
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.button {
+  min-width: fit-content;
+  margin-left: auto;
+}

@@ -1,5 +1,5 @@
 <div>
-  <header>
+  <header class="flex w-full justify-content-between align-items-center">
     <h2>Registro de Evidencias</h2>
     <p-dropdown
       [options]="recopilations"
@@ -9,87 +9,40 @@
       (onChange)="updateIndicators()"
     />
   </header>
-  <main>
-    <header>
-      <h3>Categorías</h3>
+  <main class="">
+    <header class="flex w-full justify-content-between align-items-center">
+      <h3 class="text-2xl">Categorías</h3>
       <p-dropdown
         [options]="indicators"
         [(ngModel)]="indicator"
         placeholder="Seleccione un indicador"
         optionLabel="alias"
         (onChange)="updateCategoriesAndCriteria()"
+        [emptyMessage]="
+          recopilation
+            ? 'No hay indicadores disponibles'
+            : 'Seleccione una recopilación antes de seleccionar un indicador'
+        "
       />
     </header>
-    <p-accordion multiple="false">
+    <div class="flex flex-column">
       @for (category of categoriesAndCriteria; track category.id) {
-        <p-accordionTab>
+        <p-panel toggleable="true" toggler="icon" iconPos="start" collapsed>
           <ng-template pTemplate="header">
-            <header>
-              <h2>{{ category.name }}</h2>
-            </header>
+            <app-records-category-header
+              class="w-full"
+              [recopilationId]="recopilation?.id"
+              [category]="category"
+              [criteria]="category.criteria"
+            />
           </ng-template>
-          <app-records-category
+          <app-records-category-body
             [recopilationId]="recopilation?.id"
-            [categoryId]="category.id"
+            [category]="category"
             [criteria]="category.criteria"
           />
-        </p-accordionTab>
-        <!-- <app-records-generic-card
-          text="{{ category.name }}"
-          (click)="goToCategoryRecord(category.id)"
-        /> -->
+        </p-panel>
       }
-    </p-accordion>
-    <!-- <section>
-      <header>
-        <h4>Categoría 1</h4>
-      </header>
-      <article (click)="goToCriterionRecord(1)">
-        <p>Criterio 1</p>
-      </article>
-      <article>
-        <p>Criterio 2</p>
-      </article>
-      <article>
-        <p>Criterio 3</p>
-      </article>
-      <article>
-        <p>Criterio 4</p>
-      </article>
-    </section>
-    <section>
-      <header>
-        <h4>Categoría 2</h4>
-      </header>
-      <article>
-        <p>Criterio 1</p>
-      </article>
-      <article>
-        <p>Criterio 2</p>
-      </article>
-      <article>
-        <p>Criterio 3</p>
-      </article>
-      <article>
-        <p>Criterio 4</p>
-      </article>
-    </section>
-    <section>
-      <header>
-        <h4>Categoría 3</h4>
-      </header>
-      <article>
-        <p>Criterio 1</p>
-      </article>
-      <article>
-        <p>Criterio 2</p>
-      </article>
-      <article>
-        <p>Criterio 3</p>
-      </article>
-      <article>
-        <p>Criterio 4</p>
-      </article>
-    </section> -->
+    </div>
   </main>
 </div>

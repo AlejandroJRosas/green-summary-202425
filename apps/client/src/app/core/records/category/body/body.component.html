@@ -1,0 +1,148 @@
+<section>
+  <header>
+    <h3 class="m-0 mb-1 text-xl">Respuestas</h3>
+  </header>
+  @if (departmentAnswers && departmentAnswers.length <= 0) {
+    <p style="padding-left: 2.5rem">No hay respuestas para esta categoría</p>
+  } @else {
+    @for (
+      departmentAnswer of departmentAnswers;
+      track departmentAnswer.department.id
+    ) {
+      <p-panel toggleable="true" toggler="icon" iconPos="start" collapsed>
+        <ng-template pTemplate="header">
+          <header>
+            <h3 class="text-xl mt-3 mb-3">
+              Departamento de {{ departmentAnswer.department.fullName }}
+            </h3>
+          </header>
+        </ng-template>
+        @for (
+          collection of departmentAnswer.informationCollections.concat(
+            departmentAnswer.informationCollections
+          );
+          track collection.id
+        ) {
+          <section>
+            <header class="mb-4">
+              <h4 class="text-xl m-0 mb-3">{{ collection.name }}</h4>
+              <p>{{ collection.summary }}</p>
+            </header>
+
+            <h5 class="text-xl m-0 mb-3" style="padding-left: 2.5rem">
+              Evidencias ({{ collection.evidences.length }})
+            </h5>
+            @if (collection.evidences.length <= 0) {
+              <p style="padding-left: 2.5rem" class="mb-4">
+                Esta colección de información no tiene evidencias
+              </p>
+            }
+            <div style="padding-left: 2.5rem" class="flex flex-column gap-3">
+              @for (
+                evidence of collection.evidences.concat(collection.evidences);
+                track evidence.id
+              ) {
+                <article>
+                  <div class="flex flex-column gap-3">
+                    <h6
+                      style="word-break: break-word"
+                      class="text-xl m-0 text-color-secondary"
+                    >
+                      {{ evidence.description }} - tipo ({{
+                        translateType(evidence.type)
+                      }})
+                    </h6>
+                    @switch (evidence.type) {
+                      @case ('link') {
+                        <a
+                          [href]="evidence.externalLink"
+                          target="_blank"
+                          class="m-0 text-blue-600"
+                          style="word-wrap: break-word; max-width: 80vw"
+                        >
+                          {{ evidence.externalLink }}
+                        </a>
+                      }
+                      @case ('image') {
+                        @if (evidence.externalLink) {
+                          <a
+                            [href]="evidence.externalLink"
+                            target="_blank"
+                            class="m-0 text-blue-600"
+                            style="word-wrap: break-word; max-width: 80vw"
+                          >
+                            {{ evidence.externalLink }}
+                          </a>
+                        }
+                        <p-image
+                          [src]="evidence.fileLink ?? ''"
+                          alt="Image"
+                          width="300"
+                          [preview]="true"
+                        >
+                          <ng-template pTemplate="indicator">
+                            <div class="flex flex-column">
+                              <i class="pi pi-eye"></i>
+                              <p>Ver previsualización de la imagen</p>
+                            </div>
+                          </ng-template>
+                        </p-image>
+                      }
+                      @case ('document') {
+                        <a
+                          [href]="evidence.fileLink"
+                          target="_blank"
+                          class="m-0 text-blue-600"
+                          style="word-wrap: break-word; max-width: 80vw"
+                        >
+                          {{ evidence.fileLink }}
+                        </a>
+                      }
+                      @default {
+                        <p
+                          class="m-0"
+                          style="word-wrap: break-word; max-width: 80vw"
+                        >
+                          No hay evidencias creadas para esta colección de
+                          información
+                        </p>
+                      }
+                    }
+                  </div>
+                  <p-divider />
+                </article>
+              }
+            </div>
+          </section>
+        }
+      </p-panel>
+    }
+  }
+</section>
+<section>
+  <header>
+    <h3 class="m-0 mt-2 text-xl">
+      Criterios asociados
+      {{ criteria && criteria.length > 3 ? '(Primeros tres)' : '' }}
+    </h3>
+  </header>
+  <ul>
+    @for (criterion of criteria?.slice(0, 3); track criterion.id) {
+      <li class="m-3">{{ criterion.alias }}</li>
+    }
+  </ul>
+  @if (criteria && criteria.length > 3) {
+    <p-panel toggleable="true" toggler="icon" iconPos="start" collapsed>
+      <ng-template pTemplate="header">
+        <header>
+          <h3 class="m-0 text-xl">Ver todos</h3>
+        </header>
+      </ng-template>
+      <ul class="pl-0">
+        @for (criterion of criteria; track criterion.id) {
+          <li class="m-3">{{ criterion.alias }}</li>
+        }
+      </ul>
+    </p-panel>
+  }
+</section>

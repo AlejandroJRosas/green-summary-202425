@@ -55,6 +55,30 @@ export class InformationCollectionService {
         map((response) => (response.status === 'success' ? response.data : []))
       )
   }
+
+  getByRecopilationAndCategoryFilterNoErrors(
+    recopilationId: number,
+    categoryId: number
+  ): Observable<DepartmentAnswer[]> {
+    return this.http
+      .get<
+        BackendResponse<DepartmentAnswer[], unknown, unknown>
+      >(`${BaseUrl}/information-collections/department-answer/${recopilationId}/${categoryId}`)
+      .pipe(
+        map((response) =>
+          response.status === 'success'
+            ? response.data.filter((departmentAnswer) =>
+                departmentAnswer.informationCollections.every(
+                  (informationCollection) =>
+                    informationCollection.evidences.every(
+                      (evidence) => evidence.error == null
+                    )
+                )
+              )
+            : []
+        )
+      )
+  }
   create(
     informationCollection: InformationCollectionDTO
   ): Observable<BackendResponse<InformationCollection, unknown, unknown>> {
