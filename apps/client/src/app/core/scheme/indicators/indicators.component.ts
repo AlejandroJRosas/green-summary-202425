@@ -250,6 +250,7 @@ export class IndicatorsComponent
       alias: alias.value,
       helpText: helpText.value
     }
+    this.visibleCreate = false
     this.indicatorService.create(indicator).subscribe({
       next: () => {
         this.fetchCreateIndicator = false
@@ -258,6 +259,7 @@ export class IndicatorsComponent
         this.closeDialog()
       },
       error: (e) => {
+        this.visibleCreate = false
         this.fetchCreateIndicator = false
         this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
@@ -275,6 +277,7 @@ export class IndicatorsComponent
       alias: alias.value,
       helpText: helpText.value
     }
+    this.visibleEdit = false
     this.indicatorService.edit(this.indexEdit, indicator).subscribe({
       next: () => {
         this.fetchEditIndicator = false
@@ -284,6 +287,7 @@ export class IndicatorsComponent
       },
       error: (e) => {
         this.fetchEditIndicator = false
+        this.visibleEdit = false
         this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
       }
