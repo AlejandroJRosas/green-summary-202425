@@ -158,6 +158,7 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
       name: name.value,
       helpText: helpText.value
     }
+    this.visibleCreate = false
     this.categoryService.create(category).subscribe({
       next: () => {
         this.fetchCreateCategory = false
@@ -166,6 +167,7 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
         this.getCategoriesPerIndicator(this.indicatorIndex)
       },
       error: (e) => {
+        this.visibleCreate = false
         this.fetchCreateCategory = false
         this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
@@ -181,7 +183,7 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
       name: name.value,
       helpText: helpText.value
     }
-    console.log(category)
+    this.visibleEdit = false
     this.categoryService.edit(this.categoryEdit.id, category).subscribe({
       next: () => {
         this.fetchEditCategory = false
@@ -190,6 +192,7 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
         this.getCategoriesPerIndicator(this.indicatorIndex)
       },
       error: (e) => {
+        this.visibleEdit = false
         this.fetchEditCategory = false
         this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
