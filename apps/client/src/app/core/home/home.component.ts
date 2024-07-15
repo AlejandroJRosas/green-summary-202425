@@ -11,7 +11,6 @@ import { Recopilation } from '../../../shared/types/recopilation.type'
 import { TooltipIcon } from '../../common/tooltip-icon/tooltip-icon.component'
 import { TooltipModule } from 'primeng/tooltip'
 import { RouterLink } from '@angular/router'
-import { matrix } from './test-data'
 import { MatrixComponent } from './matrix/matrix.component'
 import { ButtonModule } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
@@ -38,13 +37,12 @@ export class HomeComponent implements OnInit {
 
   recopilations: Recopilation[] = []
   selectedRecopilation: number = 0
-  matrixData: MatrixInfoDto | null = matrix
+  matrixData: MatrixInfoDto | undefined
   dialogVisible: boolean = false
   dialogMatrixScrollHeight: string = 'calc(70vh - 1rem)'
 
   ngOnInit(): void {
     this.getActiveRecopilations()
-    this.selectedRecopilation = 23
   }
 
   getActiveRecopilations() {
