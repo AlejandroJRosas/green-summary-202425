@@ -143,7 +143,7 @@ export class InformationCollectionsService {
       departmentId: department.id,
       departmentName: department.fullName,
       recopilationId: recopilation.id,
-      recopilationname: recopilation.name,
+      recopilationName: recopilation.name,
       categoryId: category.id,
       categoryName: category.name
     }
@@ -206,7 +206,7 @@ export class InformationCollectionsService {
       departmentId: department.id,
       departmentName: department.fullName,
       recopilationId: recopilation.id,
-      recopilationname: recopilation.name,
+      recopilationName: recopilation.name,
       categoryId: category.id,
       categoryName: category.name
     }
