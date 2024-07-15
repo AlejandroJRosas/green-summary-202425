@@ -14,6 +14,7 @@ import { DepartmentPerRecopilation } from '../departments-per-recopilations/enti
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
 import { NotificationsService } from '../notifications/notifications.service'
 import { MailsService } from '../mails/mails.service'
+import { NOTIFICATION_TYPES } from '../notifications/notifications.constants'
 
 @Injectable()
 export class RecommendationsService {
@@ -52,13 +53,20 @@ export class RecommendationsService {
       category
     })
 
-    const description = `Se te recomendó la categoría ${categoryId}`
-    const notification = {
-      userId: departmentId,
-      description: description
+    const notificationCategory =
+      await this.categoriesRepository.findOneByOrFail({ id: categoryId })
+    const data = {
+      categoryId: notificationCategory.id,
+      categoryName: notificationCategory.name
     }
-    await this.notificationsService.create(notification)
+    const notificationDTO = {
+      data: data,
+      type: NOTIFICATION_TYPES.RECOMMENDATION,
+      userId: departmentId
+    }
+    await this.notificationsService.create(notificationDTO)
 
+    const description = `Se te recomendó la categoría ${categoryId}`
     const department = await this.departmentsRepository.findOneByOrFail({
       id: departmentId
     })
