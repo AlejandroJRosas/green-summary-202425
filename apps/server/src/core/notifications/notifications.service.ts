@@ -74,6 +74,37 @@ export class NotificationsService {
     return { notifications, count }
   }
 
+  async getByUserId(userId: number, unseen: boolean = false) {
+    if (!unseen) {
+      const notifications = await this.notificationRepository.find({
+        where: {
+          user: {
+            id: userId
+          }
+        },
+        order: {
+          createdAt: 'DESC'
+        }
+      })
+
+      return notifications
+    } else {
+      const unseenNotifications = await this.notificationRepository.find({
+        where: {
+          user: {
+            id: userId
+          },
+          seen: false
+        },
+        order: {
+          createdAt: 'DESC'
+        }
+      })
+
+      return unseenNotifications
+    }
+  }
+
   async getOne(id: number): Promise<Notification> {
     const notification = await this.notificationRepository.findOneOrFail({
       where: { id },
