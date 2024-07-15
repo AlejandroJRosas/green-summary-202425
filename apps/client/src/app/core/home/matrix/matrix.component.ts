@@ -21,7 +21,7 @@ import { CustomTdComponent } from './custom-td/custom-td.component'
 })
 export class MatrixComponent {
   @Input() selectedRecopilation: number = 0
-  @Input() matrixData: MatrixInfoDto | null = null
+  @Input() matrixData: MatrixInfoDto | undefined
   @Input() matrixScrollHeight: string = '60vh'
 
   getAnswer(answers: Answer[], categoryId: number): Answer | undefined {

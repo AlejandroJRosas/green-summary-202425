@@ -44,7 +44,7 @@ export class PreviewComponent {
 
   recopilationId: number = -1
 
-  matrixData: MatrixInfoDto | null = null
+  matrixData: MatrixInfoDto | undefined
 
   ngOnInit() {
     this.loadRecopilation()
