@@ -27,6 +27,4 @@ export class MatrixComponent {
   getAnswer(answers: Answer[], categoryId: number): Answer | undefined {
     return answers.find((item) => item.categoryId === categoryId)
   }
-
-  getLink() {}
 }
