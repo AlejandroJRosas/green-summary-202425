@@ -15,6 +15,7 @@ import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-typ
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-evidences-by-param.dto'
 import { NotificationsService } from '../notifications/notifications.service'
+import { MailsService } from '../mails/mails.service'
 
 @Injectable()
 export class EvidencesService {
@@ -29,7 +30,8 @@ export class EvidencesService {
     private readonly linkRepository: Repository<Link>,
     @InjectRepository(InformationCollection)
     private readonly informationCollectionRepository: Repository<InformationCollection>,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private mailsService: MailsService
   ) {}
 
   async findAll({
@@ -143,11 +145,18 @@ export class EvidencesService {
       const descriptionNotification = `El departamento ${collection.department.id} ha editado una evidencia en la colección de información ${collection.id} de la recopilación ${collection.recopilation.id} asociada a la categoría ${collection.category.id}`
       await this.notificationsService.createAll(descriptionNotification)
     } else {
+      const evidenceNotification =
+        await this.evidenceRepository.findOneByOrFail({ id })
+      const description = `Tienes un error en la evidencia: ${evidenceNotification.description}, de la colección de información: ${collection.name}, de la recopilación: ${collection.recopilation.name}, asociada a la categoría: ${collection.category.name}`
       const notification = {
         userId: collection.department.id,
-        description: `Tienes un error en la evidencia ${id} de la colección de información ${collection.id} de la recopilación ${collection.recopilation.id} asociada a la categoría ${collection.category.id}`
+        description: description
       }
       await this.notificationsService.create(notification)
+      this.mailsService.sendNotification(
+        collection.department.email,
+        description
+      )
     }
 
     return this.evidenceRepository.findOneByOrFail({ id })
