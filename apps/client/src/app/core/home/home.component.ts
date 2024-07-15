@@ -3,15 +3,17 @@ import { Component, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { DropdownModule } from 'primeng/dropdown'
 import { TableModule } from 'primeng/table'
-import { RecopilationService } from '../../services/recopilation.service'
+import {
+  MatrixInfoDto,
+  RecopilationService
+} from '../../services/recopilation.service'
 import { Recopilation } from '../../../shared/types/recopilation.type'
-import { Department } from '../../../shared/types/user.type'
-import { Category } from '../../../shared/types/category.type'
-import { Indicator } from '../../../shared/types/indicator.type'
-import { Criteria } from '../../../shared/types/criterion.type'
 import { TooltipIcon } from '../../common/tooltip-icon/tooltip-icon.component'
 import { TooltipModule } from 'primeng/tooltip'
 import { RouterLink } from '@angular/router'
+import { MatrixComponent } from './matrix/matrix.component'
+import { ButtonModule } from 'primeng/button'
+import { DialogModule } from 'primeng/dialog'
 
 @Component({
   selector: 'app-home',
@@ -23,7 +25,10 @@ import { RouterLink } from '@angular/router'
     TableModule,
     TooltipIcon,
     TooltipModule,
-    RouterLink
+    RouterLink,
+    MatrixComponent,
+    ButtonModule,
+    DialogModule
   ],
   templateUrl: './home.component.html'
 })
@@ -32,7 +37,9 @@ export class HomeComponent implements OnInit {
 
   recopilations: Recopilation[] = []
   selectedRecopilation: number = 0
-  matrixData: MatrixData | null = null
+  matrixData: MatrixInfoDto | undefined
+  dialogVisible: boolean = false
+  dialogMatrixScrollHeight: string = 'calc(70vh - 1rem)'
 
   ngOnInit(): void {
     this.getActiveRecopilations()
@@ -51,76 +58,32 @@ export class HomeComponent implements OnInit {
 
   getMatrixData() {
     if (this.selectedRecopilation) {
-      this.recopilationService.getById(this.selectedRecopilation).subscribe({
-        next: (recopilation) => {
-          if (recopilation) {
-            this.matrixData = {
-              id: recopilation.id,
-              name: recopilation.name,
-              description: recopilation.description,
-              startDate: recopilation.startDate,
-              endDate: recopilation.endDate,
-              departmentEndDate: recopilation.departmentEndDate,
-              isReady: recopilation.isReady,
-              departments: recopilation.departments.map((department) => ({
-                department: department.department,
-                recommendedCategories: department.recommendedCategories
-              })),
-              indicators: recopilation.indicators.map((indicator) => ({
-                indicator: indicator.indicator,
-                categories: this.getCategoriesArray(
-                  indicator.criteria.map((criterion) => criterion.category)
-                ),
-                criteria: indicator.criteria.map((criterion) => ({
-                  criterion: criterion.criterion,
-                  category: criterion.category
-                }))
-              }))
+      this.recopilationService
+        .getMatrixInfo(this.selectedRecopilation)
+        .subscribe({
+          next: (recopilation) => {
+            if (recopilation) {
+              this.matrixData = recopilation
             }
+            console.log(this.matrixData)
+          },
+          error: (error) => {
+            console.error(error)
           }
-          console.log(this.matrixData)
-        },
-        error: (error) => {
-          console.error(error)
-        }
-      })
+        })
     }
   }
 
-  getCategoriesArray(categories: Category[]): Category[] {
-    const categoriesArray: Category[] = []
-    categories.forEach((category) => {
-      if (!categoriesArray.some((item) => item.id === category.id)) {
-        categoriesArray.push(category)
-      }
-    })
-
-    return categoriesArray
+  showDialog() {
+    this.dialogMatrixScrollHeight = 'calc(70vh - 1rem)'
+    this.dialogVisible = true
   }
 
-  isRecommended(recommendations: Category[], category: Category) {
-    return recommendations.some((item) => item.id === category.id)
+  onMaximize() {
+    if (this.dialogMatrixScrollHeight === 'calc(80vh - 1rem)') {
+      this.dialogMatrixScrollHeight = 'calc(70vh - 1rem)'
+    } else {
+      this.dialogMatrixScrollHeight = 'calc(80vh - 1rem)'
+    }
   }
-}
-
-interface MatrixData {
-  id: number
-  name: string
-  description: string
-  startDate: Date
-  endDate: Date
-  departmentEndDate: Date
-  isReady: boolean
-  departments: {
-    department: Department
-    recommendedCategories: Category[]
-  }[]
-  indicators: {
-    indicator: Indicator
-    categories: Category[]
-    criteria: {
-      criterion: Criteria
-      category: Category
-    }[]
-  }[]
 }

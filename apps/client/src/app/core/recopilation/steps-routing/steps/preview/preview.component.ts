@@ -1,18 +1,18 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import { Component, Inject } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ButtonModule } from 'primeng/button'
 import { CalendarModule } from 'primeng/calendar'
 import { InputTextModule } from 'primeng/inputtext'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { TooltipModule } from 'primeng/tooltip'
-import { Recopilation } from '../../../../../../shared/types/recopilation.type'
 import { ReactiveFormsModule } from '@angular/forms'
 import { Toast } from '../../../../../common/toast/toast.component'
 import {
-  DetailedRecopilation,
+  MatrixInfoDto,
   RecopilationService
 } from '../../../../../services/recopilation.service'
 import { JsonPipe } from '@angular/common'
+import { MatrixComponent } from '../../../../home/matrix/matrix.component'
 
 @Component({
   selector: 'app-information-recopilation',
@@ -25,7 +25,8 @@ import { JsonPipe } from '@angular/common'
     CalendarModule,
     TooltipModule,
     Toast,
-    JsonPipe
+    JsonPipe,
+    MatrixComponent
   ],
   templateUrl: './preview.component.html'
 })
@@ -43,17 +44,20 @@ export class PreviewComponent {
 
   recopilationId: number = -1
 
-  recopilationData: DetailedRecopilation | null = null
+  matrixData: MatrixInfoDto | undefined
 
   ngOnInit() {
     this.loadRecopilation()
   }
 
   loadRecopilation() {
-    if (this.recopilationId !== -1) {
-      this.recopilationService.getById(this.recopilationId).subscribe({
-        next: (data) => {
-          if (data) this.recopilationData = data
+    if (this.recopilationId) {
+      this.recopilationService.getMatrixInfo(this.recopilationId).subscribe({
+        next: (recopilation) => {
+          if (recopilation) {
+            this.matrixData = recopilation
+          }
+          console.log(this.matrixData)
         },
         error: (error) => {
           console.error(error)

@@ -9,11 +9,7 @@ export const renameFile = (req, file, callback) => {
 }
 
 export const fileFilter = (req, file, callback) => {
-  if (
-    !file.originalname.match(
-      /\.(jpeg|jpg|webp|avif|png|svg|xls|xlsx|doc|docx|pdf)$/
-    )
-  ) {
+  if (!file.originalname.match(/\.(jpeg|jpg|gif|png|xls|xlsx|doc|docx|pdf)$/)) {
     return callback(new Error('Invalid format type'), false)
   }
   callback(null, true)

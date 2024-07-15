@@ -15,6 +15,8 @@ import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-typ
 import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-evidences-by-param.dto'
 import { NotificationsService } from '../notifications/notifications.service'
+import { MailsService } from '../mails/mails.service'
+import { NOTIFICATION_TYPES } from '../notifications/notifications.constants'
 
 @Injectable()
 export class EvidencesService {
@@ -29,7 +31,8 @@ export class EvidencesService {
     private readonly linkRepository: Repository<Link>,
     @InjectRepository(InformationCollection)
     private readonly informationCollectionRepository: Repository<InformationCollection>,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private mailsService: MailsService
   ) {}
 
   async findAll({
@@ -88,17 +91,31 @@ export class EvidencesService {
         break
 
       case EvidenceType.IMAGE:
-        if (
-          !createEvidenceDto.fileLink.match(/\.(jpeg|jpg|webp|avif|png|svg)$/)
-        ) {
+        if (!createEvidenceDto.fileLink.match(/\.(jpeg|jpg|png|gif)$/)) {
           throw new Error('Invalid format type')
         }
         break
     }
     let evidence: Evidence
 
-    const descriptionNotification = `El departamento ${collection.department.id} ha agregado una evidencia en la colección de información ${collection.id} de la recopilación ${collection.recopilation.id} asociada a la categoría ${collection.category.id}`
-    await this.notificationsService.createAll(descriptionNotification)
+    const data = {
+      departmentId: collection.department.id,
+      departmentName: collection.department.fullName,
+      collectionId: collection.id,
+      collectionName: collection.name,
+      recopilationId: collection.recopilation.id,
+      recopilationName: collection.recopilation.name,
+      categoryId: collection.category.id,
+      categoryName: collection.category.name
+    }
+
+    const notificationDTO = {
+      data: data,
+      type: NOTIFICATION_TYPES.EVIDENCE_CREATION,
+      userId: collection.department.id
+    }
+
+    await this.notificationsService.createAll(notificationDTO)
 
     switch (type) {
       case EvidenceType.DOCUMENT:
@@ -140,14 +157,51 @@ export class EvidencesService {
       updateEvidenceDto.error === '' ||
       updateEvidenceDto.error === undefined
     ) {
-      const descriptionNotification = `El departamento ${collection.department.id} ha editado una evidencia en la colección de información ${collection.id} de la recopilación ${collection.recopilation.id} asociada a la categoría ${collection.category.id}`
-      await this.notificationsService.createAll(descriptionNotification)
-    } else {
-      const notification = {
-        userId: collection.department.id,
-        description: `Tienes un error en la evidencia ${id} de la colección de información ${collection.id} de la recopilación ${collection.recopilation.id} asociada a la categoría ${collection.category.id}`
+      const data = {
+        departmentId: collection.department.id,
+        departmentName: collection.department.fullName,
+        collectionId: collection.id,
+        collectionName: collection.name,
+        recopilationId: collection.recopilation.id,
+        recopilationName: collection.recopilation.name,
+        categoryId: collection.category.id,
+        categoryName: collection.category.name
       }
-      await this.notificationsService.create(notification)
+
+      const notificationDTO = {
+        data: data,
+        type: NOTIFICATION_TYPES.EVIDENCE_EDITION,
+        userId: collection.department.id
+      }
+
+      await this.notificationsService.createAll(notificationDTO)
+    } else {
+      const evidenceNotification =
+        await this.evidenceRepository.findOneByOrFail({ id })
+      const data = {
+        evidenceId: evidenceNotification.id,
+        evidenceName: evidenceNotification.description,
+        departmentId: collection.department.id,
+        departmentName: collection.department.fullName,
+        collectionId: collection.id,
+        collectionName: collection.name,
+        recopilationId: collection.recopilation.id,
+        recopilationName: collection.recopilation.name,
+        categoryId: collection.category.id,
+        categoryName: collection.category.name
+      }
+
+      const notificationDTO = {
+        data: data,
+        type: NOTIFICATION_TYPES.EVIDENCE_ERROR,
+        userId: collection.department.id
+      }
+      const description = `Tienes un error en la evidencia: ${evidenceNotification.description}, de la colección de información: ${collection.name}, de la recopilación: ${collection.recopilation.name}, asociada a la categoría: ${collection.category.name}`
+      await this.notificationsService.create(notificationDTO)
+      this.mailsService.sendNotification(
+        collection.department.email,
+        description
+      )
     }
 
     return this.evidenceRepository.findOneByOrFail({ id })

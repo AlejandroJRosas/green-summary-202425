@@ -8,7 +8,8 @@ import {
   HttpCode,
   Query,
   HttpStatus,
-  Patch
+  Patch,
+  Req
 } from '@nestjs/common'
 import { NotificationsService } from './notifications.service'
 import { CreateNotificationDto } from './dto/create-notification.dto'
@@ -23,7 +24,7 @@ import { Role } from '../auth/role.enum'
 
 @ApiTags('Notifications')
 @Controller('notifications')
-@Roles(Role.Coordinator, Role.Admin)
+@Roles(Role.Coordinator, Role.Admin, Role.Department)
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 
@@ -58,6 +59,25 @@ export class NotificationsController {
       itemsPerPage
     )
     return paginatedItems
+  }
+
+  @Get('/own')
+  async getOwn(@Req() request: Request) {
+    console.log(request['user'].id)
+    const notifications = await this.notificationsService.getByUserId(
+      request['user'].id
+    )
+    return notifications
+  }
+
+  @Get('/own/unseen')
+  async getOwnUnseen(@Req() request: Request) {
+    console.log(request['user'].id)
+    const notifications = await this.notificationsService.getByUserId(
+      request['user'].id,
+      true
+    )
+    return notifications
   }
 
   @Get('/:id')

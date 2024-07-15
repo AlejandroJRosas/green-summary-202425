@@ -1,5 +1,19 @@
 .body {
-  z-index: 0;
+  width: calc(100% - 5rem);
+  height: 100%;
+  margin-left: 5rem;
+  position: relative;
+  top: 0;
   transition: all 0.5s ease;
   padding: 3rem;
+}
+
+.body-trimmed {
+  width: calc(100% - 16.5625rem);
+  margin-left: 16.5625rem;
+}
+
+.body-md-screen {
+  width: calc(100% - 5rem);
+  margin-left: 5rem;
 }

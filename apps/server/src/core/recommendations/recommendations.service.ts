@@ -13,6 +13,8 @@ import { OrderByParamDto } from './dto/order-recommendations-by-param.dto'
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
 import { NotificationsService } from '../notifications/notifications.service'
+import { MailsService } from '../mails/mails.service'
+import { NOTIFICATION_TYPES } from '../notifications/notifications.constants'
 
 @Injectable()
 export class RecommendationsService {
@@ -27,7 +29,8 @@ export class RecommendationsService {
     private readonly recopilationsRepository: Repository<Recopilation>,
     @InjectRepository(DepartmentPerRecopilation)
     private readonly departmentsPerRecopilationsRepository: Repository<DepartmentPerRecopilation>,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private mailsService: MailsService
   ) {}
 
   async create(
@@ -50,12 +53,24 @@ export class RecommendationsService {
       category
     })
 
-    const notification = {
-      userId: departmentId,
-      description: `Se te recomendó la categoría ${categoryId}`
+    const notificationCategory =
+      await this.categoriesRepository.findOneByOrFail({ id: categoryId })
+    const data = {
+      categoryId: notificationCategory.id,
+      categoryName: notificationCategory.name
     }
+    const notificationDTO = {
+      data: data,
+      type: NOTIFICATION_TYPES.RECOMMENDATION,
+      userId: departmentId
+    }
+    await this.notificationsService.create(notificationDTO)
 
-    await this.notificationsService.create(notification)
+    const description = `Se te recomendó la categoría ${categoryId}`
+    const department = await this.departmentsRepository.findOneByOrFail({
+      id: departmentId
+    })
+    this.mailsService.sendNotification(department.email, description)
 
     return this.recommendationsRepository.save(recommendation)
   }

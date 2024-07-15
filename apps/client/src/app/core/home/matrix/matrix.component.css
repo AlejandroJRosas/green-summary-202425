@@ -1,0 +1,14 @@
+th {
+  text-align: center;
+  border-right: 1px solid #e5e7eb;
+}
+
+td {
+  padding: 0;
+  border-right: 1px solid #e5e7eb;
+  height: inherit;
+}
+
+tr {
+  height: 1px;
+}

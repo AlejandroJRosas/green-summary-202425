@@ -3,7 +3,10 @@
     <h3 class="text-color-secondary">Previsualización de la recopilación</h3>
   </header>
   <section class="flex flex-col">
-    <pre>{{ this.recopilationData | json }}</pre>
+    <app-matrix
+      [matrixData]="matrixData"
+      [selectedRecopilation]="recopilationId"
+    ></app-matrix>
   </section>
   <footer class="flex justify-content-between pt-7">
     <p-button

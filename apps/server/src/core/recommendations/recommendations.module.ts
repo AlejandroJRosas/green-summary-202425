@@ -10,6 +10,7 @@ import { DepartmentPerRecopilation } from '../departments-per-recopilations/enti
 import { NotificationsService } from '../notifications/notifications.service'
 import { Notification } from '../notifications/entities/notification.entity'
 import { User } from '../users/entities/user.entity'
+import { MailsService } from '../mails/mails.service'
 
 @Module({
   imports: [
@@ -23,7 +24,7 @@ import { User } from '../users/entities/user.entity'
       User
     ])
   ],
-  providers: [RecommendationsService, NotificationsService],
+  providers: [RecommendationsService, NotificationsService, MailsService],
   controllers: [RecommendationsController]
 })
 export class RecommendationsModule {}
