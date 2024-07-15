@@ -10,7 +10,7 @@ export class MailsService {
     await this.mailerService.sendMail({
       to: user,
       subject: 'Datos para iniciar sesión',
-      amp: constructLoginDataMail(user, password)
+      html: constructLoginDataMail(user, password)
     })
   }
 
