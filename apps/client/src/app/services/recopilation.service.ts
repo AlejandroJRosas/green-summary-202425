@@ -214,9 +214,9 @@ export type MatrixInfoDto = {
   id: number
   name: string
   description: string
-  startDate: Date
-  endDate: Date
-  departmentEndDate: Date
+  startDate: string
+  endDate: string
+  departmentEndDate: string
   isReady: boolean
   indicators: {
     index: number

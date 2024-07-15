@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component, OnInit } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms'
 import { DropdownModule } from 'primeng/dropdown'
 import { TableModule } from 'primeng/table'
@@ -14,6 +14,7 @@ import { RouterLink } from '@angular/router'
 import { MatrixComponent } from './matrix/matrix.component'
 import { ButtonModule } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
+import { Toast } from '../../common/toast/toast.component'
 
 @Component({
   selector: 'app-home',
@@ -30,10 +31,14 @@ import { DialogModule } from 'primeng/dialog'
     ButtonModule,
     DialogModule
   ],
-  templateUrl: './home.component.html'
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css'
 })
 export class HomeComponent implements OnInit {
-  constructor(private recopilationService: RecopilationService) {}
+  constructor(
+    @Inject(Toast) private toast: Toast,
+    private recopilationService: RecopilationService
+  ) {}
 
   recopilations: Recopilation[] = []
   selectedRecopilation: number = 0
@@ -50,8 +55,10 @@ export class HomeComponent implements OnInit {
       next: (recopilations) => {
         if (recopilations.status === 'success') {
           this.recopilations = recopilations.data
-          console.log(recopilations.data)
         }
+      },
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
@@ -65,10 +72,9 @@ export class HomeComponent implements OnInit {
             if (recopilation) {
               this.matrixData = recopilation
             }
-            console.log(this.matrixData)
           },
-          error: (error) => {
-            console.error(error)
+          error: (e) => {
+            this.toast.show('error', 'Error', e.error.data.message)
           }
         })
     }
@@ -85,5 +91,14 @@ export class HomeComponent implements OnInit {
     } else {
       this.dialogMatrixScrollHeight = 'calc(80vh - 1rem)'
     }
+  }
+
+  parseDate(date: string | undefined): string {
+    if (date === undefined) {
+      return ''
+    }
+    return new Date(date).toLocaleDateString('es-ES', {
+      timeZone: 'UTC'
+    })
   }
 }

@@ -1,4 +1,14 @@
-<h2>Matriz de Seguimiento</h2>
+@if (matrixData === undefined) {
+  <h2>Matriz de Seguimiento</h2>
+} @else {
+  <h2>
+    Matriz de Seguimiento - {{ matrixData.name }}
+    (Inicia:
+    {{ parseDate(matrixData.startDate) }}
+    - Termina:
+    {{ parseDate(matrixData.departmentEndDate) }})
+  </h2>
+}
 <p-dropdown
   [options]="recopilations"
   [(ngModel)]="selectedRecopilation"
@@ -7,48 +17,58 @@
   optionValue="id"
   placeholder="Selecciona una recopilación"
 />
-
 <button
   type="button"
+  class="open-big"
   (click)="showDialog()"
   pButton
   icon="pi pi-external-link"
 ></button>
-<app-matrix
-  [selectedRecopilation]="selectedRecopilation"
-  [matrixData]="matrixData"
-  [matrixScrollHeight]="'75vh'"
-></app-matrix>
-
-<p-dialog
-  header="{{ matrixData?.name }}"
-  [resizable]="false"
-  [modal]="true"
-  [maximizable]="true"
-  appendTo="body"
-  [(visible)]="dialogVisible"
-  [draggable]="false"
-  [closeOnEscape]="true"
-  [style]="{ width: '80vw' }"
-  [contentStyle]="{
-    height: '80vh'
-  }"
-  (onMaximize)="onMaximize()"
->
+<div class="matrix">
   <app-matrix
     [selectedRecopilation]="selectedRecopilation"
     [matrixData]="matrixData"
-    [matrixScrollHeight]="dialogMatrixScrollHeight"
+    [matrixScrollHeight]="'75vh'"
   ></app-matrix>
-  <ng-template pTemplate="footer">
-    <button
-      type="button"
-      pButton
-      pRipple
-      icon="pi pi-times"
-      (click)="dialogVisible = false"
-      label="Cerrar"
-      class="p-button-text"
-    ></button>
-  </ng-template>
-</p-dialog>
+</div>
+
+@if (matrixData !== undefined) {
+  <p-dialog
+    header="
+    {{ matrixData.name }}
+    (Inicia:
+    {{ parseDate(matrixData.startDate) }}
+    - Termina:
+    {{ parseDate(matrixData.departmentEndDate) }})
+  "
+    [resizable]="false"
+    [modal]="true"
+    [maximizable]="true"
+    appendTo="body"
+    [(visible)]="dialogVisible"
+    [draggable]="false"
+    [closeOnEscape]="true"
+    [style]="{ width: '80vw' }"
+    [contentStyle]="{
+      height: '80vh'
+    }"
+    (onMaximize)="onMaximize()"
+  >
+    <app-matrix
+      [selectedRecopilation]="selectedRecopilation"
+      [matrixData]="matrixData"
+      [matrixScrollHeight]="dialogMatrixScrollHeight"
+    ></app-matrix>
+    <ng-template pTemplate="footer">
+      <button
+        type="button"
+        pButton
+        pRipple
+        icon="pi pi-times"
+        (click)="dialogVisible = false"
+        label="Cerrar"
+        class="p-button-text"
+      ></button>
+    </ng-template>
+  </p-dialog>
+}
