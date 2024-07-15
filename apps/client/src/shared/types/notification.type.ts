@@ -9,6 +9,10 @@ export interface Notification {
     recopilationName: string
     categoryId: number
     categoryName: string
+    collectionId: number
+    collectionName: string
+    evidenceId: number
+    evidenceName: string
   }
   createdAt: Date
 }

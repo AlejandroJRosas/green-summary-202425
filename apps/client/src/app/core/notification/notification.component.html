@@ -1,13 +1,17 @@
 <section>
   <div class="flex flex-row align-items-start gap-3">
-    <p-avatar
-      [label]="LabelAvatar"
-      shape="circle"
-      size="normal"
-      [style]="{ 'background-color': '#00ad7c', 'color': '#ffffff' }"
-    />
+    @if (this.userType === 'coordinator' || this.userType === 'admin') {
+      <p-avatar
+        [label]="LabelAvatar"
+        shape="circle"
+        size="normal"
+        [style]="{ 'background-color': '#00ad7c', 'color': '#ffffff' }"
+      />
+    }
     <div class="flex flex-column align-items-start justify-content-start">
-      <h3 class="m-0">{{ notification.data.departmentName }}</h3>
+      @if (this.userType === 'coordinator' || this.userType === 'admin') {
+        <h3 class="m-0">{{ notification.data.departmentName }}</h3>
+      }
       @switch (notification.type) {
         @case ('recommendation') {
           <p class="my-2">
@@ -22,12 +26,18 @@
               ></a
             >
           </p>
-          <i class="m-0 text-base">{{ getDuration(notification.createdAt) }}</i>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
         }
         @case ('information_collection_creation') {
           <p class="my-2">
             El departamento {{ notification.data.departmentName }} ha
-            <strong>creado</strong> una nueva colección de información en la
+            <strong>creado</strong> una nueva colección de información
+            {{ notification.data.collectionName }} en la
             <a
               [href]="getLink()"
               style="text-decoration: none"
@@ -38,12 +48,18 @@
               ></a
             >
           </p>
-          <i class="m-0 text-base">{{ getDuration(notification.createdAt) }}</i>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
         }
         @case ('information_collection_edition') {
           <p class="my-2">
             El departamento {{ notification.data.departmentName }} ha
-            <strong>editado</strong> una colección de información en la
+            <strong>editado</strong> una colección de información
+            {{ notification.data.collectionName }} en la
             <a
               [href]="getLink()"
               style="text-decoration: none"
@@ -54,12 +70,18 @@
               ></a
             >
           </p>
-          <i class="m-0 text-base">{{ getDuration(notification.createdAt) }}</i>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
         }
         @case ('evidence_creation') {
           <p class="my-2">
             El departamento {{ notification.data.departmentName }} ha
-            <strong>creado</strong> una nueva evidencia
+            <strong>creado</strong> una nueva evidencia en la colección
+            {{ notification.data.collectionName }}
             <a
               [href]="getLink()"
               style="text-decoration: none"
@@ -70,12 +92,18 @@
               ></a
             >
           </p>
-          <i class="m-0 text-base">{{ getDuration(notification.createdAt) }}</i>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
         }
         @case ('evidence_edition') {
           <p class="my-2">
             El departamento {{ notification.data.departmentName }} ha
-            <strong>editado</strong> una evidencia
+            <strong>editado</strong> una evidencia en la colección
+            {{ notification.data.collectionName }}
             <a
               [href]="getLink()"
               style="text-decoration: none"
@@ -86,11 +114,17 @@
               ></a
             >
           </p>
-          <i class="m-0 text-base">{{ getDuration(notification.createdAt) }}</i>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
         }
         @case ('evidence_error') {
           <p class="my-2">
-            Hay una evidencia con error en la
+            Hay una evidencia con error en la colección
+            {{ notification.data.collectionName }} de la
             <a
               [href]="getLink()"
               style="text-decoration: none"
@@ -101,7 +135,12 @@
               ></a
             >
           </p>
-          <i class="m-0 text-base">{{ getDuration(notification.createdAt) }}</i>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
         }
       }
     </div>

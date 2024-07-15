@@ -42,7 +42,11 @@ export class BodyComponent implements OnInit {
         recopilationId: 0,
         recopilationName: '',
         categoryId: 0,
-        categoryName: ''
+        categoryName: '',
+        collectionId: 0,
+        collectionName: '',
+        evidenceId: 0,
+        evidenceName: ''
       },
       createdAt: new Date()
     }
@@ -70,7 +74,6 @@ export class BodyComponent implements OnInit {
       next: (res) => {
         if (res.status === 'success') {
           this.unSeenNotifications = res.data
-          console.log(this.unSeenNotifications)
         }
       },
       error: (e) => {

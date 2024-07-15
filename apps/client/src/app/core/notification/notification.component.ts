@@ -3,11 +3,12 @@ import { AvatarModule } from 'primeng/avatar'
 import { Notification } from '../../../shared/types/notification.type'
 import { User } from '../../../shared/types/user.type'
 import { NotificationService } from '../../services/notification.service'
+import { BadgeModule } from 'primeng/badge'
 
 @Component({
   selector: 'app-notification',
   standalone: true,
-  imports: [AvatarModule],
+  imports: [AvatarModule, BadgeModule],
   templateUrl: './notification.component.html',
   styles: ``
 })
@@ -23,13 +24,19 @@ export class NotificationComponent implements OnInit {
       recopilationId: 0,
       recopilationName: '',
       categoryId: 0,
-      categoryName: ''
+      categoryName: '',
+      collectionId: 0,
+      collectionName: '',
+      evidenceId: 0,
+      evidenceName: ''
     },
     createdAt: new Date()
   }
   LabelAvatar: string = ''
+  userType: string = ''
   ngOnInit() {
     this.setLabelAvatar()
+    this.getDataLocalStorage()
   }
   setLabelAvatar() {
     this.LabelAvatar = this.getLabelAvatar(
@@ -40,6 +47,9 @@ export class NotificationComponent implements OnInit {
     const words = fullName.split(' ')
     const initials = words.slice(0, 2).map((word) => word.charAt(0))
     return initials.join('')
+  }
+  getDataLocalStorage() {
+    this.userType = JSON.parse(localStorage.getItem('user')!).type
   }
   getLink(): string {
     const localUserString = localStorage.getItem('user')
