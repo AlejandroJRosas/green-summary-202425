@@ -91,9 +91,7 @@ export class EvidencesService {
         break
 
       case EvidenceType.IMAGE:
-        if (
-          !createEvidenceDto.fileLink.match(/\.(jpeg|jpg|webp|avif|png|svg)$/)
-        ) {
+        if (!createEvidenceDto.fileLink.match(/\.(jpeg|jpg|png|gif)$/)) {
           throw new Error('Invalid format type')
         }
         break
