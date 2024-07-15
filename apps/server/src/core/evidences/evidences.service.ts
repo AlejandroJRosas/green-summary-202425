@@ -104,7 +104,7 @@ export class EvidencesService {
       collectionId: collection.id,
       collectionName: collection.name,
       recopilationId: collection.recopilation.id,
-      recopilationname: collection.recopilation.name,
+      recopilationName: collection.recopilation.name,
       categoryId: collection.category.id,
       categoryName: collection.category.name
     }
@@ -163,7 +163,7 @@ export class EvidencesService {
         collectionId: collection.id,
         collectionName: collection.name,
         recopilationId: collection.recopilation.id,
-        recopilationname: collection.recopilation.name,
+        recopilationName: collection.recopilation.name,
         categoryId: collection.category.id,
         categoryName: collection.category.name
       }
@@ -186,7 +186,7 @@ export class EvidencesService {
         collectionId: collection.id,
         collectionName: collection.name,
         recopilationId: collection.recopilation.id,
-        recopilationname: collection.recopilation.name,
+        recopilationName: collection.recopilation.name,
         categoryId: collection.category.id,
         categoryName: collection.category.name
       }
