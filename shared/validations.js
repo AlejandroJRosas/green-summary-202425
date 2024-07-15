@@ -6,7 +6,7 @@ const VALUES = {
   departmentEmailAmount: 320,
   departmentPasswordAmount: 64,
   helpTextMinAmount: 1,
-  helpTextMaxAmount: 128,
+  helpTextMaxAmount: 180,
   nameAliasMinAmount: 10,
   indicatorNameAliasMaxAmount: 40,
   categoryNameMaxAmount: 128,
