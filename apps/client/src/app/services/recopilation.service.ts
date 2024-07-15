@@ -40,6 +40,13 @@ export class RecopilationService {
     )
   }
 
+  getActiveMapped(): Observable<Recopilation[]> {
+    return this.http
+      .get<
+        BackendResponse<Recopilation[], unknown, unknown>
+      >(`${BaseUrl}/recopilations/active`)
+      .pipe(map((res) => (res.status === 'success' ? res.data : [])))
+  }
   getMatrixInfo(id: number): Observable<MatrixInfoDto | null> {
     return this.http
       .get<

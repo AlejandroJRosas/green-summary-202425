@@ -1,0 +1,44 @@
+<p-dialog
+  [(visible)]="visible"
+  [modal]="true"
+  [draggable]="false"
+  [style]="{ width: '30rem' }"
+  (onHide)="hideDialog()"
+>
+  <ng-template pTemplate="header">
+    <header>
+      <h2 class="m-0">
+        Generación de word para categoría de {{ categoryName }}
+      </h2>
+    </header>
+  </ng-template>
+  <form [formGroup]="formGroup">
+    <p-listbox
+      [options]="criteria!"
+      filter
+      [virtualScrollOptions]="{
+        autoSize: true
+      }"
+      optionLabel="alias"
+      formControlName="criterion"
+      emptyMessage="No hay criterios disponibles"
+      emptyFilterMessage="No hay criterios disponibles que coincidan con la búsqueda"
+      scrollHeight="250px"
+    />
+  </form>
+  <ng-template pTemplate="footer">
+    <p-button
+      label="Cancelar"
+      [text]="true"
+      severity="danger"
+      (onClick)="hideDialog()"
+    />
+    <p-button
+      label="Generar Word"
+      [outlined]="true"
+      severity="success"
+      (onClick)="generateWord()"
+      [disabled]="formGroup.invalid"
+    />
+  </ng-template>
+</p-dialog>

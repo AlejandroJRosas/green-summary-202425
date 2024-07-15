@@ -1,0 +1,18 @@
+<header>
+  <h2 class="text-xl">{{ category?.name }}</h2>
+  @if (departmentAnswers && departmentAnswers.length > 0) {
+    <p-button
+      label="Generar Word"
+      (onClick)="modalVisible = true"
+      class="button"
+      severity="success"
+    />
+    <app-word-generation-modal
+      style="width: 0"
+      [(visible)]="modalVisible"
+      [criteria]="criteria"
+      [recopilationId]="recopilationId"
+      [categoryName]="category?.name"
+    />
+  }
+</header>

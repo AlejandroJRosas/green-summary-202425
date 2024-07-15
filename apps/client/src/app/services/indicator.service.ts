@@ -75,6 +75,18 @@ export class IndicatorService {
     )
   }
 
+  getByRecopilation(
+    recopilationId: number
+  ): Observable<IndicatorByRecopilation[]> {
+    return this.http
+      .get<
+        BackendResponse<IndicatorByRecopilation[], unknown, unknown>
+      >(`${BaseUrl}/indicators/recopilation/${recopilationId}`)
+      .pipe(
+        map((response) => (response.status === 'success' ? response.data : []))
+      )
+  }
+
   create(
     indicator: CreateIndicatorDTO
   ): Observable<BackendResponse<Indicator, unknown, unknown>> {
@@ -110,3 +122,13 @@ export type Scheme = Indicator & {
   categories: Category[]
   criterias: Criteria[]
 }
+
+export interface IndicatorByRecopilation extends Indicator {
+  categories: CategoryByRecopilation[]
+}
+
+export interface CategoryByRecopilation extends Omit<Category, 'indicator'> {
+  criteria: CriterionByRecopilation[]
+}
+
+interface CriterionByRecopilation extends Omit<Criteria, 'indicator'> {}
