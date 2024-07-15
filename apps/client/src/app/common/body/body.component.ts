@@ -81,6 +81,7 @@ export class BodyComponent implements OnInit {
         console.error(e)
       }
     })
+  }
 
   @Input() isCollapsed = false
   @Input() screenWidth = 0

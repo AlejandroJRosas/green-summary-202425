@@ -1,4 +1,4 @@
-<div class="mx-4 my-3">
+<div class="mx-4 my-3" class="body" [ngClass]="getBodyClass()">
   <header class="flex flex-row justify-content-between">
     <div class="flex flex-row align-items-center">
       <img
@@ -69,6 +69,7 @@
       }
     </div>
   </p-overlayPanel>
-<div class="body" [ngClass]="getBodyClass()">
-  <router-outlet></router-outlet>
+  <div>
+    <router-outlet></router-outlet>
+  </div>
 </div>
