@@ -1,0 +1,132 @@
+criteriaId,indicatorIndex,subIndex,name,alias,helpText,requiresEvidence
+14,3000,1,Energy-efficient practices,Prácticas de eficiencia energética,"Evaluar si la organización implementa medidas para reducir el consumo de energía y, por ende, las emisiones de CO₂ por empleado.",t
+15,3000,2,Sustainable commuting,Desplazamiento sostenible,"Considerar si se promueve el uso de transporte público, bicicletas o vehículos eléctricos para reducir la huella de carbono del desplazamiento de los empleados.",t
+16,4321,1,Pay equity,Equidad salarial,Verificar si existe igualdad de remuneración entre géneros para puestos similares.,f
+17,4321,2,Leadership representation,Representación en cargos directivos,Evaluar la presencia de mujeres en roles de liderazgo y la promoción de la diversidad en la toma de decisiones.,t
+18,8080,2,Water reuse and recycling,Reutilización y reciclaje del agua,Considerar si se recicla o reutiliza el agua en la organización para minimizar el impacto ambiental.,f
+19,8080,1,Water efficiency,Eficiencia en el uso del agua,Analizar si se implementan prácticas para reducir el consumo de agua en los procesos de producción.,f
+45,223,1,prueba ordenamiento,prueba ordenamiento,prueba,t
+97,1,1,Types of higher education institution ,Tipos de institución de educación superior,Texto de Ayuda,f
+98,1,2,Climate,Clima,Texto de Ayuda,f
+99,1,3,Number of campus sites,Número de sitios del campus,Texto de Ayuda,t
+100,1,4,Campus setting,Entorno del campus,Texto de Ayuda,t
+101,1,5,Total campus area (m2),Área total del campus (m2),Texto de Ayuda,t
+102,1,6,Total campus ground floor area of buildings (m2),Superficie total de la planta baja de los edificios del campus (m2),Texto de Ayuda,f
+103,1,7,Total campus buildings area (m2),Área total de edificios del campus (m2),Texto de Ayuda,t
+104,1,8,The ratio of open space area to total area,La relación entre el área de espacio abierto y el área total.,Texto de Ayuda,t
+105,1,9,Total area on campus covered in forest vegetation,Área total del campus cubierta de vegetación forestal,Texto de Ayuda,t
+106,1,10,Total area on campus covered in planted vegetation,Área total del campus cubierta con vegetación plantada,Texto de Ayuda,t
+107,1,11,Total area on campus for water absorption besides the forest and planted vegetation,Área total del campus para absorción de agua además del bosque y la vegetación plantada,Texto de Ayuda,t
+108,1,12,Total number of regular students,Número total de estudiantes regulares,Texto de Ayuda,f
+109,1,13,Total number of online students,Número total de estudiantes en línea,Texto de Ayuda,f
+110,1,14,Total number of academic and administrative staff,Número total de personal académico y administrativo,Texto de Ayuda,f
+111,1,15,The total open space area divided by the total campus population,El área total de espacios abiertos dividida por la población total del campus.,Texto de Ayuda,f
+112,1,16,Total university budget (in US Dollars),Presupuesto universitario total (en dólares estadounidenses),Texto de Ayuda,f
+113,1,17,University budget for sustainability effort (in US Dollars),Presupuesto universitario para esfuerzos de sostenibilidad (en dólares estadounidenses),Texto de Ayuda,t
+114,1,18,Percentage of university budget for sustainability efforts,Porcentaje del presupuesto universitario para esfuerzos de sostenibilidad,Texto de Ayuda,f
+115,1,19,Percentage of operation and maintenance activities of building in one year period,Porcentaje de actividades de operación y mantenimiento del edificio en el período de un año,Texto de Ayuda,t
+116,1,20,"Campus facilities for disabled, special needs and/or maternity care","Instalaciones del campus para discapacitados, necesidades especiales y/o atención de maternidad.",Texto de Ayuda,t
+117,1,21,Security and safety facilities,Instalaciones de seguridad y protección.,Texto de Ayuda,t
+118,1,22,"Health infrastructure facilities for students, academics and administrative staffs'' well-bein","Instalaciones de infraestructura de salud para el bienestar de estudiantes, académicos y personal administrativo.",Texto de Ayuda,t
+119,1,23,"Conservation: plant (flora), animal (fauna), or wildlife, genetic resources for food and wildlife, genetic resources for food and agriculture secured in either medium or long- term conservation facilities","Conservación: plantas (flora), animales (fauna) o vida silvestre, recursos genéticos para la alimentación y la vida silvestre, recursos genéticos para la alimentación y la agricultura asegurados en instalaciones de conservación a mediano o largo plazo.",Texto de Ayuda,t
+120,1,24,"Planning, implementation, monitoring and/or evaluation of all programs related to Setting and Infrastructure through the utilization of Information and Communication Technology (ICT)","Planificación, implementación, seguimiento y/o evaluación de todos los programas relacionados con el Entorno y la Infraestructura mediante la utilización de Tecnologías de la Información y la Comunicación (TIC)",Texto de Ayuda,t
+121,2,1,Energy efficient appliances usage,Uso de electrodomésticos energéticamente eficientes,Texto de Ayuda,t
+122,2,2,Total campus' smart building area (m2 ),Superficie total del edificio inteligente del campus (m2 ),Texto de Ayuda,f
+123,2,3,Smart building implementation,Implantación de edificios inteligentes,Texto de Ayuda,t
+124,2,4,Number of renewable energy sources on campus,Número de fuentes de energía renovables en el campus,Texto de Ayuda,f
+125,2,5,Renewable energy sources and their amount of the energy produced,"
+Fuentes de energía renovables y su cantidad de energía producida.",Texto de Ayuda,t
+126,2,6,Electricity usage per year (in kilowatt hours),Consumo de electricidad por año (en kilovatios hora),Texto de Ayuda,t
+127,2,7,Total electricity usage divided by total campus' population (kWh per person),"
+Uso total de electricidad dividido por la población total del campus (kWh por persona)",Texto de Ayuda,f
+128,2,8,The ratio of renewable energy production divided by total energy usage per year,La proporción de producción de energía renovable dividida por el uso total de energía por año.,Texto de Ayuda,f
+129,2,9,Elements of green building implementation as reflected in all construction and renovation policies,"
+Elementos de la implementación de edificios sustentables reflejados en todas las políticas de construcción y renovación.",Texto de Ayuda,t
+130,2,10,Greenhouse gas emission reduction program,"
+Programa de reducción de emisiones de gases de efecto invernadero",Texto de Ayuda,t
+131,2,11,"Total carbon footprint (CO₂ emission in the last 12 months, in metric tons)","
+Huella de carbono total (emisiones de CO₂ en los últimos 12 meses, en toneladas métricas)",Texto de Ayuda,t
+132,2,12,Total carbon footprint divided by total campus' population (metric tons per person),Huella de carbono total dividida por la población total del campus (toneladas métricas por persona),Texto de Ayuda,f
+133,2,13,Number of innovative program(s) in energy and climate change,Número de programas innovadores en energía y cambio climático,Texto de Ayuda,t
+134,2,14,Impactful university program(s) on climate change,Programa(s) universitario(s) impactante(s) sobre el cambio climático,Texto de Ayuda,t
+135,2,15,"Planning, implementation, monitoring and/or evaluation of all programs related to Energy and Climate Change through the utilization of Information and Communication Technology (ICT)","
+Planificación, implementación, seguimiento y/o evaluación de todos los programas relacionados con Energía y Cambio Climático mediante la utilización de Tecnologías de la Información y la Comunicación (TIC)",Texto de Ayuda,t
+136,3,1,"3R (Reduce, Reuse, Recycle) program for university''s waste","
+Programa 3R (Reducir, Reutilizar, Reciclar) para los residuos universitarios",Texto de Ayuda,t
+137,3,2,Program to reduce the use of paper and plastic on campus,Programa para reducir el uso de papel y plástico en el campus,Texto de Ayuda,t
+138,3,3,Total volume organic waste produced,Volumen total de residuos orgánicos producidos,Texto de Ayuda,t
+139,3,4,Total volume organic waste treated,Volumen total de residuos orgánicos tratados,Texto de Ayuda,t
+140,3,5,Organic waste treatment,Tratamiento de residuos orgánicos,Texto de Ayuda,t
+141,3,6,Total volume inorganic waste produced,"
+Volumen total de residuos inorgánicos producidos",Texto de Ayuda,t
+142,3,7,Total volume inorganic waste treated,Volumen total de residuos inorgánicos tratados,Texto de Ayuda,t
+143,3,8,Inorganic waste treatment,Tratamiento de residuos inorgánicos,Texto de Ayuda,t
+144,3,9,Total volume toxic waste produced,Volumen total de residuos tóxicos producidos,Texto de Ayuda,t
+145,3,10,Total volume toxic waste treated,Volumen total de residuos tóxicos tratados,Texto de Ayuda,t
+146,3,11,Toxic waste treatment,Tratamiento de residuos tóxicos,Texto de Ayuda,t
+147,3,12,Sewage disposal,"
+Eliminación de aguas residuales",Texto de Ayuda,t
+148,3,13,"Planning, implementation, monitoring and/or evaluation of all programs related to Waste Management through the utilization of Information and Communication Technology (ICT)","Planificación, implementación, seguimiento y/o evaluación de todos los programas relacionados con la Gestión de Residuos mediante la utilización de Tecnologías de la Información y la Comunicación (TIC)",Texto de Ayuda,t
+149,4,1,Water conservation program and implementation,"
+Programa e implementación de conservación del agua",Texto de Ayuda,t
+150,4,2,Water recycling program implementation,Implementación del programa de reciclaje de agua.,Texto de Ayuda,t
+151,4,3,Water efficient appliances usage,Uso de electrodomésticos que ahorran agua,Texto de Ayuda,t
+152,4,4,Consumption of treated water,"
+Consumo de agua tratada",Texto de Ayuda,t
+153,4,5,Water pollution control in the campus area,Control de la contaminación del agua en el área del campus.,Texto de Ayuda,t
+154,4,6,"Planning, implementation, monitoring and/or evaluation of all programs related to Water Management through the utilization of Information and Communication Technology (ICT)","Planificación, implementación, seguimiento y/o evaluación de todos los programas relacionados con la Gestión del Agua mediante la utilización de Tecnologías de la Información y la Comunicación (TIC)",Texto de Ayuda,t
+155,5,1,Number of cars actively used and managed by the university,"Número de automóviles utilizados y gestionados activamente por la universidad.
+",Texto de Ayuda,f
+156,5,2,Number of cars entering the university daily,Número de automóviles que ingresan a la universidad diariamente.,Texto de Ayuda,f
+157,5,3,Number of motorcycles entering the university daily,"
+Número de motocicletas que ingresan diariamente a la universidad",Texto de Ayuda,f
+158,5,4,The total number of vehicles (cars and motorcycles with combustion engines) divided by the total campus' population,El número total de vehículos (automóviles y motocicletas con motor de combustión) dividido por la población total del campus.,Texto de Ayuda,t
+159,5,5,Shuttle services,Servicios de transporte,Texto de Ayuda,t
+160,5,6,Number of shuttles operating in the university,Número de transportes operando en la universidad,Texto de Ayuda,f
+161,5,7,Average number of passengers of each shuttle,"
+Número promedio de pasajeros de cada transporte",Texto de Ayuda,f
+162,5,8,Total trips of each shuttle services each day,"
+Número total de viajes de cada servicio de transporte cada día",Texto de Ayuda,f
+163,5,9,Zero Emission Vehicles (ZEV) availability on campus,Disponibilidad de vehículos de cero emisiones (ZEV) en el campus,Texto de Ayuda,t
+164,5,10,Average number of Zero Emission Vehicles on campus per day,Número promedio de vehículos de cero emisiones en el campus por día,Texto de Ayuda,f
+165,5,11,The total number of Zero Emission Vehicles (ZEV) divided by the total campus population,"
+El número total de vehículos de cero emisiones (ZEV) dividido por la población total del campus",Texto de Ayuda,f
+166,5,12,Total ground parking area (m2 ),"
+Área total de estacionamiento en tierra (m2)",Texto de Ayuda,f
+167,5,13,The ratio of the ground parking area to total campus area,La relación entre el área de estacionamiento en tierra y el área total del campus.,Texto de Ayuda,t
+168,5,14,Program to limit or decrease the parking area on campus for the last 3 years (from 2021 to 2023),Programa para limitar o disminuir el área de estacionamiento en el campus durante los últimos 3 años (de 2021 a 2023),Texto de Ayuda,t
+169,5,15,Number of initiatives to decrease private vehicles on campus,Número de iniciativas para disminuir el vehículo privado en el campus,Texto de Ayuda,t
+170,5,16,Pedestrian path on campus,"
+Camino peatonal en el campus",Texto de Ayuda,t
+171,5,17,The approximate daily travel distance of a vehicle inside your campus only (in Kilometers),La distancia diaria aproximada de viaje de un vehículo dentro de su campus únicamente (en kilómetros),Texto de Ayuda,f
+172,5,18,"Planning, implementation, monitoring and/or evaluation of all programs related to Transportation through the utilization of Information and Communication Technology (ICT)","Planificación, implementación, seguimiento y/o evaluación de todos los programas relacionados con el Transporte mediante la utilización de Tecnologías de la Información y las Comunicaciones (TIC)",Texto de Ayuda,t
+173,6,1,Number of courses/subjects related to sustainability offerred,Número de cursos/materias relacionadas con la sostenibilidad ofertadas,Texto de Ayuda,t
+174,6,2,Total number of courses/subjects offered,Número total de cursos/materias ofrecidas,Texto de Ayuda,t
+175,6,3,The ratio of sustainability courses to total courses/subjects,La proporción de cursos de sostenibilidad con respecto al total de cursos/asignaturas.,Texto de Ayuda,f
+176,6,4,Total research funds dedicated to sustainability research (in US Dollars),Fondos totales de investigación dedicados a la investigación sobre sostenibilidad (en dólares estadounidenses),Texto de Ayuda,t
+177,6,5,Total research funds (in US Dollars),"
+Fondos totales de investigación (en dólares estadounidenses)",Texto de Ayuda,t
+178,6,6,The ratio of sustainability research funding to total research funding,"
+La relación entre la financiación de la investigación sobre sostenibilidad y la financiación total de la investigación",Texto de Ayuda,f
+179,6,7,Number of scholarly publications on sustainability,Número de publicaciones académicas sobre sostenibilidad,Texto de Ayuda,t
+180,6,8,Number of events related to sustainability (environment),"
+Número de eventos relacionados con la sostenibilidad (medio ambiente)",Texto de Ayuda,t
+181,6,9,Number of activities organized by student organizations related to sustainability per year,Número de actividades organizadas por organizaciones estudiantiles relacionadas con la sostenibilidad por año,Texto de Ayuda,t
+182,6,10,University-run sustainability website,Sitio web de sostenibilidad gestionado por la universidad,Texto de Ayuda,f
+183,6,11,Sustainability website address (URL) if available,"
+Dirección del sitio web de sostenibilidad (URL), si está disponible",Texto de Ayuda,f
+184,6,12,Sustainability report,Reporte de Sostenibilidad,Texto de Ayuda,t
+185,6,13,Sustainability report link address (URL) if available,"
+Dirección del enlace del informe de sostenibilidad (URL), si está disponible",Texto de Ayuda,f
+186,6,14,Number of cultural activities on campus,Número de actividades culturales en el campus,Texto de Ayuda,t
+187,6,15,Number of university sustainability program(s) with international collaborations,"
+Número de programas universitarios de sostenibilidad con colaboraciones internacionales",Texto de Ayuda,t
+188,6,16,Number of community services related to sustainability organized by university and involving students,Número de servicios comunitarios relacionados con la sostenibilidad organizados por universidad y que involucran a estudiantes,Texto de Ayuda,t
+189,6,17,Number of sustainability-related startups,"
+Número de startups relacionadas con la sostenibilidad",Texto de Ayuda,t
+190,6,18,Total number of graduates with green jobs,"
+Número total de graduados con empleos verdes",Texto de Ayuda,f
+191,6,19,Availability of unit(s) or office(s) that coordinate sustainability on campus,"
+Disponibilidad de unidad(es) u oficina(s) que coordinen la sostenibilidad en el campus",Texto de Ayuda,t
+192,6,20,"Planning, implementation, monitoring and/or evaluation of university governance through the utilization of Information and Communication Technology (ICT)","
+Planificación, implementación, seguimiento y/o evaluación de la gobernanza universitaria mediante la utilización de Tecnologías de la Información y las Comunicaciones (TIC)",Texto de Ayuda,t
