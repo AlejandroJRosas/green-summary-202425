@@ -7,6 +7,10 @@ import { Category } from '../categories/entities/category.entity'
 import { Department } from '../users/entities/department.entity'
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
+import { NotificationsService } from '../notifications/notifications.service'
+import { Notification } from '../notifications/entities/notification.entity'
+import { User } from '../users/entities/user.entity'
+import { MailsService } from '../mails/mails.service'
 
 @Module({
   imports: [
@@ -15,10 +19,12 @@ import { DepartmentPerRecopilation } from '../departments-per-recopilations/enti
       Department,
       Category,
       Recopilation,
-      DepartmentPerRecopilation
+      DepartmentPerRecopilation,
+      Notification,
+      User
     ])
   ],
-  providers: [RecommendationsService],
+  providers: [RecommendationsService, NotificationsService, MailsService],
   controllers: [RecommendationsController]
 })
 export class RecommendationsModule {}

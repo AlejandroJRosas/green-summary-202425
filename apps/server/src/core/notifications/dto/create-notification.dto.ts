@@ -1,13 +1,17 @@
-import { IsBoolean, IsDateString, IsNotEmpty, IsNumber } from 'class-validator'
+import { IsEnum, IsNotEmpty, IsNumber, IsObject } from 'class-validator'
+import {
+  NOTIFICATION_TYPES,
+  NotificationType
+} from '../notifications.constants'
 
 export class CreateNotificationDto {
-  @IsBoolean()
   @IsNotEmpty()
-  seen: boolean
+  @IsObject()
+  data: object
 
   @IsNotEmpty()
-  @IsDateString()
-  createdAt: string
+  @IsEnum(NOTIFICATION_TYPES)
+  type: NotificationType
 
   @IsNumber()
   @IsNotEmpty()

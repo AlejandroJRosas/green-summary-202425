@@ -13,6 +13,10 @@ import { DocumentsService } from './document.service'
 import { ImagesService } from './image.service'
 import { LinksController } from './link.controller'
 import { LinksService } from './link.service'
+import { NotificationsService } from '../notifications/notifications.service'
+import { Notification } from '../notifications/entities/notification.entity'
+import { User } from '../users/entities/user.entity'
+import { MailsService } from '../mails/mails.service'
 
 @Module({
   imports: [
@@ -21,7 +25,9 @@ import { LinksService } from './link.service'
       Document,
       Image,
       Link,
-      InformationCollection
+      InformationCollection,
+      Notification,
+      User
     ])
   ],
   controllers: [
@@ -30,6 +36,13 @@ import { LinksService } from './link.service'
     ImagesController,
     LinksController
   ],
-  providers: [EvidencesService, DocumentsService, ImagesService, LinksService]
+  providers: [
+    EvidencesService,
+    DocumentsService,
+    ImagesService,
+    LinksService,
+    NotificationsService,
+    MailsService
+  ]
 })
 export class EvidencesModule {}

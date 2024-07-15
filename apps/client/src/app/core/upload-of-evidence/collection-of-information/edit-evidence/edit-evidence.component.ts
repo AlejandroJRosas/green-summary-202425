@@ -71,7 +71,7 @@ export class EditEvidenceComponent implements OnInit {
   }
   goBack() {
     this.router.navigateByUrl(
-      `pages/information-collection/${this.recopilationId}/${this.categoryId}`
+      `pages/information-collection/recopilation/${this.recopilationId}/category/${this.categoryId}`
     )
   }
   console(evidence: EvidenceEdit) {

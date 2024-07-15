@@ -1,0 +1,101 @@
+evidenceId,description,type,createdAt,error,collectionId
+1,prueba del endpoint generador del word,image,2024-07-01,,1
+2,prueba 3 del endpoint generador del word,image,2024-07-01,,2
+3,ESTA ES UNA PRUEVA PARA GENERAR EL DOC,document,2024-07-02,,3
+4,Probando el endpoint para Paula forero,image,2024-06-22,,4
+5,ESTA ES UNA PRUEVA NUEVA PARA GENERAR EL DOCumento,document,2024-07-02,,5
+6,Estoy probando esto por ultima vez a ver si funcioan,image,2024-06-22,,6
+7,ESTA ES UNA PRUEVA NUEVA PARA GENERAR EL DOCumento,document,2024-07-02,,7
+8,Esto es una prueba de una evidencia,document,2024-07-04,,8
+9,Prueba,image,2024-06-23,,9
+10,Para probar el get,image,2024-06-23,,10
+11,no se por que no se esta limpiando la respuesta dios miooooooo,document,2024-06-27,,11
+12,prueba 1 del endpoint generador del word,image,2024-07-01,,12
+13,ESTA ES UNA PRUEVA PARA GENERAR EL DOC,link,2024-07-02,,13
+14,PROBANDO EL MISMO ENDPOINT PARA VER SI FUNCIOAN,image,2024-06-27,,14
+15,Probando el endpoint para demostrarle a Paula forero,document,2024-06-25,,15
+16,Endpoint para demostrarle a Paula forero,document,2024-06-25,uno,16
+17,hEndpoint para demostrarle a Paula forero,image,2024-06-24,ninguno,17
+18,prueba 2 del endpoint generador del word,image,2024-07-01,,18
+19,Prueba de la validación de tipo otra vez,image,2024-06-27,,19
+20,Probando el endpoint para demostrarle a Paula forero,document,2024-06-24,,20
+21,Prueba de la validación de tipo,document,2024-06-25,,21
+22,Prueba de la validación de tipo otra vez,document,2024-06-25,,22
+23,Prueba de la validación de tipo otra vez,document,2024-06-25,,23
+24,Prueba de la validación de tipo otra vez,image,2024-06-25,,24
+25,Prueba de la validación de tipo otra vez,image,2024-06-25,,25
+26,Environmental impact report,document,2024-01-01,,26
+27,Photo of recycling facility,image,2024-01-02,Blurry image,27
+28,Link to carbon footprint calculator,link,2024-01-03,,28
+29,Water usage analysis document,document,2024-01-04,,29
+30,Photo of solar panel installation,image,2024-01-05,Overexposed image,30
+31,Link to renewable energy usage stats,link,2024-01-06,,31
+32,Document on air quality index improvement,document,2024-01-07,Missing appendix,32
+33,Image of green building project,image,2024-01-08,,33
+34,Link to biodiversity conservation efforts,link,2024-01-09,,34
+35,Document on sustainable transport options,document,2024-01-10,,35
+36,Photo of electric vehicle charging station,image,2024-01-11,Low resolution,36
+37,Link to public awareness campaign,link,2024-01-12,,37
+38,Water quality assessment report,document,2024-01-13,,38
+39,Image of composting site,image,2024-01-14,Dark image,39
+40,Link to sustainable fisheries guidelines,link,2024-01-15,,40
+41,Document on organic farming practices,document,2024-01-16,,41
+42,Photo of marine protected area,image,2024-01-17,Glare on water,42
+43,Link to urban heat island study,link,2024-01-18,,43
+44,Environmental justice report,document,2024-01-19,,44
+45,Photo of sustainable packaging,image,2024-01-20,Out of focus,45
+46,Link to forest conservation project,link,2024-01-21,,46
+47,Document on green finance initiatives,document,2024-01-22,,47
+48,Image of environmental education workshop,image,2024-01-23,Participants not visible,48
+49,Link to climate resilience strategies,link,2024-01-24,,49
+50,Circular economy report,document,2024-01-25,,50
+51,Photo of pollution prevention equipment,image,2024-01-26,Equipment partially visible,51
+52,Link to natural capital accounting,link,2024-01-27,,52
+53,Document on sustainable supply chains,document,2024-01-28,,53
+54,Image of eco-friendly product line,image,2024-01-29,,54
+55,Link to carbon neutrality plan,link,2024-01-30,,55
+56,Forest health monitoring report,document,2024-01-31,,56
+57,Image of sustainable development goals meeting,image,2024-02-01,Low light conditions,57
+58,Link to green building materials guide,link,2024-02-02,,58
+59,Report on pollution control measures,document,2024-02-03,,59
+60,Photo of tree planting event,image,2024-02-04,Participants not in frame,60
+61,Link to e-waste recycling program,link,2024-02-05,,61
+62,Sustainable agriculture report,document,2024-02-06,,62
+63,Image of composting workshop,image,2024-02-07,Unclear focus,63
+64,Link to green innovation summit,link,2024-02-08,,64
+65,Climate action plan report,document,2024-02-09,,65
+66,Link to ocean cleanup project,link,2024-02-11,,66
+67,Image of wind energy farm,image,2024-02-13,,67
+68,Link to energy efficiency improvements,link,2024-02-14,,68
+69,Report on environmental regulations,document,2024-02-15,,69
+70,Link to zero waste community project,link,2024-02-17,,70
+71,Environmental education curriculum,document,2024-02-18,,71
+72,Image of wildlife sanctuary,image,2024-02-19,Animal not visible,72
+73,Environmental education curriculum,document,2024-02-20,,73
+74,Image of wildlife sanctuary,image,2024-02-21,,74
+75,Environmental education curriculum,document,2024-02-22,,75
+76,Image of wildlife sanctuary,image,2024-02-23,,76
+77,Environmental education curriculum,document,2024-02-24,,77
+78,Image of wildlife sanctuary,image,2024-02-25,,78
+79,Environmental education curriculum,document,2024-02-26,,79
+80,Image of wildlife sanctuary,image,2024-02-27,,80
+81,Environmental education curriculum,document,2024-02-28,,81
+82,Image of wildlife sanctuary,image,2024-02-29,,82
+83,Environmental education curriculum,document,2024-03-01,,83
+84,Image of wildlife sanctuary,image,2024-03-02,,84
+85,Environmental education curriculum,document,2024-03-03,asdf,85
+86,Image of wildlife sanctuary,image,2024-03-04,,86
+87,Environmental education curriculum,document,2024-03-05,,87
+88,Image of wildlife sanctuary,image,2024-03-06,,88
+89,Environmental education curriculum,document,2024-03-07,test,89
+90,Image of wildlife sanctuary,image,2024-03-08,,90
+91,Environmental education curriculum,document,2024-03-09,,91
+92,Image of wildlife sanctuary,image,2024-03-10,,92
+93,Environmental education curriculum,document,2024-03-11,,93
+94,Image of wildlife sanctuary,image,2024-03-12,,94
+95,Environmental education curriculum,document,2024-03-13,,95
+96,Image of wildlife sanctuary,image,2024-03-14,,96
+97,Environmental education curriculum,document,2024-03-15,,97
+98,Image of wildlife sanctuary,image,2024-03-16,test,98
+99,Environmental education curriculum,document,2024-03-17,,99
+100,Image of wildlife sanctuary,image,2024-03-18,,100

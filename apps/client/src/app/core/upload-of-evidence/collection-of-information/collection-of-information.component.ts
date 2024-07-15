@@ -25,6 +25,8 @@ import { EvidenceService } from '../../../services/evidence/evidence.service'
 import { VALUES } from '../../../../../../../shared/validations'
 import { DetailedRecopilation } from '../../../services/recopilation.service'
 import { RecopilationService } from '../../../services/recopilation.service'
+import { TooltipModule } from 'primeng/tooltip'
+
 @Component({
   selector: 'collection-of-information',
   standalone: true,
@@ -38,7 +40,8 @@ import { RecopilationService } from '../../../services/recopilation.service'
     InputTextModule,
     ConfirmDialogModule,
     ImageModule,
-    DividerModule
+    DividerModule,
+    TooltipModule
   ],
   templateUrl: './collection-of-information.component.html',
   styles: ``
@@ -125,6 +128,16 @@ export class CollectionOfInformationComponent
     this.getDepartmentId()
     this.getAllByDepartment()
     this.getRecopilationById()
+    this.toast.show(
+      'info',
+      'Evidencias con errores',
+      'Si hay alguna evidencia con error es necesario crear otra nueva para reemplazarla.'
+    )
+    this.toast.show(
+      'info',
+      'Colección de información no aprobadas',
+      'Recuerde que al crear una colección de información esta automaticamente estará no aprobada hasta que el coordinador diga lo contrario.'
+    )
   }
   reset() {
     this.formGroup.reset()
@@ -232,8 +245,6 @@ export class CollectionOfInformationComponent
     })
   }
   getAllByDepartment() {
-    console.log(this.recopilationId, this.categoryId, this.departmentId)
-    console.log(this.category)
     this.InformationCollectionService.getByDepartmentId(
       this.recopilationId,
       this.categoryId,
@@ -255,6 +266,7 @@ export class CollectionOfInformationComponent
     if (this.formGroup.invalid) return
     const { name, summary } = this.formGroup.controls
     const informationCollection: InformationCollectionDTO = {
+      isApproved: false,
       name: name.value,
       summary: summary.value,
       recopilationId: this.recopilationId,
@@ -284,6 +296,7 @@ export class CollectionOfInformationComponent
     if (this.formGroup.invalid) return
     const { name, summary } = this.formGroup.controls
     const informationCollection: InformationCollectionDTO = {
+      isApproved: false,
       name: name.value,
       summary: summary.value,
       categoryId: this.categoryId,

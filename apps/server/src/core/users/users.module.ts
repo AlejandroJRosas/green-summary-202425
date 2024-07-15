@@ -9,6 +9,8 @@ import { Admin } from './entities/admin.entity'
 import { DepartmentsService } from './departments.service'
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 import { DepartmentsController } from './departments.controller'
+import { MailsModule } from '../mails/mails.module'
+import { MailsService } from '../mails/mails.service'
 
 @Module({
   imports: [
@@ -18,10 +20,11 @@ import { DepartmentsController } from './departments.controller'
       Coordinator,
       Department,
       DepartmentPerRecopilation
-    ])
+    ]),
+    MailsModule
   ],
   controllers: [UsersController, DepartmentsController],
-  providers: [UsersService, DepartmentsService],
+  providers: [UsersService, DepartmentsService, MailsService],
   exports: [TypeOrmModule]
 })
 export class UsersModule {}

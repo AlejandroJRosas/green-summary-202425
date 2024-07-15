@@ -29,10 +29,18 @@ export class WordController {
       )
       res.set({
         'Content-Type': 'application/docx',
-        'Content-Disposition': 'attachment; filename=archivo.docx',
-        'Content-Length': buffer.length
+        'Content-Disposition':
+          'attachment; filename=Andres Bello Guayana Catholic University_Venezuela_' +
+          buffer.index +
+          '_' +
+          buffer.subIndex +
+          '_' +
+          buffer.criterionName +
+          '.docx',
+        'Content-Length': buffer.buffer.length,
+        'Access-Control-Expose-Headers': 'Content-Disposition'
       })
-      res.send(buffer)
+      res.send(buffer.buffer)
     } catch (e) {
       console.log(e)
       throw e

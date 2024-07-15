@@ -260,7 +260,7 @@ export class RecopilationsService {
       endDate: recopilation.endDate,
       departmentEndDate: recopilation.departmentEndDate,
       isReady: recopilation.isReady,
-      /* indicators, */
+      indicators,
       departments
     }
 
@@ -437,18 +437,33 @@ export class RecopilationsService {
     return await this.recommendationRepository.save(recommendations)
   }
 
-  async getActiveRecopilations({
-    orderBy,
-    orderType
-  }: OrderByParamDto & OrderTypeParamDto) {
+  async getActiveRecopilations(
+    { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto,
+    departmentId: number | undefined
+  ) {
     const currentDateString = new Date()
+
+    if (departmentId === undefined) {
+      return this.recopilationsRepository.find({
+        where: {
+          startDate: LessThan(currentDateString),
+          endDate: MoreThan(currentDateString),
+          departmentEndDate: MoreThan(currentDateString),
+          isReady: Equal(true)
+        },
+        order: { [orderBy]: orderType }
+      })
+    }
 
     return this.recopilationsRepository.find({
       where: {
         startDate: LessThan(currentDateString),
         endDate: MoreThan(currentDateString),
         departmentEndDate: MoreThan(currentDateString),
-        isReady: Equal(true)
+        isReady: Equal(true),
+        departmentsPerRecopilation: {
+          department: { id: departmentId }
+        }
       },
       order: { [orderBy]: orderType }
     })

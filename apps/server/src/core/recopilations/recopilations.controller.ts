@@ -9,7 +9,8 @@ import {
   HttpCode,
   Query,
   Patch,
-  Put
+  Put,
+  Req
 } from '@nestjs/common'
 import { RecopilationsService } from './recopilations.service'
 import { CreateRecopilationDto } from './dto/create-recopilation.dto'
@@ -65,14 +66,24 @@ export class RecopilationsController {
   @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get('active')
   async findActive(
+    @Req() request: Request,
     @Query() { orderBy = 'id' }: OrderByParamDto,
     @Query() { orderType = 'ASC' }: OrderTypeParamDto
   ) {
+    let departmentId: number | undefined = undefined
+
+    if (request['user'].type === 'department') {
+      departmentId = request['user'].id
+    }
+
     const activeRecopilations =
-      await this.recopilationsService.getActiveRecopilations({
-        orderBy,
-        orderType
-      })
+      await this.recopilationsService.getActiveRecopilations(
+        {
+          orderBy,
+          orderType
+        },
+        departmentId
+      )
 
     return activeRecopilations
   }

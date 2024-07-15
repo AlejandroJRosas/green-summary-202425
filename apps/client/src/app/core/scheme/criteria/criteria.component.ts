@@ -193,6 +193,7 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
       requiresEvidence: requiresEvidence.value,
       helpText: helpText.value
     }
+    this.visibleCreate = false
     this.criteriaService.create(criteria).subscribe({
       next: () => {
         this.fetchCreateCriterion = false
@@ -202,6 +203,7 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
       },
       error: (e) => {
         this.fetchCreateCriterion = false
+        this.visibleCreate = false
         this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
       }
@@ -220,6 +222,7 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
       helpText: helpText.value,
       requiresEvidence: requiresEvidence.value
     }
+    this.visibleEdit = false
     this.criteriaService.edit(this.criteriaEdit.id, criteria).subscribe({
       next: () => {
         this.fetchEditCriterion = false
@@ -228,6 +231,7 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
         this.getCriterionPerIndicator(this.indicatorIndex)
       },
       error: (e) => {
+        this.visibleEdit = false
         this.fetchEditCriterion = false
         this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()

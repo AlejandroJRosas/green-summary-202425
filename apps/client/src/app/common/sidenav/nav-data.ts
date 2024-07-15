@@ -37,6 +37,6 @@ export const navbarData = [
     label: 'Notificaciones',
     icon: 'pi pi-bell',
     routeLink: `${BASE_LAYOUT_ROUTE}/notifications`,
-    visibility: [Role.ADMIN, Role.COORDINATOR, Role.DEPARTMENT]
+    visibility: [Role.COORDINATOR, Role.DEPARTMENT]
   }
 ]

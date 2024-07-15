@@ -1,4 +1,14 @@
-<h2>Matriz de Seguimiento</h2>
+@if (matrixData === undefined) {
+  <h2>Matriz de Seguimiento</h2>
+} @else {
+  <h2>
+    Matriz de Seguimiento - {{ matrixData.name }}
+    (Inicia:
+    {{ parseDate(matrixData.startDate) }}
+    - Termina:
+    {{ parseDate(matrixData.departmentEndDate) }})
+  </h2>
+}
 <p-dropdown
   [options]="recopilations"
   [(ngModel)]="selectedRecopilation"
@@ -7,73 +17,58 @@
   optionValue="id"
   placeholder="Selecciona una recopilación"
 />
-@if (matrixData) {
-  <p-table
-    [value]="matrixData.departments"
-    [scrollable]="true"
-    scrollHeight="70vh"
-    styleClass="mt-2 w-11"
+<button
+  type="button"
+  class="open-big"
+  (click)="showDialog()"
+  pButton
+  icon="pi pi-external-link"
+></button>
+<div class="matrix">
+  <app-matrix
+    [selectedRecopilation]="selectedRecopilation"
+    [matrixData]="matrixData"
+    [matrixScrollHeight]="'75vh'"
+  ></app-matrix>
+</div>
+
+@if (matrixData !== undefined) {
+  <p-dialog
+    header="
+    {{ matrixData.name }}
+    (Inicia:
+    {{ parseDate(matrixData.startDate) }}
+    - Termina:
+    {{ parseDate(matrixData.departmentEndDate) }})
+  "
+    [resizable]="false"
+    [modal]="true"
+    [maximizable]="true"
+    appendTo="body"
+    [(visible)]="dialogVisible"
+    [draggable]="false"
+    [closeOnEscape]="true"
+    [style]="{ width: '80vw' }"
+    [contentStyle]="{
+      height: '80vh'
+    }"
+    (onMaximize)="onMaximize()"
   >
-    <ng-template pTemplate="header">
-      <tr>
-        <th rowspan="2" pFrozenColumn>Departamentos</th>
-        @for (indicator of matrixData.indicators; track $index) {
-          <th
-            pTooltip="{{ indicator.indicator.helpText }}"
-            [attr.colspan]="indicator.categories.length"
-          >
-            {{ indicator.indicator.alias }}
-          </th>
-        }
-      </tr>
-      <tr>
-        @for (indicator of matrixData.indicators; track $index) {
-          @for (category of indicator.categories; track $index) {
-            <th pTooltip="{{ category.helpText }}">{{ category.name }}</th>
-          }
-        }
-      </tr>
+    <app-matrix
+      [selectedRecopilation]="selectedRecopilation"
+      [matrixData]="matrixData"
+      [matrixScrollHeight]="dialogMatrixScrollHeight"
+    ></app-matrix>
+    <ng-template pTemplate="footer">
+      <button
+        type="button"
+        pButton
+        pRipple
+        icon="pi pi-times"
+        (click)="dialogVisible = false"
+        label="Cerrar"
+        class="p-button-text"
+      ></button>
     </ng-template>
-    <ng-template pTemplate="body" let-row>
-      <tr>
-        <td pFrozenColumn>{{ row.department.fullName }}</td>
-        @for (indicator of matrixData.indicators; track $index) {
-          @for (category of indicator.categories; track $index) {
-            <td>
-              <a
-                href="pages/information-collection/{{ selectedRecopilation }}/{{
-                  category.id
-                }}"
-                target="_blank"
-                rel="noreferrer"
-              >
-                <div style="width: 100%; height: 100%">
-                  @if (isRecommended(row.recommendedCategories, category)) {
-                    <tooltip-icon
-                      icon="pi pi-sparkles"
-                      tooltip="Recomendado para responder"
-                    ></tooltip-icon>
-                  } @else {
-                    -
-                  }
-                </div>
-                <!-- <tooltip-icon
-              icon="pi pi-file-check"
-              tooltip="Ha subido marcado como correcto"
-              ></tooltip-icon>
-              <tooltip-icon
-              icon="pi pi-file-arrow-up"
-                tooltip="Ha subido evidencias"
-                ></tooltip-icon>
-              <tooltip-icon
-              icon="pi pi-file-edit"
-              tooltip="Ha editado evidencias"
-              ></tooltip-icon> -->
-              </a>
-            </td>
-          }
-        }
-      </tr>
-    </ng-template>
-  </p-table>
+  </p-dialog>
 }

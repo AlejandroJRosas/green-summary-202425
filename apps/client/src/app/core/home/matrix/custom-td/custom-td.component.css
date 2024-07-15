@@ -1,0 +1,47 @@
+.custom-td-link {
+  width: 100%;
+  height: 100%;
+}
+
+.is-recommended-icon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border-bottom-left-radius: 50%;
+  border-left: solid 1px #e5e7eb;
+  border-bottom: solid 1px #e5e7eb;
+  padding-bottom: 4px;
+  padding-left: 4px;
+  color: #fce626;
+  background-color: #f9fafb;
+}
+
+.error-icon {
+  color: #fc4007;
+}
+
+.check-icon {
+  color: var(--primary-color);
+}
+
+.container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.container:hover {
+  background-color: ghostwhite;
+}
+
+a {
+  color: inherit;
+}
+
+.icons-container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

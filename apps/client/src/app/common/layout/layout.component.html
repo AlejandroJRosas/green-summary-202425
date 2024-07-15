@@ -1,7 +1,2 @@
-<div class="flex">
-  <sidenav
-    (onToggleSidenav)="onToggleSidenav($event)"
-    [ngClass]="getSidenavClass()"
-  />
-  <app-body [ngClass]="getBodyClass()" class="w-full" />
-</div>
+<sidenav (onToggleSidenav)="onToggleSidenav($event)" />
+<app-body [isCollapsed]="isCollapsed" [screenWidth]="screenWidth"></app-body>

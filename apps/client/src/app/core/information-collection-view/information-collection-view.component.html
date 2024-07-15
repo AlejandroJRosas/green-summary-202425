@@ -1,7 +1,7 @@
 <main>
   <section>
     <header class="flex flex-column">
-      <h2>Recopilación 1 / {{ department.fullName }}</h2>
+      <h2>{{ detailedRecopilation?.name }} / {{ department.fullName }}</h2>
     </header>
     <section class="flex align-items-center justify-content-center w-full">
       <section class="w-full h-full">
@@ -34,9 +34,41 @@
                 </h2>
               </section>
             </ng-template>
-            <p class="m-0 pb-3" style="max-width: 80vw">
-              {{ informationCollection.summary }}
-            </p>
+            <div
+              class="flex flex-row justify-content-between align-items-center"
+            >
+              <p class="m-0 pb-3" style="max-width: 80vw">
+                {{ informationCollection.summary }}
+              </p>
+              @if (informationCollection.isApproved === false) {
+                <p-button
+                  label="Aprobar colección de información"
+                  [outlined]="true"
+                  severity="success"
+                  icon="pi pi-check"
+                  (click)="
+                    confirmInformationCollection(
+                      informationCollection.name,
+                      informationCollection
+                    )
+                  "
+                  [disabled]="!isValidEndDate"
+                />
+              } @else {
+                <div
+                  class="flex flex-row gap-3 justify-content-center align-items-center"
+                  pTooltip="Colección de información aprobada"
+                  tooltipEvent="hover"
+                  tooltipPosition="top"
+                >
+                  <i
+                    class="pi pi-check"
+                    style="font-size: 1.5rem; color: #22c55e"
+                  ></i>
+                  <h1 style="color: #22c55e" class="text-xl">Aprobado</h1>
+                </div>
+              }
+            </div>
             <p-panel
               expandIcon="pi pi-chevron-down"
               collapseIcon="pi pi-chevron-right"
@@ -69,6 +101,53 @@
                         translateType(evidence.type)
                       }})
                     </h2>
+                    @if (evidence.error !== null) {
+                      <div
+                        class="flex flex-row gap-3 justify-content-center align-items-center"
+                        [pTooltip]="evidence.error"
+                        tooltipEvent="hover"
+                        tooltipPosition="top"
+                      >
+                        <i
+                          class="pi pi-ban"
+                          style="font-size: 1.5rem; color: #ef4444"
+                        ></i>
+                        <h1 style="color: #ef4444" class="text-xl">
+                          Evidencia con error
+                        </h1>
+                      </div>
+                    } @else {
+                      <form [formGroup]="formGroup">
+                        <p-confirmPopup>
+                          <ng-template pTemplate="content" let-message>
+                            <div
+                              class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3"
+                            >
+                              <div class="flex flex-column gap-2 w-full">
+                                <label class="flex flex-column gap-2 w-full">
+                                  Error en la evidencia
+                                  <textarea
+                                    rows="5"
+                                    cols="50"
+                                    pInputTextarea
+                                    [autoResize]="true"
+                                    formControlName="error"
+                                  ></textarea>
+                                </label>
+                              </div>
+                            </div>
+                          </ng-template>
+                        </p-confirmPopup>
+                      </form>
+                      <p-button
+                        label="Error en la evidencia"
+                        [outlined]="true"
+                        severity="danger"
+                        icon="pi pi-times"
+                        (click)="confirm($event, evidence)"
+                        [disabled]="!isValidEndDate"
+                      />
+                    }
                   </div>
                   @switch (evidence.type) {
                     @case ('link') {

@@ -8,11 +8,11 @@ import {
   HttpCode,
   Query,
   HttpStatus,
-  Patch
+  Patch,
+  Req
 } from '@nestjs/common'
 import { NotificationsService } from './notifications.service'
 import { CreateNotificationDto } from './dto/create-notification.dto'
-import { UpdateNotificationDto } from './dto/update-notification.dto'
 import { ApiTags } from '@nestjs/swagger'
 import { PaginationParams } from 'src/shared/pagination/pagination-params.dto'
 import { constructPaginatedItemsDto } from 'src/shared/pagination/construct-paginated-items-dto'
@@ -24,7 +24,7 @@ import { Role } from '../auth/role.enum'
 
 @ApiTags('Notifications')
 @Controller('notifications')
-@Roles(Role.Coordinator, Role.Admin)
+@Roles(Role.Coordinator, Role.Admin, Role.Department)
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 
@@ -61,6 +61,25 @@ export class NotificationsController {
     return paginatedItems
   }
 
+  @Get('/own')
+  async getOwn(@Req() request: Request) {
+    console.log(request['user'].id)
+    const notifications = await this.notificationsService.getByUserId(
+      request['user'].id
+    )
+    return notifications
+  }
+
+  @Get('/own/unseen')
+  async getOwnUnseen(@Req() request: Request) {
+    console.log(request['user'].id)
+    const notifications = await this.notificationsService.getByUserId(
+      request['user'].id,
+      true
+    )
+    return notifications
+  }
+
   @Get('/:id')
   async getOne(@Param('id') id: string) {
     const notification = await this.notificationsService.getOne(Number(id))
@@ -68,14 +87,8 @@ export class NotificationsController {
   }
 
   @Patch('/:id')
-  async update(
-    @Param('id') id: string,
-    @Body() updateNotificationDto: UpdateNotificationDto
-  ) {
-    const notification = await this.notificationsService.update(
-      Number(id),
-      updateNotificationDto
-    )
+  async update(@Param('id') id: string) {
+    const notification = await this.notificationsService.update(Number(id))
     return notification
   }
 

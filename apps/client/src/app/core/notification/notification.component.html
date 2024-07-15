@@ -1,0 +1,148 @@
+<section>
+  <div class="flex flex-row align-items-start gap-3">
+    @if (this.userType === 'coordinator' || this.userType === 'admin') {
+      <p-avatar
+        [label]="LabelAvatar"
+        shape="circle"
+        size="normal"
+        [style]="{ 'background-color': '#00ad7c', 'color': '#ffffff' }"
+      />
+    }
+    <div class="flex flex-column align-items-start justify-content-start">
+      @if (this.userType === 'coordinator' || this.userType === 'admin') {
+        <h3 class="m-0">{{ notification.data.departmentName }}</h3>
+      }
+      @switch (notification.type) {
+        @case ('recommendation') {
+          <p class="my-2">
+            Se le ha recomendado una <strong>nueva</strong>
+            <a
+              [href]="getLinkMatrix()"
+              style="text-decoration: none"
+              (click)="seenNotificaction(notification)"
+              ><strong class="text-blue-500">
+                categoría {{ notification.data.categoryName }} en la
+                recopilación {{ notification.data.recopilationName }}</strong
+              ></a
+            >
+          </p>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
+        }
+        @case ('information_collection_creation') {
+          <p class="my-2">
+            El departamento {{ notification.data.departmentName }} ha
+            <strong>creado</strong> una nueva colección de información
+            {{ notification.data.collectionName }} en la
+            <a
+              [href]="getLink()"
+              style="text-decoration: none"
+              (click)="seenNotificaction(notification)"
+              ><strong class="text-blue-500">
+                categoría {{ notification.data.categoryName }} en la
+                recopilación {{ notification.data.recopilationName }}</strong
+              ></a
+            >
+          </p>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
+        }
+        @case ('information_collection_edition') {
+          <p class="my-2">
+            El departamento {{ notification.data.departmentName }} ha
+            <strong>editado</strong> una colección de información
+            {{ notification.data.collectionName }} en la
+            <a
+              [href]="getLink()"
+              style="text-decoration: none"
+              (click)="seenNotificaction(notification)"
+              ><strong class="text-blue-500">
+                categoría {{ notification.data.categoryName }} en la
+                recopilación {{ notification.data.recopilationName }}</strong
+              ></a
+            >
+          </p>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
+        }
+        @case ('evidence_creation') {
+          <p class="my-2">
+            El departamento {{ notification.data.departmentName }} ha
+            <strong>creado</strong> una nueva evidencia en la colección
+            {{ notification.data.collectionName }}
+            <a
+              [href]="getLink()"
+              style="text-decoration: none"
+              (click)="seenNotificaction(notification)"
+              ><strong class="text-blue-500">
+                categoría {{ notification.data.categoryName }} en la
+                recopilación {{ notification.data.recopilationName }}</strong
+              ></a
+            >
+          </p>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
+        }
+        @case ('evidence_edition') {
+          <p class="my-2">
+            El departamento {{ notification.data.departmentName }} ha
+            <strong>editado</strong> una evidencia en la colección
+            {{ notification.data.collectionName }}
+            <a
+              [href]="getLink()"
+              style="text-decoration: none"
+              (click)="seenNotificaction(notification)"
+              ><strong class="text-blue-500">
+                categoría {{ notification.data.categoryName }} en la
+                recopilación {{ notification.data.recopilationName }}</strong
+              ></a
+            >
+          </p>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
+        }
+        @case ('evidence_error') {
+          <p class="my-2">
+            Hay una evidencia con error en la colección
+            {{ notification.data.collectionName }} de la
+            <a
+              [href]="getLink()"
+              style="text-decoration: none"
+              (click)="seenNotificaction(notification)"
+              ><strong class="text-blue-500">
+                categoría {{ notification.data.categoryName }} en la
+                recopilación {{ notification.data.recopilationName }}</strong
+              ></a
+            >
+          </p>
+          <i class="m-0 text-base"
+            >{{ getDuration(notification.createdAt) }}
+            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
+              notification.seen ? 'Visto' : 'No leído'
+            }}</strong></i
+          >
+        }
+      }
+    </div>
+  </div>
+</section>

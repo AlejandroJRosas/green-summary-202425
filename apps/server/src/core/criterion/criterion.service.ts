@@ -88,10 +88,10 @@ export class CriterionService {
     return await this.criterionRepository.findOneByOrFail({ id })
   }
 
-  async deleteCriterion(id): Promise<void> {
+  async deleteCriterion(id: number): Promise<void> {
     await this.criterionRepository.findOneByOrFail({ id })
 
-    await this.criterionRepository.delete({
+    await this.criterionRepository.softDelete({
       id
     })
 

@@ -1,6 +1,5 @@
 import { Injectable } from '@nestjs/common'
 import { CreateNotificationDto } from './dto/create-notification.dto'
-import { UpdateNotificationDto } from './dto/update-notification.dto'
 import { Notification } from './entities/notification.entity'
 import { User } from '../users/entities/user.entity'
 import { InjectRepository } from '@nestjs/typeorm'
@@ -35,6 +34,24 @@ export class NotificationsService {
     return this.notificationRepository.save(notification)
   }
 
+  async createAll(createNotificationDto: CreateNotificationDto): Promise<void> {
+    const users = await this.userRepository.find({
+      where: {
+        type: 'coordinator'
+      }
+    })
+
+    let notification
+    users.forEach((user) => {
+      notification = this.notificationRepository.create({
+        data: createNotificationDto.data,
+        type: createNotificationDto.type,
+        user: user
+      })
+      this.notificationRepository.save(notification)
+    })
+  }
+
   async getAll({
     page,
     itemsPerPage,
@@ -57,6 +74,37 @@ export class NotificationsService {
     return { notifications, count }
   }
 
+  async getByUserId(userId: number, unseen: boolean = false) {
+    if (!unseen) {
+      const notifications = await this.notificationRepository.find({
+        where: {
+          user: {
+            id: userId
+          }
+        },
+        order: {
+          createdAt: 'DESC'
+        }
+      })
+
+      return notifications
+    } else {
+      const unseenNotifications = await this.notificationRepository.find({
+        where: {
+          user: {
+            id: userId
+          },
+          seen: false
+        },
+        order: {
+          createdAt: 'DESC'
+        }
+      })
+
+      return unseenNotifications
+    }
+  }
+
   async getOne(id: number): Promise<Notification> {
     const notification = await this.notificationRepository.findOneOrFail({
       where: { id },
@@ -66,11 +114,13 @@ export class NotificationsService {
     return notification
   }
 
-  async update(
-    id: number,
-    updateNotificationDto: UpdateNotificationDto
-  ): Promise<Notification> {
-    await this.notificationRepository.update(id, updateNotificationDto)
+  async update(id: number): Promise<Notification> {
+    const change = await this.notificationRepository.findOneOrFail({
+      where: { id }
+    })
+    change.seen = true
+
+    await this.notificationRepository.update(id, change)
 
     const notification = await this.notificationRepository.findOneOrFail({
       where: { id },

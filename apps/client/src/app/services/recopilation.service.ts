@@ -47,6 +47,13 @@ export class RecopilationService {
       >(`${BaseUrl}/recopilations/active`)
       .pipe(map((res) => (res.status === 'success' ? res.data : [])))
   }
+  getMatrixInfo(id: number): Observable<MatrixInfoDto | null> {
+    return this.http
+      .get<
+        BackendResponse<MatrixInfoDto, unknown, unknown>
+      >(`${BaseUrl}/recopilations/${id}/matrix`)
+      .pipe(map((res) => (res.status === 'success' ? res.data : null)))
+  }
 
   getById(id: number): Observable<DetailedRecopilation | null> {
     return this.http
@@ -208,6 +215,47 @@ interface RecommendationsDto {
       categoryId: number
     }[]
   }[]
+}
+
+export type MatrixInfoDto = {
+  id: number
+  name: string
+  description: string
+  startDate: string
+  endDate: string
+  departmentEndDate: string
+  isReady: boolean
+  indicators: {
+    index: number
+    name: string
+    alias: string
+    helpText: string
+    categories: {
+      id: number
+      name: string
+      helpText: string
+      criteria: {
+        id: number
+        subIndex: number
+        name: string
+        alias: string
+        helpText: string
+        requiresEvidence: boolean
+      }[]
+    }[]
+  }[]
+  departments: {
+    department: Pick<Department, 'id' | 'fullName' | 'email' | 'type'>
+    answers: Answer[]
+  }[]
+}
+
+export interface Answer {
+  categoryId: number
+  isRecommended: boolean
+  isAnswered: boolean
+  isApproved: boolean
+  hasError: boolean
 }
 
 export interface DetailedRecopilation {

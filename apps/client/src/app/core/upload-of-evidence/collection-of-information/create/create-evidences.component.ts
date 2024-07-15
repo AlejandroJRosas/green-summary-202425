@@ -68,6 +68,7 @@ export class CreateEvidencesComponent
     name: '',
     evidences: [],
     recopilationId: 0,
+    isApproved: false,
     categoryId: 0,
     departmentId: 0
   }
@@ -98,7 +99,6 @@ export class CreateEvidencesComponent
     this.createColletionInformation.description =
       this.formGroup.controls.description.value
     this.createColletionInformation.evidences = this.evidences
-    console.log(this.createColletionInformation)
   }
   goBack() {
     this.router.navigateByUrl(

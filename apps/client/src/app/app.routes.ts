@@ -30,6 +30,7 @@ import { CreateEvidencesComponent } from './core/upload-of-evidence/collection-o
 import { EditEvidenceComponent } from './core/upload-of-evidence/collection-of-information/edit-evidence/edit-evidence.component'
 import { InformationCollectionViewComponent } from './core/information-collection-view/information-collection-view.component'
 import { RecordsComponent } from './core/records/records.component'
+import { ViewNotificationsComponent } from './core/view-notifications/view-notifications.component'
 
 export const routes: Routes = [
   {
@@ -138,13 +139,22 @@ export const routes: Routes = [
       {
         path: 'view/information-collection/recopilation/:recopilationId/category/:categoryId/department/:departmentId',
         title: 'Colecciones de información',
-        component: InformationCollectionViewComponent
+        component: InformationCollectionViewComponent,
+        canActivate: [roleGuard([Role.COORDINATOR, Role.ADMIN])]
       },
       {
         path: 'records',
         title: 'Registro de evidencias',
         component: RecordsComponent,
         canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
+      },
+      {
+        path: 'notifications',
+        title: 'Notificaciones',
+        component: ViewNotificationsComponent,
+        canActivate: [
+          roleGuard([Role.COORDINATOR, Role.ADMIN, Role.DEPARTMENT])
+        ]
       }
     ]
   },

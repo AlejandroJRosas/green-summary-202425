@@ -12,6 +12,8 @@ import { OrderByParamDto } from './dto/order-information-collections-by-param.dt
 import { Recopilation } from '../recopilations/entities/recopilation.entity'
 import { Department } from '../users/entities/department.entity'
 import { Category } from '../categories/entities/category.entity'
+import { NotificationsService } from '../notifications/notifications.service'
+import { NOTIFICATION_TYPES } from '../notifications/notifications.constants'
 
 @Injectable()
 export class InformationCollectionsService {
@@ -23,7 +25,8 @@ export class InformationCollectionsService {
     @InjectRepository(Department)
     private departmentRepository: Repository<Department>,
     @InjectRepository(Category)
-    private categoryRepository: Repository<Category>
+    private categoryRepository: Repository<Category>,
+    private notificationsService: NotificationsService
   ) {}
 
   async findAll({
@@ -135,6 +138,23 @@ export class InformationCollectionsService {
       category,
       department
     })
+
+    const data = {
+      departmentId: department.id,
+      departmentName: department.fullName,
+      recopilationId: recopilation.id,
+      recopilationName: recopilation.name,
+      categoryId: category.id,
+      categoryName: category.name
+    }
+
+    const notificationDTO = {
+      data: data,
+      type: NOTIFICATION_TYPES.INFORMATION_COLLECTION_CREATION,
+      userId: department.id
+    }
+    await this.notificationsService.createAll(notificationDTO)
+
     return await this.informationCollectionsRepository.save(
       informationCollection
     )
@@ -148,20 +168,56 @@ export class InformationCollectionsService {
       updateInformationCollectionDto
 
     const [recopilation, category, department] = await Promise.all([
-      this.recopilationRepository.findOneByOrFail({
+      this.recopilationRepository.findOneBy({
         id: recopilationId
       }),
-      this.categoryRepository.findOneByOrFail({ id: categoryId }),
-      this.departmentRepository.findOneByOrFail({ id: departmentId })
+      this.categoryRepository.findOneBy({ id: categoryId }),
+      this.departmentRepository.findOneBy({ id: departmentId })
     ])
 
-    await this.informationCollectionsRepository.update(id, {
-      name: updateInformationCollectionDto.name,
-      summary: updateInformationCollectionDto.summary,
-      recopilation,
-      category,
-      department
-    })
+    const dataToUpdate: Record<string, any> = {}
+
+    if (updateInformationCollectionDto.name) {
+      dataToUpdate.name = updateInformationCollectionDto.name
+    }
+    if (updateInformationCollectionDto.summary) {
+      dataToUpdate.summary = updateInformationCollectionDto.summary
+    }
+    if (updateInformationCollectionDto.isApproved) {
+      dataToUpdate.isApproved = updateInformationCollectionDto.isApproved
+    }
+    if (updateInformationCollectionDto.recopilationId) {
+      dataToUpdate.recopilation = recopilation
+    }
+    if (updateInformationCollectionDto.categoryId) {
+      dataToUpdate.category = category
+    }
+    if (updateInformationCollectionDto.departmentId) {
+      dataToUpdate.department = department
+    }
+
+    await this.informationCollectionsRepository.update(id, dataToUpdate)
+
+    const collectionData =
+      await this.informationCollectionsRepository.findOneByOrFail({ id })
+    const data = {
+      collectionId: collectionData.id,
+      collectionName: collectionData.name,
+      departmentId: department.id,
+      departmentName: department.fullName,
+      recopilationId: recopilation.id,
+      recopilationName: recopilation.name,
+      categoryId: category.id,
+      categoryName: category.name
+    }
+
+    const notificationDTO = {
+      data: data,
+      type: NOTIFICATION_TYPES.INFORMATION_COLLECTION_EDITION,
+      userId: department.id
+    }
+    await this.notificationsService.createAll(notificationDTO)
+
     return this.informationCollectionsRepository.findOneByOrFail({ id })
   }
 

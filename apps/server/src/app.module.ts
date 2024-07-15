@@ -18,6 +18,7 @@ import { CategorizedCriteriaModule } from './core/categorized-criteria/categoriz
 import { ServeStaticModule } from '@nestjs/serve-static/dist/serve-static.module'
 import { SummaryInformationModule } from './core/summary-information/summary-information.module'
 import { WordModule } from './core/word/word.module'
+import { MailsModule } from './core/mails/mails.module'
 
 @Module({
   imports: [
@@ -30,7 +31,7 @@ import { WordModule } from './core/word/word.module'
           type: 'postgres',
           url: DATABASE_CONFIG.URL,
           autoLoadEntities: true,
-          synchronize: true
+          synchronize: false
         }
       },
       inject: [ConfigService]
@@ -54,7 +55,8 @@ import { WordModule } from './core/word/word.module'
     EvidencesModule,
     NotificationsModule,
     SummaryInformationModule,
-    WordModule
+    WordModule,
+    MailsModule
   ]
 })
 export class AppModule {}

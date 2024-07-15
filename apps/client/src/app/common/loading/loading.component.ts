@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common'
-import { Component } from '@angular/core'
-import { BehaviorSubject } from 'rxjs'
+import { Component, inject } from '@angular/core'
 import { LoadingService } from '../../services/loading.service'
 
 @Component({
@@ -11,5 +10,6 @@ import { LoadingService } from '../../services/loading.service'
   styleUrls: ['./loading.component.css']
 })
 export class LoadingComponent {
-  constructor(public loader: LoadingService) {}
+  constructor() {}
+  loadingService = inject(LoadingService)
 }

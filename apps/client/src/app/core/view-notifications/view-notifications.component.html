@@ -1,0 +1,23 @@
+<main>
+  <header class="flex flex-row align-items-center pb-4 gap-3">
+    <h2>Notificaciones</h2>
+    <i class="pi pi-bell" style="font-size: 1.5rem"></i>
+  </header>
+  <section>
+    <div class="flex flex-column gap-5">
+      @if (notifications.length === 0 || fetchError === true) {
+        <div class="flex flex-column justify-content-center align-items-center">
+          <img
+            src="../../../assets/empty-mailbox.png"
+            alt="logo de green summary"
+          />
+          <i class="text-lg"><strong>No hay notificaciones por ver</strong></i>
+        </div>
+      } @else {
+        @for (notification of notifications; track notification.id) {
+          <app-notification [notification]="notification"></app-notification>
+        }
+      }
+    </div>
+  </section>
+</main>
