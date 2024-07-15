@@ -53,8 +53,8 @@
       class="flex flex-column gap-3 w-25rem"
       [style]="{ maxHeight: '25rem' }"
     >
-      @for (notification of notificationsUnSeen; track notification.id) {
-        @if (notificationsUnSeen.length === 0 || fetchError === true) {
+      @for (notification of unSeenNotifications; track notification.id) {
+        @if (unSeenNotifications.length === 0 || fetchError === true) {
           <i>No hay notificaciones por ver</i>
         } @else {
           <app-notification [notification]="notification"></app-notification>

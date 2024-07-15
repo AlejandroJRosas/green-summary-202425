@@ -31,7 +31,7 @@ export class BodyComponent implements OnInit {
     email: ''
   }
   LabelAvatar: string = ''
-  notificationsUnSeen: Notification[] = [
+  unSeenNotifications: Notification[] = [
     {
       id: 0,
       seen: false,
@@ -69,8 +69,8 @@ export class BodyComponent implements OnInit {
     this.NotificationService.getOwnUnSeen().subscribe({
       next: (res) => {
         if (res.status === 'success') {
-          this.notificationsUnSeen = res.data
-          console.log(this.notificationsUnSeen)
+          this.unSeenNotifications = res.data
+          console.log(this.unSeenNotifications)
         }
       },
       error: (e) => {
