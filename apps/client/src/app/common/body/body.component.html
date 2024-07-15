@@ -1,5 +1,5 @@
 <div class="mx-4 my-3">
-  <header>
+  <header class="flex flex-row justify-content-between">
     <div class="flex flex-row align-items-center">
       <img
         src="../../../assets/green-summary-favicon-color.webp"
@@ -9,14 +9,49 @@
       />
       <h2>Green Summary</h2>
     </div>
+    <div class="flex flex-row gap-3">
+      <p-button
+        [rounded]="false"
+        [text]="true"
+        severity="secondary"
+        (click)="op.toggle($event)"
+        class="flex align-items-center"
+      >
+        <i
+          class="pi pi-bell"
+          style="font-size: 2rem; color: #334155"
+          pBadge
+          value="10+"
+          severity="danger"
+        ></i>
+      </p-button>
+      <div
+        class="flex flex-row align-items-center px-3 gap-3"
+        style="border-radius: 50px; background-color: #f2f8e6"
+      >
+        <p-avatar
+          label="PF"
+          shape="circle"
+          size="normal"
+          [style]="{
+            'background-color': '#00ad7c',
+            'color': '#ffffff',
+            'width': '3rem',
+            'height': '3rem',
+            'font-size': '1.5rem'
+          }"
+        />
+        <div class="flex flex-column align-items-start justify-content-start">
+          <h3 class="m-0">{{ this.user.fullName }}</h3>
+          <p class="m-0">{{ this.user.email }}</p>
+        </div>
+      </div>
+    </div>
   </header>
-  <p-button
-    (onClick)="op.toggle($event)"
-    icon="pi pi-share-alt"
-    label="notificaciones"
-  />
   <p-overlayPanel #op>
-    <div class="flex flex-column gap-3 w-25rem"></div>
+    <div class="flex flex-column gap-3 w-25rem">
+      <app-notification />
+    </div>
   </p-overlayPanel>
   <router-outlet></router-outlet>
 </div>
