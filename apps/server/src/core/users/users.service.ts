@@ -120,6 +120,9 @@ export class UsersService {
     const encryptedPassword = await this.encryptPassword(generatedPassword)
     user.password = encryptedPassword
     await this.usersRepository.update(id, user)
+
+    this.mailsService.sendMail(user.email, generatedPassword)
+
     return generatedPassword
   }
 
