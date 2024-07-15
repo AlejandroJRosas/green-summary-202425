@@ -48,7 +48,10 @@ export class LinkEvidenceService {
     return this.http.delete<void>(`${BaseUrl}/links/${id}`)
   }
 }
-export type EvidenceLinkDTO = Omit<EvidenceDTO, 'fileLink' | 'collectionId'>
+export type EvidenceLinkDTO = Omit<
+  EvidenceDTO,
+  'fileLink' | 'collectionId' | 'error'
+>
 type Paginated = {
   first: number
   rows: number

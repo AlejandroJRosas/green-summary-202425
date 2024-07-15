@@ -48,7 +48,7 @@ export class EvidenceService {
   }
 }
 
-export type EvidenceDTO = Omit<Evidence, 'id' | 'collection'> & {
+export type EvidenceDTO = Omit<Evidence, 'id' | 'collection' | 'error'> & {
   collectionId: string
 }
 type Paginated = {

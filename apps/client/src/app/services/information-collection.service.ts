@@ -57,6 +57,14 @@ export class InformationCollectionService {
       BackendResponse<InformationCollection, unknown, unknown>
     >(`${BaseUrl}/information-collections/${id}`, informationCollection)
   }
+  editInformationCollectionByDepartment(
+    id: number,
+    informationCollection: InformationCollectionByDepartment
+  ): Observable<BackendResponse<InformationCollection, unknown, unknown>> {
+    return this.http.patch<
+      BackendResponse<InformationCollection, unknown, unknown>
+    >(`${BaseUrl}/information-collections/${id}`, informationCollection)
+  }
 
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${BaseUrl}/information-collections/${id}`)
