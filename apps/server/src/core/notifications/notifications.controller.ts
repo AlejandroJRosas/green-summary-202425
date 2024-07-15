@@ -24,7 +24,7 @@ import { Role } from '../auth/role.enum'
 
 @ApiTags('Notifications')
 @Controller('notifications')
-@Roles(Role.Coordinator, Role.Admin)
+@Roles(Role.Coordinator, Role.Admin, Role.Department)
 export class NotificationsController {
   constructor(private readonly notificationsService: NotificationsService) {}
 
