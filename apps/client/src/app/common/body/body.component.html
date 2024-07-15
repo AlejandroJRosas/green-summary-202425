@@ -30,7 +30,7 @@
         style="border-radius: 50px; background-color: #f2f8e6"
       >
         <p-avatar
-          label="PF"
+          [label]="LabelAvatar"
           shape="circle"
           size="normal"
           [style]="{
@@ -48,9 +48,18 @@
       </div>
     </div>
   </header>
-  <p-overlayPanel #op>
-    <div class="flex flex-column gap-3 w-25rem">
-      <app-notification />
+  <p-overlayPanel #op [style]="{ height: '25rem', overflowY: 'auto' }">
+    <div
+      class="flex flex-column gap-3 w-25rem"
+      [style]="{ maxHeight: '25rem' }"
+    >
+      @for (notification of notificationsUnSeen; track notification.id) {
+        @if (notificationsUnSeen.length === 0 || fetchError === true) {
+          <i>No hay notificaciones por ver</i>
+        } @else {
+          <app-notification [notification]="notification"></app-notification>
+        }
+      }
     </div>
   </p-overlayPanel>
   <router-outlet></router-outlet>
