@@ -1,3 +1,22 @@
-<div class="body">
+<div class="mx-4 my-3">
+  <header>
+    <div class="flex flex-row align-items-center">
+      <img
+        src="../../../assets/green-summary-favicon-color.webp"
+        alt="logo de green summary"
+        width="55px"
+        height="55px"
+      />
+      <h2>Green Summary</h2>
+    </div>
+  </header>
+  <p-button
+    (onClick)="op.toggle($event)"
+    icon="pi pi-share-alt"
+    label="notificaciones"
+  />
+  <p-overlayPanel #op>
+    <div class="flex flex-column gap-3 w-25rem"></div>
+  </p-overlayPanel>
   <router-outlet></router-outlet>
 </div>
