@@ -16,6 +16,7 @@ import { LinksService } from './link.service'
 import { NotificationsService } from '../notifications/notifications.service'
 import { Notification } from '../notifications/entities/notification.entity'
 import { User } from '../users/entities/user.entity'
+import { MailsService } from '../mails/mails.service'
 
 @Module({
   imports: [
@@ -40,7 +41,8 @@ import { User } from '../users/entities/user.entity'
     DocumentsService,
     ImagesService,
     LinksService,
-    NotificationsService
+    NotificationsService,
+    MailsService
   ]
 })
 export class EvidencesModule {}
