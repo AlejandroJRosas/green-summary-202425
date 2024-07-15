@@ -4,5 +4,11 @@ th {
 }
 
 td {
+  padding: 0;
   border-right: 1px solid #e5e7eb;
+  height: inherit;
+}
+
+tr {
+  height: 1px;
 }

@@ -34,7 +34,7 @@
     </ng-template>
     <ng-template pTemplate="body" let-row>
       <tr>
-        <td pFrozenColumn>
+        <td pFrozenColumn style="padding-top: 15px; padding-bottom: 15px">
           {{ row.department.fullName }}
         </td>
         @for (indicator of matrixData.indicators; track $index) {
