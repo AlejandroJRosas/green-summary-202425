@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common'
 import { MailerService } from '@nestjs-modules/mailer'
+import { constructLoginDataMail } from './login-data-mail'
 
 @Injectable()
 export class MailsService {
@@ -8,8 +9,9 @@ export class MailsService {
   async sendMail(user: string, password: string) {
     await this.mailerService.sendMail({
       to: user,
-      subject: 'DATOS DEL USUARIO',
-      html: `<b>Usuario: ${user}    Contraseña: ${password}</b>`
+      subject: 'Datos para iniciar sesión',
+      html: `<b>Usuario: ${user}    Contraseña: ${password}</b>`,
+      amp: constructLoginDataMail(user, password)
     })
   }
 
