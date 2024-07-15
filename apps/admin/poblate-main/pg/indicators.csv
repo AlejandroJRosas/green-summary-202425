@@ -1,0 +1,16 @@
+index,name,alias,helpText
+3000,CO₂ emissions per employee,Emisiones de CO₂ por empleado,Este indicador mide la cantidad de dióxido de carbono (CO₂) emitido por cada empleado de la organización.
+123,Infrastructure and buildings,Infraestructura y edificios,Infraestructura de la universidad en donde se debe colocar información sobre de como está construido 
+223,Prueba indicador,prueba indicador,prueba de indicador texto de ayuda
+4321,Gender Diversity Index,Índice de diversidad de género,Este indicador evalúa la representación de género en la organización. Puede medirse como la proporción de mujeres en cargos directivos o en toda la plantilla. Fomentar la diversidad de género es fundamental para la equidad y la inclusión.
+8080,Water consumption per unit produced,Consumo de agua por unidad producida,Este indicador cuantifica la cantidad de agua utilizada para producir una unidad de producto o servicio. Ayuda a identificar oportunidades de eficiencia hídrica y a reducir el impacto ambiental.
+10000,Test indicator with no criteria,Indicador de prueba sin criterios,Este indicador es un ejemplo de un indicador que no tiene criterios asociados. Puede ser útil para pruebas o demostraciones.
+20000,Test indicator with no categories,Indicador de prueba sin categorías,Este indicador es un ejemplo de un indicador que no tiene categorías asociadas. Puede ser útil para pruebas o demostraciones.
+3234,Test Indicator,Indicador de Prueba,Mensaje de ayuda del indicador
+1,Setting and Infrastructure (SI),Infraestructura,"Evalúa el compromiso de la institución con la creación de un campus sostenible a través del diseño, la construcción y la operación de sus instalaciones."
+2,Energy and Climate Change (EC),Energía y Cambio Climático,Evalúa el compromiso de la institución con la reducción de su huella de carbono y la lucha contra el cambio climático.
+3,Waste (WS),Desperdicios,Evalúa el compromiso de la institución con la reducción de la generación de residuos y la promoción de prácticas sostenibles de manejo de residuos.
+4,Water (WR),Agua,Datos sobre el uso y conservación del agua.
+5,Transportation (TR),Transporte,Información sobre los medios de transporte disponibles.
+6,Education and Research (ED),Educación,Información sobre programas educativos y de investigación.
+7,Institutional Guidelines (?),Directrices Institucionales,Información sobre las políticas y directrices institucionales.

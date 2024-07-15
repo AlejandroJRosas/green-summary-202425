@@ -3,12 +3,15 @@ import {
   Column,
   PrimaryGeneratedColumn,
   TableInheritance,
-  OneToMany
+  OneToMany,
+  Unique,
+  DeleteDateColumn
 } from 'typeorm'
 import { USER_TYPES, UserType } from '../users.constants'
 import { Notification } from 'src/core/notifications/entities/notification.entity'
 
 @Entity({ name: 'users' })
+@Unique(['email', 'deletedAt'])
 @TableInheritance({
   column: { type: 'enum', enum: Object.values(USER_TYPES), name: 'type' }
 })
@@ -19,7 +22,7 @@ export abstract class User {
   @Column({ nullable: false })
   fullName: string
 
-  @Column({ unique: true, nullable: false })
+  @Column({ nullable: false })
   email: string
 
   @Column({ nullable: false, select: false })
@@ -30,4 +33,7 @@ export abstract class User {
 
   @Column({ type: 'enum', enum: Object.values(USER_TYPES), nullable: false })
   type: UserType
+
+  @DeleteDateColumn()
+  deletedAt: Date
 }
