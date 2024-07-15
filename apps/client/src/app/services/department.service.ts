@@ -11,7 +11,6 @@ import { BackendResponse } from '../../shared/types/http-response.type'
 })
 export class DepartmentService {
   constructor(private http: HttpClient) {}
-
   get(
     paginated: Paginated
   ): Observable<PaginatedResponse<Department, unknown, unknown>> {
@@ -61,6 +60,14 @@ export class DepartmentService {
   }
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${BaseUrl}/users/${id}`)
+  }
+  passwordChange(
+    id: number
+  ): Observable<BackendResponse<string, unknown, unknown>> {
+    return this.http.patch<BackendResponse<string, unknown, unknown>>(
+      `${BaseUrl}/users/password-change/${id}`,
+      {}
+    )
   }
 }
 

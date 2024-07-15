@@ -52,6 +52,20 @@
                 severity="danger"
                 [outlined]="true"
               />
+              <p-button
+                (click)="
+                  confirmationPasswordChange(
+                    $event,
+                    department.id,
+                    department.fullName,
+                    department
+                  )
+                "
+                icon="pi pi-key"
+                [rounded]="true"
+                severity="info"
+                [outlined]="true"
+              />
             </div>
           </td>
         </tr>
@@ -75,6 +89,7 @@
             <div
               class="flex flex-row justify-content-center align-items-center gap-3"
             >
+              <p-skeleton shape="circle" size="3rem" />
               <p-skeleton shape="circle" size="3rem" />
               <p-skeleton shape="circle" size="3rem" />
             </div>

@@ -152,6 +152,32 @@ export class DepartmentComponent
       }
     })
   }
+  confirmationPasswordChange(
+    event: Event,
+    id: number,
+    name: string,
+    department: User
+  ) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: `¿Estás seguro de que quieres autogenerar una nueva contraseña para el departamento <strong>${name}</strong>?`,
+      header: 'Cambiar contraseña',
+      icon: 'pi pi-info-circle',
+      acceptButtonStyleClass: 'p-button-danger p-button-text',
+      rejectButtonStyleClass: 'p-button-text p-button-text',
+      acceptIcon: 'none',
+      rejectIcon: 'none',
+      acceptLabel: 'Sí',
+      rejectLabel: 'No',
+      accept: () => {
+        this.toast.show('info', 'Autogenerando..', 'Autogenerando contraseña..')
+        this.passwordChange(id, department)
+      },
+      reject: () => {
+        this.toast.show('error', 'Rechazado', 'Haz rechazado el cambio')
+      }
+    })
+  }
 
   getAll() {
     this.departmentService.get(this.paginated).subscribe({
@@ -209,6 +235,25 @@ export class DepartmentComponent
     this.departmentService.edit(user.id, user).subscribe({
       next: () => {
         this.toast.show('success', 'Editado', 'Departamento editado con éxito')
+        this.getAll()
+      },
+      error: (e) => {
+        console.error(e)
+        this.toast.show('error', 'Error', e.error.data.message)
+      }
+    })
+  }
+  passwordChange(id: number, department: User) {
+    this.departmentService.passwordChange(id).subscribe({
+      next: (res) => {
+        this.toast.show(
+          'success',
+          'Contraseña cambiada',
+          'Contraseña cambiada con éxito'
+        )
+        this.department = department
+        this.department.password = res.status === 'success' ? res.data : ''
+        this.showDialogViewInformation()
         this.getAll()
       },
       error: (e) => {
