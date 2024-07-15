@@ -19,9 +19,6 @@ export class Notification {
   @Column({ type: 'boolean', default: false, nullable: false })
   seen: boolean
 
-  @Column({ type: 'text', nullable: false })
-  description: string
-
   @Column({
     type: 'enum',
     nullable: false,

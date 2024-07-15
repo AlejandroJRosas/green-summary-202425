@@ -13,6 +13,7 @@ import { Recopilation } from '../recopilations/entities/recopilation.entity'
 import { Department } from '../users/entities/department.entity'
 import { Category } from '../categories/entities/category.entity'
 import { NotificationsService } from '../notifications/notifications.service'
+import { NOTIFICATION_TYPES } from '../notifications/notifications.constants'
 
 @Injectable()
 export class InformationCollectionsService {
@@ -137,8 +138,22 @@ export class InformationCollectionsService {
       category,
       department
     })
-    const descriptionNotification = `El departamento ${departmentId} ha creado una colección de información en la recopilación ${recopilationId} asociada a la categoría ${categoryId}`
-    await this.notificationsService.createAll(descriptionNotification)
+
+    const data = {
+      departmentId: department.id,
+      departmentName: department.fullName,
+      recopilationId: recopilation.id,
+      recopilationname: recopilation.name,
+      categoryId: category.id,
+      categoryName: category.name
+    }
+
+    const notificationDTO = {
+      data: data,
+      type: NOTIFICATION_TYPES.INFORMATION_COLLECTION_CREATION,
+      userId: department.id
+    }
+    await this.notificationsService.createAll(notificationDTO)
 
     return await this.informationCollectionsRepository.save(
       informationCollection
@@ -183,8 +198,25 @@ export class InformationCollectionsService {
 
     await this.informationCollectionsRepository.update(id, dataToUpdate)
 
-    const descriptionNotification = `El departamento ${departmentId} ha editado la colección de información ${id} de la recopilación ${recopilationId} asociada a la categoría ${categoryId}`
-    await this.notificationsService.createAll(descriptionNotification)
+    const collectionData =
+      await this.informationCollectionsRepository.findOneByOrFail({ id })
+    const data = {
+      collectionId: collectionData.id,
+      collectionName: collectionData.name,
+      departmentId: department.id,
+      departmentName: department.fullName,
+      recopilationId: recopilation.id,
+      recopilationname: recopilation.name,
+      categoryId: category.id,
+      categoryName: category.name
+    }
+
+    const notificationDTO = {
+      data: data,
+      type: NOTIFICATION_TYPES.INFORMATION_COLLECTION_EDITION,
+      userId: department.id
+    }
+    await this.notificationsService.createAll(notificationDTO)
 
     return this.informationCollectionsRepository.findOneByOrFail({ id })
   }

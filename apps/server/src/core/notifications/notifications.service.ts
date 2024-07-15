@@ -34,7 +34,7 @@ export class NotificationsService {
     return this.notificationRepository.save(notification)
   }
 
-  async createAll(description: string): Promise<void> {
+  async createAll(createNotificationDto: CreateNotificationDto): Promise<void> {
     const users = await this.userRepository.find({
       where: {
         type: 'coordinator'
@@ -44,7 +44,8 @@ export class NotificationsService {
     let notification
     users.forEach((user) => {
       notification = this.notificationRepository.create({
-        description: description,
+        data: createNotificationDto.data,
+        type: createNotificationDto.type,
         user: user
       })
       this.notificationRepository.save(notification)
