@@ -1,6 +1,6 @@
 <div
   class="loading"
-  [ngClass]="this.loader.getLoading() ? '' : 'hidden'"
+  [ngClass]="this.loadingService.isLoading() ? 'activate' : 'hidden'"
   role="progressbar"
 >
   <div class="container">
