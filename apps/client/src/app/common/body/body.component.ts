@@ -1,4 +1,4 @@
-import { Component } from '@angular/core'
+import { Component, Input } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterOutlet } from '@angular/router'
 
@@ -9,4 +9,21 @@ import { RouterOutlet } from '@angular/router'
   templateUrl: './body.component.html',
   styleUrl: './body.component.css'
 })
-export class BodyComponent {}
+export class BodyComponent {
+  @Input() isCollapsed = false
+  @Input() screenWidth = 0
+
+  getBodyClass(): string {
+    let styleClass = ''
+    if (this.isCollapsed && this.screenWidth > 768) {
+      styleClass = 'body-trimmed'
+    } else if (
+      this.isCollapsed &&
+      this.screenWidth <= 768 &&
+      this.screenWidth > 0
+    ) {
+      styleClass = 'body-md-screen'
+    }
+    return styleClass
+  }
+}
