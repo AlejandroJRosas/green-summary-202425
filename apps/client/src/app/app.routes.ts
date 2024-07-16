@@ -31,6 +31,7 @@ import { EditEvidenceComponent } from './core/upload-of-evidence/collection-of-i
 import { InformationCollectionViewComponent } from './core/information-collection-view/information-collection-view.component'
 import { RecordsComponent } from './core/records/records.component'
 import { ViewNotificationsComponent } from './core/view-notifications/view-notifications.component'
+import { StatisticsComponent } from './core/statistics/statistics.component'
 
 export const routes: Routes = [
   {
@@ -55,6 +56,12 @@ export const routes: Routes = [
         title: 'Inicio',
         component: HomeComponent,
         canActivate: [authGuard]
+      },
+      {
+        path: 'statistics',
+        title: 'Inicio',
+        component: StatisticsComponent,
+        canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
       },
       {
         path: 'departments',
