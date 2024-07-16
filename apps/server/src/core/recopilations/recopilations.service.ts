@@ -138,6 +138,7 @@ export class RecopilationsService {
   async findOneMatrix(id: number) {
     const recopilation = await this.recopilationsRepository.findOneOrFail({
       where: { id },
+      withDeleted: true,
       relations: {
         departmentsPerRecopilation: {
           department: true,
