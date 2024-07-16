@@ -31,7 +31,7 @@ import { MailsModule } from './core/mails/mails.module'
           type: 'postgres',
           url: DATABASE_CONFIG.URL,
           autoLoadEntities: true,
-          synchronize: true
+          synchronize: false
         }
       },
       inject: [ConfigService]
