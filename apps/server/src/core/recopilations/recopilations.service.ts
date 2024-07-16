@@ -92,7 +92,8 @@ export class RecopilationsService {
         'categorizedCriterion.criteria.indicator',
         'categorizedCriterion.category',
         'indicatorsPerRecopilations.indicator'
-      ]
+      ],
+      withDeleted: true
     })
 
     const recommendations = recopilation.departmentsPerRecopilation.map(
