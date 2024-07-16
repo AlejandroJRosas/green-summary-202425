@@ -354,7 +354,9 @@ export class WordService {
     const subIndex = (await summary).criterion.subIndex
     const criterionName = (await summary).criterion.name
 
-    const collections = (await summary).informationCollections
+    let collections = (await summary).informationCollections
+
+    collections = collections.filter((ic) => ic.isApproved)
 
     const header = new Header({
       children: [
