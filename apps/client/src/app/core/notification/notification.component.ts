@@ -75,18 +75,12 @@ export class NotificationComponent implements OnInit {
 
     return 'pages/home'
   }
+
   seenNotificaction(notification: Notification) {
     this.notification.seen = true
-    this.NotificationService.edit(this.notification.id, notification).subscribe(
-      {
-        next: (res) => {
-          if (res.status === 'success') {
-            console.log('se editó compadre')
-          }
-        }
-      }
-    )
+    this.NotificationService.edit(this.notification.id, notification)
   }
+
   getDuration(date: Date): string {
     const now = new Date()
     const createdAt = new Date(date)

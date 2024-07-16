@@ -69,10 +69,14 @@ export class RecommendCategoriesDepartmentComponent {
       next: (recopilation) => {
         if (!recopilation) return
 
-        this.recommendationsFormValues = recopilation.departments.map((d) => ({
-          departmentId: d.department.id,
-          categories: d.recommendedCategories
-        }))
+        if (Array.isArray(recopilation.departments)) {
+          this.recommendationsFormValues = recopilation.departments.map(
+            (d) => ({
+              departmentId: d.department.id,
+              categories: d.recommendedCategories
+            })
+          )
+        }
       },
       error: (e) => {
         this.toast.show('error', 'Error', e.error.data.message)

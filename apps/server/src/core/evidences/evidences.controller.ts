@@ -162,11 +162,9 @@ export class EvidencesController {
     fileLink: Express.Multer.File
   ) {
     const name = this.configService.get('link')
-    console.log(fileLink)
     if (fileLink !== undefined) {
       updateEvidenceDto.fileLink = `${name.URL_BACK}/uploads/${fileLink.filename}`
     }
-    console.log(updateEvidenceDto.fileLink)
     const updatedEvidence = await this.evidencesService.update(
       +id,
       updateEvidenceDto

@@ -253,11 +253,9 @@ export class CollectionOfInformationComponent
       next: (res) => {
         if (res.status === 'success') {
           this.informationCollections = res.data
-          console.log(res.data)
         }
       },
       error: (e) => {
-        console.error(e)
         this.toast.show('error', 'Error', e.error.data.message)
       }
     })

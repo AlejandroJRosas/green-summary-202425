@@ -36,7 +36,6 @@ export class DataSharingEvidenceService {
   }
   addEvidence(): void {
     const newEvidenceIndex = this.evidences.length + 1
-    console.log(this.evidences.length)
     this.evidences.push(newEvidenceIndex)
     const newFormGroup = new FormGroup({
       selectedType: new FormControl<typeEvidence>({
@@ -50,7 +49,6 @@ export class DataSharingEvidenceService {
     this.evidences = evidences
   }
   removeEvidence(indexEvidence: number): void {
-    console.log(indexEvidence)
     if (this.evidences.length === 1) {
       this.evidences.pop()
       this.formGroups.pop()

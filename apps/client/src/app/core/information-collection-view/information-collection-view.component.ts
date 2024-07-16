@@ -155,7 +155,6 @@ export class InformationCollectionViewComponent implements OnInit {
     informationCollection: InformationCollectionByDepartment
   ) {
     informationCollection.isApproved = true
-    console.log()
     this.InformationCollectionService.editInformationCollectionByDepartment(
       informationCollectionId,
       informationCollection

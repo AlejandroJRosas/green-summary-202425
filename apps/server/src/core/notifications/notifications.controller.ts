@@ -63,7 +63,6 @@ export class NotificationsController {
 
   @Get('/own')
   async getOwn(@Req() request: Request) {
-    console.log(request['user'].id)
     const notifications = await this.notificationsService.getByUserId(
       request['user'].id
     )
@@ -72,7 +71,6 @@ export class NotificationsController {
 
   @Get('/own/unseen')
   async getOwnUnseen(@Req() request: Request) {
-    console.log(request['user'].id)
     const notifications = await this.notificationsService.getByUserId(
       request['user'].id,
       true

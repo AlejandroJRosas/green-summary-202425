@@ -38,7 +38,6 @@ export class SelectDepartmentsComponent implements OnInit {
   selectedDepartmentsIds: number[] = []
 
   ngOnInit() {
-    console.log(this.recopilationId)
     this.loadDepartmentsList()
     this.loadPreviousSelectedDepartments()
   }

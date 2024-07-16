@@ -90,7 +90,6 @@ export class IndicatorsService {
 
     const formattedIndicators = indicators.map((i) => {
       const categories = []
-      console.log(i.recopilationsPerIndicator)
       i.recopilationsPerIndicator[0].recopilation.categorizedCriterion.forEach(
         (cc) => {
           if (cc.criteria.indicator.index !== i.index) return
