@@ -37,7 +37,23 @@
           <td>
             <div class="flex flex-row gap-3">
               <p-button
+                (click)="
+                  confirmationPasswordChange(
+                    $event,
+                    department.id,
+                    department.fullName,
+                    department
+                  )
+                "
+                pTooltip="Cambiar contraseña"
+                icon="pi pi-key"
+                [rounded]="true"
+                severity="info"
+                [outlined]="true"
+              />
+              <p-button
                 (click)="showDialogEdit(department)"
+                pTooltip="Editar"
                 icon="pi pi-pencil"
                 [rounded]="true"
                 severity="success"
@@ -47,23 +63,10 @@
                 (click)="
                   confirmationDelete($event, department.id, department.fullName)
                 "
+                pTooltip="Eliminar"
                 icon="pi pi-trash"
                 [rounded]="true"
                 severity="danger"
-                [outlined]="true"
-              />
-              <p-button
-                (click)="
-                  confirmationPasswordChange(
-                    $event,
-                    department.id,
-                    department.fullName,
-                    department
-                  )
-                "
-                icon="pi pi-key"
-                [rounded]="true"
-                severity="info"
                 [outlined]="true"
               />
             </div>
@@ -241,7 +244,7 @@
         Departamento {{ department.fullName }}
       </span>
       <span class="text-base text-color-secondary">
-        ¡Anota los datos! <strong> No podrás verlo de nuevo </strong>, pero se
+        ¡Anota los datos! <strong>No podrás verlo de nuevo</strong>, pero se
         enviarán por correo al departamento.
       </span>
     </div>
