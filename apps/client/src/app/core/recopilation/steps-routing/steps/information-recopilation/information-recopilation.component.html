@@ -21,31 +21,31 @@
           </div>
           <div class="flex flex-column gap-2">
             <label
-              for="recopilationEndDate"
+              for="recopilationDepartmentEndDate"
               class="flex flex-row align-items-center gap-2 w-full"
             >
-              Fecha Final
+              Fecha Final Departamental
               <i
-                pTooltip="Fecha final de esta recopilación"
+                pTooltip="Fecha final de carga de información para los departamentos"
                 class="pi pi-question-circle text-color-secondary"
                 style="font-size: 1.2rem"
               ></i>
             </label>
             <p-calendar
-              [inputId]="'recopilationEndDate'"
+              [inputId]="'recopilationDepartmentEndDate'"
               styleClass="w-full"
               [iconDisplay]="'input'"
               [showIcon]="true"
-              [readonlyInput]="true"
+              inputId="icondisplay"
               dateFormat="dd/mm/yy"
-              formControlName="endDate"
-              (onClose)="errorsUpdate('endDate')"
-              (onClickOutside)="errorsUpdate('endDate')"
-              (onInput)="errorsUpdate('endDate')"
-              (onSelect)="errorsUpdate('endDate')"
-              (onBlur)="errorsUpdate('endDate')"
+              formControlName="departmentEndDate"
+              (onClose)="errorsUpdate('departmentEndDate')"
+              (onClickOutside)="errorsUpdate('departmentEndDate')"
+              (onInput)="errorsUpdate('departmentEndDate')"
+              (onSelect)="errorsUpdate('departmentEndDate')"
+              (onBlur)="errorsUpdate('departmentEndDate')"
             />
-            <small class="p-error">{{ errors.endDate }}</small>
+            <small class="p-error">{{ errors.departmentEndDate }}</small>
           </div>
         </div>
         <div class="flex flex-column flex-grow-1 gap-3">
@@ -79,31 +79,31 @@
           </div>
           <div class="flex flex-column gap-2">
             <label
-              for="recopilationDepartmentEndDate"
+              for="recopilationEndDate"
               class="flex flex-row align-items-center gap-2 w-full"
             >
-              Fecha Final Departamental
+              Fecha Final
               <i
-                pTooltip="Fecha final de carga de información para los departamentos"
+                pTooltip="Fecha final de esta recopilación"
                 class="pi pi-question-circle text-color-secondary"
                 style="font-size: 1.2rem"
               ></i>
             </label>
             <p-calendar
-              [inputId]="'recopilationDepartmentEndDate'"
+              [inputId]="'recopilationEndDate'"
               styleClass="w-full"
               [iconDisplay]="'input'"
               [showIcon]="true"
-              inputId="icondisplay"
+              [readonlyInput]="true"
               dateFormat="dd/mm/yy"
-              formControlName="departmentEndDate"
-              (onClose)="errorsUpdate('departmentEndDate')"
-              (onClickOutside)="errorsUpdate('departmentEndDate')"
-              (onInput)="errorsUpdate('departmentEndDate')"
-              (onSelect)="errorsUpdate('departmentEndDate')"
-              (onBlur)="errorsUpdate('departmentEndDate')"
+              formControlName="endDate"
+              (onClose)="errorsUpdate('endDate')"
+              (onClickOutside)="errorsUpdate('endDate')"
+              (onInput)="errorsUpdate('endDate')"
+              (onSelect)="errorsUpdate('endDate')"
+              (onBlur)="errorsUpdate('endDate')"
             />
-            <small class="p-error">{{ errors.departmentEndDate }}</small>
+            <small class="p-error">{{ errors.endDate }}</small>
           </div>
         </div>
       </div>

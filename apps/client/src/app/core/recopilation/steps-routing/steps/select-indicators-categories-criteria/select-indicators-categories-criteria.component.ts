@@ -60,6 +60,9 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
     this.recopilationService.getAll().subscribe({
       next: (recopilations) => {
         this.previousRecopilations = recopilations
+      },
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
@@ -80,6 +83,9 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
           })),
           selected: true
         }))
+      },
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
@@ -109,8 +115,8 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
       next: (indicators) => {
         this.schemes = indicators
       },
-      error: (error) => {
-        console.log(error)
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
@@ -138,6 +144,9 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
           'Éxito',
           'Esquema de recopilación agregado correctamente'
         )
+      },
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }

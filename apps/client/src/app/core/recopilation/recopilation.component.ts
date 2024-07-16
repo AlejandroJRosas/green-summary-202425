@@ -70,7 +70,6 @@ export class RecopilationComponent {
         this.loadRecopilations()
       },
       error: (e) => {
-        console.error(e)
         this.toast.show('error', 'Error', e.error.data.message)
       }
     })

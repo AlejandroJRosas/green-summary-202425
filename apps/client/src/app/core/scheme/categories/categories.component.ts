@@ -196,7 +196,6 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
         this.fetchEditCategory = false
         this.toast.show('error', 'Error', e.error.data.message)
         this.closeDialog()
-        console.log(e)
       }
     })
   }

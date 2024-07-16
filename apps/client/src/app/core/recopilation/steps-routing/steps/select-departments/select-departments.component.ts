@@ -47,10 +47,9 @@ export class SelectDepartmentsComponent implements OnInit {
     this.departmentService.getAll().subscribe({
       next: (response) => {
         this.departments = response
-        console.log(response)
       },
-      error: (error) => {
-        console.log(error)
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
@@ -60,8 +59,10 @@ export class SelectDepartmentsComponent implements OnInit {
       .getSelectedDepartments(this.recopilationId)
       .subscribe({
         next: (departments) => {
-          console.log(departments)
           this.selectedDepartmentsIds = departments.map((d) => d.id)
+        },
+        error: (e) => {
+          this.toast.show('error', 'Error', e.error.data.message)
         }
       })
   }
@@ -72,8 +73,7 @@ export class SelectDepartmentsComponent implements OnInit {
       departmentsIds: this.selectedDepartmentsIds
     }
     this.recopilationService.relateDepartments(payload).subscribe({
-      next: (response) => {
-        console.log(response)
+      next: () => {
         this.toast.show(
           'success',
           'Éxito',
@@ -81,8 +81,8 @@ export class SelectDepartmentsComponent implements OnInit {
         )
         this.nextStep()
       },
-      error: (error) => {
-        console.log(error)
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }

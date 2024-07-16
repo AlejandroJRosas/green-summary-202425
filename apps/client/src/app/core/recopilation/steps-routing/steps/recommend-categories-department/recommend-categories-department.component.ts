@@ -57,6 +57,9 @@ export class RecommendCategoriesDepartmentComponent {
       next: () => {
         this.nextStep()
         this.toast.show('success', 'Éxito', 'Categorías recomendadas con éxito')
+      },
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
@@ -70,6 +73,9 @@ export class RecommendCategoriesDepartmentComponent {
           departmentId: d.department.id,
           categories: d.recommendedCategories
         }))
+      },
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
@@ -86,6 +92,9 @@ export class RecommendCategoriesDepartmentComponent {
               categories: []
             })
           )
+        },
+        error: (e) => {
+          this.toast.show('error', 'Error', e.error.data.message)
         }
       })
   }
@@ -94,6 +103,9 @@ export class RecommendCategoriesDepartmentComponent {
     this.recopilationService.getCategories(this.recopilationId).subscribe({
       next: (categories) => {
         this.categories = categories
+      },
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }

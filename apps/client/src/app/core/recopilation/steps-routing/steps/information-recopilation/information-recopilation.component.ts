@@ -96,8 +96,8 @@ export class InformationRecopilationComponent
             endDate: new Date(recopilation.endDate)
           })
         },
-        error: (error) => {
-          console.error(error)
+        error: (e) => {
+          this.toast.show('error', 'Error', e.error.data.message)
         }
       })
     }
@@ -143,8 +143,8 @@ export class InformationRecopilationComponent
         )
         this.nextStep()
       },
-      error: (error) => {
-        console.error(error)
+      error: (e) => {
+        this.toast.show('error', 'Error', e.error.data.message)
       }
     })
   }
