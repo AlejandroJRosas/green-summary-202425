@@ -97,7 +97,11 @@ export class InformationRecopilationComponent
           })
         },
         error: (e) => {
-          this.toast.show('error', 'Error', e.error.data.message)
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
       })
     }

@@ -59,7 +59,11 @@ export class RecommendCategoriesDepartmentComponent {
         this.toast.show('success', 'Éxito', 'Categorías recomendadas con éxito')
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -79,7 +83,11 @@ export class RecommendCategoriesDepartmentComponent {
         }
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -98,7 +106,11 @@ export class RecommendCategoriesDepartmentComponent {
           )
         },
         error: (e) => {
-          this.toast.show('error', 'Error', e.error.data.message)
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
       })
   }
@@ -109,7 +121,11 @@ export class RecommendCategoriesDepartmentComponent {
         this.categories = categories
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }

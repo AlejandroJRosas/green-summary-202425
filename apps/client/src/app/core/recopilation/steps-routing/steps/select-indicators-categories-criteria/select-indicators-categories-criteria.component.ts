@@ -62,7 +62,11 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
         this.previousRecopilations = recopilations
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -83,7 +87,11 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
         }))
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -114,7 +122,11 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
         this.schemes = indicators
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -144,7 +156,11 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
         )
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }

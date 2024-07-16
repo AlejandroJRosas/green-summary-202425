@@ -131,8 +131,11 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
             res.status === 'success' ? res.data : this.categories
         },
         error: (e) => {
-          console.error(e)
-          this.toast.show('error', 'Error', e.error.data.message)
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
       })
   }
@@ -143,8 +146,11 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
         this.getCategoriesPerIndicator(this.indicatorIndex)
       },
       error: (e) => {
-        console.error(e)
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -169,7 +175,11 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
       error: (e) => {
         this.visibleCreate = false
         this.fetchCreateCategory = false
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.closeDialog()
       }
     })
@@ -194,7 +204,11 @@ export class CategoryComponent extends ValidatedFormGroup<formPayload> {
       error: (e) => {
         this.visibleEdit = false
         this.fetchEditCategory = false
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.closeDialog()
       }
     })

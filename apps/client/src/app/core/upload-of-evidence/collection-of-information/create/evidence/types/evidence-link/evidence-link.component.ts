@@ -151,7 +151,11 @@ export class EvidenceLinkComponent
       },
       error: (e) => {
         console.error(e)
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.createdEvidence = false
       }
     })
@@ -175,7 +179,11 @@ export class EvidenceLinkComponent
         this.disableForm()
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.editedEvience = false
       }
     })
@@ -197,7 +205,11 @@ export class EvidenceLinkComponent
       error: (e) => {
         console.error(e)
         this.editedEvience = false
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
