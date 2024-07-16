@@ -17,6 +17,7 @@ import { User } from '../../../shared/types/user.type'
 import { ValidatedFormGroup } from '../../common/validated-form-group/validated-form-group'
 import { string, object } from 'yup'
 import { VALUES } from '../../../../../../shared/validations'
+import { TooltipModule } from 'primeng/tooltip'
 
 @Component({
   selector: 'app-department',
@@ -31,7 +32,8 @@ import { VALUES } from '../../../../../../shared/validations'
     Toast,
     DialogModule,
     InputTextModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    TooltipModule
   ],
   templateUrl: './department.component.html',
   providers: [ConfirmationService]
@@ -146,9 +148,6 @@ export class DepartmentComponent
       accept: () => {
         this.toast.show('info', 'Eliminando..', 'Eliminando departamento..')
         this.onDelete(id)
-      },
-      reject: () => {
-        this.toast.show('error', 'Rechazado', 'Haz rechazado la eliminación')
       }
     })
   }
@@ -172,9 +171,6 @@ export class DepartmentComponent
       accept: () => {
         this.toast.show('info', 'Autogenerando..', 'Autogenerando contraseña..')
         this.passwordChange(id, department)
-      },
-      reject: () => {
-        this.toast.show('error', 'Rechazado', 'Haz rechazado el cambio')
       }
     })
   }
