@@ -22,14 +22,13 @@
             tooltip="Ha subido evidencias"
           ></tooltip-icon>
         }
-        @if (answer?.isApproved && !answer?.hasError) {
+        @if (answer?.isApproved) {
           <tooltip-icon
             class="check-icon"
             icon="pi pi-file-check"
             tooltip="Ha sido marcado como correcto"
           ></tooltip-icon>
-        }
-        @if (answer?.hasError && !answer?.isApproved) {
+        } @else if (answer?.hasError) {
           <tooltip-icon
             class="error-icon"
             icon="pi pi-file-excel"
