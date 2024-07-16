@@ -1,16 +1,32 @@
 <section>
   <div class="flex flex-row align-items-start gap-3">
     @if (this.userType === 'coordinator' || this.userType === 'admin') {
-      <p-avatar
-        [label]="LabelAvatar"
-        shape="circle"
-        size="normal"
-        [style]="{ 'background-color': '#00ad7c', 'color': '#ffffff' }"
-      />
+      @if (notification.seen) {
+        <p-avatar
+          [label]="LabelAvatar"
+          shape="circle"
+          [style]="{ 'background-color': '#00ad7c', 'color': '#ffffff' }"
+        />
+      } @else {
+        <p-avatar
+          [label]="LabelAvatar"
+          shape="circle"
+          pBadge
+          severity="danger"
+          [style]="{
+            'background-color': '#00ad7c',
+            'color': '#ffffff',
+            'overflow': 'visible'
+          }"
+          class="notification-avatar"
+        />
+      }
     }
     <div class="flex flex-column align-items-start justify-content-start">
       @if (this.userType === 'coordinator' || this.userType === 'admin') {
-        <h3 class="m-0">{{ notification.data.departmentName }}</h3>
+        <h3 class="m-0">
+          {{ notification.data.departmentName }}
+        </h3>
       }
       @switch (notification.type) {
         @case ('recommendation') {
@@ -28,10 +44,7 @@
           </p>
           <i class="m-0 text-base"
             >{{ getDuration(notification.createdAt) }}
-            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
-              notification.seen ? 'Visto' : 'No leído'
-            }}</strong></i
-          >
+          </i>
         }
         @case ('information_collection_creation') {
           <p class="my-2">
@@ -50,10 +63,7 @@
           </p>
           <i class="m-0 text-base"
             >{{ getDuration(notification.createdAt) }}
-            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
-              notification.seen ? 'Visto' : 'No leído'
-            }}</strong></i
-          >
+          </i>
         }
         @case ('information_collection_edition') {
           <p class="my-2">
@@ -72,10 +82,7 @@
           </p>
           <i class="m-0 text-base"
             >{{ getDuration(notification.createdAt) }}
-            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
-              notification.seen ? 'Visto' : 'No leído'
-            }}</strong></i
-          >
+          </i>
         }
         @case ('evidence_creation') {
           <p class="my-2">
@@ -94,10 +101,7 @@
           </p>
           <i class="m-0 text-base"
             >{{ getDuration(notification.createdAt) }}
-            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
-              notification.seen ? 'Visto' : 'No leído'
-            }}</strong></i
-          >
+          </i>
         }
         @case ('evidence_edition') {
           <p class="my-2">
@@ -116,10 +120,7 @@
           </p>
           <i class="m-0 text-base"
             >{{ getDuration(notification.createdAt) }}
-            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
-              notification.seen ? 'Visto' : 'No leído'
-            }}</strong></i
-          >
+          </i>
         }
         @case ('evidence_error') {
           <p class="my-2">
@@ -137,10 +138,7 @@
           </p>
           <i class="m-0 text-base"
             >{{ getDuration(notification.createdAt) }}
-            <strong [style.color]="notification.seen ? '#0D6EFD' : '#EF4444'">{{
-              notification.seen ? 'Visto' : 'No leído'
-            }}</strong></i
-          >
+          </i>
         }
       }
     </div>

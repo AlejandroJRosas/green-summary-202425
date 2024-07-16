@@ -9,8 +9,7 @@ import { BadgeModule } from 'primeng/badge'
   selector: 'app-notification',
   standalone: true,
   imports: [AvatarModule, BadgeModule],
-  templateUrl: './notification.component.html',
-  styles: ``
+  templateUrl: './notification.component.html'
 })
 export class NotificationComponent implements OnInit {
   constructor(private NotificationService: NotificationService) {}
@@ -78,7 +77,13 @@ export class NotificationComponent implements OnInit {
 
   seenNotificaction(notification: Notification) {
     this.notification.seen = true
-    this.NotificationService.edit(this.notification.id, notification)
+    this.NotificationService.edit(this.notification.id, notification).subscribe(
+      {
+        next: (response) => {
+          console.log(response)
+        }
+      }
+    )
   }
 
   getDuration(date: Date): string {
