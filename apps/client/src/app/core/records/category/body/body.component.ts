@@ -41,6 +41,7 @@ export class RecordsCategoryBodyComponent implements OnInit {
       )
       .subscribe((departmentAnswers) => {
         this.departmentAnswers = departmentAnswers
+        console.log(this.departmentAnswers)
       })
   }
 
