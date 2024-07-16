@@ -18,9 +18,7 @@
           </header>
         </ng-template>
         @for (
-          collection of departmentAnswer.informationCollections.concat(
-            departmentAnswer.informationCollections
-          );
+          collection of departmentAnswer.informationCollections;
           track collection.id
         ) {
           <section>
@@ -38,10 +36,7 @@
               </p>
             }
             <div style="padding-left: 2.5rem" class="flex flex-column gap-3">
-              @for (
-                evidence of collection.evidences.concat(collection.evidences);
-                track evidence.id
-              ) {
+              @for (evidence of collection.evidences; track evidence.id) {
                 <article>
                   <div class="flex flex-column gap-3">
                     <h6
@@ -98,15 +93,7 @@
                           {{ evidence.fileLink }}
                         </a>
                       }
-                      @default {
-                        <p
-                          class="m-0"
-                          style="word-wrap: break-word; max-width: 80vw"
-                        >
-                          No hay evidencias creadas para esta colección de
-                          información
-                        </p>
-                      }
+                      @default {}
                     }
                   </div>
                   <p-divider />
