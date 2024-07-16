@@ -13,9 +13,11 @@ import {
 import { Response } from 'express'
 import { constructHttpResponse } from 'src/shared/construct-http-response'
 
+const POSTGRES_UNIQUE_CONSTRAINT_VIOLATION_CODE = '23505'
+
 @Catch(TypeORMError)
 export class TypeORMExceptionFilter implements ExceptionFilter {
-  public catch(exception: TypeORMError, host: ArgumentsHost) {
+  public catch(exception: any, host: ArgumentsHost) {
     const ctx = host.switchToHttp()
     const response = ctx.getResponse<Response>()
 
@@ -28,6 +30,16 @@ export class TypeORMExceptionFilter implements ExceptionFilter {
         statusCode = HttpStatus.NOT_FOUND
         break
       case QueryFailedError:
+        if (
+          exception.driverError.code ===
+          POSTGRES_UNIQUE_CONSTRAINT_VIOLATION_CODE
+        ) {
+          error = 'Duplicate key value violates unique constraint'
+          statusCode = HttpStatus.CONFLICT
+          exception.message =
+            '¡Parece que ya existe esa información en el sistema! Intenta ingresando algo diferente.'
+          break
+        }
         error = 'Query failed error'
         statusCode = HttpStatus.UNPROCESSABLE_ENTITY
         break
