@@ -10,7 +10,11 @@ export class IndicatorPerRecopilation {
 
   @ManyToOne(
     () => Recopilation,
-    (recopilation) => recopilation.indicatorsPerRecopilations
+    (recopilation) => recopilation.indicatorsPerRecopilations,
+    {
+      onDelete: 'CASCADE',
+      onUpdate: 'CASCADE'
+    }
   )
   recopilation: Recopilation
 
