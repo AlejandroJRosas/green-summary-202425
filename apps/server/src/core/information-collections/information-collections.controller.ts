@@ -8,7 +8,8 @@ import {
   HttpStatus,
   HttpCode,
   Query,
-  Patch
+  Patch,
+  Req
 } from '@nestjs/common'
 import { InformationCollectionsService } from './information-collections.service'
 import { CreateInformationCollectionDto } from './dto/create-information-collection.dto'
@@ -105,12 +106,16 @@ export class InformationCollectionsController {
 
   @Patch(':id')
   async update(
+    @Req() request: Request,
     @Param('id') id: number,
     @Body() updateInformationCollectionDto: UpdateInformationCollectionDto
   ) {
+    const notifyCoordinators = request['user'].type === Role.Department
+
     const updatedCollection = await this.informationCollectionsService.update(
       id,
-      updateInformationCollectionDto
+      updateInformationCollectionDto,
+      notifyCoordinators
     )
 
     return updatedCollection
