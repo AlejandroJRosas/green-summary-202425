@@ -16,7 +16,7 @@ export class CriteriaService {
     id: number
   ): Observable<BackendResponse<Criteria[], unknown, unknown>> {
     return this.http.get<BackendResponse<Criteria[], unknown, unknown>>(
-      `${BaseUrl}/criteria/indicator/${id}`
+      `${BaseUrl}/criteria/indicator/${id}?orderBy=subIndex&orderType=ASC`
     )
   }
 
