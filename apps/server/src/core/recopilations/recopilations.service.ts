@@ -281,6 +281,9 @@ export class RecopilationsService {
           category: { id: categoryId },
           department: { id: departmentId }
         },
+        relations: {
+          evidences: true
+        },
         order: {
           createdAt: 'ASC'
         }
