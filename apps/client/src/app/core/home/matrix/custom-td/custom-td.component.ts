@@ -15,15 +15,11 @@ export class CustomTdComponent {
   @Input() selectedRecopilation: number | undefined
   @Input() departmentId: number | undefined
 
-  getLink(): string {
-    const localUserString = localStorage.getItem('user')
-    if (!localUserString) {
-      return 'login'
-    }
-    const user: User = JSON.parse(localUserString)
+  user: User = JSON.parse(localStorage.getItem('user')!)
 
-    if (user.type === 'department') {
-      if (user.id === this.departmentId) {
+  getLink(): string {
+    if (this.user.type === 'department') {
+      if (this.user.id === this.departmentId) {
         return `pages/information-collection/recopilation/${this.selectedRecopilation}/category/${this.answer?.categoryId}`
       }
       return ''
