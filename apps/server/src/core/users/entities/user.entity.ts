@@ -5,13 +5,15 @@ import {
   TableInheritance,
   OneToMany,
   Unique,
-  DeleteDateColumn
+  DeleteDateColumn,
+  Index
 } from 'typeorm'
 import { USER_TYPES, UserType } from '../users.constants'
 import { Notification } from 'src/core/notifications/entities/notification.entity'
 
 @Entity({ name: 'users' })
-@Unique(['email', 'deletedAt'])
+@Index(['email'], { unique: true, where: '"deletedAt" IS NULL' })
+@Index(['fullName'], { where: '"deletedAt" IS NULL' })
 @TableInheritance({
   column: { type: 'enum', enum: Object.values(USER_TYPES), name: 'type' }
 })
