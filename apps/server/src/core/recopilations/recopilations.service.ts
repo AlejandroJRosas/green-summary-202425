@@ -222,7 +222,7 @@ export class RecopilationsService {
         department: dpr.department,
         answers: await Promise.all(
           allCategories.map(async (c) => {
-            const isRecommended = dpr.recommendations.some(
+            const isRecommended = dpr.recommendations?.some(
               (r) => r.category.id === c.id
             )
 
@@ -239,7 +239,7 @@ export class RecopilationsService {
 
             let hasError = false
             informationCollections.forEach((ic) => {
-              if (ic.evidences.some((e) => e.error !== null)) hasError = true
+              if (ic.evidences?.some((e) => e.error !== null)) hasError = true
             })
 
             return {
