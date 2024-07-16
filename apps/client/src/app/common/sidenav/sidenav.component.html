@@ -13,6 +13,7 @@
           routerLinkActive="active"
           [routerLinkActiveOptions]="{ exact: false }"
           style="width: 100%; cursor: pointer"
+          [pTooltip]="isCollapsed ? '' : item.label"
         >
           <li class="sidenav-nav-item">
             <a class="sidenav-nav-link">
@@ -28,7 +29,11 @@
       }
     }
     <li class="sidenav-nav-item">
-      <button class="sidenav-nav-link" (click)="logout()">
+      <button
+        class="sidenav-nav-link"
+        (click)="logout()"
+        [pTooltip]="isCollapsed ? '' : 'Cerrar sesión'"
+      >
         <i class="sidenav-link-icon pi pi-sign-out"></i>
         @if (isCollapsed) {
           <span class="sidenav-link-text" @fadeInOut> Cerrar sesión </span>

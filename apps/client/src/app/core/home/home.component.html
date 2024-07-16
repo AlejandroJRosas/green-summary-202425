@@ -28,8 +28,9 @@
     class="open-big"
     (click)="showDialog()"
     pButton
+    pTooltip="Abrir en ventana grande"
     severity="success"
-    disabled="!matrixData"
+    [disabled]="matrixData === undefined"
     icon="pi pi-external-link"
   ></button>
   <div class="matrix">

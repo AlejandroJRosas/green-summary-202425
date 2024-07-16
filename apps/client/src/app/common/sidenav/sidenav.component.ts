@@ -12,6 +12,7 @@ import { Router, RouterLink, RouterModule } from '@angular/router'
 import { CommonModule } from '@angular/common'
 import { Toast } from '../toast/toast.component'
 import { RoleType } from '../../services/auth.service'
+import { TooltipModule } from 'primeng/tooltip'
 
 export interface SideNavToggle {
   screenWidth: number
@@ -21,7 +22,7 @@ export interface SideNavToggle {
 @Component({
   selector: 'sidenav',
   standalone: true,
-  imports: [RouterLink, CommonModule, RouterModule],
+  imports: [RouterLink, CommonModule, RouterModule, TooltipModule],
   templateUrl: './sidenav.component.html',
   styleUrl: './sidenav.component.css',
   animations: [

@@ -34,6 +34,9 @@
       font-weight: 900;
       cursor: pointer;
       border: none;
+      background: -webkit-linear-gradient(var(--primary-color), #333);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .logo-text {
