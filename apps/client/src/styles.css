@@ -171,8 +171,15 @@ p-password.ng-valid > .p-password > .p-inputtext {
 
 .notification-avatar .p-badge {
   scale: 1.85;
+  animation: blinker 1.5s linear infinite;
 }
 
 .notification-avatar .p-overlay-badge {
   position: relative;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0.4;
+  }
 }
