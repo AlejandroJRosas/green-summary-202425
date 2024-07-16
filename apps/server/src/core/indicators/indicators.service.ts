@@ -62,6 +62,7 @@ export class IndicatorsService {
           }
         }
       },
+      withDeleted: true,
       relations: {
         recopilationsPerIndicator: {
           recopilation: {
