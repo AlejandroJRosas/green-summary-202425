@@ -71,13 +71,17 @@ export class InformationCollectionService {
                 .map((departmentAnswer) => ({
                   ...departmentAnswer,
                   informationCollections:
-                    departmentAnswer.informationCollections.filter(
-                      (informationCollection) =>
-                        informationCollection.isApproved &&
-                        informationCollection.evidences.every(
+                    departmentAnswer.informationCollections
+                      .filter(
+                        (informationCollection) =>
+                          informationCollection.isApproved
+                      )
+                      .map((informationCollection) => ({
+                        ...informationCollection,
+                        evidences: informationCollection.evidences.filter(
                           (evidence) => evidence.error == null
                         )
-                    )
+                      }))
                 }))
                 .filter(
                   (departmentAnswer) =>
