@@ -1,6 +1,8 @@
 <section>
   <header>
-    <h3 class="m-0 mb-1 text-xl">Respuestas</h3>
+    <h3 class="m-0 mb-1 text-xl">
+      Respuestas ({{ departmentAnswers?.length }})
+    </h3>
   </header>
   @if (departmentAnswers && departmentAnswers.length <= 0) {
     <p style="padding-left: 2.5rem">No hay respuestas para esta categoría</p>
