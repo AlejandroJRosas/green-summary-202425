@@ -61,7 +61,7 @@ export class InformationRecopilationComponent
         .required('La fecha de inicio de la recopilación es obligatoria')
         .test(
           'is-before-departmentEndDate',
-          'La fecha de inicio debe ser menor que la fecha de finalización departamental',
+          'La fecha de inicio debe ser menor que la fecha de finalización departamental de la recopilación',
           function (value) {
             const { departmentEndDate } = this.parent
             return (
@@ -88,19 +88,53 @@ export class InformationRecopilationComponent
           'La fecha de finalización departamental de la recopilación es obligatoria'
         )
         .when('endDate', (endDate, schema) => {
-          return schema.test({
-            test: (departmentEndDate) =>
-              !departmentEndDate ||
-              !endDate ||
-              departmentEndDate.getTime() <=
-                new Date(endDate as unknown as Date).getTime(),
-            message:
-              'La fecha de finalización departamental no puede ser mayor que la fecha de finalización de la recopilación'
-          })
+          return schema
+            .test({
+              test: (departmentEndDate) =>
+                !departmentEndDate ||
+                !endDate ||
+                departmentEndDate.getTime() <
+                  new Date(endDate as unknown as Date).getTime(),
+              message:
+                'La fecha de finalización departamental no puede ser mayor que la fecha de finalización de la recopilación'
+            })
+            .when('startDate', (startDate, schema) => {
+              return schema.test({
+                test: (departmentEndDate) =>
+                  !departmentEndDate ||
+                  !startDate ||
+                  departmentEndDate.getTime() >
+                    new Date(startDate as unknown as Date).getTime(),
+                message:
+                  'La fecha de finalización departamental no puede ser menor que la fecha de inicio de la recopilación'
+              })
+            })
         }),
-      endDate: date().required(
-        'La fecha de finalización de la recopilación es obligatoria'
-      )
+      endDate: date()
+        .required('La fecha de finalización de la recopilación es obligatoria')
+        .when('startDate', (startDate, schema) => {
+          return schema
+            .test({
+              test: (endDate) =>
+                !endDate ||
+                !startDate ||
+                endDate.getTime() >
+                  new Date(startDate as unknown as Date).getTime(),
+              message:
+                'La fecha de finalización no puede ser menor que la fecha de inicio de la recopilación'
+            })
+            .when('departmentEndDate', (departmentEndDate, schema) => {
+              return schema.test({
+                test: (endDate) =>
+                  !endDate ||
+                  !departmentEndDate ||
+                  endDate.getTime() >
+                    new Date(departmentEndDate as unknown as Date).getTime(),
+                message:
+                  'La fecha de finalización no puede ser menor que la fecha de finalización departamental'
+              })
+            })
+        })
     })
 
     super(initialControlValues, validationSchema)
@@ -200,6 +234,28 @@ export class InformationRecopilationComponent
 
       control.markAsDirty()
       this.errorsUpdate(controlName as keyof RecopilationFormControls)
+    }
+  }
+
+  public override errorsUpdate(
+    field: Extract<keyof RecopilationFormControls, string>
+  ) {
+    if (!(field in this.errors)) {
+      throw new Error(
+        `Field ${field.toString()} not found in ${this.constructor.name}`
+      )
+    }
+
+    super.errorsUpdate(field)
+
+    for (const controlName in this.formGroup.controls) {
+      if (
+        controlName in this.errors &&
+        this.formGroup.controls[controlName as keyof RecopilationFormControls]
+          .dirty
+      ) {
+        super.errorsUpdate(controlName as keyof RecopilationFormControls)
+      }
     }
   }
 }

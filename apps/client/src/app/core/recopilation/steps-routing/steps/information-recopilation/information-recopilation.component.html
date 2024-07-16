@@ -4,9 +4,12 @@
   </header>
   <section class="flex">
     <form class="flex flex-column gap-4 w-6" [formGroup]="formGroup">
-      <div class="flex flex-row flex-wrap gap-4">
-        <div class="flex flex-column flex-grow-1 gap-3">
-          <div class="flex flex-column gap-2 w-full">
+      <div class="w-full flex flex-wrap gap-4">
+        <div class="w-full flex flex-wrap gap-3">
+          <div
+            class="flex flex-column gap-2"
+            style="min-width: 200px; flex: 1 1 200px"
+          >
             <label>Nombre</label>
             <input
               pInputText
@@ -19,37 +22,10 @@
             />
             <small class="p-error w-7">{{ errors.name }}</small>
           </div>
-          <div class="flex flex-column gap-2">
-            <label
-              for="recopilationDepartmentEndDate"
-              class="flex flex-row align-items-center gap-2 w-full"
-            >
-              Fecha Final Departamental
-              <i
-                pTooltip="Fecha final de carga de información para los departamentos"
-                class="pi pi-question-circle text-color-secondary"
-                style="font-size: 1.2rem"
-              ></i>
-            </label>
-            <p-calendar
-              [inputId]="'recopilationDepartmentEndDate'"
-              styleClass="w-full"
-              [iconDisplay]="'input'"
-              [showIcon]="true"
-              inputId="icondisplay"
-              dateFormat="dd/mm/yy"
-              formControlName="departmentEndDate"
-              (onClose)="errorsUpdate('departmentEndDate')"
-              (onClickOutside)="errorsUpdate('departmentEndDate')"
-              (onInput)="errorsUpdate('departmentEndDate')"
-              (onSelect)="errorsUpdate('departmentEndDate')"
-              (onBlur)="errorsUpdate('departmentEndDate')"
-            />
-            <small class="p-error">{{ errors.departmentEndDate }}</small>
-          </div>
-        </div>
-        <div class="flex flex-column flex-grow-1 gap-3">
-          <div class="flex flex-column gap-2">
+          <div
+            class="flex flex-column gap-2"
+            style="min-width: 200px; flex: 1 1 200px"
+          >
             <label
               for="recopilationStartDate"
               class="flex flex-row align-items-center gap-2 w-full"
@@ -77,7 +53,44 @@
             />
             <small class="p-error">{{ errors.startDate }}</small>
           </div>
-          <div class="flex flex-column gap-2">
+        </div>
+        <div class="w-full flex flex-wrap gap-3">
+          <div
+            class="flex flex-column gap-2"
+            style="min-width: 200px; flex: 1 1 200px"
+          >
+            <label
+              for="recopilationDepartmentEndDate"
+              class="flex flex-row align-items-center gap-2 w-full"
+              style="text-wrap: nowrap"
+            >
+              Fecha Final Departamental
+              <i
+                pTooltip="Fecha final de carga de información para los departamentos"
+                class="pi pi-question-circle text-color-secondary"
+                style="font-size: 1.2rem"
+              ></i>
+            </label>
+            <p-calendar
+              [inputId]="'recopilationDepartmentEndDate'"
+              styleClass="w-full"
+              [iconDisplay]="'input'"
+              [showIcon]="true"
+              inputId="icondisplay"
+              dateFormat="dd/mm/yy"
+              formControlName="departmentEndDate"
+              (onClose)="errorsUpdate('departmentEndDate')"
+              (onClickOutside)="errorsUpdate('departmentEndDate')"
+              (onInput)="errorsUpdate('departmentEndDate')"
+              (onSelect)="errorsUpdate('departmentEndDate')"
+              (onBlur)="errorsUpdate('departmentEndDate')"
+            />
+            <small class="p-error">{{ errors.departmentEndDate }}</small>
+          </div>
+          <div
+            class="flex flex-column gap-2"
+            style="min-width: 200px; flex: 1 1 200px"
+          >
             <label
               for="recopilationEndDate"
               class="flex flex-row align-items-center gap-2 w-full"
