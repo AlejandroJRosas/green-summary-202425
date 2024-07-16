@@ -4,7 +4,7 @@ import {
   EntityNotFoundError,
   Equal,
   In,
-  LessThan,
+  LessThanOrEqual,
   MoreThan,
   Repository
 } from 'typeorm'
@@ -443,14 +443,14 @@ export class RecopilationsService {
     { orderBy, orderType }: OrderByParamDto & OrderTypeParamDto,
     departmentId: number | undefined
   ) {
-    const currentDateString = new Date()
+    const currentDate = new Date()
+    currentDate.setHours(0, 0, 0, 0)
 
     if (departmentId === undefined) {
       return this.recopilationsRepository.find({
         where: {
-          startDate: LessThan(currentDateString),
-          endDate: MoreThan(currentDateString),
-          departmentEndDate: MoreThan(currentDateString),
+          startDate: LessThanOrEqual(currentDate),
+          endDate: MoreThan(currentDate),
           isReady: Equal(true)
         },
         order: { [orderBy]: orderType }
@@ -459,9 +459,9 @@ export class RecopilationsService {
 
     return this.recopilationsRepository.find({
       where: {
-        startDate: LessThan(currentDateString),
-        endDate: MoreThan(currentDateString),
-        departmentEndDate: MoreThan(currentDateString),
+        startDate: LessThanOrEqual(currentDate),
+        endDate: MoreThan(currentDate),
+        departmentEndDate: MoreThan(currentDate),
         isReady: Equal(true),
         departmentsPerRecopilation: {
           department: { id: departmentId }
