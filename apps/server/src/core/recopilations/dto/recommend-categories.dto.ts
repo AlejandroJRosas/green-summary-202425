@@ -13,9 +13,7 @@ export class RecommendCategoriesDto {
   recopilationId: number
 
   @ValidateNested({ each: true })
-  @ArrayNotEmpty()
   @IsArray()
-  @IsNotEmpty()
   @Type(() => DepartmentToBeRecommended)
   departments: DepartmentToBeRecommended[]
 }
