@@ -162,7 +162,8 @@ export class InformationCollectionsService {
 
   async update(
     id: number,
-    updateInformationCollectionDto: UpdateInformationCollectionDto
+    updateInformationCollectionDto: UpdateInformationCollectionDto,
+    notifyCoordinators: boolean
   ): Promise<InformationCollection> {
     const { recopilationId, categoryId, departmentId } =
       updateInformationCollectionDto
@@ -211,12 +212,14 @@ export class InformationCollectionsService {
       categoryName: category.name
     }
 
-    const notificationDTO = {
-      data: data,
-      type: NOTIFICATION_TYPES.INFORMATION_COLLECTION_EDITION,
-      userId: department.id
+    if (notifyCoordinators) {
+      const notificationDTO = {
+        data: data,
+        type: NOTIFICATION_TYPES.INFORMATION_COLLECTION_EDITION,
+        userId: department.id
+      }
+      await this.notificationsService.createAll(notificationDTO)
     }
-    await this.notificationsService.createAll(notificationDTO)
 
     return this.informationCollectionsRepository.findOneByOrFail({ id })
   }

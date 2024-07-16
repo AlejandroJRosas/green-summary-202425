@@ -11,7 +11,8 @@ export class CategorizedCriteria {
 
   @ManyToOne(
     () => Recopilation,
-    (recopilation) => recopilation.categorizedCriterion
+    (recopilation) => recopilation.categorizedCriterion,
+    { onDelete: 'CASCADE', onUpdate: 'CASCADE' }
   )
   recopilation: Recopilation
 
