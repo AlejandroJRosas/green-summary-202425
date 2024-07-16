@@ -13,7 +13,7 @@ import { Notification } from 'src/core/notifications/entities/notification.entit
 
 @Entity({ name: 'users' })
 @Index(['email'], { unique: true, where: '"deletedAt" IS NULL' })
-@Index(['fullName'], { where: '"deletedAt" IS NULL' })
+@Index(['fullName'], { unique: true, where: '"deletedAt" IS NULL' })
 @TableInheritance({
   column: { type: 'enum', enum: Object.values(USER_TYPES), name: 'type' }
 })
