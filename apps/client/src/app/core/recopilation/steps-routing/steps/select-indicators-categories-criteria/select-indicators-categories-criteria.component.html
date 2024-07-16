@@ -15,6 +15,11 @@
           optionValue="id"
           [showClear]="true"
           placeholder="Selecciona la recopilación"
+          [emptyMessage]="
+            previousRecopilations
+              ? 'No hay recopilaciones activas disponibles'
+              : 'Seleccione una recopilación'
+          "
         />
       </div>
       <main class="w-11">
@@ -82,6 +87,11 @@
                   optionLabel="name"
                   optionValue="id"
                   placeholder="Selecciona una Categoría"
+                  [emptyMessage]="
+                    scheme.categories
+                      ? 'No hay categorias asociadas a este indicador'
+                      : 'Seleccione una categoría'
+                  "
                 />
               </div>
             }
