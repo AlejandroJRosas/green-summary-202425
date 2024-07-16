@@ -23,7 +23,8 @@ export class DepartmentPerRecopilation {
 
   @ManyToOne(
     () => Recopilation,
-    (recopilation) => recopilation.departmentsPerRecopilation
+    (recopilation) => recopilation.departmentsPerRecopilation,
+    { onDelete: 'CASCADE', onUpdate: 'CASCADE' }
   )
   recopilation: Recopilation
 
