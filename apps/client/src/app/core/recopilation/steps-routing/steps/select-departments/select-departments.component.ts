@@ -48,7 +48,11 @@ export class SelectDepartmentsComponent implements OnInit {
         this.departments = response
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -61,7 +65,11 @@ export class SelectDepartmentsComponent implements OnInit {
           this.selectedDepartmentsIds = departments.map((d) => d.id)
         },
         error: (e) => {
-          this.toast.show('error', 'Error', e.error.data.message)
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
       })
   }
@@ -81,7 +89,11 @@ export class SelectDepartmentsComponent implements OnInit {
         this.nextStep()
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }

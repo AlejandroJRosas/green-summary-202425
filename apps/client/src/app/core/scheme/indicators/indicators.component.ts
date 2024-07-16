@@ -192,8 +192,11 @@ export class IndicatorsComponent
         }
       },
       error: (e) => {
-        console.error(e)
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.isFetching = false
       }
     })
@@ -213,8 +216,11 @@ export class IndicatorsComponent
           }
         },
         error: (e) => {
-          console.error(e)
-          this.toast.show('error', 'Error', e.error.data.message)
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
       })
   }
@@ -233,8 +239,11 @@ export class IndicatorsComponent
           }
         },
         error: (e) => {
-          console.error(e)
-          this.toast.show('error', 'Error', e.error.data.message)
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
       })
   }
@@ -261,7 +270,11 @@ export class IndicatorsComponent
       error: (e) => {
         this.visibleCreate = false
         this.fetchCreateIndicator = false
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.closeDialog()
       }
     })
@@ -288,7 +301,11 @@ export class IndicatorsComponent
       error: (e) => {
         this.fetchEditIndicator = false
         this.visibleEdit = false
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.closeDialog()
       }
     })
@@ -301,8 +318,11 @@ export class IndicatorsComponent
         this.getAll()
       },
       error: (e) => {
-        console.error(e)
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }

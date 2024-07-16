@@ -4,7 +4,7 @@ const BASE_LAYOUT_ROUTE = '/pages'
 
 export const navbarData = [
   {
-    label: 'Home',
+    label: 'Inicio',
     icon: 'pi pi-home',
     routeLink: `${BASE_LAYOUT_ROUTE}/home`,
     visibility: [Role.ADMIN, Role.COORDINATOR, Role.DEPARTMENT]

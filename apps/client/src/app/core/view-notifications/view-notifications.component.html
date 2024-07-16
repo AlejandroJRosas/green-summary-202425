@@ -7,11 +7,8 @@
     <div class="flex flex-column gap-5">
       @if (notifications.length === 0 || fetchError === true) {
         <div class="flex flex-column justify-content-center align-items-center">
-          <img
-            src="../../../assets/empty-mailbox.png"
-            alt="logo de green summary"
-          />
-          <i class="text-lg"><strong>No hay notificaciones por ver</strong></i>
+          <img src="../../../assets/empty-mailbox.png" alt="empty-mailbox" />
+          <i class="text-lg"><strong>No hay notificaciones pora ver</strong></i>
         </div>
       } @else {
         @for (notification of notifications; track notification.id) {

@@ -256,7 +256,11 @@ export class CollectionOfInformationComponent
         }
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -284,8 +288,11 @@ export class CollectionOfInformationComponent
         }
       },
       error: (e) => {
-        console.error(e)
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.closeDialogCreate()
       }
     })
@@ -315,7 +322,11 @@ export class CollectionOfInformationComponent
         )
       },
       error: (e) => {
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.closeDialogEdit()
       }
     })
@@ -331,8 +342,11 @@ export class CollectionOfInformationComponent
         this.getAllByDepartment()
       },
       error: (e) => {
-        console.error(e)
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -348,8 +362,11 @@ export class CollectionOfInformationComponent
           this.getAllByDepartment()
         },
         error: (e) => {
-          console.error(e)
-          this.toast.show('error', 'Error', e.error.data.message)
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
       })
     } else {
@@ -363,8 +380,11 @@ export class CollectionOfInformationComponent
           this.getAllByDepartment()
         },
         error: (e) => {
-          console.error(e)
-          this.toast.show('error', 'Error', e.error.data.message)
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
       })
     }

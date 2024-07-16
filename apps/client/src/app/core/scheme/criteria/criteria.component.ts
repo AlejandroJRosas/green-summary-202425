@@ -163,8 +163,11 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
           this.criterion = res.status === 'success' ? res.data : this.criterion
         },
         error: (e) => {
-          console.error(e)
-          this.toast.show('error', 'Error', e.error.data.message)
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
       })
   }
@@ -175,8 +178,11 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
         this.getCriterionPerIndicator(this.indicatorIndex)
       },
       error: (e) => {
-        console.error(e)
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -204,7 +210,11 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
       error: (e) => {
         this.fetchCreateCriterion = false
         this.visibleCreate = false
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.closeDialog()
       }
     })
@@ -233,7 +243,11 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
       error: (e) => {
         this.visibleEdit = false
         this.fetchEditCriterion = false
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
         this.closeDialog()
       }
     })

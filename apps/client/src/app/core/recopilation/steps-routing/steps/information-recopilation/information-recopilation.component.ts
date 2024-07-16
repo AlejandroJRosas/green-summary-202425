@@ -57,12 +57,47 @@ export class InformationRecopilationComponent
       description: string().required(
         'La descripción de la recopilación es obligatoria'
       ),
-      startDate: date().required(
-        'La fecha de inicio de la recopilación es obligatoria'
-      ),
-      departmentEndDate: date().required(
-        'La fecha de finalización departamental de la recopilación es obligatoria'
-      ),
+      startDate: date()
+        .required('La fecha de inicio de la recopilación es obligatoria')
+        .test(
+          'is-before-departmentEndDate',
+          'La fecha de inicio debe ser menor que la fecha de finalización departamental',
+          function (value) {
+            const { departmentEndDate } = this.parent
+            return (
+              !value ||
+              !departmentEndDate ||
+              value.getTime() < new Date(departmentEndDate).getTime()
+            )
+          }
+        )
+        .test(
+          'is-before-endDate',
+          'La fecha de inicio debe ser menor que la fecha de finalización de la recopilación',
+          function (value) {
+            const { endDate } = this.parent
+            return (
+              !value ||
+              !endDate ||
+              value.getTime() < new Date(endDate).getTime()
+            )
+          }
+        ),
+      departmentEndDate: date()
+        .required(
+          'La fecha de finalización departamental de la recopilación es obligatoria'
+        )
+        .when('endDate', (endDate, schema) => {
+          return schema.test({
+            test: (departmentEndDate) =>
+              !departmentEndDate ||
+              !endDate ||
+              departmentEndDate.getTime() <=
+                new Date(endDate as unknown as Date).getTime(),
+            message:
+              'La fecha de finalización departamental no puede ser mayor que la fecha de finalización de la recopilación'
+          })
+        }),
       endDate: date().required(
         'La fecha de finalización de la recopilación es obligatoria'
       )
@@ -97,7 +132,11 @@ export class InformationRecopilationComponent
           })
         },
         error: (e) => {
-          this.toast.show('error', 'Error', e.error.data.message)
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
       })
     }

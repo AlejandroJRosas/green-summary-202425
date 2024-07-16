@@ -212,8 +212,11 @@ export class DepartmentComponent
       },
       error: (e) => {
         this.visibleCreate = false
-        console.error(e)
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -252,8 +255,11 @@ export class DepartmentComponent
         this.getAll()
       },
       error: (e) => {
-        console.error(e)
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -271,8 +277,11 @@ export class DepartmentComponent
         this.getAll()
       },
       error: (e) => {
-        console.error(e)
-        this.toast.show('error', 'Error', e.error.data.message)
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }

@@ -17,12 +17,19 @@
     optionLabel="name"
     optionValue="id"
     placeholder="Selecciona una recopilación"
+    [emptyMessage]="
+      recopilations
+        ? 'No hay recopilaciones activas disponibles'
+        : 'Seleccione una recopilación'
+    "
   />
   <button
     type="button"
     class="open-big"
     (click)="showDialog()"
     pButton
+    severity="success"
+    disabled="!matrixData"
     icon="pi pi-external-link"
   ></button>
   <div class="matrix">

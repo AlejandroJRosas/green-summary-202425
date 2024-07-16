@@ -7,14 +7,14 @@ const VALUES = {
   departmentPasswordAmount: 64,
   helpTextMinAmount: 1,
   helpTextMaxAmount: 180,
-  nameAliasMinAmount: 10,
+  nameAliasMinAmount: 4,
   indicatorNameAliasMaxAmount: 40,
   categoryNameMaxAmount: 128,
   criterionNameAliasMaxAmount: 80,
   errorTextAmount: 280,
   recopilationsNameMaxAmount: 40,
   informationCollectionsSummary: 280,
-  evidencesLinkMinAmount: 10,
+  evidencesLinkMinAmount: 4,
   evidencesLinkMaxAmount: 1024
 }
 
