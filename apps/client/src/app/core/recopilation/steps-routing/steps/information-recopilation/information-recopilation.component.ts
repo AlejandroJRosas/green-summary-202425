@@ -255,6 +255,9 @@ export class InformationRecopilationComponent
           .dirty
       ) {
         super.errorsUpdate(controlName as keyof RecopilationFormControls)
+        this.formGroup.controls[
+          controlName as keyof RecopilationFormControls
+        ].updateValueAndValidity()
       }
     }
   }
