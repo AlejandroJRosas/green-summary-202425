@@ -38,6 +38,6 @@ export class Indicator {
   recopilationsPerIndicator: IndicatorPerRecopilation[]
 
   @DeleteDateColumn()
-  /* @PrimaryColumn() */
+  @PrimaryColumn()
   deletedAt: Date
 }
