@@ -8,6 +8,7 @@ import { BadgeModule } from 'primeng/badge'
 import { AvatarModule } from 'primeng/avatar'
 import { NotificationService } from '../../services/notification.service'
 import { Notification } from '../../../shared/types/notification.type'
+import { TooltipModule } from 'primeng/tooltip'
 
 @Component({
   selector: 'app-body',
@@ -19,7 +20,8 @@ import { Notification } from '../../../shared/types/notification.type'
     OverlayPanelModule,
     NotificationComponent,
     BadgeModule,
-    AvatarModule
+    AvatarModule,
+    TooltipModule
   ],
   templateUrl: './body.component.html',
   styleUrl: './body.component.css'

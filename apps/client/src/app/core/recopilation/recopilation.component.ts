@@ -8,11 +8,19 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { ConfirmationService } from 'primeng/api'
 import { Toast } from '../../common/toast/toast.component'
 import { DialogModule } from 'primeng/dialog'
+import { TooltipModule } from 'primeng/tooltip'
 
 @Component({
   selector: 'app-recopilation',
   standalone: true,
-  imports: [ButtonModule, PanelModule, ConfirmDialogModule, DialogModule],
+  imports: [
+    ButtonModule,
+    PanelModule,
+    ConfirmDialogModule,
+    DialogModule,
+    TooltipModule,
+    ButtonModule
+  ],
   providers: [ConfirmationService],
   templateUrl: './recopilation.component.html'
 })
@@ -24,7 +32,7 @@ export class RecopilationComponent {
     @Inject(Toast) private toast: Toast
   ) {}
 
-  recopilations: Recopilation[] = []
+  recopilations: Array<Recopilation & { isReady: boolean }> = []
 
   ngOnInit() {
     this.loadRecopilations()
@@ -80,5 +88,15 @@ export class RecopilationComponent {
     this.router.navigateByUrl(
       'pages/recopilations/steps-create/information-recopilation'
     )
+  }
+
+  navigateContinueSteps(id: number) {
+    this.router.navigateByUrl(
+      `pages/recopilations/steps-create/information-recopilation/${id}`
+    )
+  }
+
+  navigateRecopilationDetails(id: number) {
+    this.router.navigateByUrl(`pages/recopilations/steps-create/preview/${id}`)
   }
 }

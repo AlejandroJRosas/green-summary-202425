@@ -18,10 +18,35 @@
           >
             <h2 style="word-break: break-word" class="text-xl">
               {{ recopilation.name }}
+              {{ recopilation.isReady ? '' : '(Por completar)' }}
             </h2>
-            <div class="flex flex-row gap-1 flex-nowrap">
-              <button
-                class="p-panel-header-icon p-link mr-2"
+
+            <div class="flex flex-row gap-3">
+              @if (!recopilation.isReady) {
+                <p-button
+                  severity="info"
+                  icon="pi pi-play"
+                  rounded="true"
+                  outlined="true"
+                  pTooltip="Continuar"
+                  (click)="navigateContinueSteps(recopilation.id)"
+                />
+              } @else {
+                <p-button
+                  severity="success"
+                  pTooltip="Ver Detalles"
+                  icon="pi pi-eye"
+                  rounded="true"
+                  outlined="true"
+                  (click)="navigateRecopilationDetails(recopilation.id)"
+                />
+              }
+              <p-button
+                severity="warning"
+                pTooltip="Eliminar"
+                icon="pi pi-trash"
+                rounded="true"
+                outlined="true"
                 (click)="
                   confirmRecopilationDeletion(
                     $event,
@@ -29,17 +54,7 @@
                     recopilation.name
                   )
                 "
-              >
-                <span
-                  class="pi pi-trash"
-                  style="
-                    color: #ef4444;
-                    border: solid 1.5px #ef4444;
-                    border-radius: 100%;
-                    padding: 7px;
-                  "
-                ></span>
-              </button>
+              />
             </div>
           </section>
         </ng-template>

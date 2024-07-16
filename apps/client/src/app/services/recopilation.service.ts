@@ -26,10 +26,10 @@ export class RecopilationService {
     )
   }
 
-  getAll(): Observable<Recopilation[]> {
+  getAll(): Observable<Array<Recopilation & { isReady: boolean }>> {
     return this.http
       .get<
-        PaginatedResponse<Recopilation, unknown, unknown>
+        PaginatedResponse<Recopilation & { isReady: boolean }, unknown, unknown>
       >(`${BaseUrl}/recopilations?itemsPerPage=999&page=1&orderBy=id&orderType=DESC`)
       .pipe(map((res) => (res.status === 'success' ? res.data.items : [])))
   }
