@@ -1,5 +1,10 @@
 <header>
-  <h2 class="text-xl">{{ category?.name }}</h2>
+  <h2 class="text-xl">
+    {{ category?.name }}-
+    <strong class="text-black-alpha-70"
+      >Aportes ({{ departmentAnswers?.length }})</strong
+    >
+  </h2>
   @if (departmentAnswers && departmentAnswers.length > 0) {
     <p-button
       label="Generar Word"
