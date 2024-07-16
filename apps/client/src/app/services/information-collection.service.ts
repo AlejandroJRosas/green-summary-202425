@@ -67,14 +67,22 @@ export class InformationCollectionService {
       .pipe(
         map((response) =>
           response.status === 'success'
-            ? response.data.filter((departmentAnswer) =>
-                departmentAnswer.informationCollections.every(
-                  (informationCollection) =>
-                    informationCollection.evidences.every(
-                      (evidence) => evidence.error == null
+            ? response.data
+                .map((departmentAnswer) => ({
+                  ...departmentAnswer,
+                  informationCollections:
+                    departmentAnswer.informationCollections.filter(
+                      (informationCollection) =>
+                        informationCollection.isApproved &&
+                        informationCollection.evidences.every(
+                          (evidence) => evidence.error == null
+                        )
                     )
+                }))
+                .filter(
+                  (departmentAnswer) =>
+                    departmentAnswer.informationCollections.length > 0
                 )
-              )
             : []
         )
       )
