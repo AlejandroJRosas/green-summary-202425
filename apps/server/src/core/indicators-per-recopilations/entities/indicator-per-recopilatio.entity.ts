@@ -22,6 +22,7 @@ export class IndicatorPerRecopilation {
     () => Indicator,
     (indicator) => indicator.recopilationsPerIndicator,
     {
+      onDelete: 'CASCADE',
       onUpdate: 'CASCADE'
     }
   )
