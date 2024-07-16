@@ -1,23 +1,75 @@
 <main>
-  <header class="pb-3">
+  <header class="pb-3 flex gap-4">
     <h3 class="text-color-secondary">Previsualización de la recopilación</h3>
+    <button
+      type="button"
+      class="open-big"
+      (click)="showDialog()"
+      pButton
+      pTooltip="Abrir en ventana grande"
+      severity="success"
+      [disabled]="matrixData === undefined"
+      icon="pi pi-external-link"
+    ></button>
   </header>
-  <section class="flex flex-col">
-    <app-matrix
-      [matrixData]="matrixData"
-      [selectedRecopilation]="recopilationId"
-    ></app-matrix>
-  </section>
+  <h2>
+    Matriz de Seguimiento - {{ matrixData?.name }}
+    (Inicia:
+    {{ parseDate(matrixData?.startDate) }}
+    - Termina:
+    {{ parseDate(matrixData?.departmentEndDate) }})
+  </h2>
+  <app-matrix
+    [matrixData]="matrixData"
+    [selectedRecopilation]="recopilationId"
+    [matrixScrollHeight]="'75vh'"
+  ></app-matrix>
+
+  <h2 class="pt-3">Relaciones entre Categorías y Criterios</h2>
+
+  @for (indicator of matrixData?.indicators; track $index) {
+    @for (category of indicator.categories; track $index) {
+      <p-panel
+        expandIcon="pi pi-chevron-down"
+        collapseIcon="pi pi-chevron-right"
+        [toggleable]="true"
+        collapsed="true"
+        iconPos="start"
+      >
+        <ng-template pTemplate="header">
+          <section
+            class="flex flex-row justify-content-between align-items-center w-full gap-4"
+          >
+            <h2 style="word-break: break-word" class="text-xl">
+              {{ category.name }}
+            </h2>
+          </section>
+        </ng-template>
+        @for (criterion of category.criteria; track $index) {
+          <p class="m-0 pb-3" style="max-width: 80vw">
+            {{ indicator.index }}.{{ criterion.subIndex }} {{ criterion.alias }}
+          </p>
+        }
+      </p-panel>
+    }
+  }
+
   <footer class="flex justify-content-between pt-7">
-    <p-button
-      label="Cancelar"
-      icon="pi pi-angle-left"
-      iconPos="left"
-      size="small"
-      severity="danger"
-      [outlined]="true"
-      (click)="prevStep()"
-    />
+    <div
+      [pTooltip]="matrixData?.isReady ? 'Esta recopilación ya está activa' : ''"
+    >
+      <p-button
+        label="Atras"
+        icon="pi pi-angle-left"
+        iconPos="left"
+        size="small"
+        severity="danger"
+        [disabled]="matrixData?.isReady"
+        [outlined]="true"
+        (click)="prevStep()"
+      />
+    </div>
+
     <div>
       <p-button
         label="Finalizar"
@@ -30,3 +82,43 @@
     </div>
   </footer>
 </main>
+@if (matrixData !== undefined) {
+  <p-dialog
+    header="
+  {{ matrixData.name }}
+  (Inicia:
+  {{ parseDate(matrixData.startDate) }}
+  - Termina:
+  {{ parseDate(matrixData.departmentEndDate) }})
+"
+    [resizable]="false"
+    [modal]="true"
+    [maximizable]="true"
+    appendTo="body"
+    [(visible)]="dialogVisible"
+    [draggable]="false"
+    [closeOnEscape]="true"
+    [style]="{ width: '80vw' }"
+    [contentStyle]="{
+      height: '80vh'
+    }"
+    (onMaximize)="onMaximize()"
+  >
+    <app-matrix
+      [selectedRecopilation]="recopilationId"
+      [matrixData]="matrixData"
+      [matrixScrollHeight]="dialogMatrixScrollHeight"
+    ></app-matrix>
+    <ng-template pTemplate="footer">
+      <button
+        type="button"
+        pButton
+        pRipple
+        icon="pi pi-times"
+        (click)="dialogVisible = false"
+        label="Cerrar"
+        class="p-button-text"
+      ></button>
+    </ng-template>
+  </p-dialog>
+}

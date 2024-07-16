@@ -13,6 +13,8 @@ import {
 } from '../../../../../services/recopilation.service'
 import { JsonPipe } from '@angular/common'
 import { MatrixComponent } from '../../../../home/matrix/matrix.component'
+import { PanelModule } from 'primeng/panel'
+import { DialogModule } from 'primeng/dialog'
 
 @Component({
   selector: 'app-information-recopilation',
@@ -26,7 +28,9 @@ import { MatrixComponent } from '../../../../home/matrix/matrix.component'
     TooltipModule,
     Toast,
     JsonPipe,
-    MatrixComponent
+    MatrixComponent,
+    PanelModule,
+    DialogModule
   ],
   templateUrl: './preview.component.html'
 })
@@ -43,27 +47,30 @@ export class PreviewComponent {
   }
 
   recopilationId: number = -1
-
   matrixData: MatrixInfoDto | undefined
+  dialogVisible: boolean = false
+  dialogMatrixScrollHeight: string = 'calc(70vh - 1rem)'
 
   ngOnInit() {
     this.loadRecopilation()
   }
 
   loadRecopilation() {
-    if (this.recopilationId) {
-      this.recopilationService.getMatrixInfo(this.recopilationId).subscribe({
-        next: (recopilation) => {
-          if (recopilation) {
-            this.matrixData = recopilation
-          }
-          console.log(this.matrixData)
-        },
-        error: (error) => {
-          console.error(error)
+    this.recopilationService.getMatrixInfo(this.recopilationId).subscribe({
+      next: (recopilation) => {
+        if (recopilation) {
+          this.matrixData = recopilation
+          console.log(recopilation)
         }
-      })
-    }
+      },
+      error: (e) => {
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
+      }
+    })
   }
 
   finishRecopilationCreation() {
@@ -71,6 +78,13 @@ export class PreviewComponent {
       next: () => {
         this.toast.show('success', 'Éxito', 'Recopilación creada con éxito')
         this.router.navigateByUrl('pages/recopilations')
+      },
+      error: (e) => {
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
       }
     })
   }
@@ -78,5 +92,27 @@ export class PreviewComponent {
     this.router.navigateByUrl(
       `pages/recopilations/steps-create/recommend-categories-department/${this.recopilationId}`
     )
+  }
+
+  showDialog() {
+    this.dialogMatrixScrollHeight = 'calc(70vh - 1rem)'
+    this.dialogVisible = true
+  }
+
+  onMaximize() {
+    if (this.dialogMatrixScrollHeight === 'calc(80vh - 1rem)') {
+      this.dialogMatrixScrollHeight = 'calc(70vh - 1rem)'
+    } else {
+      this.dialogMatrixScrollHeight = 'calc(80vh - 1rem)'
+    }
+  }
+
+  parseDate(date: string | undefined): string {
+    if (date === undefined) {
+      return ''
+    }
+    return new Date(date).toLocaleDateString('es-ES', {
+      timeZone: 'UTC'
+    })
   }
 }
