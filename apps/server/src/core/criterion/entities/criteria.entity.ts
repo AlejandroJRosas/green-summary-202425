@@ -4,14 +4,21 @@ import {
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
-  Unique,
-  DeleteDateColumn
+  DeleteDateColumn,
+  Index
 } from 'typeorm'
 import { Indicator } from 'src/core/indicators/entities/indicator.entity'
 import { CategorizedCriteria } from 'src/core/categorized-criteria/entities/categorized-criterion.entity'
 
 @Entity('criterion')
-@Unique(['subIndex', 'indicator', 'deletedAt'])
+@Index(['subIndex', 'indicator'], {
+  unique: true,
+  where: '"deletedAt" IS NULL'
+})
+@Index(['name', 'indicator'], {
+  unique: true,
+  where: '"deletedAt" IS NULL'
+})
 export class Criteria {
   @PrimaryGeneratedColumn()
   id: number
