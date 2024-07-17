@@ -3,10 +3,11 @@
     <h2>Registro de Evidencias</h2>
     <p-dropdown
       [options]="recopilations"
-      [(ngModel)]="recopilation"
-      placeholder="Seleccione una recopilación"
-      optionLabel="name"
+      [(ngModel)]="selectedRecopilation"
       (onChange)="updateIndicators()"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Seleccione una recopilación"
     />
   </header>
   <main class="">
@@ -19,7 +20,7 @@
         optionLabel="alias"
         (onChange)="updateCategoriesAndCriteria()"
         [emptyMessage]="
-          recopilation
+          selectedRecopilation
             ? 'No hay indicadores disponibles'
             : 'Seleccione una recopilación antes de seleccionar un indicador'
         "
@@ -31,13 +32,13 @@
           <ng-template pTemplate="header">
             <app-records-category-header
               class="w-full"
-              [recopilationId]="recopilation?.id"
+              [recopilationId]="selectedRecopilation"
               [category]="category"
               [criteria]="category.criteria"
             />
           </ng-template>
           <app-records-category-body
-            [recopilationId]="recopilation?.id"
+            [recopilationId]="selectedRecopilation"
             [category]="category"
             [criteria]="category.criteria"
           />

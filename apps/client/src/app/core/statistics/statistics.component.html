@@ -1,11 +1,24 @@
 <div class="p-4">
   <h2>Módulo de Estadísticas</h2>
-  <iframe
+  <p-dropdown
+    [options]="recopilations"
+    [(ngModel)]="selectedRecopilation"
+    (onChange)="getStats()"
+    optionLabel="name"
+    optionValue="id"
+    placeholder="Selecciona una recopilación"
+    [emptyMessage]="
+      recopilations
+        ? 'No hay recopilaciones activas disponibles'
+        : 'Seleccione una recopilación'
+    "
+  />
+  <!-- <iframe
     title="dashboard"
     width="1140"
     height="541.25"
     src="https://app.powerbi.com/reportEmbed?reportId=abb09fb3-e767-4ecf-bb27-b082e0aa287f&autoAuth=true&ctid=29a18182-402d-4ca9-a51f-2a356c6efdb7"
     frameborder="0"
     allowFullScreen="true"
-  ></iframe>
+  ></iframe> -->
 </div>

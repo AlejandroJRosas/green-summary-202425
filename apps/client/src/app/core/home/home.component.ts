@@ -64,7 +64,7 @@ export class HomeComponent implements OnInit {
             this.updateLocalSelectedRecopilation()
             this.selectedRecopilation = this.recopilations[0].id
             this.getMatrixData()
-          } else {
+          } else if (this.selectedRecopilation !== 0) {
             this.getMatrixData()
           }
         }

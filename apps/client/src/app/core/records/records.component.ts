@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-binary-expression */
 import { Component, OnInit } from '@angular/core'
 import { DropdownModule } from 'primeng/dropdown'
 import { FormsModule } from '@angular/forms'
@@ -26,7 +27,8 @@ import { RecordsCategoryBodyComponent } from './category/body/body.component'
   templateUrl: './records.component.html'
 })
 export class RecordsComponent implements OnInit {
-  public recopilation: Recopilation | undefined
+  public selectedRecopilation: number =
+    Number(localStorage.getItem('selectedRecopilation')) ?? 0
 
   public recopilations: Recopilation[] | undefined
 
@@ -50,11 +52,26 @@ export class RecordsComponent implements OnInit {
   initializeRecopilations(): void {
     this.recopilationService.getActiveMapped().subscribe((recopilations) => {
       this.recopilations = recopilations
+      if (this.recopilations.length === 1 && this.selectedRecopilation === 0) {
+        this.updateLocalSelectedRecopilation()
+        this.selectedRecopilation = this.recopilations[0].id
+        this.updateIndicators()
+      } else if (this.selectedRecopilation !== 0) {
+        this.updateIndicators()
+      }
     })
   }
 
+  updateLocalSelectedRecopilation() {
+    localStorage.removeItem('selectedRecopilation')
+    localStorage.setItem(
+      'selectedRecopilation',
+      this.selectedRecopilation.toString()
+    )
+  }
+
   updateIndicators(): void {
-    if (this.recopilation == null) {
+    if (this.selectedRecopilation === 0) {
       this.indicators = []
       return
     }
@@ -63,7 +80,7 @@ export class RecordsComponent implements OnInit {
     this.resetCategoriesAndCriteria()
 
     this.indicatorService
-      .getByRecopilation(this.recopilation.id)
+      .getByRecopilation(this.selectedRecopilation)
       .subscribe((indicatorsByRecopilation) => {
         this.indicatorsByRecopilation = indicatorsByRecopilation
 
