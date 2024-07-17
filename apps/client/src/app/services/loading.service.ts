@@ -4,16 +4,21 @@ import { Injectable } from '@angular/core'
   providedIn: 'root'
 })
 export class LoadingService {
+  private activeRequests = 0
   loading: boolean = false
 
   constructor() {}
 
   show() {
+    this.activeRequests++
     this.loading = true
   }
 
   hide() {
-    this.loading = false
+    this.activeRequests--
+    if (this.activeRequests === 0) {
+      this.loading = false
+    }
   }
 
   isLoading(): boolean {
