@@ -16,6 +16,7 @@ import { PanelModule } from 'primeng/panel'
 import { ConfirmationService } from 'primeng/api'
 import { Toast } from '../../../common/toast/toast.component'
 import { VALUES } from '../../../../../../../shared/validations'
+import { TooltipModule } from 'primeng/tooltip'
 
 @Component({
   selector: 'criteria',
@@ -28,7 +29,8 @@ import { VALUES } from '../../../../../../../shared/validations'
     InputTextModule,
     InputTextareaModule,
     RadioButtonModule,
-    PanelModule
+    PanelModule,
+    TooltipModule
   ],
   templateUrl: './criteria.component.html'
 })

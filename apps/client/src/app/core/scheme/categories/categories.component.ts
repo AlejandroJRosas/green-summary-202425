@@ -15,6 +15,7 @@ import { Category } from '../../../../shared/types/category.type'
 import { ConfirmationService } from 'primeng/api'
 import { PanelModule } from 'primeng/panel'
 import { VALUES } from '../../../../../../../shared/validations'
+import { TooltipModule } from 'primeng/tooltip'
 
 @Component({
   selector: 'categories',
@@ -26,7 +27,8 @@ import { VALUES } from '../../../../../../../shared/validations'
     ButtonModule,
     InputTextModule,
     InputTextareaModule,
-    PanelModule
+    PanelModule,
+    TooltipModule
   ],
   templateUrl: './categories.component.html'
 })

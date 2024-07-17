@@ -25,9 +25,8 @@
           <h2 style="word-break: break-word" class="text-xl">
             {{ scheme.index }}. {{ scheme.name }} ({{ scheme.alias }})
           </h2>
-          <div class="flex flex-row gap-1 flex-nowrap">
-            <button
-              class="p-panel-header-icon p-link mr-2"
+          <div class="flex flex-row gap-3">
+            <p-button
               (click)="
                 showDialogEditIndicator(
                   scheme.index,
@@ -36,33 +35,24 @@
                   scheme.helpText
                 )
               "
-            >
-              <span
-                class="pi pi-pencil"
-                style="
-                  color: #22c55e;
-                  border: solid 1.5px #22c55e;
-                  border-radius: 100%;
-                  padding: 7px;
-                "
-              ></span>
-            </button>
-            <button
-              class="p-panel-header-icon p-link mr-2"
+              pTooltip="Editar"
+              icon="pi pi-pencil"
+              [rounded]="true"
+              severity="success"
+              [outlined]="true"
+              tooltipPosition="left"
+            />
+            <p-button
               (click)="
                 confirmationDeleteIndicator($event, scheme.index, scheme.name)
               "
-            >
-              <span
-                class="pi pi-trash"
-                style="
-                  color: #ef4444;
-                  border: solid 1.5px #ef4444;
-                  border-radius: 100%;
-                  padding: 7px;
-                "
-              ></span>
-            </button>
+              pTooltip="Eliminar"
+              icon="pi pi-trash"
+              [rounded]="true"
+              severity="danger"
+              [outlined]="true"
+              tooltipPosition="left"
+            />
           </div>
         </section>
       </ng-template>

@@ -20,6 +20,7 @@ import { string, object, number } from 'yup'
 import { Category } from '../../../../shared/types/category.type'
 import { Criteria } from '../../../../shared/types/criterion.type'
 import { VALUES } from '../../../../../../../shared/validations'
+import { TooltipModule } from 'primeng/tooltip'
 
 @Component({
   selector: 'indicators',
@@ -35,7 +36,8 @@ import { VALUES } from '../../../../../../../shared/validations'
     FormsModule,
     ReactiveFormsModule,
     CategoryComponent,
-    CriteriaComponent
+    CriteriaComponent,
+    TooltipModule
   ],
   templateUrl: './indicators.component.html',
   styles: ``

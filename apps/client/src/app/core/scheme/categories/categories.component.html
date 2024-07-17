@@ -10,18 +10,15 @@
       class="flex flex-row justify-content-between align-items-center w-full"
     >
       <h3 class="text-lg">Categorías ({{ categories.length }})</h3>
-      <button class="p-panel-header-icon p-link mr-2">
-        <span
-          class="pi pi-plus"
-          (click)="visibleCreate = true"
-          style="
-            color: #3b82f6;
-            border: solid 1.5px #3b82f6;
-            border-radius: 100%;
-            padding: 6px;
-          "
-        ></span>
-      </button>
+      <p-button
+        (click)="visibleCreate = true"
+        pTooltip="Crear"
+        icon="pi pi-plus"
+        [rounded]="true"
+        severity="info"
+        [outlined]="true"
+        tooltipPosition="left"
+      />
     </section>
   </ng-template>
   @for (category of categories; track category.id) {
