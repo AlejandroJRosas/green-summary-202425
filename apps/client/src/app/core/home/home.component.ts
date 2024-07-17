@@ -1,3 +1,4 @@
+/* eslint-disable no-constant-binary-expression */
 import { CommonModule } from '@angular/common'
 import { Component, Inject, OnInit } from '@angular/core'
 import { FormsModule } from '@angular/forms'
@@ -41,7 +42,8 @@ export class HomeComponent implements OnInit {
   ) {}
 
   recopilations: Recopilation[] = []
-  selectedRecopilation: number = 0
+  selectedRecopilation: number =
+    Number(localStorage.getItem('selectedRecopilation')) ?? 0
   matrixData: MatrixInfoDto | undefined
   dialogVisible: boolean = false
   dialogMatrixScrollHeight: string = 'calc(70vh - 1rem)'
@@ -55,6 +57,16 @@ export class HomeComponent implements OnInit {
       next: (recopilations) => {
         if (recopilations.status === 'success') {
           this.recopilations = recopilations.data
+          if (
+            this.recopilations.length === 1 &&
+            this.selectedRecopilation === 0
+          ) {
+            this.updateLocalSelectedRecopilation()
+            this.selectedRecopilation = this.recopilations[0].id
+            this.getMatrixData()
+          } else {
+            this.getMatrixData()
+          }
         }
       },
       error: (e) => {
@@ -67,6 +79,14 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  updateLocalSelectedRecopilation() {
+    localStorage.removeItem('selectedRecopilation')
+    localStorage.setItem(
+      'selectedRecopilation',
+      this.selectedRecopilation.toString()
+    )
+  }
+
   getMatrixData() {
     if (this.selectedRecopilation) {
       this.recopilationService
@@ -74,6 +94,7 @@ export class HomeComponent implements OnInit {
         .subscribe({
           next: (recopilation) => {
             if (recopilation) {
+              this.updateLocalSelectedRecopilation()
               this.matrixData = recopilation
             }
           },
