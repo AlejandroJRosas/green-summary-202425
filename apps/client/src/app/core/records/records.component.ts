@@ -52,11 +52,22 @@ export class RecordsComponent implements OnInit {
   initializeRecopilations(): void {
     this.recopilationService.getActiveMapped().subscribe((recopilations) => {
       this.recopilations = recopilations
-      if (this.recopilations.length === 1 && this.selectedRecopilation === 0) {
+      if (
+        this.recopilations.length === 1 &&
+        (this.selectedRecopilation === 0 ||
+          this.recopilations.find(
+            (recopilation) => recopilation.id === this.selectedRecopilation
+          ) === undefined)
+      ) {
         this.updateLocalSelectedRecopilation()
         this.selectedRecopilation = this.recopilations[0].id
         this.updateIndicators()
-      } else if (this.selectedRecopilation !== 0) {
+      } else if (
+        this.selectedRecopilation !== 0 &&
+        this.recopilations.find(
+          (recopilation) => recopilation.id === this.selectedRecopilation
+        ) !== undefined
+      ) {
         this.updateIndicators()
       }
     })

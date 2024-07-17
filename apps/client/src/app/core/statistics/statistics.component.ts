@@ -30,11 +30,22 @@ export class StatisticsComponent {
   getAllRecopilations() {
     this.recopilationService.getAll().subscribe((recopilations) => {
       this.recopilations = recopilations
-      if (this.recopilations.length === 1 && this.selectedRecopilation === 0) {
+      if (
+        this.recopilations.length === 1 &&
+        (this.selectedRecopilation === 0 ||
+          this.recopilations.find(
+            (recopilation) => recopilation.id === this.selectedRecopilation
+          ) === undefined)
+      ) {
         this.updateLocalSelectedRecopilation()
         this.selectedRecopilation = this.recopilations[0].id
         this.getStats()
-      } else if (this.selectedRecopilation !== 0) {
+      } else if (
+        this.selectedRecopilation !== 0 &&
+        this.recopilations.find(
+          (recopilation) => recopilation.id === this.selectedRecopilation
+        ) !== undefined
+      ) {
         this.getStats()
       }
     })

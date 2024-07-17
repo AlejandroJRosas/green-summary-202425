@@ -59,12 +59,20 @@ export class HomeComponent implements OnInit {
           this.recopilations = recopilations.data
           if (
             this.recopilations.length === 1 &&
-            this.selectedRecopilation === 0
+            (this.selectedRecopilation === 0 ||
+              this.recopilations.find(
+                (recopilation) => recopilation.id === this.selectedRecopilation
+              ) === undefined)
           ) {
             this.updateLocalSelectedRecopilation()
             this.selectedRecopilation = this.recopilations[0].id
             this.getMatrixData()
-          } else if (this.selectedRecopilation !== 0) {
+          } else if (
+            this.selectedRecopilation !== 0 &&
+            this.recopilations.find(
+              (recopilation) => recopilation.id === this.selectedRecopilation
+            ) !== undefined
+          ) {
             this.getMatrixData()
           }
         }
