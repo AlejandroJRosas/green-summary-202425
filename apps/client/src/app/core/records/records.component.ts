@@ -82,6 +82,7 @@ export class RecordsComponent implements OnInit {
   }
 
   updateIndicators(): void {
+    this.updateLocalSelectedRecopilation()
     if (this.selectedRecopilation === 0) {
       this.indicators = []
       return
