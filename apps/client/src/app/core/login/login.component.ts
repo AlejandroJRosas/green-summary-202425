@@ -10,6 +10,7 @@ import { AuthResponse, AuthService } from '../../services/auth.service'
 import { Router } from '@angular/router'
 import * as Yup from 'yup'
 import { ValidatedFormGroup } from '../../common/validated-form-group/validated-form-group'
+import { AnimationOptions, LottieComponent } from 'ngx-lottie'
 
 @Component({
   selector: 'app-login',
@@ -22,11 +23,16 @@ import { ValidatedFormGroup } from '../../common/validated-form-group/validated-
     PasswordModule,
     FloatLabelModule,
     CheckboxModule,
-    Toast
+    Toast,
+    LottieComponent
   ],
   templateUrl: './login.component.html'
 })
 export class LoginComponent extends ValidatedFormGroup<ILoginComponent> {
+  options: AnimationOptions = {
+    path: '/assets/animations/login.json'
+  }
+
   errors = {
     email: '',
     password: ''

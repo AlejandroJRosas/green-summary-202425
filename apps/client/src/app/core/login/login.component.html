@@ -1,5 +1,5 @@
 <div
-  class="flex flex-row w-full h-screen border align-items-center justify-content-around px-4"
+  class="flex flex-row w-full h-screen border align-items-center justify-content-center px-4"
 >
   <form action="#" [formGroup]="formGroup">
     <div class="flex flex-column justify-content-center align-items-left gap-4">
@@ -52,12 +52,10 @@
       ></p-button>
     </div>
   </form>
-  <img
-    src="/assets/earth.png"
-    alt="earth"
-    width="500px"
-    height="500px"
+  <ng-lottie
+    [options]="options"
+    width="600px"
     class="hidden lg:inline"
+    style="margin-left: -100px"
   />
-  <!-- <ng-lottie [options]="options" /> -->
 </div>
