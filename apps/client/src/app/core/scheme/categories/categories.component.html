@@ -25,33 +25,25 @@
     <div class="flex flex-column gap-3 mb-5">
       <div class="flex justify-content-between align-items-center gap-4">
         <h3 class="m-0" style="word-break: break-word">{{ category.name }}</h3>
-        <div class="flex-nowrap">
-          <button class="p-panel-header-icon p-link mr-2">
-            <span
-              class="pi pi-pencil"
-              (click)="showDialogEdit(category)"
-              style="
-                color: #22c55e;
-                border: solid 1.5px #22c55e;
-                border-radius: 100%;
-                padding: 8px;
-              "
-            ></span>
-          </button>
-          <button
-            class="p-panel-header-icon p-link mr-2"
+        <div class="flex flex-row gap-2 flex-nowrap">
+          <p-button
+            (click)="showDialogEdit(category)"
+            pTooltip="Editar"
+            icon="pi pi-pencil"
+            [rounded]="true"
+            severity="success"
+            [outlined]="true"
+            tooltipPosition="left"
+          />
+          <p-button
             (click)="confirmationDelete($event, category.id, category.name)"
-          >
-            <span
-              class="pi pi-trash"
-              style="
-                color: #ef4444;
-                border: solid 1.5px #ef4444;
-                border-radius: 100%;
-                padding: 8px;
-              "
-            ></span>
-          </button>
+            pTooltip="Eliminar"
+            icon="pi pi-trash"
+            [rounded]="true"
+            severity="danger"
+            [outlined]="true"
+            tooltipPosition="left"
+          />
         </div>
       </div>
       <p class="m-0" style="word-wrap: break-word; max-width: 80vw">
