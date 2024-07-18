@@ -47,7 +47,17 @@ body::-webkit-scrollbar-thumb {
 }
 
 .p-datatable-wrapper::-webkit-scrollbar-thumb {
-  background-color: #22c55e;
+  background-color: var(--primary-color);
+  border-radius: 20px;
+}
+
+.p-component::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.p-component::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
   border-radius: 20px;
 }
 
