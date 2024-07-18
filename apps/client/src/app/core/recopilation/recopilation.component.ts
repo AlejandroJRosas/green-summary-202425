@@ -32,7 +32,10 @@ export class RecopilationComponent {
     @Inject(Toast) private toast: Toast
   ) {}
 
-  recopilations: Array<Recopilation & { isReady: boolean }> = []
+  inCreationRecopilations: Array<Recopilation & { isReady: boolean }> = []
+  upcomingRecopilations: Array<Recopilation & { isReady: boolean }> = []
+  activeRecopilations: Array<Recopilation & { isReady: boolean }> = []
+  finishedRecopilations: Array<Recopilation & { isReady: boolean }> = []
 
   ngOnInit() {
     this.loadRecopilations()
@@ -40,7 +43,22 @@ export class RecopilationComponent {
 
   private loadRecopilations() {
     this.recopilationService.getAll().subscribe((recopilations) => {
-      this.recopilations = recopilations
+      recopilations.forEach((recopilation) => {
+        if (!recopilation.isReady) {
+          this.inCreationRecopilations.push(recopilation)
+        } else if (
+          new Date(recopilation.endDate).getTime() > new Date().getTime() &&
+          new Date(recopilation.startDate).getTime() > new Date().getTime()
+        ) {
+          this.upcomingRecopilations.push(recopilation)
+        } else if (
+          new Date(recopilation.endDate).getTime() < new Date().getTime()
+        ) {
+          this.finishedRecopilations.push(recopilation)
+        } else {
+          this.activeRecopilations.push(recopilation)
+        }
+      })
     })
   }
 

@@ -10,7 +10,183 @@
     />
   </header>
   <section class="flex flex-column">
-    @for (recopilation of recopilations; track recopilation.id) {
+    @if (inCreationRecopilations.length > 0) {
+      <h3 class="text-xl mt-0">
+        En Creación ({{ inCreationRecopilations.length }})
+      </h3>
+    }
+    @for (recopilation of inCreationRecopilations; track recopilation.id) {
+      <p-panel>
+        <ng-template pTemplate="header">
+          <section
+            class="flex flex-row justify-content-between align-items-center w-full gap-4"
+          >
+            <h2 style="word-break: break-word" class="text-xl">
+              {{ recopilation.name }}
+              {{ recopilation.isReady ? '' : '(Por completar)' }}
+            </h2>
+
+            <div class="flex flex-row gap-3">
+              @if (!recopilation.isReady) {
+                <p-button
+                  severity="info"
+                  icon="pi pi-play"
+                  rounded="true"
+                  outlined="true"
+                  pTooltip="Continuar"
+                  (click)="navigateContinueSteps(recopilation.id)"
+                />
+              } @else {
+                <p-button
+                  severity="success"
+                  pTooltip="Ver Detalles"
+                  icon="pi pi-eye"
+                  rounded="true"
+                  outlined="true"
+                  (click)="navigateRecopilationDetails(recopilation.id)"
+                />
+              }
+              <p-button
+                severity="warning"
+                pTooltip="Eliminar"
+                icon="pi pi-trash"
+                rounded="true"
+                outlined="true"
+                (click)="
+                  confirmRecopilationDeletion(
+                    $event,
+                    recopilation.id,
+                    recopilation.name
+                  )
+                "
+              />
+            </div>
+          </section>
+        </ng-template>
+        <p class="m-0 pb-3" style="max-width: 80vw">
+          {{ recopilation.description }}
+        </p>
+      </p-panel>
+    }
+
+    @if (activeRecopilations.length > 0) {
+      <h3 class="text-xl">Activas ({{ activeRecopilations.length }})</h3>
+    }
+    @for (recopilation of activeRecopilations; track recopilation.id) {
+      <p-panel>
+        <ng-template pTemplate="header">
+          <section
+            class="flex flex-row justify-content-between align-items-center w-full gap-4"
+          >
+            <h2 style="word-break: break-word" class="text-xl">
+              {{ recopilation.name }}
+              {{ recopilation.isReady ? '' : '(Por completar)' }}
+            </h2>
+
+            <div class="flex flex-row gap-3">
+              @if (!recopilation.isReady) {
+                <p-button
+                  severity="info"
+                  icon="pi pi-play"
+                  rounded="true"
+                  outlined="true"
+                  pTooltip="Continuar"
+                  (click)="navigateContinueSteps(recopilation.id)"
+                />
+              } @else {
+                <p-button
+                  severity="success"
+                  pTooltip="Ver Detalles"
+                  icon="pi pi-eye"
+                  rounded="true"
+                  outlined="true"
+                  (click)="navigateRecopilationDetails(recopilation.id)"
+                />
+              }
+              <p-button
+                severity="warning"
+                pTooltip="Eliminar"
+                icon="pi pi-trash"
+                rounded="true"
+                outlined="true"
+                (click)="
+                  confirmRecopilationDeletion(
+                    $event,
+                    recopilation.id,
+                    recopilation.name
+                  )
+                "
+              />
+            </div>
+          </section>
+        </ng-template>
+        <p class="m-0 pb-3" style="max-width: 80vw">
+          {{ recopilation.description }}
+        </p>
+      </p-panel>
+    }
+
+    @if (upcomingRecopilations.length > 0) {
+      <h3 class="text-xl">Próximas ({{ upcomingRecopilations.length }})</h3>
+    }
+    @for (recopilation of upcomingRecopilations; track recopilation.id) {
+      <p-panel>
+        <ng-template pTemplate="header">
+          <section
+            class="flex flex-row justify-content-between align-items-center w-full gap-4"
+          >
+            <h2 style="word-break: break-word" class="text-xl">
+              {{ recopilation.name }}
+              {{ recopilation.isReady ? '' : '(Por completar)' }}
+            </h2>
+
+            <div class="flex flex-row gap-3">
+              @if (!recopilation.isReady) {
+                <p-button
+                  severity="info"
+                  icon="pi pi-play"
+                  rounded="true"
+                  outlined="true"
+                  pTooltip="Continuar"
+                  (click)="navigateContinueSteps(recopilation.id)"
+                />
+              } @else {
+                <p-button
+                  severity="success"
+                  pTooltip="Ver Detalles"
+                  icon="pi pi-eye"
+                  rounded="true"
+                  outlined="true"
+                  (click)="navigateRecopilationDetails(recopilation.id)"
+                />
+              }
+              <p-button
+                severity="warning"
+                pTooltip="Eliminar"
+                icon="pi pi-trash"
+                rounded="true"
+                outlined="true"
+                (click)="
+                  confirmRecopilationDeletion(
+                    $event,
+                    recopilation.id,
+                    recopilation.name
+                  )
+                "
+              />
+            </div>
+          </section>
+        </ng-template>
+        <p class="m-0 pb-3" style="max-width: 80vw">
+          {{ recopilation.description }}
+        </p>
+      </p-panel>
+    }
+
+    @if (finishedRecopilations.length > 0) {
+      <h3 class="text-xl">Finalizadas ({{ finishedRecopilations.length }})</h3>
+    }
+    @for (recopilation of finishedRecopilations; track recopilation.id) {
       <p-panel>
         <ng-template pTemplate="header">
           <section
