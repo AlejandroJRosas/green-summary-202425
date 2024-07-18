@@ -62,26 +62,32 @@
               <th
                 pTooltip="Departamentos que forman parte de la recopilación"
                 tooltipPosition="bottom"
+                pSortableColumn="name"
               >
-                Departamentos
+                Departamentos <p-sortIcon field="name" />
               </th>
               <th
                 pTooltip="Razón de Actividades Recomendadas Respondidas"
                 tooltipPosition="bottom"
+                pSortableColumn="recommendedAnswers"
               >
                 Actividades Recomendadas Respondidas
+                <p-sortIcon field="recommendedAnswers" />
               </th>
               <th
                 pTooltip="Razón de Actividades Libres Respondidas"
                 tooltipPosition="bottom"
+                pSortableColumn="freeAnswers"
               >
                 Actividades Libres Respondidas
+                <p-sortIcon field="freeAnswers" />
               </th>
               <th
                 pTooltip="Razón de Total de Actividades Respondidas, tanto Recomendadas como Libres"
                 tooltipPosition="bottom"
+                pSortableColumn="answers"
               >
-                Total
+                Total <p-sortIcon field="answers" />
               </th>
             </tr>
           </ng-template>
@@ -134,16 +140,12 @@
                 pTooltip="Catidad de Respuestas / Total de Respuestas | Porcentaje Total"
                 tooltipPosition="bottom"
               >
-                {{ item.recommendedAnswers + item.freeAnswers }}/{{
-                  item.recommendedQuantity + item.freeQuantity
-                }}
-                |
                 {{
-                  (
-                    ((item.recommendedAnswers + item.freeAnswers) /
-                      (item.recommendedQuantity + item.freeQuantity)) *
-                    100
-                  ).toFixed(1)
+                  item.answers +
+                    '/' +
+                    item.quantity +
+                    ' | ' +
+                    ((item.answers / item.quantity) * 100).toFixed(1)
                 }}%
               </td>
             </tr>
@@ -190,20 +192,14 @@
                 }}
               </td>
               <td class="t-footer">
-                {{
-                  departmentsExtraInfo.totalRecommendedAnswers +
-                    departmentsExtraInfo.totalFreeAnswers
-                }}/{{
-                  departmentsExtraInfo.totalRecommendedQuantity +
-                    departmentsExtraInfo.totalFreeQuantity
+                {{ departmentsExtraInfo.totalAnswers }}/{{
+                  departmentsExtraInfo.totalQuantity
                 }}
                 |
                 {{
                   (
-                    ((departmentsExtraInfo.totalRecommendedAnswers +
-                      departmentsExtraInfo.totalFreeAnswers) /
-                      (departmentsExtraInfo.totalRecommendedQuantity +
-                        departmentsExtraInfo.totalFreeQuantity)) *
+                    (departmentsExtraInfo.totalAnswers /
+                      departmentsExtraInfo.totalQuantity) *
                     100
                   ).toFixed(1)
                 }}%

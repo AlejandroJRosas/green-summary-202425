@@ -222,6 +222,18 @@ p-password.ng-valid > .p-password > .p-inputtext {
   position: relative;
 }
 
+.p-highlight {
+  color: var(--primary-color);
+}
+
+.p-highlight > p-sorticon > sortamountupalticon > svg {
+  color: var(--primary-color);
+}
+
+.p-highlight > p-sorticon > sortamountdownicon > svg {
+  color: var(--primary-color);
+}
+
 @keyframes blinker {
   50% {
     opacity: 0.4;

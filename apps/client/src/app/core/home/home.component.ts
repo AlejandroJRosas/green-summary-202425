@@ -58,6 +58,8 @@ export class HomeComponent implements OnInit {
     totalRecommendedAnswers: 0,
     totalFreeQuantity: 0,
     totalFreeAnswers: 0,
+    totalQuantity: 0,
+    totalAnswers: 0,
     departments: []
   }
 
@@ -147,40 +149,41 @@ export class HomeComponent implements OnInit {
                     freeAnswers: department.answers.filter(
                       (item) =>
                         item.isRecommended === false && item.isAnswered === true
+                    ).length,
+                    quantity: department.answers.length,
+                    answers: department.answers.filter(
+                      (item) => item.isAnswered === true
                     ).length
                   }
                 })
 
-              const totalRecommendedQuantity =
-                this.departmentsExtraInfo.departments.reduce(
-                  (acc, item) => acc + item.recommendedQuantity,
-                  0
-                )
-
-              const totalRecommendedAnswers =
+              this.departmentsExtraInfo.totalRecommendedAnswers =
                 this.departmentsExtraInfo.departments.reduce(
                   (acc, item) => acc + item.recommendedAnswers,
                   0
                 )
-
-              const totalFreeQuantity =
-                this.departmentsExtraInfo.departments.reduce(
-                  (acc, item) => acc + item.freeQuantity,
-                  0
-                )
-
-              const totalFreeAnswers =
+              this.departmentsExtraInfo.totalFreeAnswers =
                 this.departmentsExtraInfo.departments.reduce(
                   (acc, item) => acc + item.freeAnswers,
                   0
                 )
-
               this.departmentsExtraInfo.totalRecommendedQuantity =
-                totalRecommendedQuantity
-              this.departmentsExtraInfo.totalRecommendedAnswers =
-                totalRecommendedAnswers
-              this.departmentsExtraInfo.totalFreeQuantity = totalFreeQuantity
-              this.departmentsExtraInfo.totalFreeAnswers = totalFreeAnswers
+                this.departmentsExtraInfo.departments.reduce(
+                  (acc, item) => acc + item.recommendedQuantity,
+                  0
+                )
+              this.departmentsExtraInfo.totalFreeQuantity =
+                this.departmentsExtraInfo.departments.reduce(
+                  (acc, item) => acc + item.freeQuantity,
+                  0
+                )
+              this.departmentsExtraInfo.totalQuantity =
+                this.departmentsExtraInfo.totalRecommendedQuantity +
+                this.departmentsExtraInfo.totalFreeQuantity
+
+              this.departmentsExtraInfo.totalAnswers =
+                this.departmentsExtraInfo.totalRecommendedAnswers +
+                this.departmentsExtraInfo.totalFreeAnswers
 
               this.matrixData = recopilation
             }
@@ -224,6 +227,8 @@ type ExtraInfo = {
   totalRecommendedAnswers: number
   totalFreeQuantity: number
   totalFreeAnswers: number
+  totalQuantity: number
+  totalAnswers: number
   departments: DepartmentExtraInfo[]
 }
 
@@ -234,4 +239,6 @@ type DepartmentExtraInfo = {
   recommendedAnswers: number
   freeQuantity: number
   freeAnswers: number
+  quantity: number
+  answers: number
 }
