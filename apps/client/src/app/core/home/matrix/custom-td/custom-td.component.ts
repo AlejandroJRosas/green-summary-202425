@@ -1,12 +1,13 @@
 import { Component, Input } from '@angular/core'
 import { Answer } from '../../../../services/recopilation.service'
+import { CommonModule } from '@angular/common'
 import { TooltipIcon } from '../../../../common/tooltip-icon/tooltip-icon.component'
 import { User } from '../../../../../shared/types/user.type'
 
 @Component({
   selector: 'custom-td',
   standalone: true,
-  imports: [TooltipIcon],
+  imports: [CommonModule, TooltipIcon],
   templateUrl: './custom-td.component.html',
   styleUrl: './custom-td.component.css'
 })

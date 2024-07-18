@@ -34,7 +34,11 @@
     </ng-template>
     <ng-template pTemplate="body" let-row>
       <tr>
-        <td pFrozenColumn style="padding-top: 15px; padding-bottom: 15px">
+        <td
+          pFrozenColumn
+          style="padding-top: 15px; padding-bottom: 15px"
+          [ngClass]="currentUser.id === row.department.id ? 'current-user' : ''"
+        >
           {{ row.department.fullName }}
         </td>
         @for (indicator of matrixData.indicators; track $index) {

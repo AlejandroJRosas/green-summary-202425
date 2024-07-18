@@ -16,6 +16,7 @@ import { MatrixComponent } from './matrix/matrix.component'
 import { ButtonModule } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
 import { Toast } from '../../common/toast/toast.component'
+import { User } from '../../../shared/types/user.type'
 
 @Component({
   selector: 'app-home',
@@ -42,6 +43,7 @@ export class HomeComponent implements OnInit {
   ) {}
 
   recopilations: Recopilation[] = []
+  currentUser: User = JSON.parse(localStorage.getItem('user')!)
   selectedRecopilation: number =
     Number(localStorage.getItem('selectedRecopilation')) ?? 0
   matrixData: MatrixInfoDto | undefined
@@ -103,6 +105,19 @@ export class HomeComponent implements OnInit {
           next: (recopilation) => {
             if (recopilation) {
               this.updateLocalSelectedRecopilation()
+              if (this.currentUser.type === 'department') {
+                const departmentIndex = recopilation.departments.findIndex(
+                  (item) => item.department.id === this.currentUser.id
+                )
+
+                const selectedDepartment = recopilation.departments.splice(
+                  departmentIndex,
+                  1
+                )[0]
+
+                recopilation.departments.unshift(selectedDepartment)
+                recopilation.departments[0].department.fullName = `*${recopilation.departments[0].department.fullName}* (Tu)`
+              }
               this.matrixData = recopilation
             }
           },

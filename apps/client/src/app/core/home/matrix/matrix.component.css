@@ -12,3 +12,7 @@ td {
 tr {
   height: 1px;
 }
+
+.current-user {
+  background-color: #ffffe4ef;
+}
