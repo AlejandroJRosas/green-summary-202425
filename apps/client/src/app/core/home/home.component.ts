@@ -116,7 +116,6 @@ export class HomeComponent implements OnInit {
                 )[0]
 
                 recopilation.departments.unshift(selectedDepartment)
-                recopilation.departments[0].department.fullName = `*${recopilation.departments[0].department.fullName}* (Tu)`
               }
               this.matrixData = recopilation
             }

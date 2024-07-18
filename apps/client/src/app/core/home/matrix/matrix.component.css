@@ -14,5 +14,6 @@ tr {
 }
 
 .current-user {
-  background-color: #ffffe4ef;
+  background-color: #f2f8e6;
+  font-weight: bold;
 }
