@@ -12,7 +12,6 @@ export interface Values {
   nameAliasMinAmount: number
   indicatorNameAliasMaxAmount: number
   categoryNameMaxAmount: number
-  criterionNameAliasMaxAmount: number
   errorTextAmount: number
   recopilationsNameMaxAmount: number
   informationCollectionsSummary: number
