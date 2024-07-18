@@ -16,6 +16,7 @@
         @for (indicator of matrixData.indicators; track $index) {
           <th
             pTooltip="{{ indicator.helpText }}"
+            tooltipPosition="bottom"
             [attr.colspan]="indicator.categories.length"
           >
             {{ indicator.alias }}
@@ -25,7 +26,7 @@
       <tr>
         @for (indicator of matrixData.indicators; track $index) {
           @for (category of indicator.categories; track $index) {
-            <th pTooltip="{{ category.helpText }}">
+            <th pTooltip="{{ category.helpText }}" tooltipPosition="bottom">
               {{ category.name }}
             </th>
           }
