@@ -54,20 +54,12 @@ export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
         .required('El subíndice es requerido'),
       name: string()
         .required('El nombre es requerido')
-        .max(
-          VALUES.criterionNameAliasMaxAmount,
-          'El nombre no puede superar los 80 caracteres'
-        )
         .min(
           VALUES.nameAliasMinAmount,
           'El nombre debe superar un mínimo de 10 caracteres'
         ),
       alias: string()
         .required('El alias es requerido')
-        .max(
-          VALUES.criterionNameAliasMaxAmount,
-          'El alias no puede superar los 80 caracteres'
-        )
         .min(
           VALUES.nameAliasMinAmount,
           'El alias debe superar un mínimo de 10 caracteres'

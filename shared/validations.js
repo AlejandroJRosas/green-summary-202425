@@ -10,7 +10,6 @@ const VALUES = {
   nameAliasMinAmount: 4,
   indicatorNameAliasMaxAmount: 40,
   categoryNameMaxAmount: 128,
-  criterionNameAliasMaxAmount: 80,
   errorTextAmount: 280,
   recopilationsNameMaxAmount: 40,
   informationCollectionsSummary: 280,
