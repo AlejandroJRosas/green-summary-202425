@@ -15,6 +15,7 @@ import { JsonPipe } from '@angular/common'
 import { MatrixComponent } from '../../../../home/matrix/matrix.component'
 import { PanelModule } from 'primeng/panel'
 import { DialogModule } from 'primeng/dialog'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'app-information-recopilation',
@@ -30,7 +31,8 @@ import { DialogModule } from 'primeng/dialog'
     JsonPipe,
     MatrixComponent,
     PanelModule,
-    DialogModule
+    DialogModule,
+    ScrollTopModule
   ],
   templateUrl: './preview.component.html'
 })

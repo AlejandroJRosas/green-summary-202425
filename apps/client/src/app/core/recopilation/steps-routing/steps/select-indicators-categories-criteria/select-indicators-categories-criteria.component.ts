@@ -12,6 +12,7 @@ import { RecopilationService } from '../../../../../services/recopilation.servic
 import { PanelModule } from 'primeng/panel'
 import { Category } from '../../../../../../shared/types/category.type'
 import { Recopilation } from '../../../../../../shared/types/recopilation.type'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'app-select-indicators-categories-criteria',
@@ -24,7 +25,8 @@ import { Recopilation } from '../../../../../../shared/types/recopilation.type'
     PanelModule,
     CheckboxModule,
     DropdownModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ScrollTopModule
   ],
   templateUrl: './select-indicators-categories-criteria.component.html'
 })

@@ -11,6 +11,7 @@
   --text-color-secondary: #373737;
   --primary-color: #00ad7c;
   --primary-color-text: #fff;
+  --light-green: #f2f8e6;
   font-family:
     'Inter var',
     -apple-system,
@@ -59,6 +60,10 @@ body::-webkit-scrollbar-thumb {
 .p-component::-webkit-scrollbar-thumb {
   background-color: var(--primary-color);
   border-radius: 20px;
+}
+
+.p-scrolltop {
+  background-color: var(--primary-color);
 }
 
 fieldset {

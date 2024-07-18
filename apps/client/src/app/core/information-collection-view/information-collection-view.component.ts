@@ -28,6 +28,7 @@ import { EvidenceService } from '../../services/evidence/evidence.service'
 import { Evidence } from '../../../shared/types/evidence.type'
 import { TooltipModule } from 'primeng/tooltip'
 import { ConfirmDialogModule } from 'primeng/confirmdialog'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'app-information-collection-view',
@@ -43,7 +44,8 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog'
     ConfirmPopupModule,
     ReactiveFormsModule,
     TooltipModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    ScrollTopModule
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './information-collection-view.component.html',

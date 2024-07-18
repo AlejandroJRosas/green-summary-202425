@@ -12,6 +12,7 @@ import {
   DetailedRecopilation,
   RecopilationService
 } from '../../services/recopilation.service'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'app-upload-of-evidence',
@@ -19,7 +20,8 @@ import {
   imports: [
     ButtonModule,
     CollectionOfInformationComponent,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    ScrollTopModule
   ],
   providers: [ConfirmationService],
   templateUrl: './upload-of-evidence.html',

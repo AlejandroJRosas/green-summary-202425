@@ -4,11 +4,12 @@ import { Notification } from '../../../shared/types/notification.type'
 import { User } from '../../../shared/types/user.type'
 import { NotificationService } from '../../services/notification.service'
 import { BadgeModule } from 'primeng/badge'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'app-notification',
   standalone: true,
-  imports: [AvatarModule, BadgeModule],
+  imports: [AvatarModule, BadgeModule, ScrollTopModule],
   templateUrl: './notification.component.html'
 })
 export class NotificationComponent implements OnInit {

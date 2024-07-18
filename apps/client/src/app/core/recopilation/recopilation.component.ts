@@ -9,6 +9,7 @@ import { ConfirmationService } from 'primeng/api'
 import { Toast } from '../../common/toast/toast.component'
 import { DialogModule } from 'primeng/dialog'
 import { TooltipModule } from 'primeng/tooltip'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'app-recopilation',
@@ -19,7 +20,8 @@ import { TooltipModule } from 'primeng/tooltip'
     ConfirmDialogModule,
     DialogModule,
     TooltipModule,
-    ButtonModule
+    ButtonModule,
+    ScrollTopModule
   ],
   providers: [ConfirmationService],
   templateUrl: './recopilation.component.html'

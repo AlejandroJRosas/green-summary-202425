@@ -10,6 +10,7 @@ import { CategorySelectorComponent } from './category-selector/category-selector
 import { Department } from '../../../../../../shared/types/user.type'
 import { Category } from '../../../../../../shared/types/category.type'
 import { RecopilationService } from '../../../../../services/recopilation.service'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'app-recommend-categories-department',
@@ -20,7 +21,8 @@ import { RecopilationService } from '../../../../../services/recopilation.servic
     DropdownModule,
     ChipModule,
     FormsModule,
-    CategorySelectorComponent
+    CategorySelectorComponent,
+    ScrollTopModule
   ],
   templateUrl: './recommend-categories-department.component.html',
   providers: [ConfirmationService]

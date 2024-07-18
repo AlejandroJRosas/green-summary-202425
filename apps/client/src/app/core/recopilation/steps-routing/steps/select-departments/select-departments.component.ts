@@ -9,11 +9,18 @@ import { RecopilationService } from '../../../../../services/recopilation.servic
 import { FormsModule } from '@angular/forms'
 import { Toast } from '../../../../../common/toast/toast.component'
 import { Recopilation } from '../../../../../../shared/types/recopilation.type'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'app-select-departments',
   standalone: true,
-  imports: [FormsModule, ButtonModule, DropdownModule, CheckboxModule],
+  imports: [
+    FormsModule,
+    ButtonModule,
+    DropdownModule,
+    CheckboxModule,
+    ScrollTopModule
+  ],
   templateUrl: './select-departments.component.html',
   styles: ``
 })

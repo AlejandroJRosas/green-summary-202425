@@ -13,6 +13,7 @@ import {
 } from '../../services/indicator.service'
 import { RecordsCategoryHeaderComponent } from './category/header/header.component'
 import { RecordsCategoryBodyComponent } from './category/body/body.component'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'app-records',
@@ -22,7 +23,8 @@ import { RecordsCategoryBodyComponent } from './category/body/body.component'
     FormsModule,
     PanelModule,
     RecordsCategoryHeaderComponent,
-    RecordsCategoryBodyComponent
+    RecordsCategoryBodyComponent,
+    ScrollTopModule
   ],
   templateUrl: './records.component.html'
 })
