@@ -1,7 +1,26 @@
+th {
+  text-align: center;
+  border-right: 1px solid #e5e7eb;
+}
+
+td {
+  border-right: 1px solid #e5e7eb;
+  height: inherit;
+  text-align: center;
+}
+
+tr {
+  height: 1px;
+}
+
 .open-big {
   margin-left: 1rem;
 }
 
 .matrix {
   margin-top: 2rem;
+}
+
+.t-footer {
+  background-color: var(--light-green);
 }

@@ -62,6 +62,14 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
+.p-datatable-thead .p-element {
+  background-color: var(--light-green);
+}
+
+.p-datatable-body .p-element {
+  background-color: var(--background-color);
+}
+
 .p-scrolltop {
   background-color: var(--primary-color);
 }

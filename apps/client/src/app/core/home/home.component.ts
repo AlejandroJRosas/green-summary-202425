@@ -17,6 +17,8 @@ import { ButtonModule } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
 import { Toast } from '../../common/toast/toast.component'
 import { User } from '../../../shared/types/user.type'
+import { PanelModule } from 'primeng/panel'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'app-home',
@@ -31,7 +33,9 @@ import { User } from '../../../shared/types/user.type'
     RouterLink,
     MatrixComponent,
     ButtonModule,
-    DialogModule
+    DialogModule,
+    PanelModule,
+    ScrollTopModule
   ],
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
@@ -49,6 +53,13 @@ export class HomeComponent implements OnInit {
   matrixData: MatrixInfoDto | undefined
   dialogVisible: boolean = false
   dialogMatrixScrollHeight: string = 'calc(70vh - 1rem)'
+  departmentsExtraInfo: ExtraInfo = {
+    totalRecommendedQuantity: 0,
+    totalRecommendedAnswers: 0,
+    totalFreeQuantity: 0,
+    totalFreeAnswers: 0,
+    departments: []
+  }
 
   ngOnInit(): void {
     this.getActiveRecopilations()
@@ -117,6 +128,60 @@ export class HomeComponent implements OnInit {
 
                 recopilation.departments.unshift(selectedDepartment)
               }
+
+              this.departmentsExtraInfo.departments =
+                recopilation.departments.map((department) => {
+                  return {
+                    id: department.department.id,
+                    name: department.department.fullName,
+                    recommendedQuantity: department.answers.filter(
+                      (item) => item.isRecommended === true
+                    ).length,
+                    recommendedAnswers: department.answers.filter(
+                      (item) =>
+                        item.isRecommended === true && item.isAnswered === true
+                    ).length,
+                    freeQuantity: department.answers.filter(
+                      (item) => item.isRecommended === false
+                    ).length,
+                    freeAnswers: department.answers.filter(
+                      (item) =>
+                        item.isRecommended === false && item.isAnswered === true
+                    ).length
+                  }
+                })
+
+              const totalRecommendedQuantity =
+                this.departmentsExtraInfo.departments.reduce(
+                  (acc, item) => acc + item.recommendedQuantity,
+                  0
+                )
+
+              const totalRecommendedAnswers =
+                this.departmentsExtraInfo.departments.reduce(
+                  (acc, item) => acc + item.recommendedAnswers,
+                  0
+                )
+
+              const totalFreeQuantity =
+                this.departmentsExtraInfo.departments.reduce(
+                  (acc, item) => acc + item.freeQuantity,
+                  0
+                )
+
+              const totalFreeAnswers =
+                this.departmentsExtraInfo.departments.reduce(
+                  (acc, item) => acc + item.freeAnswers,
+                  0
+                )
+
+              this.departmentsExtraInfo.totalRecommendedQuantity =
+                totalRecommendedQuantity
+              this.departmentsExtraInfo.totalRecommendedAnswers =
+                totalRecommendedAnswers
+              this.departmentsExtraInfo.totalFreeQuantity = totalFreeQuantity
+              this.departmentsExtraInfo.totalFreeAnswers = totalFreeAnswers
+
               this.matrixData = recopilation
             }
           },
@@ -152,4 +217,21 @@ export class HomeComponent implements OnInit {
       timeZone: 'UTC'
     })
   }
+}
+
+type ExtraInfo = {
+  totalRecommendedQuantity: number
+  totalRecommendedAnswers: number
+  totalFreeQuantity: number
+  totalFreeAnswers: number
+  departments: DepartmentExtraInfo[]
+}
+
+type DepartmentExtraInfo = {
+  id: number
+  name: string
+  recommendedQuantity: number
+  recommendedAnswers: number
+  freeQuantity: number
+  freeAnswers: number
 }
