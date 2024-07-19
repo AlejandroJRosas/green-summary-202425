@@ -15,6 +15,6 @@ tr {
 }
 
 .current-user {
-  background-color: var(--light-green);
+  background-color: var(--gris-tirando-a-verde);
   font-weight: bold;
 }

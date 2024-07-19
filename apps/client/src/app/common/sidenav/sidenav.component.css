@@ -15,7 +15,7 @@
   width: 5rem;
   height: 100vh;
   background-color: var(--background-color);
-  border-right: 1.5px solid #e0e0e0;
+  border-right: 1.5px solid #e5e7eb;
   transition: all 0.5s ease;
 
   .logo-container {

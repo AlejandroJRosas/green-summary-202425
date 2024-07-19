@@ -1,5 +1,5 @@
 .current-user {
-  background-color: var(--light-green);
+  background-color: var(--gris-tirando-a-verde);
 }
 
 .custom-td-link {
@@ -35,7 +35,7 @@
 }
 
 .container:hover {
-  background-color: ghostwhite;
+  filter: brightness(90%);
 }
 
 a {

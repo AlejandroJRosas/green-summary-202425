@@ -40,8 +40,8 @@
       [matrixScrollHeight]="'75vh'"
     ></app-matrix>
   </div>
-  @if (matrixData !== undefined) {
-    <div>
+  @if (matrixData !== undefined && currentUser.type !== 'department') {
+    <div class="max-h-[500px]">
       <p-panel
         expandIcon="pi pi-minus"
         collapseIcon="pi pi-plus"
@@ -56,7 +56,10 @@
           Cantidad de Actividades:
           {{ matrixData.departments[0].answers.length }}
         </h3>
-        <p-table [value]="departmentsExtraInfo.departments">
+        <p-table
+          [value]="departmentsExtraInfo.departments"
+          styleClass="p-datatable-striped"
+        >
           <ng-template pTemplate="header">
             <tr>
               <th
