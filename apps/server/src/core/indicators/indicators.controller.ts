@@ -21,12 +21,22 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-indicators-by-param.dto'
 import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
+import { EventEmitter2 } from '@nestjs/event-emitter'
+import { IndicatorPerRecopilation } from '../indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
+import { Repository } from 'typeorm'
+import { MatrixChangedManyEvent } from '../recopilations/dto/matrix-changed-many.event'
+import { InjectRepository } from '@nestjs/typeorm'
 
 @ApiTags('Indicators')
 @Controller('indicators')
 @Roles(Role.Coordinator, Role.Admin)
 export class IndicatorsController {
-  constructor(private readonly indicatorsService: IndicatorsService) {}
+  constructor(
+    private readonly indicatorsService: IndicatorsService,
+    @InjectRepository(IndicatorPerRecopilation)
+    private readonly indicatorPerRecopilationRepository: Repository<IndicatorPerRecopilation>,
+    private readonly eventEmitter: EventEmitter2
+  ) {}
 
   @Get()
   async getAllIndicators(
@@ -73,11 +83,28 @@ export class IndicatorsController {
     @Param('id') id: string,
     @Body() updatedIndicador: UpdateIndicatorDto
   ) {
-    const indicator = await this.indicatorsService.updateIndicator(
+    const updatedIndicator = await this.indicatorsService.updateIndicator(
       Number(id),
       updatedIndicador
     )
-    return indicator
+
+    const recopilations = await this.indicatorPerRecopilationRepository.find({
+      where: {
+        indicator: {
+          index: updatedIndicador.index
+        }
+      },
+      relations: {
+        recopilation: true
+      }
+    })
+
+    this.eventEmitter.emit(
+      'matrix.changed.many',
+      new MatrixChangedManyEvent(recopilations.map((r) => r.recopilation.id))
+    )
+
+    return updatedIndicator
   }
 
   @Delete('/:id')

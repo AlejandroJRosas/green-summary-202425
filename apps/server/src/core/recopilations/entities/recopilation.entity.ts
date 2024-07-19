@@ -27,6 +27,9 @@ export class Recopilation {
   @Column({ default: false })
   isReady: boolean
 
+  @Column({ type: 'text', nullable: true, select: false })
+  cachedMatrix: string | null
+
   @OneToMany(
     () => IndicatorPerRecopilation,
     (indicatorsPerRecopilations) => indicatorsPerRecopilations.recopilation

@@ -19,6 +19,7 @@ import { ServeStaticModule } from '@nestjs/serve-static/dist/serve-static.module
 import { SummaryInformationModule } from './core/summary-information/summary-information.module'
 import { WordModule } from './core/word/word.module'
 import { MailsModule } from './core/mails/mails.module'
+import { EventEmitterModule } from '@nestjs/event-emitter'
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { MailsModule } from './core/mails/mails.module'
     ServeStaticModule.forRoot({
       rootPath: path.join(__dirname, '..', 'uploads')
     }),
+    EventEmitterModule.forRoot({}),
     AuthModule,
     UsersModule,
     RecopilationsModule,

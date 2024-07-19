@@ -28,6 +28,9 @@ import { Role } from '../auth/role.enum'
 import { Repository } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Recopilation } from './entities/recopilation.entity'
+import { EventEmitter2, OnEvent } from '@nestjs/event-emitter'
+import { MatrixChangedEvent } from './dto/matrix-changed.event'
+import { MatrixChangedManyEvent } from './dto/matrix-changed-many.event'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
@@ -35,7 +38,8 @@ export class RecopilationsController {
   constructor(
     private readonly recopilationsService: RecopilationsService,
     @InjectRepository(Recopilation)
-    private readonly recopilationsRepository: Repository<Recopilation>
+    private readonly recopilationsRepository: Repository<Recopilation>,
+    private readonly eventEmitter: EventEmitter2
   ) {}
 
   @Roles(Role.Coordinator, Role.Admin, Role.Department)
@@ -107,7 +111,7 @@ export class RecopilationsController {
   @Roles(Role.Coordinator, Role.Admin, Role.Department)
   @Get(':id/matrix')
   async findOneMatrix(@Param('id') id: string) {
-    const recopilation = await this.recopilationsService.findOneMatrix(+id)
+    const recopilation = await this.recopilationsService.findMatrix(+id)
 
     return recopilation
   }
@@ -118,6 +122,11 @@ export class RecopilationsController {
   async create(@Body() recopilationData: CreateRecopilationDto) {
     const createdRecopilation =
       await this.recopilationsService.create(recopilationData)
+
+    this.eventEmitter.emit(
+      'matrix.changed',
+      new MatrixChangedEvent(createdRecopilation.id)
+    )
 
     return createdRecopilation
   }
@@ -133,6 +142,8 @@ export class RecopilationsController {
       recopilationData
     )
 
+    this.eventEmitter.emit('matrix.changed', new MatrixChangedEvent(Number(id)))
+
     return updatedRecopilation
   }
 
@@ -140,14 +151,26 @@ export class RecopilationsController {
   @Put()
   async updateOrCreate(@Body() recopilationData: UpdateRecopilationDto) {
     if (!recopilationData.id) {
-      return await this.recopilationsService.create(
+      const createdRecopilation = await this.recopilationsService.create(
         recopilationData as CreateRecopilationDto
       )
+
+      this.eventEmitter.emit(
+        'matrix.changed',
+        new MatrixChangedEvent(createdRecopilation.id)
+      )
+
+      return createdRecopilation
     }
 
     const updatedRecopilation = await this.recopilationsService.update(
       recopilationData.id,
       recopilationData
+    )
+
+    this.eventEmitter.emit(
+      'matrix.changed',
+      new MatrixChangedEvent(updatedRecopilation.id)
     )
 
     return updatedRecopilation
@@ -166,9 +189,16 @@ export class RecopilationsController {
     @Body() relateIndicatorsToRecopilationDto: RelateIndicatorsToRecopilationDto
   ) {
     try {
-      return await this.recopilationsService.relateToIndicators(
+      const recopilation = await this.recopilationsService.relateToIndicators(
         relateIndicatorsToRecopilationDto
       )
+
+      this.eventEmitter.emit(
+        'matrix.changed',
+        new MatrixChangedEvent(recopilation.id)
+      )
+
+      return recopilation
     } catch (e) {
       console.log(e)
       throw e
@@ -181,9 +211,16 @@ export class RecopilationsController {
     @Body() recommendCategoriesDto: RecommendCategoriesDto
   ) {
     try {
-      return await this.recopilationsService.recommendCategories(
+      const res = await this.recopilationsService.recommendCategories(
         recommendCategoriesDto
       )
+
+      this.eventEmitter.emit(
+        'matrix.changed',
+        new MatrixChangedEvent(recommendCategoriesDto.recopilationId)
+      )
+
+      return res
     } catch (e) {
       console.log(e)
       throw e
@@ -200,5 +237,22 @@ export class RecopilationsController {
     recopilation.isReady = true
 
     await this.recopilationsRepository.save(recopilation)
+
+    this.eventEmitter.emit(
+      'matrix.changed',
+      new MatrixChangedEvent(recopilation.id)
+    )
+  }
+
+  @OnEvent('matrix.changed')
+  handleChangedMatrixEvent(payload: MatrixChangedEvent) {
+    this.recopilationsService.constructAndSaveMatrix(payload.recopilationId)
+  }
+
+  @OnEvent('matrix.changed.many')
+  handleChangedManyMatrixEvent(payload: MatrixChangedManyEvent) {
+    for (const recopilationId of payload.recopilationIds) {
+      this.recopilationsService.constructAndSaveMatrix(recopilationId)
+    }
   }
 }

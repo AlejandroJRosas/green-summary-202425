@@ -204,7 +204,14 @@ export class EvidencesService {
       )
     }
 
-    return this.evidenceRepository.findOneByOrFail({ id })
+    return this.evidenceRepository.findOneOrFail({
+      where: { id },
+      relations: {
+        collection: {
+          recopilation: true
+        }
+      }
+    })
   }
 
   async remove(id: number): Promise<void> {

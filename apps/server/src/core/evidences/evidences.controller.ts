@@ -28,6 +28,8 @@ import { FileInterceptor } from '@nestjs/platform-express'
 import { diskStorage } from 'multer'
 import { renameFile, fileFilter } from 'src/shared/file-upload'
 import { ConfigService } from 'nestjs-config'
+import { EventEmitter2 } from '@nestjs/event-emitter'
+import { MatrixChangedEvent } from '../recopilations/dto/matrix-changed.event'
 
 @ApiTags('Evidences')
 @Controller('evidences')
@@ -35,7 +37,8 @@ import { ConfigService } from 'nestjs-config'
 export class EvidencesController {
   constructor(
     private configService: ConfigService,
-    private readonly evidencesService: EvidencesService
+    private readonly evidencesService: EvidencesService,
+    private readonly eventEmitter: EventEmitter2
   ) {}
 
   @Get()
@@ -168,6 +171,11 @@ export class EvidencesController {
     const updatedEvidence = await this.evidencesService.update(
       +id,
       updateEvidenceDto
+    )
+
+    this.eventEmitter.emit(
+      'matrix.changed',
+      new MatrixChangedEvent(Number(updatedEvidence.collection.recopilation.id))
     )
 
     return updatedEvidence

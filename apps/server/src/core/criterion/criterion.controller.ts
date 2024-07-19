@@ -21,12 +21,22 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-criteria-by-param.dto'
 import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
+import { EventEmitter2 } from '@nestjs/event-emitter'
+import { CategorizedCriteria } from '../categorized-criteria/entities/categorized-criterion.entity'
+import { Repository } from 'typeorm'
+import { MatrixChangedManyEvent } from '../recopilations/dto/matrix-changed-many.event'
+import { InjectRepository } from '@nestjs/typeorm'
 
 @ApiTags('Criteria')
 @Controller('criteria')
 @Roles(Role.Coordinator, Role.Admin)
 export class CriterionController {
-  constructor(private readonly criterionService: CriterionService) {}
+  constructor(
+    private readonly criterionService: CriterionService,
+    @InjectRepository(CategorizedCriteria)
+    private readonly categorizedCriteriaRepository: Repository<CategorizedCriteria>,
+    private readonly eventEmitter: EventEmitter2
+  ) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -76,11 +86,30 @@ export class CriterionController {
     @Param('id') id: string,
     @Body() updateCriteriaDto: UpdateCriteriaDto
   ) {
-    const criterion = await this.criterionService.updateCriterion(
+    const updatedCriterion = await this.criterionService.updateCriterion(
       Number(id),
       updateCriteriaDto
     )
-    return criterion
+
+    const categorizedCriteria = await this.categorizedCriteriaRepository.find({
+      where: {
+        criteria: {
+          id: updatedCriterion.id
+        }
+      },
+      relations: {
+        recopilation: true
+      }
+    })
+
+    this.eventEmitter.emit(
+      'matrix.changed.many',
+      new MatrixChangedManyEvent(
+        categorizedCriteria.map((r) => r.recopilation.id)
+      )
+    )
+
+    return updatedCriterion
   }
 
   @Delete(':id')

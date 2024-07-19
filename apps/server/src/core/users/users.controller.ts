@@ -22,12 +22,22 @@ import { OrderByParamDto } from './dto/order-users-by-param.dto'
 import { FiltersSegmentDto } from 'src/shared/filtering/filters-segment.dto'
 import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
+import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
+import { Repository } from 'typeorm'
+import { EventEmitter2 } from '@nestjs/event-emitter'
+import { MatrixChangedManyEvent } from '../recopilations/dto/matrix-changed-many.event'
+import { InjectRepository } from '@nestjs/typeorm'
 
 @ApiTags('Users')
 @Controller('users')
 @Roles(Role.Coordinator, Role.Admin)
 export class UsersController {
-  constructor(private readonly usersService: UsersService) {}
+  constructor(
+    private readonly usersService: UsersService,
+    @InjectRepository(DepartmentPerRecopilation)
+    private readonly departmentPerRecopilationRepository: Repository<DepartmentPerRecopilation>,
+    private readonly eventEmitter: EventEmitter2
+  ) {}
 
   @Post()
   @HttpCode(HttpStatus.CREATED)
@@ -63,7 +73,25 @@ export class UsersController {
     @Param() { id }: FindOneParams,
     @Body() updateUserDto: UpdateUserDto
   ) {
-    return this.usersService.update(+id, updateUserDto)
+    const updatedUser = await this.usersService.update(+id, updateUserDto)
+
+    const recopilations = await this.departmentPerRecopilationRepository.find({
+      where: {
+        department: {
+          id: updatedUser.id
+        }
+      },
+      relations: {
+        recopilation: true
+      }
+    })
+
+    this.eventEmitter.emit(
+      'matrix.changed.many',
+      new MatrixChangedManyEvent(recopilations.map((r) => r.recopilation.id))
+    )
+
+    return updatedUser
   }
 
   @Delete(':id')

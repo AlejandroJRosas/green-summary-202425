@@ -135,7 +135,36 @@ export class RecopilationsService {
     return recopilationDto
   }
 
-  async findOneMatrix(id: number) {
+  async findMatrix(id: number): Promise<MatrixInfoDto> {
+    const recopilation = await this.recopilationsRepository.findOneOrFail({
+      where: { id },
+      select: { cachedMatrix: true }
+    })
+
+    if (!recopilation.cachedMatrix) {
+      return this.constructAndSaveMatrix(id)
+    }
+
+    try {
+      const matrix = JSON.parse(recopilation.cachedMatrix) as MatrixInfoDto
+
+      return matrix
+    } catch (e) {
+      return this.constructAndSaveMatrix(id)
+    }
+  }
+
+  async constructAndSaveMatrix(id: number) {
+    const matrix = await this.constructMatrix(id)
+
+    await this.recopilationsRepository.update(id, {
+      cachedMatrix: JSON.stringify(matrix)
+    })
+
+    return matrix
+  }
+
+  private async constructMatrix(id: number) {
     const recopilation = await this.recopilationsRepository.findOneOrFail({
       where: { id },
       withDeleted: true,
@@ -254,7 +283,7 @@ export class RecopilationsService {
       }))
     )
 
-    const recopilationDto = {
+    const recopilationDto: MatrixInfoDto = {
       id: recopilation.id,
       name: recopilation.name,
       description: recopilation.description,
@@ -473,4 +502,45 @@ export class RecopilationsService {
       order: { [orderBy]: orderType }
     })
   }
+}
+
+export type MatrixInfoDto = {
+  id: number
+  name: string
+  description: string
+  startDate: Date
+  endDate: Date
+  departmentEndDate: Date
+  isReady: boolean
+  indicators: {
+    index: number
+    name: string
+    alias: string
+    helpText: string
+    categories: {
+      id: number
+      name: string
+      helpText: string
+      criteria: {
+        id: number
+        subIndex: number
+        name: string
+        alias: string
+        helpText: string
+        requiresEvidence: boolean
+      }[]
+    }[]
+  }[]
+  departments: {
+    department: Pick<Department, 'id' | 'fullName' | 'email' | 'type'>
+    answers: Answer[]
+  }[]
+}
+
+export interface Answer {
+  categoryId: number
+  isRecommended: boolean
+  isAnswered: boolean
+  isApproved: boolean
+  hasError: boolean
 }

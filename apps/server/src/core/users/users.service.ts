@@ -16,6 +16,9 @@ import { parseFiltersToTypeOrm } from 'src/shared/filtering/parse-filters-to-typ
 import * as generator from 'generate-password'
 import * as bcrypt from 'bcrypt'
 import { MailsService } from '../mails/mails.service'
+import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
+import { MatrixChangedManyEvent } from '../recopilations/dto/matrix-changed-many.event'
+import { EventEmitter2 } from '@nestjs/event-emitter'
 
 @Injectable()
 export class UsersService {
@@ -101,7 +104,9 @@ export class UsersService {
 
     await this.usersRepository.update(id, updateUserDto)
 
-    return this.usersRepository.findOneByOrFail({ id })
+    const updatedUser = await this.usersRepository.findOneByOrFail({ id })
+
+    return updatedUser
   }
 
   async remove(id: number) {

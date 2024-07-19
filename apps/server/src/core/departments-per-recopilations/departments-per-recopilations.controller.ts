@@ -19,13 +19,16 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-departments-per-recopilations-by-param.dto'
 import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
+import { EventEmitter2 } from '@nestjs/event-emitter'
+import { MatrixChangedEvent } from '../recopilations/dto/matrix-changed.event'
 
 @ApiTags('Departments Per Recopilations')
 @Controller('departments-per-recopilations')
 @Roles(Role.Coordinator, Role.Admin)
 export class DepartmentsPerRecopilationsController {
   constructor(
-    private readonly departmentsPerRecopilationsService: DepartmentsPerRecopilationsService
+    private readonly departmentsPerRecopilationsService: DepartmentsPerRecopilationsService,
+    private readonly eventEmitter: EventEmitter2
   ) {}
 
   @Get()
@@ -62,9 +65,16 @@ export class DepartmentsPerRecopilationsController {
     @Body()
     createDepartmentsPerRecopilationDto: CreateDepartmentsPerRecopilationDto
   ) {
-    return this.departmentsPerRecopilationsService.set(
+    const res = await this.departmentsPerRecopilationsService.set(
       createDepartmentsPerRecopilationDto
     )
+
+    this.eventEmitter.emit(
+      'matrix.changed',
+      new MatrixChangedEvent(createDepartmentsPerRecopilationDto.recopilationId)
+    )
+
+    return res
   }
 
   @Patch(':id')

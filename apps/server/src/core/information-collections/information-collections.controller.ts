@@ -22,13 +22,16 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-information-collections-by-param.dto'
 import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
+import { EventEmitter2 } from '@nestjs/event-emitter'
+import { MatrixChangedEvent } from '../recopilations/dto/matrix-changed.event'
 
 @ApiTags('Information Collections')
 @Controller('information-collections')
 @Roles(Role.Coordinator, Role.Admin, Role.Department)
 export class InformationCollectionsController {
   constructor(
-    private readonly informationCollectionsService: InformationCollectionsService
+    private readonly informationCollectionsService: InformationCollectionsService,
+    private readonly eventEmitter: EventEmitter2
   ) {}
 
   @Get()
@@ -101,6 +104,14 @@ export class InformationCollectionsController {
     const newCollection = await this.informationCollectionsService.create(
       createInformationCollectionDto
     )
+
+    this.eventEmitter.emit(
+      'matrix.changed',
+      new MatrixChangedEvent(
+        Number(createInformationCollectionDto.recopilationId)
+      )
+    )
+
     return newCollection
   }
 
@@ -118,12 +129,25 @@ export class InformationCollectionsController {
       notifyCoordinators
     )
 
+    this.eventEmitter.emit(
+      'matrix.changed',
+      new MatrixChangedEvent(Number(updatedCollection.recopilation.id))
+    )
+
     return updatedCollection
   }
 
   @Delete(':id')
   @HttpCode(HttpStatus.NO_CONTENT)
   async remove(@Param('id') id: number) {
+    const collectionToRemove =
+      await this.informationCollectionsService.findOne(id)
+
     await this.informationCollectionsService.remove(id)
+
+    this.eventEmitter.emit(
+      'matrix.changed',
+      new MatrixChangedEvent(Number(collectionToRemove.recopilation.id))
+    )
   }
 }

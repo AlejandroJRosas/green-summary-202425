@@ -221,7 +221,10 @@ export class InformationCollectionsService {
       await this.notificationsService.createAll(notificationDTO)
     }
 
-    return this.informationCollectionsRepository.findOneByOrFail({ id })
+    return this.informationCollectionsRepository.findOneOrFail({
+      where: { id },
+      relations: { recopilation: true }
+    })
   }
 
   async remove(id: number): Promise<void> {

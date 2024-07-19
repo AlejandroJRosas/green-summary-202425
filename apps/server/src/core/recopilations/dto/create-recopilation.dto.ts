@@ -28,19 +28,19 @@ export class CreateRecopilationDto {
 
   @IsNotEmpty()
   @IsDateString()
-  @ValidateIf((o: CreateRecopilationDto) =>
+  /*  @ValidateIf((o: CreateRecopilationDto) =>
     isAfter(parseISO(o.departmentEndDate), new Date())
-  ) // La fecha debe ser posterior a la actual
+  ) // La fecha debe ser posterior a la actual */
   departmentEndDate: string
 
   @IsNotEmpty()
   @IsDateString()
-  @ValidateIf((o: CreateRecopilationDto) =>
+  /*   @ValidateIf((o: CreateRecopilationDto) =>
     isAfter(parseISO(o.endDate), new Date())
-  ) // La fecha debe ser posterior a la actual
+  ) // La fecha debe ser posterior a la actual */
   endDate: string
 
-  // Custom validation logic
+  /*   // Custom validation logic
   @ValidateIf((o: CreateRecopilationDto) =>
     isAfter(parseISO(o.departmentEndDate), parseISO(o.startDate))
   )
@@ -54,5 +54,5 @@ export class CreateRecopilationDto {
     if (!isAfter(parseISO(this.endDate), parseISO(this.startDate))) {
       throw new Error('endDate must be after startDate')
     }
-  }
+  } */
 }
