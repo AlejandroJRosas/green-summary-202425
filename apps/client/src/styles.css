@@ -13,6 +13,9 @@
   --primary-color-text: #fff;
   --light-green: #f2f8e6;
   --gris-tirando-a-verde: #fce5c3;
+  --severity-info: #0ea5e9;
+  --severity-success: #22c55e;
+  --severity-danger: #ef4444;
   font-family:
     'Inter var',
     -apple-system,
