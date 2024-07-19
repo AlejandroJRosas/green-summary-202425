@@ -35,10 +35,14 @@ body {
   padding: 0px;
   margin: 0px;
   background-color: var(--background-color);
+  scroll-behavior: smooth;
 }
+
+/* Scroll Styles */
 
 body::-webkit-scrollbar {
   width: 10px;
+  height: 5px;
 }
 
 body::-webkit-scrollbar-thumb {
@@ -46,9 +50,19 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
+.p-dropdown-items-wrapper::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.p-dropdown-items-wrapper::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 20px;
+}
+
 .p-datatable-wrapper::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 5px;
+  height: 5px;
 }
 
 .p-datatable-wrapper::-webkit-scrollbar-thumb {
@@ -57,14 +71,16 @@ body::-webkit-scrollbar-thumb {
 }
 
 .p-component::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 5px;
+  height: 5px;
 }
 
 .p-component::-webkit-scrollbar-thumb {
   background-color: var(--primary-color);
   border-radius: 20px;
 }
+
+/* Scroll */
 
 .p-datatable-thead .p-element {
   background-color: var(--light-green);
