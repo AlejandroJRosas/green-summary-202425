@@ -23,12 +23,14 @@ import {
 import { User } from '../../../shared/types/user.type'
 import { ConfirmPopupModule } from 'primeng/confirmpopup'
 import { ConfirmationService, MessageService } from 'primeng/api'
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
+import { ReactiveFormsModule } from '@angular/forms'
 import { EvidenceService } from '../../services/evidence/evidence.service'
 import { Evidence } from '../../../shared/types/evidence.type'
 import { TooltipModule } from 'primeng/tooltip'
 import { ScrollTopModule } from 'primeng/scrolltop'
 import { OverlayPanelModule } from 'primeng/overlaypanel'
+import { ValidatedFormGroup } from '../../common/validated-form-group/validated-form-group'
+import { string, object } from 'yup'
 
 @Component({
   selector: 'app-information-collection-view',
@@ -51,7 +53,13 @@ import { OverlayPanelModule } from 'primeng/overlaypanel'
   templateUrl: './information-collection-view.component.html',
   styles: ``
 })
-export class InformationCollectionViewComponent implements OnInit {
+export class InformationCollectionViewComponent
+  extends ValidatedFormGroup<ErrorForm>
+  implements OnInit
+{
+  errors = {
+    error: ''
+  }
   constructor(
     @Inject(Toast) private toast: Toast,
     private route: ActivatedRoute,
@@ -62,6 +70,16 @@ export class InformationCollectionViewComponent implements OnInit {
     private EvidenceService: EvidenceService,
     private RecopilationService: RecopilationService
   ) {
+    const initialControlValues = {
+      error: ''
+    }
+    const validationSchema = object({
+      error: string()
+        .required('El error es requerido')
+        .max(200, 'El error no debe superar los 200 caracteres')
+        .min(2, 'El nombre debe superar un mínimo de 2 caracteres')
+    })
+    super(initialControlValues, validationSchema)
     this.route.params.subscribe((params) => {
       this.categoryId = parseInt(params['categoryId'], 10)
       this.recopilationId = parseInt(params['recopilationId'], 10)
@@ -74,9 +92,6 @@ export class InformationCollectionViewComponent implements OnInit {
   currentDate = new Date()
   isValidEndDate: boolean = false
   detailedRecopilation: DetailedRecopilation | null = null
-  formGroup = new FormGroup({
-    error: new FormControl('')
-  })
   informationCollections: InformationCollectionByDepartment[] = []
   indicator: Indicator = {
     index: 0,
@@ -166,7 +181,7 @@ export class InformationCollectionViewComponent implements OnInit {
     this.EvidenceService.edit(evidence.id, formData).subscribe({
       next: (res) => {
         if (res.status === 'success') {
-          this.toast.show('success', 'Guardado', 'error subido con éxito')
+          this.toast.show('success', 'Guardado', 'Error subido con éxito')
           this.resetError()
           this.getAllByDepartment()
         }
@@ -248,4 +263,7 @@ export class InformationCollectionViewComponent implements OnInit {
       }
     })
   }
+}
+interface ErrorForm {
+  error: string
 }

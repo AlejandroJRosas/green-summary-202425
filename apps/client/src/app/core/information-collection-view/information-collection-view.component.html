@@ -129,13 +129,18 @@
                                   rows="5"
                                   cols="50"
                                   pInputTextarea
-                                  [autoResize]="false"
+                                  style="resize: none"
                                   formControlName="error"
+                                  (input)="errorsUpdate('error')"
+                                  (blur)="errorsUpdate('error')"
                                 ></textarea>
+                                <small class="p-error">{{
+                                  errors.error
+                                }}</small>
                               </label>
                             </div>
                             <div
-                              class="flex flex-row gap-3 justify-content-start align-items-start"
+                              class="flex flex-row gap-3 justify-content-end align-items-end w-full"
                             >
                               <p-button
                                 label="Cancelar"
@@ -152,6 +157,7 @@
                                 icon="pi pi-check"
                                 (click)="editEvidenceErrorById(evidence)"
                                 (click)="er.hide()"
+                                [disabled]="formGroup.invalid"
                               />
                             </div>
                           </div>
