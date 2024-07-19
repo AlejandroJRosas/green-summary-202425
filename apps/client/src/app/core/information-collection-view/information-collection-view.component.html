@@ -118,33 +118,51 @@
                       </div>
                     } @else {
                       <form [formGroup]="formGroup">
-                        <p-confirmPopup>
-                          <ng-template pTemplate="content" let-message>
-                            <div
-                              class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3"
-                            >
-                              <div class="flex flex-column gap-2 w-full">
-                                <label class="flex flex-column gap-2 w-full">
-                                  Error en la evidencia
-                                  <textarea
-                                    rows="5"
-                                    cols="50"
-                                    pInputTextarea
-                                    [autoResize]="true"
-                                    formControlName="error"
-                                  ></textarea>
-                                </label>
-                              </div>
+                        <p-overlayPanel #er>
+                          <div
+                            class="flex flex-column align-items-center w-full gap-3 border-bottom-1 surface-border p-3 mb-3"
+                          >
+                            <div class="flex flex-column gap-2 w-full">
+                              <label class="flex flex-column gap-2 w-full">
+                                Error en la evidencia
+                                <textarea
+                                  rows="5"
+                                  cols="50"
+                                  pInputTextarea
+                                  [autoResize]="false"
+                                  formControlName="error"
+                                ></textarea>
+                              </label>
                             </div>
-                          </ng-template>
-                        </p-confirmPopup>
+                            <div
+                              class="flex flex-row gap-3 justify-content-start align-items-start"
+                            >
+                              <p-button
+                                label="Cancelar"
+                                [outlined]="true"
+                                severity="danger"
+                                icon="pi pi-times"
+                                (click)="er.hide()"
+                                (click)="resetError()"
+                              />
+                              <p-button
+                                label="Guardar"
+                                [outlined]="true"
+                                severity="success"
+                                icon="pi pi-check"
+                                (click)="editEvidenceErrorById(evidence)"
+                                (click)="er.hide()"
+                              />
+                            </div>
+                          </div>
+                        </p-overlayPanel>
                       </form>
                       <p-button
                         label="Error en la evidencia"
                         [outlined]="true"
                         severity="danger"
                         icon="pi pi-times"
-                        (click)="confirm($event, evidence)"
+                        (click)="er.toggle($event)"
                         [disabled]="!isValidEndDate"
                       />
                     }

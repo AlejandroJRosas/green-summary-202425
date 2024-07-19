@@ -27,8 +27,8 @@ import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms'
 import { EvidenceService } from '../../services/evidence/evidence.service'
 import { Evidence } from '../../../shared/types/evidence.type'
 import { TooltipModule } from 'primeng/tooltip'
-import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { ScrollTopModule } from 'primeng/scrolltop'
+import { OverlayPanelModule } from 'primeng/overlaypanel'
 
 @Component({
   selector: 'app-information-collection-view',
@@ -44,8 +44,8 @@ import { ScrollTopModule } from 'primeng/scrolltop'
     ConfirmPopupModule,
     ReactiveFormsModule,
     TooltipModule,
-    ConfirmDialogModule,
-    ScrollTopModule
+    ScrollTopModule,
+    OverlayPanelModule
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './information-collection-view.component.html',
@@ -59,7 +59,6 @@ export class InformationCollectionViewComponent implements OnInit {
     private CategoryService: CategoryService,
     private router: Router,
     private DepartmentService: DepartmentService,
-    private confirmationService: ConfirmationService,
     private EvidenceService: EvidenceService,
     private RecopilationService: RecopilationService
   ) {
@@ -128,30 +127,6 @@ export class InformationCollectionViewComponent implements OnInit {
       informationCollection
     )
   }
-  confirm(event: Event, evidence: Evidence) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      icon: 'pi pi-exclamation-circle',
-      acceptIcon: 'pi pi-check mr-1',
-      rejectIcon: 'pi pi-times mr-1',
-      acceptLabel: 'Guardar',
-      rejectLabel: 'Cancelar',
-      rejectButtonStyleClass: 'p-button-outlined p-button-sm',
-      acceptButtonStyleClass: 'p-button-sm',
-      accept: () => {
-        this.toast.show('success', 'Guardando...', 'Guardando el error...')
-        this.editEvidenceErrorById(evidence)
-      },
-      reject: () => {
-        this.toast.show(
-          'error',
-          'Rechazado',
-          'Ha rechazado la subida del error'
-        )
-        this.formGroup.controls.error.setValue('')
-      }
-    })
-  }
   editApprovedInformationById(
     informationCollectionId: number,
     informationCollection: InformationCollectionByDepartment
@@ -180,6 +155,10 @@ export class InformationCollectionViewComponent implements OnInit {
       }
     })
   }
+  resetError() {
+    this.formGroup.reset()
+    this.formGroup.controls.error.setValue('')
+  }
   editEvidenceErrorById(evidence: Evidence) {
     if (this.formGroup.controls.error.value === null) return
     const formData = new FormData()
@@ -188,7 +167,7 @@ export class InformationCollectionViewComponent implements OnInit {
       next: (res) => {
         if (res.status === 'success') {
           this.toast.show('success', 'Guardado', 'error subido con éxito')
-          this.formGroup.controls.error.setValue('')
+          this.resetError()
           this.getAllByDepartment()
         }
       },
