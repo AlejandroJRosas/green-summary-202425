@@ -1,0 +1,1280 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">client documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CreateEvidencesComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../classes/ValidatedFormGroup.html" target="_self" >ValidatedFormGroup</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>create-evidences</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>InputTextareaModule</code>
+                            <code>ButtonModule</code>
+                                <code><a href="../components/EvidenceComponent.html" target="_self" >EvidenceComponent</a></code>
+                            <code>FormsModule</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>PanelModule</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">styles</td>
+                <td class="col-md-9"><code></code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./create-evidences.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#categoryId" >categoryId</a>
+                            </li>
+                            <li>
+                                <a href="#createColletionInformation" >createColletionInformation</a>
+                            </li>
+                            <li>
+                                <a href="#currentUrl" >currentUrl</a>
+                            </li>
+                            <li>
+                                <a href="#errors" >errors</a>
+                            </li>
+                            <li>
+                                <a href="#evidences" >evidences</a>
+                            </li>
+                            <li>
+                                <a href="#informationCollection" >informationCollection</a>
+                            </li>
+                            <li>
+                                <a href="#recopilationId" >recopilationId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#formGroup" >formGroup</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addEvidence" >addEvidence</a>
+                            </li>
+                            <li>
+                                <a href="#getInformationCollectionById" >getInformationCollectionById</a>
+                            </li>
+                            <li>
+                                <a href="#goBack" >goBack</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onCreate" >onCreate</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#controlErrors" >controlErrors</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#errorsUpdate" >errorsUpdate</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(toast: <a href="../components/Toast.html" target="_self">Toast</a>, route: ActivatedRoute, router: Router, InformationCollectionService: <a href="../injectables/InformationCollectionService.html" target="_self">InformationCollectionService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>toast</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../components/Toast.html" target="_self" >Toast</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>InformationCollectionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/InformationCollectionService.html" target="_self" >InformationCollectionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="addEvidence"></a>
+                    <span class="name">
+                        <span ><b>addEvidence</b></span>
+                        <a href="#addEvidence"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>addEvidence()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="95"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:95</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getInformationCollectionById"></a>
+                    <span class="name">
+                        <span ><b>getInformationCollectionById</b></span>
+                        <a href="#getInformationCollectionById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getInformationCollectionById()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="80"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="goBack"></a>
+                    <span class="name">
+                        <span ><b>goBack</b></span>
+                        <a href="#goBack"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>goBack()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="103"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="76"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:76</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCreate"></a>
+                    <span class="name">
+                        <span ><b>onCreate</b></span>
+                        <a href="#onCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCreate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="98"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="controlErrors"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>controlErrors</b></span>
+                        <a href="#controlErrors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>controlErrors(controlName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../classes/ValidatedFormGroup.html" target="_self" >ValidatedFormGroup</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/ValidatedFormGroup.html#source" target="_self" >ValidatedFormGroup:27</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>controlName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorsUpdate"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>errorsUpdate</b></span>
+                        <a href="#errorsUpdate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>errorsUpdate(field: Extract<T | string>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../classes/ValidatedFormGroup.html" target="_self" >ValidatedFormGroup</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/ValidatedFormGroup.html#source" target="_self" >ValidatedFormGroup:17</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates the given field in this.errors only if that field&#39;s control is touched and dirty</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>field</td>
+                                            <td>
+                                                        <code>Extract&lt;T | string&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Field in this.errors to update</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categoryId"></a>
+                    <span class="name">
+                        <span ><b>categoryId</b></span>
+                        <a href="#categoryId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:64</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createColletionInformation"></a>
+                    <span class="name">
+                        <span ><b>createColletionInformation</b></span>
+                        <a href="#createColletionInformation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#CollectionInformationDTO" target="_self" >CollectionInformationDTO</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    description: &#x27;&#x27;,
+    evidences: []
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="58" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:58</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUrl"></a>
+                    <span class="name">
+                        <span ><b>currentUrl</b></span>
+                        <a href="#currentUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errors"></a>
+                    <span class="name">
+                        <span ><b>errors</b></span>
+                        <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    description: &#x27;&#x27;
+  }</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/ValidatedFormGroup.html" target="_self" >ValidatedFormGroup</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/ValidatedFormGroup.html#source" target="_self" >ValidatedFormGroup:55</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="evidences"></a>
+                    <span class="name">
+                        <span ><b>evidences</b></span>
+                        <a href="#evidences"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>number[]</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="62" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:62</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="informationCollection"></a>
+                    <span class="name">
+                        <span ><b>informationCollection</b></span>
+                        <a href="#informationCollection"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/InformationCollection.html" target="_self" >InformationCollection</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    id: 0,
+    summary: &#x27;&#x27;,
+    name: &#x27;&#x27;,
+    evidences: [],
+    recopilationId: 0,
+    isApproved: false,
+    categoryId: 0,
+    departmentId: 0
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recopilationId"></a>
+                    <span class="name">
+                        <span ><b>recopilationId</b></span>
+                        <a href="#recopilationId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/create/create-evidences.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formGroup"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>formGroup</b></span>
+                        <a href="#formGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#FormControls" target="_self" >FormGroup&lt;FormControls&lt;T&gt;&gt;</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/ValidatedFormGroup.html" target="_self" >ValidatedFormGroup</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/ValidatedFormGroup.html#source" target="_self" >ValidatedFormGroup:10</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, OnInit } from &#x27;@angular/core&#x27;
+import { InputTextareaModule } from &#x27;primeng/inputtextarea&#x27;
+import { ButtonModule } from &#x27;primeng/button&#x27;
+import { EvidenceComponent } from &#x27;./evidence/evidence.component&#x27;
+import { FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;
+import { string, object } from &#x27;yup&#x27;
+import { ValidatedFormGroup } from &#x27;../../../../common/validated-form-group/validated-form-group&#x27;
+import { PanelModule } from &#x27;primeng/panel&#x27;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;
+import { InformationCollectionService } from &#x27;../../../../services/information-collection.service&#x27;
+import { InformationCollection } from &#x27;../../../../../shared/types/information-collection.type&#x27;
+import { Toast } from &#x27;../../../../common/toast/toast.component&#x27;
+
+@Component({
+  selector: &#x27;create-evidences&#x27;,
+  standalone: true,
+  imports: [
+    InputTextareaModule,
+    ButtonModule,
+    EvidenceComponent,
+    FormsModule,
+    ReactiveFormsModule,
+    PanelModule
+  ],
+  templateUrl: &#x27;./create-evidences.component.html&#x27;,
+  styles: &#x60;&#x60;
+})
+export class CreateEvidencesComponent
+  extends ValidatedFormGroup&lt;FormValues&gt;
+  implements OnInit
+{
+  constructor(
+    @Inject(Toast) private toast: Toast,
+    private route: ActivatedRoute,
+    private router: Router,
+    private InformationCollectionService: InformationCollectionService
+  ) {
+    const initialControlValues &#x3D; {
+      description: &#x27;&#x27;
+    }
+    const validationSchema &#x3D; object({
+      description: string().required(&#x27;La descripción es requerida&#x27;)
+    })
+    super(initialControlValues, validationSchema)
+    this.route.params.subscribe((params) &#x3D;&gt; {
+      this.categoryId &#x3D; parseInt(params[&#x27;categoryId&#x27;], 10)
+      this.recopilationId &#x3D; parseInt(params[&#x27;recopilationId&#x27;], 10)
+      this.informationCollection.id &#x3D; parseInt(
+        params[&#x27;informationCollectionId&#x27;],
+        10
+      )
+    })
+  }
+  currentUrl &#x3D; &#x27;&#x27;
+  errors &#x3D; {
+    description: &#x27;&#x27;
+  }
+  createColletionInformation: CollectionInformationDTO &#x3D; {
+    description: &#x27;&#x27;,
+    evidences: []
+  }
+  evidences: number[] &#x3D; []
+  recopilationId: number &#x3D; 0
+  categoryId: number &#x3D; 0
+  informationCollection: InformationCollection &#x3D; {
+    id: 0,
+    summary: &#x27;&#x27;,
+    name: &#x27;&#x27;,
+    evidences: [],
+    recopilationId: 0,
+    isApproved: false,
+    categoryId: 0,
+    departmentId: 0
+  }
+
+  ngOnInit() {
+    this.getInformationCollectionById()
+  }
+
+  getInformationCollectionById() {
+    this.InformationCollectionService.getById(
+      this.informationCollection.id
+    ).subscribe({
+      next: (res) &#x3D;&gt; {
+        if (res.status &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) {
+          this.informationCollection &#x3D; res.data
+        }
+      },
+      error: (e) &#x3D;&gt; {
+        console.error(e)
+        this.router.navigateByUrl(&#x27;/404 Not Found&#x27;)
+      }
+    })
+  }
+  addEvidence() {
+    this.evidences.push(this.evidences.length + 1)
+  }
+  onCreate() {
+    this.createColletionInformation.description &#x3D;
+      this.formGroup.controls.description.value
+    this.createColletionInformation.evidences &#x3D; this.evidences
+  }
+  goBack() {
+    this.router.navigateByUrl(
+      &#x60;pages/information-collection/recopilation/${this.recopilationId}/category/${this.categoryId}&#x60;
+    )
+  }
+}
+type FormValues &#x3D; {
+  description: string
+}
+type CollectionInformationDTO &#x3D; {
+  description: string
+  evidences: number[]
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;main class&#x3D;&quot;flex flex-column h-full justify-content-between&quot;&gt;
+  &lt;section&gt;
+    &lt;header&gt;
+      &lt;h2 class&#x3D;&quot;text-color-secondary&quot;&gt;Colección de información&lt;/h2&gt;
+      &lt;h2 class&#x3D;&quot;text-color-secondary&quot;&gt;
+        {{ informationCollection.name }}
+      &lt;/h2&gt;
+    &lt;/header&gt;
+    &lt;form [formGroup]&#x3D;&quot;formGroup&quot;&gt;
+      &lt;p class&#x3D;&quot;text-color-secondary&quot;&gt;
+        {{ informationCollection.summary }}
+      &lt;/p&gt;
+      &lt;evidence /&gt;
+    &lt;/form&gt;
+  &lt;/section&gt;
+  &lt;footer class&#x3D;&quot;flex justify-content-between py-3&quot;&gt;
+    &lt;p-button
+      label&#x3D;&quot;Atrás&quot;
+      (click)&#x3D;&quot;goBack()&quot;
+      size&#x3D;&quot;small&quot;
+      icon&#x3D;&quot;pi pi-angle-left&quot;
+      [outlined]&#x3D;&quot;true&quot;
+      severity&#x3D;&quot;info&quot;
+    /&gt;
+  &lt;/footer&gt;
+&lt;/main&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+            <pre class="line-numbers"><code class="language-scss">
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><main class="flex flex-column h-full justify-content-between">  <section>    <header>      <h2 class="text-color-secondary">Colección de información</h2>      <h2 class="text-color-secondary">        {{ informationCollection.name }}      </h2>    </header>    <form [formGroup]="formGroup">      <p class="text-color-secondary">        {{ informationCollection.summary }}      </p>      <evidence />    </form>  </section>  <footer class="flex justify-content-between py-3">    <p-button      label="Atrás"      (click)="goBack()"      size="small"      icon="pi pi-angle-left"      [outlined]="true"      severity="info"    />  </footer></main></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BodyComponent', 'selector': 'app-body'},{'name': 'CategoryComponent', 'selector': 'categories'},{'name': 'CategorySelectorComponent', 'selector': 'app-category-selector'},{'name': 'CollectionOfInformationComponent', 'selector': 'collection-of-information'},{'name': 'CreateEvidencesComponent', 'selector': 'create-evidences'},{'name': 'CriteriaComponent', 'selector': 'criteria'},{'name': 'CustomTdComponent', 'selector': 'custom-td'},{'name': 'DepartmentComponent', 'selector': 'app-department'},{'name': 'EditEvidenceComponent', 'selector': 'app-edit-evidence'},{'name': 'EvidenceComponent', 'selector': 'evidence'},{'name': 'EvidenceDocumentComponent', 'selector': 'evidence-document'},{'name': 'EvidenceImageComponent', 'selector': 'evidence-image'},{'name': 'EvidenceLinkComponent', 'selector': 'evidence-link'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndicatorsComponent', 'selector': 'indicators'},{'name': 'InformationCollectionViewComponent', 'selector': 'app-information-collection-view'},{'name': 'InformationRecopilationComponent', 'selector': 'app-information-recopilation'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MatrixComponent', 'selector': 'app-matrix'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'PreviewComponent', 'selector': 'app-information-recopilation'},{'name': 'RecommendCategoriesDepartmentComponent', 'selector': 'app-recommend-categories-department'},{'name': 'RecopilationComponent', 'selector': 'app-recopilation'},{'name': 'RecordsCategoryBodyComponent', 'selector': 'app-records-category-body'},{'name': 'RecordsCategoryHeaderComponent', 'selector': 'app-records-category-header'},{'name': 'RecordsComponent', 'selector': 'app-records'},{'name': 'SchemeComponent', 'selector': 'app-scheme'},{'name': 'SelectDepartmentsComponent', 'selector': 'app-select-departments'},{'name': 'SelectIndicatorsCategoriesCriteriaComponent', 'selector': 'app-select-indicators-categories-criteria'},{'name': 'SidenavComponent', 'selector': 'sidenav'},{'name': 'StatisticsComponent', 'selector': 'app-statistics'},{'name': 'StepsRoutingComponent', 'selector': 'app-steps-routing'},{'name': 'Toast', 'selector': 'toast'},{'name': 'TooltipIcon', 'selector': 'tooltip-icon'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UploadOfEvidenceComponent', 'selector': 'app-upload-of-evidence'},{'name': 'ViewNotificationsComponent', 'selector': 'app-view-coordinator-notifications'},{'name': 'WordGenerationModalComponent', 'selector': 'app-word-generation-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CreateEvidencesComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CreateEvidencesComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

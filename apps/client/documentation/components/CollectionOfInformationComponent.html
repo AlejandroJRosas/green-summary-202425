@@ -1,0 +1,3116 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">client documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CollectionOfInformationComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Extends</h3>
+    </p>
+    <p class="comment">
+                    <code><a href="../classes/ValidatedFormGroup.html" target="_self" >ValidatedFormGroup</a></code>
+    </p>
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>collection-of-information</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>PanelModule</code>
+                            <code>ButtonModule</code>
+                            <code>DialogModule</code>
+                            <code>FormsModule</code>
+                            <code>ReactiveFormsModule</code>
+                            <code>InputTextareaModule</code>
+                            <code>InputTextModule</code>
+                            <code>ConfirmDialogModule</code>
+                            <code>ImageModule</code>
+                            <code>DividerModule</code>
+                            <code>TooltipModule</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">styles</td>
+                <td class="col-md-9"><code></code></td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./collection-of-information.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#categoryId" >categoryId</a>
+                            </li>
+                            <li>
+                                <a href="#currentDate" >currentDate</a>
+                            </li>
+                            <li>
+                                <a href="#currentUrl" >currentUrl</a>
+                            </li>
+                            <li>
+                                <a href="#departmentId" >departmentId</a>
+                            </li>
+                            <li>
+                                <a href="#detailedRecopilation" >detailedRecopilation</a>
+                            </li>
+                            <li>
+                                <a href="#errors" >errors</a>
+                            </li>
+                            <li>
+                                <a href="#indicator" >indicator</a>
+                            </li>
+                            <li>
+                                <a href="#informationCollectionIdEdit" >informationCollectionIdEdit</a>
+                            </li>
+                            <li>
+                                <a href="#informationCollections" >informationCollections</a>
+                            </li>
+                            <li>
+                                <a href="#isValidDepartmentalDate" >isValidDepartmentalDate</a>
+                            </li>
+                            <li>
+                                <a href="#paginated" >paginated</a>
+                            </li>
+                            <li>
+                                <a href="#recopilationId" >recopilationId</a>
+                            </li>
+                            <li>
+                                <a href="#visibleCreate" >visibleCreate</a>
+                            </li>
+                            <li>
+                                <a href="#visibleEdit" >visibleEdit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#formGroup" >formGroup</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#closeDialogCreate" >closeDialogCreate</a>
+                            </li>
+                            <li>
+                                <a href="#closeDialogEdit" >closeDialogEdit</a>
+                            </li>
+                            <li>
+                                <a href="#confirmationDelete" >confirmationDelete</a>
+                            </li>
+                            <li>
+                                <a href="#confirmationDeleteEvidence" >confirmationDeleteEvidence</a>
+                            </li>
+                            <li>
+                                <a href="#createEvidences" >createEvidences</a>
+                            </li>
+                            <li>
+                                <a href="#getAllByDepartment" >getAllByDepartment</a>
+                            </li>
+                            <li>
+                                <a href="#getDepartmentId" >getDepartmentId</a>
+                            </li>
+                            <li>
+                                <a href="#getRecopilationById" >getRecopilationById</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onCreate" >onCreate</a>
+                            </li>
+                            <li>
+                                <a href="#onDelete" >onDelete</a>
+                            </li>
+                            <li>
+                                <a href="#onDeleteEvidence" >onDeleteEvidence</a>
+                            </li>
+                            <li>
+                                <a href="#onEdit" >onEdit</a>
+                            </li>
+                            <li>
+                                <a href="#onEditEvidence" >onEditEvidence</a>
+                            </li>
+                            <li>
+                                <a href="#reset" >reset</a>
+                            </li>
+                            <li>
+                                <a href="#showDialogEdit" >showDialogEdit</a>
+                            </li>
+                            <li>
+                                <a href="#translateType" >translateType</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#controlErrors" >controlErrors</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Public</span>
+                                <a href="#errorsUpdate" >errorsUpdate</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#category" >category</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(toast: <a href="../components/Toast.html" target="_self">Toast</a>, route: ActivatedRoute, router: Router, confirmationService: ConfirmationService, InformationCollectionService: <a href="../injectables/InformationCollectionService.html" target="_self">InformationCollectionService</a>, LinkEvidenceService: <a href="../injectables/LinkEvidenceService.html" target="_self">LinkEvidenceService</a>, EvidenceService: <a href="../injectables/EvidenceService.html" target="_self">EvidenceService</a>, RecopilationService: <a href="../injectables/RecopilationService.html" target="_self">RecopilationService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="52" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:52</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>toast</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../components/Toast.html" target="_self" >Toast</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>route</td>
+                                                  
+                                                        <td>
+                                                                    <code>ActivatedRoute</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>confirmationService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfirmationService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>InformationCollectionService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/InformationCollectionService.html" target="_self" >InformationCollectionService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>LinkEvidenceService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/LinkEvidenceService.html" target="_self" >LinkEvidenceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>EvidenceService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/EvidenceService.html" target="_self" >EvidenceService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>RecopilationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/RecopilationService.html" target="_self" >RecopilationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="category"></a>
+                        <b>category</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Category.html" target="_self" >Category</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    name: &#x27;&#x27;,
+    helpText: &#x27;&#x27;,
+    id: 0,
+    indicator: this.indicator
+  }</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:110</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeDialogCreate"></a>
+                    <span class="name">
+                        <span ><b>closeDialogCreate</b></span>
+                        <a href="#closeDialogCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeDialogCreate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:149</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="closeDialogEdit"></a>
+                    <span class="name">
+                        <span ><b>closeDialogEdit</b></span>
+                        <a href="#closeDialogEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>closeDialogEdit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="153"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:153</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmationDelete"></a>
+                    <span class="name">
+                        <span ><b>confirmationDelete</b></span>
+                        <a href="#confirmationDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmationDelete(event: Event, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="176"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:176</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmationDeleteEvidence"></a>
+                    <span class="name">
+                        <span ><b>confirmationDeleteEvidence</b></span>
+                        <a href="#confirmationDeleteEvidence"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmationDeleteEvidence(event: Event, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="202"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:202</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>type</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createEvidences"></a>
+                    <span class="name">
+                        <span ><b>createEvidences</b></span>
+                        <a href="#createEvidences"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createEvidences(informationCollectionId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="392"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:392</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>informationCollectionId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllByDepartment"></a>
+                    <span class="name">
+                        <span ><b>getAllByDepartment</b></span>
+                        <a href="#getAllByDepartment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getAllByDepartment()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="247"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:247</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDepartmentId"></a>
+                    <span class="name">
+                        <span ><b>getDepartmentId</b></span>
+                        <a href="#getDepartmentId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getDepartmentId()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getRecopilationById"></a>
+                    <span class="name">
+                        <span ><b>getRecopilationById</b></span>
+                        <a href="#getRecopilationById"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getRecopilationById()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="224"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:224</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="127"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:127</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onCreate"></a>
+                    <span class="name">
+                        <span ><b>onCreate</b></span>
+                        <a href="#onCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onCreate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="267"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:267</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDelete"></a>
+                    <span class="name">
+                        <span ><b>onDelete</b></span>
+                        <a href="#onDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDelete(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="334"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:334</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDeleteEvidence"></a>
+                    <span class="name">
+                        <span ><b>onDeleteEvidence</b></span>
+                        <a href="#onDeleteEvidence"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onDeleteEvidence(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="353"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:353</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>type</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEdit"></a>
+                    <span class="name">
+                        <span ><b>onEdit</b></span>
+                        <a href="#onEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onEdit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="300"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:300</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onEditEvidence"></a>
+                    <span class="name">
+                        <span ><b>onEditEvidence</b></span>
+                        <a href="#onEditEvidence"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onEditEvidence(evidenceId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, informationCollectionId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="400"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:400</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>evidenceId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>informationCollectionId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="reset"></a>
+                    <span class="name">
+                        <span ><b>reset</b></span>
+                        <a href="#reset"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>reset()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showDialogEdit"></a>
+                    <span class="name">
+                        <span ><b>showDialogEdit</b></span>
+                        <a href="#showDialogEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showDialogEdit(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, summary: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="157"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:157</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>summary</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translateType"></a>
+                    <span class="name">
+                        <span ><b>translateType</b></span>
+                        <a href="#translateType"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>translateType(type: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="166"
+                                    class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:166</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>type</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>&quot;Imagen&quot; | &quot;Documento&quot; | &quot;Link&quot;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="controlErrors"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>controlErrors</b></span>
+                        <a href="#controlErrors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>controlErrors(controlName: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../classes/ValidatedFormGroup.html" target="_self" >ValidatedFormGroup</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/ValidatedFormGroup.html#source" target="_self" >ValidatedFormGroup:27</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>controlName</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errorsUpdate"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>errorsUpdate</b></span>
+                        <a href="#errorsUpdate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>errorsUpdate(field: Extract<T | string>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Inherited from         <code><a href="../classes/ValidatedFormGroup.html" target="_self" >ValidatedFormGroup</a></code>
+</div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/ValidatedFormGroup.html#source" target="_self" >ValidatedFormGroup:17</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Updates the given field in this.errors only if that field&#39;s control is touched and dirty</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>field</td>
+                                            <td>
+                                                        <code>Extract&lt;T | string&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <p>Field in this.errors to update</p>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="categoryId"></a>
+                    <span class="name">
+                        <span ><b>categoryId</b></span>
+                        <a href="#categoryId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:122</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentDate"></a>
+                    <span class="name">
+                        <span ><b>currentDate</b></span>
+                        <a href="#currentDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Date()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:125</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUrl"></a>
+                    <span class="name">
+                        <span ><b>currentUrl</b></span>
+                        <a href="#currentUrl"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:116</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="departmentId"></a>
+                    <span class="name">
+                        <span ><b>departmentId</b></span>
+                        <a href="#departmentId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:120</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="detailedRecopilation"></a>
+                    <span class="name">
+                        <span ><b>detailedRecopilation</b></span>
+                        <a href="#detailedRecopilation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/DetailedRecopilation.html" target="_self" >DetailedRecopilation | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:124</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="errors"></a>
+                    <span class="name">
+                        <span ><b>errors</b></span>
+                        <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    name: &#x27;&#x27;,
+    summary: &#x27;&#x27;
+  }</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/ValidatedFormGroup.html" target="_self" >ValidatedFormGroup</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/ValidatedFormGroup.html#source" target="_self" >ValidatedFormGroup:95</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="indicator"></a>
+                    <span class="name">
+                        <span ><b>indicator</b></span>
+                        <a href="#indicator"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/Indicator.html" target="_self" >Indicator</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    index: 0,
+    alias: &#x27;&#x27;,
+    helpText: &#x27;&#x27;,
+    name: &#x27;&#x27;
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:104</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="informationCollectionIdEdit"></a>
+                    <span class="name">
+                        <span ><b>informationCollectionIdEdit</b></span>
+                        <a href="#informationCollectionIdEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="informationCollections"></a>
+                    <span class="name">
+                        <span ><b>informationCollections</b></span>
+                        <a href="#informationCollections"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#InformationCollectionByDepartment" target="_self" >InformationCollectionByDepartment[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="103" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:103</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isValidDepartmentalDate"></a>
+                    <span class="name">
+                        <span ><b>isValidDepartmentalDate</b></span>
+                        <a href="#isValidDepartmentalDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="123" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:123</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="paginated"></a>
+                    <span class="name">
+                        <span ><b>paginated</b></span>
+                        <a href="#paginated"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/object" target="_blank" >object</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    first: 0,
+    rows: 100
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="99" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recopilationId"></a>
+                    <span class="name">
+                        <span ><b>recopilationId</b></span>
+                        <a href="#recopilationId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="visibleCreate"></a>
+                    <span class="name">
+                        <span ><b>visibleCreate</b></span>
+                        <a href="#visibleCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:117</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="visibleEdit"></a>
+                    <span class="name">
+                        <span ><b>visibleEdit</b></span>
+                        <a href="#visibleEdit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="118" class="link-to-prism">src/app/core/upload-of-evidence/collection-of-information/collection-of-information.component.ts:118</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formGroup"></a>
+                    <span class="name">
+                            <span class="modifier">Public</span>
+                        <span ><b>formGroup</b></span>
+                        <a href="#formGroup"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#FormControls" target="_self" >FormGroup&lt;FormControls&lt;T&gt;&gt;</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Inherited from         <code><a href="../classes/ValidatedFormGroup.html" target="_self" >ValidatedFormGroup</a></code>
+</div>
+                            </td>
+                        </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in         <code><a href="../classes/ValidatedFormGroup.html#source" target="_self" >ValidatedFormGroup:10</a></code>
+</div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject, Input, OnInit } from &#x27;@angular/core&#x27;
+import { PanelModule } from &#x27;primeng/panel&#x27;
+import { ActivatedRoute, Router } from &#x27;@angular/router&#x27;
+import { ConfirmationService } from &#x27;primeng/api&#x27;
+import { ButtonModule } from &#x27;primeng/button&#x27;
+import { DialogModule } from &#x27;primeng/dialog&#x27;
+import { FormsModule, ReactiveFormsModule } from &#x27;@angular/forms&#x27;
+import { ValidatedFormGroup } from &#x27;../../../common/validated-form-group/validated-form-group&#x27;
+import { string, object } from &#x27;yup&#x27;
+import { InputTextModule } from &#x27;primeng/inputtext&#x27;
+import { ConfirmDialogModule } from &#x27;primeng/confirmdialog&#x27;
+import { LinkEvidenceService } from &#x27;../../../services/evidence/link-evidence.service&#x27;
+import {
+  InformationCollectionByDepartment,
+  InformationCollectionDTO,
+  InformationCollectionService
+} from &#x27;../../../services/information-collection.service&#x27;
+import { InputTextareaModule } from &#x27;primeng/inputtextarea&#x27;
+import { Toast } from &#x27;../../../common/toast/toast.component&#x27;
+import { Category } from &#x27;../../../../shared/types/category.type&#x27;
+import { Indicator } from &#x27;../../../../shared/types/indicator.type&#x27;
+import { ImageModule } from &#x27;primeng/image&#x27;
+import { DividerModule } from &#x27;primeng/divider&#x27;
+import { EvidenceService } from &#x27;../../../services/evidence/evidence.service&#x27;
+import { VALUES } from &#x27;../../../../../../../shared/validations&#x27;
+import { DetailedRecopilation } from &#x27;../../../services/recopilation.service&#x27;
+import { RecopilationService } from &#x27;../../../services/recopilation.service&#x27;
+import { TooltipModule } from &#x27;primeng/tooltip&#x27;
+
+@Component({
+  selector: &#x27;collection-of-information&#x27;,
+  standalone: true,
+  imports: [
+    PanelModule,
+    ButtonModule,
+    DialogModule,
+    FormsModule,
+    ReactiveFormsModule,
+    InputTextareaModule,
+    InputTextModule,
+    ConfirmDialogModule,
+    ImageModule,
+    DividerModule,
+    TooltipModule
+  ],
+  templateUrl: &#x27;./collection-of-information.component.html&#x27;,
+  styles: &#x60;&#x60;
+})
+export class CollectionOfInformationComponent
+  extends ValidatedFormGroup&lt;FormValues&gt;
+  implements OnInit
+{
+  constructor(
+    @Inject(Toast) private toast: Toast,
+    private route: ActivatedRoute,
+    private router: Router,
+    private confirmationService: ConfirmationService,
+    private InformationCollectionService: InformationCollectionService,
+    private LinkEvidenceService: LinkEvidenceService,
+    private EvidenceService: EvidenceService,
+    private RecopilationService: RecopilationService
+  ) {
+    const initialControlValues &#x3D; {
+      name: &#x27;&#x27;,
+      summary: &#x27;&#x27;
+    }
+    const validationSchema &#x3D; object({
+      summary: string()
+        .required(&#x27;La descripción es requerida&#x27;)
+        .max(
+          VALUES.descriptionMaxAmount,
+          &#x27;La descripción no puede superar los 280 caracteres&#x27;
+        )
+        .min(
+          VALUES.descriptionMinAmount,
+          &#x27;La descripción debe superar los 30 caracteres&#x27;
+        ),
+      name: string()
+        .required(&#x27;El nombre es requerido&#x27;)
+        .max(
+          VALUES.indicatorNameAliasMaxAmount,
+          &#x27;El nombre no puede superar los 40 caracteres&#x27;
+        )
+        .min(
+          VALUES.nameAliasMinAmount,
+          &#x27;El nombre debe superar un mínimo de 10 caracteres&#x27;
+        )
+    })
+    super(initialControlValues, validationSchema)
+    this.route.params.subscribe((params) &#x3D;&gt; {
+      this.categoryId &#x3D; parseInt(params[&#x27;categoryId&#x27;], 10)
+      this.recopilationId &#x3D; parseInt(params[&#x27;recopilationId&#x27;], 10)
+    })
+  }
+  errors &#x3D; {
+    name: &#x27;&#x27;,
+    summary: &#x27;&#x27;
+  }
+  paginated &#x3D; {
+    first: 0,
+    rows: 100
+  }
+  informationCollections: InformationCollectionByDepartment[] &#x3D; []
+  indicator: Indicator &#x3D; {
+    index: 0,
+    alias: &#x27;&#x27;,
+    helpText: &#x27;&#x27;,
+    name: &#x27;&#x27;
+  }
+  @Input() category: Category &#x3D; {
+    name: &#x27;&#x27;,
+    helpText: &#x27;&#x27;,
+    id: 0,
+    indicator: this.indicator
+  }
+  currentUrl &#x3D; &#x27;&#x27;
+  visibleCreate: boolean &#x3D; false
+  visibleEdit: boolean &#x3D; false
+  informationCollectionIdEdit: number &#x3D; 0
+  departmentId: number &#x3D; 0
+  recopilationId: number &#x3D; 0
+  categoryId: number &#x3D; 0
+  isValidDepartmentalDate: boolean &#x3D; false
+  detailedRecopilation: DetailedRecopilation | null &#x3D; null
+  currentDate &#x3D; new Date()
+
+  ngOnInit() {
+    this.getDepartmentId()
+    this.getAllByDepartment()
+    this.getRecopilationById()
+    this.toast.show(
+      &#x27;info&#x27;,
+      &#x27;Evidencias con errores&#x27;,
+      &#x27;Si hay alguna evidencia con error es necesario crear otra nueva para reemplazarla.&#x27;
+    )
+    this.toast.show(
+      &#x27;info&#x27;,
+      &#x27;Colección de información no aprobadas&#x27;,
+      &#x27;Recuerde que al crear una colección de información esta automaticamente estará no aprobada hasta que el coordinador diga lo contrario.&#x27;
+    )
+  }
+  reset() {
+    this.formGroup.reset()
+    this.errors &#x3D; {
+      name: &#x27;&#x27;,
+      summary: &#x27;&#x27;
+    }
+  }
+  closeDialogCreate() {
+    this.visibleCreate &#x3D; false
+    this.reset()
+  }
+  closeDialogEdit() {
+    this.visibleEdit &#x3D; false
+    this.reset()
+  }
+  showDialogEdit(id: number, name: string, summary: string) {
+    this.visibleEdit &#x3D; true
+    this.formGroup.controls.name.setValue(name)
+    this.formGroup.controls.summary.setValue(summary)
+    this.informationCollectionIdEdit &#x3D; id
+  }
+  getDepartmentId() {
+    this.departmentId &#x3D; JSON.parse(localStorage.getItem(&#x27;user&#x27;)!).id as number
+  }
+  translateType(type: string) {
+    switch (type) {
+      case &#x27;image&#x27;:
+        return &#x27;Imagen&#x27;
+      case &#x27;document&#x27;:
+        return &#x27;Documento&#x27;
+      default:
+        return &#x27;Link&#x27;
+    }
+  }
+  confirmationDelete(event: Event, id: number, name: string) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: &#x60;¿Estás seguro de que quieres eliminar la colección de información &lt;strong&gt;${name}&lt;/strong&gt;?&#x60;,
+      header: &#x27;Eliminar colección de información&#x27;,
+      icon: &#x27;pi pi-info-circle&#x27;,
+      acceptButtonStyleClass: &#x27;p-button-danger p-button-text&#x27;,
+      rejectButtonStyleClass: &#x27;p-button-text p-button-text&#x27;,
+      acceptIcon: &#x27;none&#x27;,
+      rejectIcon: &#x27;none&#x27;,
+      acceptLabel: &#x27;Sí&#x27;,
+      rejectLabel: &#x27;No&#x27;,
+
+      accept: () &#x3D;&gt; {
+        this.toast.show(
+          &#x27;info&#x27;,
+          &#x27;Eliminando..&#x27;,
+          &#x27;Eliminando colección de información..&#x27;
+        )
+        this.onDelete(id)
+      },
+      reject: () &#x3D;&gt; {
+        this.toast.show(&#x27;error&#x27;, &#x27;Rechazado&#x27;, &#x27;Haz rechazado la eliminación&#x27;)
+      }
+    })
+  }
+  confirmationDeleteEvidence(event: Event, id: number, type: string) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: &#x60;¿Estás seguro de que quieres eliminar esta evidencia?&#x60;,
+      header: &#x27;Eliminar evidencia&#x27;,
+      icon: &#x27;pi pi-info-circle&#x27;,
+      acceptButtonStyleClass: &#x27;p-button-danger p-button-text&#x27;,
+      rejectButtonStyleClass: &#x27;p-button-text p-button-text&#x27;,
+      acceptIcon: &#x27;none&#x27;,
+      rejectIcon: &#x27;none&#x27;,
+      acceptLabel: &#x27;Sí&#x27;,
+      rejectLabel: &#x27;No&#x27;,
+
+      accept: () &#x3D;&gt; {
+        this.toast.show(&#x27;info&#x27;, &#x27;Eliminando..&#x27;, &#x27;Eliminando evidencia..&#x27;)
+        this.onDeleteEvidence(id, type)
+      },
+      reject: () &#x3D;&gt; {
+        this.toast.show(&#x27;error&#x27;, &#x27;Rechazado&#x27;, &#x27;Haz rechazado la eliminación&#x27;)
+      }
+    })
+  }
+  getRecopilationById() {
+    this.RecopilationService.getById(this.recopilationId).subscribe({
+      next: (res) &#x3D;&gt; {
+        if (res) {
+          this.detailedRecopilation &#x3D; res
+          if (
+            this.currentDate &lt;&#x3D; this.detailedRecopilation?.departmentEndDate
+          ) {
+            this.isValidDepartmentalDate &#x3D; true
+          } else {
+            this.toast.show(
+              &#x27;warn&#x27;,
+              &#x27;Cierre de Subidas de Información&#x27;,
+              &#x27;El periodo de subida de información ha finalizado. Ya no se podrán subir nuevas colecciones de información ni evidencias.&#x27;
+            )
+          }
+        }
+      },
+      error: (e) &#x3D;&gt; {
+        console.error(e)
+      }
+    })
+  }
+  getAllByDepartment() {
+    this.InformationCollectionService.getByDepartmentId(
+      this.recopilationId,
+      this.categoryId,
+      this.departmentId
+    ).subscribe({
+      next: (res) &#x3D;&gt; {
+        if (res.status &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) {
+          this.informationCollections &#x3D; res.data
+        }
+      },
+      error: (e) &#x3D;&gt; {
+        if (e.error.data !&#x3D; null) {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.data.message)
+        } else {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.message)
+        }
+      }
+    })
+  }
+  onCreate() {
+    if (this.formGroup.invalid) return
+    const { name, summary } &#x3D; this.formGroup.controls
+    const informationCollection: InformationCollectionDTO &#x3D; {
+      isApproved: false,
+      name: name.value,
+      summary: summary.value,
+      recopilationId: this.recopilationId,
+      categoryId: this.category.id,
+      departmentId: this.departmentId
+    }
+    this.closeDialogCreate()
+    this.InformationCollectionService.create(informationCollection).subscribe({
+      next: (res) &#x3D;&gt; {
+        if (res.status &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) {
+          this.toast.show(
+            &#x27;success&#x27;,
+            &#x27;Creado&#x27;,
+            &#x27;Colección de información creado con éxito&#x27;
+          )
+          this.getAllByDepartment()
+        }
+      },
+      error: (e) &#x3D;&gt; {
+        if (e.error.data !&#x3D; null) {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.data.message)
+        } else {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.message)
+        }
+        this.closeDialogCreate()
+      }
+    })
+  }
+  onEdit() {
+    if (this.formGroup.invalid) return
+    const { name, summary } &#x3D; this.formGroup.controls
+    const informationCollection: InformationCollectionDTO &#x3D; {
+      isApproved: false,
+      name: name.value,
+      summary: summary.value,
+      categoryId: this.categoryId,
+      recopilationId: this.recopilationId,
+      departmentId: this.departmentId
+    }
+    this.closeDialogEdit()
+    this.InformationCollectionService.edit(
+      this.informationCollectionIdEdit,
+      informationCollection
+    ).subscribe({
+      next: () &#x3D;&gt; {
+        this.getAllByDepartment()
+        this.toast.show(
+          &#x27;success&#x27;,
+          &#x27;Editado&#x27;,
+          &#x27;Colección de información editado con éxito&#x27;
+        )
+      },
+      error: (e) &#x3D;&gt; {
+        if (e.error.data !&#x3D; null) {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.data.message)
+        } else {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.message)
+        }
+        this.closeDialogEdit()
+      }
+    })
+  }
+  onDelete(id: number) {
+    this.InformationCollectionService.delete(id).subscribe({
+      next: () &#x3D;&gt; {
+        this.toast.show(
+          &#x27;success&#x27;,
+          &#x27;Eliminado&#x27;,
+          &#x27;Colección de información eliminada con éxito&#x27;
+        )
+        this.getAllByDepartment()
+      },
+      error: (e) &#x3D;&gt; {
+        if (e.error.data !&#x3D; null) {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.data.message)
+        } else {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.message)
+        }
+      }
+    })
+  }
+  onDeleteEvidence(id: number, type: string) {
+    if (type &#x3D;&#x3D;&#x3D; &#x27;link&#x27;) {
+      this.LinkEvidenceService.delete(id).subscribe({
+        next: () &#x3D;&gt; {
+          this.toast.show(
+            &#x27;success&#x27;,
+            &#x27;Creado&#x27;,
+            &#x27;Evidencia tipo link eliminada con éxito&#x27;
+          )
+          this.getAllByDepartment()
+        },
+        error: (e) &#x3D;&gt; {
+          if (e.error.data !&#x3D; null) {
+            this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.data.message)
+          } else {
+            this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.message)
+          }
+        }
+      })
+    } else {
+      this.EvidenceService.delete(id).subscribe({
+        next: () &#x3D;&gt; {
+          this.toast.show(
+            &#x27;success&#x27;,
+            &#x27;Creado&#x27;,
+            &#x27;Evidencia tipo imagen eliminada con éxito&#x27;
+          )
+          this.getAllByDepartment()
+        },
+        error: (e) &#x3D;&gt; {
+          if (e.error.data !&#x3D; null) {
+            this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.data.message)
+          } else {
+            this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.message)
+          }
+        }
+      })
+    }
+  }
+  createEvidences(informationCollectionId: number) {
+    this.route.url.subscribe((url) &#x3D;&gt; {
+      this.currentUrl &#x3D; url.map((segment) &#x3D;&gt; segment.path).join(&#x27;/&#x27;)
+    })
+    this.router.navigateByUrl(
+      &#x60;pages/create/${this.currentUrl}/information-collection/${informationCollectionId}&#x60;
+    )
+  }
+  onEditEvidence(evidenceId: number, informationCollectionId: number) {
+    this.route.url.subscribe((url) &#x3D;&gt; {
+      this.currentUrl &#x3D; url.map((segment) &#x3D;&gt; segment.path).join(&#x27;/&#x27;)
+    })
+    this.router.navigateByUrl(
+      &#x60;pages/edit/${this.currentUrl}/information-collection/${informationCollectionId}/evidence/${evidenceId}&#x60;
+    )
+  }
+}
+
+type FormValues &#x3D; Pick&lt;InformationCollectionDTO, &#x27;name&#x27; | &#x27;summary&#x27;&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;section class&#x3D;&quot;w-full h-full&quot;&gt;
+  &lt;div
+    class&#x3D;&quot;flex flex-row justify-content-between align-items-center gap-6 pb-4 w-full&quot;
+  &gt;
+    &lt;h2 class&#x3D;&quot;text-color-secondary flex-1&quot;&gt;
+      Subida de archivos para {{ this.category.indicator.alias }} /
+      {{ this.category.name }}
+    &lt;/h2&gt;
+    &lt;p-button
+      styleClass&#x3D;&quot;bg-primary border-primary mr-4 flex-none&quot;
+      (onClick)&#x3D;&quot;visibleCreate &#x3D; true&quot;
+      label&#x3D;&quot;Agregar Colección&quot;
+      icon&#x3D;&quot;pi pi-plus&quot;
+      size&#x3D;&quot;small&quot;
+      [disabled]&#x3D;&quot;!isValidDepartmentalDate&quot;
+    /&gt;
+  &lt;/div&gt;
+  @for (
+    informationCollection of informationCollections;
+    track informationCollection.id;
+    let idx &#x3D; $index
+  ) {
+    &lt;p-panel
+      expandIcon&#x3D;&quot;pi pi-chevron-down&quot;
+      collapseIcon&#x3D;&quot;pi pi-chevron-right&quot;
+      [toggleable]&#x3D;&quot;true&quot;
+      collapsed&#x3D;&quot;true&quot;
+      iconPos&#x3D;&quot;start&quot;
+    &gt;
+      &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+        &lt;section
+          class&#x3D;&quot;flex flex-row justify-content-between align-items-center w-full gap-4&quot;
+        &gt;
+          &lt;h2 style&#x3D;&quot;word-break: break-word&quot; class&#x3D;&quot;text-xl&quot;&gt;
+            {{ informationCollection.name }}
+          &lt;/h2&gt;
+          &lt;div class&#x3D;&quot;flex flex-row gap-2 flex-nowrap&quot;&gt;
+            &lt;button
+              class&#x3D;&quot;p-panel-header-icon p-link mr-2&quot;
+              [disabled]&#x3D;&quot;!isValidDepartmentalDate&quot;
+            &gt;
+              &lt;span
+                class&#x3D;&quot;pi pi-pencil&quot;
+                (click)&#x3D;&quot;
+                  isValidDepartmentalDate
+                    ? showDialogEdit(
+                        informationCollection.id,
+                        informationCollection.name,
+                        informationCollection.summary
+                      )
+                    : &#x27;&#x27;
+                &quot;
+                [style.color]&#x3D;&quot;isValidDepartmentalDate ? &#x27;#22c55e&#x27; : &#x27;darkgrey&#x27;&quot;
+                [style.border]&#x3D;&quot;
+                  isValidDepartmentalDate
+                    ? &#x27;solid 1.5px #22c55e&#x27;
+                    : &#x27;solid 1.5px darkgrey&#x27;
+                &quot;
+                style&#x3D;&quot;border-radius: 100%; padding: 7px&quot;
+              &gt;&lt;/span&gt;
+            &lt;/button&gt;
+            &lt;button
+              class&#x3D;&quot;p-panel-header-icon p-link mr-2&quot;
+              [disabled]&#x3D;&quot;!isValidDepartmentalDate&quot;
+            &gt;
+              &lt;span
+                class&#x3D;&quot;pi pi-trash&quot;
+                (click)&#x3D;&quot;
+                  isValidDepartmentalDate
+                    ? confirmationDelete(
+                        $event,
+                        informationCollection.id,
+                        informationCollection.name
+                      )
+                    : &#x27;&#x27;
+                &quot;
+                [style.color]&#x3D;&quot;isValidDepartmentalDate ? &#x27;#ef4444&#x27; : &#x27;darkgrey&#x27;&quot;
+                [style.border]&#x3D;&quot;
+                  isValidDepartmentalDate
+                    ? &#x27;solid 1.5px #ef4444&#x27;
+                    : &#x27;solid 1.5px darkgrey&#x27;
+                &quot;
+                style&#x3D;&quot;border-radius: 100%; padding: 7px&quot;
+              &gt;&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/div&gt;
+        &lt;/section&gt;
+      &lt;/ng-template&gt;
+      &lt;div class&#x3D;&quot;flex flex-row justify-content-between align-items-center&quot;&gt;
+        &lt;p class&#x3D;&quot;m-0 pb-3&quot; style&#x3D;&quot;max-width: 80vw&quot;&gt;
+          {{ informationCollection.summary }}
+        &lt;/p&gt;
+        @if (informationCollection.isApproved &#x3D;&#x3D;&#x3D; false) {
+          &lt;div
+            class&#x3D;&quot;flex flex-row gap-3 justify-content-center align-items-center&quot;
+            pTooltip&#x3D;&quot;Colección de información no aprobada&quot;
+            tooltipEvent&#x3D;&quot;hover&quot;
+            tooltipPosition&#x3D;&quot;top&quot;
+          &gt;
+            &lt;i
+              class&#x3D;&quot;pi pi-times&quot;
+              style&#x3D;&quot;font-size: 1.5rem; color: #ef4444&quot;
+            &gt;&lt;/i&gt;
+            &lt;h1 style&#x3D;&quot;color: #ef4444&quot; class&#x3D;&quot;text-xl&quot;&gt;No Aprobado&lt;/h1&gt;
+          &lt;/div&gt;
+        } @else {
+          &lt;div
+            class&#x3D;&quot;flex flex-row gap-3 justify-content-center align-items-center&quot;
+            pTooltip&#x3D;&quot;Colección de información aprobada&quot;
+            tooltipEvent&#x3D;&quot;hover&quot;
+            tooltipPosition&#x3D;&quot;top&quot;
+          &gt;
+            &lt;i
+              class&#x3D;&quot;pi pi-check&quot;
+              style&#x3D;&quot;font-size: 1.5rem; color: #22c55e&quot;
+            &gt;&lt;/i&gt;
+            &lt;h1 style&#x3D;&quot;color: #22c55e&quot; class&#x3D;&quot;text-xl&quot;&gt;Aprobado&lt;/h1&gt;
+          &lt;/div&gt;
+        }
+      &lt;/div&gt;
+      &lt;p-panel
+        expandIcon&#x3D;&quot;pi pi-chevron-down&quot;
+        collapseIcon&#x3D;&quot;pi pi-chevron-right&quot;
+        [toggleable]&#x3D;&quot;true&quot;
+        collapsed&#x3D;&quot;true&quot;
+        iconPos&#x3D;&quot;start&quot;
+      &gt;
+        &lt;ng-template pTemplate&#x3D;&quot;header&quot; class&#x3D;&quot;p-0&quot;&gt;
+          &lt;section
+            class&#x3D;&quot;flex flex-row justify-content-between align-items-center w-full&quot;
+          &gt;
+            &lt;h3 class&#x3D;&quot;text-xl&quot;&gt;
+              Evidencias ({{ informationCollection.evidences.length }})
+            &lt;/h3&gt;
+            &lt;button
+              class&#x3D;&quot;p-panel-header-icon p-link mr-2&quot;
+              [disabled]&#x3D;&quot;!isValidDepartmentalDate&quot;
+            &gt;
+              &lt;span
+                class&#x3D;&quot;pi pi-plus&quot;
+                (click)&#x3D;&quot;
+                  isValidDepartmentalDate
+                    ? createEvidences(informationCollection.id)
+                    : &#x27;&#x27;
+                &quot;
+                [style.color]&#x3D;&quot;isValidDepartmentalDate ? &#x27;#3b82f6&#x27; : &#x27;darkgrey&#x27;&quot;
+                [style.border]&#x3D;&quot;
+                  isValidDepartmentalDate
+                    ? &#x27;solid 1.5px #3b82f6&#x27;
+                    : &#x27;solid 1.5px darkgrey&#x27;
+                &quot;
+                style&#x3D;&quot;border-radius: 100%; padding: 7px&quot;
+              &gt;&lt;/span&gt;
+            &lt;/button&gt;
+          &lt;/section&gt;
+        &lt;/ng-template&gt;
+        @for (evidence of informationCollection.evidences; track evidence.id) {
+          &lt;div class&#x3D;&quot;flex flex-column gap-3 mb-5&quot;&gt;
+            &lt;div class&#x3D;&quot;flex justify-content-between align-items-center gap-4&quot;&gt;
+              &lt;h2
+                style&#x3D;&quot;word-break: break-word&quot;
+                class&#x3D;&quot;m-0 text-xl text-color-secondary&quot;
+              &gt;
+                {{ evidence.description }} - tipo ({{
+                  translateType(evidence.type)
+                }})
+              &lt;/h2&gt;
+              @if (evidence.error !&#x3D;&#x3D; null) {
+                &lt;div
+                  class&#x3D;&quot;flex flex-row gap-3 justify-content-center align-items-center&quot;
+                  [pTooltip]&#x3D;&quot;evidence.error&quot;
+                  tooltipEvent&#x3D;&quot;hover&quot;
+                  tooltipPosition&#x3D;&quot;top&quot;
+                &gt;
+                  &lt;i
+                    class&#x3D;&quot;pi pi-ban&quot;
+                    style&#x3D;&quot;font-size: 1.5rem; color: #ef4444&quot;
+                  &gt;&lt;/i&gt;
+                  &lt;h1 style&#x3D;&quot;color: #ef4444&quot; class&#x3D;&quot;text-xl&quot;&gt;
+                    Evidencia con error
+                  &lt;/h1&gt;
+                &lt;/div&gt;
+              } @else {
+                &lt;div class&#x3D;&quot;flex flex-nowrap&quot;&gt;
+                  &lt;button
+                    class&#x3D;&quot;p-panel-header-icon p-link mr-2&quot;
+                    [disabled]&#x3D;&quot;!isValidDepartmentalDate&quot;
+                  &gt;
+                    &lt;span
+                      class&#x3D;&quot;pi pi-pencil&quot;
+                      (click)&#x3D;&quot;
+                        isValidDepartmentalDate
+                          ? onEditEvidence(
+                              evidence.id,
+                              informationCollection.id
+                            )
+                          : &#x27;&#x27;
+                      &quot;
+                      [style.color]&#x3D;&quot;
+                        isValidDepartmentalDate ? &#x27;#22c55e&#x27; : &#x27;darkgrey&#x27;
+                      &quot;
+                      [style.border]&#x3D;&quot;
+                        isValidDepartmentalDate
+                          ? &#x27;solid 1.5px #22c55e&#x27;
+                          : &#x27;solid 1.5px darkgrey&#x27;
+                      &quot;
+                      style&#x3D;&quot;border-radius: 100%; padding: 7px&quot;
+                    &gt;&lt;/span&gt;
+                  &lt;/button&gt;
+                  &lt;button
+                    class&#x3D;&quot;p-panel-header-icon p-link mr-2&quot;
+                    [disabled]&#x3D;&quot;!isValidDepartmentalDate&quot;
+                  &gt;
+                    &lt;span
+                      class&#x3D;&quot;pi pi-trash&quot;
+                      (click)&#x3D;&quot;
+                        isValidDepartmentalDate
+                          ? confirmationDeleteEvidence(
+                              $event,
+                              evidence.id,
+                              evidence.type
+                            )
+                          : &#x27;&#x27;
+                      &quot;
+                      [style.color]&#x3D;&quot;
+                        isValidDepartmentalDate ? &#x27;#ef4444&#x27; : &#x27;darkgrey&#x27;
+                      &quot;
+                      [style.border]&#x3D;&quot;
+                        isValidDepartmentalDate
+                          ? &#x27;solid 1.5px #ef4444&#x27;
+                          : &#x27;solid 1.5px darkgrey&#x27;
+                      &quot;
+                      style&#x3D;&quot;border-radius: 100%; padding: 7px&quot;
+                    &gt;&lt;/span&gt;
+                  &lt;/button&gt;
+                &lt;/div&gt;
+              }
+            &lt;/div&gt;
+            @switch (evidence.type) {
+              @case (&#x27;link&#x27;) {
+                &lt;a
+                  [href]&#x3D;&quot;evidence.externalLink&quot;
+                  target&#x3D;&quot;_blank&quot;
+                  class&#x3D;&quot;m-0 text-blue-600&quot;
+                  style&#x3D;&quot;word-wrap: break-word; max-width: 80vw&quot;
+                &gt;
+                  {{ evidence.externalLink }}
+                &lt;/a&gt;
+              }
+              @case (&#x27;image&#x27;) {
+                @if (evidence.externalLink) {
+                  &lt;a
+                    [href]&#x3D;&quot;evidence.externalLink&quot;
+                    target&#x3D;&quot;_blank&quot;
+                    class&#x3D;&quot;m-0 text-blue-600&quot;
+                    style&#x3D;&quot;word-wrap: break-word; max-width: 80vw&quot;
+                  &gt;
+                    {{ evidence.externalLink }}
+                  &lt;/a&gt;
+                }
+                &lt;p-image
+                  [src]&#x3D;&quot;evidence.fileLink ?? &#x27;&#x27;&quot;
+                  alt&#x3D;&quot;Image&quot;
+                  width&#x3D;&quot;300&quot;
+                  [preview]&#x3D;&quot;true&quot;
+                &gt;
+                  &lt;ng-template pTemplate&#x3D;&quot;indicator&quot;&gt;
+                    &lt;div class&#x3D;&quot;flex flex-column&quot;&gt;
+                      &lt;i class&#x3D;&quot;pi pi-eye&quot;&gt;&lt;/i&gt;
+                      &lt;p&gt;Ver previsualización de la imagen&lt;/p&gt;
+                    &lt;/div&gt;
+                  &lt;/ng-template&gt;
+                &lt;/p-image&gt;
+              }
+              @case (&#x27;document&#x27;) {
+                &lt;a
+                  [href]&#x3D;&quot;evidence.fileLink&quot;
+                  target&#x3D;&quot;_blank&quot;
+                  class&#x3D;&quot;m-0 text-blue-600&quot;
+                  style&#x3D;&quot;word-wrap: break-word; max-width: 80vw&quot;
+                &gt;
+                  {{ evidence.fileLink }}
+                &lt;/a&gt;
+              }
+              @default {
+                &lt;p class&#x3D;&quot;m-0&quot; style&#x3D;&quot;word-wrap: break-word; max-width: 80vw&quot;&gt;
+                  No hay evidencias creadas para esta colección de información
+                &lt;/p&gt;
+              }
+            }
+          &lt;/div&gt;
+          &lt;p-divider /&gt;
+        }
+      &lt;/p-panel&gt;
+    &lt;/p-panel&gt;
+  }
+  &lt;p-dialog
+    header&#x3D;&quot;Crear Colección de información&quot;
+    [modal]&#x3D;&quot;true&quot;
+    [(visible)]&#x3D;&quot;visibleCreate&quot;
+    [draggable]&#x3D;&quot;false&quot;
+    [resizable]&#x3D;&quot;false&quot;
+    [style]&#x3D;&quot;{ width: &#x27;30rem&#x27; }&quot;
+    (onHide)&#x3D;&quot;closeDialogCreate()&quot;
+  &gt;
+    &lt;form [formGroup]&#x3D;&quot;formGroup&quot;&gt;
+      &lt;div class&#x3D;&quot;flex flex-column gap-3&quot;&gt;
+        &lt;div class&#x3D;&quot;flex flex-column gap-2 w-full&quot;&gt;
+          &lt;label class&#x3D;&quot;flex flex-column gap-2 w-full&quot;&gt;
+            Nombre
+            &lt;input
+              pInputText
+              name&#x3D;&quot;name&quot;
+              class&#x3D;&quot;w-full&quot;
+              type&#x3D;&quot;text&quot;
+              formControlName&#x3D;&quot;name&quot;
+              (input)&#x3D;&quot;errorsUpdate(&#x27;name&#x27;)&quot;
+              (blur)&#x3D;&quot;errorsUpdate(&#x27;name&#x27;)&quot;
+            /&gt;
+          &lt;/label&gt;
+          &lt;small class&#x3D;&quot;p-error&quot;&gt;{{ errors.name }}&lt;/small&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex flex-column gap-2 w-full&quot;&gt;
+          &lt;label class&#x3D;&quot;flex flex-column gap-2 w-full&quot;&gt;
+            Descripción
+            &lt;textarea
+              pInputTextarea
+              rows&#x3D;&quot;5&quot;
+              cols&#x3D;&quot;40&quot;
+              formControlName&#x3D;&quot;summary&quot;
+              (input)&#x3D;&quot;errorsUpdate(&#x27;summary&#x27;)&quot;
+              (blur)&#x3D;&quot;errorsUpdate(&#x27;summary&#x27;)&quot;
+            &gt;&lt;/textarea&gt;
+          &lt;/label&gt;
+          &lt;small class&#x3D;&quot;p-error&quot;&gt;{{ errors.summary }}&lt;/small&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;footer class&#x3D;&quot;flex justify-content-end gap-2 mt-4&quot;&gt;
+        &lt;p-button
+          label&#x3D;&quot;Cancelar&quot;
+          size&#x3D;&quot;small&quot;
+          icon&#x3D;&quot;pi pi-times&quot;
+          [outlined]&#x3D;&quot;true&quot;
+          severity&#x3D;&quot;danger&quot;
+          (click)&#x3D;&quot;visibleCreate &#x3D; false&quot;
+        /&gt;
+        &lt;p-button
+          label&#x3D;&quot;Guardar&quot;
+          size&#x3D;&quot;small&quot;
+          icon&#x3D;&quot;pi pi-check&quot;
+          (click)&#x3D;&quot;onCreate()&quot;
+          [outlined]&#x3D;&quot;true&quot;
+          severity&#x3D;&quot;success&quot;
+          [disabled]&#x3D;&quot;formGroup.invalid&quot;
+        /&gt;
+      &lt;/footer&gt;
+    &lt;/form&gt;
+  &lt;/p-dialog&gt;
+  &lt;p-dialog
+    header&#x3D;&quot;Editar colección de información&quot;
+    [modal]&#x3D;&quot;true&quot;
+    [(visible)]&#x3D;&quot;visibleEdit&quot;
+    [draggable]&#x3D;&quot;false&quot;
+    [resizable]&#x3D;&quot;false&quot;
+    [style]&#x3D;&quot;{ width: &#x27;30rem&#x27; }&quot;
+    (onHide)&#x3D;&quot;closeDialogEdit()&quot;
+  &gt;
+    &lt;form [formGroup]&#x3D;&quot;formGroup&quot;&gt;
+      &lt;div class&#x3D;&quot;flex flex-column gap-3&quot;&gt;
+        &lt;div class&#x3D;&quot;flex flex-column gap-2 w-full&quot;&gt;
+          &lt;label class&#x3D;&quot;flex flex-column gap-2 w-full&quot;&gt;
+            Nombre
+            &lt;input
+              pInputText
+              name&#x3D;&quot;name&quot;
+              class&#x3D;&quot;w-full&quot;
+              type&#x3D;&quot;text&quot;
+              formControlName&#x3D;&quot;name&quot;
+              (input)&#x3D;&quot;errorsUpdate(&#x27;name&#x27;)&quot;
+              (blur)&#x3D;&quot;errorsUpdate(&#x27;name&#x27;)&quot;
+            /&gt;
+          &lt;/label&gt;
+          &lt;small class&#x3D;&quot;p-error&quot;&gt;{{ errors.name }}&lt;/small&gt;
+        &lt;/div&gt;
+        &lt;div class&#x3D;&quot;flex flex-column gap-2 w-full&quot;&gt;
+          &lt;label class&#x3D;&quot;flex flex-column gap-2 w-full&quot;&gt;
+            Descripción
+            &lt;textarea
+              pInputTextarea
+              rows&#x3D;&quot;5&quot;
+              cols&#x3D;&quot;40&quot;
+              formControlName&#x3D;&quot;summary&quot;
+              (input)&#x3D;&quot;errorsUpdate(&#x27;summary&#x27;)&quot;
+              (blur)&#x3D;&quot;errorsUpdate(&#x27;summary&#x27;)&quot;
+            &gt;&lt;/textarea&gt;
+          &lt;/label&gt;
+          &lt;small class&#x3D;&quot;p-error&quot;&gt;{{ errors.summary }}&lt;/small&gt;
+        &lt;/div&gt;
+      &lt;/div&gt;
+      &lt;footer class&#x3D;&quot;flex justify-content-end gap-2 mt-4&quot;&gt;
+        &lt;p-button
+          label&#x3D;&quot;Cancelar&quot;
+          size&#x3D;&quot;small&quot;
+          icon&#x3D;&quot;pi pi-times&quot;
+          [outlined]&#x3D;&quot;true&quot;
+          severity&#x3D;&quot;danger&quot;
+          (click)&#x3D;&quot;visibleEdit &#x3D; false&quot;
+        /&gt;
+        &lt;p-button
+          label&#x3D;&quot;Guardar&quot;
+          size&#x3D;&quot;small&quot;
+          icon&#x3D;&quot;pi pi-check&quot;
+          (click)&#x3D;&quot;onEdit()&quot;
+          [outlined]&#x3D;&quot;true&quot;
+          severity&#x3D;&quot;success&quot;
+          [disabled]&#x3D;&quot;formGroup.invalid&quot;
+        /&gt;
+      &lt;/footer&gt;
+    &lt;/form&gt;
+  &lt;/p-dialog&gt;
+  &lt;p-confirmDialog /&gt;
+&lt;/section&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+            <pre class="line-numbers"><code class="language-scss">
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><section class="w-full h-full">  <div    class="flex flex-row justify-content-between align-items-center gap-6 pb-4 w-full"  >    <h2 class="text-color-secondary flex-1">      Subida de archivos para {{ this.category.indicator.alias }} /      {{ this.category.name }}    </h2>    <p-button      styleClass="bg-primary border-primary mr-4 flex-none"      (onClick)="visibleCreate = true"      label="Agregar Colección"      icon="pi pi-plus"      size="small"      [disabled]="!isValidDepartmentalDate"    />  </div>  @for (    informationCollection of informationCollections;    track informationCollection.id;    let idx = $index  ) {    <p-panel      expandIcon="pi pi-chevron-down"      collapseIcon="pi pi-chevron-right"      [toggleable]="true"      collapsed="true"      iconPos="start"    >      <ng-template pTemplate="header">        <section          class="flex flex-row justify-content-between align-items-center w-full gap-4"        >          <h2 style="word-break: break-word" class="text-xl">            {{ informationCollection.name }}          </h2>          <div class="flex flex-row gap-2 flex-nowrap">            <button              class="p-panel-header-icon p-link mr-2"              [disabled]="!isValidDepartmentalDate"            >              <span                class="pi pi-pencil"                (click)="                  isValidDepartmentalDate                    ? showDialogEdit(                        informationCollection.id,                        informationCollection.name,                        informationCollection.summary                      )                    : \'\'                "                [style.color]="isValidDepartmentalDate ? \'#22c55e\' : \'darkgrey\'"                [style.border]="                  isValidDepartmentalDate                    ? \'solid 1.5px #22c55e\'                    : \'solid 1.5px darkgrey\'                "                style="border-radius: 100%; padding: 7px"              ></span>            </button>            <button              class="p-panel-header-icon p-link mr-2"              [disabled]="!isValidDepartmentalDate"            >              <span                class="pi pi-trash"                (click)="                  isValidDepartmentalDate                    ? confirmationDelete(                        $event,                        informationCollection.id,                        informationCollection.name                      )                    : \'\'                "                [style.color]="isValidDepartmentalDate ? \'#ef4444\' : \'darkgrey\'"                [style.border]="                  isValidDepartmentalDate                    ? \'solid 1.5px #ef4444\'                    : \'solid 1.5px darkgrey\'                "                style="border-radius: 100%; padding: 7px"              ></span>            </button>          </div>        </section>      </ng-template>      <div class="flex flex-row justify-content-between align-items-center">        <p class="m-0 pb-3" style="max-width: 80vw">          {{ informationCollection.summary }}        </p>        @if (informationCollection.isApproved === false) {          <div            class="flex flex-row gap-3 justify-content-center align-items-center"            pTooltip="Colección de información no aprobada"            tooltipEvent="hover"            tooltipPosition="top"          >            <i              class="pi pi-times"              style="font-size: 1.5rem; color: #ef4444"            ></i>            <h1 style="color: #ef4444" class="text-xl">No Aprobado</h1>          </div>        } @else {          <div            class="flex flex-row gap-3 justify-content-center align-items-center"            pTooltip="Colección de información aprobada"            tooltipEvent="hover"            tooltipPosition="top"          >            <i              class="pi pi-check"              style="font-size: 1.5rem; color: #22c55e"            ></i>            <h1 style="color: #22c55e" class="text-xl">Aprobado</h1>          </div>        }      </div>      <p-panel        expandIcon="pi pi-chevron-down"        collapseIcon="pi pi-chevron-right"        [toggleable]="true"        collapsed="true"        iconPos="start"      >        <ng-template pTemplate="header" class="p-0">          <section            class="flex flex-row justify-content-between align-items-center w-full"          >            <h3 class="text-xl">              Evidencias ({{ informationCollection.evidences.length }})            </h3>            <button              class="p-panel-header-icon p-link mr-2"              [disabled]="!isValidDepartmentalDate"            >              <span                class="pi pi-plus"                (click)="                  isValidDepartmentalDate                    ? createEvidences(informationCollection.id)                    : \'\'                "                [style.color]="isValidDepartmentalDate ? \'#3b82f6\' : \'darkgrey\'"                [style.border]="                  isValidDepartmentalDate                    ? \'solid 1.5px #3b82f6\'                    : \'solid 1.5px darkgrey\'                "                style="border-radius: 100%; padding: 7px"              ></span>            </button>          </section>        </ng-template>        @for (evidence of informationCollection.evidences; track evidence.id) {          <div class="flex flex-column gap-3 mb-5">            <div class="flex justify-content-between align-items-center gap-4">              <h2                style="word-break: break-word"                class="m-0 text-xl text-color-secondary"              >                {{ evidence.description }} - tipo ({{                  translateType(evidence.type)                }})              </h2>              @if (evidence.error !== null) {                <div                  class="flex flex-row gap-3 justify-content-center align-items-center"                  [pTooltip]="evidence.error"                  tooltipEvent="hover"                  tooltipPosition="top"                >                  <i                    class="pi pi-ban"                    style="font-size: 1.5rem; color: #ef4444"                  ></i>                  <h1 style="color: #ef4444" class="text-xl">                    Evidencia con error                  </h1>                </div>              } @else {                <div class="flex flex-nowrap">                  <button                    class="p-panel-header-icon p-link mr-2"                    [disabled]="!isValidDepartmentalDate"                  >                    <span                      class="pi pi-pencil"                      (click)="                        isValidDepartmentalDate                          ? onEditEvidence(                              evidence.id,                              informationCollection.id                            )                          : \'\'                      "                      [style.color]="                        isValidDepartmentalDate ? \'#22c55e\' : \'darkgrey\'                      "                      [style.border]="                        isValidDepartmentalDate                          ? \'solid 1.5px #22c55e\'                          : \'solid 1.5px darkgrey\'                      "                      style="border-radius: 100%; padding: 7px"                    ></span>                  </button>                  <button                    class="p-panel-header-icon p-link mr-2"                    [disabled]="!isValidDepartmentalDate"                  >                    <span                      class="pi pi-trash"                      (click)="                        isValidDepartmentalDate                          ? confirmationDeleteEvidence(                              $event,                              evidence.id,                              evidence.type                            )                          : \'\'                      "                      [style.color]="                        isValidDepartmentalDate ? \'#ef4444\' : \'darkgrey\'                      "                      [style.border]="                        isValidDepartmentalDate                          ? \'solid 1.5px #ef4444\'                          : \'solid 1.5px darkgrey\'                      "                      style="border-radius: 100%; padding: 7px"                    ></span>                  </button>                </div>              }            </div>            @switch (evidence.type) {              @case (\'link\') {                <a                  [href]="evidence.externalLink"                  target="_blank"                  class="m-0 text-blue-600"                  style="word-wrap: break-word; max-width: 80vw"                >                  {{ evidence.externalLink }}                </a>              }              @case (\'image\') {                @if (evidence.externalLink) {                  <a                    [href]="evidence.externalLink"                    target="_blank"                    class="m-0 text-blue-600"                    style="word-wrap: break-word; max-width: 80vw"                  >                    {{ evidence.externalLink }}                  </a>                }                <p-image                  [src]="evidence.fileLink ?? \'\'"                  alt="Image"                  width="300"                  [preview]="true"                >                  <ng-template pTemplate="indicator">                    <div class="flex flex-column">                      <i class="pi pi-eye"></i>                      <p>Ver previsualización de la imagen</p>                    </div>                  </ng-template>                </p-image>              }              @case (\'document\') {                <a                  [href]="evidence.fileLink"                  target="_blank"                  class="m-0 text-blue-600"                  style="word-wrap: break-word; max-width: 80vw"                >                  {{ evidence.fileLink }}                </a>              }              @default {                <p class="m-0" style="word-wrap: break-word; max-width: 80vw">                  No hay evidencias creadas para esta colección de información                </p>              }            }          </div>          <p-divider />        }      </p-panel>    </p-panel>  }  <p-dialog    header="Crear Colección de información"    [modal]="true"    [(visible)]="visibleCreate"    [draggable]="false"    [resizable]="false"    [style]="{ width: \'30rem\' }"    (onHide)="closeDialogCreate()"  >    <form [formGroup]="formGroup">      <div class="flex flex-column gap-3">        <div class="flex flex-column gap-2 w-full">          <label class="flex flex-column gap-2 w-full">            Nombre            <input              pInputText              name="name"              class="w-full"              type="text"              formControlName="name"              (input)="errorsUpdate(\'name\')"              (blur)="errorsUpdate(\'name\')"            />          </label>          <small class="p-error">{{ errors.name }}</small>        </div>        <div class="flex flex-column gap-2 w-full">          <label class="flex flex-column gap-2 w-full">            Descripción            <textarea              pInputTextarea              rows="5"              cols="40"              formControlName="summary"              (input)="errorsUpdate(\'summary\')"              (blur)="errorsUpdate(\'summary\')"            ></textarea>          </label>          <small class="p-error">{{ errors.summary }}</small>        </div>      </div>      <footer class="flex justify-content-end gap-2 mt-4">        <p-button          label="Cancelar"          size="small"          icon="pi pi-times"          [outlined]="true"          severity="danger"          (click)="visibleCreate = false"        />        <p-button          label="Guardar"          size="small"          icon="pi pi-check"          (click)="onCreate()"          [outlined]="true"          severity="success"          [disabled]="formGroup.invalid"        />      </footer>    </form>  </p-dialog>  <p-dialog    header="Editar colección de información"    [modal]="true"    [(visible)]="visibleEdit"    [draggable]="false"    [resizable]="false"    [style]="{ width: \'30rem\' }"    (onHide)="closeDialogEdit()"  >    <form [formGroup]="formGroup">      <div class="flex flex-column gap-3">        <div class="flex flex-column gap-2 w-full">          <label class="flex flex-column gap-2 w-full">            Nombre            <input              pInputText              name="name"              class="w-full"              type="text"              formControlName="name"              (input)="errorsUpdate(\'name\')"              (blur)="errorsUpdate(\'name\')"            />          </label>          <small class="p-error">{{ errors.name }}</small>        </div>        <div class="flex flex-column gap-2 w-full">          <label class="flex flex-column gap-2 w-full">            Descripción            <textarea              pInputTextarea              rows="5"              cols="40"              formControlName="summary"              (input)="errorsUpdate(\'summary\')"              (blur)="errorsUpdate(\'summary\')"            ></textarea>          </label>          <small class="p-error">{{ errors.summary }}</small>        </div>      </div>      <footer class="flex justify-content-end gap-2 mt-4">        <p-button          label="Cancelar"          size="small"          icon="pi pi-times"          [outlined]="true"          severity="danger"          (click)="visibleEdit = false"        />        <p-button          label="Guardar"          size="small"          icon="pi pi-check"          (click)="onEdit()"          [outlined]="true"          severity="success"          [disabled]="formGroup.invalid"        />      </footer>    </form>  </p-dialog>  <p-confirmDialog /></section></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BodyComponent', 'selector': 'app-body'},{'name': 'CategoryComponent', 'selector': 'categories'},{'name': 'CategorySelectorComponent', 'selector': 'app-category-selector'},{'name': 'CollectionOfInformationComponent', 'selector': 'collection-of-information'},{'name': 'CreateEvidencesComponent', 'selector': 'create-evidences'},{'name': 'CriteriaComponent', 'selector': 'criteria'},{'name': 'CustomTdComponent', 'selector': 'custom-td'},{'name': 'DepartmentComponent', 'selector': 'app-department'},{'name': 'EditEvidenceComponent', 'selector': 'app-edit-evidence'},{'name': 'EvidenceComponent', 'selector': 'evidence'},{'name': 'EvidenceDocumentComponent', 'selector': 'evidence-document'},{'name': 'EvidenceImageComponent', 'selector': 'evidence-image'},{'name': 'EvidenceLinkComponent', 'selector': 'evidence-link'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndicatorsComponent', 'selector': 'indicators'},{'name': 'InformationCollectionViewComponent', 'selector': 'app-information-collection-view'},{'name': 'InformationRecopilationComponent', 'selector': 'app-information-recopilation'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MatrixComponent', 'selector': 'app-matrix'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'PreviewComponent', 'selector': 'app-information-recopilation'},{'name': 'RecommendCategoriesDepartmentComponent', 'selector': 'app-recommend-categories-department'},{'name': 'RecopilationComponent', 'selector': 'app-recopilation'},{'name': 'RecordsCategoryBodyComponent', 'selector': 'app-records-category-body'},{'name': 'RecordsCategoryHeaderComponent', 'selector': 'app-records-category-header'},{'name': 'RecordsComponent', 'selector': 'app-records'},{'name': 'SchemeComponent', 'selector': 'app-scheme'},{'name': 'SelectDepartmentsComponent', 'selector': 'app-select-departments'},{'name': 'SelectIndicatorsCategoriesCriteriaComponent', 'selector': 'app-select-indicators-categories-criteria'},{'name': 'SidenavComponent', 'selector': 'sidenav'},{'name': 'StatisticsComponent', 'selector': 'app-statistics'},{'name': 'StepsRoutingComponent', 'selector': 'app-steps-routing'},{'name': 'Toast', 'selector': 'toast'},{'name': 'TooltipIcon', 'selector': 'tooltip-icon'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UploadOfEvidenceComponent', 'selector': 'app-upload-of-evidence'},{'name': 'ViewNotificationsComponent', 'selector': 'app-view-coordinator-notifications'},{'name': 'WordGenerationModalComponent', 'selector': 'app-word-generation-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CollectionOfInformationComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CollectionOfInformationComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

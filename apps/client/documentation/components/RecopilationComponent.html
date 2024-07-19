@@ -1,0 +1,1393 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">client documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  RecopilationComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/core/recopilation/recopilation.component.ts</code>
+</p>
+
+
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code>ConfirmationService</code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-recopilation</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>ButtonModule</code>
+                            <code>PanelModule</code>
+                            <code>ConfirmDialogModule</code>
+                            <code>DialogModule</code>
+                            <code>TooltipModule</code>
+                            <code>ButtonModule</code>
+                            <code>ScrollTopModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./recopilation.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#activeRecopilations" >activeRecopilations</a>
+                            </li>
+                            <li>
+                                <a href="#finishedRecopilations" >finishedRecopilations</a>
+                            </li>
+                            <li>
+                                <a href="#inCreationRecopilations" >inCreationRecopilations</a>
+                            </li>
+                            <li>
+                                <a href="#upcomingRecopilations" >upcomingRecopilations</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#confirmRecopilationDeletion" >confirmRecopilationDeletion</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#loadRecopilations" >loadRecopilations</a>
+                            </li>
+                            <li>
+                                <a href="#navigateContinueSteps" >navigateContinueSteps</a>
+                            </li>
+                            <li>
+                                <a href="#navigateRecopilationDetails" >navigateRecopilationDetails</a>
+                            </li>
+                            <li>
+                                <a href="#navigateStepsCreate" >navigateStepsCreate</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#onDelete" >onDelete</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(router: Router, recopilationService: <a href="../injectables/RecopilationService.html" target="_self">RecopilationService</a>, confirmationService: ConfirmationService, toast: <a href="../components/Toast.html" target="_self">Toast</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>router</td>
+                                                  
+                                                        <td>
+                                                                    <code>Router</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>recopilationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/RecopilationService.html" target="_self" >RecopilationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>confirmationService</td>
+                                                  
+                                                        <td>
+                                                                    <code>ConfirmationService</code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>toast</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../components/Toast.html" target="_self" >Toast</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="confirmRecopilationDeletion"></a>
+                    <span class="name">
+                        <span ><b>confirmRecopilationDeletion</b></span>
+                        <a href="#confirmRecopilationDeletion"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>confirmRecopilationDeletion(event: Event, id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="67"
+                                    class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:67</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>name</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="loadRecopilations"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>loadRecopilations</b></span>
+                        <a href="#loadRecopilations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>loadRecopilations()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="46"
+                                    class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:46</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateContinueSteps"></a>
+                    <span class="name">
+                        <span ><b>navigateContinueSteps</b></span>
+                        <a href="#navigateContinueSteps"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateContinueSteps(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateRecopilationDetails"></a>
+                    <span class="name">
+                        <span ><b>navigateRecopilationDetails</b></span>
+                        <a href="#navigateRecopilationDetails"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateRecopilationDetails(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="119"
+                                    class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:119</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="navigateStepsCreate"></a>
+                    <span class="name">
+                        <span ><b>navigateStepsCreate</b></span>
+                        <a href="#navigateStepsCreate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>navigateStepsCreate()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="107"
+                                    class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:107</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="42"
+                                    class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:42</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onDelete"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>onDelete</b></span>
+                        <a href="#onDelete"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>onDelete(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="87"
+                                    class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:87</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="activeRecopilations"></a>
+                    <span class="name">
+                        <span ><b>activeRecopilations</b></span>
+                        <a href="#activeRecopilations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Array&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="39" class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:39</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="finishedRecopilations"></a>
+                    <span class="name">
+                        <span ><b>finishedRecopilations</b></span>
+                        <a href="#finishedRecopilations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Array&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="40" class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:40</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="inCreationRecopilations"></a>
+                    <span class="name">
+                        <span ><b>inCreationRecopilations</b></span>
+                        <a href="#inCreationRecopilations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Array&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="37" class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:37</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="upcomingRecopilations"></a>
+                    <span class="name">
+                        <span ><b>upcomingRecopilations</b></span>
+                        <a href="#upcomingRecopilations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Array&lt;&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="38" class="link-to-prism">src/app/core/recopilation/recopilation.component.ts:38</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Inject } from &#x27;@angular/core&#x27;
+import { Router } from &#x27;@angular/router&#x27;
+import { ButtonModule } from &#x27;primeng/button&#x27;
+import { Recopilation } from &#x27;../../../shared/types/recopilation.type&#x27;
+import { RecopilationService } from &#x27;../../services/recopilation.service&#x27;
+import { PanelModule } from &#x27;primeng/panel&#x27;
+import { ConfirmDialogModule } from &#x27;primeng/confirmdialog&#x27;
+import { ConfirmationService } from &#x27;primeng/api&#x27;
+import { Toast } from &#x27;../../common/toast/toast.component&#x27;
+import { DialogModule } from &#x27;primeng/dialog&#x27;
+import { TooltipModule } from &#x27;primeng/tooltip&#x27;
+import { ScrollTopModule } from &#x27;primeng/scrolltop&#x27;
+
+@Component({
+  selector: &#x27;app-recopilation&#x27;,
+  standalone: true,
+  imports: [
+    ButtonModule,
+    PanelModule,
+    ConfirmDialogModule,
+    DialogModule,
+    TooltipModule,
+    ButtonModule,
+    ScrollTopModule
+  ],
+  providers: [ConfirmationService],
+  templateUrl: &#x27;./recopilation.component.html&#x27;
+})
+export class RecopilationComponent {
+  constructor(
+    private router: Router,
+    private readonly recopilationService: RecopilationService,
+    private readonly confirmationService: ConfirmationService,
+    @Inject(Toast) private toast: Toast
+  ) {}
+
+  inCreationRecopilations: Array&lt;Recopilation &amp; { isReady: boolean }&gt; &#x3D; []
+  upcomingRecopilations: Array&lt;Recopilation &amp; { isReady: boolean }&gt; &#x3D; []
+  activeRecopilations: Array&lt;Recopilation &amp; { isReady: boolean }&gt; &#x3D; []
+  finishedRecopilations: Array&lt;Recopilation &amp; { isReady: boolean }&gt; &#x3D; []
+
+  ngOnInit() {
+    this.loadRecopilations()
+  }
+
+  private loadRecopilations() {
+    this.recopilationService.getAll().subscribe((recopilations) &#x3D;&gt; {
+      recopilations.forEach((recopilation) &#x3D;&gt; {
+        if (!recopilation.isReady) {
+          this.inCreationRecopilations.push(recopilation)
+        } else if (
+          new Date(recopilation.endDate).getTime() &gt; new Date().getTime() &amp;&amp;
+          new Date(recopilation.startDate).getTime() &gt; new Date().getTime()
+        ) {
+          this.upcomingRecopilations.push(recopilation)
+        } else if (
+          new Date(recopilation.endDate).getTime() &lt; new Date().getTime()
+        ) {
+          this.finishedRecopilations.push(recopilation)
+        } else {
+          this.activeRecopilations.push(recopilation)
+        }
+      })
+    })
+  }
+
+  confirmRecopilationDeletion(event: Event, id: number, name: string) {
+    this.confirmationService.confirm({
+      target: event.target as EventTarget,
+      message: &#x60;¿Estás seguro de que quieres eliminar el recopilación &lt;strong&gt;${name}&lt;/strong&gt;?&#x60;,
+      header: &#x27;Eliminar recopilación&#x27;,
+      icon: &#x27;pi pi-info-circle&#x27;,
+      acceptButtonStyleClass: &#x27;p-button-danger p-button-text&#x27;,
+      rejectButtonStyleClass: &#x27;p-button-text p-button-text&#x27;,
+      acceptIcon: &#x27;none&#x27;,
+      rejectIcon: &#x27;none&#x27;,
+      acceptLabel: &#x27;Sí&#x27;,
+      rejectLabel: &#x27;No&#x27;,
+
+      accept: () &#x3D;&gt; {
+        this.toast.show(&#x27;info&#x27;, &#x27;Eliminando..&#x27;, &#x27;Eliminando recopilación..&#x27;)
+        this.onDelete(id)
+      }
+    })
+  }
+
+  private onDelete(id: number) {
+    this.recopilationService.delete(id).subscribe({
+      next: () &#x3D;&gt; {
+        this.toast.show(
+          &#x27;success&#x27;,
+          &#x27;Eliminado&#x27;,
+          &#x27;Recopilación eliminada con éxito&#x27;
+        )
+        this.loadRecopilations()
+      },
+      error: (e) &#x3D;&gt; {
+        if (e.error.data !&#x3D; null) {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.data.message)
+        } else {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.message)
+        }
+      }
+    })
+  }
+
+  navigateStepsCreate() {
+    this.router.navigateByUrl(
+      &#x27;pages/recopilations/steps-create/information-recopilation&#x27;
+    )
+  }
+
+  navigateContinueSteps(id: number) {
+    this.router.navigateByUrl(
+      &#x60;pages/recopilations/steps-create/information-recopilation/${id}&#x60;
+    )
+  }
+
+  navigateRecopilationDetails(id: number) {
+    this.router.navigateByUrl(&#x60;pages/recopilations/steps-create/preview/${id}&#x60;)
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;main class&#x3D;&quot;flex flex-column p-4&quot;&gt;
+  &lt;header class&#x3D;&quot;flex flex-row justify-content-between align-items-center pb-4&quot;&gt;
+    &lt;h2&gt;Recopilaciones&lt;/h2&gt;
+    &lt;p-button
+      (click)&#x3D;&quot;navigateStepsCreate()&quot;
+      styleClass&#x3D;&quot;bg-primary border-primary mr-4&quot;
+      label&#x3D;&quot;Crear&quot;
+      icon&#x3D;&quot;pi pi-plus&quot;
+      size&#x3D;&quot;small&quot;
+    /&gt;
+  &lt;/header&gt;
+  &lt;section class&#x3D;&quot;flex flex-column&quot;&gt;
+    @if (inCreationRecopilations.length &gt; 0) {
+      &lt;h3 class&#x3D;&quot;text-xl mt-0&quot;&gt;
+        En Creación ({{ inCreationRecopilations.length }})
+      &lt;/h3&gt;
+    }
+    @for (recopilation of inCreationRecopilations; track recopilation.id) {
+      &lt;p-panel&gt;
+        &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+          &lt;section
+            class&#x3D;&quot;flex flex-row justify-content-between align-items-center w-full gap-4&quot;
+          &gt;
+            &lt;h2 style&#x3D;&quot;word-break: break-word&quot; class&#x3D;&quot;text-xl&quot;&gt;
+              {{ recopilation.name }}
+              {{ recopilation.isReady ? &#x27;&#x27; : &#x27;(Por completar)&#x27; }}
+            &lt;/h2&gt;
+
+            &lt;div class&#x3D;&quot;flex flex-row gap-3&quot;&gt;
+              @if (!recopilation.isReady) {
+                &lt;p-button
+                  severity&#x3D;&quot;info&quot;
+                  icon&#x3D;&quot;pi pi-play&quot;
+                  rounded&#x3D;&quot;true&quot;
+                  outlined&#x3D;&quot;true&quot;
+                  pTooltip&#x3D;&quot;Continuar&quot;
+                  (click)&#x3D;&quot;navigateContinueSteps(recopilation.id)&quot;
+                /&gt;
+              } @else {
+                &lt;p-button
+                  severity&#x3D;&quot;success&quot;
+                  pTooltip&#x3D;&quot;Ver Detalles&quot;
+                  icon&#x3D;&quot;pi pi-eye&quot;
+                  rounded&#x3D;&quot;true&quot;
+                  outlined&#x3D;&quot;true&quot;
+                  (click)&#x3D;&quot;navigateRecopilationDetails(recopilation.id)&quot;
+                /&gt;
+              }
+              &lt;p-button
+                severity&#x3D;&quot;warning&quot;
+                pTooltip&#x3D;&quot;Eliminar&quot;
+                icon&#x3D;&quot;pi pi-trash&quot;
+                rounded&#x3D;&quot;true&quot;
+                outlined&#x3D;&quot;true&quot;
+                (click)&#x3D;&quot;
+                  confirmRecopilationDeletion(
+                    $event,
+                    recopilation.id,
+                    recopilation.name
+                  )
+                &quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/section&gt;
+        &lt;/ng-template&gt;
+        &lt;p class&#x3D;&quot;m-0 pb-3&quot; style&#x3D;&quot;max-width: 80vw&quot;&gt;
+          {{ recopilation.description }}
+        &lt;/p&gt;
+      &lt;/p-panel&gt;
+    }
+
+    @if (activeRecopilations.length &gt; 0) {
+      &lt;h3 class&#x3D;&quot;text-xl&quot;&gt;Activas ({{ activeRecopilations.length }})&lt;/h3&gt;
+    }
+    @for (recopilation of activeRecopilations; track recopilation.id) {
+      &lt;p-panel&gt;
+        &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+          &lt;section
+            class&#x3D;&quot;flex flex-row justify-content-between align-items-center w-full gap-4&quot;
+          &gt;
+            &lt;h2 style&#x3D;&quot;word-break: break-word&quot; class&#x3D;&quot;text-xl&quot;&gt;
+              {{ recopilation.name }}
+              {{ recopilation.isReady ? &#x27;&#x27; : &#x27;(Por completar)&#x27; }}
+            &lt;/h2&gt;
+
+            &lt;div class&#x3D;&quot;flex flex-row gap-3&quot;&gt;
+              @if (!recopilation.isReady) {
+                &lt;p-button
+                  severity&#x3D;&quot;info&quot;
+                  icon&#x3D;&quot;pi pi-play&quot;
+                  rounded&#x3D;&quot;true&quot;
+                  outlined&#x3D;&quot;true&quot;
+                  pTooltip&#x3D;&quot;Continuar&quot;
+                  (click)&#x3D;&quot;navigateContinueSteps(recopilation.id)&quot;
+                /&gt;
+              } @else {
+                &lt;p-button
+                  severity&#x3D;&quot;success&quot;
+                  pTooltip&#x3D;&quot;Ver Detalles&quot;
+                  icon&#x3D;&quot;pi pi-eye&quot;
+                  rounded&#x3D;&quot;true&quot;
+                  outlined&#x3D;&quot;true&quot;
+                  (click)&#x3D;&quot;navigateRecopilationDetails(recopilation.id)&quot;
+                /&gt;
+              }
+              &lt;p-button
+                severity&#x3D;&quot;warning&quot;
+                pTooltip&#x3D;&quot;Eliminar&quot;
+                icon&#x3D;&quot;pi pi-trash&quot;
+                rounded&#x3D;&quot;true&quot;
+                outlined&#x3D;&quot;true&quot;
+                (click)&#x3D;&quot;
+                  confirmRecopilationDeletion(
+                    $event,
+                    recopilation.id,
+                    recopilation.name
+                  )
+                &quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/section&gt;
+        &lt;/ng-template&gt;
+        &lt;p class&#x3D;&quot;m-0 pb-3&quot; style&#x3D;&quot;max-width: 80vw&quot;&gt;
+          {{ recopilation.description }}
+        &lt;/p&gt;
+      &lt;/p-panel&gt;
+    }
+
+    @if (upcomingRecopilations.length &gt; 0) {
+      &lt;h3 class&#x3D;&quot;text-xl&quot;&gt;Próximas ({{ upcomingRecopilations.length }})&lt;/h3&gt;
+    }
+    @for (recopilation of upcomingRecopilations; track recopilation.id) {
+      &lt;p-panel&gt;
+        &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+          &lt;section
+            class&#x3D;&quot;flex flex-row justify-content-between align-items-center w-full gap-4&quot;
+          &gt;
+            &lt;h2 style&#x3D;&quot;word-break: break-word&quot; class&#x3D;&quot;text-xl&quot;&gt;
+              {{ recopilation.name }}
+              {{ recopilation.isReady ? &#x27;&#x27; : &#x27;(Por completar)&#x27; }}
+            &lt;/h2&gt;
+
+            &lt;div class&#x3D;&quot;flex flex-row gap-3&quot;&gt;
+              @if (!recopilation.isReady) {
+                &lt;p-button
+                  severity&#x3D;&quot;info&quot;
+                  icon&#x3D;&quot;pi pi-play&quot;
+                  rounded&#x3D;&quot;true&quot;
+                  outlined&#x3D;&quot;true&quot;
+                  pTooltip&#x3D;&quot;Continuar&quot;
+                  (click)&#x3D;&quot;navigateContinueSteps(recopilation.id)&quot;
+                /&gt;
+              } @else {
+                &lt;p-button
+                  severity&#x3D;&quot;success&quot;
+                  pTooltip&#x3D;&quot;Ver Detalles&quot;
+                  icon&#x3D;&quot;pi pi-eye&quot;
+                  rounded&#x3D;&quot;true&quot;
+                  outlined&#x3D;&quot;true&quot;
+                  (click)&#x3D;&quot;navigateRecopilationDetails(recopilation.id)&quot;
+                /&gt;
+              }
+              &lt;p-button
+                severity&#x3D;&quot;warning&quot;
+                pTooltip&#x3D;&quot;Eliminar&quot;
+                icon&#x3D;&quot;pi pi-trash&quot;
+                rounded&#x3D;&quot;true&quot;
+                outlined&#x3D;&quot;true&quot;
+                (click)&#x3D;&quot;
+                  confirmRecopilationDeletion(
+                    $event,
+                    recopilation.id,
+                    recopilation.name
+                  )
+                &quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/section&gt;
+        &lt;/ng-template&gt;
+        &lt;p class&#x3D;&quot;m-0 pb-3&quot; style&#x3D;&quot;max-width: 80vw&quot;&gt;
+          {{ recopilation.description }}
+        &lt;/p&gt;
+      &lt;/p-panel&gt;
+    }
+
+    @if (finishedRecopilations.length &gt; 0) {
+      &lt;h3 class&#x3D;&quot;text-xl&quot;&gt;Finalizadas ({{ finishedRecopilations.length }})&lt;/h3&gt;
+    }
+    @for (recopilation of finishedRecopilations; track recopilation.id) {
+      &lt;p-panel&gt;
+        &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+          &lt;section
+            class&#x3D;&quot;flex flex-row justify-content-between align-items-center w-full gap-4&quot;
+          &gt;
+            &lt;h2 style&#x3D;&quot;word-break: break-word&quot; class&#x3D;&quot;text-xl&quot;&gt;
+              {{ recopilation.name }}
+              {{ recopilation.isReady ? &#x27;&#x27; : &#x27;(Por completar)&#x27; }}
+            &lt;/h2&gt;
+
+            &lt;div class&#x3D;&quot;flex flex-row gap-3&quot;&gt;
+              @if (!recopilation.isReady) {
+                &lt;p-button
+                  severity&#x3D;&quot;info&quot;
+                  icon&#x3D;&quot;pi pi-play&quot;
+                  rounded&#x3D;&quot;true&quot;
+                  outlined&#x3D;&quot;true&quot;
+                  pTooltip&#x3D;&quot;Continuar&quot;
+                  (click)&#x3D;&quot;navigateContinueSteps(recopilation.id)&quot;
+                /&gt;
+              } @else {
+                &lt;p-button
+                  severity&#x3D;&quot;success&quot;
+                  pTooltip&#x3D;&quot;Ver Detalles&quot;
+                  icon&#x3D;&quot;pi pi-eye&quot;
+                  rounded&#x3D;&quot;true&quot;
+                  outlined&#x3D;&quot;true&quot;
+                  (click)&#x3D;&quot;navigateRecopilationDetails(recopilation.id)&quot;
+                /&gt;
+              }
+              &lt;p-button
+                severity&#x3D;&quot;warning&quot;
+                pTooltip&#x3D;&quot;Eliminar&quot;
+                icon&#x3D;&quot;pi pi-trash&quot;
+                rounded&#x3D;&quot;true&quot;
+                outlined&#x3D;&quot;true&quot;
+                (click)&#x3D;&quot;
+                  confirmRecopilationDeletion(
+                    $event,
+                    recopilation.id,
+                    recopilation.name
+                  )
+                &quot;
+              /&gt;
+            &lt;/div&gt;
+          &lt;/section&gt;
+        &lt;/ng-template&gt;
+        &lt;p class&#x3D;&quot;m-0 pb-3&quot; style&#x3D;&quot;max-width: 80vw&quot;&gt;
+          {{ recopilation.description }}
+        &lt;/p&gt;
+      &lt;/p-panel&gt;
+    }
+  &lt;/section&gt;
+  &lt;p-scrollTop icon&#x3D;&quot;pi pi-chevron-up&quot; /&gt;
+&lt;/main&gt;
+&lt;p-confirmDialog /&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><main class="flex flex-column p-4">  <header class="flex flex-row justify-content-between align-items-center pb-4">    <h2>Recopilaciones</h2>    <p-button      (click)="navigateStepsCreate()"      styleClass="bg-primary border-primary mr-4"      label="Crear"      icon="pi pi-plus"      size="small"    />  </header>  <section class="flex flex-column">    @if (inCreationRecopilations.length > 0) {      <h3 class="text-xl mt-0">        En Creación ({{ inCreationRecopilations.length }})      </h3>    }    @for (recopilation of inCreationRecopilations; track recopilation.id) {      <p-panel>        <ng-template pTemplate="header">          <section            class="flex flex-row justify-content-between align-items-center w-full gap-4"          >            <h2 style="word-break: break-word" class="text-xl">              {{ recopilation.name }}              {{ recopilation.isReady ? \'\' : \'(Por completar)\' }}            </h2>            <div class="flex flex-row gap-3">              @if (!recopilation.isReady) {                <p-button                  severity="info"                  icon="pi pi-play"                  rounded="true"                  outlined="true"                  pTooltip="Continuar"                  (click)="navigateContinueSteps(recopilation.id)"                />              } @else {                <p-button                  severity="success"                  pTooltip="Ver Detalles"                  icon="pi pi-eye"                  rounded="true"                  outlined="true"                  (click)="navigateRecopilationDetails(recopilation.id)"                />              }              <p-button                severity="warning"                pTooltip="Eliminar"                icon="pi pi-trash"                rounded="true"                outlined="true"                (click)="                  confirmRecopilationDeletion(                    $event,                    recopilation.id,                    recopilation.name                  )                "              />            </div>          </section>        </ng-template>        <p class="m-0 pb-3" style="max-width: 80vw">          {{ recopilation.description }}        </p>      </p-panel>    }    @if (activeRecopilations.length > 0) {      <h3 class="text-xl">Activas ({{ activeRecopilations.length }})</h3>    }    @for (recopilation of activeRecopilations; track recopilation.id) {      <p-panel>        <ng-template pTemplate="header">          <section            class="flex flex-row justify-content-between align-items-center w-full gap-4"          >            <h2 style="word-break: break-word" class="text-xl">              {{ recopilation.name }}              {{ recopilation.isReady ? \'\' : \'(Por completar)\' }}            </h2>            <div class="flex flex-row gap-3">              @if (!recopilation.isReady) {                <p-button                  severity="info"                  icon="pi pi-play"                  rounded="true"                  outlined="true"                  pTooltip="Continuar"                  (click)="navigateContinueSteps(recopilation.id)"                />              } @else {                <p-button                  severity="success"                  pTooltip="Ver Detalles"                  icon="pi pi-eye"                  rounded="true"                  outlined="true"                  (click)="navigateRecopilationDetails(recopilation.id)"                />              }              <p-button                severity="warning"                pTooltip="Eliminar"                icon="pi pi-trash"                rounded="true"                outlined="true"                (click)="                  confirmRecopilationDeletion(                    $event,                    recopilation.id,                    recopilation.name                  )                "              />            </div>          </section>        </ng-template>        <p class="m-0 pb-3" style="max-width: 80vw">          {{ recopilation.description }}        </p>      </p-panel>    }    @if (upcomingRecopilations.length > 0) {      <h3 class="text-xl">Próximas ({{ upcomingRecopilations.length }})</h3>    }    @for (recopilation of upcomingRecopilations; track recopilation.id) {      <p-panel>        <ng-template pTemplate="header">          <section            class="flex flex-row justify-content-between align-items-center w-full gap-4"          >            <h2 style="word-break: break-word" class="text-xl">              {{ recopilation.name }}              {{ recopilation.isReady ? \'\' : \'(Por completar)\' }}            </h2>            <div class="flex flex-row gap-3">              @if (!recopilation.isReady) {                <p-button                  severity="info"                  icon="pi pi-play"                  rounded="true"                  outlined="true"                  pTooltip="Continuar"                  (click)="navigateContinueSteps(recopilation.id)"                />              } @else {                <p-button                  severity="success"                  pTooltip="Ver Detalles"                  icon="pi pi-eye"                  rounded="true"                  outlined="true"                  (click)="navigateRecopilationDetails(recopilation.id)"                />              }              <p-button                severity="warning"                pTooltip="Eliminar"                icon="pi pi-trash"                rounded="true"                outlined="true"                (click)="                  confirmRecopilationDeletion(                    $event,                    recopilation.id,                    recopilation.name                  )                "              />            </div>          </section>        </ng-template>        <p class="m-0 pb-3" style="max-width: 80vw">          {{ recopilation.description }}        </p>      </p-panel>    }    @if (finishedRecopilations.length > 0) {      <h3 class="text-xl">Finalizadas ({{ finishedRecopilations.length }})</h3>    }    @for (recopilation of finishedRecopilations; track recopilation.id) {      <p-panel>        <ng-template pTemplate="header">          <section            class="flex flex-row justify-content-between align-items-center w-full gap-4"          >            <h2 style="word-break: break-word" class="text-xl">              {{ recopilation.name }}              {{ recopilation.isReady ? \'\' : \'(Por completar)\' }}            </h2>            <div class="flex flex-row gap-3">              @if (!recopilation.isReady) {                <p-button                  severity="info"                  icon="pi pi-play"                  rounded="true"                  outlined="true"                  pTooltip="Continuar"                  (click)="navigateContinueSteps(recopilation.id)"                />              } @else {                <p-button                  severity="success"                  pTooltip="Ver Detalles"                  icon="pi pi-eye"                  rounded="true"                  outlined="true"                  (click)="navigateRecopilationDetails(recopilation.id)"                />              }              <p-button                severity="warning"                pTooltip="Eliminar"                icon="pi pi-trash"                rounded="true"                outlined="true"                (click)="                  confirmRecopilationDeletion(                    $event,                    recopilation.id,                    recopilation.name                  )                "              />            </div>          </section>        </ng-template>        <p class="m-0 pb-3" style="max-width: 80vw">          {{ recopilation.description }}        </p>      </p-panel>    }  </section>  <p-scrollTop icon="pi pi-chevron-up" /></main><p-confirmDialog /></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BodyComponent', 'selector': 'app-body'},{'name': 'CategoryComponent', 'selector': 'categories'},{'name': 'CategorySelectorComponent', 'selector': 'app-category-selector'},{'name': 'CollectionOfInformationComponent', 'selector': 'collection-of-information'},{'name': 'CreateEvidencesComponent', 'selector': 'create-evidences'},{'name': 'CriteriaComponent', 'selector': 'criteria'},{'name': 'CustomTdComponent', 'selector': 'custom-td'},{'name': 'DepartmentComponent', 'selector': 'app-department'},{'name': 'EditEvidenceComponent', 'selector': 'app-edit-evidence'},{'name': 'EvidenceComponent', 'selector': 'evidence'},{'name': 'EvidenceDocumentComponent', 'selector': 'evidence-document'},{'name': 'EvidenceImageComponent', 'selector': 'evidence-image'},{'name': 'EvidenceLinkComponent', 'selector': 'evidence-link'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndicatorsComponent', 'selector': 'indicators'},{'name': 'InformationCollectionViewComponent', 'selector': 'app-information-collection-view'},{'name': 'InformationRecopilationComponent', 'selector': 'app-information-recopilation'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MatrixComponent', 'selector': 'app-matrix'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'PreviewComponent', 'selector': 'app-information-recopilation'},{'name': 'RecommendCategoriesDepartmentComponent', 'selector': 'app-recommend-categories-department'},{'name': 'RecopilationComponent', 'selector': 'app-recopilation'},{'name': 'RecordsCategoryBodyComponent', 'selector': 'app-records-category-body'},{'name': 'RecordsCategoryHeaderComponent', 'selector': 'app-records-category-header'},{'name': 'RecordsComponent', 'selector': 'app-records'},{'name': 'SchemeComponent', 'selector': 'app-scheme'},{'name': 'SelectDepartmentsComponent', 'selector': 'app-select-departments'},{'name': 'SelectIndicatorsCategoriesCriteriaComponent', 'selector': 'app-select-indicators-categories-criteria'},{'name': 'SidenavComponent', 'selector': 'sidenav'},{'name': 'StatisticsComponent', 'selector': 'app-statistics'},{'name': 'StepsRoutingComponent', 'selector': 'app-steps-routing'},{'name': 'Toast', 'selector': 'toast'},{'name': 'TooltipIcon', 'selector': 'tooltip-icon'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UploadOfEvidenceComponent', 'selector': 'app-upload-of-evidence'},{'name': 'ViewNotificationsComponent', 'selector': 'app-view-coordinator-notifications'},{'name': 'WordGenerationModalComponent', 'selector': 'app-word-generation-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'RecopilationComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RecopilationComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

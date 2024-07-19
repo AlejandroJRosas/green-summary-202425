@@ -1,0 +1,1162 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>server documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">server documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >InformationCollectionsService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/core/information-collections/information-collections.service.ts</code>
+        </p>
+
+
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#create" >create</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#findAll" >findAll</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#findOne" >findOne</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getAllDepartmentsAnswers" >getAllDepartmentsAnswers</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#getDepartmentAnswer" >getDepartmentAnswer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#remove" >remove</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#update" >update</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+            <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(informationCollectionsRepository: <a href="../entitys/InformationCollection.html" target="_self">Repository&lt;InformationCollection&gt;</a>, recopilationRepository: <a href="../entitys/Recopilation.html" target="_self">Repository&lt;Recopilation&gt;</a>, departmentRepository: <a href="../classes/Department.html" target="_self">Repository&lt;Department&gt;</a>, categoryRepository: <a href="../entitys/Category.html" target="_self">Repository&lt;Category&gt;</a>, notificationsService: <a href="../injectables/NotificationsService.html" target="_self">NotificationsService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/core/information-collections/information-collections.service.ts:19</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>informationCollectionsRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/InformationCollection.html" target="_self" >Repository&lt;InformationCollection&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>recopilationRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Recopilation.html" target="_self" >Repository&lt;Recopilation&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>departmentRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../classes/Department.html" target="_self" >Repository&lt;Department&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>categoryRepository</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../entitys/Category.html" target="_self" >Repository&lt;Category&gt;</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>notificationsService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/NotificationsService.html" target="_self" >NotificationsService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="create"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>create</b></span>
+                        <a href="#create"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>create(createInformationCollectionDto: <a href="../classes/CreateInformationCollectionDto.html" target="_self">CreateInformationCollectionDto</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/core/information-collections/information-collections.service.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>createInformationCollectionDto</td>
+                                            <td>
+                                                            <code><a href="../classes/CreateInformationCollectionDto.html" target="_self" >CreateInformationCollectionDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../entitys/InformationCollection.html" target="_self" >Promise&lt;InformationCollection&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="findAll"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>findAll</b></span>
+                        <a href="#findAll"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>findAll(undefined)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="32"
+                                    class="link-to-prism">src/core/information-collections/information-collections.service.ts:32</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="findOne"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>findOne</b></span>
+                        <a href="#findOne"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>findOne(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="54"
+                                    class="link-to-prism">src/core/information-collections/information-collections.service.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../entitys/InformationCollection.html" target="_self" >Promise&lt;InformationCollection&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getAllDepartmentsAnswers"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getAllDepartmentsAnswers</b></span>
+                        <a href="#getAllDepartmentsAnswers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getAllDepartmentsAnswers(recopilationId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, categoryId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, undefined)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="82"
+                                    class="link-to-prism">src/core/information-collections/information-collections.service.ts:82</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>recopilationId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>categoryId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getDepartmentAnswer"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>getDepartmentAnswer</b></span>
+                        <a href="#getDepartmentAnswer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getDepartmentAnswer(recopilationId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, categoryId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, departmentId: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, undefined)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="61"
+                                    class="link-to-prism">src/core/information-collections/information-collections.service.ts:61</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>recopilationId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>categoryId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>departmentId</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>unknown</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="remove"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>remove</b></span>
+                        <a href="#remove"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>remove(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="227"
+                                    class="link-to-prism">src/core/information-collections/information-collections.service.ts:227</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;void&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="update"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>update</b></span>
+                        <a href="#update"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>update(id: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>, updateInformationCollectionDto: <a href="../classes/UpdateInformationCollectionDto.html" target="_self">UpdateInformationCollectionDto</a>, notifyCoordinators: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="163"
+                                    class="link-to-prism">src/core/information-collections/information-collections.service.ts:163</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>id</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>updateInformationCollectionDto</td>
+                                            <td>
+                                                            <code><a href="../classes/UpdateInformationCollectionDto.html" target="_self" >UpdateInformationCollectionDto</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>notifyCoordinators</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../entitys/InformationCollection.html" target="_self" >Promise&lt;InformationCollection&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@nestjs/common&#x27;
+import { InjectRepository } from &#x27;@nestjs/typeorm&#x27;
+import { Repository } from &#x27;typeorm&#x27;
+import { InformationCollection } from &#x27;./entities/information-collection.entity&#x27;
+import { CreateInformationCollectionDto } from &#x27;./dto/create-information-collection.dto&#x27;
+import { UpdateInformationCollectionDto } from &#x27;./dto/update-information-collection.dto&#x27;
+import { PaginationParams } from &#x27;src/shared/pagination/pagination-params.dto&#x27;
+import { FiltersSegmentDto } from &#x27;src/shared/filtering/filters-segment.dto&#x27;
+import { parseFiltersToTypeOrm } from &#x27;src/shared/filtering/parse-filters-to-type-orm&#x27;
+import { OrderTypeParamDto } from &#x27;src/shared/sorting/order-type-param.dto&#x27;
+import { OrderByParamDto } from &#x27;./dto/order-information-collections-by-param.dto&#x27;
+import { Recopilation } from &#x27;../recopilations/entities/recopilation.entity&#x27;
+import { Department } from &#x27;../users/entities/department.entity&#x27;
+import { Category } from &#x27;../categories/entities/category.entity&#x27;
+import { NotificationsService } from &#x27;../notifications/notifications.service&#x27;
+import { NOTIFICATION_TYPES } from &#x27;../notifications/notifications.constants&#x27;
+
+@Injectable()
+export class InformationCollectionsService {
+  constructor(
+    @InjectRepository(InformationCollection)
+    private informationCollectionsRepository: Repository&lt;InformationCollection&gt;,
+    @InjectRepository(Recopilation)
+    private recopilationRepository: Repository&lt;Recopilation&gt;,
+    @InjectRepository(Department)
+    private departmentRepository: Repository&lt;Department&gt;,
+    @InjectRepository(Category)
+    private categoryRepository: Repository&lt;Category&gt;,
+    private notificationsService: NotificationsService
+  ) {}
+
+  async findAll({
+    page,
+    itemsPerPage,
+    orderBy,
+    orderType,
+    filters
+  }: PaginationParams &amp;
+    OrderByParamDto &amp;
+    OrderTypeParamDto &amp;
+    FiltersSegmentDto) {
+    const [informationCollection, count] &#x3D;
+      await this.informationCollectionsRepository.findAndCount({
+        take: itemsPerPage,
+        skip: (page - 1) * itemsPerPage,
+        order: { [orderBy]: orderType },
+        where: parseFiltersToTypeOrm(filters),
+        relations: [&#x27;evidences&#x27;, &#x27;recopilation&#x27;, &#x27;department&#x27;, &#x27;category&#x27;]
+      })
+
+    return { informationCollection, count }
+  }
+
+  async findOne(id: number): Promise&lt;InformationCollection&gt; {
+    return await this.informationCollectionsRepository.findOneOrFail({
+      where: { id },
+      relations: [&#x27;evidences&#x27;, &#x27;recopilation&#x27;, &#x27;department&#x27;, &#x27;category&#x27;]
+    })
+  }
+
+  async getDepartmentAnswer(
+    recopilationId: number,
+    categoryId: number,
+    departmentId: number,
+    { orderBy, orderType }: OrderByParamDto &amp; OrderTypeParamDto
+  ) {
+    const informationCollections &#x3D; this.informationCollectionsRepository.find({
+      relations: [&#x27;evidences&#x27;],
+      where: {
+        recopilation: { id: recopilationId },
+        category: { id: categoryId },
+        department: { id: departmentId }
+      },
+      order: {
+        [orderBy]: orderType
+      }
+    })
+
+    return informationCollections
+  }
+
+  async getAllDepartmentsAnswers(
+    recopilationId: number,
+    categoryId: number,
+    { orderBy, orderType }: OrderByParamDto &amp; OrderTypeParamDto
+  ) {
+    const informationCollections &#x3D;
+      await this.informationCollectionsRepository.find({
+        relations: { department: true, evidences: true },
+        where: {
+          recopilation: { id: recopilationId },
+          category: { id: categoryId }
+        },
+        order: {
+          [orderBy]: orderType
+        }
+      })
+
+    const formattedInformationCollections &#x3D; []
+
+    informationCollections.forEach((ic) &#x3D;&gt; {
+      const department &#x3D; ic.department
+
+      const alreadyInsertedDepartment &#x3D; formattedInformationCollections.find(
+        (d) &#x3D;&gt; d.department.id &#x3D;&#x3D;&#x3D; department.id
+      )
+
+      if (alreadyInsertedDepartment) {
+        alreadyInsertedDepartment.informationCollections.push(ic)
+      } else {
+        formattedInformationCollections.push({
+          department,
+          informationCollections: [ic]
+        })
+      }
+    })
+
+    return formattedInformationCollections
+  }
+
+  async create(
+    createInformationCollectionDto: CreateInformationCollectionDto
+  ): Promise&lt;InformationCollection&gt; {
+    const { recopilationId, categoryId, departmentId } &#x3D;
+      createInformationCollectionDto
+
+    const [recopilation, category, department] &#x3D; await Promise.all([
+      this.recopilationRepository.findOneByOrFail({
+        id: recopilationId
+      }),
+      this.categoryRepository.findOneByOrFail({ id: categoryId }),
+      this.departmentRepository.findOneByOrFail({ id: departmentId })
+    ])
+
+    const informationCollection &#x3D; this.informationCollectionsRepository.create({
+      ...createInformationCollectionDto,
+      recopilation,
+      category,
+      department
+    })
+
+    const data &#x3D; {
+      departmentId: department.id,
+      departmentName: department.fullName,
+      recopilationId: recopilation.id,
+      recopilationName: recopilation.name,
+      categoryId: category.id,
+      categoryName: category.name
+    }
+
+    const notificationDTO &#x3D; {
+      data: data,
+      type: NOTIFICATION_TYPES.INFORMATION_COLLECTION_CREATION,
+      userId: department.id
+    }
+    await this.notificationsService.createAll(notificationDTO)
+
+    return await this.informationCollectionsRepository.save(
+      informationCollection
+    )
+  }
+
+  async update(
+    id: number,
+    updateInformationCollectionDto: UpdateInformationCollectionDto,
+    notifyCoordinators: boolean
+  ): Promise&lt;InformationCollection&gt; {
+    const { recopilationId, categoryId, departmentId } &#x3D;
+      updateInformationCollectionDto
+
+    const [recopilation, category, department] &#x3D; await Promise.all([
+      this.recopilationRepository.findOneBy({
+        id: recopilationId
+      }),
+      this.categoryRepository.findOneBy({ id: categoryId }),
+      this.departmentRepository.findOneBy({ id: departmentId })
+    ])
+
+    const dataToUpdate: Record&lt;string, any&gt; &#x3D; {}
+
+    if (updateInformationCollectionDto.name) {
+      dataToUpdate.name &#x3D; updateInformationCollectionDto.name
+    }
+    if (updateInformationCollectionDto.summary) {
+      dataToUpdate.summary &#x3D; updateInformationCollectionDto.summary
+    }
+    if (updateInformationCollectionDto.isApproved) {
+      dataToUpdate.isApproved &#x3D; updateInformationCollectionDto.isApproved
+    }
+    if (updateInformationCollectionDto.recopilationId) {
+      dataToUpdate.recopilation &#x3D; recopilation
+    }
+    if (updateInformationCollectionDto.categoryId) {
+      dataToUpdate.category &#x3D; category
+    }
+    if (updateInformationCollectionDto.departmentId) {
+      dataToUpdate.department &#x3D; department
+    }
+
+    await this.informationCollectionsRepository.update(id, dataToUpdate)
+
+    const collectionData &#x3D;
+      await this.informationCollectionsRepository.findOneByOrFail({ id })
+    const data &#x3D; {
+      collectionId: collectionData.id,
+      collectionName: collectionData.name,
+      departmentId: department.id,
+      departmentName: department.fullName,
+      recopilationId: recopilation.id,
+      recopilationName: recopilation.name,
+      categoryId: category.id,
+      categoryName: category.name
+    }
+
+    if (notifyCoordinators) {
+      const notificationDTO &#x3D; {
+        data: data,
+        type: NOTIFICATION_TYPES.INFORMATION_COLLECTION_EDITION,
+        userId: department.id
+      }
+      await this.notificationsService.createAll(notificationDTO)
+    }
+
+    return this.informationCollectionsRepository.findOneByOrFail({ id })
+  }
+
+  async remove(id: number): Promise&lt;void&gt; {
+    await this.informationCollectionsRepository.delete(id)
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'InformationCollectionsService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

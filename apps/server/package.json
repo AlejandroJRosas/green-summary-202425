@@ -17,7 +17,9 @@
     "test:watch": "jest --watch",
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
-    "test:e2e": "jest --config ./test/jest-e2e.json"
+    "test:e2e": "jest --config ./test/jest-e2e.json",
+    "generate:docs": "compodoc -p tsconfig.doc.json",
+    "serve:docs": "compodoc -s -d ./documentation"
   },
   "dependencies": {
     "@nestjs-modules/mailer": "^2.0.2",
@@ -52,6 +54,7 @@
     "typeorm": "^0.3.20"
   },
   "devDependencies": {
+    "@compodoc/compodoc": "^1.1.25",
     "@nestjs/cli": "^10.0.0",
     "@nestjs/schematics": "^10.0.0",
     "@nestjs/testing": "^10.0.0",

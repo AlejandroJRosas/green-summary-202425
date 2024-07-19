@@ -1,0 +1,420 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">client documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  IndicatorByRecopilation</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/services/indicator.service.ts</code>
+        </p>
+
+
+
+            <p class="comment">
+                <h3>Extends</h3>
+            </p>
+            <p class="comment">
+                            <code><a href="../interfaces/Indicator.html" target="_self" >Indicator</a></code>
+            </p>
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#categories" 
+>
+                                            categories
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="categories"></a>
+                                        <span class="name "><b>categories</b>
+                                            <a href="#categories">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>categories:         <code><a href="../miscellaneous/typealiases.html#Recopilation" target="_self" >CategoryByRecopilation[]</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#Recopilation" target="_self" >CategoryByRecopilation[]</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable } from &#x27;@angular/core&#x27;
+import { HttpClient } from &#x27;@angular/common/http&#x27;
+import { BaseUrl } from &#x27;../../config&#x27;
+import { Observable, forkJoin, map, switchMap } from &#x27;rxjs&#x27;
+import { PaginatedResponse } from &#x27;../../shared/types/paginated-response.type&#x27;
+import { BackendResponse } from &#x27;../../shared/types/http-response.type&#x27;
+import { Indicator } from &#x27;../../shared/types/indicator.type&#x27;
+import { Category } from &#x27;../../shared/types/category.type&#x27;
+import { Criteria } from &#x27;../../shared/types/criterion.type&#x27;
+import { CategoryService } from &#x27;./category.service&#x27;
+import { CriteriaService } from &#x27;./criteria.service&#x27;
+
+@Injectable({
+  providedIn: &#x27;root&#x27;
+})
+export class IndicatorService {
+  constructor(
+    private http: HttpClient,
+    private categoryService: CategoryService,
+    private criterionService: CriteriaService
+  ) {}
+
+  get(
+    paginated: Paginated
+  ): Observable&lt;PaginatedResponse&lt;Indicator, unknown, unknown&gt;&gt; {
+    const { first, rows } &#x3D; paginated
+    const page &#x3D; first / rows + 1
+    return this.http.get&lt;PaginatedResponse&lt;Indicator, unknown, unknown&gt;&gt;(
+      &#x60;${BaseUrl}/indicators?itemsPerPage&#x3D;${rows}&amp;page&#x3D;${page}&amp;orderBy&#x3D;index&amp;orderType&#x3D;ASC&#x60;
+    )
+  }
+
+  getAll(): Observable&lt;Indicator[]&gt; {
+    return this.http
+      .get&lt;
+        PaginatedResponse&lt;Indicator, unknown, unknown&gt;
+      &gt;(&#x60;${BaseUrl}/indicators?itemsPerPage&#x3D;999&amp;orderBy&#x3D;index&amp;orderType&#x3D;ASC&#x60;)
+      .pipe(
+        map((response) &#x3D;&gt;
+          response.status &#x3D;&#x3D;&#x3D; &#x27;success&#x27; ? response.data.items : []
+        )
+      )
+  }
+
+  getAllIndicators(): Observable&lt;Scheme[]&gt; {
+    return this.getAll().pipe(
+      switchMap((indicators) &#x3D;&gt; {
+        const indicatorObservables &#x3D; indicators.map((i) &#x3D;&gt; {
+          const categories$ &#x3D;
+            this.categoryService.getAllCategoriesByIndicatorIndex(i.index)
+          const criterias$ &#x3D;
+            this.criterionService.getAllCriterionByIndicatorIndex(i.index)
+
+          return forkJoin([categories$, criterias$]).pipe(
+            map(([categories, criterias]) &#x3D;&gt; ({
+              ...i,
+              categories:
+                categories.status &#x3D;&#x3D;&#x3D; &#x27;success&#x27; ? categories.data : [],
+              criterias: criterias.status &#x3D;&#x3D;&#x3D; &#x27;success&#x27; ? criterias.data : []
+            }))
+          )
+        })
+
+        const result &#x3D; forkJoin(indicatorObservables)
+        return result
+      })
+    )
+  }
+
+  getById(
+    id: number
+  ): Observable&lt;BackendResponse&lt;Indicator, unknown, unknown&gt;&gt; {
+    return this.http.get&lt;BackendResponse&lt;Indicator, unknown, unknown&gt;&gt;(
+      &#x60;${BaseUrl}/indicators/${id}&#x60;
+    )
+  }
+
+  getByRecopilation(
+    recopilationId: number
+  ): Observable&lt;IndicatorByRecopilation[]&gt; {
+    return this.http
+      .get&lt;
+        BackendResponse&lt;IndicatorByRecopilation[], unknown, unknown&gt;
+      &gt;(&#x60;${BaseUrl}/indicators/recopilation/${recopilationId}&#x60;)
+      .pipe(
+        map((response) &#x3D;&gt; (response.status &#x3D;&#x3D;&#x3D; &#x27;success&#x27; ? response.data : []))
+      )
+  }
+
+  create(
+    indicator: CreateIndicatorDTO
+  ): Observable&lt;BackendResponse&lt;Indicator, unknown, unknown&gt;&gt; {
+    return this.http.post&lt;BackendResponse&lt;Indicator, unknown, unknown&gt;&gt;(
+      &#x60;${BaseUrl}/indicators&#x60;,
+      indicator
+    )
+  }
+
+  edit(
+    id: number,
+    indicator: CreateIndicatorDTO
+  ): Observable&lt;BackendResponse&lt;Indicator, unknown, unknown&gt;&gt; {
+    return this.http.patch&lt;BackendResponse&lt;Indicator, unknown, unknown&gt;&gt;(
+      &#x60;${BaseUrl}/indicators/${id}&#x60;,
+      indicator
+    )
+  }
+
+  delete(id: number): Observable&lt;void&gt; {
+    return this.http.delete&lt;void&gt;(&#x60;${BaseUrl}/indicators/${id}&#x60;)
+  }
+}
+
+export type CreateIndicatorDTO &#x3D; Indicator
+
+type Paginated &#x3D; {
+  first: number
+  rows: number
+}
+
+export type Scheme &#x3D; Indicator &amp; {
+  categories: Category[]
+  criterias: Criteria[]
+}
+
+export interface IndicatorByRecopilation extends Indicator {
+  categories: CategoryByRecopilation[]
+}
+
+export interface CategoryByRecopilation extends Omit&lt;Category, &#x27;indicator&#x27;&gt; {
+  criteria: CriterionByRecopilation[]
+}
+
+interface CriterionByRecopilation extends Omit&lt;Criteria, &#x27;indicator&#x27;&gt; {}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'IndicatorByRecopilation.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

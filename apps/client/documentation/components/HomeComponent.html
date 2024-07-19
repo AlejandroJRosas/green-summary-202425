@@ -1,0 +1,1494 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>client documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">client documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  HomeComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/core/home/home.component.ts</code>
+</p>
+
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnInit</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-home</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>FormsModule</code>
+                            <code>CommonModule</code>
+                            <code>DropdownModule</code>
+                            <code>TableModule</code>
+                                <code><a href="../components/TooltipIcon.html" target="_self" >TooltipIcon</a></code>
+                            <code>TooltipModule</code>
+                            <code>RouterLink</code>
+                                <code><a href="../components/MatrixComponent.html" target="_self" >MatrixComponent</a></code>
+                            <code>ButtonModule</code>
+                            <code>DialogModule</code>
+                            <code>PanelModule</code>
+                            <code>ScrollTopModule</code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./home.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./home.component.css</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#currentUser" >currentUser</a>
+                            </li>
+                            <li>
+                                <a href="#departmentsExtraInfo" >departmentsExtraInfo</a>
+                            </li>
+                            <li>
+                                <a href="#dialogMatrixScrollHeight" >dialogMatrixScrollHeight</a>
+                            </li>
+                            <li>
+                                <a href="#dialogVisible" >dialogVisible</a>
+                            </li>
+                            <li>
+                                <a href="#matrixData" >matrixData</a>
+                            </li>
+                            <li>
+                                <a href="#recopilations" >recopilations</a>
+                            </li>
+                            <li>
+                                <a href="#selectedRecopilation" >selectedRecopilation</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#getActiveRecopilations" >getActiveRecopilations</a>
+                            </li>
+                            <li>
+                                <a href="#getMatrixData" >getMatrixData</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnInit" >ngOnInit</a>
+                            </li>
+                            <li>
+                                <a href="#onMaximize" >onMaximize</a>
+                            </li>
+                            <li>
+                                <a href="#parseDate" >parseDate</a>
+                            </li>
+                            <li>
+                                <a href="#showDialog" >showDialog</a>
+                            </li>
+                            <li>
+                                <a href="#updateLocalSelectedRecopilation" >updateLocalSelectedRecopilation</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(toast: <a href="../components/Toast.html" target="_self">Toast</a>, recopilationService: <a href="../injectables/RecopilationService.html" target="_self">RecopilationService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/core/home/home.component.ts:43</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>toast</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../components/Toast.html" target="_self" >Toast</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                                <tr>
+                                                        <td>recopilationService</td>
+                                                  
+                                                        <td>
+                                                                        <code><a href="../injectables/RecopilationService.html" target="_self" >RecopilationService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getActiveRecopilations"></a>
+                    <span class="name">
+                        <span ><b>getActiveRecopilations</b></span>
+                        <a href="#getActiveRecopilations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getActiveRecopilations()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="70"
+                                    class="link-to-prism">src/app/core/home/home.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getMatrixData"></a>
+                    <span class="name">
+                        <span ><b>getMatrixData</b></span>
+                        <a href="#getMatrixData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getMatrixData()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="113"
+                                    class="link-to-prism">src/app/core/home/home.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnInit"></a>
+                    <span class="name">
+                        <span ><b>ngOnInit</b></span>
+                        <a href="#ngOnInit"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnInit()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="66"
+                                    class="link-to-prism">src/app/core/home/home.component.ts:66</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onMaximize"></a>
+                    <span class="name">
+                        <span ><b>onMaximize</b></span>
+                        <a href="#onMaximize"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onMaximize()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="207"
+                                    class="link-to-prism">src/app/core/home/home.component.ts:207</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="parseDate"></a>
+                    <span class="name">
+                        <span ><b>parseDate</b></span>
+                        <a href="#parseDate"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>parseDate(date: string | undefined)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="215"
+                                    class="link-to-prism">src/app/core/home/home.component.ts:215</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>date</td>
+                                            <td>
+                                                        <code>string | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showDialog"></a>
+                    <span class="name">
+                        <span ><b>showDialog</b></span>
+                        <a href="#showDialog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>showDialog()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="202"
+                                    class="link-to-prism">src/app/core/home/home.component.ts:202</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="updateLocalSelectedRecopilation"></a>
+                    <span class="name">
+                        <span ><b>updateLocalSelectedRecopilation</b></span>
+                        <a href="#updateLocalSelectedRecopilation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>updateLocalSelectedRecopilation()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="105"
+                                    class="link-to-prism">src/app/core/home/home.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentUser"></a>
+                    <span class="name">
+                        <span ><b>currentUser</b></span>
+                        <a href="#currentUser"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/User.html" target="_self" >User</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>JSON.parse(localStorage.getItem(&#x27;user&#x27;)!)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/core/home/home.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="departmentsExtraInfo"></a>
+                    <span class="name">
+                        <span ><b>departmentsExtraInfo</b></span>
+                        <a href="#departmentsExtraInfo"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ExtraInfo" target="_self" >ExtraInfo</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    totalRecommendedQuantity: 0,
+    totalRecommendedAnswers: 0,
+    totalFreeQuantity: 0,
+    totalFreeAnswers: 0,
+    totalQuantity: 0,
+    totalAnswers: 0,
+    departments: []
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/core/home/home.component.ts:56</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogMatrixScrollHeight"></a>
+                    <span class="name">
+                        <span ><b>dialogMatrixScrollHeight</b></span>
+                        <a href="#dialogMatrixScrollHeight"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;calc(70vh - 1rem)&#x27;</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/core/home/home.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="dialogVisible"></a>
+                    <span class="name">
+                        <span ><b>dialogVisible</b></span>
+                        <a href="#dialogVisible"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="54" class="link-to-prism">src/app/core/home/home.component.ts:54</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="matrixData"></a>
+                    <span class="name">
+                        <span ><b>matrixData</b></span>
+                        <a href="#matrixData"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#MatrixInfoDto" target="_self" >MatrixInfoDto | undefined</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="53" class="link-to-prism">src/app/core/home/home.component.ts:53</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="recopilations"></a>
+                    <span class="name">
+                        <span ><b>recopilations</b></span>
+                        <a href="#recopilations"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#Recopilation" target="_self" >Recopilation[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/core/home/home.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectedRecopilation"></a>
+                    <span class="name">
+                        <span ><b>selectedRecopilation</b></span>
+                        <a href="#selectedRecopilation"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>Number(localStorage.getItem(&#x27;selectedRecopilation&#x27;)) ?? 0</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/core/home/home.component.ts:51</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;
+import { Component, Inject, OnInit } from &#x27;@angular/core&#x27;
+import { FormsModule } from &#x27;@angular/forms&#x27;
+import { DropdownModule } from &#x27;primeng/dropdown&#x27;
+import { TableModule } from &#x27;primeng/table&#x27;
+import {
+  MatrixInfoDto,
+  RecopilationService
+} from &#x27;../../services/recopilation.service&#x27;
+import { Recopilation } from &#x27;../../../shared/types/recopilation.type&#x27;
+import { TooltipIcon } from &#x27;../../common/tooltip-icon/tooltip-icon.component&#x27;
+import { TooltipModule } from &#x27;primeng/tooltip&#x27;
+import { RouterLink } from &#x27;@angular/router&#x27;
+import { MatrixComponent } from &#x27;./matrix/matrix.component&#x27;
+import { ButtonModule } from &#x27;primeng/button&#x27;
+import { DialogModule } from &#x27;primeng/dialog&#x27;
+import { Toast } from &#x27;../../common/toast/toast.component&#x27;
+import { User } from &#x27;../../../shared/types/user.type&#x27;
+import { PanelModule } from &#x27;primeng/panel&#x27;
+import { ScrollTopModule } from &#x27;primeng/scrolltop&#x27;
+
+@Component({
+  selector: &#x27;app-home&#x27;,
+  standalone: true,
+  imports: [
+    FormsModule,
+    CommonModule,
+    DropdownModule,
+    TableModule,
+    TooltipIcon,
+    TooltipModule,
+    RouterLink,
+    MatrixComponent,
+    ButtonModule,
+    DialogModule,
+    PanelModule,
+    ScrollTopModule
+  ],
+  templateUrl: &#x27;./home.component.html&#x27;,
+  styleUrl: &#x27;./home.component.css&#x27;
+})
+export class HomeComponent implements OnInit {
+  constructor(
+    @Inject(Toast) private toast: Toast,
+    private recopilationService: RecopilationService
+  ) {}
+
+  recopilations: Recopilation[] &#x3D; []
+  currentUser: User &#x3D; JSON.parse(localStorage.getItem(&#x27;user&#x27;)!)
+  selectedRecopilation: number &#x3D;
+    Number(localStorage.getItem(&#x27;selectedRecopilation&#x27;)) ?? 0
+  matrixData: MatrixInfoDto | undefined
+  dialogVisible: boolean &#x3D; false
+  dialogMatrixScrollHeight: string &#x3D; &#x27;calc(70vh - 1rem)&#x27;
+  departmentsExtraInfo: ExtraInfo &#x3D; {
+    totalRecommendedQuantity: 0,
+    totalRecommendedAnswers: 0,
+    totalFreeQuantity: 0,
+    totalFreeAnswers: 0,
+    totalQuantity: 0,
+    totalAnswers: 0,
+    departments: []
+  }
+
+  ngOnInit(): void {
+    this.getActiveRecopilations()
+  }
+
+  getActiveRecopilations() {
+    this.recopilationService.getActive().subscribe({
+      next: (recopilations) &#x3D;&gt; {
+        if (recopilations.status &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) {
+          this.recopilations &#x3D; recopilations.data
+          if (
+            this.recopilations.length &#x3D;&#x3D;&#x3D; 1 &amp;&amp;
+            (this.selectedRecopilation &#x3D;&#x3D;&#x3D; 0 ||
+              this.recopilations.find(
+                (recopilation) &#x3D;&gt; recopilation.id &#x3D;&#x3D;&#x3D; this.selectedRecopilation
+              ) &#x3D;&#x3D;&#x3D; undefined)
+          ) {
+            this.updateLocalSelectedRecopilation()
+            this.selectedRecopilation &#x3D; this.recopilations[0].id
+            this.getMatrixData()
+          } else if (
+            this.selectedRecopilation !&#x3D;&#x3D; 0 &amp;&amp;
+            this.recopilations.find(
+              (recopilation) &#x3D;&gt; recopilation.id &#x3D;&#x3D;&#x3D; this.selectedRecopilation
+            ) !&#x3D;&#x3D; undefined
+          ) {
+            this.getMatrixData()
+          }
+        }
+      },
+      error: (e) &#x3D;&gt; {
+        if (e.error.data.message) {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.data.message)
+        } else {
+          this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.message)
+        }
+      }
+    })
+  }
+
+  updateLocalSelectedRecopilation() {
+    localStorage.removeItem(&#x27;selectedRecopilation&#x27;)
+    localStorage.setItem(
+      &#x27;selectedRecopilation&#x27;,
+      this.selectedRecopilation.toString()
+    )
+  }
+
+  getMatrixData() {
+    if (this.selectedRecopilation) {
+      this.recopilationService
+        .getMatrixInfo(this.selectedRecopilation)
+        .subscribe({
+          next: (recopilation) &#x3D;&gt; {
+            if (recopilation) {
+              this.updateLocalSelectedRecopilation()
+              if (this.currentUser.type &#x3D;&#x3D;&#x3D; &#x27;department&#x27;) {
+                const departmentIndex &#x3D; recopilation.departments.findIndex(
+                  (item) &#x3D;&gt; item.department.id &#x3D;&#x3D;&#x3D; this.currentUser.id
+                )
+
+                const selectedDepartment &#x3D; recopilation.departments.splice(
+                  departmentIndex,
+                  1
+                )[0]
+
+                recopilation.departments.unshift(selectedDepartment)
+              }
+
+              this.departmentsExtraInfo.departments &#x3D;
+                recopilation.departments.map((department) &#x3D;&gt; {
+                  return {
+                    id: department.department.id,
+                    name: department.department.fullName,
+                    recommendedQuantity: department.answers.filter(
+                      (item) &#x3D;&gt; item.isRecommended &#x3D;&#x3D;&#x3D; true
+                    ).length,
+                    recommendedAnswers: department.answers.filter(
+                      (item) &#x3D;&gt;
+                        item.isRecommended &#x3D;&#x3D;&#x3D; true &amp;&amp; item.isAnswered &#x3D;&#x3D;&#x3D; true
+                    ).length,
+                    freeQuantity: department.answers.filter(
+                      (item) &#x3D;&gt; item.isRecommended &#x3D;&#x3D;&#x3D; false
+                    ).length,
+                    freeAnswers: department.answers.filter(
+                      (item) &#x3D;&gt;
+                        item.isRecommended &#x3D;&#x3D;&#x3D; false &amp;&amp; item.isAnswered &#x3D;&#x3D;&#x3D; true
+                    ).length,
+                    quantity: department.answers.length,
+                    answers: department.answers.filter(
+                      (item) &#x3D;&gt; item.isAnswered &#x3D;&#x3D;&#x3D; true
+                    ).length
+                  }
+                })
+
+              this.departmentsExtraInfo.totalRecommendedAnswers &#x3D;
+                this.departmentsExtraInfo.departments.reduce(
+                  (acc, item) &#x3D;&gt; acc + item.recommendedAnswers,
+                  0
+                )
+              this.departmentsExtraInfo.totalFreeAnswers &#x3D;
+                this.departmentsExtraInfo.departments.reduce(
+                  (acc, item) &#x3D;&gt; acc + item.freeAnswers,
+                  0
+                )
+              this.departmentsExtraInfo.totalRecommendedQuantity &#x3D;
+                this.departmentsExtraInfo.departments.reduce(
+                  (acc, item) &#x3D;&gt; acc + item.recommendedQuantity,
+                  0
+                )
+              this.departmentsExtraInfo.totalFreeQuantity &#x3D;
+                this.departmentsExtraInfo.departments.reduce(
+                  (acc, item) &#x3D;&gt; acc + item.freeQuantity,
+                  0
+                )
+              this.departmentsExtraInfo.totalQuantity &#x3D;
+                this.departmentsExtraInfo.totalRecommendedQuantity +
+                this.departmentsExtraInfo.totalFreeQuantity
+
+              this.departmentsExtraInfo.totalAnswers &#x3D;
+                this.departmentsExtraInfo.totalRecommendedAnswers +
+                this.departmentsExtraInfo.totalFreeAnswers
+
+              this.matrixData &#x3D; recopilation
+            }
+          },
+          error: (e) &#x3D;&gt; {
+            if (e.error.data !&#x3D; null) {
+              this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.data.message)
+            } else {
+              this.toast.show(&#x27;error&#x27;, &#x27;Error&#x27;, e.error.message)
+            }
+          }
+        })
+    }
+  }
+
+  showDialog() {
+    this.dialogMatrixScrollHeight &#x3D; &#x27;calc(70vh - 1rem)&#x27;
+    this.dialogVisible &#x3D; true
+  }
+
+  onMaximize() {
+    if (this.dialogMatrixScrollHeight &#x3D;&#x3D;&#x3D; &#x27;calc(80vh - 1rem)&#x27;) {
+      this.dialogMatrixScrollHeight &#x3D; &#x27;calc(70vh - 1rem)&#x27;
+    } else {
+      this.dialogMatrixScrollHeight &#x3D; &#x27;calc(80vh - 1rem)&#x27;
+    }
+  }
+
+  parseDate(date: string | undefined): string {
+    if (date &#x3D;&#x3D;&#x3D; undefined) {
+      return &#x27;&#x27;
+    }
+    return new Date(date).toLocaleDateString(&#x27;es-ES&#x27;, {
+      timeZone: &#x27;UTC&#x27;
+    })
+  }
+}
+
+type ExtraInfo &#x3D; {
+  totalRecommendedQuantity: number
+  totalRecommendedAnswers: number
+  totalFreeQuantity: number
+  totalFreeAnswers: number
+  totalQuantity: number
+  totalAnswers: number
+  departments: DepartmentExtraInfo[]
+}
+
+type DepartmentExtraInfo &#x3D; {
+  id: number
+  name: string
+  recommendedQuantity: number
+  recommendedAnswers: number
+  freeQuantity: number
+  freeAnswers: number
+  quantity: number
+  answers: number
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;p-4&quot;&gt;
+  @if (matrixData &#x3D;&#x3D;&#x3D; undefined) {
+    &lt;h2&gt;Matriz de Seguimiento&lt;/h2&gt;
+  } @else {
+    &lt;h2&gt;
+      Matriz de Seguimiento - {{ matrixData.name }}
+      (Inicia:
+      {{ parseDate(matrixData.startDate) }}
+      - Termina:
+      {{ parseDate(matrixData.departmentEndDate) }})
+    &lt;/h2&gt;
+  }
+  &lt;p-dropdown
+    [options]&#x3D;&quot;recopilations&quot;
+    [(ngModel)]&#x3D;&quot;selectedRecopilation&quot;
+    (onChange)&#x3D;&quot;getMatrixData()&quot;
+    optionLabel&#x3D;&quot;name&quot;
+    optionValue&#x3D;&quot;id&quot;
+    placeholder&#x3D;&quot;Selecciona una recopilación&quot;
+    [emptyMessage]&#x3D;&quot;
+      recopilations
+        ? &#x27;No hay recopilaciones activas disponibles&#x27;
+        : &#x27;Seleccione una recopilación&#x27;
+    &quot;
+  /&gt;
+  &lt;button
+    type&#x3D;&quot;button&quot;
+    class&#x3D;&quot;open-big&quot;
+    (click)&#x3D;&quot;showDialog()&quot;
+    pButton
+    pTooltip&#x3D;&quot;Abrir en ventana grande&quot;
+    severity&#x3D;&quot;success&quot;
+    [disabled]&#x3D;&quot;matrixData &#x3D;&#x3D;&#x3D; undefined&quot;
+    icon&#x3D;&quot;pi pi-external-link&quot;
+  &gt;&lt;/button&gt;
+  &lt;div class&#x3D;&quot;matrix&quot;&gt;
+    &lt;app-matrix
+      [selectedRecopilation]&#x3D;&quot;selectedRecopilation&quot;
+      [matrixData]&#x3D;&quot;matrixData&quot;
+      [matrixScrollHeight]&#x3D;&quot;&#x27;75vh&#x27;&quot;
+    &gt;&lt;/app-matrix&gt;
+  &lt;/div&gt;
+  @if (matrixData !&#x3D;&#x3D; undefined) {
+    &lt;div&gt;
+      &lt;p-panel
+        expandIcon&#x3D;&quot;pi pi-minus&quot;
+        collapseIcon&#x3D;&quot;pi pi-plus&quot;
+        [toggleable]&#x3D;&quot;true&quot;
+        collapsed&#x3D;&quot;true&quot;
+        iconPos&#x3D;&quot;start&quot;
+      &gt;
+        &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+          &lt;h2&gt;Más información&lt;/h2&gt;
+        &lt;/ng-template&gt;
+        &lt;h3&gt;
+          Cantidad de Actividades:
+          {{ matrixData.departments[0].answers.length }}
+        &lt;/h3&gt;
+        &lt;p-table [value]&#x3D;&quot;departmentsExtraInfo.departments&quot;&gt;
+          &lt;ng-template pTemplate&#x3D;&quot;header&quot;&gt;
+            &lt;tr&gt;
+              &lt;th
+                pTooltip&#x3D;&quot;Departamentos que forman parte de la recopilación&quot;
+                tooltipPosition&#x3D;&quot;bottom&quot;
+                pSortableColumn&#x3D;&quot;name&quot;
+              &gt;
+                Departamentos &lt;p-sortIcon field&#x3D;&quot;name&quot; /&gt;
+              &lt;/th&gt;
+              &lt;th
+                pTooltip&#x3D;&quot;Razón de Actividades Recomendadas Respondidas&quot;
+                tooltipPosition&#x3D;&quot;bottom&quot;
+                pSortableColumn&#x3D;&quot;recommendedAnswers&quot;
+              &gt;
+                Actividades Recomendadas Respondidas
+                &lt;p-sortIcon field&#x3D;&quot;recommendedAnswers&quot; /&gt;
+              &lt;/th&gt;
+              &lt;th
+                pTooltip&#x3D;&quot;Razón de Actividades Libres Respondidas&quot;
+                tooltipPosition&#x3D;&quot;bottom&quot;
+                pSortableColumn&#x3D;&quot;freeAnswers&quot;
+              &gt;
+                Actividades Libres Respondidas
+                &lt;p-sortIcon field&#x3D;&quot;freeAnswers&quot; /&gt;
+              &lt;/th&gt;
+              &lt;th
+                pTooltip&#x3D;&quot;Razón de Total de Actividades Respondidas, tanto Recomendadas como Libres&quot;
+                tooltipPosition&#x3D;&quot;bottom&quot;
+                pSortableColumn&#x3D;&quot;answers&quot;
+              &gt;
+                Total &lt;p-sortIcon field&#x3D;&quot;answers&quot; /&gt;
+              &lt;/th&gt;
+            &lt;/tr&gt;
+          &lt;/ng-template&gt;
+          &lt;ng-template pTemplate&#x3D;&quot;body&quot; let-item&gt;
+            &lt;tr&gt;
+              &lt;td&gt;{{ item.name }}&lt;/td&gt;
+              &lt;td
+                pTooltip&#x3D;&quot;Catidad de Respuestas Recomendadas / Total de Actividades Recomendadas | Porcentaje de Respuestas Recomendadas&quot;
+                tooltipPosition&#x3D;&quot;bottom&quot;
+              &gt;
+                {{
+                  item.recommendedAnswers &#x3D;&#x3D;&#x3D; 0 &amp;&amp;
+                  item.recommendedQuantity &#x3D;&#x3D;&#x3D; 0
+                    ? &#x27;N/A&#x27;
+                    : item.recommendedAnswers +
+                      &#x27;/&#x27; +
+                      item.recommendedQuantity +
+                      &#x27; | &#x27; +
+                      (item.recommendedQuantity
+                        ? (
+                            (item.recommendedAnswers /
+                              item.recommendedQuantity) *
+                            100
+                          ).toFixed(1)
+                        : 0) +
+                      &#x27;%&#x27;
+                }}
+              &lt;/td&gt;
+              &lt;td
+                pTooltip&#x3D;&quot;Catidad de Respuestas Libres / Total de Actividades Libres | Porcentaje de Respuestas Libres&quot;
+                tooltipPosition&#x3D;&quot;bottom&quot;
+              &gt;
+                {{
+                  item.freeAnswers &#x3D;&#x3D;&#x3D; 0 &amp;&amp; item.freeQuantity &#x3D;&#x3D;&#x3D; 0
+                    ? &#x27;N/A&#x27;
+                    : item.freeAnswers +
+                      &#x27;/&#x27; +
+                      item.freeQuantity +
+                      &#x27; | &#x27; +
+                      (item.freeQuantity
+                        ? (
+                            (item.freeAnswers / item.freeQuantity) *
+                            100
+                          ).toFixed(1)
+                        : 0) +
+                      &#x27;%&#x27;
+                }}
+              &lt;/td&gt;
+              &lt;td
+                pTooltip&#x3D;&quot;Catidad de Respuestas / Total de Respuestas | Porcentaje Total&quot;
+                tooltipPosition&#x3D;&quot;bottom&quot;
+              &gt;
+                {{
+                  item.answers +
+                    &#x27;/&#x27; +
+                    item.quantity +
+                    &#x27; | &#x27; +
+                    ((item.answers / item.quantity) * 100).toFixed(1)
+                }}%
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/ng-template&gt;
+          &lt;ng-template pTemplate&#x3D;&quot;footer&quot;&gt;
+            &lt;tr&gt;
+              &lt;td class&#x3D;&quot;t-footer&quot;&gt;Rendimiento&lt;/td&gt;
+              &lt;td class&#x3D;&quot;t-footer&quot;&gt;
+                {{
+                  departmentsExtraInfo.totalRecommendedAnswers &#x3D;&#x3D;&#x3D; 0 &amp;&amp;
+                  departmentsExtraInfo.totalRecommendedQuantity &#x3D;&#x3D;&#x3D; 0
+                    ? &#x27;N/A&#x27;
+                    : departmentsExtraInfo.totalRecommendedAnswers +
+                      &#x27;/&#x27; +
+                      departmentsExtraInfo.totalRecommendedQuantity +
+                      &#x27; | &#x27; +
+                      (departmentsExtraInfo.totalRecommendedQuantity
+                        ? (
+                            (departmentsExtraInfo.totalRecommendedAnswers /
+                              departmentsExtraInfo.totalRecommendedQuantity) *
+                            100
+                          ).toFixed(1)
+                        : 0) +
+                      &#x27;%&#x27;
+                }}
+              &lt;/td&gt;
+              &lt;td class&#x3D;&quot;t-footer&quot;&gt;
+                {{
+                  departmentsExtraInfo.totalFreeAnswers &#x3D;&#x3D;&#x3D; 0 &amp;&amp;
+                  departmentsExtraInfo.totalFreeQuantity &#x3D;&#x3D;&#x3D; 0
+                    ? &#x27;N/A&#x27;
+                    : departmentsExtraInfo.totalFreeAnswers +
+                      &#x27;/&#x27; +
+                      departmentsExtraInfo.totalFreeQuantity +
+                      &#x27; | &#x27; +
+                      (departmentsExtraInfo.totalFreeQuantity
+                        ? (
+                            (departmentsExtraInfo.totalFreeAnswers /
+                              departmentsExtraInfo.totalFreeQuantity) *
+                            100
+                          ).toFixed(1)
+                        : 0) +
+                      &#x27;%&#x27;
+                }}
+              &lt;/td&gt;
+              &lt;td class&#x3D;&quot;t-footer&quot;&gt;
+                {{ departmentsExtraInfo.totalAnswers }}/{{
+                  departmentsExtraInfo.totalQuantity
+                }}
+                |
+                {{
+                  (
+                    (departmentsExtraInfo.totalAnswers /
+                      departmentsExtraInfo.totalQuantity) *
+                    100
+                  ).toFixed(1)
+                }}%
+              &lt;/td&gt;
+            &lt;/tr&gt;
+          &lt;/ng-template&gt;
+        &lt;/p-table&gt;
+      &lt;/p-panel&gt;
+    &lt;/div&gt;
+  }
+
+  @if (matrixData !&#x3D;&#x3D; undefined) {
+    &lt;p-dialog
+      header&#x3D;&quot;
+    {{ matrixData.name }}
+    (Inicia:
+    {{ parseDate(matrixData.startDate) }}
+    - Termina:
+    {{ parseDate(matrixData.departmentEndDate) }})
+  &quot;
+      [resizable]&#x3D;&quot;false&quot;
+      [modal]&#x3D;&quot;true&quot;
+      [maximizable]&#x3D;&quot;true&quot;
+      appendTo&#x3D;&quot;body&quot;
+      [(visible)]&#x3D;&quot;dialogVisible&quot;
+      [draggable]&#x3D;&quot;false&quot;
+      [closeOnEscape]&#x3D;&quot;true&quot;
+      [style]&#x3D;&quot;{ width: &#x27;80vw&#x27; }&quot;
+      [contentStyle]&#x3D;&quot;{
+        height: &#x27;80vh&#x27;
+      }&quot;
+      (onMaximize)&#x3D;&quot;onMaximize()&quot;
+    &gt;
+      &lt;app-matrix
+        [selectedRecopilation]&#x3D;&quot;selectedRecopilation&quot;
+        [matrixData]&#x3D;&quot;matrixData&quot;
+        [matrixScrollHeight]&#x3D;&quot;dialogMatrixScrollHeight&quot;
+      &gt;&lt;/app-matrix&gt;
+      &lt;ng-template pTemplate&#x3D;&quot;footer&quot;&gt;
+        &lt;button
+          type&#x3D;&quot;button&quot;
+          pButton
+          pRipple
+          icon&#x3D;&quot;pi pi-times&quot;
+          (click)&#x3D;&quot;dialogVisible &#x3D; false&quot;
+          label&#x3D;&quot;Cerrar&quot;
+          class&#x3D;&quot;p-button-text&quot;
+        &gt;&lt;/button&gt;
+      &lt;/ng-template&gt;
+    &lt;/p-dialog&gt;
+  }
+  &lt;p-scrollTop icon&#x3D;&quot;pi pi-chevron-up&quot; /&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="p-4">  @if (matrixData === undefined) {    <h2>Matriz de Seguimiento</h2>  } @else {    <h2>      Matriz de Seguimiento - {{ matrixData.name }}      (Inicia:      {{ parseDate(matrixData.startDate) }}      - Termina:      {{ parseDate(matrixData.departmentEndDate) }})    </h2>  }  <p-dropdown    [options]="recopilations"    [(ngModel)]="selectedRecopilation"    (onChange)="getMatrixData()"    optionLabel="name"    optionValue="id"    placeholder="Selecciona una recopilación"    [emptyMessage]="      recopilations        ? \'No hay recopilaciones activas disponibles\'        : \'Seleccione una recopilación\'    "  />  <button    type="button"    class="open-big"    (click)="showDialog()"    pButton    pTooltip="Abrir en ventana grande"    severity="success"    [disabled]="matrixData === undefined"    icon="pi pi-external-link"  ></button>  <div class="matrix">    <app-matrix      [selectedRecopilation]="selectedRecopilation"      [matrixData]="matrixData"      [matrixScrollHeight]="\'75vh\'"    ></app-matrix>  </div>  @if (matrixData !== undefined) {    <div>      <p-panel        expandIcon="pi pi-minus"        collapseIcon="pi pi-plus"        [toggleable]="true"        collapsed="true"        iconPos="start"      >        <ng-template pTemplate="header">          <h2>Más información</h2>        </ng-template>        <h3>          Cantidad de Actividades:          {{ matrixData.departments[0].answers.length }}        </h3>        <p-table [value]="departmentsExtraInfo.departments">          <ng-template pTemplate="header">            <tr>              <th                pTooltip="Departamentos que forman parte de la recopilación"                tooltipPosition="bottom"                pSortableColumn="name"              >                Departamentos <p-sortIcon field="name" />              </th>              <th                pTooltip="Razón de Actividades Recomendadas Respondidas"                tooltipPosition="bottom"                pSortableColumn="recommendedAnswers"              >                Actividades Recomendadas Respondidas                <p-sortIcon field="recommendedAnswers" />              </th>              <th                pTooltip="Razón de Actividades Libres Respondidas"                tooltipPosition="bottom"                pSortableColumn="freeAnswers"              >                Actividades Libres Respondidas                <p-sortIcon field="freeAnswers" />              </th>              <th                pTooltip="Razón de Total de Actividades Respondidas, tanto Recomendadas como Libres"                tooltipPosition="bottom"                pSortableColumn="answers"              >                Total <p-sortIcon field="answers" />              </th>            </tr>          </ng-template>          <ng-template pTemplate="body" let-item>            <tr>              <td>{{ item.name }}</td>              <td                pTooltip="Catidad de Respuestas Recomendadas / Total de Actividades Recomendadas | Porcentaje de Respuestas Recomendadas"                tooltipPosition="bottom"              >                {{                  item.recommendedAnswers === 0 &&                  item.recommendedQuantity === 0                    ? \'N/A\'                    : item.recommendedAnswers +                      \'/\' +                      item.recommendedQuantity +                      \' | \' +                      (item.recommendedQuantity                        ? (                            (item.recommendedAnswers /                              item.recommendedQuantity) *                            100                          ).toFixed(1)                        : 0) +                      \'%\'                }}              </td>              <td                pTooltip="Catidad de Respuestas Libres / Total de Actividades Libres | Porcentaje de Respuestas Libres"                tooltipPosition="bottom"              >                {{                  item.freeAnswers === 0 && item.freeQuantity === 0                    ? \'N/A\'                    : item.freeAnswers +                      \'/\' +                      item.freeQuantity +                      \' | \' +                      (item.freeQuantity                        ? (                            (item.freeAnswers / item.freeQuantity) *                            100                          ).toFixed(1)                        : 0) +                      \'%\'                }}              </td>              <td                pTooltip="Catidad de Respuestas / Total de Respuestas | Porcentaje Total"                tooltipPosition="bottom"              >                {{                  item.answers +                    \'/\' +                    item.quantity +                    \' | \' +                    ((item.answers / item.quantity) * 100).toFixed(1)                }}%              </td>            </tr>          </ng-template>          <ng-template pTemplate="footer">            <tr>              <td class="t-footer">Rendimiento</td>              <td class="t-footer">                {{                  departmentsExtraInfo.totalRecommendedAnswers === 0 &&                  departmentsExtraInfo.totalRecommendedQuantity === 0                    ? \'N/A\'                    : departmentsExtraInfo.totalRecommendedAnswers +                      \'/\' +                      departmentsExtraInfo.totalRecommendedQuantity +                      \' | \' +                      (departmentsExtraInfo.totalRecommendedQuantity                        ? (                            (departmentsExtraInfo.totalRecommendedAnswers /                              departmentsExtraInfo.totalRecommendedQuantity) *                            100                          ).toFixed(1)                        : 0) +                      \'%\'                }}              </td>              <td class="t-footer">                {{                  departmentsExtraInfo.totalFreeAnswers === 0 &&                  departmentsExtraInfo.totalFreeQuantity === 0                    ? \'N/A\'                    : departmentsExtraInfo.totalFreeAnswers +                      \'/\' +                      departmentsExtraInfo.totalFreeQuantity +                      \' | \' +                      (departmentsExtraInfo.totalFreeQuantity                        ? (                            (departmentsExtraInfo.totalFreeAnswers /                              departmentsExtraInfo.totalFreeQuantity) *                            100                          ).toFixed(1)                        : 0) +                      \'%\'                }}              </td>              <td class="t-footer">                {{ departmentsExtraInfo.totalAnswers }}/{{                  departmentsExtraInfo.totalQuantity                }}                |                {{                  (                    (departmentsExtraInfo.totalAnswers /                      departmentsExtraInfo.totalQuantity) *                    100                  ).toFixed(1)                }}%              </td>            </tr>          </ng-template>        </p-table>      </p-panel>    </div>  }  @if (matrixData !== undefined) {    <p-dialog      header="    {{ matrixData.name }}    (Inicia:    {{ parseDate(matrixData.startDate) }}    - Termina:    {{ parseDate(matrixData.departmentEndDate) }})  "      [resizable]="false"      [modal]="true"      [maximizable]="true"      appendTo="body"      [(visible)]="dialogVisible"      [draggable]="false"      [closeOnEscape]="true"      [style]="{ width: \'80vw\' }"      [contentStyle]="{        height: \'80vh\'      }"      (onMaximize)="onMaximize()"    >      <app-matrix        [selectedRecopilation]="selectedRecopilation"        [matrixData]="matrixData"        [matrixScrollHeight]="dialogMatrixScrollHeight"      ></app-matrix>      <ng-template pTemplate="footer">        <button          type="button"          pButton          pRipple          icon="pi pi-times"          (click)="dialogVisible = false"          label="Cerrar"          class="p-button-text"        ></button>      </ng-template>    </p-dialog>  }  <p-scrollTop icon="pi pi-chevron-up" /></div></div>'
+    var COMPONENTS = [{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BodyComponent', 'selector': 'app-body'},{'name': 'CategoryComponent', 'selector': 'categories'},{'name': 'CategorySelectorComponent', 'selector': 'app-category-selector'},{'name': 'CollectionOfInformationComponent', 'selector': 'collection-of-information'},{'name': 'CreateEvidencesComponent', 'selector': 'create-evidences'},{'name': 'CriteriaComponent', 'selector': 'criteria'},{'name': 'CustomTdComponent', 'selector': 'custom-td'},{'name': 'DepartmentComponent', 'selector': 'app-department'},{'name': 'EditEvidenceComponent', 'selector': 'app-edit-evidence'},{'name': 'EvidenceComponent', 'selector': 'evidence'},{'name': 'EvidenceDocumentComponent', 'selector': 'evidence-document'},{'name': 'EvidenceImageComponent', 'selector': 'evidence-image'},{'name': 'EvidenceLinkComponent', 'selector': 'evidence-link'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IndicatorsComponent', 'selector': 'indicators'},{'name': 'InformationCollectionViewComponent', 'selector': 'app-information-collection-view'},{'name': 'InformationRecopilationComponent', 'selector': 'app-information-recopilation'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'LoadingComponent', 'selector': 'app-loading'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'MatrixComponent', 'selector': 'app-matrix'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'PreviewComponent', 'selector': 'app-information-recopilation'},{'name': 'RecommendCategoriesDepartmentComponent', 'selector': 'app-recommend-categories-department'},{'name': 'RecopilationComponent', 'selector': 'app-recopilation'},{'name': 'RecordsCategoryBodyComponent', 'selector': 'app-records-category-body'},{'name': 'RecordsCategoryHeaderComponent', 'selector': 'app-records-category-header'},{'name': 'RecordsComponent', 'selector': 'app-records'},{'name': 'SchemeComponent', 'selector': 'app-scheme'},{'name': 'SelectDepartmentsComponent', 'selector': 'app-select-departments'},{'name': 'SelectIndicatorsCategoriesCriteriaComponent', 'selector': 'app-select-indicators-categories-criteria'},{'name': 'SidenavComponent', 'selector': 'sidenav'},{'name': 'StatisticsComponent', 'selector': 'app-statistics'},{'name': 'StepsRoutingComponent', 'selector': 'app-steps-routing'},{'name': 'Toast', 'selector': 'toast'},{'name': 'TooltipIcon', 'selector': 'tooltip-icon'},{'name': 'UnauthorizedComponent', 'selector': 'app-unauthorized'},{'name': 'UploadOfEvidenceComponent', 'selector': 'app-upload-of-evidence'},{'name': 'ViewNotificationsComponent', 'selector': 'app-view-coordinator-notifications'},{'name': 'WordGenerationModalComponent', 'selector': 'app-word-generation-modal'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'HomeComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'HomeComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
