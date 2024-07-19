@@ -138,7 +138,7 @@ export class RecopilationsService {
   async findMatrix(id: number): Promise<MatrixInfoDto> {
     const recopilation = await this.recopilationsRepository.findOneOrFail({
       where: { id },
-      select: { cachedMatrix: true }
+      select: { id: true, cachedMatrix: true }
     })
 
     if (!recopilation.cachedMatrix) {
