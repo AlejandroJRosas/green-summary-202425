@@ -20,83 +20,22 @@
       >
         <ng-template pTemplate="header">
           <h3 class="text-xl">
+            <i
+              class="pi pi-circle-fill"
+              style="color: var(--severity-info)"
+            ></i>
             En Creación ({{ inCreationRecopilations.length }})
           </h3>
         </ng-template>
         @for (recopilation of inCreationRecopilations; track recopilation.id) {
-          <p-panel>
-            <section
-              class="flex flex-row justify-content-between align-items-center w-full gap-4"
-            >
-              <h2 style="word-break: break-word" class="text-xl">
-                {{ recopilation.name }}
-                (Por completar)
-              </h2>
-
-              <div class="flex flex-row gap-3">
-                @if (!recopilation.isReady) {
-                  <p-button
-                    severity="info"
-                    icon="pi pi-play"
-                    rounded="true"
-                    outlined="true"
-                    pTooltip="Continuar"
-                    (click)="navigateContinueSteps(recopilation.id)"
-                  />
-                } @else {
-                  <p-button
-                    severity="success"
-                    pTooltip="Ver Detalles"
-                    icon="pi pi-eye"
-                    rounded="true"
-                    outlined="true"
-                    (click)="navigateRecopilationDetails(recopilation.id)"
-                  />
-                }
-                <p-button
-                  severity="warning"
-                  pTooltip="Eliminar"
-                  icon="pi pi-trash"
-                  rounded="true"
-                  outlined="true"
-                  (click)="
-                    confirmRecopilationDeletion(
-                      $event,
-                      recopilation.id,
-                      recopilation.name
-                    )
-                  "
-                />
-              </div>
-            </section>
-            <p class="m-0 pb-3" style="max-width: 80vw">
-              {{ recopilation.description }}
-            </p>
-          </p-panel>
-        }
-      </p-panel>
-    }
-
-    @if (upcomingRecopilations.length > 0) {
-      <p-panel
-        expandIcon="pi pi-chevron-down"
-        collapseIcon="pi pi-chevron-right"
-        [toggleable]="true"
-        collapsed="false"
-        iconPos="start"
-      >
-        <ng-template pTemplate="header">
-          <h3 class="text-xl">Próximas ({{ upcomingRecopilations.length }})</h3>
-        </ng-template>
-        @for (recopilation of upcomingRecopilations; track recopilation.id) {
           <p-panel>
             <ng-template pTemplate="header">
               <section
                 class="flex flex-row justify-content-between align-items-center w-full gap-4"
               >
                 <h2 style="word-break: break-word" class="text-xl">
-                  {{ recopilation.name }} | {{ recopilation.startDate }} -
-                  {{ recopilation.endDate }} |
+                  {{ recopilation.name }}
+                  (Por completar)
                 </h2>
 
                 <div class="flex flex-row gap-3">
@@ -107,24 +46,27 @@
                       rounded="true"
                       outlined="true"
                       pTooltip="Continuar"
+                      tooltipPosition="left"
                       (click)="navigateContinueSteps(recopilation.id)"
                     />
                   } @else {
                     <p-button
                       severity="success"
-                      pTooltip="Ver Detalles"
                       icon="pi pi-eye"
                       rounded="true"
                       outlined="true"
+                      pTooltip="Ver Detalles"
+                      tooltipPosition="left"
                       (click)="navigateRecopilationDetails(recopilation.id)"
                     />
                   }
                   <p-button
                     severity="warning"
-                    pTooltip="Eliminar"
                     icon="pi pi-trash"
                     rounded="true"
                     outlined="true"
+                    pTooltip="Eliminar"
+                    tooltipPosition="left"
                     (click)="
                       confirmRecopilationDeletion(
                         $event,
@@ -153,7 +95,13 @@
         iconPos="start"
       >
         <ng-template pTemplate="header">
-          <h3 class="text-xl">Activas ({{ activeRecopilations.length }})</h3>
+          <h3 class="text-xl">
+            <i
+              class="pi pi-circle-fill"
+              style="color: var(--severity-success)"
+            ></i>
+            Activas ({{ activeRecopilations.length }})
+          </h3>
         </ng-template>
         @for (recopilation of activeRecopilations; track recopilation.id) {
           <p-panel>
@@ -174,24 +122,103 @@
                       rounded="true"
                       outlined="true"
                       pTooltip="Continuar"
+                      tooltipPosition="left"
                       (click)="navigateContinueSteps(recopilation.id)"
                     />
                   } @else {
                     <p-button
                       severity="success"
-                      pTooltip="Ver Detalles"
                       icon="pi pi-eye"
                       rounded="true"
                       outlined="true"
+                      pTooltip="Ver Detalles"
+                      tooltipPosition="left"
                       (click)="navigateRecopilationDetails(recopilation.id)"
                     />
                   }
                   <p-button
                     severity="warning"
-                    pTooltip="Eliminar"
                     icon="pi pi-trash"
                     rounded="true"
                     outlined="true"
+                    pTooltip="Eliminar"
+                    tooltipPosition="left"
+                    (click)="
+                      confirmRecopilationDeletion(
+                        $event,
+                        recopilation.id,
+                        recopilation.name
+                      )
+                    "
+                  />
+                </div>
+              </section>
+            </ng-template>
+            <p class="m-0 pb-3" style="max-width: 80vw">
+              {{ recopilation.description }}
+            </p>
+          </p-panel>
+        }
+      </p-panel>
+    }
+
+    @if (upcomingRecopilations.length > 0) {
+      <p-panel
+        expandIcon="pi pi-chevron-down"
+        collapseIcon="pi pi-chevron-right"
+        [toggleable]="true"
+        collapsed="false"
+        iconPos="start"
+      >
+        <ng-template pTemplate="header">
+          <h3 class="text-xl">
+            <i
+              class="pi pi-circle-fill"
+              style="color: var(--ucab-yellow-hex)"
+            ></i>
+            Próximas ({{ upcomingRecopilations.length }})
+          </h3>
+        </ng-template>
+        @for (recopilation of upcomingRecopilations; track recopilation.id) {
+          <p-panel>
+            <ng-template pTemplate="header">
+              <section
+                class="flex flex-row justify-content-between align-items-center w-full gap-4"
+              >
+                <h2 style="word-break: break-word" class="text-xl">
+                  {{ recopilation.name }} | {{ recopilation.startDate }} -
+                  {{ recopilation.endDate }} |
+                </h2>
+
+                <div class="flex flex-row gap-3">
+                  @if (!recopilation.isReady) {
+                    <p-button
+                      severity="info"
+                      icon="pi pi-play"
+                      rounded="true"
+                      outlined="true"
+                      pTooltip="Continuar"
+                      tooltipPosition="left"
+                      (click)="navigateContinueSteps(recopilation.id)"
+                    />
+                  } @else {
+                    <p-button
+                      severity="success"
+                      icon="pi pi-eye"
+                      rounded="true"
+                      outlined="true"
+                      pTooltip="Ver Detalles"
+                      tooltipPosition="left"
+                      (click)="navigateRecopilationDetails(recopilation.id)"
+                    />
+                  }
+                  <p-button
+                    severity="warning"
+                    icon="pi pi-trash"
+                    rounded="true"
+                    outlined="true"
+                    pTooltip="Eliminar"
+                    tooltipPosition="left"
                     (click)="
                       confirmRecopilationDeletion(
                         $event,
@@ -221,7 +248,8 @@
       >
         <ng-template pTemplate="header">
           <h3 class="text-xl">
-            Finalizadas ({{ finishedRecopilations.length }})
+            <i class="pi pi-circle-fill" style="color: gray"></i> Finalizadas
+            ({{ finishedRecopilations.length }})
           </h3>
         </ng-template>
         @for (recopilation of finishedRecopilations; track recopilation.id) {
@@ -243,24 +271,27 @@
                       rounded="true"
                       outlined="true"
                       pTooltip="Continuar"
+                      tooltipPosition="left"
                       (click)="navigateContinueSteps(recopilation.id)"
                     />
                   } @else {
                     <p-button
                       severity="success"
-                      pTooltip="Ver Detalles"
                       icon="pi pi-eye"
                       rounded="true"
                       outlined="true"
+                      pTooltip="Ver Detalles"
+                      tooltipPosition="left"
                       (click)="navigateRecopilationDetails(recopilation.id)"
                     />
                   }
                   <p-button
                     severity="warning"
-                    pTooltip="Eliminar"
                     icon="pi pi-trash"
                     rounded="true"
                     outlined="true"
+                    pTooltip="Eliminar"
+                    tooltipPosition="left"
                     (click)="
                       confirmRecopilationDeletion(
                         $event,
