@@ -10,6 +10,12 @@ export const navbarData = [
     visibility: [Role.ADMIN, Role.COORDINATOR, Role.DEPARTMENT]
   },
   {
+    label: 'Notificaciones',
+    icon: 'pi pi-bell',
+    routeLink: `${BASE_LAYOUT_ROUTE}/notifications`,
+    visibility: [Role.COORDINATOR, Role.DEPARTMENT]
+  },
+  {
     label: 'Estadísticas',
     icon: 'pi pi-chart-bar',
     routeLink: `${BASE_LAYOUT_ROUTE}/statistics`,
@@ -38,11 +44,5 @@ export const navbarData = [
     icon: 'pi pi-file-word',
     routeLink: `${BASE_LAYOUT_ROUTE}/records`,
     visibility: [Role.ADMIN, Role.COORDINATOR]
-  },
-  {
-    label: 'Notificaciones',
-    icon: 'pi pi-bell',
-    routeLink: `${BASE_LAYOUT_ROUTE}/notifications`,
-    visibility: [Role.COORDINATOR, Role.DEPARTMENT]
   }
 ]
