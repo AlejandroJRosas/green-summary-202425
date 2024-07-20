@@ -56,6 +56,7 @@
             ) +
             '%'
           "
+          tooltipPosition="bottom"
           color="var(--severity-success)"
           [value]="
             getCompletionValue(
@@ -124,6 +125,10 @@
       } @else {
         <app-card title="Categoría con más errores" mainText="N/A" />
       }
+      <app-card
+        title="Colecciones de Información"
+        [mainText]="stats.quantities.collections.toString()"
+      />
     </div>
 
     <div class="container">
@@ -133,10 +138,6 @@
       <app-indicators-pie-chart [matrixData]="stats.matrix" />
       <div class="vertical-container">
         <app-card
-          title="Colecciones de Información"
-          [mainText]="stats.quantities.collections.toString()"
-        />
-        <app-card
           title="Evidencias Cargadas"
           [mainText]="
             (
@@ -145,7 +146,31 @@
               stats.quantities.evidences.links
             ).toString()
           "
-        />
+        >
+          <p-divider />
+          <div class="card">
+            <h2>Imágenes</h2>
+            <h3>
+              {{ stats.quantities.evidences.images }}
+            </h3>
+          </div>
+          <p-divider />
+
+          <div class="card">
+            <h2>Documentos</h2>
+            <h3>
+              {{ stats.quantities.evidences.documents }}
+            </h3>
+          </div>
+          <p-divider />
+
+          <div class="card">
+            <h2>Enlaces</h2>
+            <h3>
+              {{ stats.quantities.evidences.links }}
+            </h3>
+          </div>
+        </app-card>
       </div>
     </div>
     <app-departments-performance [matrixData]="stats.matrix" />

@@ -18,6 +18,7 @@ import { DepartmentsPerformanceComponent } from './components/departments-perfor
 import { ScrollTopModule } from 'primeng/scrolltop'
 import { IndicatorsPieChartComponent } from './components/indicators-pie-chart/indicators-pie-chart.component'
 import { CommonModule } from '@angular/common'
+import { DividerModule } from 'primeng/divider'
 
 @Component({
   selector: 'app-statistics',
@@ -34,7 +35,8 @@ import { CommonModule } from '@angular/common'
     TooltipModule,
     DepartmentsPerformanceComponent,
     ScrollTopModule,
-    IndicatorsPieChartComponent
+    IndicatorsPieChartComponent,
+    DividerModule
   ],
   templateUrl: './statistics.component.html',
   styleUrl: './statistics.component.css'

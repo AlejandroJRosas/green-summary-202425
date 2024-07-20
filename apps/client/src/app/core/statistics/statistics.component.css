@@ -42,3 +42,36 @@
   margin-top: 0.25rem;
   text-align: end;
 }
+
+.span-types {
+  margin-top: 0.25rem;
+  text-align: center;
+}
+
+.types-title {
+  margin: 0;
+  font-size: 1rem;
+  text-wrap: wrap;
+  font-weight: 300;
+  width: 50%;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+
+  h2 {
+    margin: 0;
+    font-size: 1rem;
+    text-wrap: wrap;
+    font-weight: 300;
+    width: 50%;
+  }
+
+  h3 {
+    margin: 0;
+    margin-top: 0.75rem;
+    font-size: 2rem;
+    text-align: center;
+  }
+}
