@@ -26,6 +26,7 @@ import { VALUES } from '../../../../../../../shared/validations'
 import { DetailedRecopilation } from '../../../services/recopilation.service'
 import { RecopilationService } from '../../../services/recopilation.service'
 import { TooltipModule } from 'primeng/tooltip'
+import { ChipModule } from 'primeng/chip'
 
 @Component({
   selector: 'collection-of-information',
@@ -41,7 +42,8 @@ import { TooltipModule } from 'primeng/tooltip'
     ConfirmDialogModule,
     ImageModule,
     DividerModule,
-    TooltipModule
+    TooltipModule,
+    ChipModule
   ],
   templateUrl: './collection-of-information.component.html',
   styles: ``
