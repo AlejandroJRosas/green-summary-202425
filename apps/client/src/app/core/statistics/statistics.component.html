@@ -66,65 +66,64 @@
         />
       </app-card>
 
-      <!-- @if (stats.mostAnswersCategory.length > 0) {
+      @if (stats.mostAnswersCategory) {
         <app-card
           title="Categoría más respondida"
-          [mainText]="stats.mostAnswersCategory[0].category.name"
+          [mainText]="stats.mostAnswersCategory.category.name"
         >
           <span class="span-text">
-            ({{ stats.mostAnswersCategory[0].answersQuantity }}
+            ({{ stats.mostAnswersCategory.answersQuantity }}
             {{
-              stats.mostAnswersCategory[0].answersQuantity === 1
+              stats.mostAnswersCategory.answersQuantity === 1
                 ? 'respuesta'
                 : 'respuestas'
             }})
           </span>
         </app-card>
       } @else {
-        <app-card title="Categoría más respondida" mainText="N/A">
-          <span class="span-text"> (Sin respuestas) </span>
-        </app-card>
+        <app-card title="Categoría más respondida" mainText="N/A" />
       }
 
-      @if (stats.leastAnswersCategory.length > 0) {
+      @if (stats.leastAnswersCategory) {
         <app-card
           title="Categoría menos respondida"
-          [mainText]="stats.leastAnswersCategory[0].category.name"
+          [mainText]="stats.leastAnswersCategory.category.name"
         >
           <span class="span-text"
-            >({{ stats.leastAnswersCategory[0].answersQuantity }}
+            >({{ stats.leastAnswersCategory.answersQuantity }}
             {{
-              stats.leastAnswersCategory[0].answersQuantity === 1
+              stats.leastAnswersCategory.answersQuantity === 1
                 ? 'respuesta'
                 : 'respuestas'
             }})
           </span>
         </app-card>
       } @else {
-        <app-card title="Categoría menos respondida" mainText="N/A">
-          <span class="span-text"> (Sin respuestas) </span>
-        </app-card>
+        <app-card title="Categoría menos respondida" mainText="N/A" />
       }
 
-      @if (stats.leastAnswersCategory.length > 0) {
+      @if (stats.mostErrorsCategory) {
         <app-card
           title="Categoría con más errores"
-          [mainText]="stats.leastAnswersCategory[0].category.name"
+          [mainText]="stats.mostErrorsCategory.category.name"
         >
           <span class="span-text">
-            ({{ stats.mostAnswersCategory[0].answersQuantity }}
+            ({{ stats.mostErrorsCategory.errorsQuantity }}
             {{
-              stats.mostAnswersCategory[0].answersQuantity === 1
+              stats.mostErrorsCategory.errorsQuantity === 1
+                ? 'error'
+                : 'errores'
+            }}) ({{ stats.mostErrorsCategory.answersQuantity }}
+            {{
+              stats.mostErrorsCategory.answersQuantity === 1
                 ? 'respuesta'
                 : 'respuestas'
             }})
           </span>
         </app-card>
       } @else {
-        <app-card title="Categoría con más errores" mainText="N/A">
-          <span class="span-text"> (Sin respuestas) </span>
-        </app-card>
-      } -->
+        <app-card title="Categoría con más errores" mainText="N/A" />
+      }
     </div>
 
     <div class="container">

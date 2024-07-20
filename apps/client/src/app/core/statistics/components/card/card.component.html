@@ -7,12 +7,9 @@
       [pTooltip]="
         this.mainText && this.mainText.length > 27 ? this.mainText : ''
       "
+      [class]="mainText.length > 27 ? 'small-text' : ''"
     >
-      {{
-        this.mainText && this.mainText.length > 27
-          ? this.mainText.slice(0, 27) + '...'
-          : this.mainText
-      }}
+      {{ this.mainText }}
     </h3>
   }
   <ng-content></ng-content>

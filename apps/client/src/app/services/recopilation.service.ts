@@ -324,18 +324,18 @@ export interface StatisticsDto {
     department: User
     answersQuantity: number
   }[]
-  mostAnswersCategory: {
+  mostAnswersCategory?: {
     category: Category
     answersQuantity: number
-  }[]
-  leastAnswersCategory: {
+  }
+  leastAnswersCategory?: {
     category: Category
     answersQuantity: number
-  }[]
-  mostErrorsCategory: {
+  }
+  mostErrorsCategory?: {
     category: Category
     answersQuantity: number
     errorsQuantity: number
-  }[]
+  }
   matrix: MatrixInfoDto
 }
