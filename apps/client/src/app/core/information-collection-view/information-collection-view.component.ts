@@ -31,6 +31,7 @@ import { ScrollTopModule } from 'primeng/scrolltop'
 import { OverlayPanelModule } from 'primeng/overlaypanel'
 import { ValidatedFormGroup } from '../../common/validated-form-group/validated-form-group'
 import { string, object } from 'yup'
+import { ChipModule } from 'primeng/chip'
 
 @Component({
   selector: 'app-information-collection-view',
@@ -47,7 +48,8 @@ import { string, object } from 'yup'
     ReactiveFormsModule,
     TooltipModule,
     ScrollTopModule,
-    OverlayPanelModule
+    OverlayPanelModule,
+    ChipModule
   ],
   providers: [ConfirmationService, MessageService],
   templateUrl: './information-collection-view.component.html',
