@@ -105,4 +105,10 @@ export class RecopilationComponent {
       })
     })
   }
+
+  navigateStepsCreate() {
+    this.router.navigateByUrl(
+      'pages/recopilations/steps-create/information-recopilation'
+    )
+  }
 }
