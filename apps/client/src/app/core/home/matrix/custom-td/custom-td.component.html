@@ -51,19 +51,6 @@
             tooltip="Ha subido evidencias"
           ></tooltip-icon>
         }
-        @if (answer?.isApproved) {
-          <tooltip-icon
-            class="check-icon"
-            icon="pi pi-file-check"
-            tooltip="Ha sido marcado como correcto"
-          ></tooltip-icon>
-        } @else if (answer?.hasError) {
-          <tooltip-icon
-            class="error-icon"
-            icon="pi pi-file-excel"
-            tooltip="Ha sido marcado con errores"
-          ></tooltip-icon>
-        }
       </div>
     </div>
   }
