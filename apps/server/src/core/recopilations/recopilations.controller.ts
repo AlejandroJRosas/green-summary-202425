@@ -284,7 +284,12 @@ export class RecopilationsController {
           })
           .then((recs) => recs.map((r) => r.category.id))
 
-        this.notifyRecommendationToDepartment(d.id, recopilation.id, categories)
+        if (categories.length > 0)
+          this.notifyRecommendationToDepartment(
+            d.id,
+            recopilation.id,
+            categories
+          )
       })
     )
 
