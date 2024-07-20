@@ -72,8 +72,12 @@ export class InformationCollectionsService {
         department: { id: departmentId }
       },
       order: {
-        [orderBy]: orderType
-      }
+        createdAt: 'DESC',
+        evidences: {
+          createdAt: 'DESC'
+        }
+      },
+      [orderBy]: orderType
     })
 
     return informationCollections
