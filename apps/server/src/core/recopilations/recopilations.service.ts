@@ -459,7 +459,10 @@ export class RecopilationsService {
           evidences: true
         },
         order: {
-          createdAt: 'ASC'
+          createdAt: 'DESC',
+          evidences: {
+            createdAt: 'DESC'
+          }
         }
       })
 
