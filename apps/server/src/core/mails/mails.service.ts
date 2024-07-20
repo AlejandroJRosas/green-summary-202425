@@ -14,11 +14,11 @@ export class MailsService {
     })
   }
 
-  async sendNotification(user: string, notification: string) {
+  async sendNotification(to: string, subject: string, html: string) {
     await this.mailerService.sendMail({
-      to: user,
-      subject: 'Notificación',
-      html: `<b>${notification}</b>`
+      to,
+      subject,
+      html
     })
   }
 }

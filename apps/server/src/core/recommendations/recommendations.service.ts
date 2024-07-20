@@ -53,25 +53,6 @@ export class RecommendationsService {
       category
     })
 
-    const notificationCategory =
-      await this.categoriesRepository.findOneByOrFail({ id: categoryId })
-    const data = {
-      categoryId: notificationCategory.id,
-      categoryName: notificationCategory.name
-    }
-    const notificationDTO = {
-      data: data,
-      type: NOTIFICATION_TYPES.RECOMMENDATION,
-      userId: departmentId
-    }
-    await this.notificationsService.create(notificationDTO)
-
-    const description = `Se te recomendó la categoría ${categoryId}`
-    const department = await this.departmentsRepository.findOneByOrFail({
-      id: departmentId
-    })
-    this.mailsService.sendNotification(department.email, description)
-
     return this.recommendationsRepository.save(recommendation)
   }
 

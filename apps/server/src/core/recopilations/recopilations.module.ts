@@ -13,6 +13,9 @@ import { Department } from '../users/entities/department.entity'
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 import { InformationCollection } from '../information-collections/entities/information-collection.entity'
 import { Evidence } from '../evidences/entities/evidence.entity'
+import { NotificationsService } from '../notifications/notifications.service'
+import { Notification } from '../notifications/entities/notification.entity'
+import { User } from '../users/entities/user.entity'
 
 @Module({
   imports: [
@@ -21,17 +24,19 @@ import { Evidence } from '../evidences/entities/evidence.entity'
       Indicator,
       Category,
       Criteria,
+      User,
       Department,
       IndicatorPerRecopilation,
       CategorizedCriteria,
       Recommendation,
       DepartmentPerRecopilation,
       InformationCollection,
-      Evidence
+      Evidence,
+      Notification
     ])
   ],
   controllers: [RecopilationsController],
-  providers: [RecopilationsService],
+  providers: [RecopilationsService, NotificationsService],
   exports: [TypeOrmModule]
 })
 export class RecopilationsModule {}

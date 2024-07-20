@@ -200,6 +200,7 @@ export class EvidencesService {
       await this.notificationsService.create(notificationDTO)
       this.mailsService.sendNotification(
         collection.department.email,
+        'Error en evidencia',
         description
       )
     }

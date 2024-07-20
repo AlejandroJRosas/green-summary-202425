@@ -25,12 +25,19 @@ import { RelateIndicatorsToRecopilationDto } from './dto/relate-indicators-to-re
 import { RecommendCategoriesDto } from './dto/recommend-categories.dto'
 import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
-import { Repository } from 'typeorm'
+import { In, Repository } from 'typeorm'
 import { InjectRepository } from '@nestjs/typeorm'
 import { Recopilation } from './entities/recopilation.entity'
 import { EventEmitter2, OnEvent } from '@nestjs/event-emitter'
 import { MatrixChangedEvent } from './dto/matrix-changed.event'
 import { MatrixChangedManyEvent } from './dto/matrix-changed-many.event'
+import { NOTIFICATION_TYPES } from '../notifications/notifications.constants'
+import { Notification } from '../notifications/entities/notification.entity'
+import { NotificationsService } from '../notifications/notifications.service'
+import { Department } from '../users/entities/department.entity'
+import { MailsService } from '../mails/mails.service'
+import { constructRecommendationMail } from './recommendation-mail'
+import { Category } from '../categories/entities/category.entity'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
@@ -39,6 +46,12 @@ export class RecopilationsController {
     private readonly recopilationsService: RecopilationsService,
     @InjectRepository(Recopilation)
     private readonly recopilationsRepository: Repository<Recopilation>,
+    @InjectRepository(Department)
+    private readonly departmentsRepository: Repository<Department>,
+    @InjectRepository(Category)
+    private readonly categoriesRepository: Repository<Category>,
+    private readonly notificationsService: NotificationsService,
+    private readonly mailsService: MailsService,
     private readonly eventEmitter: EventEmitter2
   ) {}
 
@@ -210,21 +223,67 @@ export class RecopilationsController {
   async recommendCategoriesToDepartments(
     @Body() recommendCategoriesDto: RecommendCategoriesDto
   ) {
-    try {
-      const res = await this.recopilationsService.recommendCategories(
-        recommendCategoriesDto
-      )
+    const res = await this.recopilationsService.recommendCategories(
+      recommendCategoriesDto
+    )
 
-      this.eventEmitter.emit(
-        'matrix.changed',
-        new MatrixChangedEvent(recommendCategoriesDto.recopilationId)
-      )
+    this.eventEmitter.emit(
+      'matrix.changed',
+      new MatrixChangedEvent(recommendCategoriesDto.recopilationId)
+    )
 
-      return res
-    } catch (e) {
-      console.log(e)
-      throw e
+    recommendCategoriesDto.departments.map((d) => {
+      this.notifyRecommendationToDepartment(
+        +d.departmentId,
+        +recommendCategoriesDto.recopilationId,
+        d.categories.map((c) => +c.categoryId)
+      )
+    })
+
+    return res
+  }
+
+  private async notifyRecommendationToDepartment(
+    departmentId: number,
+    recopilationId: number,
+    categoriesIds: number[]
+  ) {
+    const recopilation = await this.recopilationsService.findOne(recopilationId)
+
+    const data = {
+      recopilationId: recopilationId,
+      recopilationName: recopilation.name,
+      recommendationsQuantity: categoriesIds.length
     }
+
+    const notificationDTO = {
+      data: data,
+      type: NOTIFICATION_TYPES.RECOMMENDATION,
+      userId: departmentId
+    }
+    await this.notificationsService.create(notificationDTO)
+
+    const { email: departmentEmail } =
+      await this.departmentsRepository.findOneByOrFail({
+        id: departmentId
+      })
+
+    const categories = await this.categoriesRepository.find({
+      where: {
+        id: In(categoriesIds)
+      }
+    })
+
+    const emailBody = constructRecommendationMail(
+      recopilation.name,
+      categories.map((c) => c.name)
+    )
+
+    this.mailsService.sendNotification(
+      departmentEmail,
+      'Has sido recomendado para aportar información',
+      emailBody
+    )
   }
 
   @Roles(Role.Coordinator, Role.Admin)
