@@ -114,6 +114,13 @@ export class StatisticsComponent {
           text[0] = 'En Creación'
           text[1] = 'var(--severity-info)'
         } else if (
+          new Date(recopilation.departmentEndDate).getTime() <
+            new Date().getTime() &&
+          new Date(recopilation.endDate).getTime() > new Date().getTime()
+        ) {
+          text[0] = 'En Revisión'
+          text[1] = 'var(--severity-danger)'
+        } else if (
           new Date(recopilation.endDate).getTime() > new Date().getTime() &&
           new Date(recopilation.startDate).getTime() > new Date().getTime()
         ) {

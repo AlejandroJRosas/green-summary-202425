@@ -30,7 +30,7 @@ export class RecopilationService {
     return this.http
       .get<
         PaginatedResponse<Recopilation & { isReady: boolean }, unknown, unknown>
-      >(`${BaseUrl}/recopilations?itemsPerPage=999&page=1&orderBy=id&orderType=DESC`)
+      >(`${BaseUrl}/recopilations?itemsPerPage=999&page=1&orderBy=endDate&orderType=DESC`)
       .pipe(map((res) => (res.status === 'success' ? res.data.items : [])))
   }
 

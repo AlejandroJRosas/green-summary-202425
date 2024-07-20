@@ -31,7 +31,8 @@
             icon="pi pi-file-check"
             tooltip="Ha sido marcado como correcto"
           ></tooltip-icon>
-        } @else if (answer?.hasError) {
+        }
+        @if (answer?.hasError) {
           <tooltip-icon
             class="error-icon"
             icon="pi pi-file-excel"

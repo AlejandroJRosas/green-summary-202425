@@ -68,6 +68,7 @@ export class RecopilationComponent {
   ) {}
 
   inCreationRecopilations: Array<Recopilation & { isReady: boolean }> = []
+  onReviewRecopilations: Array<Recopilation & { isReady: boolean }> = []
   upcomingRecopilations: Array<Recopilation & { isReady: boolean }> = []
   activeRecopilations: Array<Recopilation & { isReady: boolean }> = []
   finishedRecopilations: Array<Recopilation & { isReady: boolean }> = []
@@ -81,6 +82,12 @@ export class RecopilationComponent {
       recopilations.forEach((recopilation) => {
         if (!recopilation.isReady) {
           this.inCreationRecopilations.push(recopilation)
+        } else if (
+          new Date(recopilation.departmentEndDate).getTime() <
+            new Date().getTime() &&
+          new Date(recopilation.endDate).getTime() > new Date().getTime()
+        ) {
+          this.onReviewRecopilations.push(recopilation)
         } else if (
           new Date(recopilation.endDate).getTime() > new Date().getTime() &&
           new Date(recopilation.startDate).getTime() > new Date().getTime()
