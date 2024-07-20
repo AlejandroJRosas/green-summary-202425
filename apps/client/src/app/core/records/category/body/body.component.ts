@@ -1,5 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core'
-import { PanelModule } from 'primeng/panel'
+import {
+  Component,
+  Input,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core'
+import { Panel, PanelModule } from 'primeng/panel'
 import { ImageModule } from 'primeng/image'
 import { DividerModule } from 'primeng/divider'
 import {
@@ -17,11 +23,15 @@ import { Category } from '../../../../../shared/types/category.type'
   styleUrl: './body.component.css'
 })
 export class RecordsCategoryBodyComponent implements OnInit {
+  @ViewChildren(Panel) public panels: QueryList<Panel> | undefined
+
   @Input() public criteria: Array<Omit<Criteria, 'indicator'>> | undefined
 
   @Input() public recopilationId: number | undefined
 
   @Input() public category: Omit<Category, 'indicator'> | undefined
+
+  public allCollapsed: boolean = true
 
   public modalVisible: boolean = false
 
@@ -41,7 +51,6 @@ export class RecordsCategoryBodyComponent implements OnInit {
       )
       .subscribe((departmentAnswers) => {
         this.departmentAnswers = departmentAnswers
-        console.log(this.departmentAnswers)
       })
   }
 
@@ -55,4 +64,33 @@ export class RecordsCategoryBodyComponent implements OnInit {
         return 'Link'
     }
   }
+
+  collapseAll() {
+    if (this.panels == null) return
+
+    this.allCollapsed = true
+
+    this.panels.forEach((panel) => {
+      if (panel.collapsed) return
+
+      panel.animating = true
+      panel.collapse()
+    })
+  }
+
+  expandAll() {
+    if (this.panels == null) return
+
+    this.allCollapsed = false
+
+    this.panels.forEach((panel) => {
+      if (!panel.collapsed) return
+
+      panel.animating = true
+      panel.expand()
+    })
+  }
+
+  //!DO NOT REMOVE THIS METHOD
+  changed() {}
 }

@@ -2,8 +2,9 @@
   expandIcon="pi pi-chevron-down"
   collapseIcon="pi pi-chevron-right"
   [toggleable]="true"
-  collapsed="true"
+  collapsed
   iconPos="start"
+  (collapsedChange)="changed()"
 >
   <ng-template pTemplate="header" class="p-0">
     <section

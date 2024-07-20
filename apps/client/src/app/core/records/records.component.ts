@@ -1,8 +1,9 @@
 /* eslint-disable no-constant-binary-expression */
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, QueryList, ViewChildren } from '@angular/core'
 import { DropdownModule } from 'primeng/dropdown'
 import { FormsModule } from '@angular/forms'
-import { PanelModule } from 'primeng/panel'
+import { Panel, PanelModule } from 'primeng/panel'
+import { ButtonModule } from 'primeng/button'
 import { type Recopilation } from '../../../shared/types/recopilation.type'
 import { type Indicator } from '../../../shared/types/indicator.type'
 import { RecopilationService } from '../../services/recopilation.service'
@@ -22,6 +23,7 @@ import { ScrollTopModule } from 'primeng/scrolltop'
     DropdownModule,
     FormsModule,
     PanelModule,
+    ButtonModule,
     RecordsCategoryHeaderComponent,
     RecordsCategoryBodyComponent,
     ScrollTopModule
@@ -29,12 +31,21 @@ import { ScrollTopModule } from 'primeng/scrolltop'
   templateUrl: './records.component.html'
 })
 export class RecordsComponent implements OnInit {
+  @ViewChildren(RecordsCategoryBodyComponent)
+  public recordsCategoryBodyComponents:
+    | QueryList<RecordsCategoryBodyComponent>
+    | undefined
+
+  @ViewChildren(Panel) public panels: QueryList<Panel> | undefined
+
+  public allCollapsed: boolean = true
+
   public selectedRecopilation: number =
     Number(localStorage.getItem('selectedRecopilation')) ?? 0
 
   public recopilations: Recopilation[] | undefined
 
-  public indicator: Indicator | undefined
+  public indicator: number | undefined
 
   public indicators: Indicator[] | undefined
 
@@ -104,6 +115,11 @@ export class RecordsComponent implements OnInit {
           helpText: i.helpText,
           name: i.name
         }))
+
+        if (this.indicatorsByRecopilation.length > 0) {
+          this.indicator = this.indicatorsByRecopilation[0].index
+          this.updateCategoriesAndCriteria()
+        }
       })
   }
 
@@ -116,7 +132,7 @@ export class RecordsComponent implements OnInit {
     this.resetCategoriesAndCriteria()
 
     this.categoriesAndCriteria = this.indicatorsByRecopilation.find(
-      (i) => i.index === this.indicator!.index
+      (i) => i.index === this.indicator
     )?.categories
   }
 
@@ -127,5 +143,40 @@ export class RecordsComponent implements OnInit {
 
   resetCategoriesAndCriteria(): void {
     this.categoriesAndCriteria = []
+  }
+
+  //!DO NOT REMOVE THIS METHOD
+  changed() {}
+
+  collapseAll() {
+    if (this.recordsCategoryBodyComponents == null) return
+    if (this.panels == null) return
+
+    this.allCollapsed = true
+
+    this.recordsCategoryBodyComponents.forEach((body) => body.collapseAll())
+
+    this.panels.forEach((panel) => {
+      if (panel.collapsed) return
+
+      panel.animating = true
+      panel.collapse()
+    })
+  }
+
+  expandAll() {
+    if (this.recordsCategoryBodyComponents == null) return
+    if (this.panels == null) return
+
+    this.allCollapsed = false
+
+    this.recordsCategoryBodyComponents.forEach((body) => body.expandAll())
+
+    this.panels.forEach((panel) => {
+      if (!panel.collapsed) return
+
+      panel.animating = true
+      panel.expand()
+    })
   }
 }

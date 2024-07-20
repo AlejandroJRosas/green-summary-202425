@@ -13,11 +13,46 @@
   <main class="">
     <header class="flex w-full justify-content-between align-items-center">
       <h3 class="text-2xl">Categorías</h3>
+      @if (indicator != null) {
+        <div
+          class="flex flex-row flex-wrap gap-2"
+          [style]="{
+            'margin-right': 'auto',
+            'margin-left': '1rem'
+          }"
+        >
+          <p-button
+            (click)="expandAll()"
+            label="Expandir"
+            icon="pi pi-chevron-down"
+            [rounded]="true"
+            severity="info"
+            [outlined]="true"
+            tooltipPosition="left"
+            [style]="{
+              padding: '10px'
+            }"
+          />
+          <p-button
+            (click)="collapseAll()"
+            label="Colapsar"
+            icon="pi pi-chevron-right"
+            [rounded]="true"
+            severity="info"
+            [outlined]="true"
+            tooltipPosition="left"
+            [style]="{
+              padding: '10px'
+            }"
+          />
+        </div>
+      }
       <p-dropdown
         [options]="indicators"
         [(ngModel)]="indicator"
         placeholder="Seleccione un indicador"
         optionLabel="alias"
+        optionValue="index"
         (onChange)="updateCategoriesAndCriteria()"
         [emptyMessage]="
           selectedRecopilation
@@ -28,7 +63,15 @@
     </header>
     <div class="flex flex-column">
       @for (category of categoriesAndCriteria; track category.id) {
-        <p-panel toggleable="true" toggler="icon" iconPos="start" collapsed>
+        <p-panel
+          expandIcon="pi pi-chevron-down"
+          collapseIcon="pi pi-chevron-right"
+          toggler="icon"
+          iconPos="start"
+          toggleable
+          collapsed
+          (collapsedChange)="changed()"
+        >
           <ng-template pTemplate="header">
             <app-records-category-header
               class="w-full"

@@ -11,7 +11,15 @@
       departmentAnswer of departmentAnswers;
       track departmentAnswer.department.id
     ) {
-      <p-panel toggleable="true" toggler="icon" iconPos="start" collapsed>
+      <p-panel
+        expandIcon="pi pi-chevron-down"
+        collapseIcon="pi pi-chevron-right"
+        toggler="icon"
+        iconPos="start"
+        toggleable
+        collapsed
+        (collapsedChange)="changed()"
+      >
         <ng-template pTemplate="header">
           <header>
             <h3 class="text-xl mt-3 mb-3">
@@ -121,7 +129,15 @@
     }
   </ul>
   @if (criteria && criteria.length > 3) {
-    <p-panel toggleable="true" toggler="icon" iconPos="start" collapsed>
+    <p-panel
+      expandIcon="pi pi-chevron-down"
+      collapseIcon="pi pi-chevron-right"
+      toggler="icon"
+      iconPos="start"
+      toggleable
+      collapsed
+      (collapsedChange)="changed()"
+    >
       <ng-template pTemplate="header">
         <header>
           <h3 class="m-0 text-xl">Ver todos</h3>

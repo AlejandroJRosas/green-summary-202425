@@ -1,4 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core'
 import { ValidatedFormGroup } from '../../../common/validated-form-group/validated-form-group'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { AccordionModule } from 'primeng/accordion'
@@ -7,7 +13,7 @@ import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { DialogModule } from 'primeng/dialog'
 import { InputTextModule } from 'primeng/inputtext'
 import { InputTextareaModule } from 'primeng/inputtextarea'
-import { PanelModule } from 'primeng/panel'
+import { PanelModule, Panel } from 'primeng/panel'
 import { Indicator } from '../../../../shared/types/indicator.type'
 import { CategoryComponent } from '../categories/categories.component'
 import { CriteriaComponent } from '../criteria/criteria.component'
@@ -46,6 +52,61 @@ export class IndicatorsComponent
   extends ValidatedFormGroup<Indicator>
   implements OnInit
 {
+  @ViewChildren(Panel) panels: QueryList<Panel> | undefined
+
+  @ViewChildren(CategoryComponent) categoryComponents:
+    | QueryList<CategoryComponent>
+    | undefined
+
+  @ViewChildren(CriteriaComponent) criteriaComponents:
+    | QueryList<CriteriaComponent>
+    | undefined
+
+  //!DO NOT REMOVE THIS METHOD
+  changed() {}
+
+  collapseAll() {
+    if (this.panels == null) return
+    if (this.categoryComponents == null) return
+    if (this.criteriaComponents == null) return
+
+    this.categoryComponents.forEach((categoryComponent) =>
+      categoryComponent.collapse()
+    )
+
+    this.criteriaComponents.forEach((criteriaComponent) =>
+      criteriaComponent.collapse()
+    )
+
+    this.panels.forEach((panel) => {
+      if (panel.collapsed) return
+
+      panel.animating = true
+      panel.collapse()
+    })
+  }
+
+  expandAll() {
+    if (this.panels == null) return
+    if (this.categoryComponents == null) return
+    if (this.criteriaComponents == null) return
+
+    this.categoryComponents.forEach((categoryComponent) =>
+      categoryComponent.expand()
+    )
+
+    this.criteriaComponents.forEach((criteriaComponent) =>
+      criteriaComponent.expand()
+    )
+
+    this.panels.forEach((panel) => {
+      if (!panel.collapsed) return
+
+      panel.animating = true
+      panel.expand()
+    })
+  }
+
   constructor(
     @Inject(Toast) private toast: Toast,
     private indicatorService: IndicatorService,

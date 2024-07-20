@@ -25,7 +25,41 @@
     [matrixScrollHeight]="'75vh'"
   ></app-matrix>
 
-  <h2 class="pt-3">Relaciones entre Categorías y Criterios</h2>
+  <div class="pt-3 flex flex-row align-items-center">
+    <h2>Relaciones entre Categorías y Criterios</h2>
+    <div
+      class="flex flex-row flex-wrap gap-2"
+      [style]="{
+        'margin-right': 'auto',
+        'margin-left': '1rem'
+      }"
+    >
+      <p-button
+        (click)="expandAll()"
+        label="Expandir"
+        icon="pi pi-chevron-down"
+        [rounded]="true"
+        severity="info"
+        [outlined]="true"
+        tooltipPosition="left"
+        [style]="{
+          padding: '10px'
+        }"
+      />
+      <p-button
+        (click)="collapseAll()"
+        label="Colapsar"
+        icon="pi pi-chevron-right"
+        [rounded]="true"
+        severity="info"
+        [outlined]="true"
+        tooltipPosition="left"
+        [style]="{
+          padding: '10px'
+        }"
+      />
+    </div>
+  </div>
 
   @for (indicator of matrixData?.indicators; track $index) {
     @for (category of indicator.categories; track $index) {
@@ -35,6 +69,7 @@
         [toggleable]="true"
         collapsed="true"
         iconPos="start"
+        (collapsedChange)="changed()"
       >
         <ng-template pTemplate="header">
           <section

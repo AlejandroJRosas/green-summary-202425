@@ -1,6 +1,38 @@
 <section>
   <div class="flex flex-row justify-content-between align-items-center">
     <h3 class="text-xl">Indicadores ({{ totalItems }})</h3>
+    <div
+      class="flex flex-row flex-wrap gap-2"
+      [style]="{
+        'margin-right': 'auto',
+        'margin-left': '1rem'
+      }"
+    >
+      <p-button
+        (click)="expandAll()"
+        label="Expandir"
+        icon="pi pi-chevron-down"
+        [rounded]="true"
+        severity="info"
+        [outlined]="true"
+        tooltipPosition="left"
+        [style]="{
+          padding: '10px'
+        }"
+      />
+      <p-button
+        (click)="collapseAll()"
+        label="Colapsar"
+        icon="pi pi-chevron-right"
+        [rounded]="true"
+        severity="info"
+        [outlined]="true"
+        tooltipPosition="left"
+        [style]="{
+          padding: '10px'
+        }"
+      />
+    </div>
     <p-button
       (click)="visibleCreate = true"
       styleClass="bg-primary border-primary mr-4"
@@ -15,8 +47,9 @@
       expandIcon="pi pi-chevron-down"
       collapseIcon="pi pi-chevron-right"
       [toggleable]="true"
-      collapsed="true"
+      [collapsed]="true"
       iconPos="start"
+      (collapsedChange)="changed()"
     >
       <ng-template pTemplate="header">
         <section

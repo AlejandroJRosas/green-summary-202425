@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core'
+import { Component, Inject, Input, ViewChild } from '@angular/core'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
 import { ButtonModule } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
@@ -12,7 +12,7 @@ import {
   CriteriaService
 } from '../../../services/criteria.service'
 import { Criteria } from '../../../../shared/types/criterion.type'
-import { PanelModule } from 'primeng/panel'
+import { Panel, PanelModule } from 'primeng/panel'
 import { ConfirmationService } from 'primeng/api'
 import { Toast } from '../../../common/toast/toast.component'
 import { VALUES } from '../../../../../../../shared/validations'
@@ -35,6 +35,35 @@ import { TooltipModule } from 'primeng/tooltip'
   templateUrl: './criteria.component.html'
 })
 export class CriteriaComponent extends ValidatedFormGroup<formPayload> {
+  @ViewChild(Panel) public panel: Panel | undefined
+
+  collapsed: boolean = true
+
+  collapse() {
+    if (this.panel == null) return
+
+    this.collapsed = true
+
+    if (this.panel.collapsed) return
+
+    this.panel.animating = true
+    this.panel.collapse()
+  }
+
+  expand() {
+    if (this.panel == null) return
+
+    this.collapsed = false
+
+    if (!this.panel.collapsed) return
+
+    this.panel.animating = true
+    this.panel.expand()
+  }
+
+  //!DO NOT REMOVE THIS METHOD
+  changed() {}
+
   constructor(
     @Inject(Toast) private toast: Toast,
     private confirmationService: ConfirmationService,

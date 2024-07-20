@@ -1,9 +1,9 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, QueryList, ViewChildren } from '@angular/core'
 import { Router } from '@angular/router'
 import { ButtonModule } from 'primeng/button'
 import { Recopilation } from '../../../shared/types/recopilation.type'
 import { RecopilationService } from '../../services/recopilation.service'
-import { PanelModule } from 'primeng/panel'
+import { Panel, PanelModule } from 'primeng/panel'
 import { ConfirmDialogModule } from 'primeng/confirmdialog'
 import { ConfirmationService } from 'primeng/api'
 import { Toast } from '../../common/toast/toast.component'
@@ -27,6 +27,39 @@ import { ScrollTopModule } from 'primeng/scrolltop'
   templateUrl: './recopilation.component.html'
 })
 export class RecopilationComponent {
+  @ViewChildren(Panel) panels: QueryList<Panel> | undefined
+
+  allCollapsed: boolean = true
+
+  //!DO NOT REMOVE THIS METHOD
+  changed() {}
+
+  collapseAll() {
+    if (this.panels == null) return
+
+    this.allCollapsed = true
+
+    this.panels.forEach((panel) => {
+      if (panel.collapsed) return
+
+      panel.animating = true
+      panel.collapse()
+    })
+  }
+
+  expandAll() {
+    if (this.panels == null) return
+
+    this.allCollapsed = false
+
+    this.panels.forEach((panel) => {
+      if (!panel.collapsed) return
+
+      panel.animating = true
+      panel.expand()
+    })
+  }
+
   constructor(
     private router: Router,
     private readonly recopilationService: RecopilationService,

@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core'
+import { Component, Inject, Input, ViewChild } from '@angular/core'
 import { ButtonModule } from 'primeng/button'
 import { DialogModule } from 'primeng/dialog'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms'
@@ -13,7 +13,7 @@ import { InputTextModule } from 'primeng/inputtext'
 import { InputTextareaModule } from 'primeng/inputtextarea'
 import { Category } from '../../../../shared/types/category.type'
 import { ConfirmationService } from 'primeng/api'
-import { PanelModule } from 'primeng/panel'
+import { Panel, PanelModule } from 'primeng/panel'
 import { VALUES } from '../../../../../../../shared/validations'
 import { TooltipModule } from 'primeng/tooltip'
 
@@ -33,6 +33,35 @@ import { TooltipModule } from 'primeng/tooltip'
   templateUrl: './categories.component.html'
 })
 export class CategoryComponent extends ValidatedFormGroup<formPayload> {
+  @ViewChild(Panel) public panel: Panel | undefined
+
+  collapsed: boolean = true
+
+  collapse() {
+    if (this.panel == null) return
+
+    this.collapsed = true
+
+    if (this.panel.collapsed) return
+
+    this.panel.animating = true
+    this.panel.collapse()
+  }
+
+  expand() {
+    if (this.panel == null) return
+
+    this.collapsed = false
+
+    if (!this.panel.collapsed) return
+
+    this.panel.animating = true
+    this.panel.expand()
+  }
+
+  //!DO NOT REMOVE THIS METHOD
+  changed() {}
+
   constructor(
     @Inject(Toast) private toast: Toast,
     private confirmationService: ConfirmationService,

@@ -1,4 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import {
   InformationCollectionByDepartment,
@@ -11,7 +17,7 @@ import { DividerModule } from 'primeng/divider'
 import { ImageModule } from 'primeng/image'
 import { InputTextModule } from 'primeng/inputtext'
 import { InputTextareaModule } from 'primeng/inputtextarea'
-import { PanelModule } from 'primeng/panel'
+import { Panel, PanelModule } from 'primeng/panel'
 import { Category } from '../../../shared/types/category.type'
 import { Indicator } from '../../../shared/types/indicator.type'
 import { CategoryService } from '../../services/category.service'
@@ -52,6 +58,39 @@ import { OverlayPanelModule } from 'primeng/overlaypanel'
   styles: ``
 })
 export class InformationCollectionViewComponent implements OnInit {
+  @ViewChildren(Panel) panels: QueryList<Panel> | undefined
+
+  allCollapsed: boolean = true
+
+  //!DO NOT REMOVE THIS METHOD
+  changed() {}
+
+  collapseAll() {
+    if (this.panels == null) return
+
+    this.allCollapsed = true
+
+    this.panels.forEach((panel) => {
+      if (panel.collapsed) return
+
+      panel.animating = true
+      panel.collapse()
+    })
+  }
+
+  expandAll() {
+    if (this.panels == null) return
+
+    this.allCollapsed = false
+
+    this.panels.forEach((panel) => {
+      if (!panel.collapsed) return
+
+      panel.animating = true
+      panel.expand()
+    })
+  }
+
   constructor(
     @Inject(Toast) private toast: Toast,
     private route: ActivatedRoute,

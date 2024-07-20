@@ -1,5 +1,12 @@
-import { Component, Inject, Input, OnInit } from '@angular/core'
-import { PanelModule } from 'primeng/panel'
+import {
+  Component,
+  Inject,
+  Input,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core'
+import { Panel, PanelModule } from 'primeng/panel'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ConfirmationService } from 'primeng/api'
 import { ButtonModule } from 'primeng/button'
@@ -50,6 +57,33 @@ export class CollectionOfInformationComponent
   extends ValidatedFormGroup<FormValues>
   implements OnInit
 {
+  @ViewChildren(Panel) panels: QueryList<Panel> | undefined
+
+  //!DO NOT REMOVE THIS METHOD
+  changed() {}
+
+  collapseAll() {
+    if (this.panels == null) return
+
+    this.panels.forEach((panel) => {
+      if (panel.collapsed) return
+
+      panel.animating = true
+      panel.collapse()
+    })
+  }
+
+  expandAll() {
+    if (this.panels == null) return
+
+    this.panels.forEach((panel) => {
+      if (!panel.collapsed) return
+
+      panel.animating = true
+      panel.expand()
+    })
+  }
+
   constructor(
     @Inject(Toast) private toast: Toast,
     private route: ActivatedRoute,

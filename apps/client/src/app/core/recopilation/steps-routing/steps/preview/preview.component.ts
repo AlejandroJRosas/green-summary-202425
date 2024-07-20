@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, QueryList, ViewChildren } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
 import { ButtonModule } from 'primeng/button'
 import { CalendarModule } from 'primeng/calendar'
@@ -13,7 +13,7 @@ import {
 } from '../../../../../services/recopilation.service'
 import { JsonPipe } from '@angular/common'
 import { MatrixComponent } from '../../../../home/matrix/matrix.component'
-import { PanelModule } from 'primeng/panel'
+import { Panel, PanelModule } from 'primeng/panel'
 import { DialogModule } from 'primeng/dialog'
 import { ScrollTopModule } from 'primeng/scrolltop'
 
@@ -37,6 +37,39 @@ import { ScrollTopModule } from 'primeng/scrolltop'
   templateUrl: './preview.component.html'
 })
 export class PreviewComponent {
+  @ViewChildren(Panel) panels: QueryList<Panel> | undefined
+
+  allCollapsed: boolean = true
+
+  //!DO NOT REMOVE THIS METHOD
+  changed() {}
+
+  collapseAll() {
+    if (this.panels == null) return
+
+    this.allCollapsed = true
+
+    this.panels.forEach((panel) => {
+      if (panel.collapsed) return
+
+      panel.animating = true
+      panel.collapse()
+    })
+  }
+
+  expandAll() {
+    if (this.panels == null) return
+
+    this.allCollapsed = false
+
+    this.panels.forEach((panel) => {
+      if (!panel.collapsed) return
+
+      panel.animating = true
+      panel.expand()
+    })
+  }
+
   constructor(
     @Inject(Toast) private toast: Toast,
     private recopilationService: RecopilationService,

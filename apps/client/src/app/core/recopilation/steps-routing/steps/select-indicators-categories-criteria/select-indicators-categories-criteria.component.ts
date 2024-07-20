@@ -1,4 +1,10 @@
-import { Component, Inject, OnInit } from '@angular/core'
+import {
+  Component,
+  Inject,
+  OnInit,
+  QueryList,
+  ViewChildren
+} from '@angular/core'
 import { ButtonModule } from 'primeng/button'
 import { DropdownModule } from 'primeng/dropdown'
 import { ActivatedRoute, Router } from '@angular/router'
@@ -9,7 +15,7 @@ import { IndicatorService } from '../../../../../services/indicator.service'
 import { Indicator } from '../../../../../../shared/types/indicator.type'
 import { Criteria } from '../../../../../../shared/types/criterion.type'
 import { RecopilationService } from '../../../../../services/recopilation.service'
-import { PanelModule } from 'primeng/panel'
+import { Panel, PanelModule } from 'primeng/panel'
 import { Category } from '../../../../../../shared/types/category.type'
 import { Recopilation } from '../../../../../../shared/types/recopilation.type'
 import { ScrollTopModule } from 'primeng/scrolltop'
@@ -31,6 +37,39 @@ import { ScrollTopModule } from 'primeng/scrolltop'
   templateUrl: './select-indicators-categories-criteria.component.html'
 })
 export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
+  @ViewChildren(Panel) panels: QueryList<Panel> | undefined
+
+  allCollapsed: boolean = true
+
+  //!DO NOT REMOVE THIS METHOD
+  changed() {}
+
+  collapseAll() {
+    if (this.panels == null) return
+
+    this.allCollapsed = true
+
+    this.panels.forEach((panel) => {
+      if (panel.collapsed) return
+
+      panel.animating = true
+      panel.collapse()
+    })
+  }
+
+  expandAll() {
+    if (this.panels == null) return
+
+    this.allCollapsed = false
+
+    this.panels.forEach((panel) => {
+      if (!panel.collapsed) return
+
+      panel.animating = true
+      panel.expand()
+    })
+  }
+
   constructor(
     @Inject(Toast) private toast: Toast,
     private router: Router,
