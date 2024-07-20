@@ -20,11 +20,11 @@ export function constructRecommendationMail(
     Las siguientes categorías están recomendadas para ser repondidas por usted:
   </p>
 
-  <section style="width: fit-content; margin: auto; margin-top: 60px; display: flex; flex-direction: column; gap: 30px; border: 2px solid whitesmoke; padding: 1% 6% 1% 3%; border-radius: 10px; color: #323232; font-family: 'Arial';">
-    <ul style="font-size: 20px; display: flex; flex-direction: column; gap: 15px; color: #323232; font-family: 'Arial';">
+  <section style="width: fit-content; margin: auto; margin-top: 60px; display: flex; flex-direction: column; gap: 30px; border: 2px solid whitesmoke; padding: 2% 6% 0% 3%; border-radius: 10px; color: #323232; font-family: 'Arial';">
+    <ul style="font-size: 20px; color: #323232; font-family: 'Arial';">
       ${categoriesList.map(
         (c) =>
-          `<li style="color: #323232; font-family: 'Arial';">
+          `<li style="color: #323232; font-family: 'Arial'; margin-bottom: 25px;">
                 ${c}
             </li>
           `
