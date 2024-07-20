@@ -193,7 +193,7 @@ export class InformationRecopilationComponent
     }
 
     // We are sure that form control values are not null nor undefined 'cuz we only reach here if form group is valid, that's why we use '!'
-    const newRecopilation: Recopilation & { id: number } = {
+    const newRecopilation: Omit<Recopilation, 'isReady'> & { id: number } = {
       id: this.recopilationId,
       name: this.formGroup.get('name')!.value!,
       description: this.formGroup.get('description')!.value!,

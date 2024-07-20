@@ -111,7 +111,7 @@ export class RecopilationService {
   }
 
   create(
-    recopilation: Recopilation & { id: number }
+    recopilation: Omit<Recopilation, 'isReady'> & { id: number }
   ): Observable<
     BackendResponse<CreateRecopilationDto & { id: number }, unknown, unknown>
   > {

@@ -15,6 +15,18 @@
   />
   @if (stats) {
     <div class="container">
+      <app-card title="Estatus de Recopilación">
+        <span class="status-text">
+          <h3>
+            <i
+              class="pi pi-circle-fill"
+              [style]="'color:' + getMainTextStatus()[1]"
+            ></i>
+            {{ getMainTextStatus()[0] }}
+          </h3>
+        </span>
+      </app-card>
+
       <app-card
         title="Categorías Evaluadas"
         [mainText]="stats.quantities.categories.toString()"

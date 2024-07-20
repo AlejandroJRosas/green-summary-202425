@@ -5,6 +5,23 @@
   margin-top: 1rem;
 }
 
+.status-text {
+  margin-top: 0.75rem;
+  font-size: 1.75rem;
+
+  h3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0;
+  }
+
+  .pi {
+    font-size: 1.25rem;
+  }
+}
+
 .vertical-container {
   display: flex;
   flex-direction: column;

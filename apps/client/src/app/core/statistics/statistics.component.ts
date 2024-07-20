@@ -101,6 +101,39 @@ export class StatisticsComponent {
       })
   }
 
+  getMainTextStatus(): string[] {
+    const text = ['', '']
+
+    if (this.selectedRecopilation === 0) {
+      return ['No hay recopilación seleccionada', 'gray']
+    }
+
+    this.recopilations.forEach((recopilation) => {
+      if (recopilation.id === this.selectedRecopilation) {
+        if (!recopilation.isReady) {
+          text[0] = 'En Creación'
+          text[1] = 'var(--severity-info)'
+        } else if (
+          new Date(recopilation.endDate).getTime() > new Date().getTime() &&
+          new Date(recopilation.startDate).getTime() > new Date().getTime()
+        ) {
+          text[0] = 'Próxima'
+          text[1] = 'var(--ucab-yellow-hex)'
+        } else if (
+          new Date(recopilation.endDate).getTime() < new Date().getTime()
+        ) {
+          text[0] = 'Finalizada'
+          text[1] = 'gray'
+        } else {
+          text[0] = 'Activa'
+          text[1] = 'var(--severity-success)'
+        }
+      }
+    })
+
+    return text
+  }
+
   getCompletionValue(answers: number, total: number): string {
     return ((answers / total) * 100).toFixed(0)
   }

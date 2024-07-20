@@ -5,4 +5,5 @@ export type Recopilation = {
   startDate: Date
   departmentEndDate: Date
   endDate: Date
+  isReady: boolean
 }
