@@ -1,5 +1,5 @@
 <div class="p-4">
-  <h2>Módulo de Estadísticas</h2>
+  <h2>Estadísticas</h2>
   <p-dropdown
     [options]="recopilations"
     [(ngModel)]="selectedRecopilation"
@@ -13,12 +13,133 @@
         : 'Seleccione una recopilación'
     "
   />
-  <!-- <iframe
-    title="dashboard"
-    width="1140"
-    height="541.25"
-    src="https://app.powerbi.com/reportEmbed?reportId=abb09fb3-e767-4ecf-bb27-b082e0aa287f&autoAuth=true&ctid=29a18182-402d-4ca9-a51f-2a356c6efdb7"
-    frameborder="0"
-    allowFullScreen="true"
-  ></iframe> -->
+  @if (stats) {
+    <div class="container">
+      <app-card
+        title="Categorías Evaluadas"
+        [mainText]="stats.quantities.categories.toString()"
+      />
+
+      <app-card
+        title="Departamentos Participando"
+        [mainText]="stats.quantities.departments.toString()"
+      />
+
+      <app-card
+        title="Completación de Categorías"
+        [mainText]="
+          stats.quantities.answers.toString() +
+          ' de ' +
+          (
+            stats.quantities.categories * stats.quantities.departments
+          ).toString()
+        "
+      >
+        <p-progressBar
+          [pTooltip]="
+            'Completación de Categorías ' +
+            getCompletionValue(
+              stats.quantities.answers,
+              stats.quantities.categories * stats.quantities.departments
+            ) +
+            '%'
+          "
+          color="var(--severity-success)"
+          [value]="
+            getCompletionValue(
+              stats.quantities.answers,
+              stats.quantities.categories * stats.quantities.departments
+            )
+          "
+        />
+      </app-card>
+
+      <!-- @if (stats.mostAnswersCategory.length > 0) {
+        <app-card
+          title="Categoría más respondida"
+          [mainText]="stats.mostAnswersCategory[0].category.name"
+        >
+          <span class="span-text">
+            ({{ stats.mostAnswersCategory[0].answersQuantity }}
+            {{
+              stats.mostAnswersCategory[0].answersQuantity === 1
+                ? 'respuesta'
+                : 'respuestas'
+            }})
+          </span>
+        </app-card>
+      } @else {
+        <app-card title="Categoría más respondida" mainText="N/A">
+          <span class="span-text"> (Sin respuestas) </span>
+        </app-card>
+      }
+
+      @if (stats.leastAnswersCategory.length > 0) {
+        <app-card
+          title="Categoría menos respondida"
+          [mainText]="stats.leastAnswersCategory[0].category.name"
+        >
+          <span class="span-text"
+            >({{ stats.leastAnswersCategory[0].answersQuantity }}
+            {{
+              stats.leastAnswersCategory[0].answersQuantity === 1
+                ? 'respuesta'
+                : 'respuestas'
+            }})
+          </span>
+        </app-card>
+      } @else {
+        <app-card title="Categoría menos respondida" mainText="N/A">
+          <span class="span-text"> (Sin respuestas) </span>
+        </app-card>
+      }
+
+      @if (stats.leastAnswersCategory.length > 0) {
+        <app-card
+          title="Categoría con más errores"
+          [mainText]="stats.leastAnswersCategory[0].category.name"
+        >
+          <span class="span-text">
+            ({{ stats.mostAnswersCategory[0].answersQuantity }}
+            {{
+              stats.mostAnswersCategory[0].answersQuantity === 1
+                ? 'respuesta'
+                : 'respuestas'
+            }})
+          </span>
+        </app-card>
+      } @else {
+        <app-card title="Categoría con más errores" mainText="N/A">
+          <span class="span-text"> (Sin respuestas) </span>
+        </app-card>
+      } -->
+    </div>
+
+    <div class="container">
+      <div class="ranking-container">
+        <app-horizontal-bar [stats]="stats" />
+      </div>
+      <app-indicators-pie-chart [matrixData]="stats.matrix" />
+      <div class="vertical-container">
+        <app-card
+          title="Colecciones de Información"
+          [mainText]="stats.quantities.collections.toString()"
+        />
+        <app-card
+          title="Evidencias Cargadas"
+          [mainText]="
+            (
+              stats.quantities.evidences.images +
+              stats.quantities.evidences.documents +
+              stats.quantities.evidences.links
+            ).toString()
+          "
+        />
+      </div>
+    </div>
+    <app-departments-performance [matrixData]="stats.matrix" />
+  } @else {
+    <p>No hay estadísticas disponibles</p>
+  }
+  <p-scrollTop />
 </div>
