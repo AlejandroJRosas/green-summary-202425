@@ -21,6 +21,13 @@
             [attr.colspan]="indicator.categories.length"
           >
             {{ indicator.alias }}
+            @if (currentUser.type !== 'department') {
+              <i
+                class="pi pi-info-circle"
+                [pTooltip]="getIndicatorTooltipStats(indicator.index)"
+                tooltipPosition="top"
+              ></i>
+            }
           </th>
         }
       </tr>
@@ -29,6 +36,13 @@
           @for (category of indicator.categories; track $index) {
             <th pTooltip="{{ category.helpText }}" tooltipPosition="bottom">
               {{ category.name }}
+              @if (currentUser.type !== 'department') {
+                <i
+                  class="pi pi-info-circle"
+                  [pTooltip]="getCategoryTooltipStats(category.id)"
+                  tooltipPosition="top"
+                ></i>
+              }
             </th>
           }
         }
