@@ -24,3 +24,17 @@ tr {
 .t-footer {
   background-color: var(--light-green);
 }
+
+h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0;
+  word-break: break-word;
+}
+
+h4 {
+  margin-top: 0;
+  font-weight: 600;
+  color: gray;
+  font-size: 1.25rem;
+  font-style: italic;
+}

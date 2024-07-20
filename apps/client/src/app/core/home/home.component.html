@@ -1,15 +1,6 @@
 <div class="p-4">
-  @if (matrixData === undefined) {
-    <h2>Matriz de Seguimiento</h2>
-  } @else {
-    <h2>
-      Matriz de Seguimiento - {{ matrixData.name }}
-      (Inicia:
-      {{ parseDate(matrixData.startDate) }}
-      - Termina:
-      {{ parseDate(matrixData.departmentEndDate) }})
-    </h2>
-  }
+  <h2>Matriz de Seguimiento</h2>
+
   <p-dropdown
     [options]="recopilations"
     [(ngModel)]="selectedRecopilation"
@@ -23,6 +14,7 @@
         : 'Seleccione una recopilación'
     "
   />
+
   <button
     type="button"
     class="open-big"
@@ -33,6 +25,20 @@
     [disabled]="matrixData === undefined"
     icon="pi pi-external-link"
   ></button>
+
+  @if (matrixData !== undefined) {
+    <div>
+      <h3>
+        {{ matrixData.name }}
+      </h3>
+      <h4>
+        Inicio: {{ parseDate(matrixData.startDate) }} - Cierre Departamental:
+        {{ parseDate(matrixData.departmentEndDate) }} - Finalización:
+        {{ parseDate(matrixData.endDate) }}
+      </h4>
+    </div>
+  }
+
   <div class="matrix">
     <app-matrix
       [selectedRecopilation]="selectedRecopilation"

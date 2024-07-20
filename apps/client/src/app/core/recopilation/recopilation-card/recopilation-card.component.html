@@ -1,0 +1,68 @@
+@if (recopilation) {
+  <p-panel>
+    <ng-template pTemplate="header">
+      <section
+        class="flex flex-row justify-content-between align-items-center w-full gap-4"
+      >
+        <div>
+          <h2 style="word-break: break-word" class="text-xl">
+            {{ recopilation.name }}
+            @if (!recopilation.isReady) {
+              (Por completar)
+            }
+          </h2>
+          @if (recopilation.isReady) {
+            <h3>
+              Inicio: {{ parseDate(recopilation.startDate) }} - Cierre
+              Departamental: {{ parseDate(recopilation.departmentEndDate) }} -
+              Finalización:
+              {{ parseDate(recopilation.endDate) }}
+            </h3>
+          }
+        </div>
+
+        <div class="flex flex-row gap-3">
+          @if (!recopilation.isReady) {
+            <p-button
+              severity="info"
+              icon="pi pi-play"
+              rounded="true"
+              outlined="true"
+              pTooltip="Continuar"
+              tooltipPosition="left"
+              (click)="navigateContinueSteps(recopilation.id)"
+            />
+          } @else {
+            <p-button
+              severity="success"
+              icon="pi pi-eye"
+              rounded="true"
+              outlined="true"
+              pTooltip="Ver Detalles"
+              tooltipPosition="left"
+              (click)="navigateRecopilationDetails(recopilation.id)"
+            />
+          }
+          <p-button
+            severity="warning"
+            icon="pi pi-trash"
+            rounded="true"
+            outlined="true"
+            pTooltip="Eliminar"
+            tooltipPosition="left"
+            (click)="
+              confirmRecopilationDeletion(
+                $event,
+                recopilation.id,
+                recopilation.name
+              )
+            "
+          />
+        </div>
+      </section>
+    </ng-template>
+    <p class="m-0 pb-3" style="max-width: 80vw">
+      {{ recopilation.description }}
+    </p>
+  </p-panel>
+}

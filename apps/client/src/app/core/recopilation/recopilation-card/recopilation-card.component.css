@@ -1,0 +1,11 @@
+h2 {
+  margin-bottom: 0.25rem;
+}
+
+h3 {
+  margin-top: 0;
+  font-weight: 600;
+  color: gray;
+  font-size: 1rem;
+  font-style: italic;
+}

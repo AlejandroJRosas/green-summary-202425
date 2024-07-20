@@ -10,6 +10,7 @@ import { Toast } from '../../common/toast/toast.component'
 import { DialogModule } from 'primeng/dialog'
 import { TooltipModule } from 'primeng/tooltip'
 import { ScrollTopModule } from 'primeng/scrolltop'
+import { RecopilationCardComponent } from './recopilation-card/recopilation-card.component'
 
 @Component({
   selector: 'app-recopilation',
@@ -21,7 +22,8 @@ import { ScrollTopModule } from 'primeng/scrolltop'
     DialogModule,
     TooltipModule,
     ButtonModule,
-    ScrollTopModule
+    ScrollTopModule,
+    RecopilationCardComponent
   ],
   providers: [ConfirmationService],
   templateUrl: './recopilation.component.html'
@@ -61,10 +63,10 @@ export class RecopilationComponent {
   }
 
   constructor(
+    @Inject(Toast) private toast: Toast,
     private router: Router,
     private readonly recopilationService: RecopilationService,
-    private readonly confirmationService: ConfirmationService,
-    @Inject(Toast) private toast: Toast
+    private readonly confirmationService: ConfirmationService
   ) {}
 
   inCreationRecopilations: Array<Recopilation & { isReady: boolean }> = []
@@ -104,59 +106,9 @@ export class RecopilationComponent {
     })
   }
 
-  confirmRecopilationDeletion(event: Event, id: number, name: string) {
-    this.confirmationService.confirm({
-      target: event.target as EventTarget,
-      message: `¿Estás seguro de que quieres eliminar el recopilación <strong>${name}</strong>?`,
-      header: 'Eliminar recopilación',
-      icon: 'pi pi-info-circle',
-      acceptButtonStyleClass: 'p-button-danger p-button-text',
-      rejectButtonStyleClass: 'p-button-text p-button-text',
-      acceptIcon: 'none',
-      rejectIcon: 'none',
-      acceptLabel: 'Sí',
-      rejectLabel: 'No',
-
-      accept: () => {
-        this.toast.show('info', 'Eliminando..', 'Eliminando recopilación..')
-        this.onDelete(id)
-      }
-    })
-  }
-
-  private onDelete(id: number) {
-    this.recopilationService.delete(id).subscribe({
-      next: () => {
-        this.toast.show(
-          'success',
-          'Eliminado',
-          'Recopilación eliminada con éxito'
-        )
-        this.loadRecopilations()
-      },
-      error: (e) => {
-        if (e.error.data != null) {
-          this.toast.show('error', 'Error', e.error.data.message)
-        } else {
-          this.toast.show('error', 'Error', e.error.message)
-        }
-      }
-    })
-  }
-
   navigateStepsCreate() {
     this.router.navigateByUrl(
       'pages/recopilations/steps-create/information-recopilation'
     )
-  }
-
-  navigateContinueSteps(id: number) {
-    this.router.navigateByUrl(
-      `pages/recopilations/steps-create/information-recopilation/${id}`
-    )
-  }
-
-  navigateRecopilationDetails(id: number) {
-    this.router.navigateByUrl(`pages/recopilations/steps-create/preview/${id}`)
   }
 }

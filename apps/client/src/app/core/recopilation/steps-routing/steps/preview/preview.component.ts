@@ -34,7 +34,8 @@ import { ScrollTopModule } from 'primeng/scrolltop'
     DialogModule,
     ScrollTopModule
   ],
-  templateUrl: './preview.component.html'
+  templateUrl: './preview.component.html',
+  styleUrl: './preview.component.css'
 })
 export class PreviewComponent {
   @ViewChildren(Panel) panels: QueryList<Panel> | undefined
@@ -95,7 +96,6 @@ export class PreviewComponent {
       next: (recopilation) => {
         if (recopilation) {
           this.matrixData = recopilation
-          console.log(recopilation)
         }
       },
       error: (e) => {
