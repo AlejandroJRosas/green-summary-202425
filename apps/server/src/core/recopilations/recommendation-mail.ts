@@ -1,5 +1,6 @@
 export function constructRecommendationMail(
   recopilationName: string,
+  recopilationStartDate: Date,
   categoriesList: string[]
 ) {
   return `
@@ -17,6 +18,7 @@ export function constructRecommendationMail(
     </h1>
 
     <p style="display: block; font-size: 17px; margin-top: 30px; margin-right: 40px; margin-left: 40px; color: #323232; font-family: 'Arial';">
+      Esta recopilación estará disponible a partir del ${new Intl.DateTimeFormat('es-US', { dateStyle: 'full' }).format(recopilationStartDate)}, desde ese momento podrás subir tu información a la plataforma. <br/>
       Las siguientes categorías están recomendadas para ser respondidas por usted:
     </p>
 

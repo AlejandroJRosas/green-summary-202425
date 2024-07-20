@@ -329,6 +329,7 @@ export class RecopilationsController {
 
     const emailBody = constructRecommendationMail(
       recopilation.name,
+      recopilation.startDate,
       categories.map((c) => c.name)
     )
 
