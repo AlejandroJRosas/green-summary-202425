@@ -347,7 +347,9 @@ export class RecopilationsController {
 
   @OnEvent('matrix.changed')
   handleChangedMatrixEvent(payload: MatrixChangedEvent) {
-    this.recopilationsService.constructAndSaveMatrix(payload.recopilationId)
+    return this.recopilationsService.constructAndSaveMatrix(
+      payload.recopilationId
+    )
   }
 
   @OnEvent('matrix.changed.many')
