@@ -12,6 +12,7 @@ import { Recommendation } from '../recommendations/entities/recommendation.entit
 import { Department } from '../users/entities/department.entity'
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 import { InformationCollection } from '../information-collections/entities/information-collection.entity'
+import { Evidence } from '../evidences/entities/evidence.entity'
 
 @Module({
   imports: [
@@ -25,7 +26,8 @@ import { InformationCollection } from '../information-collections/entities/infor
       CategorizedCriteria,
       Recommendation,
       DepartmentPerRecopilation,
-      InformationCollection
+      InformationCollection,
+      Evidence
     ])
   ],
   controllers: [RecopilationsController],
