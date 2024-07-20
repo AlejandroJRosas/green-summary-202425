@@ -398,7 +398,7 @@ export class RecopilationsService {
           return res.map((row) => {
             const { count, ...resWithoutCount } = row
             return { category: resWithoutCount, answersQuantity: +count }
-          })
+          })[0]
         }),
       this.departmentsRepository
         .query(
@@ -419,7 +419,7 @@ export class RecopilationsService {
           return res.map((row) => {
             const { count, ...resWithoutCount } = row
             return { category: resWithoutCount, answersQuantity: +count }
-          })
+          })[0]
         }),
       this.findMatrix(recopilationId)
     ])
