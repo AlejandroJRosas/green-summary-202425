@@ -93,7 +93,6 @@ export class StatisticsComponent {
         next: (stats) => {
           this.updateLocalSelectedRecopilation()
           this.stats = stats ?? undefined
-          console.log(stats)
         },
         error: () => {
           this.toast.show('error', 'Error', 'Error al obtener las estadísticas')

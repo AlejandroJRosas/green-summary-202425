@@ -1,0 +1,11 @@
+.matrix-name {
+  margin-bottom: 0.25rem;
+}
+
+.matrix-dates {
+  margin-top: 0;
+  font-weight: 600;
+  color: gray;
+  font-size: 1rem;
+  font-style: italic;
+}

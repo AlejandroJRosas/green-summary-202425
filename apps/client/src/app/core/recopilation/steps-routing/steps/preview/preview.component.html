@@ -12,13 +12,19 @@
       icon="pi pi-external-link"
     ></button>
   </header>
-  <h2>
-    Matriz de Seguimiento - {{ matrixData?.name }}
-    (Inicia:
-    {{ parseDate(matrixData?.startDate) }}
-    - Termina:
-    {{ parseDate(matrixData?.departmentEndDate) }})
-  </h2>
+  <h2>Matriz de Seguimiento</h2>
+  @if (matrixData) {
+    <div>
+      <h3 class="matrix-name">
+        {{ matrixData.name }}
+      </h3>
+      <h4 class="matrix-dates">
+        Inicio: {{ parseDate(matrixData.startDate) }} - Cierre Departamental:
+        {{ parseDate(matrixData.departmentEndDate) }} - Finalización:
+        {{ parseDate(matrixData.endDate) }}
+      </h4>
+    </div>
+  }
   <app-matrix
     [matrixData]="matrixData"
     [selectedRecopilation]="recopilationId"
