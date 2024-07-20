@@ -265,7 +265,8 @@ export class RecopilationsService {
               dpr.department.id
             )
 
-            const isAnswered = informationCollections.length > 0
+            const isAnswered =
+              informationCollections.filter((ic) => !ic.isApproved).length > 0
 
             const isApproved =
               isAnswered && informationCollections.every((ic) => ic.isApproved)
