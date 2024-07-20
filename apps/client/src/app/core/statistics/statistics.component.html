@@ -81,9 +81,7 @@
           </span>
         </app-card>
       } @else {
-        <app-card title="Categoría más respondida" mainText="N/A">
-          <span class="span-text"> (Sin respuestas) </span>
-        </app-card>
+        <app-card title="Categoría más respondida" mainText="N/A" />
       }
 
       @if (stats.leastAnswersCategory) {
@@ -101,9 +99,7 @@
           </span>
         </app-card>
       } @else {
-        <app-card title="Categoría menos respondida" mainText="N/A">
-          <span class="span-text"> (Sin respuestas) </span>
-        </app-card>
+        <app-card title="Categoría menos respondida" mainText="N/A" />
       }
 
       @if (stats.mostErrorsCategory) {
@@ -126,9 +122,7 @@
           </span>
         </app-card>
       } @else {
-        <app-card title="Categoría con más errores" mainText="N/A">
-          <span class="span-text"> (Sin errores)(Sin respuestas) </span>
-        </app-card>
+        <app-card title="Categoría con más errores" mainText="N/A" />
       }
     </div>
 
