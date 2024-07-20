@@ -16,6 +16,7 @@ import { Evidence } from '../evidences/entities/evidence.entity'
 import { NotificationsService } from '../notifications/notifications.service'
 import { Notification } from '../notifications/entities/notification.entity'
 import { User } from '../users/entities/user.entity'
+import { MailsService } from '../mails/mails.service'
 
 @Module({
   imports: [
@@ -36,7 +37,7 @@ import { User } from '../users/entities/user.entity'
     ])
   ],
   controllers: [RecopilationsController],
-  providers: [RecopilationsService, NotificationsService],
+  providers: [RecopilationsService, NotificationsService, MailsService],
   exports: [TypeOrmModule]
 })
 export class RecopilationsModule {}

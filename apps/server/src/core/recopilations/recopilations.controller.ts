@@ -32,12 +32,12 @@ import { EventEmitter2, OnEvent } from '@nestjs/event-emitter'
 import { MatrixChangedEvent } from './dto/matrix-changed.event'
 import { MatrixChangedManyEvent } from './dto/matrix-changed-many.event'
 import { NOTIFICATION_TYPES } from '../notifications/notifications.constants'
-import { Notification } from '../notifications/entities/notification.entity'
 import { NotificationsService } from '../notifications/notifications.service'
 import { Department } from '../users/entities/department.entity'
 import { MailsService } from '../mails/mails.service'
 import { constructRecommendationMail } from './recommendation-mail'
 import { Category } from '../categories/entities/category.entity'
+import { Recommendation } from '../recommendations/entities/recommendation.entity'
 
 @ApiTags('Recopilations')
 @Controller('recopilations')
@@ -50,6 +50,8 @@ export class RecopilationsController {
     private readonly departmentsRepository: Repository<Department>,
     @InjectRepository(Category)
     private readonly categoriesRepository: Repository<Category>,
+    @InjectRepository(Recommendation)
+    private readonly recommendationsRepository: Repository<Recommendation>,
     private readonly notificationsService: NotificationsService,
     private readonly mailsService: MailsService,
     private readonly eventEmitter: EventEmitter2
@@ -232,15 +234,61 @@ export class RecopilationsController {
       new MatrixChangedEvent(recommendCategoriesDto.recopilationId)
     )
 
-    recommendCategoriesDto.departments.map((d) => {
-      this.notifyRecommendationToDepartment(
-        +d.departmentId,
-        +recommendCategoriesDto.recopilationId,
-        d.categories.map((c) => +c.categoryId)
-      )
+    return res
+  }
+
+  @Roles(Role.Coordinator, Role.Admin)
+  @Patch(':id/set-as-ready')
+  async setAsReady(@Param('id') id: string) {
+    const recopilation = await this.recopilationsRepository.findOneByOrFail({
+      id: +id
     })
 
-    return res
+    if (recopilation.isReady) {
+      return recopilation
+    }
+
+    recopilation.isReady = true
+
+    const updatedRecopilation =
+      await this.recopilationsRepository.save(recopilation)
+
+    this.eventEmitter.emit(
+      'matrix.changed',
+      new MatrixChangedEvent(recopilation.id)
+    )
+
+    const departmentsInRecopilation = await this.departmentsRepository.find({
+      where: {}
+    })
+
+    await Promise.all(
+      departmentsInRecopilation.map(async (d) => {
+        const categories = await this.recommendationsRepository
+          .find({
+            where: {
+              departmentPerRecopilation: {
+                recopilation: {
+                  id: recopilation.id,
+                  departmentsPerRecopilation: {
+                    department: {
+                      id: d.id
+                    }
+                  }
+                }
+              }
+            },
+            relations: {
+              category: true
+            }
+          })
+          .then((recs) => recs.map((r) => r.category.id))
+
+        this.notifyRecommendationToDepartment(d.id, recopilation.id, categories)
+      })
+    )
+
+    return updatedRecopilation
   }
 
   private async notifyRecommendationToDepartment(
@@ -283,23 +331,6 @@ export class RecopilationsController {
       departmentEmail,
       'Has sido recomendado para aportar información',
       emailBody
-    )
-  }
-
-  @Roles(Role.Coordinator, Role.Admin)
-  @Patch(':id/set-as-ready')
-  async setAsReady(@Param('id') id: string) {
-    const recopilation = await this.recopilationsRepository.findOneByOrFail({
-      id: +id
-    })
-
-    recopilation.isReady = true
-
-    await this.recopilationsRepository.save(recopilation)
-
-    this.eventEmitter.emit(
-      'matrix.changed',
-      new MatrixChangedEvent(recopilation.id)
     )
   }
 
