@@ -244,6 +244,12 @@ export class RecopilationsController {
     )
   }
 
+  @Roles(Role.Coordinator, Role.Admin)
+  @Get(':id/statistics')
+  async getRecopilationStats(@Param('id') id: string) {
+    return this.recopilationsService.getRecopilationStatistics(+id)
+  }
+
   @OnEvent('matrix.changed')
   handleChangedMatrixEvent(payload: MatrixChangedEvent) {
     this.recopilationsService.constructAndSaveMatrix(payload.recopilationId)

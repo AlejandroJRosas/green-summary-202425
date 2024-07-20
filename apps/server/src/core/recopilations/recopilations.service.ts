@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common'
+import { Inject, Injectable } from '@nestjs/common'
 import { InjectRepository } from '@nestjs/typeorm'
 import {
   EntityNotFoundError,
@@ -28,6 +28,8 @@ import { Recommendation } from '../recommendations/entities/recommendation.entit
 import { DepartmentPerRecopilation } from '../departments-per-recopilations/entities/departments-per-recopilation.entity'
 import { RecopilationDto } from './dto/recopilation.dto'
 import { InformationCollection } from '../information-collections/entities/information-collection.entity'
+import { Evidence } from '../evidences/entities/evidence.entity'
+import { EvidenceType } from '../evidences/evidences.constants'
 
 @Injectable()
 export class RecopilationsService {
@@ -51,7 +53,9 @@ export class RecopilationsService {
     @InjectRepository(DepartmentPerRecopilation)
     private departmentsPerRecopilationsRepository: Repository<DepartmentPerRecopilation>,
     @InjectRepository(InformationCollection)
-    private informationCollectionsRepository: Repository<InformationCollection>
+    private informationCollectionsRepository: Repository<InformationCollection>,
+    @InjectRepository(Evidence)
+    private evidencesRepository: Repository<Evidence>
   ) {}
 
   async findAll({
@@ -296,6 +300,147 @@ export class RecopilationsService {
     }
 
     return recopilationDto
+  }
+
+  async getRecopilationStatistics(recopilationId: number) {
+    const [
+      categoriesQuantity,
+      departmentsQuantity,
+      answersQuantity,
+      collectionsQuantity,
+      imageEvidencesQuantity,
+      documentEvidencesQuantity,
+      linkEvidencesQuantity,
+      departmentsRanking,
+      mostAnswersCategory,
+      leastAnswersCategory,
+      matrix
+    ] = await Promise.all([
+      this.categorizedCriteriaRepository
+        .createQueryBuilder()
+        .select('COUNT(DISTINCT "categoryId")')
+        .where({ recopilation: { id: recopilationId } })
+        .execute()
+        .then((res) => +res[0].count),
+      this.departmentsPerRecopilationsRepository
+        .createQueryBuilder()
+        .where({ recopilation: { id: recopilationId } })
+        .getCount(),
+      this.informationCollectionsRepository
+        .query(
+          `
+            SELECT COUNT(*) 
+            FROM (SELECT DISTINCT "departmentId", "categoryId"
+                  FROM information_collections
+                  WHERE "recopilationId" = $1
+                  ) AS internalQuery
+        `,
+          [recopilationId]
+        )
+        .then((res) => +res[0].count),
+      this.informationCollectionsRepository.count({
+        where: { recopilation: { id: recopilationId } }
+      }),
+      this.evidencesRepository.count({
+        where: {
+          collection: { recopilation: { id: recopilationId } },
+          type: Equal('image' as EvidenceType)
+        }
+      }),
+      this.evidencesRepository.count({
+        where: {
+          collection: { recopilation: { id: recopilationId } },
+          type: Equal('document' as EvidenceType)
+        }
+      }),
+      this.evidencesRepository.count({
+        where: {
+          collection: { recopilation: { id: recopilationId } },
+          type: Equal('link' as EvidenceType)
+        }
+      }),
+      this.departmentsRepository
+        .query(
+          `
+          SELECT "departmentId" as id, d."fullName", d.email, d.password, COUNT(*) as count 
+          FROM (SELECT DISTINCT "departmentId", "categoryId"
+                FROM information_collections
+                WHERE "recopilationId" = $1
+                ) AS ic
+          INNER JOIN users d ON ic."departmentId" = d.id 
+          GROUP BY ic."departmentId", d."fullName", d.email, d.password
+          ORDER BY count DESC
+      `,
+          [recopilationId]
+        )
+        .then((res) => {
+          return res.map((row) => {
+            const { count, ...resWithoutCount } = row
+            return { department: resWithoutCount, answersQuantity: +count }
+          })
+        }),
+      this.departmentsRepository
+        .query(
+          `
+          SELECT "categoryId" as id, c.name, c."helpText", COUNT(*) as count
+          FROM (SELECT DISTINCT "departmentId", "categoryId"
+                FROM information_collections
+                WHERE "recopilationId" = $1
+                ) AS ic
+          INNER JOIN categories c ON ic."categoryId" = c.id 
+          GROUP BY "categoryId", c.name, c."helpText" 
+          ORDER BY count DESC
+          LIMIT 1
+      `,
+          [recopilationId]
+        )
+        .then((res) => {
+          return res.map((row) => {
+            const { count, ...resWithoutCount } = row
+            return { category: resWithoutCount, answersQuantity: +count }
+          })
+        }),
+      this.departmentsRepository
+        .query(
+          `
+          SELECT "categoryId" as id, c.name, c."helpText", COUNT(*) as count
+          FROM (SELECT DISTINCT "departmentId", "categoryId"
+                FROM information_collections
+                WHERE "recopilationId" = $1
+                ) AS ic
+          INNER JOIN categories c ON ic."categoryId" = c.id 
+          GROUP BY "categoryId", c.name, c."helpText" 
+          ORDER BY count ASC
+          LIMIT 1
+      `,
+          [recopilationId]
+        )
+        .then((res) => {
+          return res.map((row) => {
+            const { count, ...resWithoutCount } = row
+            return { category: resWithoutCount, answersQuantity: +count }
+          })
+        }),
+      this.findMatrix(recopilationId)
+    ])
+
+    return {
+      quantities: {
+        categories: categoriesQuantity,
+        departments: departmentsQuantity,
+        answers: answersQuantity,
+        collections: collectionsQuantity,
+        evidences: {
+          images: imageEvidencesQuantity,
+          documents: documentEvidencesQuantity,
+          links: linkEvidencesQuantity
+        }
+      },
+      departmentsRanking,
+      mostAnswersCategory,
+      leastAnswersCategory,
+      matrix
+    }
   }
 
   private async getDepartmentAnswer(
