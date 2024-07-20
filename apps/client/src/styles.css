@@ -60,6 +60,16 @@ body::-webkit-scrollbar-thumb {
   border-radius: 20px;
 }
 
+.p-dialog-content::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.p-dialog-content::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 20px;
+}
+
 .p-datatable-wrapper::-webkit-scrollbar {
   width: 5px;
   height: 5px;
