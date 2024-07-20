@@ -1,0 +1,7 @@
+@if (indicatorsData) {
+  <h4>{{ indicatorsData.datasets[0].label }}</h4>
+  <p-chart type="pie" [data]="indicatorsData" />
+} @else {
+  <h4>Respuestas de Indicadores</h4>
+  <p>Aún no hay respuestas de indicadores</p>
+}

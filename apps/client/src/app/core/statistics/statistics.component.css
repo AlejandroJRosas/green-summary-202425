@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.vertical-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.non-dep-text {
+  text-wrap: wrap;
+  width: 37rem;
+}
+
+.ranking-container {
+  width: 37rem;
+}
+
+.span-text {
+  margin-top: 0.25rem;
+  text-align: end;
+}

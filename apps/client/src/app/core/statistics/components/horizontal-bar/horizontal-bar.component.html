@@ -1,0 +1,7 @@
+@if (rankingData) {
+  <h4>{{ rankingData.datasets[0].label }}</h4>
+  <p-chart type="bar" [data]="rankingData" [options]="options" />
+} @else {
+  <h4>Ranking de Departamentos</h4>
+  <p>Aún no hay respuestas de departamentos</p>
+}

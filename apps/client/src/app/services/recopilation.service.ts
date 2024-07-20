@@ -174,6 +174,14 @@ export class RecopilationService {
   delete(id: number): Observable<void> {
     return this.http.delete<void>(`${BaseUrl}/recopilations/${id}`)
   }
+
+  getStatisticsPerRecopilation(id: number): Observable<StatisticsDto | null> {
+    return this.http
+      .get<
+        BackendResponse<StatisticsDto, unknown, unknown>
+      >(`${BaseUrl}/recopilations/${id}/statistics`)
+      .pipe(map((res) => (res.status === 'success' ? res.data : null)))
+  }
 }
 
 //! This should not be exported
@@ -298,4 +306,36 @@ interface DetailedRecopilationDto {
       category: Category
     }[]
   }[]
+}
+
+export interface StatisticsDto {
+  quantities: {
+    categories: number
+    departments: number
+    answers: number
+    collections: number
+    evidences: {
+      images: number
+      documents: number
+      links: number
+    }
+  }
+  departmentsRanking: {
+    department: User
+    answersQuantity: number
+  }[]
+  mostAnswersCategory: {
+    category: Category
+    answersQuantity: number
+  }[]
+  leastAnswersCategory: {
+    category: Category
+    answersQuantity: number
+  }[]
+  mostErrorsCategory: {
+    category: Category
+    answersQuantity: number
+    errorsQuantity: number
+  }[]
+  matrix: MatrixInfoDto
 }

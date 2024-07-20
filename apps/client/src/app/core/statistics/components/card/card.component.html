@@ -1,0 +1,15 @@
+<div class="card">
+  <h2>
+    {{ title }}
+  </h2>
+  <h3
+    [pTooltip]="this.mainText && this.mainText.length > 27 ? this.mainText : ''"
+  >
+    {{
+      this.mainText && this.mainText.length > 27
+        ? this.mainText.slice(0, 27) + '...'
+        : this.mainText
+    }}
+  </h3>
+  <ng-content></ng-content>
+</div>

@@ -53,15 +53,6 @@ export class HomeComponent implements OnInit {
   matrixData: MatrixInfoDto | undefined
   dialogVisible: boolean = false
   dialogMatrixScrollHeight: string = 'calc(70vh - 1rem)'
-  departmentsExtraInfo: ExtraInfo = {
-    totalRecommendedQuantity: 0,
-    totalRecommendedAnswers: 0,
-    totalFreeQuantity: 0,
-    totalFreeAnswers: 0,
-    totalQuantity: 0,
-    totalAnswers: 0,
-    departments: []
-  }
 
   ngOnInit(): void {
     this.getActiveRecopilations()
@@ -131,60 +122,6 @@ export class HomeComponent implements OnInit {
                 recopilation.departments.unshift(selectedDepartment)
               }
 
-              this.departmentsExtraInfo.departments =
-                recopilation.departments.map((department) => {
-                  return {
-                    id: department.department.id,
-                    name: department.department.fullName,
-                    recommendedQuantity: department.answers.filter(
-                      (item) => item.isRecommended === true
-                    ).length,
-                    recommendedAnswers: department.answers.filter(
-                      (item) =>
-                        item.isRecommended === true && item.isAnswered === true
-                    ).length,
-                    freeQuantity: department.answers.filter(
-                      (item) => item.isRecommended === false
-                    ).length,
-                    freeAnswers: department.answers.filter(
-                      (item) =>
-                        item.isRecommended === false && item.isAnswered === true
-                    ).length,
-                    quantity: department.answers.length,
-                    answers: department.answers.filter(
-                      (item) => item.isAnswered === true
-                    ).length
-                  }
-                })
-
-              this.departmentsExtraInfo.totalRecommendedAnswers =
-                this.departmentsExtraInfo.departments.reduce(
-                  (acc, item) => acc + item.recommendedAnswers,
-                  0
-                )
-              this.departmentsExtraInfo.totalFreeAnswers =
-                this.departmentsExtraInfo.departments.reduce(
-                  (acc, item) => acc + item.freeAnswers,
-                  0
-                )
-              this.departmentsExtraInfo.totalRecommendedQuantity =
-                this.departmentsExtraInfo.departments.reduce(
-                  (acc, item) => acc + item.recommendedQuantity,
-                  0
-                )
-              this.departmentsExtraInfo.totalFreeQuantity =
-                this.departmentsExtraInfo.departments.reduce(
-                  (acc, item) => acc + item.freeQuantity,
-                  0
-                )
-              this.departmentsExtraInfo.totalQuantity =
-                this.departmentsExtraInfo.totalRecommendedQuantity +
-                this.departmentsExtraInfo.totalFreeQuantity
-
-              this.departmentsExtraInfo.totalAnswers =
-                this.departmentsExtraInfo.totalRecommendedAnswers +
-                this.departmentsExtraInfo.totalFreeAnswers
-
               this.matrixData = recopilation
             }
           },
@@ -220,25 +157,4 @@ export class HomeComponent implements OnInit {
       timeZone: 'UTC'
     })
   }
-}
-
-type ExtraInfo = {
-  totalRecommendedQuantity: number
-  totalRecommendedAnswers: number
-  totalFreeQuantity: number
-  totalFreeAnswers: number
-  totalQuantity: number
-  totalAnswers: number
-  departments: DepartmentExtraInfo[]
-}
-
-type DepartmentExtraInfo = {
-  id: number
-  name: string
-  recommendedQuantity: number
-  recommendedAnswers: number
-  freeQuantity: number
-  freeAnswers: number
-  quantity: number
-  answers: number
 }
