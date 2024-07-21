@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core'
 import { ActivatedRoute, Router } from '@angular/router'
-import { InformationCollectionService } from '../../../../services/information-collection.service'
 import { EvidenceService } from '../../../../services/evidence/evidence.service'
 import { Evidence } from '../../../../../shared/types/evidence.type'
 import { ButtonModule } from 'primeng/button'
@@ -24,7 +23,6 @@ export class EditEvidenceComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private InformationCollectionService: InformationCollectionService,
     private EvidenceService: EvidenceService
   ) {
     this.route.params.subscribe((params) => {
@@ -73,9 +71,6 @@ export class EditEvidenceComponent implements OnInit {
     this.router.navigateByUrl(
       `pages/information-collection/recopilation/${this.recopilationId}/category/${this.categoryId}`
     )
-  }
-  console(evidence: EvidenceEdit) {
-    console.log(evidence)
   }
 }
 type EvidenceEdit = Omit<Evidence, 'collection'> & {

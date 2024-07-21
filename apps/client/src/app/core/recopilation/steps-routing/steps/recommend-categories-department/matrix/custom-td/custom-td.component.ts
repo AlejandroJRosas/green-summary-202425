@@ -20,15 +20,6 @@ export class CustomTdComponent {
   @Input() recopilationId: number = -1
 
   selectRecommendation() {
-    console.log(
-      'Nombre: ',
-      this.matrixData?.departments.find(
-        (d) => d.department.id === this.departmentId
-      )?.department.fullName
-    )
-    console.log('Departamento: ', this.departmentId)
-    console.log('Categoria: ', this.answer?.categoryId)
-
     this.matrixData?.departments.forEach((d) => {
       if (d.department.id === this.departmentId) {
         d.answers.forEach((a) => {
@@ -38,13 +29,5 @@ export class CustomTdComponent {
         })
       }
     })
-    console.log(
-      'Recomendación: ',
-      this.matrixData?.departments
-        .find((department) => department.department.id === this.departmentId)
-        ?.answers.find(
-          (answer) => answer.categoryId === this.answer?.categoryId
-        )?.isRecommended
-    )
   }
 }
