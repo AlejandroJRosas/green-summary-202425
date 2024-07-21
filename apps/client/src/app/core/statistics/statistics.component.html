@@ -7,12 +7,11 @@
     optionLabel="name"
     optionValue="id"
     placeholder="Selecciona una recopilación"
-    [emptyMessage]="
-      recopilations
-        ? 'No hay recopilaciones activas disponibles'
-        : 'Seleccione una recopilación'
-    "
+    emptyMessage="No hay recopilaciones activas disponibles"
   />
+  <div>
+    @if (recopilations.length === 0) {}
+  </div>
   @if (stats) {
     <div class="container">
       <app-card title="Estatus de Recopilación">
@@ -177,7 +176,17 @@
     </div>
     <app-departments-performance [matrixData]="stats.matrix" />
   } @else {
-    <p>No hay estadísticas disponibles</p>
+    <div
+      class="flex flex-column justify-content-center align-items-center gap-2"
+    >
+      <img src="../../../assets/empty-statistics.png" alt="empty-mailbox" />
+      <i class="text-lg"
+        ><strong
+          >Aún no hay estadísticas por ver, no has seleccinado una
+          recopilación</strong
+        ></i
+      >
+    </div>
   }
   <p-scrollTop />
 </div>

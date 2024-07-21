@@ -247,10 +247,6 @@ p-password.ng-valid > .p-password > .p-inputtext {
   position: relative;
 }
 
-.p-highlight {
-  color: var(--primary-color);
-}
-
 .p-highlight > p-sorticon > sortamountupalticon > svg {
   color: var(--primary-color);
 }
@@ -265,7 +261,9 @@ p-password.ng-valid > .p-password > .p-inputtext {
 .p-button.p-button-icon-only {
   width: 2.5rem;
 }
-
+.p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight.p-focus {
+  background: #e2eceb;
+}
 @keyframes blinker {
   50% {
     opacity: 0.4;
