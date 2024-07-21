@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start:dev": "pnpm --parallel -r start:dev",
     "build": "pnpm --parallel -r build",
+    "generate:docs": "pnpm --parallel -r generate:docs",
     "prepare": "husky"
   },
   "keywords": [],

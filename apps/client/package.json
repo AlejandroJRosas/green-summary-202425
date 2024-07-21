@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start:dev": "ng serve",
-    "build": "ng build && generate:docs",
+    "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "generate:docs": "compodoc -p tsconfig.doc.json",
