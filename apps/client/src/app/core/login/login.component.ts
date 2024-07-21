@@ -26,7 +26,8 @@ import { AnimationOptions, LottieComponent } from 'ngx-lottie'
     Toast,
     LottieComponent
   ],
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
 export class LoginComponent extends ValidatedFormGroup<ILoginComponent> {
   options: AnimationOptions = {
