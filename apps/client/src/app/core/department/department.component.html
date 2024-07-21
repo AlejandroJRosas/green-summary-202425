@@ -12,71 +12,89 @@
     />
   </header>
   <section class="flex flex-column" *ngIf="!isFetchingDepartments">
-    <p-table
-      [value]="departments"
-      dataKey="id"
-      styleClass="w-full"
-      [lazy]="true"
-      (onLazyLoad)="loadPaginatedData($event)"
-      [paginator]="true"
-      [rows]="paginated.rows"
-      [first]="paginated.first"
-      [totalRecords]="totalRecords"
-    >
-      <ng-template pTemplate="header">
-        <tr>
-          <th>Nombre</th>
-          <th>Correo Electrónico</th>
-          <th>Acciones</th>
-        </tr>
-      </ng-template>
-      <ng-template pTemplate="body" let-department>
-        <tr>
-          <td>{{ department.fullName }}</td>
-          <td>{{ department.email }}</td>
-          <td>
-            <div class="flex flex-row gap-2">
-              <p-button
-                (click)="
-                  confirmationPasswordChange(
-                    $event,
-                    department.id,
-                    department.fullName,
-                    department
-                  )
-                "
-                pTooltip="Cambiar contraseña"
-                icon="pi pi-key"
-                [rounded]="true"
-                severity="info"
-                [outlined]="true"
-                tooltipPosition="left"
-              />
-              <p-button
-                (click)="showDialogEdit(department)"
-                pTooltip="Editar"
-                icon="pi pi-pencil"
-                [rounded]="true"
-                severity="success"
-                [outlined]="true"
-                tooltipPosition="left"
-              />
-              <p-button
-                (click)="
-                  confirmationDelete($event, department.id, department.fullName)
-                "
-                pTooltip="Eliminar"
-                icon="pi pi-trash"
-                [rounded]="true"
-                severity="danger"
-                [outlined]="true"
-                tooltipPosition="left"
-              />
-            </div>
-          </td>
-        </tr>
-      </ng-template>
-    </p-table>
+    @if (departments.length === 0) {
+      <div
+        class="flex flex-column justify-content-center align-items-center gap-2"
+      >
+        <img
+          src="../../../assets/empty-department.png"
+          alt="empty-empty-department"
+        />
+        <i class="text-lg"
+          ><strong>Aún no hay departamentos por ver, crea uno nuevo</strong></i
+        >
+      </div>
+    } @else {
+      <p-table
+        [value]="departments"
+        dataKey="id"
+        styleClass="w-full"
+        [lazy]="true"
+        (onLazyLoad)="loadPaginatedData($event)"
+        [paginator]="true"
+        [rows]="paginated.rows"
+        [first]="paginated.first"
+        [totalRecords]="totalRecords"
+      >
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Nombre</th>
+            <th>Correo Electrónico</th>
+            <th>Acciones</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-department>
+          <tr>
+            <td>{{ department.fullName }}</td>
+            <td>{{ department.email }}</td>
+            <td>
+              <div class="flex flex-row gap-2">
+                <p-button
+                  (click)="
+                    confirmationPasswordChange(
+                      $event,
+                      department.id,
+                      department.fullName,
+                      department
+                    )
+                  "
+                  pTooltip="Cambiar contraseña"
+                  icon="pi pi-key"
+                  [rounded]="true"
+                  severity="info"
+                  [outlined]="true"
+                  tooltipPosition="left"
+                />
+                <p-button
+                  (click)="showDialogEdit(department)"
+                  pTooltip="Editar"
+                  icon="pi pi-pencil"
+                  [rounded]="true"
+                  severity="success"
+                  [outlined]="true"
+                  tooltipPosition="left"
+                />
+                <p-button
+                  (click)="
+                    confirmationDelete(
+                      $event,
+                      department.id,
+                      department.fullName
+                    )
+                  "
+                  pTooltip="Eliminar"
+                  icon="pi pi-trash"
+                  [rounded]="true"
+                  severity="danger"
+                  [outlined]="true"
+                  tooltipPosition="left"
+                />
+              </div>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    }
   </section>
   <section class="flex flex-column" *ngIf="isFetchingDepartments">
     <p-table [value]="skeletons" dataKey="id" styleClass="w-full">

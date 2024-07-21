@@ -74,9 +74,20 @@ export class RecopilationComponent {
   upcomingRecopilations: Array<Recopilation & { isReady: boolean }> = []
   activeRecopilations: Array<Recopilation & { isReady: boolean }> = []
   finishedRecopilations: Array<Recopilation & { isReady: boolean }> = []
+  showEmptyImage: boolean = true
 
   ngOnInit() {
     this.loadRecopilations()
+  }
+
+  showImage(): boolean {
+    return (
+      this.inCreationRecopilations.length === 0 &&
+      this.onReviewRecopilations.length === 0 &&
+      this.upcomingRecopilations.length === 0 &&
+      this.activeRecopilations.length === 0 &&
+      this.finishedRecopilations.length === 0
+    )
   }
 
   private loadRecopilations() {
@@ -103,6 +114,7 @@ export class RecopilationComponent {
           this.activeRecopilations.push(recopilation)
         }
       })
+      this.showEmptyImage = this.showImage()
     })
   }
 

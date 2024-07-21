@@ -179,8 +179,8 @@ export class DepartmentComponent
     this.departmentService.get(this.paginated).subscribe({
       next: (res) => {
         if (res.status === 'success') {
-          this.departments = res.data.items
-          this.totalRecords = res.data.totalItems
+          this.departments = []
+          // this.totalRecords = res.data.totalItems
         }
         this.isFetchingDepartments = false
       },
