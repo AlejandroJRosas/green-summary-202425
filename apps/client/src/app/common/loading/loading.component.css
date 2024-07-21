@@ -1,4 +1,4 @@
-.activate {
+/* .activate {
   transition:
     opacity 0.5s,
     display 2s;
@@ -122,4 +122,245 @@ path {
   75% {
     filter: drop-shadow(0px 0px 0px var(--color));
   }
+} */
+
+.hidden {
+  display: none;
+  opacity: 0;
+  transition:
+    opacity 0.5s,
+    display 2s;
+  transition-behavior: allow-discrete;
+}
+
+.loading {
+  z-index: 69;
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.corners {
+  width: 7rem;
+  height: 7rem;
+  position: relative;
+  transform-origin: center;
+  animation: spin 3s infinite linear;
+}
+
+.corner {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+}
+
+@keyframes spin1 {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(0deg);
+  }
+  70% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(270deg);
+  }
+  70% {
+    transform: rotate(270deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin3 {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(180deg);
+  }
+  70% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes spin4 {
+  0% {
+    transform: rotate(0deg);
+  }
+  30% {
+    transform: rotate(90deg);
+  }
+  70% {
+    transform: rotate(90deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes fade4 {
+  0% {
+    opacity: 100;
+  }
+  35% {
+    opacity: 0;
+  }
+  70% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
+@keyframes bright {
+  0% {
+    filter: drop-shadow(0px 0px 0px var(--color));
+  }
+  10% {
+    filter: drop-shadow(0px 0px 0px var(--color));
+  }
+  35% {
+    filter: drop-shadow(0px 0px 30px var(--color));
+  }
+  70% {
+    filter: drop-shadow(0px 0px 30px var(--color));
+  }
+  100% {
+    filter: drop-shadow(0px 0px 0px var(--color));
+  }
+}
+
+@keyframes green-bright {
+  0% {
+    filter: drop-shadow(0px 0px 40px #00ad7c);
+  }
+  35% {
+    filter: drop-shadow(0px 0px 0px #00ad7c);
+  }
+  100% {
+    filter: drop-shadow(0px 0px 40px #00ad7c);
+  }
+}
+
+.corner--1 {
+  &::before {
+    display: block;
+    width: 48%;
+    height: 48%;
+    border-radius: 0 40% 0 40%;
+    background-color: #007935;
+    content: '';
+  }
+  animation: spin1 3s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.corner--2 {
+  &::before {
+    display: block;
+    width: 48%;
+    height: 48%;
+    border-radius: 0 40% 0 40%;
+    background-color: #37b4e3;
+    content: '';
+  }
+  animation: spin2 3s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.corner--3 {
+  &::before {
+    display: block;
+    width: 48%;
+    height: 48%;
+    border-radius: 0 40% 0 40%;
+    background-color: #fbc430;
+    content: '';
+  }
+  animation: spin3 3s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.corner--4 {
+  &::before {
+    display: block;
+    width: 48%;
+    height: 48%;
+    border-radius: 0 40% 0 40%;
+    background-color: #00ad7c;
+    content: '';
+  }
+  animation:
+    spin4 3s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86),
+    fade4 3s infinite cubic-bezier(0.785, 0.135, 0.15, 0.86);
+}
+
+.bright-green {
+  width: 100%;
+  height: 100%;
+  background-clip: border-box;
+  animation: 3s green-bright infinite;
+  position: absolute;
+}
+
+.bright-ucab-yellow {
+  width: 100%;
+  height: 100%;
+  background-clip: border-box;
+  --color: #fbc430;
+  animation: 3s bright infinite;
+  position: absolute;
+}
+
+.bright-ucab-blue {
+  width: 100%;
+  height: 100%;
+  background-clip: border-box;
+  --color: #37b4e3;
+  animation: 3s bright infinite;
+  position: absolute;
+}
+
+.bright-ucab-green {
+  width: 100%;
+  height: 100%;
+  background-clip: border-box;
+  --color: #007935;
+  animation: 3s bright infinite;
+  position: absolute;
 }

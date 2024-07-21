@@ -1,4 +1,4 @@
-<div
+<!-- <div
   class="loading"
   [ngClass]="this.loadingService.isLoading() ? 'activate' : 'hidden'"
   role="progressbar"
@@ -35,6 +35,26 @@
                  L33 247 L0 196 L0 81 L33 30 L33 0"
         />
       </svg>
+    </div>
+  </div>
+</div> -->
+<div
+  class="loading container"
+  [ngClass]="this.loadingService.isLoading() ? 'activate' : 'hidden'"
+  role="progressbar"
+>
+  <div class="corners">
+    <div class="bright-ucab-green">
+      <div class="corner corner--1"></div>
+    </div>
+    <div class="bright-ucab-blue">
+      <div class="corner corner--2"></div>
+    </div>
+    <div class="bright-ucab-yellow">
+      <div class="corner corner--3"></div>
+    </div>
+    <div class="bright-green">
+      <div class="corner corner--4"></div>
     </div>
   </div>
 </div>
