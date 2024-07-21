@@ -196,11 +196,6 @@ p-password.ng-valid > .p-password > .p-inputtext {
   border: none;
 }
 
-.p-chip {
-  background-color: var(--primary-color);
-  color: var(--primary-color-text);
-}
-
 .p-autocomplete-panel .p-autocomplete-items .p-autocomplete-item.p-highlight {
   color: #4b5563;
   background: #fff;
