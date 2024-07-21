@@ -14,7 +14,6 @@
         : 'Seleccione una recopilación'
     "
   />
-
   <button
     type="button"
     class="open-big"
@@ -25,9 +24,36 @@
     [disabled]="matrixData === undefined"
     icon="pi pi-external-link"
   ></button>
+  @if (recopilations.length === 0) {
+    <div
+      class="flex flex-column justify-content-center align-items-center gap-2"
+    >
+      <img
+        src="../../../assets/empty-recopilation.png"
+        alt="empty-recopilation"
+      />
+      <i class="text-lg"
+        ><strong
+          >Aún no hay recopilaciones activas para seleccionar, crea una nueva
+          recopilación</strong
+        ></i
+      >
+    </div>
+  }
+  @if (recopilations.length >= 2 && selectedRecopilation == 1) {
+    <div
+      class="flex flex-column justify-content-center align-items-center gap-2"
+    >
+      <img
+        src="../../../assets/select-recopilation.png"
+        alt="empty-recopilation"
+      />
+      <i class="text-lg"><strong>Selecciona una recopilación activa</strong></i>
+    </div>
+  }
 
   @if (matrixData !== undefined) {
-    <div>
+    <div class="flex flex-column gap-2">
       <h3>
         {{ matrixData.name }}
       </h3>
@@ -87,5 +113,6 @@
       </ng-template>
     </p-dialog>
   }
+
   <p-scrollTop icon="pi pi-chevron-up" />
 </div>

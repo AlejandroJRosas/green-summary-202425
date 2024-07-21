@@ -8,9 +8,10 @@
       optionLabel="name"
       optionValue="id"
       placeholder="Seleccione una recopilación"
+      emptyMessage="No hay recopilaciones activas disponibles"
     />
   </header>
-  <main class="">
+  <main>
     <header class="flex w-full justify-content-between align-items-center">
       <h3 class="text-2xl">Categorías</h3>
       @if (indicator != null) {
@@ -62,6 +63,36 @@
       />
     </header>
     <div class="flex flex-column">
+      @if (recopilations?.length === 0) {
+        <div
+          class="flex flex-column justify-content-center align-items-center gap-2"
+        >
+          <img src="../../../assets/empty-records.png" alt="empty-records" />
+          <i class="text-lg"
+            ><strong
+              >Aún no hay recopilaciones activas, crea una nueva recopilación
+              para empezar a ver las respuestas</strong
+            ></i
+          >
+        </div>
+      }
+      @if (
+        recopilations !== undefined &&
+        recopilations.length >= 2 &&
+        selectedRecopilation == 1
+      ) {
+        <div
+          class="flex flex-column justify-content-center align-items-center gap-2"
+        >
+          <img
+            src="../../../assets/select-recopilation.png"
+            alt="empty-recopilation"
+          />
+          <i class="text-lg"
+            ><strong>Selecciona una recopilación activa</strong></i
+          >
+        </div>
+      }
       @for (category of categoriesAndCriteria; track category.id) {
         <p-panel
           expandIcon="pi pi-chevron-down"
