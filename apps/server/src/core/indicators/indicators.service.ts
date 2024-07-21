@@ -134,7 +134,7 @@ export class IndicatorsService {
   }
 
   async deleteIndicator(index: number): Promise<void> {
-    const result = await this.indicatorRepository.delete(index)
+    const result = await this.indicatorRepository.softDelete(index)
     if (result.affected === 0) {
       throw new NotFoundException(`Indicador with ID ${index} not found`)
     }

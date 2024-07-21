@@ -124,7 +124,7 @@ export class CategoriesService {
   async categoriesByRecopilation(recopilationId: number): Promise<Category[]> {
     const criterion = this.categorizedCriteriaRepository
       .createQueryBuilder()
-      .select('c.id, c.name, c.helpText, c.indicatorIndex')
+      .select('c.id, c.name, c.helpText')
       .distinctOn(['c.id'])
       .from('categorized_criterion', 'cc')
       .innerJoin('cc.category', 'c')
