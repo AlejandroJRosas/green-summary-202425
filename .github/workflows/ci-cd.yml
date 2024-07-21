@@ -24,5 +24,7 @@ jobs:
             pnpm build
             pm2 restart summary-frontend & pm2 restart summary-backend && kill $!
             pnpm generate:docs
+            rm /var/www/green-summary-client-docs -rf
+            rm /var/www/green-summary-server-docs -rf
             mv /var/apps/green-summary-202425/apps/client/documentation /var/www/green-summary-client-docs
             mv /var/apps/green-summary-202425/apps/server/documentation /var/www/green-summary-server-docs
