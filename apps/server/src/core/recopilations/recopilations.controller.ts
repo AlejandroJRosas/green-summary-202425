@@ -228,12 +228,12 @@ export class RecopilationsController {
     const res = await this.recopilationsService.recommendCategories(
       recommendCategoriesDto
     )
-
+    console.log('1')
     await this.eventEmitter.emitAsync(
       'matrix.changed',
       new MatrixChangedEvent(recommendCategoriesDto.recopilationId)
     )
-
+    console.log('2')
     return res
   }
 
@@ -346,7 +346,7 @@ export class RecopilationsController {
     return this.recopilationsService.getRecopilationStatistics(+id)
   }
 
-  @OnEvent('matrix.changed', { async: true })
+  @OnEvent('matrix.changed', { async: true, promisify: true })
   handleChangedMatrixEvent(payload: MatrixChangedEvent) {
     return this.recopilationsService.constructAndSaveMatrix(
       payload.recopilationId
