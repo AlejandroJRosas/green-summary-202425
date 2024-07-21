@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core'
+import { Component, EventEmitter, Inject, Input, Output } from '@angular/core'
 import { PanelModule } from 'primeng/panel'
 import { Recopilation } from '../../../../shared/types/recopilation.type'
 import { ButtonModule } from 'primeng/button'
@@ -17,6 +17,8 @@ import { ConfirmationService } from 'primeng/api'
 })
 export class RecopilationCardComponent {
   @Input() recopilation: Recopilation | undefined
+
+  @Output() recopilationDeleter = new EventEmitter<boolean>()
 
   constructor(
     @Inject(Toast) private toast: Toast,
@@ -64,12 +66,12 @@ export class RecopilationCardComponent {
   private onDelete(id: number) {
     this.recopilationService.delete(id).subscribe({
       next: () => {
+        this.recopilationDeleter.emit(true)
         this.toast.show(
           'success',
           'Eliminado',
           'Recopilación eliminada con éxito'
         )
-        // this.loadRecopilations()
       },
       error: (e) => {
         if (e.error.data != null) {

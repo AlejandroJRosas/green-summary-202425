@@ -65,15 +65,16 @@ export class RecopilationComponent {
   constructor(
     @Inject(Toast) private toast: Toast,
     private router: Router,
-    private readonly recopilationService: RecopilationService,
-    private readonly confirmationService: ConfirmationService
+    private readonly recopilationService: RecopilationService
   ) {}
 
-  inCreationRecopilations: Array<Recopilation & { isReady: boolean }> = []
-  onReviewRecopilations: Array<Recopilation & { isReady: boolean }> = []
-  upcomingRecopilations: Array<Recopilation & { isReady: boolean }> = []
-  activeRecopilations: Array<Recopilation & { isReady: boolean }> = []
-  finishedRecopilations: Array<Recopilation & { isReady: boolean }> = []
+  recopilationsCategorized: RecopilationCategorized = {
+    inCreation: [],
+    onReview: [],
+    upcoming: [],
+    active: [],
+    finished: []
+  }
   showEmptyImage: boolean = true
 
   ngOnInit() {
@@ -82,40 +83,62 @@ export class RecopilationComponent {
 
   showImage(): boolean {
     return (
-      this.inCreationRecopilations.length === 0 &&
-      this.onReviewRecopilations.length === 0 &&
-      this.upcomingRecopilations.length === 0 &&
-      this.activeRecopilations.length === 0 &&
-      this.finishedRecopilations.length === 0
+      this.recopilationsCategorized.inCreation.length === 0 &&
+      this.recopilationsCategorized.onReview.length === 0 &&
+      this.recopilationsCategorized.active.length === 0 &&
+      this.recopilationsCategorized.upcoming.length === 0 &&
+      this.recopilationsCategorized.finished.length === 0
     )
   }
 
-  private loadRecopilations() {
-    this.recopilationService.getAll().subscribe((recopilations) => {
-      recopilations.forEach((recopilation) => {
-        if (!recopilation.isReady) {
-          this.inCreationRecopilations.push(recopilation)
-        } else if (
-          new Date(recopilation.departmentEndDate).getTime() <
-            new Date().getTime() &&
-          new Date(recopilation.endDate).getTime() > new Date().getTime()
-        ) {
-          this.onReviewRecopilations.push(recopilation)
-        } else if (
-          new Date(recopilation.endDate).getTime() > new Date().getTime() &&
-          new Date(recopilation.startDate).getTime() > new Date().getTime()
-        ) {
-          this.upcomingRecopilations.push(recopilation)
-        } else if (
-          new Date(recopilation.endDate).getTime() < new Date().getTime()
-        ) {
-          this.finishedRecopilations.push(recopilation)
-        } else {
-          this.activeRecopilations.push(recopilation)
-        }
-      })
-      this.showEmptyImage = this.showImage()
+  handleRecopilationDeleted(isDeleting: boolean): void {
+    if (isDeleting) {
+      this.loadRecopilations()
+    }
+  }
+
+  loadRecopilations() {
+    this.recopilationsCategorized = {
+      inCreation: [],
+      onReview: [],
+      upcoming: [],
+      active: [],
+      finished: []
+    }
+    this.recopilationService.getAll().subscribe({
+      next: (recopilations) => {
+        recopilations.forEach((recopilation) => {
+          this.categorizeRecopilation(recopilation)
+        })
+        this.showEmptyImage = this.showImage()
+      },
+      error: () => {
+        this.toast.show('error', 'Error', 'Error al cargar las recopilaciones')
+      }
     })
+  }
+
+  categorizeRecopilation(recopilation: Recopilation): void {
+    if (!recopilation.isReady) {
+      this.recopilationsCategorized.inCreation.push(recopilation)
+    } else if (
+      new Date(recopilation.departmentEndDate).getTime() <
+        new Date().getTime() &&
+      new Date(recopilation.endDate).getTime() > new Date().getTime()
+    ) {
+      this.recopilationsCategorized.onReview.push(recopilation)
+    } else if (
+      new Date(recopilation.endDate).getTime() > new Date().getTime() &&
+      new Date(recopilation.startDate).getTime() > new Date().getTime()
+    ) {
+      this.recopilationsCategorized.upcoming.push(recopilation)
+    } else if (
+      new Date(recopilation.endDate).getTime() < new Date().getTime()
+    ) {
+      this.recopilationsCategorized.finished.push(recopilation)
+    } else {
+      this.recopilationsCategorized.active.push(recopilation)
+    }
   }
 
   navigateStepsCreate() {
@@ -123,4 +146,12 @@ export class RecopilationComponent {
       'pages/recopilations/steps-create/information-recopilation'
     )
   }
+}
+
+export type RecopilationCategorized = {
+  inCreation: Recopilation[]
+  onReview: Recopilation[]
+  upcoming: Recopilation[]
+  active: Recopilation[]
+  finished: Recopilation[]
 }

@@ -59,7 +59,7 @@
         >
       </div>
     } @else {
-      @if (inCreationRecopilations.length > 0) {
+      @if (recopilationsCategorized.inCreation.length > 0) {
         <p-panel
           expandIcon="pi pi-chevron-down"
           collapseIcon="pi pi-chevron-right"
@@ -74,19 +74,22 @@
                 class="pi pi-circle-fill"
                 style="color: var(--severity-info)"
               ></i>
-              En Creación ({{ inCreationRecopilations.length }})
+              En Creación ({{ recopilationsCategorized.inCreation.length }})
             </h3>
           </ng-template>
           @for (
-            recopilation of inCreationRecopilations;
+            recopilation of recopilationsCategorized.inCreation;
             track recopilation.id
           ) {
-            <app-recopilation-card [recopilation]="recopilation" />
+            <app-recopilation-card
+              [recopilation]="recopilation"
+              (recopilationDeleter)="handleRecopilationDeleted($event)"
+            />
           }
         </p-panel>
       }
 
-      @if (onReviewRecopilations.length > 0) {
+      @if (recopilationsCategorized.onReview.length > 0) {
         <p-panel
           expandIcon="pi pi-chevron-down"
           collapseIcon="pi pi-chevron-right"
@@ -101,16 +104,22 @@
                 class="pi pi-circle-fill"
                 style="color: var(--severity-danger)"
               ></i>
-              En Periodo de Revisión ({{ onReviewRecopilations.length }})
+              En Revisión ({{ recopilationsCategorized.onReview.length }})
             </h3>
           </ng-template>
-          @for (recopilation of onReviewRecopilations; track recopilation.id) {
-            <app-recopilation-card [recopilation]="recopilation" />
+          @for (
+            recopilation of recopilationsCategorized.onReview;
+            track recopilation.id
+          ) {
+            <app-recopilation-card
+              [recopilation]="recopilation"
+              (recopilationDeleter)="handleRecopilationDeleted($event)"
+            />
           }
         </p-panel>
       }
 
-      @if (activeRecopilations.length > 0) {
+      @if (recopilationsCategorized.active.length > 0) {
         <p-panel
           expandIcon="pi pi-chevron-down"
           collapseIcon="pi pi-chevron-right"
@@ -125,16 +134,22 @@
                 class="pi pi-circle-fill"
                 style="color: var(--severity-success)"
               ></i>
-              Activas ({{ activeRecopilations.length }})
+              Activas ({{ recopilationsCategorized.active.length }})
             </h3>
           </ng-template>
-          @for (recopilation of activeRecopilations; track recopilation.id) {
-            <app-recopilation-card [recopilation]="recopilation" />
+          @for (
+            recopilation of recopilationsCategorized.active;
+            track recopilation.id
+          ) {
+            <app-recopilation-card
+              [recopilation]="recopilation"
+              (recopilationDeleter)="handleRecopilationDeleted($event)"
+            />
           }
         </p-panel>
       }
 
-      @if (upcomingRecopilations.length > 0) {
+      @if (recopilationsCategorized.upcoming.length > 0) {
         <p-panel
           expandIcon="pi pi-chevron-down"
           collapseIcon="pi pi-chevron-right"
@@ -149,16 +164,22 @@
                 class="pi pi-circle-fill"
                 style="color: var(--ucab-yellow-hex)"
               ></i>
-              Próximas ({{ upcomingRecopilations.length }})
+              Próximas ({{ recopilationsCategorized.upcoming.length }})
             </h3>
           </ng-template>
-          @for (recopilation of upcomingRecopilations; track recopilation.id) {
-            <app-recopilation-card [recopilation]="recopilation" />
+          @for (
+            recopilation of recopilationsCategorized.upcoming;
+            track recopilation.id
+          ) {
+            <app-recopilation-card
+              [recopilation]="recopilation"
+              (recopilationDeleter)="handleRecopilationDeleted($event)"
+            />
           }
         </p-panel>
       }
 
-      @if (finishedRecopilations.length > 0) {
+      @if (recopilationsCategorized.finished.length > 0) {
         <p-panel
           expandIcon="pi pi-chevron-down"
           collapseIcon="pi pi-chevron-right"
@@ -170,11 +191,17 @@
           <ng-template pTemplate="header">
             <h3 class="text-xl">
               <i class="pi pi-circle-fill" style="color: gray"></i> Finalizadas
-              ({{ finishedRecopilations.length }})
+              ({{ recopilationsCategorized.finished.length }})
             </h3>
           </ng-template>
-          @for (recopilation of finishedRecopilations; track recopilation.id) {
-            <app-recopilation-card [recopilation]="recopilation" />
+          @for (
+            recopilation of recopilationsCategorized.finished;
+            track recopilation.id
+          ) {
+            <app-recopilation-card
+              [recopilation]="recopilation"
+              (recopilationDeleter)="handleRecopilationDeleted($event)"
+            />
           }
         </p-panel>
       }
