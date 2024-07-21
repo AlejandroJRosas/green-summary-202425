@@ -4,6 +4,13 @@
       Recomendación de categorías a departamentos
     </h3>
   </header>
+  @if (matrixData) {
+    <app-matrix
+      [recopilationId]="recopilationId"
+      [matrixData]="matrixData"
+      [matrixScrollHeight]="'80vh'"
+    />
+  }
   <section class="flex flex-column pt-3">
     <form>
       <div class="flex flex-column gap-4">

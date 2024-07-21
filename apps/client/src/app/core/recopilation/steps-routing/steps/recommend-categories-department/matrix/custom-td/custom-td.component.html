@@ -1,0 +1,11 @@
+<div class="container">
+  @if (answer?.isRecommended) {
+    <div class="is-recommended-icon">
+      <tooltip-icon
+        icon="pi pi-sparkles"
+        tooltip="Recomendado para responder"
+      ></tooltip-icon>
+    </div>
+  }
+  <div (click)="selectRecommendation()" class="custom-td-link"></div>
+</div>

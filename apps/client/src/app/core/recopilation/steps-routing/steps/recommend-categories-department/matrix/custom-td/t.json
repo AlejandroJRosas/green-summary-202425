@@ -1,0 +1,6644 @@
+{
+  "id": 1,
+  "name": "Green Metric 2023",
+  "description": "Green Metric 2023 Green Metric 2023 Green Metric 2023 Green Metric 2023",
+  "startDate": "2024-07-18",
+  "endDate": "2024-07-22",
+  "departmentEndDate": "2024-07-21",
+  "isReady": false,
+  "indicators": [
+    {
+      "id": 1,
+      "index": 1,
+      "name": "Setting and Infrastructure (SI)",
+      "alias": "Infraestructura",
+      "helpText": "Evalúa el compromiso de la institución con la creación de un campus sostenible a través del diseño, la construcción y la operación de sus instalaciones.",
+      "deletedAt": null,
+      "categories": [
+        {
+          "id": 1,
+          "name": "Área con Vegetación Plantada",
+          "helpText": "El área con vegetación plantada incluye todos los terrenos de una institución que han sido intencionalmente cultivados con plantas, arbustos, árboles y otras formas de vegetación.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 1,
+              "subIndex": 1,
+              "name": "Types of higher education institution",
+              "alias": "Tipos de institución de educación superior",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 2,
+              "subIndex": 2,
+              "name": "Climate",
+              "alias": "Clima",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 3,
+              "subIndex": 3,
+              "name": "Number of campus sites",
+              "alias": "Número de sitios del campus",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 4,
+              "subIndex": 4,
+              "name": "Campus setting",
+              "alias": "Entorno del campus",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 5,
+              "subIndex": 5,
+              "name": "Total campus area (m2)",
+              "alias": "Área total del campus (m2)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 6,
+              "subIndex": 6,
+              "name": "Total campus ground floor area of buildings (m2)",
+              "alias": "Superficie total de la planta baja de los edificios del campus (m2)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 2,
+          "name": "Facilidades para personas con discapacidades",
+          "helpText": "Las facilidades para personas con discapacidades incluyen todas las infraestructuras y servicios diseñados para garantizar la accesibilidad y comodidad de las personas con discapacidades dentro de la institución.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 7,
+              "subIndex": 7,
+              "name": "Total campus buildings area (m2)",
+              "alias": "Área total de edificios del campus (m2)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 8,
+              "subIndex": 8,
+              "name": "The ratio of open space area to total area",
+              "alias": "La relación entre el área de espacio abierto y el área total.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 9,
+              "subIndex": 9,
+              "name": "Total area on campus covered in forest vegetation",
+              "alias": "Área total del campus cubierta de vegetación forestal",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 10,
+              "subIndex": 10,
+              "name": "Total area on campus covered in planted vegetation",
+              "alias": "Área total del campus cubierta con vegetación plantada",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 11,
+              "subIndex": 11,
+              "name": "Total area on campus for water absorption besides the forest and planted vegetation",
+              "alias": "Área total del campus para absorción de agua además del bosque y la vegetación plantada",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 12,
+              "subIndex": 12,
+              "name": "Total number of regular students",
+              "alias": "Número total de estudiantes regulares",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 3,
+          "name": "Facilidades y equipamiento de seguridad física y laboral",
+          "helpText": "Las facilidades y el equipamiento de seguridad física y laboral abarcan todas las medidas, instalaciones y equipos destinados a garantizar la seguridad y el bienestar de las personas dentro de la institución.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 13,
+              "subIndex": 13,
+              "name": "Total number of online students",
+              "alias": "Número total de estudiantes en línea",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 14,
+              "subIndex": 14,
+              "name": "Total number of academic and administrative staff",
+              "alias": "Número total de personal académico y administrativo",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 15,
+              "subIndex": 15,
+              "name": "The total open space area divided by the total campus population",
+              "alias": "El área total de espacios abiertos dividida por la población total del campus.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 16,
+              "subIndex": 16,
+              "name": "Total university budget (in US Dollars)",
+              "alias": "Presupuesto universitario total (en dólares estadounidenses)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 17,
+              "subIndex": 17,
+              "name": "University budget for sustainability effort (in US Dollars)",
+              "alias": "Presupuesto universitario para esfuerzos de sostenibilidad (en dólares estadounidenses)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 18,
+              "subIndex": 18,
+              "name": "Percentage of university budget for sustainability efforts",
+              "alias": "Porcentaje del presupuesto universitario para esfuerzos de sostenibilidad",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 4,
+          "name": "Conservación y promoción de la vida silvestre en campus",
+          "helpText": "La conservación y promoción de la vida silvestre en el campus incluye todas las iniciativas y prácticas destinadas a proteger y fomentar la biodiversidad local.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 19,
+              "subIndex": 19,
+              "name": "Percentage of operation and maintenance activities of building in one year period",
+              "alias": "Porcentaje de actividades de operación y mantenimiento del edificio en el período de un año",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 20,
+              "subIndex": 20,
+              "name": "Campus facilities for disabled, special needs and/or maternity care",
+              "alias": "Instalaciones del campus para discapacitados, necesidades especiales y/o atención de maternidad.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 21,
+              "subIndex": 21,
+              "name": "Security and safety facilities",
+              "alias": "Instalaciones de seguridad y protección.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 22,
+              "subIndex": 22,
+              "name": "Health infrastructure facilities for students, academics and administrative staffs' well-bein",
+              "alias": "Instalaciones de infraestructura de salud para el bienestar de estudiantes, académicos y personal administrativo.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 23,
+              "subIndex": 23,
+              "name": "Conservation: plant (flora), animal (fauna), or wildlife, genetic resources for food and wildlife, genetic resources for food and agriculture secured in either medium or long- term conservation facilities",
+              "alias": "Conservación: plantas (flora), animales (fauna) o vida silvestre, recursos genéticos para la alimentación y la vida silvestre, recursos genéticos para la alimentación y la agricultura asegurados en instalaciones de conservación a mediano o largo plazo.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 24,
+              "subIndex": 24,
+              "name": "Planning, implementation, monitoring and/or evaluation of all programs related to Setting and Infrastructure through the utilization of Information and Communication Technology (ICT)",
+              "alias": "Planificación, implementación, seguimiento y/o evaluación de todos los programas relacionados con el Entorno y la Infraestructura mediante la utilización de Tecnologías de la Información y la Comunicación (TIC)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "index": 2,
+      "name": "Energy and Climate Change (EC)",
+      "alias": "Energía y Cambio Climático",
+      "helpText": "Evalúa el compromiso de la institución con la reducción de su huella de carbono y la lucha contra el cambio climático.",
+      "deletedAt": null,
+      "categories": [
+        {
+          "id": 5,
+          "name": "Equipamiento para uso eficiente de la energía",
+          "helpText": "Información sobre equipos y dispositivos que ayudan a utilizar la energía de manera más eficiente.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 25,
+              "subIndex": 1,
+              "name": "Energy efficient appliances usage",
+              "alias": "Uso de electrodomésticos energéticamente eficientes",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 26,
+              "subIndex": 2,
+              "name": "Total campus' smart building area (m2 )",
+              "alias": "Superficie total del edificio inteligente del campus (m2 )",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 6,
+          "name": "Edificaciones inteligentes",
+          "helpText": "Detalles sobre edificaciones que integran sistemas inteligentes para optimizar el uso de recursos.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 27,
+              "subIndex": 3,
+              "name": "Smart building implementation",
+              "alias": "Implantación de edificios inteligentes",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 28,
+              "subIndex": 4,
+              "name": "Number of renewable energy sources on campus",
+              "alias": "Número de fuentes de energía renovables en el campus",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 7,
+          "name": "Fuentes de energía renovables",
+          "helpText": "Información sobre las diversas fuentes de energía renovable disponibles.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 29,
+              "subIndex": 5,
+              "name": "Renewable energy sources and their amount of the energy produced",
+              "alias": "\nFuentes de energía renovables y su cantidad de energía producida.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 30,
+              "subIndex": 6,
+              "name": "Electricity usage per year (in kilowatt hours)",
+              "alias": "Consumo de electricidad por año (en kilovatios hora)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 8,
+          "name": "Consumo de electricidad",
+          "helpText": "Datos sobre el consumo de electricidad y cómo se puede gestionar mejor.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 31,
+              "subIndex": 7,
+              "name": "Total electricity usage divided by total campus' population (kWh per person)",
+              "alias": "\nUso total de electricidad dividido por la población total del campus (kWh por persona)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 32,
+              "subIndex": 8,
+              "name": "The ratio of renewable energy production divided by total energy usage per year",
+              "alias": "La proporción de producción de energía renovable dividida por el uso total de energía por año.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 9,
+          "name": "Consumo de agua",
+          "helpText": "Detalles sobre el consumo de agua y métodos para conservar este recurso.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 33,
+              "subIndex": 9,
+              "name": "Elements of green building implementation as reflected in all construction and renovation policies",
+              "alias": "\nElementos de la implementación de edificios sustentables reflejados en todas las políticas de construcción y renovación.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 34,
+              "subIndex": 10,
+              "name": "Greenhouse gas emission reduction program",
+              "alias": "\nPrograma de reducción de emisiones de gases de efecto invernadero",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 10,
+          "name": "Huella de Carbono",
+          "helpText": "Información sobre cómo se mide la huella de carbono y su importancia.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 35,
+              "subIndex": 11,
+              "name": "Total carbon footprint (CO₂ emission in the last 12 months, in metric tons)",
+              "alias": "\nHuella de carbono total (emisiones de CO₂ en los últimos 12 meses, en toneladas métricas)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 36,
+              "subIndex": 12,
+              "name": "Total carbon footprint divided by total campus' population (metric tons per person)",
+              "alias": "Huella de carbono total dividida por la población total del campus (toneladas métricas por persona)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 11,
+          "name": "Programa reducción de GEI",
+          "helpText": "Programas diseñados para reducir las emisiones de gases de efecto invernadero.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 37,
+              "subIndex": 13,
+              "name": "Number of innovative program(s) in energy and climate change",
+              "alias": "Número de programas innovadores en energía y cambio climático",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 38,
+              "subIndex": 14,
+              "name": "Impactful university program(s) on climate change",
+              "alias": "Programa(s) universitario(s) impactante(s) sobre el cambio climático",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 12,
+          "name": "Políticas Verdes",
+          "helpText": "Políticas que fomentan la implementación de prácticas verdes en la organización.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 39,
+              "subIndex": 15,
+              "name": "Planning, implementation, monitoring and/or evaluation of all programs related to Energy and Climate Change through the utilization of Information and Communication Technology (ICT)",
+              "alias": "\nPlanificación, implementación, seguimiento y/o evaluación de todos los programas relacionados con Energía y Cambio Climático mediante la utilización de Tecnologías de la Información y la Comunicación (TIC)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "index": 3,
+      "name": "Waste (WS)",
+      "alias": "Desperdicios",
+      "helpText": "Evalúa el compromiso de la institución con la reducción de la generación de residuos y la promoción de prácticas sostenibles de manejo de residuos.",
+      "deletedAt": null,
+      "categories": [
+        {
+          "id": 13,
+          "name": "Programa 3R para papel y plástico",
+          "helpText": "El Programa 3R (Reducir, Reutilizar y Reciclar) para papel y plástico busca minimizar el impacto ambiental de estos materiales dentro de la institución.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 40,
+              "subIndex": 1,
+              "name": "3R (Reduce, Reuse, Recycle) program for university's waste",
+              "alias": "\nPrograma 3R (Reducir, Reutilizar, Reciclar) para los residuos universitarios",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 41,
+              "subIndex": 2,
+              "name": "Program to reduce the use of paper and plastic on campus",
+              "alias": "Programa para reducir el uso de papel y plástico en el campus",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 42,
+              "subIndex": 3,
+              "name": "Total volume organic waste produced",
+              "alias": "Volumen total de residuos orgánicos producidos",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 14,
+          "name": "Programa 3R para materia orgánica",
+          "helpText": "El Programa 3R (Reducir, Reutilizar y Reciclar) para materia orgánica está diseñado para gestionar de manera sostenible los residuos orgánicos generados dentro de la institución.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 43,
+              "subIndex": 4,
+              "name": "Total volume organic waste treated",
+              "alias": "Volumen total de residuos orgánicos tratados",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 44,
+              "subIndex": 5,
+              "name": "Organic waste treatment",
+              "alias": "Tratamiento de residuos orgánicos",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 45,
+              "subIndex": 6,
+              "name": "Total volume inorganic waste produced",
+              "alias": "\nVolumen total de residuos inorgánicos producidos",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 15,
+          "name": "Programa 3R desechos tóxicos",
+          "helpText": "El Programa 3R (Reducir, Reutilizar y Reciclar) para desechos tóxicos está orientado a gestionar de manera segura y sostenible los residuos peligrosos generados en la institución.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 46,
+              "subIndex": 7,
+              "name": "Total volume inorganic waste treated",
+              "alias": "Volumen total de residuos inorgánicos tratados",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 47,
+              "subIndex": 8,
+              "name": "Inorganic waste treatment",
+              "alias": "Tratamiento de residuos inorgánicos",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 48,
+              "subIndex": 9,
+              "name": "Total volume toxic waste produced",
+              "alias": "Volumen total de residuos tóxicos producidos",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 16,
+          "name": "Programa Tratamiento de Aguas servidas",
+          "helpText": "El Programa de Tratamiento de Aguas Servidas está diseñado para gestionar y tratar las aguas residuales generadas en la institución de manera eficiente y sostenible.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 49,
+              "subIndex": 10,
+              "name": "Total volume toxic waste treated",
+              "alias": "Volumen total de residuos tóxicos tratados",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 50,
+              "subIndex": 11,
+              "name": "Toxic waste treatment",
+              "alias": "Tratamiento de residuos tóxicos",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 51,
+              "subIndex": 12,
+              "name": "Sewage disposal",
+              "alias": "\nEliminación de aguas residuales",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 52,
+              "subIndex": 13,
+              "name": "Planning, implementation, monitoring and/or evaluation of all programs related to Waste Management through the utilization of Information and Communication Technology (ICT)",
+              "alias": "Planificación, implementación, seguimiento y/o evaluación de todos los programas relacionados con la Gestión de Residuos mediante la utilización de Tecnologías de la Información y la Comunicación (TIC)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "index": 4,
+      "name": "Water (WR)",
+      "alias": "Agua",
+      "helpText": "Datos sobre el uso y conservación del agua.",
+      "deletedAt": null,
+      "categories": [
+        {
+          "id": 17,
+          "name": "Programa Conservación y uso eficiente del Agua",
+          "helpText": "Información sobre cómo conservar el agua y utilizarla eficientemente.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 53,
+              "subIndex": 1,
+              "name": "Water conservation program and implementation",
+              "alias": "\nPrograma e implementación de conservación del agua",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 54,
+              "subIndex": 2,
+              "name": "Water recycling program implementation",
+              "alias": "Implementación del programa de reciclaje de agua.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 55,
+              "subIndex": 3,
+              "name": "Water efficient appliances usage",
+              "alias": "Uso de electrodomésticos que ahorran agua",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 18,
+          "name": "Programa Reciclaje del Agua",
+          "helpText": "Detalles sobre cómo reciclar y reutilizar el agua de manera efectiva.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 56,
+              "subIndex": 4,
+              "name": "Consumption of treated water",
+              "alias": "\nConsumo de agua tratada",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 57,
+              "subIndex": 5,
+              "name": "Water pollution control in the campus area",
+              "alias": "Control de la contaminación del agua en el área del campus.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 58,
+              "subIndex": 6,
+              "name": "Planning, implementation, monitoring and/or evaluation of all programs related to Water Management through the utilization of Information and Communication Technology (ICT)",
+              "alias": "Planificación, implementación, seguimiento y/o evaluación de todos los programas relacionados con la Gestión del Agua mediante la utilización de Tecnologías de la Información y la Comunicación (TIC)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 5,
+      "index": 5,
+      "name": "Transportation (TR)",
+      "alias": "Transporte",
+      "helpText": "Información sobre los medios de transporte disponibles.",
+      "deletedAt": null,
+      "categories": [
+        {
+          "id": 19,
+          "name": "Iniciativas de transporte de emisión cero",
+          "helpText": "Las iniciativas de transporte de emisión cero están orientadas a promover el uso de medios de transporte sostenibles y libres de emisiones dentro de la institución.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 59,
+              "subIndex": 1,
+              "name": "Number of cars actively used and managed by the university",
+              "alias": "Número de automóviles utilizados y gestionados activamente por la universidad.\n",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 60,
+              "subIndex": 2,
+              "name": "Number of cars entering the university daily",
+              "alias": "Número de automóviles que ingresan a la universidad diariamente.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 61,
+              "subIndex": 3,
+              "name": "Number of motorcycles entering the university daily",
+              "alias": "\nNúmero de motocicletas que ingresan diariamente a la universidad",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 62,
+              "subIndex": 4,
+              "name": "The total number of vehicles (cars and motorcycles with combustion engines) divided by the total campus' population",
+              "alias": "El número total de vehículos (automóviles y motocicletas con motor de combustión) dividido por la población total del campus.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 63,
+              "subIndex": 5,
+              "name": "Shuttle services",
+              "alias": "Servicios de transporte",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 64,
+              "subIndex": 6,
+              "name": "Number of shuttles operating in the university",
+              "alias": "Número de transportes operando en la universidad",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 65,
+              "subIndex": 7,
+              "name": "Average number of passengers of each shuttle",
+              "alias": "\nNúmero promedio de pasajeros de cada transporte",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 66,
+              "subIndex": 8,
+              "name": "Total trips of each shuttle services each day",
+              "alias": "\nNúmero total de viajes de cada servicio de transporte cada día",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 67,
+              "subIndex": 9,
+              "name": "Zero Emission Vehicles (ZEV) availability on campus",
+              "alias": "Disponibilidad de vehículos de cero emisiones (ZEV) en el campus",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 20,
+          "name": "Iniciativas reducción uso vehículos",
+          "helpText": "Las iniciativas de reducción del uso de vehículos buscan disminuir la dependencia de automóviles y promover alternativas de transporte más sostenibles dentro de la institución.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 68,
+              "subIndex": 10,
+              "name": "Average number of Zero Emission Vehicles on campus per day",
+              "alias": "Número promedio de vehículos de cero emisiones en el campus por día",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 69,
+              "subIndex": 11,
+              "name": "The total number of Zero Emission Vehicles (ZEV) divided by the total campus population",
+              "alias": "\nEl número total de vehículos de cero emisiones (ZEV) dividido por la población total del campus",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 70,
+              "subIndex": 12,
+              "name": "Total ground parking area (m2 )",
+              "alias": "\nÁrea total de estacionamiento en tierra (m2)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 71,
+              "subIndex": 13,
+              "name": "The ratio of the ground parking area to total campus area",
+              "alias": "La relación entre el área de estacionamiento en tierra y el área total del campus.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 72,
+              "subIndex": 14,
+              "name": "Program to limit or decrease the parking area on campus for the last 3 years (from 2021 to 2023)",
+              "alias": "Programa para limitar o disminuir el área de estacionamiento en el campus durante los últimos 3 años (de 2021 a 2023)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 73,
+              "subIndex": 15,
+              "name": "Number of initiatives to decrease private vehicles on campus",
+              "alias": "Número de iniciativas para disminuir el vehículo privado en el campus",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 74,
+              "subIndex": 16,
+              "name": "Pedestrian path on campus",
+              "alias": "\nCamino peatonal en el campus",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 75,
+              "subIndex": 17,
+              "name": "The approximate daily travel distance of a vehicle inside your campus only (in Kilometers)",
+              "alias": "La distancia diaria aproximada de viaje de un vehículo dentro de su campus únicamente (en kilómetros)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 76,
+              "subIndex": 18,
+              "name": "Planning, implementation, monitoring and/or evaluation of all programs related to Transportation through the utilization of Information and Communication Technology (ICT)",
+              "alias": "Planificación, implementación, seguimiento y/o evaluación de todos los programas relacionados con el Transporte mediante la utilización de Tecnologías de la Información y las Comunicaciones (TIC)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 6,
+      "index": 6,
+      "name": "Education and Research (ED)",
+      "alias": "Educación",
+      "helpText": "Información sobre programas educativos y de investigación.",
+      "deletedAt": null,
+      "categories": [
+        {
+          "id": 21,
+          "name": "Cursos académicos con contenidos de sostenibilidad",
+          "helpText": "Evalúa el compromiso de la institución con la integración de principios y prácticas de sostenibilidad en la currícula académica.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 77,
+              "subIndex": 1,
+              "name": "Number of courses/subjects related to sustainability offerred",
+              "alias": "Número de cursos/materias relacionadas con la sostenibilidad ofertadas",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 78,
+              "subIndex": 2,
+              "name": "Total number of courses/subjects offered",
+              "alias": "Número total de cursos/materias ofrecidas",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 22,
+          "name": "Publicaciones académicas en sostenibilidad",
+          "helpText": "Evalúa el compromiso de la institución con la investigación y la difusión del conocimiento en el ámbito de la sostenibilidad.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 79,
+              "subIndex": 3,
+              "name": "The ratio of sustainability courses to total courses/subjects",
+              "alias": "La proporción de cursos de sostenibilidad con respecto al total de cursos/asignaturas.",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 80,
+              "subIndex": 4,
+              "name": "Total research funds dedicated to sustainability research (in US Dollars)",
+              "alias": "Fondos totales de investigación dedicados a la investigación sobre sostenibilidad (en dólares estadounidenses)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 23,
+          "name": "Eventos relacionados con sostenibilidad",
+          "helpText": "Evalúa el compromiso de la institución con la organización y participación en eventos que promuevan la educación, la sensibilización y la acción hacia la sostenibilidad.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 81,
+              "subIndex": 5,
+              "name": "Total research funds (in US Dollars)",
+              "alias": "\nFondos totales de investigación (en dólares estadounidenses)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 82,
+              "subIndex": 6,
+              "name": "The ratio of sustainability research funding to total research funding",
+              "alias": "\nLa relación entre la financiación de la investigación sobre sostenibilidad y la financiación total de la investigación",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 24,
+          "name": "Actividades organizadas por estudiantes relacionadas con sostenibilidad",
+          "helpText": "Evalúa el compromiso de la institución con el fomento de la participación estudiantil en iniciativas que promuevan la sostenibilidad.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 83,
+              "subIndex": 7,
+              "name": "Number of scholarly publications on sustainability",
+              "alias": "Número de publicaciones académicas sobre sostenibilidad",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 84,
+              "subIndex": 8,
+              "name": "Number of events related to sustainability (environment)",
+              "alias": "\nNúmero de eventos relacionados con la sostenibilidad (medio ambiente)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 25,
+          "name": "Sitio web con contenidos de sostenibilidad",
+          "helpText": "Evalúa la existencia y calidad de los contenidos relacionados con la sostenibilidad en el sitio web de la institución.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 85,
+              "subIndex": 9,
+              "name": "Number of activities organized by student organizations related to sustainability per year",
+              "alias": "Número de actividades organizadas por organizaciones estudiantiles relacionadas con la sostenibilidad por año",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 86,
+              "subIndex": 10,
+              "name": "University-run sustainability website",
+              "alias": "Sitio web de sostenibilidad gestionado por la universidad",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 26,
+          "name": "Reporte de sostenibilidad",
+          "helpText": "Evalúa la elaboración y publicación de informes que transparentan el desempeño ambiental, social y económico de la institución.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 87,
+              "subIndex": 11,
+              "name": "Sustainability website address (URL) if available",
+              "alias": "\nDirección del sitio web de sostenibilidad (URL), si está disponible",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 88,
+              "subIndex": 12,
+              "name": "Sustainability report",
+              "alias": "Reporte de Sostenibilidad",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 27,
+          "name": "Actividades culturales en el campus",
+          "helpText": "Evalúa la promoción y desarrollo de actividades culturales que fomenten la vida universitaria y el bienestar de la comunidad.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 89,
+              "subIndex": 13,
+              "name": "Sustainability report link address (URL) if available",
+              "alias": "\nDirección del enlace del informe de sostenibilidad (URL), si está disponible",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            },
+            {
+              "id": 90,
+              "subIndex": 14,
+              "name": "Number of cultural activities on campus",
+              "alias": "Número de actividades culturales en el campus",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 28,
+          "name": "Programas de aprendizaje y enseñanza en sostenibilidad",
+          "helpText": "Evalúa la existencia e implementación de programas y cursos que abordan temáticas relacionadas con el desarrollo sostenible.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 91,
+              "subIndex": 15,
+              "name": "Number of university sustainability program(s) with international collaborations",
+              "alias": "\nNúmero de programas universitarios de sostenibilidad con colaboraciones internacionales",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 92,
+              "subIndex": 16,
+              "name": "Number of community services related to sustainability organized by university and involving students",
+              "alias": "Número de servicios comunitarios relacionados con la sostenibilidad organizados por universidad y que involucran a estudiantes",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 29,
+          "name": "Actividades comunitarias con contenidos de sostenibilidad(involucren estudiantes)",
+          "helpText": "Evalúa la existencia y desarrollo de actividades comunitarias que promuevan el aprendizaje y la acción sostenible entre los estudiantes.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 93,
+              "subIndex": 17,
+              "name": "Number of sustainability-related startups",
+              "alias": "\nNúmero de startups relacionadas con la sostenibilidad",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 94,
+              "subIndex": 18,
+              "name": "Total number of graduates with green jobs",
+              "alias": "\nNúmero total de graduados con empleos verdes",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": false,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 30,
+          "name": "Iniciativas emprendimientos",
+          "helpText": "Evalúa el apoyo y fomento que brinda la institución al desarrollo de iniciativas emprendedoras entre sus estudiantes, egresados y comunidad en general.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 95,
+              "subIndex": 19,
+              "name": "Availability of unit(s) or office(s) that coordinate sustainability on campus",
+              "alias": "\nDisponibilidad de unidad(es) u oficina(s) que coordinen la sostenibilidad en el campus",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 96,
+              "subIndex": 20,
+              "name": "Planning, implementation, monitoring and/or evaluation of university governance through the utilization of Information and Communication Technology (ICT)",
+              "alias": "\nPlanificación, implementación, seguimiento y/o evaluación de la gobernanza universitaria mediante la utilización de Tecnologías de la Información y las Comunicaciones (TIC)",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": 7,
+      "index": 7,
+      "name": "Institutional Guidelines (IG)",
+      "alias": "Directrices Institucionales",
+      "helpText": "Información sobre las políticas y directrices institucionales.",
+      "deletedAt": null,
+      "categories": [
+        {
+          "id": 31,
+          "name": "Póliticas, Lineamientos, estrategías.",
+          "helpText": "Las políticas, lineamientos y estrategias establecen el marco normativo y de acción para la gestión y promoción de prácticas sostenibles dentro de la institución. Esta encuesta tiene como objetivo evaluar la existencia, implementación y efectividad de estas políticas.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 97,
+              "subIndex": 1,
+              "name": "Test Name 1",
+              "alias": "Nombre Prueba 1",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 98,
+              "subIndex": 2,
+              "name": "Test Name 2",
+              "alias": "Nombre Prueba 2",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        },
+        {
+          "id": 32,
+          "name": "Inversiones en sistenibilidad",
+          "helpText": "Las inversiones en sostenibilidad se refieren a los recursos financieros destinados a proyectos y prácticas que promueven la sostenibilidad ambiental, social y económica dentro de la institución.",
+          "deletedAt": null,
+          "criteria": [
+            {
+              "id": 99,
+              "subIndex": 3,
+              "name": "Test Name 3",
+              "alias": "Nombre Prueba 3",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            },
+            {
+              "id": 100,
+              "subIndex": 4,
+              "name": "Test Name 4",
+              "alias": "Nombre Prueba 4",
+              "helpText": "Texto de Ayuda",
+              "requiresEvidence": true,
+              "deletedAt": null
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "departments": [
+    {
+      "department": {
+        "id": 9,
+        "fullName": "Dirección de Finanzas y Administración",
+        "email": "ejarzolay.21@est.ucab.edu.ve",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": true,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 8,
+        "fullName": "Vicerrectorado",
+        "email": "vicerectorado@ucab.edu.ve",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": true,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 11,
+        "fullName": "Coordinación de Seguridad y Salud laboral",
+        "email": "email2@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 12,
+        "fullName": "Coordinación de Sustentabilidad Ambiental",
+        "email": "email3@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 13,
+        "fullName": "Coordinación de Comunicaciones",
+        "email": "email4@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 10,
+        "fullName": "Dirección de Servicios Generales",
+        "email": "cjnaim.16@est.ucab.edu.ve",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 16,
+        "fullName": "Escuela de Ingeniería Civil",
+        "email": "email6@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 15,
+        "fullName": "CADH",
+        "email": "ajrosas.19@est.caub.edu.ve",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 17,
+        "fullName": "Escuela de Ingeniería Industrial",
+        "email": "email7@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 14,
+        "fullName": "Dirección de Extensión Social Universitaria",
+        "email": "email5@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 18,
+        "fullName": "Escuela de Ingeniería Informática",
+        "email": "jarodriguez.21@est.ucab.edu.ve",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 28,
+        "fullName": "Coordinación General de Tecnología de la Información (CGTI)",
+        "email": "email15@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 29,
+        "fullName": "Centro Estudios Regionales",
+        "email": "email16@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 26,
+        "fullName": "Dirección de Desarrollo Estudiantil",
+        "email": "email14@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 27,
+        "fullName": "Coordinación General de Recursos Humanos",
+        "email": "cesotillo.18@est.ucab.edu.ve",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 25,
+        "fullName": "Coordinación de Internacionalización",
+        "email": "enmontano.18@est.ucab.edu.ve",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 30,
+        "fullName": "Coordinación de Deporte",
+        "email": "ejsucre.19@est.ucab.edu.ve",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 24,
+        "fullName": "Coordinación de Cultura",
+        "email": "email13@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 20,
+        "fullName": "Escuela Admininstración y Contaduría",
+        "email": "email9@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 22,
+        "fullName": "Escuela de Derecho",
+        "email": "email11@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 19,
+        "fullName": "Escuela de Comunicación Social",
+        "email": "email8@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 21,
+        "fullName": "Escuela Relaciones Industriales",
+        "email": "email10@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    },
+    {
+      "department": {
+        "id": 23,
+        "fullName": "Escuela de Educación",
+        "email": "email12@gmail.com",
+        "type": "department",
+        "deletedAt": null
+      },
+      "answers": [
+        {
+          "categoryId": 1,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 2,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 3,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 4,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 5,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 6,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 7,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 8,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 9,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 10,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 11,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 12,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 13,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 14,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 15,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 16,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 17,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 18,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 19,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 20,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 21,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 22,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 23,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 24,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 25,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 26,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 27,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 28,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 29,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 30,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 31,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        },
+        {
+          "categoryId": 32,
+          "isRecommended": false,
+          "isAnswered": false,
+          "isApproved": false,
+          "hasError": false
+        }
+      ]
+    }
+  ]
+}

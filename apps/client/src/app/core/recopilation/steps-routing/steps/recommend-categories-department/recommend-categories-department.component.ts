@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { ButtonModule } from 'primeng/button'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Toast } from '../../../../../common/toast/toast.component'
@@ -9,8 +9,12 @@ import { FormsModule } from '@angular/forms'
 import { CategorySelectorComponent } from './category-selector/category-selector.component'
 import { Department } from '../../../../../../shared/types/user.type'
 import { Category } from '../../../../../../shared/types/category.type'
-import { RecopilationService } from '../../../../../services/recopilation.service'
+import {
+  MatrixInfoDto,
+  RecopilationService
+} from '../../../../../services/recopilation.service'
 import { ScrollTopModule } from 'primeng/scrolltop'
+import { MatrixRecommendationsComponent } from './matrix/matrix.component'
 
 @Component({
   selector: 'app-recommend-categories-department',
@@ -22,12 +26,20 @@ import { ScrollTopModule } from 'primeng/scrolltop'
     ChipModule,
     FormsModule,
     CategorySelectorComponent,
-    ScrollTopModule
+    ScrollTopModule,
+    MatrixRecommendationsComponent
   ],
   templateUrl: './recommend-categories-department.component.html',
   providers: [ConfirmationService]
 })
-export class RecommendCategoriesDepartmentComponent {
+export class RecommendCategoriesDepartmentComponent implements OnInit {
+  recopilationId = -1
+  departments: Department[] = []
+  categories: Category[] = []
+  selectedCategories: Category[] = []
+  recommendationsFormValues: RecommendationFormValues[] = []
+  matrixData: MatrixInfoDto | undefined
+
   constructor(
     private router: Router,
     @Inject(Toast) private toast: Toast,
@@ -38,19 +50,31 @@ export class RecommendCategoriesDepartmentComponent {
       this.recopilationId = parseInt(params['recopilationId']) || -1
     })
   }
-  recopilationId = -1
-
-  departments: Department[] = []
-  categories: Category[] = []
-
-  recommendationsFormValues: recommendationFormValues[] = []
-
-  selectedCategories: Category[] = []
 
   ngOnInit() {
     this.loadDepartments()
     this.loadCategories()
     this.loadAlreadyInsertedRecommendations()
+    this.getMatrixData()
+  }
+
+  getMatrixData() {
+    if (this.recopilationId) {
+      this.recopilationService.getMatrixInfo(this.recopilationId).subscribe({
+        next: (recopilation) => {
+          if (recopilation) {
+            this.matrixData = recopilation
+          }
+        },
+        error: (e) => {
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
+        }
+      })
+    }
   }
 
   submitAndContinue() {
@@ -165,7 +189,7 @@ export class RecommendCategoriesDepartmentComponent {
   }
 }
 
-type recommendationFormValues = {
+export type RecommendationFormValues = {
   departmentId: number
   categories: Category[]
 }
