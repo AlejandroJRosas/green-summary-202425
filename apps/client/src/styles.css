@@ -264,7 +264,6 @@ p-password.ng-valid > .p-password > .p-inputtext {
 }
 .p-button.p-button-icon-only {
   width: 2.5rem;
-  /* padding: 0.75rem 0; */
 }
 
 @keyframes blinker {
