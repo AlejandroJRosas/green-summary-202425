@@ -5,6 +5,11 @@
 .custom-td-link {
   width: 100%;
   height: 100%;
+  cursor: pointer;
+}
+
+.custom-td-link:hover {
+  background-color: #f9fafb;
 }
 
 .is-recommended-icon {

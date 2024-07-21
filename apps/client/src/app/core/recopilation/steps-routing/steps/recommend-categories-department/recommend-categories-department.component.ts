@@ -6,7 +6,6 @@ import { ConfirmationService } from 'primeng/api'
 import { DropdownModule } from 'primeng/dropdown'
 import { ChipModule } from 'primeng/chip'
 import { FormsModule } from '@angular/forms'
-import { CategorySelectorComponent } from './category-selector/category-selector.component'
 import { Department } from '../../../../../../shared/types/user.type'
 import { Category } from '../../../../../../shared/types/category.type'
 import {
@@ -15,6 +14,7 @@ import {
 } from '../../../../../services/recopilation.service'
 import { ScrollTopModule } from 'primeng/scrolltop'
 import { MatrixRecommendationsComponent } from './matrix/matrix.component'
+import { TooltipModule } from 'primeng/tooltip'
 
 @Component({
   selector: 'app-recommend-categories-department',
@@ -25,9 +25,9 @@ import { MatrixRecommendationsComponent } from './matrix/matrix.component'
     DropdownModule,
     ChipModule,
     FormsModule,
-    CategorySelectorComponent,
     ScrollTopModule,
-    MatrixRecommendationsComponent
+    MatrixRecommendationsComponent,
+    TooltipModule
   ],
   templateUrl: './recommend-categories-department.component.html',
   providers: [ConfirmationService]
@@ -52,9 +52,6 @@ export class RecommendCategoriesDepartmentComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.loadDepartments()
-    this.loadCategories()
-    this.loadAlreadyInsertedRecommendations()
     this.getMatrixData()
   }
 
@@ -77,8 +74,41 @@ export class RecommendCategoriesDepartmentComponent implements OnInit {
     }
   }
 
+  preparePayload() {
+    this.recommendationsFormValues = []
+
+    this.matrixData?.departments.map((department) => {
+      const filteredCategories = department.answers
+        .map((answer) => {
+          if (answer.isRecommended) {
+            return {
+              categoryId: answer.categoryId
+            }
+          }
+          return null
+        })
+        .filter((category) => category !== null)
+
+      if (filteredCategories.length > 0) {
+        this.recommendationsFormValues.push({
+          departmentId: department.department.id,
+          categories: filteredCategories
+        })
+      }
+    })
+  }
+
   submitAndContinue() {
-    const payload = this.adaptFormValuesToDto()
+    this.preparePayload()
+
+    const payload = {
+      recopilationId: this.recopilationId,
+      departments: this.recommendationsFormValues as {
+        departmentId: number
+        categories: { categoryId: number }[]
+      }[]
+    }
+
     this.recopilationService.recommendCategories(payload).subscribe({
       next: () => {
         this.nextStep()
@@ -92,88 +122,6 @@ export class RecommendCategoriesDepartmentComponent implements OnInit {
         }
       }
     })
-  }
-
-  private loadAlreadyInsertedRecommendations() {
-    this.recopilationService.getById(this.recopilationId).subscribe({
-      next: (recopilation) => {
-        if (!recopilation) return
-
-        if (Array.isArray(recopilation.departments)) {
-          this.recommendationsFormValues = recopilation.departments.map(
-            (d) => ({
-              departmentId: d.department.id,
-              categories: d.recommendedCategories
-            })
-          )
-        }
-      },
-      error: (e) => {
-        if (e.error.data != null) {
-          this.toast.show('error', 'Error', e.error.data.message)
-        } else {
-          this.toast.show('error', 'Error', e.error.message)
-        }
-      }
-    })
-  }
-
-  private loadDepartments() {
-    this.recopilationService
-      .getSelectedDepartments(this.recopilationId)
-      .subscribe({
-        next: (departments) => {
-          this.departments = departments
-          departments.forEach((department) =>
-            this.recommendationsFormValues.push({
-              departmentId: department.id,
-              categories: []
-            })
-          )
-        },
-        error: (e) => {
-          if (e.error.data != null) {
-            this.toast.show('error', 'Error', e.error.data.message)
-          } else {
-            this.toast.show('error', 'Error', e.error.message)
-          }
-        }
-      })
-  }
-
-  private loadCategories() {
-    this.recopilationService.getCategories(this.recopilationId).subscribe({
-      next: (categories) => {
-        this.categories = categories
-      },
-      error: (e) => {
-        if (e.error.data != null) {
-          this.toast.show('error', 'Error', e.error.data.message)
-        } else {
-          this.toast.show('error', 'Error', e.error.message)
-        }
-      }
-    })
-  }
-
-  private adaptFormValuesToDto() {
-    return {
-      recopilationId: this.recopilationId,
-      departments: this.recommendationsFormValues
-        .filter((rfv) => rfv.categories.length > 0)
-        .map((rfv) => ({
-          departmentId: rfv.departmentId,
-          categories: rfv.categories.map((category) => ({
-            categoryId: category.id
-          }))
-        }))
-    }
-  }
-
-  getCategoriesArray(departmentId: number) {
-    return this.recommendationsFormValues.find(
-      (recommendation) => recommendation.departmentId === departmentId
-    )?.categories as []
   }
 
   nextStep() {
@@ -191,5 +139,5 @@ export class RecommendCategoriesDepartmentComponent implements OnInit {
 
 export type RecommendationFormValues = {
   departmentId: number
-  categories: Category[]
+  categories: ({ categoryId: number } | null)[]
 }
