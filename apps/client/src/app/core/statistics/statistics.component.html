@@ -135,7 +135,9 @@
       <div class="ranking-container">
         <app-horizontal-bar [stats]="stats" />
       </div>
-      <app-indicators-pie-chart [matrixData]="stats.matrix" />
+      <div class="pie-container">
+        <app-indicators-pie-chart [matrixData]="stats.matrix" />
+      </div>
       <div class="vertical-container">
         <app-card
           title="Evidencias Cargadas"
