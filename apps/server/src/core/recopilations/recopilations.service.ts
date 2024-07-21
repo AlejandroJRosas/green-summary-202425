@@ -516,13 +516,20 @@ export class RecopilationsService {
     for (const i of indicators) {
       const indicator = await this.indicatorsRepository.findOneOrFail({
         where: { index: i.indicatorId },
-        relations: ['categories', 'criterion']
+        relations: ['categories', 'criterion'],
+        withDeleted: true
       })
 
       for (const c of i.criterion) {
         const [criteria, category] = await Promise.all([
-          this.criterionRepository.findOneByOrFail({ id: c.criteriaId }),
-          this.categoriesRepository.findOneByOrFail({ id: c.categoryId })
+          this.criterionRepository.findOneOrFail({
+            where: { id: c.criteriaId },
+            withDeleted: true
+          }),
+          this.categoriesRepository.findOneOrFail({
+            where: { id: c.categoryId },
+            withDeleted: true
+          })
         ])
 
         if (!indicator.criterion.some((c) => c.id === criteria.id)) {
