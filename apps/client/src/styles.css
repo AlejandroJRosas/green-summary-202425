@@ -258,6 +258,14 @@ p-password.ng-valid > .p-password > .p-inputtext {
 .p-highlight > p-sorticon > sortamountdownicon > svg {
   color: var(--primary-color);
 }
+.p-button.p-button-icon-only.p-button-rounded {
+  border-radius: 50%;
+  height: 2.5rem;
+}
+.p-button.p-button-icon-only {
+  width: 2.5rem;
+  /* padding: 0.75rem 0; */
+}
 
 @keyframes blinker {
   50% {
