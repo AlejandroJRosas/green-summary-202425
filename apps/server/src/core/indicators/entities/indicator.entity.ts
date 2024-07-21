@@ -1,11 +1,26 @@
 import { Category } from 'src/core/categories/entities/category.entity'
 import { Criteria } from 'src/core/criterion/entities/criteria.entity'
 import { IndicatorPerRecopilation } from 'src/core/indicators-per-recopilations/entities/indicator-per-recopilatio.entity'
-import { Entity, Column, OneToMany, PrimaryColumn } from 'typeorm'
+import {
+  Entity,
+  Column,
+  OneToMany,
+  PrimaryColumn,
+  PrimaryGeneratedColumn,
+  Index,
+  DeleteDateColumn
+} from 'typeorm'
 
 @Entity('indicators')
+@Index(['index'], {
+  unique: true,
+  where: '"deletedAt" IS NULL'
+})
 export class Indicator {
-  @PrimaryColumn()
+  @PrimaryGeneratedColumn()
+  id: number
+
+  @Column()
   index: number
 
   @Column({ type: 'varchar', length: 255, nullable: false, unique: true })
@@ -28,4 +43,7 @@ export class Indicator {
     (indicatorPorRecopilations) => indicatorPorRecopilations.indicator
   )
   recopilationsPerIndicator: IndicatorPerRecopilation[]
+
+  @DeleteDateColumn()
+  deletedAt: Date
 }
