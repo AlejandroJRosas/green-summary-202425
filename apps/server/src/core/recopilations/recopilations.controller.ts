@@ -208,7 +208,7 @@ export class RecopilationsController {
         relateIndicatorsToRecopilationDto
       )
 
-      this.eventEmitter.emit(
+      await this.eventEmitter.emitAsync(
         'matrix.changed',
         new MatrixChangedEvent(recopilation.id)
       )
@@ -229,7 +229,7 @@ export class RecopilationsController {
       recommendCategoriesDto
     )
 
-    this.eventEmitter.emit(
+    await this.eventEmitter.emitAsync(
       'matrix.changed',
       new MatrixChangedEvent(recommendCategoriesDto.recopilationId)
     )
@@ -346,7 +346,7 @@ export class RecopilationsController {
     return this.recopilationsService.getRecopilationStatistics(+id)
   }
 
-  @OnEvent('matrix.changed')
+  @OnEvent('matrix.changed', { async: true })
   handleChangedMatrixEvent(payload: MatrixChangedEvent) {
     return this.recopilationsService.constructAndSaveMatrix(
       payload.recopilationId
