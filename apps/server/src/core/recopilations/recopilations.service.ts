@@ -191,6 +191,9 @@ export class RecopilationsService {
       },
       order: {
         departmentsPerRecopilation: {
+          department: {
+            fullName: 'ASC'
+          },
           recommendations: {
             category: {
               id: 'ASC'
