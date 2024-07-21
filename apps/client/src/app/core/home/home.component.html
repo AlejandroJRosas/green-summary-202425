@@ -1,29 +1,30 @@
 <div class="p-4">
   <h2>Matriz de Seguimiento</h2>
-
-  <p-dropdown
-    [options]="recopilations"
-    [(ngModel)]="selectedRecopilation"
-    (onChange)="getMatrixData()"
-    optionLabel="name"
-    optionValue="id"
-    placeholder="Selecciona una recopilación"
-    [emptyMessage]="
-      recopilations
-        ? 'No hay recopilaciones activas disponibles'
-        : 'Seleccione una recopilación'
-    "
-  />
-  <button
-    type="button"
-    class="open-big"
-    (click)="showDialog()"
-    pButton
-    pTooltip="Abrir en ventana grande"
-    severity="success"
-    [disabled]="matrixData === undefined"
-    icon="pi pi-external-link"
-  ></button>
+  <div class="pb-3">
+    <p-dropdown
+      [options]="recopilations"
+      [(ngModel)]="selectedRecopilation"
+      (onChange)="getMatrixData()"
+      optionLabel="name"
+      optionValue="id"
+      placeholder="Selecciona una recopilación"
+      [emptyMessage]="
+        recopilations
+          ? 'No hay recopilaciones activas disponibles'
+          : 'Seleccione una recopilación'
+      "
+    />
+    <button
+      type="button"
+      class="open-big"
+      (click)="showDialog()"
+      pButton
+      pTooltip="Abrir en ventana grande"
+      severity="success"
+      [disabled]="matrixData === undefined"
+      icon="pi pi-external-link"
+    ></button>
+  </div>
   @if (recopilations.length === 0) {
     <div
       class="flex flex-column justify-content-center align-items-center gap-2"
@@ -57,7 +58,7 @@
       <h3>
         {{ matrixData.name }}
       </h3>
-      <h4>
+      <h4 class="m-0">
         Inicio: {{ parseDate(matrixData.startDate) }} - Cierre Departamental:
         {{ parseDate(matrixData.departmentEndDate) }} - Finalización:
         {{ parseDate(matrixData.endDate) }}
