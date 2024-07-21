@@ -612,8 +612,7 @@ export class RecopilationsService {
       relations: ['departmentPerRecopilation'],
       where: {
         departmentPerRecopilation: {
-          recopilation: { id: recopilationId },
-          department: { id: In(departments.map((d) => d.departmentId)) }
+          recopilation: { id: recopilationId }
         }
       }
     })
