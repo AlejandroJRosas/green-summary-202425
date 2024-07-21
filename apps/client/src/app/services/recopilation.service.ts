@@ -215,7 +215,7 @@ interface RelateIndicatorsDto {
   }[]
 }
 
-interface RecommendationsDto {
+export interface RecommendationsDto {
   recopilationId: number
   departments: {
     departmentId: number

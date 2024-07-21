@@ -11,36 +11,33 @@
     </div>
   }
   @if (this.user.type !== 'department' || departmentId === this.user.id) {
-    <a
-      href="{{ getLink() }}"
-      target="_blank"
-      rel="noreferrer"
-      class="custom-td-link"
-    >
-      <div class="icons-container">
-        @if (answer?.isAnswered) {
-          <tooltip-icon
-            class="load-icon"
-            icon="pi pi-file-arrow-up"
-            tooltip="Ha subido evidencias"
-          ></tooltip-icon>
-        }
-        @if (answer?.isApproved) {
-          <tooltip-icon
-            class="check-icon"
-            icon="pi pi-file-check"
-            tooltip="Ha sido marcado como correcto"
-          ></tooltip-icon>
-        }
-        @if (answer?.hasError) {
-          <tooltip-icon
-            class="error-icon"
-            icon="pi pi-file-excel"
-            tooltip="Ha sido marcado con errores"
-          ></tooltip-icon>
-        }
-      </div>
-    </a>
+    <div class="custom-td-link">
+      <a href="{{ getLink() }}" target="_blank" rel="noreferrer">
+        <div class="icons-container">
+          @if (answer?.isAnswered) {
+            <tooltip-icon
+              class="load-icon"
+              icon="pi pi-file-arrow-up"
+              tooltip="Ha subido evidencias"
+            ></tooltip-icon>
+          }
+          @if (answer?.isApproved) {
+            <tooltip-icon
+              class="check-icon"
+              icon="pi pi-file-check"
+              tooltip="Ha sido marcado como correcto"
+            ></tooltip-icon>
+          }
+          @if (answer?.hasError) {
+            <tooltip-icon
+              class="error-icon"
+              icon="pi pi-file-excel"
+              tooltip="Ha sido marcado con errores"
+            ></tooltip-icon>
+          }
+        </div>
+      </a>
+    </div>
   } @else {
     <div class="custom-td-link">
       <div class="icons-container">

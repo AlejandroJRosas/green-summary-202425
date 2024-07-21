@@ -1,4 +1,4 @@
-import { Component, Inject } from '@angular/core'
+import { Component, Inject, OnInit } from '@angular/core'
 import { ButtonModule } from 'primeng/button'
 import { ActivatedRoute, Router } from '@angular/router'
 import { Toast } from '../../../../../common/toast/toast.component'
@@ -6,11 +6,15 @@ import { ConfirmationService } from 'primeng/api'
 import { DropdownModule } from 'primeng/dropdown'
 import { ChipModule } from 'primeng/chip'
 import { FormsModule } from '@angular/forms'
-import { CategorySelectorComponent } from './category-selector/category-selector.component'
 import { Department } from '../../../../../../shared/types/user.type'
 import { Category } from '../../../../../../shared/types/category.type'
-import { RecopilationService } from '../../../../../services/recopilation.service'
+import {
+  MatrixInfoDto,
+  RecopilationService
+} from '../../../../../services/recopilation.service'
 import { ScrollTopModule } from 'primeng/scrolltop'
+import { MatrixRecommendationsComponent } from './matrix/matrix.component'
+import { TooltipModule } from 'primeng/tooltip'
 
 @Component({
   selector: 'app-recommend-categories-department',
@@ -21,13 +25,21 @@ import { ScrollTopModule } from 'primeng/scrolltop'
     DropdownModule,
     ChipModule,
     FormsModule,
-    CategorySelectorComponent,
-    ScrollTopModule
+    ScrollTopModule,
+    MatrixRecommendationsComponent,
+    TooltipModule
   ],
   templateUrl: './recommend-categories-department.component.html',
   providers: [ConfirmationService]
 })
-export class RecommendCategoriesDepartmentComponent {
+export class RecommendCategoriesDepartmentComponent implements OnInit {
+  recopilationId = -1
+  departments: Department[] = []
+  categories: Category[] = []
+  selectedCategories: Category[] = []
+  recommendationsFormValues: RecommendationFormValues[] = []
+  matrixData: MatrixInfoDto | undefined
+
   constructor(
     private router: Router,
     @Inject(Toast) private toast: Toast,
@@ -38,23 +50,65 @@ export class RecommendCategoriesDepartmentComponent {
       this.recopilationId = parseInt(params['recopilationId']) || -1
     })
   }
-  recopilationId = -1
-
-  departments: Department[] = []
-  categories: Category[] = []
-
-  recommendationsFormValues: recommendationFormValues[] = []
-
-  selectedCategories: Category[] = []
 
   ngOnInit() {
-    this.loadDepartments()
-    this.loadCategories()
-    this.loadAlreadyInsertedRecommendations()
+    this.getMatrixData()
+  }
+
+  getMatrixData() {
+    if (this.recopilationId) {
+      this.recopilationService.getMatrixInfo(this.recopilationId).subscribe({
+        next: (recopilation) => {
+          if (recopilation) {
+            this.matrixData = recopilation
+          }
+        },
+        error: (e) => {
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
+        }
+      })
+    }
+  }
+
+  preparePayload() {
+    this.recommendationsFormValues = []
+
+    this.matrixData?.departments.map((department) => {
+      const filteredCategories = department.answers
+        .map((answer) => {
+          if (answer.isRecommended) {
+            return {
+              categoryId: answer.categoryId
+            }
+          }
+          return null
+        })
+        .filter((category) => category !== null)
+
+      if (filteredCategories.length > 0) {
+        this.recommendationsFormValues.push({
+          departmentId: department.department.id,
+          categories: filteredCategories
+        })
+      }
+    })
   }
 
   submitAndContinue() {
-    const payload = this.adaptFormValuesToDto()
+    this.preparePayload()
+
+    const payload = {
+      recopilationId: this.recopilationId,
+      departments: this.recommendationsFormValues as {
+        departmentId: number
+        categories: { categoryId: number }[]
+      }[]
+    }
+
     this.recopilationService.recommendCategories(payload).subscribe({
       next: () => {
         this.nextStep()
@@ -70,88 +124,6 @@ export class RecommendCategoriesDepartmentComponent {
     })
   }
 
-  private loadAlreadyInsertedRecommendations() {
-    this.recopilationService.getById(this.recopilationId).subscribe({
-      next: (recopilation) => {
-        if (!recopilation) return
-
-        if (Array.isArray(recopilation.departments)) {
-          this.recommendationsFormValues = recopilation.departments.map(
-            (d) => ({
-              departmentId: d.department.id,
-              categories: d.recommendedCategories
-            })
-          )
-        }
-      },
-      error: (e) => {
-        if (e.error.data != null) {
-          this.toast.show('error', 'Error', e.error.data.message)
-        } else {
-          this.toast.show('error', 'Error', e.error.message)
-        }
-      }
-    })
-  }
-
-  private loadDepartments() {
-    this.recopilationService
-      .getSelectedDepartments(this.recopilationId)
-      .subscribe({
-        next: (departments) => {
-          this.departments = departments
-          departments.forEach((department) =>
-            this.recommendationsFormValues.push({
-              departmentId: department.id,
-              categories: []
-            })
-          )
-        },
-        error: (e) => {
-          if (e.error.data != null) {
-            this.toast.show('error', 'Error', e.error.data.message)
-          } else {
-            this.toast.show('error', 'Error', e.error.message)
-          }
-        }
-      })
-  }
-
-  private loadCategories() {
-    this.recopilationService.getCategories(this.recopilationId).subscribe({
-      next: (categories) => {
-        this.categories = categories
-      },
-      error: (e) => {
-        if (e.error.data != null) {
-          this.toast.show('error', 'Error', e.error.data.message)
-        } else {
-          this.toast.show('error', 'Error', e.error.message)
-        }
-      }
-    })
-  }
-
-  private adaptFormValuesToDto() {
-    return {
-      recopilationId: this.recopilationId,
-      departments: this.recommendationsFormValues
-        .filter((rfv) => rfv.categories.length > 0)
-        .map((rfv) => ({
-          departmentId: rfv.departmentId,
-          categories: rfv.categories.map((category) => ({
-            categoryId: category.id
-          }))
-        }))
-    }
-  }
-
-  getCategoriesArray(departmentId: number) {
-    return this.recommendationsFormValues.find(
-      (recommendation) => recommendation.departmentId === departmentId
-    )?.categories as []
-  }
-
   nextStep() {
     this.router.navigateByUrl(
       `pages/recopilations/steps-create/preview/${this.recopilationId}`
@@ -165,7 +137,7 @@ export class RecommendCategoriesDepartmentComponent {
   }
 }
 
-type recommendationFormValues = {
+export type RecommendationFormValues = {
   departmentId: number
-  categories: Category[]
+  categories: ({ categoryId: number } | null)[]
 }
