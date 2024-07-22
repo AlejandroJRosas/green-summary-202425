@@ -17,6 +17,10 @@ import { NotificationsService } from '../notifications/notifications.service'
 import { Notification } from '../notifications/entities/notification.entity'
 import { User } from '../users/entities/user.entity'
 import { MailsService } from '../mails/mails.service'
+import { InformationCollectionsService } from '../information-collections/information-collections.service'
+import { Recopilation } from '../recopilations/entities/recopilation.entity'
+import { Department } from '../users/entities/department.entity'
+import { Category } from '../categories/entities/category.entity'
 
 @Module({
   imports: [
@@ -27,7 +31,10 @@ import { MailsService } from '../mails/mails.service'
       Link,
       InformationCollection,
       Notification,
-      User
+      User,
+      Recopilation,
+      Department,
+      Category
     ])
   ],
   controllers: [
@@ -42,7 +49,8 @@ import { MailsService } from '../mails/mails.service'
     ImagesService,
     LinksService,
     NotificationsService,
-    MailsService
+    MailsService,
+    InformationCollectionsService
   ]
 })
 export class EvidencesModule {}

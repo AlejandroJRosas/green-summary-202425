@@ -30,6 +30,7 @@ import { renameFile, fileFilter } from 'src/shared/file-upload'
 import { ConfigService } from 'nestjs-config'
 import { EventEmitter2 } from '@nestjs/event-emitter'
 import { MatrixChangedEvent } from '../recopilations/dto/matrix-changed.event'
+import { InformationCollectionsService } from '../information-collections/information-collections.service'
 
 @ApiTags('Evidences')
 @Controller('evidences')
@@ -38,7 +39,8 @@ export class EvidencesController {
   constructor(
     private configService: ConfigService,
     private readonly evidencesService: EvidencesService,
-    private readonly eventEmitter: EventEmitter2
+    private readonly eventEmitter: EventEmitter2,
+    private readonly informationCollectionsService: InformationCollectionsService
   ) {}
 
   @Get()
@@ -117,6 +119,9 @@ export class EvidencesController {
     const name = this.configService.get('link')
     createEvidenceDto.fileLink = `${name.URL_BACK}/uploads/${fileLink.filename}`
     const newEvidence = await this.evidencesService.create(createEvidenceDto)
+    this.informationCollectionsService.disapproveCollection(
+      +createEvidenceDto.collectionId
+    )
     return newEvidence
   }
 
@@ -176,6 +181,10 @@ export class EvidencesController {
     this.eventEmitter.emit(
       'matrix.changed',
       new MatrixChangedEvent(Number(updatedEvidence.collection.recopilation.id))
+    )
+
+    await this.informationCollectionsService.disapproveCollection(
+      updatedEvidence.collection.id
     )
 
     return updatedEvidence

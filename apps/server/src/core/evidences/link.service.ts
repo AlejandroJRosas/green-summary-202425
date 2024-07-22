@@ -70,7 +70,11 @@ export class LinksService {
     updateEvidenceDto: UpdateEvidenceDto
   ): Promise<Link> {
     await this.linkRepository.update(id, updateEvidenceDto)
-    return this.linkRepository.findOneByOrFail({ id })
+
+    return this.linkRepository.findOneOrFail({
+      where: { id },
+      relations: { collection: true }
+    })
   }
 
   async remove(id: number): Promise<void> {

@@ -190,6 +190,8 @@ export class InformationCollectionsService {
     }
     if (updateInformationCollectionDto.isApproved) {
       dataToUpdate.isApproved = updateInformationCollectionDto.isApproved
+    } else {
+      dataToUpdate.isApproved = false
     }
     if (updateInformationCollectionDto.recopilationId) {
       dataToUpdate.recopilation = recopilation
@@ -233,5 +235,11 @@ export class InformationCollectionsService {
 
   async remove(id: number): Promise<void> {
     await this.informationCollectionsRepository.delete(id)
+  }
+
+  async disapproveCollection(id: number): Promise<void> {
+    await this.informationCollectionsRepository.update(id, {
+      isApproved: false
+    })
   }
 }

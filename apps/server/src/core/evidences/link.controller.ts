@@ -21,12 +21,16 @@ import { OrderTypeParamDto } from 'src/shared/sorting/order-type-param.dto'
 import { OrderByParamDto } from './dto/order-evidences-by-param.dto'
 import { Roles } from '../auth/roles.decorator'
 import { Role } from '../auth/role.enum'
+import { InformationCollectionsService } from '../information-collections/information-collections.service'
 
 @ApiTags('Links')
 @Controller('links')
 @Roles(Role.Coordinator, Role.Admin, Role.Department)
 export class LinksController {
-  constructor(private readonly linksService: LinksService) {}
+  constructor(
+    private readonly linksService: LinksService,
+    private readonly informationCollectionsService: InformationCollectionsService
+  ) {}
 
   @Get()
   async findAll(
@@ -62,6 +66,11 @@ export class LinksController {
   @HttpCode(HttpStatus.CREATED)
   async create(@Body() createEvidenceDto: CreateEvidenceDto) {
     const newEvidence = await this.linksService.create(createEvidenceDto)
+
+    await this.informationCollectionsService.disapproveCollection(
+      +createEvidenceDto.collectionId
+    )
+
     return newEvidence
   }
 
@@ -73,6 +82,10 @@ export class LinksController {
     const updatedEvidence = await this.linksService.update(
       +id,
       updateEvidenceDto
+    )
+
+    await this.informationCollectionsService.disapproveCollection(
+      updatedEvidence.collection.id
     )
 
     return updatedEvidence
