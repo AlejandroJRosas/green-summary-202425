@@ -7,6 +7,7 @@
       class="text-color-secondary flex-1"
       [pTooltip]="this.category.helpText"
       tooltipEvent="hover"
+      tooltipPosition="bottom"
     >
       Subida de archivos para {{ this.category.indicator.alias }} /
       {{ this.category.name }}
@@ -20,59 +21,85 @@
       [disabled]="!isValidDepartmentalDate"
     />
   </div>
-  <div class="pb-4 flex flex-row flex-wrap gap-2">
-    <p-button
-      (click)="expandAll()"
-      label="Expandir"
-      icon="pi pi-chevron-down"
-      [rounded]="true"
-      severity="info"
-      [outlined]="true"
-      tooltipPosition="left"
-      [style]="{
-        padding: '10px'
-      }"
-    />
-    <p-button
-      (click)="collapseAll()"
-      label="Colapsar"
-      icon="pi pi-chevron-right"
-      [rounded]="true"
-      severity="info"
-      [outlined]="true"
-      tooltipPosition="left"
-      [style]="{
-        padding: '10px'
-      }"
-    />
-  </div>
-  @for (
-    informationCollection of informationCollections;
-    track informationCollection.id;
-    let idx = $index
-  ) {
-    <p-panel
-      expandIcon="pi pi-chevron-down"
-      collapseIcon="pi pi-chevron-right"
-      [toggleable]="true"
-      collapsed="true"
-      iconPos="start"
-      (collapsedChange)="changed()"
+  @if (informationCollections.length !== 0) {
+    <div class="pb-4 flex flex-row flex-wrap gap-2">
+      <p-button
+        (click)="expandAll()"
+        label="Expandir"
+        icon="pi pi-chevron-down"
+        [rounded]="true"
+        severity="info"
+        [outlined]="true"
+        tooltipPosition="left"
+        [style]="{
+          padding: '10px'
+        }"
+      />
+      <p-button
+        (click)="collapseAll()"
+        label="Colapsar"
+        icon="pi pi-chevron-right"
+        [rounded]="true"
+        severity="info"
+        [outlined]="true"
+        tooltipPosition="left"
+        [style]="{
+          padding: '10px'
+        }"
+      />
+    </div>
+  }
+  @if (informationCollections.length === 0) {
+    <div
+      class="flex flex-column justify-content-center align-items-center gap-2 pt-4"
     >
-      <ng-template pTemplate="header">
-        <section
-          class="flex flex-row justify-content-between align-items-center w-full gap-4"
-        >
-          <h2 style="word-break: break-word" class="text-xl">
-            {{ informationCollection.name }}
-          </h2>
-          <div class="flex flex-row gap-2 flex-nowrap">
-            <button
-              class="p-panel-header-icon p-link mr-2"
-              [disabled]="!isValidDepartmentalDate"
+      <img src="../../../assets/empty-collection.png" alt="empty-collection" />
+      <i class="text-lg"
+        ><strong>Aún no hay colecciones ni evidencias creadas</strong></i
+      >
+    </div>
+  } @else {
+    @for (
+      informationCollection of informationCollections;
+      track informationCollection.id;
+      let idx = $index
+    ) {
+      <p-panel
+        expandIcon="pi pi-chevron-down"
+        collapseIcon="pi pi-chevron-right"
+        [toggleable]="true"
+        collapsed="true"
+        iconPos="start"
+        (collapsedChange)="changed()"
+      >
+        <ng-template pTemplate="header">
+          <section
+            class="flex flex-row justify-content-between align-items-center w-full gap-4"
+          >
+            <div
+              class="flex flex-row justify-content-center align-items-center gap-2"
             >
-              <span
-                class="pi pi-pencil"
+              @if (informationCollection.isApproved) {
+                <p-chip
+                  styleClass="pl-0 pr-3 bg-green-100"
+                  pTooltip="Colección de información aprobada"
+                  tooltipEvent="hover"
+                  tooltipPosition="top"
+                >
+                  <span
+                    class="bg-green-200 border-circle w-2rem h-2rem flex align-items-center justify-content-center"
+                  >
+                    <i class="pi pi-check"></i>
+                  </span>
+                  <span class="ml-2 font-medium"> Aprobado </span>
+                </p-chip>
+              }
+              <h2 style="word-break: break-word" class="text-xl">
+                {{ informationCollection.name }}
+              </h2>
+            </div>
+            <div class="flex flex-row gap-2 flex-nowrap">
+              <p-button
                 (click)="
                   isValidDepartmentalDate
                     ? showDialogEdit(
@@ -82,21 +109,15 @@
                       )
                     : ''
                 "
-                [style.color]="isValidDepartmentalDate ? '#22c55e' : 'darkgrey'"
-                [style.border]="
-                  isValidDepartmentalDate
-                    ? 'solid 1.5px #22c55e'
-                    : 'solid 1.5px darkgrey'
-                "
-                style="border-radius: 100%; padding: 7px"
-              ></span>
-            </button>
-            <button
-              class="p-panel-header-icon p-link mr-2"
-              [disabled]="!isValidDepartmentalDate"
-            >
-              <span
-                class="pi pi-trash"
+                pTooltip="Editar"
+                icon="pi pi-pencil"
+                [rounded]="true"
+                severity="success"
+                [outlined]="true"
+                tooltipPosition="left"
+                [disabled]="!isValidDepartmentalDate"
+              />
+              <p-button
                 (click)="
                   isValidDepartmentalDate
                     ? confirmationDelete(
@@ -106,163 +127,123 @@
                       )
                     : ''
                 "
-                [style.color]="isValidDepartmentalDate ? '#ef4444' : 'darkgrey'"
-                [style.border]="
-                  isValidDepartmentalDate
-                    ? 'solid 1.5px #ef4444'
-                    : 'solid 1.5px darkgrey'
-                "
-                style="border-radius: 100%; padding: 7px"
-              ></span>
-            </button>
-          </div>
-        </section>
-      </ng-template>
-      <div class="flex flex-row justify-content-between align-items-center">
-        <p class="m-0 pb-3" style="max-width: 75vw; font-size: 1.125rem">
-          {{ informationCollection.summary }}
-        </p>
-        @if (informationCollection.isApproved === false) {
-          <div
-            class="flex flex-row gap-3 justify-content-center align-items-start"
-            pTooltip="Colección de información no aprobada"
-            tooltipEvent="hover"
-            tooltipPosition="top"
-          >
-            <i
-              class="pi pi-times"
-              style="font-size: 1.5rem; color: #ef4444"
-            ></i>
-            <h1 style="color: #ef4444; font-size: 1.125rem; margin: 0">
-              No Aprobado
-            </h1>
-          </div>
-        } @else {
-          <div
-            class="flex flex-row gap-3 justify-content-center align-items-start"
-            pTooltip="Colección de información aprobada"
-            tooltipEvent="hover"
-            tooltipPosition="top"
-          >
-            <i
-              class="pi pi-check"
-              style="font-size: 1.5rem; color: #22c55e"
-            ></i>
-            <h1 style="color: #22c55e; font-size: 1.125rem; margin: 0">
-              Aprobado
-            </h1>
-          </div>
-        }
-      </div>
-      <p-panel
-        expandIcon="pi pi-chevron-down"
-        collapseIcon="pi pi-chevron-right"
-        [toggleable]="true"
-        collapsed="true"
-        iconPos="start"
-        (collapsedChange)="changed()"
-      >
-        <ng-template pTemplate="header" class="p-0">
-          <section
-            class="flex flex-row justify-content-between align-items-center w-full"
-          >
-            <h3 class="text-xl">
-              Evidencias ({{ informationCollection.evidences.length }})
-            </h3>
-            <button
-              class="p-panel-header-icon p-link mr-2"
-              [disabled]="!isValidDepartmentalDate"
+                [disabled]="!isValidDepartmentalDate"
+                pTooltip="Eliminar"
+                icon="pi pi-trash"
+                [rounded]="true"
+                severity="danger"
+                [outlined]="true"
+                tooltipPosition="left"
+              />
+            </div>
+          </section>
+        </ng-template>
+        <div class="flex flex-row justify-content-between align-items-center">
+          <p class="m-0 pb-3" style="max-width: 75vw; font-size: 1.125rem">
+            {{ informationCollection.summary }}
+          </p>
+        </div>
+        <p-panel
+          expandIcon="pi pi-chevron-down"
+          collapseIcon="pi pi-chevron-right"
+          [toggleable]="true"
+          collapsed="true"
+          iconPos="start"
+          (collapsedChange)="changed()"
+        >
+          <ng-template pTemplate="header" class="p-0">
+            <section
+              class="flex flex-row justify-content-between align-items-center w-full"
             >
-              <span
-                class="pi pi-plus"
+              <h3 class="text-xl">
+                Evidencias ({{ informationCollection.evidences.length }})
+              </h3>
+              <p-button
                 (click)="
                   isValidDepartmentalDate
                     ? createEvidences(informationCollection.id)
                     : ''
                 "
-                [style.color]="isValidDepartmentalDate ? '#3b82f6' : 'darkgrey'"
-                [style.border]="
-                  isValidDepartmentalDate
-                    ? 'solid 1.5px #3b82f6'
-                    : 'solid 1.5px darkgrey'
-                "
-                style="border-radius: 100%; padding: 7px"
-              ></span>
-            </button>
-          </section>
-        </ng-template>
-        @for (evidence of informationCollection.evidences; track evidence.id) {
-          <div class="flex flex-column gap-3 mb-5">
-            <div class="flex justify-content-between align-items-start gap-4">
-              <div class="flex flex-column gap-3">
-                @switch (evidence.type) {
-                  @case ('link') {
-                    <p-chip styleClass="pl-0 pr-3 surface-200">
-                      <span
-                        class="bg-blue-200 border-circle w-2rem h-2rem flex align-items-center justify-content-center"
-                      >
-                        <i class="pi pi-external-link"></i>
-                      </span>
-                      <span class="ml-2 font-medium">
-                        {{ translateType(evidence.type) }}
-                      </span>
-                    </p-chip>
+                [disabled]="!isValidDepartmentalDate"
+                pTooltip="Crear evidencia"
+                icon="pi pi-plus"
+                [rounded]="true"
+                severity="info"
+                [outlined]="true"
+                tooltipPosition="left"
+              />
+            </section>
+          </ng-template>
+          @for (
+            evidence of informationCollection.evidences;
+            track evidence.id
+          ) {
+            <div class="flex flex-column gap-3 mb-5">
+              <div class="flex justify-content-between align-items-start gap-4">
+                <div class="flex flex-column gap-3">
+                  @switch (evidence.type) {
+                    @case ('link') {
+                      <p-chip styleClass="pl-0 pr-3 surface-200">
+                        <span
+                          class="bg-blue-200 border-circle w-2rem h-2rem flex align-items-center justify-content-center"
+                        >
+                          <i class="pi pi-external-link"></i>
+                        </span>
+                        <span class="ml-2 font-medium">
+                          {{ translateType(evidence.type) }}
+                        </span>
+                      </p-chip>
+                    }
+                    @case ('image') {
+                      <p-chip styleClass="pl-0 pr-3 surface-200">
+                        <span
+                          class="bg-purple-200 border-circle w-2rem h-2rem flex align-items-center justify-content-center"
+                        >
+                          <i class="pi pi-image"></i>
+                        </span>
+                        <span class="ml-2 font-medium">
+                          {{ translateType(evidence.type) }}
+                        </span>
+                      </p-chip>
+                    }
+                    @case ('document') {
+                      <p-chip styleClass="pl-0 pr-3 surface-200">
+                        <span
+                          class="bg-green-200 border-circle w-2rem h-2rem flex align-items-center justify-content-center"
+                        >
+                          <i class="pi pi-folder"></i>
+                        </span>
+                        <span class="ml-2 font-medium">
+                          {{ translateType(evidence.type) }}
+                        </span>
+                      </p-chip>
+                    }
                   }
-                  @case ('image') {
-                    <p-chip styleClass="pl-0 pr-3 surface-200">
-                      <span
-                        class="bg-purple-200 border-circle w-2rem h-2rem flex align-items-center justify-content-center"
-                      >
-                        <i class="pi pi-image"></i>
-                      </span>
-                      <span class="ml-2 font-medium">
-                        {{ translateType(evidence.type) }}
-                      </span>
-                    </p-chip>
-                  }
-                  @case ('document') {
-                    <p-chip styleClass="pl-0 pr-3 surface-200">
-                      <span
-                        class="bg-indigo-200 border-circle w-2rem h-2rem flex align-items-center justify-content-center"
-                      >
-                        <i class="pi pi-folder"></i>
-                      </span>
-                      <span class="ml-2 font-medium">
-                        {{ translateType(evidence.type) }}
-                      </span>
-                    </p-chip>
-                  }
-                }
-                <h2
-                  style="word-break: break-word; font-size: 1.125rem"
-                  class="m-0 text-color-secondary"
-                >
-                  {{ evidence.description }}
-                </h2>
-              </div>
-              @if (evidence.error !== null) {
-                <div
-                  class="flex flex-row gap-3 justify-content-center align-items-start"
-                  [pTooltip]="evidence.error"
-                  tooltipEvent="hover"
-                  tooltipPosition="top"
-                >
-                  <i
-                    class="pi pi-ban"
-                    style="font-size: 1.5rem; color: #ef4444"
-                  ></i>
-                  <h1 style="color: #ef4444; font-size: 1.125rem" class="m-0">
-                    Evidencia con error
-                  </h1>
-                </div>
-              } @else {
-                <div class="flex flex-nowrap">
-                  <button
-                    class="p-panel-header-icon p-link mr-2"
-                    [disabled]="!isValidDepartmentalDate"
+                  <h2
+                    style="word-break: break-word; font-size: 1.125rem"
+                    class="m-0 text-color-secondary"
                   >
-                    <span
-                      class="pi pi-pencil"
+                    {{ evidence.description }}
+                  </h2>
+                </div>
+                @if (evidence.error !== null) {
+                  <div
+                    class="flex flex-row gap-3 justify-content-center align-items-start"
+                    [pTooltip]="evidence.error"
+                    tooltipEvent="hover"
+                    tooltipPosition="top"
+                  >
+                    <i
+                      class="pi pi-ban"
+                      style="font-size: 1.5rem; color: #ef4444"
+                    ></i>
+                    <h1 style="color: #ef4444; font-size: 1.125rem" class="m-0">
+                      Evidencia con error
+                    </h1>
+                  </div>
+                } @else {
+                  <div class="flex flex-nowrap gap-2">
+                    <p-button
                       (click)="
                         isValidDepartmentalDate
                           ? onEditEvidence(
@@ -271,23 +252,15 @@
                             )
                           : ''
                       "
-                      [style.color]="
-                        isValidDepartmentalDate ? '#22c55e' : 'darkgrey'
-                      "
-                      [style.border]="
-                        isValidDepartmentalDate
-                          ? 'solid 1.5px #22c55e'
-                          : 'solid 1.5px darkgrey'
-                      "
-                      style="border-radius: 100%; padding: 7px"
-                    ></span>
-                  </button>
-                  <button
-                    class="p-panel-header-icon p-link mr-2"
-                    [disabled]="!isValidDepartmentalDate"
-                  >
-                    <span
-                      class="pi pi-trash"
+                      pTooltip="Editar"
+                      icon="pi pi-pencil"
+                      [rounded]="true"
+                      severity="success"
+                      [outlined]="true"
+                      tooltipPosition="left"
+                      [disabled]="!isValidDepartmentalDate"
+                    />
+                    <p-button
                       (click)="
                         isValidDepartmentalDate
                           ? confirmationDeleteEvidence(
@@ -297,33 +270,19 @@
                             )
                           : ''
                       "
-                      [style.color]="
-                        isValidDepartmentalDate ? '#ef4444' : 'darkgrey'
-                      "
-                      [style.border]="
-                        isValidDepartmentalDate
-                          ? 'solid 1.5px #ef4444'
-                          : 'solid 1.5px darkgrey'
-                      "
-                      style="border-radius: 100%; padding: 7px"
-                    ></span>
-                  </button>
-                </div>
-              }
-            </div>
-            @switch (evidence.type) {
-              @case ('link') {
-                <a
-                  [href]="evidence.externalLink"
-                  target="_blank"
-                  class="m-0 text-blue-600"
-                  style="word-wrap: break-word; max-width: 80vw"
-                >
-                  {{ evidence.externalLink }}
-                </a>
-              }
-              @case ('image') {
-                @if (evidence.externalLink) {
+                      [disabled]="!isValidDepartmentalDate"
+                      pTooltip="Eliminar"
+                      icon="pi pi-trash"
+                      [rounded]="true"
+                      severity="danger"
+                      [outlined]="true"
+                      tooltipPosition="left"
+                    />
+                  </div>
+                }
+              </div>
+              @switch (evidence.type) {
+                @case ('link') {
                   <a
                     [href]="evidence.externalLink"
                     target="_blank"
@@ -333,41 +292,53 @@
                     {{ evidence.externalLink }}
                   </a>
                 }
-                <p-image
-                  [src]="evidence.fileLink ?? ''"
-                  alt="Image"
-                  width="300"
-                  [preview]="true"
-                >
-                  <ng-template pTemplate="indicator">
-                    <div class="flex flex-column">
-                      <i class="pi pi-eye"></i>
-                      <p>Ver previsualización de la imagen</p>
-                    </div>
-                  </ng-template>
-                </p-image>
+                @case ('image') {
+                  @if (evidence.externalLink) {
+                    <a
+                      [href]="evidence.externalLink"
+                      target="_blank"
+                      class="m-0 text-blue-600"
+                      style="word-wrap: break-word; max-width: 80vw"
+                    >
+                      {{ evidence.externalLink }}
+                    </a>
+                  }
+                  <p-image
+                    [src]="evidence.fileLink ?? ''"
+                    alt="Image"
+                    width="300"
+                    [preview]="true"
+                  >
+                    <ng-template pTemplate="indicator">
+                      <div class="flex flex-column">
+                        <i class="pi pi-eye"></i>
+                        <p>Ver previsualización de la imagen</p>
+                      </div>
+                    </ng-template>
+                  </p-image>
+                }
+                @case ('document') {
+                  <a
+                    [href]="evidence.fileLink"
+                    target="_blank"
+                    class="m-0 text-blue-600"
+                    style="word-wrap: break-word; max-width: 80vw"
+                  >
+                    {{ evidence.fileLink }}
+                  </a>
+                }
+                @default {
+                  <p class="m-0" style="word-wrap: break-word; max-width: 80vw">
+                    No hay evidencias creadas para esta colección de información
+                  </p>
+                }
               }
-              @case ('document') {
-                <a
-                  [href]="evidence.fileLink"
-                  target="_blank"
-                  class="m-0 text-blue-600"
-                  style="word-wrap: break-word; max-width: 80vw"
-                >
-                  {{ evidence.fileLink }}
-                </a>
-              }
-              @default {
-                <p class="m-0" style="word-wrap: break-word; max-width: 80vw">
-                  No hay evidencias creadas para esta colección de información
-                </p>
-              }
-            }
-          </div>
-          <p-divider />
-        }
+            </div>
+            <p-divider />
+          }
+        </p-panel>
       </p-panel>
-    </p-panel>
+    }
   }
   <p-dialog
     header="Crear Colección de información"

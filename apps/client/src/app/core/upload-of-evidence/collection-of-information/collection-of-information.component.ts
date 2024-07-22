@@ -159,21 +159,12 @@ export class CollectionOfInformationComponent
   isValidDepartmentalDate: boolean = false
   detailedRecopilation: DetailedRecopilation | null = null
   currentDate = new Date()
+  showMessageEvidenceWithError: boolean = true
 
   ngOnInit() {
     this.getDepartmentId()
     this.getAllByDepartment()
     this.getRecopilationById()
-    this.toast.show(
-      'info',
-      'Evidencias con errores',
-      'Si hay alguna evidencia con error es necesario crear otra nueva para reemplazarla.'
-    )
-    this.toast.show(
-      'info',
-      'Colección de información no aprobadas',
-      'Recuerde que al crear una colección de información esta automaticamente estará no aprobada hasta que el coordinador diga lo contrario.'
-    )
   }
   reset() {
     this.formGroup.reset()
@@ -189,6 +180,21 @@ export class CollectionOfInformationComponent
   closeDialogEdit() {
     this.visibleEdit = false
     this.reset()
+  }
+  messageEvidenceWithError() {
+    if (
+      this.informationCollections.some((informationCollection) => {
+        return informationCollection.evidences.some((evidence) => {
+          return evidence.error !== null
+        })
+      })
+    ) {
+      this.toast.show(
+        'info',
+        'Evidencias con errores',
+        'Si hay alguna evidencia con error es necesario crear otra nueva para reemplazarla.'
+      )
+    }
   }
   showDialogEdit(id: number, name: string, summary: string) {
     this.visibleEdit = true
@@ -289,6 +295,10 @@ export class CollectionOfInformationComponent
       next: (res) => {
         if (res.status === 'success') {
           this.informationCollections = res.data
+          if (this.showMessageEvidenceWithError) {
+            this.messageEvidenceWithError()
+            this.showMessageEvidenceWithError = false
+          }
         }
       },
       error: (e) => {

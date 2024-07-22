@@ -12,7 +12,15 @@
   --primary-color: #00ad7c;
   --primary-color-text: #fff;
   --light-green: #f2f8e6;
-  --gris-tirando-a-verde: #fce5c3;
+  --gris-tirando-a-verde: #bee9ca;
+  /* lista de colores
+  #eee4ff
+  #c0dfd69d
+  #bee9ca
+  #b9f8c6bd
+  #fce5c3 Rojo original
+  #fffff sin color
+  */
   --severity-info: #0ea5e9;
   --severity-success: #22c55e;
   --severity-danger: #ef4444;
