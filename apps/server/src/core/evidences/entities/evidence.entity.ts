@@ -18,7 +18,7 @@ export abstract class Evidence {
   id: number
 
   @CreateDateColumn({
-    type: 'timestamp',
+    type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP(6)',
     nullable: false
   })

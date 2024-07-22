@@ -41,7 +41,7 @@ export class InformationCollection {
   isApproved: boolean
 
   @CreateDateColumn({
-    type: 'timestamp',
+    type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP(6)',
     nullable: false
   })

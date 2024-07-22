@@ -37,7 +37,7 @@ export class Notification {
   data: Record<string, unknown>
 
   @CreateDateColumn({
-    type: 'timestamp',
+    type: 'timestamptz',
     default: () => 'CURRENT_TIMESTAMP(6)'
   })
   createdAt: Date
