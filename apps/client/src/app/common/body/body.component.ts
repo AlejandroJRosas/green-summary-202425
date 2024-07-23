@@ -80,7 +80,6 @@ export class BodyComponent implements OnInit {
       next: (res) => {
         if (res.status === 'success') {
           this.unSeenNotifications = res.data
-          console.log('hola')
         }
       },
       error: (e) => {
