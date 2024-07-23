@@ -40,7 +40,7 @@ export class RecopilationCardComponent {
   }
 
   navigateRecopilationDetails(id: number) {
-    this.router.navigateByUrl(`pages/recopilations/steps-create/preview/${id}`)
+    this.router.navigateByUrl(`pages/recopilations/${id}`)
   }
 
   confirmRecopilationDeletion(event: Event, id: number, name: string) {

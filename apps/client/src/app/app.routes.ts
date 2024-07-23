@@ -32,6 +32,7 @@ import { InformationCollectionViewComponent } from './core/information-collectio
 import { RecordsComponent } from './core/records/records.component'
 import { ViewNotificationsComponent } from './core/view-notifications/view-notifications.component'
 import { StatisticsComponent } from './core/statistics/statistics.component'
+import { RecopilationDetailsComponent } from './core/recopilation/recopilation-details/recopilation-details.component'
 
 export const routes: Routes = [
   {
@@ -79,6 +80,12 @@ export const routes: Routes = [
         path: 'recopilations',
         title: 'Recopilaciones',
         component: RecopilationComponent,
+        canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
+      },
+      {
+        path: 'recopilations/:recopilationId',
+        title: 'Detalle de recopilación',
+        component: RecopilationDetailsComponent,
         canActivate: [authGuard, roleGuard([Role.ADMIN, Role.COORDINATOR])]
       },
       {
