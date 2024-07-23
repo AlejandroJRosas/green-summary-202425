@@ -5,74 +5,69 @@ import { FormControl, FormGroup } from '@angular/forms'
   providedIn: 'root'
 })
 export class DataSharingEvidenceService {
-  public evidences: number[] = []
-  public formGroups: FormGroup[] = []
-  public disabledSelect: boolean[] = []
-  private formGroupsMap: Map<number, FormGroup> = new Map()
-  private evidenceIndexCounter = 0
+  public evidencesEntries: EvidenceEntry[] = []
 
   constructor() {}
 
+  getEvidences(): EvidenceEntry[] {
+    return this.evidencesEntries
+  }
+
   getFormGroups(): FormGroup[] {
-    return this.formGroups
+    return this.evidencesEntries.map((evidence) => evidence.formGroup)
   }
-  getFormGroupByEvidence(evidence: number): FormGroup {
-    return this.formGroups[evidence]
+
+  getFormGroupByEvidence(evidenceId: number): FormGroup | undefined {
+    return this.evidencesEntries.find((e) => e.id === evidenceId)?.formGroup
   }
-  getDisabledSelectByEvidence(evidence: number): boolean {
-    return this.disabledSelect[evidence]
+
+  getDisabledSelectByEvidence(evidenceId: number): boolean | undefined {
+    return this.evidencesEntries.find((e) => e.id === evidenceId)
+      ?.disabledSelect
   }
-  changeDisabledSelectByEvidence(evidence: number): boolean {
-    this.disabledSelect[evidence] = true
-    return this.disabledSelect[evidence]
-  }
-  addFormGroup() {
-    const newformGroup = new FormGroup({
-      selectedType: new FormControl<typeEvidence>({
-        name: '',
-        code: ''
-      })
-    })
-    this.formGroups.push(newformGroup)
-    return newformGroup
-  }
-  getEvidences(): number[] {
-    return this.evidences
-  }
-  getLenghtEvidences() {
-    return this.evidences.length
-  }
-  addEvidence(): void {
-    const newEvidenceIndex = this.evidenceIndexCounter + 1
-    this.evidenceIndexCounter++
-    const disabledSelect = false
-    this.evidences.push(newEvidenceIndex)
-    const newFormGroup = new FormGroup({
-      selectedType: new FormControl<typeEvidence>({
-        name: '',
-        code: ''
-      })
-    })
-    this.formGroups.push(newFormGroup)
-    this.disabledSelect.push(disabledSelect)
-  }
-  setEvidences(evidences: number[]): void {
-    this.evidences = evidences
-  }
-  removeEvidence(indexEvidence: number): void {
-    if (this.evidences.length === 1) {
-      this.evidences.pop()
-      this.formGroups.pop()
-      this.disabledSelect.pop()
-    } else {
-      this.evidences.splice(indexEvidence, 1)
-      this.formGroupsMap.delete(indexEvidence)
-      this.disabledSelect.splice(indexEvidence, 1)
-      console.log(indexEvidence)
+
+  disableSelectByEvidence(evidence: number): void {
+    const evidenceToDisable = this.evidencesEntries.find(
+      (e) => e.id === evidence
+    )
+    if (evidenceToDisable) {
+      evidenceToDisable.disabledSelect = true
     }
   }
+
+  addEvidence(): void {
+    const newEvidenceEntry: EvidenceEntry = {
+      id: Math.max(0, ...this.evidencesEntries.map((e) => e.id)) + 1,
+      disabledSelect: false,
+      formGroup: new FormGroup({
+        selectedType: new FormControl<EvidenceFormControl>({
+          name: '',
+          code: ''
+        })
+      })
+    }
+
+    this.evidencesEntries.unshift(newEvidenceEntry)
+  }
+
+  removeEvidence(evidenceId: number): void {
+    this.evidencesEntries = this.evidencesEntries.filter(
+      (e) => e.id !== evidenceId
+    )
+  }
+
+  clearEvidences(): void {
+    this.evidencesEntries = []
+  }
 }
-interface typeEvidence {
+
+interface EvidenceFormControl {
   name: string
   code: string
+}
+
+interface EvidenceEntry {
+  id: number
+  formGroup: FormGroup
+  disabledSelect: boolean
 }

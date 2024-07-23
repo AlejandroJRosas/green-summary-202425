@@ -62,18 +62,19 @@ export class EvidenceComponent implements OnInit {
     { name: 'Documento', code: 'document' },
     { name: 'Link', code: 'link' }
   ]
+
   ngOnInit(): void {
     this.getRecopilationById()
   }
-  getFormGroup(evidence: number): FormGroup {
-    return this.DataSharingEvidence.getFormGroupByEvidence(evidence)
+
+  getFormGroup(evidenceId: number): FormGroup {
+    return this.DataSharingEvidence.getFormGroupByEvidence(evidenceId)!
   }
+
   addEvidence() {
     this.DataSharingEvidence.addEvidence()
   }
-  changeDisableSelect(disable: boolean) {
-    this.disableSelect = disable
-  }
+
   getRecopilationById() {
     this.RecopilationService.getById(this.recopilationId).subscribe({
       next: (res) => {
