@@ -60,6 +60,9 @@ export class BodyComponent implements OnInit {
     this.getDataLocalStorage()
     this.setLabelAvatar()
   }
+  reload() {
+    window.location.reload()
+  }
   setLabelAvatar() {
     this.LabelAvatar = this.getLabelAvatar(this.user.fullName).toUpperCase()
   }
@@ -77,6 +80,7 @@ export class BodyComponent implements OnInit {
       next: (res) => {
         if (res.status === 'success') {
           this.unSeenNotifications = res.data
+          console.log('hola')
         }
       },
       error: (e) => {
