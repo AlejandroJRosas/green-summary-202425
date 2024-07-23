@@ -6,6 +6,7 @@
   top: 0;
   transition: all 0.5s ease;
   padding: 1rem 1.5rem;
+  min-height: 100dvh;
 }
 
 .body-trimmed {

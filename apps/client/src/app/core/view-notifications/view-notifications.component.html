@@ -6,7 +6,9 @@
   <section>
     <div class="flex flex-column gap-5">
       @if (notifications.length === 0 || fetchError === true) {
-        <div class="flex flex-column justify-content-center align-items-center">
+        <div
+          class="flex flex-column justify-content-center align-items-center h-full"
+        >
           <img src="../../../assets/empty-mailbox.png" alt="empty-mailbox" />
           <i class="text-lg"><strong>No hay notificaciones por ver</strong></i>
         </div>
