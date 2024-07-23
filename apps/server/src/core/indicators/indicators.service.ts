@@ -45,8 +45,8 @@ export class IndicatorsService {
     return { indicators, count }
   }
 
-  async getOneIndicator(index: number): Promise<Indicator> {
-    const indicator = await this.indicatorRepository.findOneByOrFail({ index })
+  async getOneIndicator(id: number): Promise<Indicator> {
+    const indicator = await this.indicatorRepository.findOneByOrFail({ id })
     return indicator
   }
 
@@ -133,10 +133,10 @@ export class IndicatorsService {
     return updatedIndicador
   }
 
-  async deleteIndicator(index: number): Promise<void> {
-    const result = await this.indicatorRepository.softDelete(index)
+  async deleteIndicator(id: number): Promise<void> {
+    const result = await this.indicatorRepository.softDelete({ id })
     if (result.affected === 0) {
-      throw new NotFoundException(`Indicador with ID ${index} not found`)
+      throw new NotFoundException(`Indicador with ID ${id} not found`)
     }
   }
 }
