@@ -48,16 +48,17 @@ export class BodyComponent implements OnInit {
         collectionId: 0,
         collectionName: '',
         evidenceId: 0,
-        evidenceName: ''
+        evidenceName: '',
+        recommendationsQuantity: 0
       },
       createdAt: new Date()
     }
   ]
   fetchError: boolean = false
   ngOnInit() {
+    this.getNotificationsUnSeen()
     this.getDataLocalStorage()
     this.setLabelAvatar()
-    this.getNotificationsUnSeen()
   }
   setLabelAvatar() {
     this.LabelAvatar = this.getLabelAvatar(this.user.fullName).toUpperCase()

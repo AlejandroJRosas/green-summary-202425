@@ -27,7 +27,8 @@ export class ViewNotificationsComponent implements OnInit {
         collectionId: 0,
         collectionName: '',
         evidenceId: 0,
-        evidenceName: ''
+        evidenceName: '',
+        recommendationsQuantity: 0
       },
       createdAt: new Date()
     }

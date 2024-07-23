@@ -56,8 +56,6 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.getActiveRecopilations()
-    console.log(this.recopilations.length)
-    console.log(this.selectedRecopilation)
   }
 
   getActiveRecopilations() {
@@ -83,8 +81,6 @@ export class HomeComponent implements OnInit {
           ) {
             this.getMatrixData()
           }
-          console.log(this.recopilations.length)
-          console.log(this.selectedRecopilation)
         }
       },
       error: (e) => {

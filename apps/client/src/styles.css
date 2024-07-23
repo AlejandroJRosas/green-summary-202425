@@ -251,6 +251,13 @@ p-password.ng-valid > .p-password > .p-inputtext {
     bright 1.3s linear infinite;
 }
 
+.notification-avatar .p-badge.p-badge-lg {
+  font-size: 1.125rem;
+  min-width: 0.7125rem;
+  height: 0.7125rem;
+  line-height: 2.25rem;
+}
+
 .notification-avatar .p-overlay-badge {
   position: relative;
 }
@@ -271,6 +278,9 @@ p-password.ng-valid > .p-password > .p-inputtext {
 }
 .p-dropdown-panel .p-dropdown-items .p-dropdown-item.p-highlight.p-focus {
   background: #e2eceb;
+}
+.p-avatar.p-avatar-lg .p-avatar-icon {
+  font-size: 1.3rem;
 }
 @keyframes blinker {
   50% {

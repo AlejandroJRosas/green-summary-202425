@@ -69,7 +69,7 @@ export class LoginComponent extends ValidatedFormGroup<ILoginComponent> {
       password: { value: password }
     } = this.formGroup.controls
 
-    this.authService.login({ email, password }).subscribe({
+    this.authService.login({ email: email.toLowerCase(), password }).subscribe({
       next: (res: AuthResponse) => {
         localStorage.setItem('user', JSON.stringify(res.data.user))
         localStorage.setItem('token', res.data.token)

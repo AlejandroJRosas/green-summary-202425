@@ -13,6 +13,7 @@ export interface Notification {
     collectionName: string
     evidenceId: number
     evidenceName: string
+    recommendationsQuantity: number
   }
   createdAt: Date
 }
