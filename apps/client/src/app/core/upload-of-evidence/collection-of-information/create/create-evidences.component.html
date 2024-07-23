@@ -1,13 +1,13 @@
 <main class="flex flex-column h-full justify-content-between">
   <section>
     <header>
-      <h2 class="text-color-secondary">Colección de información</h2>
-      <h2 class="text-color-secondary">
+      <h2 style="font-size: 1.5rem">Colección de información</h2>
+      <h2 class="text-color-secondary" style="font-size: 1.375">
         {{ informationCollection.name }}
       </h2>
     </header>
     <form [formGroup]="formGroup">
-      <p class="text-color-secondary">
+      <p class="text-color-secondary" style="font-size: 1.125rem">
         {{ informationCollection.summary }}
       </p>
       <evidence />

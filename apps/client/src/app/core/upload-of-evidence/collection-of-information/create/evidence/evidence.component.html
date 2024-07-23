@@ -1,40 +1,26 @@
 <section class="h-full">
-  <div class="flex flex-row gap-4">
-    <h3 class="text-color-secondary">Evidencias</h3>
-    <button
-      class="p-panel-header-icon p-link mr-2"
+  <div class="flex flex-row gap-4 align-items-center">
+    <h3 class="text-color-secondary text-xl">Evidencias</h3>
+    <p-button
+      (click)="
+        isValidDepartmentalDate
+          ? this.DataSharingEvidence.getLenghtEvidences() !== 0
+            ? ''
+            : addEvidence()
+          : ''
+      "
       [disabled]="
         !isValidDepartmentalDate
           ? true
           : this.DataSharingEvidence.getLenghtEvidences() !== 0
       "
-    >
-      <span
-        (click)="
-          isValidDepartmentalDate
-            ? this.DataSharingEvidence.getLenghtEvidences() !== 0
-              ? ''
-              : addEvidence()
-            : ''
-        "
-        class="pi pi-plus"
-        [style.color]="
-          isValidDepartmentalDate
-            ? this.DataSharingEvidence.getLenghtEvidences() === 0
-              ? '#3b82f6'
-              : 'darkgrey'
-            : 'darkgrey'
-        "
-        [style.border]="
-          isValidDepartmentalDate
-            ? this.DataSharingEvidence.getLenghtEvidences() === 0
-              ? 'solid 1.5px #3b82f6'
-              : 'solid 1.5px darkgrey'
-            : 'solid 1.5px darkgrey'
-        "
-        style="border-radius: 100%; padding: 6px"
-      ></span>
-    </button>
+      pTooltip="Agregar evidencia"
+      icon="pi pi-plus"
+      [rounded]="true"
+      severity="info"
+      [outlined]="true"
+      tooltipPosition="right"
+    />
   </div>
   @for (evidence of this.DataSharingEvidence.getEvidences(); track evidence) {
     <form
