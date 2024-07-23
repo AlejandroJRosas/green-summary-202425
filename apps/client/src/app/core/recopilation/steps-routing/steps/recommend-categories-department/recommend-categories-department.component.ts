@@ -15,6 +15,7 @@ import {
 import { ScrollTopModule } from 'primeng/scrolltop'
 import { MatrixRecommendationsComponent } from './matrix/matrix.component'
 import { TooltipModule } from 'primeng/tooltip'
+import { DialogModule } from 'primeng/dialog'
 
 @Component({
   selector: 'app-recommend-categories-department',
@@ -27,7 +28,8 @@ import { TooltipModule } from 'primeng/tooltip'
     FormsModule,
     ScrollTopModule,
     MatrixRecommendationsComponent,
-    TooltipModule
+    TooltipModule,
+    DialogModule
   ],
   templateUrl: './recommend-categories-department.component.html',
   providers: [ConfirmationService]
@@ -39,6 +41,8 @@ export class RecommendCategoriesDepartmentComponent implements OnInit {
   selectedCategories: Category[] = []
   recommendationsFormValues: RecommendationFormValues[] = []
   matrixData: MatrixInfoDto | undefined
+  dialogVisible: boolean = false
+  dialogMatrixScrollHeight: string = 'calc(70vh - 1rem)'
 
   constructor(
     private router: Router,
@@ -139,6 +143,28 @@ export class RecommendCategoriesDepartmentComponent implements OnInit {
     this.router.navigateByUrl(
       `pages/recopilations/steps-create/select-indicators-categories-criteria/${this.recopilationId}`
     )
+  }
+
+  showDialog() {
+    this.dialogMatrixScrollHeight = 'calc(70vh - 1rem)'
+    this.dialogVisible = true
+  }
+
+  onMaximize() {
+    if (this.dialogMatrixScrollHeight === 'calc(80vh - 1rem)') {
+      this.dialogMatrixScrollHeight = 'calc(70vh - 1rem)'
+    } else {
+      this.dialogMatrixScrollHeight = 'calc(80vh - 1rem)'
+    }
+  }
+
+  parseDate(date: string | undefined): string {
+    if (date === undefined) {
+      return ''
+    }
+    return new Date(date).toLocaleDateString('es-ES', {
+      timeZone: 'UTC'
+    })
   }
 }
 
