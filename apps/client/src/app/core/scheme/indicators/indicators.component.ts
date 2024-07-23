@@ -390,4 +390,8 @@ export class IndicatorsComponent
     })
   }
 }
-type IScheme = Indicator & { categories: Category[]; criterias: Criteria[] }
+type IScheme = Indicator & {
+  id?: number
+  categories: Category[]
+  criterias: Criteria[]
+}
