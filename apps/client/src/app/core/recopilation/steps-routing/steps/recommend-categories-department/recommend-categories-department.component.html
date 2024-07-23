@@ -1,12 +1,22 @@
 <main>
-  <header>
+  <header class="flex">
     <h3 class="text-color-secondary">
-      Recomendación de categorías a departamentos
       <i
         class="pi pi-info-circle"
         pTooltip="Haga click en los recuadros para recomendar categorías a los departamentos"
       ></i>
+      Recomendación de categorías a departamentos
     </h3>
+    <button
+      type="button"
+      class="open-big ml-1"
+      (click)="showDialog()"
+      pButton
+      pTooltip="Abrir en ventana grande"
+      severity="success"
+      [disabled]="matrixData === undefined"
+      icon="pi pi-external-link"
+    ></button>
   </header>
   @if (matrixData) {
     <app-matrix
@@ -36,3 +46,43 @@
   </footer>
   <p-scrollTop icon="pi pi-chevron-up" />
 </main>
+@if (matrixData !== undefined) {
+  <p-dialog
+    header="
+  {{ matrixData.name }}
+  (Inicia:
+  {{ parseDate(matrixData.startDate) }}
+  - Termina:
+  {{ parseDate(matrixData.departmentEndDate) }})
+"
+    [resizable]="false"
+    [modal]="true"
+    [maximizable]="true"
+    appendTo="body"
+    [(visible)]="dialogVisible"
+    [draggable]="false"
+    [closeOnEscape]="true"
+    [style]="{ width: '80vw' }"
+    [contentStyle]="{
+      height: '80vh'
+    }"
+    (onMaximize)="onMaximize()"
+  >
+    <app-matrix
+      [recopilationId]="recopilationId"
+      [matrixData]="matrixData"
+      [matrixScrollHeight]="dialogMatrixScrollHeight"
+    ></app-matrix>
+    <ng-template pTemplate="footer">
+      <button
+        type="button"
+        pButton
+        pRipple
+        icon="pi pi-times"
+        (click)="dialogVisible = false"
+        label="Cerrar"
+        class="p-button-text"
+      ></button>
+    </ng-template>
+  </p-dialog>
+}
