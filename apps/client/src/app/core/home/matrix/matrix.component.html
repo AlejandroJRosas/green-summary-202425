@@ -56,6 +56,13 @@
           [ngClass]="currentUser.id === row.department.id ? 'current-user' : ''"
         >
           {{ row.department.fullName }}
+          @if (currentUser.type !== 'department') {
+            <i
+              class="pi pi-info-circle"
+              [pTooltip]="getDepartmentTooltipStats(row.department.id)"
+              tooltipPosition="right"
+            ></i>
+          }
         </td>
         @for (indicator of matrixData.indicators; track $index) {
           @for (category of indicator.categories; track $index) {

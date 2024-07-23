@@ -33,6 +33,16 @@ export class MatrixComponent implements OnInit, OnChanges {
   @Input() matrixData: MatrixInfoDto | undefined
   @Input() matrixScrollHeight: string = '60vh'
 
+  departmentsExtraInfo: ExtraInfo = {
+    totalRecommendedQuantity: 0,
+    totalRecommendedAnswers: 0,
+    totalFreeQuantity: 0,
+    totalFreeAnswers: 0,
+    totalQuantity: 0,
+    totalAnswers: 0,
+    departments: []
+  }
+
   totalDepartments: number = 0
   currentUser: User = JSON.parse(localStorage.getItem('user')!)
 
@@ -41,12 +51,14 @@ export class MatrixComponent implements OnInit, OnChanges {
   ngOnInit(): void {
     this.totalDepartments = this.matrixData?.departments.length || 0
     this.getStats()
+    this.loadExtraInfo()
   }
 
   ngOnChanges(changes: SimpleChanges): void {
     if (changes['matrixData']) {
       this.totalDepartments = this.matrixData?.departments.length || 0
       this.getStats()
+      this.loadExtraInfo()
     }
   }
 
@@ -115,6 +127,76 @@ export class MatrixComponent implements OnInit, OnChanges {
     })
   }
 
+  loadExtraInfo() {
+    if (!this.matrixData) return
+    this.departmentsExtraInfo.departments = this.matrixData.departments.map(
+      (department) => {
+        return {
+          id: department.department.id,
+          name: department.department.fullName,
+          recommendedQuantity: department.answers.filter(
+            (item) => item.isRecommended === true
+          ).length,
+          recommendedAnswers: department.answers.filter(
+            (item) => item.isRecommended === true && item.isAnswered === true
+          ).length,
+          freeQuantity: department.answers.filter(
+            (item) => item.isRecommended === false
+          ).length,
+          freeAnswers: department.answers.filter(
+            (item) => item.isRecommended === false && item.isAnswered === true
+          ).length,
+          quantity: department.answers.length,
+          answers: department.answers.filter((item) => item.isAnswered === true)
+            .length
+        }
+      }
+    )
+
+    this.departmentsExtraInfo.totalRecommendedAnswers =
+      this.departmentsExtraInfo.departments.reduce(
+        (acc, item) => acc + item.recommendedAnswers,
+        0
+      )
+    this.departmentsExtraInfo.totalFreeAnswers =
+      this.departmentsExtraInfo.departments.reduce(
+        (acc, item) => acc + item.freeAnswers,
+        0
+      )
+    this.departmentsExtraInfo.totalRecommendedQuantity =
+      this.departmentsExtraInfo.departments.reduce(
+        (acc, item) => acc + item.recommendedQuantity,
+        0
+      )
+    this.departmentsExtraInfo.totalFreeQuantity =
+      this.departmentsExtraInfo.departments.reduce(
+        (acc, item) => acc + item.freeQuantity,
+        0
+      )
+    this.departmentsExtraInfo.totalQuantity =
+      this.departmentsExtraInfo.totalRecommendedQuantity +
+      this.departmentsExtraInfo.totalFreeQuantity
+
+    this.departmentsExtraInfo.totalAnswers =
+      this.departmentsExtraInfo.totalRecommendedAnswers +
+      this.departmentsExtraInfo.totalFreeAnswers
+  }
+
+  getDepartmentTooltipStats(departmentId: number): string {
+    const department = this.departmentsExtraInfo.departments.find(
+      (department) => department.id == departmentId
+    )
+
+    if (department) {
+      return `Respuestas:
+        Recomendadas: ${department.recommendedAnswers}/${department.recommendedQuantity}
+        Total: ${department.answers}/${department.quantity}
+      `
+    }
+
+    return 'Departamento no encontrado'
+  }
+
   getIndicatorTooltipStats(indicatorId: number): string {
     const response = this.stats.find((stat) => stat.indicatorId === indicatorId)
 
@@ -159,4 +241,25 @@ interface CategoryStats {
   freeQuantity: number
   recommendedAnswersQuantity: number
   recommendedQuantity: number
+}
+
+interface ExtraInfo {
+  totalRecommendedQuantity: number
+  totalRecommendedAnswers: number
+  totalFreeQuantity: number
+  totalFreeAnswers: number
+  totalQuantity: number
+  totalAnswers: number
+  departments: DepartmentExtraInfo[]
+}
+
+interface DepartmentExtraInfo {
+  id: number
+  name: string
+  recommendedQuantity: number
+  recommendedAnswers: number
+  freeQuantity: number
+  freeAnswers: number
+  quantity: number
+  answers: number
 }
