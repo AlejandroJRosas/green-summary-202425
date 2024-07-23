@@ -6,6 +6,7 @@ import { NotificationService } from '../../services/notification.service'
 import { BadgeModule } from 'primeng/badge'
 import { ScrollTopModule } from 'primeng/scrolltop'
 import { Router } from '@angular/router'
+import { BodyComponent } from '../../common/body/body.component'
 
 @Component({
   selector: 'app-notification',
@@ -16,7 +17,8 @@ import { Router } from '@angular/router'
 export class NotificationComponent implements OnInit {
   constructor(
     private NotificationService: NotificationService,
-    private router: Router
+    private router: Router,
+    private body: BodyComponent
   ) {}
   @Input() notification: Notification = {
     id: 0,
@@ -97,7 +99,7 @@ export class NotificationComponent implements OnInit {
   }
   getLinkRecopilation() {
     this.updateLocalSelectedRecopilation()
-    this.router.navigateByUrl('pages/home')
+    this.router.navigate(['pages/home'])
   }
   updateLocalSelectedRecopilation() {
     localStorage.removeItem('selectedRecopilation')
@@ -119,7 +121,9 @@ export class NotificationComponent implements OnInit {
     this.notification.seen = true
     this.NotificationService.edit(this.notification.id, notification).subscribe(
       {
-        next: () => {}
+        next: () => {
+          this.body.reload()
+        }
       }
     )
   }
