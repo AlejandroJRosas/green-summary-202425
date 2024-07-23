@@ -39,16 +39,14 @@
       </a>
     </div>
   } @else {
-    <div class="custom-td-link">
-      <div class="icons-container">
-        @if (answer?.isAnswered) {
-          <tooltip-icon
-            class="load-icon"
-            icon="pi pi-file-arrow-up"
-            tooltip="Ha subido evidencias"
-          ></tooltip-icon>
-        }
-      </div>
+    <div class="icons-container">
+      @if (answer?.isAnswered) {
+        <tooltip-icon
+          class="load-icon"
+          icon="pi pi-file-arrow-up"
+          tooltip="Ha subido evidencias"
+        ></tooltip-icon>
+      }
     </div>
   }
 </div>
