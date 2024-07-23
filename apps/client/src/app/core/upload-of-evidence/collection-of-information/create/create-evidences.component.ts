@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router'
 import { InformationCollectionService } from '../../../../services/information-collection.service'
 import { InformationCollection } from '../../../../../shared/types/information-collection.type'
 import { Toast } from '../../../../common/toast/toast.component'
+import { DataSharingEvidenceService } from '../../../../services/evidence/data-sharing-evidence.service'
 
 @Component({
   selector: 'create-evidences',
@@ -33,6 +34,7 @@ export class CreateEvidencesComponent
     @Inject(Toast) private toast: Toast,
     private route: ActivatedRoute,
     private router: Router,
+    private DataSharingEvidence: DataSharingEvidenceService,
     private InformationCollectionService: InformationCollectionService
   ) {
     const initialControlValues = {
@@ -101,6 +103,7 @@ export class CreateEvidencesComponent
     this.createColletionInformation.evidences = this.evidences
   }
   goBack() {
+    this.DataSharingEvidence.clearEvidences()
     this.router.navigateByUrl(
       `pages/information-collection/recopilation/${this.recopilationId}/category/${this.categoryId}`
     )

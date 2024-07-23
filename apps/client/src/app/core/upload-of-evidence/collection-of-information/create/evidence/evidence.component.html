@@ -12,10 +12,13 @@
       tooltipPosition="right"
     />
   </div>
-  @for (evidence of this.DataSharingEvidence.getEvidences(); track evidence) {
+  @for (
+    evidence of this.DataSharingEvidence.getEvidences();
+    track evidence.id
+  ) {
     <form
       [formGroup]="
-        this.DataSharingEvidence.getFormGroupByEvidence(evidence - 1)
+        this.DataSharingEvidence.getFormGroupByEvidence(evidence.id)!
       "
     >
       <p-dropdown
@@ -24,45 +27,39 @@
         placeholder="Selecciona un tipo de evidencia"
         formControlName="selectedType"
         [readonly]="
-          this.DataSharingEvidence.getDisabledSelectByEvidence(evidence - 1) ||
+          this.DataSharingEvidence.getDisabledSelectByEvidence(evidence.id) ||
           !isValidDepartmentalDate
         "
       />
       @switch (
-        this.DataSharingEvidence.getFormGroupByEvidence(evidence - 1).controls[
+        this.DataSharingEvidence.getFormGroupByEvidence(evidence.id)!.controls[
           'selectedType'
         ].value?.code ?? ''
       ) {
         @case ('image') {
           <evidence-image
             [informationCollectionId]="informationCollectionId"
-            [index]="evidence - 1"
+            [index]="evidence.id"
             (disableSelect)="
-              this.DataSharingEvidence.changeDisabledSelectByEvidence(
-                evidence - 1
-              )
+              this.DataSharingEvidence.disableSelectByEvidence(evidence.id)
             "
           />
         }
         @case ('link') {
           <evidence-link
             [informationCollectionId]="informationCollectionId"
-            [index]="evidence - 1"
+            [index]="evidence.id"
             (disableSelect)="
-              this.DataSharingEvidence.changeDisabledSelectByEvidence(
-                evidence - 1
-              )
+              this.DataSharingEvidence.disableSelectByEvidence(evidence.id)
             "
           />
         }
         @case ('document') {
           <evidence-document
             [informationCollectionId]="informationCollectionId"
-            [index]="evidence - 1"
+            [index]="evidence.id"
             (disableSelect)="
-              this.DataSharingEvidence.changeDisabledSelectByEvidence(
-                evidence - 1
-              )
+              this.DataSharingEvidence.disableSelectByEvidence(evidence.id)
             "
           />
         }
