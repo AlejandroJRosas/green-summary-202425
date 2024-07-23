@@ -41,6 +41,8 @@ export class SelectDepartmentsComponent implements OnInit {
 
   recopilations: Recopilation[] = []
 
+  recopilation: Recopilation | undefined
+
   departments: Department[] = []
   selectedDepartmentsIds: number[] = []
 
@@ -79,9 +81,29 @@ export class SelectDepartmentsComponent implements OnInit {
           }
         }
       })
+
+    this.recopilationService.getById(this.recopilationId).subscribe({
+      next: (data) => {
+        if (!data) return
+
+        this.recopilation = data
+      },
+      error: (e) => {
+        if (e.error.data != null) {
+          this.toast.show('error', 'Error', e.error.data.message)
+        } else {
+          this.toast.show('error', 'Error', e.error.message)
+        }
+      }
+    })
   }
 
   submitAndContinue() {
+    if (this.recopilation?.isReady) {
+      this.nextStep()
+      return
+    }
+
     const payload = {
       recopilationId: this.recopilationId,
       departmentsIds: this.selectedDepartmentsIds

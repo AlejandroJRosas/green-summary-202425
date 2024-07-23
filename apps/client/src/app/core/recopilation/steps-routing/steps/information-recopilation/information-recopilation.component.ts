@@ -53,7 +53,9 @@ export class InformationRecopilationComponent
     }
 
     const validationSchema = object({
-      name: string().required('El nombre de la recopilación es obligatorio'),
+      name: string()
+        .max(30, 'El nombre de la recopilación debe ser menor a 30 carácteres')
+        .required('El nombre de la recopilación es obligatorio'),
       description: string().required(
         'La descripción de la recopilación es obligatoria'
       ),
@@ -146,6 +148,8 @@ export class InformationRecopilationComponent
 
   recopilationId: number = -1
 
+  recopilation: Recopilation | undefined
+
   ngOnInit() {
     this.loadRecopilation()
   }
@@ -157,6 +161,7 @@ export class InformationRecopilationComponent
           if (!data) return
 
           const recopilation = data
+          this.recopilation = data
           this.formGroup.patchValue({
             name: recopilation.name,
             description: recopilation.description,
@@ -187,6 +192,11 @@ export class InformationRecopilationComponent
   }
 
   submitAndContinueOrFail() {
+    if (this.recopilation?.isReady) {
+      this.nextStep()
+      return
+    }
+
     if (this.formGroup.invalid) {
       this.forceValidations()
       return

@@ -109,19 +109,23 @@ export class PreviewComponent {
   }
 
   finishRecopilationCreation() {
-    this.recopilationService.setAsReady(this.recopilationId).subscribe({
-      next: () => {
-        this.toast.show('success', 'Éxito', 'Recopilación creada con éxito')
-        this.router.navigateByUrl('pages/recopilations')
-      },
-      error: (e) => {
-        if (e.error.data != null) {
-          this.toast.show('error', 'Error', e.error.data.message)
-        } else {
-          this.toast.show('error', 'Error', e.error.message)
+    if (!this.matrixData?.isReady) {
+      this.recopilationService.setAsReady(this.recopilationId).subscribe({
+        next: () => {
+          this.toast.show('success', 'Éxito', 'Recopilación creada con éxito')
+          this.router.navigateByUrl('pages/recopilations')
+        },
+        error: (e) => {
+          if (e.error.data != null) {
+            this.toast.show('error', 'Error', e.error.data.message)
+          } else {
+            this.toast.show('error', 'Error', e.error.message)
+          }
         }
-      }
-    })
+      })
+    } else {
+      this.router.navigateByUrl('pages/recopilations')
+    }
   }
   prevStep() {
     this.router.navigateByUrl(
