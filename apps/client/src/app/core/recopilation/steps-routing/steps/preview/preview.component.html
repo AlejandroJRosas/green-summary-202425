@@ -96,31 +96,30 @@
   }
 
   <footer class="flex justify-content-between pt-7">
-    <div
-      [pTooltip]="matrixData?.isReady ? 'Esta recopilación ya está activa' : ''"
-    >
-      <p-button
-        label="Atras"
-        icon="pi pi-angle-left"
-        iconPos="left"
-        size="small"
-        severity="danger"
-        [disabled]="matrixData?.isReady"
-        [outlined]="true"
-        (click)="prevStep()"
-      />
-    </div>
+    <p-button
+      label="Atras"
+      icon="pi pi-angle-left"
+      iconPos="left"
+      size="small"
+      severity="danger"
+      [outlined]="true"
+      (click)="prevStep()"
+    />
 
-    <div>
-      <p-button
-        label="Finalizar"
-        styleClass="bg-primary border-primary"
-        icon="pi pi-angle-right"
-        iconPos="right"
-        size="small"
-        (click)="finishRecopilationCreation()"
-      ></p-button>
-    </div>
+    <p-button
+      label="Finalizar"
+      [pTooltip]="
+        matrixData?.isReady
+          ? ''
+          : 'Al darle click a finalizar la recopilación se activará y no podrá ser modificada'
+      "
+      tooltipPosition="left"
+      styleClass="bg-primary border-primary"
+      icon="pi pi-angle-right"
+      iconPos="right"
+      size="small"
+      (click)="finishRecopilationCreation()"
+    ></p-button>
   </footer>
   <p-scrollTop icon="pi pi-chevron-up" />
 </main>

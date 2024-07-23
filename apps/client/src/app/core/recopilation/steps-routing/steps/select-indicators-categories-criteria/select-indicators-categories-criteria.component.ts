@@ -86,6 +86,7 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
   recopilationId = -1
   schemes: Scheme[] = []
   indicators: IndicatorToRelateFormValues[] = []
+  recopilationIsReady: boolean = false
 
   ngOnInit() {
     this.loadScheme()
@@ -113,9 +114,12 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
   }
 
   private loadRecopilationPreviousData(recopilationId: number) {
+    if (recopilationId === null) return
     this.recopilationService.getDetailedById(recopilationId).subscribe({
       next: (data) => {
         if (!data) return
+
+        this.recopilationIsReady = data.isReady
 
         this.indicators = data.indicators.map((i) => ({
           indicatorId: i.indicator.index,
@@ -185,6 +189,11 @@ export class SelectIndicatorsCategoriesCriteriaComponent implements OnInit {
   }
 
   onSubmit() {
+    if (this.recopilationIsReady) {
+      this.nextStep()
+      return
+    }
+
     const payload = this.adaptFormValuesToDto()
 
     this.recopilationService.relateIndicators(payload).subscribe({

@@ -99,6 +99,11 @@ export class RecommendCategoriesDepartmentComponent implements OnInit {
   }
 
   submitAndContinue() {
+    if (this.matrixData?.isReady) {
+      this.nextStep()
+      return
+    }
+
     this.preparePayload()
 
     const payload = {
