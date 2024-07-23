@@ -36,7 +36,7 @@ import { TooltipModule } from 'primeng/tooltip'
 import { ScrollTopModule } from 'primeng/scrolltop'
 import { OverlayPanelModule } from 'primeng/overlaypanel'
 import { ValidatedFormGroup } from '../../common/validated-form-group/validated-form-group'
-import { string, object } from 'yup'
+import { string, object, number } from 'yup'
 import { ChipModule } from 'primeng/chip'
 
 @Component({
@@ -175,7 +175,9 @@ export class InformationCollectionViewComponent
 
   goToRecordPage() {
     this.router.navigateByUrl(
-      `pages/records?recopilationId=${this.recopilationId}&indicatorId=${this.recopilationId}`
+      //* Ignore line because changes in indicator signature break working code
+      // @ts-ignore
+      `pages/records?recopilationId=${this.recopilationId}&indicatorId=${this.indicator.id}`
     )
   }
 

@@ -62,7 +62,6 @@ export class RecordsComponent implements OnInit {
       if (params['recopilationId'] && params['indicatorId']) {
         this.selectedRecopilation = +params['recopilationId']
         this.searchParamIndicatorId = this.indicator = +params['indicatorId']
-        this.updateCategoriesAndCriteria()
       }
       this.initializeRecopilations()
     })
@@ -128,6 +127,9 @@ export class RecordsComponent implements OnInit {
           this.indicator =
             this.searchParamIndicatorId ??
             this.indicatorsByRecopilation[0].index
+
+          this.searchParamIndicatorId = undefined
+
           this.updateCategoriesAndCriteria()
         }
       })
