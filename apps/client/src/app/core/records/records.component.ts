@@ -15,6 +15,7 @@ import {
 import { RecordsCategoryHeaderComponent } from './category/header/header.component'
 import { RecordsCategoryBodyComponent } from './category/body/body.component'
 import { ScrollTopModule } from 'primeng/scrolltop'
+import { ActivatedRoute } from '@angular/router'
 
 @Component({
   selector: 'app-records',
@@ -39,28 +40,35 @@ export class RecordsComponent implements OnInit {
   @ViewChildren(Panel) public panels: QueryList<Panel> | undefined
 
   public allCollapsed: boolean = true
-
   public selectedRecopilation: number =
     Number(localStorage.getItem('selectedRecopilation')) ?? 0
-
   public recopilations: Recopilation[] | undefined
-
   public indicator: number | undefined
-
   public indicators: Indicator[] | undefined
-
   public categoriesAndCriteria: CategoryByRecopilation[] | undefined
-
   private indicatorsByRecopilation: IndicatorByRecopilation[] | undefined
+
+  searchParamRecopilationId: number | undefined
+  searchParamIndicatorId: number | undefined
 
   constructor(
     private recopilationService: RecopilationService,
-    private indicatorService: IndicatorService
+    private indicatorService: IndicatorService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit(): void {
-    this.initializeRecopilations()
+    this.route.queryParams.subscribe((params) => {
+      if (params['recopilationId'] && params['indicatorId']) {
+        this.selectedRecopilation = +params['recopilationId']
+        this.searchParamIndicatorId = this.indicator = +params['indicatorId']
+        this.updateCategoriesAndCriteria()
+      }
+      this.initializeRecopilations()
+    })
   }
+
+  selectedIndicator: number = 0
 
   initializeRecopilations(): void {
     this.recopilationService.getActiveMapped().subscribe((recopilations) => {
@@ -117,7 +125,9 @@ export class RecordsComponent implements OnInit {
         }))
 
         if (this.indicatorsByRecopilation.length > 0) {
-          this.indicator = this.indicatorsByRecopilation[0].index
+          this.indicator =
+            this.searchParamIndicatorId ??
+            this.indicatorsByRecopilation[0].index
           this.updateCategoriesAndCriteria()
         }
       })

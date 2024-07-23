@@ -127,6 +127,7 @@ export class InformationCollectionViewComponent
       this.departmentId = parseInt(params['departmentId'], 10)
     })
   }
+
   recopilationId: number = 0
   categoryId: number = 0
   departmentId: number = 0
@@ -153,12 +154,14 @@ export class InformationCollectionViewComponent
     password: '',
     type: 'department'
   }
+
   ngOnInit() {
     this.getDepartmentById()
     this.getCategoryById()
     this.getAllByDepartment()
     this.getRecopilationById()
   }
+
   translateType(type: string) {
     switch (type) {
       case 'image':
@@ -169,6 +172,13 @@ export class InformationCollectionViewComponent
         return 'Link'
     }
   }
+
+  goToRecordPage() {
+    this.router.navigateByUrl(
+      `pages/records?recopilationId=${this.recopilationId}&indicatorId=${this.recopilationId}`
+    )
+  }
+
   confirmInformationCollection(
     name: string,
     informationCollection: InformationCollectionByDepartment
@@ -183,6 +193,7 @@ export class InformationCollectionViewComponent
       informationCollection
     )
   }
+
   editApprovedInformationById(
     informationCollectionId: number,
     informationCollection: InformationCollectionByDepartment
@@ -211,10 +222,12 @@ export class InformationCollectionViewComponent
       }
     })
   }
+
   resetError() {
     this.formGroup.reset()
     this.formGroup.controls.error.setValue('')
   }
+
   editEvidenceErrorById(evidence: Evidence) {
     if (this.formGroup.controls.error.value === null) return
     const formData = new FormData()
@@ -236,6 +249,7 @@ export class InformationCollectionViewComponent
       }
     })
   }
+
   getRecopilationById() {
     this.RecopilationService.getById(this.recopilationId).subscribe({
       next: (res) => {
@@ -258,6 +272,7 @@ export class InformationCollectionViewComponent
       }
     })
   }
+
   getDepartmentById() {
     this.DepartmentService.getById(this.departmentId).subscribe({
       next: (res) => {
@@ -271,6 +286,7 @@ export class InformationCollectionViewComponent
       }
     })
   }
+
   getCategoryById() {
     this.CategoryService.getById(this.categoryId).subscribe({
       next: (res) => {
@@ -284,6 +300,7 @@ export class InformationCollectionViewComponent
       }
     })
   }
+
   getAllByDepartment() {
     this.InformationCollectionService.getByDepartmentId(
       this.recopilationId,

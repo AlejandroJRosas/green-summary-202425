@@ -8,16 +8,25 @@
     <section class="flex align-items-center justify-content-center w-full">
       <section class="w-full h-full">
         <div class="flex flex-column align-items-start pb-4 w-full">
-          <h2
-            style="font-size: 1.4rem"
-            class="text-color-secondary flex-1"
-            [pTooltip]="this.category.helpText"
-            tooltipEvent="hover"
-            tooltipPosition="bottom"
-          >
-            Subida de archivos para {{ this.category.indicator.alias }} /
-            {{ this.category.name }}
-          </h2>
+          <div class="flex gap-3">
+            <h2
+              style="font-size: 1.4rem"
+              class="text-color-secondary flex-1"
+              [pTooltip]="this.category.helpText"
+              tooltipEvent="hover"
+              tooltipPosition="bottom"
+            >
+              Subida de archivos para {{ this.category.indicator.alias }} /
+              {{ this.category.name }}
+            </h2>
+            <p-button
+              label="Ir al registro"
+              severity="success"
+              icon="pi pi-angle-right"
+              iconPos="right"
+              (click)="goToRecordPage()"
+            ></p-button>
+          </div>
           @if (informationCollections.length !== 0) {
             <div class="flex flex-row flex-wrap gap-2">
               <p-button
