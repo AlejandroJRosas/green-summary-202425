@@ -2,18 +2,8 @@
   <div class="flex flex-row gap-4 align-items-center">
     <h3 class="text-color-secondary text-xl">Evidencias</h3>
     <p-button
-      (click)="
-        isValidDepartmentalDate
-          ? this.DataSharingEvidence.getLenghtEvidences() !== 0
-            ? ''
-            : addEvidence()
-          : ''
-      "
-      [disabled]="
-        !isValidDepartmentalDate
-          ? true
-          : this.DataSharingEvidence.getLenghtEvidences() !== 0
-      "
+      (click)="isValidDepartmentalDate ? addEvidence() : ''"
+      [disabled]="!isValidDepartmentalDate"
       pTooltip="Agregar evidencia"
       icon="pi pi-plus"
       [rounded]="true"
@@ -69,4 +59,5 @@
       }
     </form>
   }
+  <p-scrollTop icon="pi pi-chevron-up" />
 </section>

@@ -13,6 +13,7 @@ import { Toast } from '../../../../../common/toast/toast.component'
 import { DetailedRecopilation } from '../../../../../services/recopilation.service'
 import { RecopilationService } from '../../../../../services/recopilation.service'
 import { TooltipModule } from 'primeng/tooltip'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'evidence',
@@ -27,7 +28,8 @@ import { TooltipModule } from 'primeng/tooltip'
     FormsModule,
     ReactiveFormsModule,
     PanelModule,
-    TooltipModule
+    TooltipModule,
+    ScrollTopModule
   ],
   templateUrl: './evidence.component.html',
   styles: ``

@@ -7,6 +7,7 @@ import { FormControl, FormGroup } from '@angular/forms'
 export class DataSharingEvidenceService {
   public evidences: number[] = []
   public formGroups: FormGroup[] = []
+  public disabledSelect: boolean[] = []
   private formGroupsMap: Map<number, FormGroup> = new Map()
 
   constructor() {}
@@ -36,6 +37,7 @@ export class DataSharingEvidenceService {
   }
   addEvidence(): void {
     const newEvidenceIndex = this.evidences.length + 1
+    const disabledSelect = false
     this.evidences.push(newEvidenceIndex)
     const newFormGroup = new FormGroup({
       selectedType: new FormControl<typeEvidence>({
@@ -44,6 +46,7 @@ export class DataSharingEvidenceService {
       })
     })
     this.formGroups.push(newFormGroup)
+    this.disabledSelect.push(disabledSelect)
   }
   setEvidences(evidences: number[]): void {
     this.evidences = evidences
@@ -52,9 +55,11 @@ export class DataSharingEvidenceService {
     if (this.evidences.length === 1) {
       this.evidences.pop()
       this.formGroups.pop()
+      this.disabledSelect.pop()
     } else {
       this.evidences.splice(indexEvidence, 1)
       this.formGroupsMap.delete(indexEvidence)
+      this.disabledSelect.pop()
     }
   }
 }
