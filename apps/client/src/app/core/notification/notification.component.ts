@@ -54,11 +54,11 @@ export class NotificationComponent implements OnInit {
     },
     evidenceCreation: {
       icon: 'pi pi-file-plus',
-      color: 'bg-cyan-100'
+      color: 'bg-cyan-200'
     },
     evidenceEdition: {
       icon: 'pi pi-file-edit',
-      color: 'bg-teal-100'
+      color: 'bg-pink-200'
     },
     evidenceError: {
       icon: 'pi pi-file-excel',
