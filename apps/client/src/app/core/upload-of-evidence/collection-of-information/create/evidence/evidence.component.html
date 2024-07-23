@@ -23,7 +23,10 @@
         optionLabel="name"
         placeholder="Selecciona un tipo de evidencia"
         formControlName="selectedType"
-        [readonly]="disableSelect || !isValidDepartmentalDate"
+        [readonly]="
+          this.DataSharingEvidence.getDisabledSelectByEvidence(evidence - 1) ||
+          !isValidDepartmentalDate
+        "
       />
       @switch (
         this.DataSharingEvidence.getFormGroupByEvidence(evidence - 1).controls[
@@ -34,21 +37,33 @@
           <evidence-image
             [informationCollectionId]="informationCollectionId"
             [index]="evidence - 1"
-            (disableSelect)="changeDisableSelect($event)"
+            (disableSelect)="
+              this.DataSharingEvidence.changeDisabledSelectByEvidence(
+                evidence - 1
+              )
+            "
           />
         }
         @case ('link') {
           <evidence-link
             [informationCollectionId]="informationCollectionId"
             [index]="evidence - 1"
-            (disableSelect)="changeDisableSelect($event)"
+            (disableSelect)="
+              this.DataSharingEvidence.changeDisabledSelectByEvidence(
+                evidence - 1
+              )
+            "
           />
         }
         @case ('document') {
           <evidence-document
             [informationCollectionId]="informationCollectionId"
             [index]="evidence - 1"
-            (disableSelect)="changeDisableSelect($event)"
+            (disableSelect)="
+              this.DataSharingEvidence.changeDisabledSelectByEvidence(
+                evidence - 1
+              )
+            "
           />
         }
         @default {

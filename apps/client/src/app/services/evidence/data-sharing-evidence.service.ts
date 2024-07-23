@@ -9,6 +9,7 @@ export class DataSharingEvidenceService {
   public formGroups: FormGroup[] = []
   public disabledSelect: boolean[] = []
   private formGroupsMap: Map<number, FormGroup> = new Map()
+  private evidenceIndexCounter = 0
 
   constructor() {}
 
@@ -18,7 +19,13 @@ export class DataSharingEvidenceService {
   getFormGroupByEvidence(evidence: number): FormGroup {
     return this.formGroups[evidence]
   }
-
+  getDisabledSelectByEvidence(evidence: number): boolean {
+    return this.disabledSelect[evidence]
+  }
+  changeDisabledSelectByEvidence(evidence: number): boolean {
+    this.disabledSelect[evidence] = true
+    return this.disabledSelect[evidence]
+  }
   addFormGroup() {
     const newformGroup = new FormGroup({
       selectedType: new FormControl<typeEvidence>({
@@ -36,7 +43,8 @@ export class DataSharingEvidenceService {
     return this.evidences.length
   }
   addEvidence(): void {
-    const newEvidenceIndex = this.evidences.length + 1
+    const newEvidenceIndex = this.evidenceIndexCounter + 1
+    this.evidenceIndexCounter++
     const disabledSelect = false
     this.evidences.push(newEvidenceIndex)
     const newFormGroup = new FormGroup({
@@ -59,7 +67,8 @@ export class DataSharingEvidenceService {
     } else {
       this.evidences.splice(indexEvidence, 1)
       this.formGroupsMap.delete(indexEvidence)
-      this.disabledSelect.pop()
+      this.disabledSelect.splice(indexEvidence, 1)
+      console.log(indexEvidence)
     }
   }
 }
