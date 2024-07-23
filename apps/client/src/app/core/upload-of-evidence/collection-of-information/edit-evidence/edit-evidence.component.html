@@ -12,13 +12,13 @@
   </section>
   @switch (evidence.type) {
     @case ('image') {
-      <evidence-image [evidence]="evidence" [edit]="true" />
+      <evidence-image [evidence]="evidence" [edit]="true" [index]="1" />
     }
     @case ('link') {
-      <evidence-link [evidence]="evidence" [edit]="true" />
+      <evidence-link [evidence]="evidence" [edit]="true" [index]="1" />
     }
     @case ('document') {
-      <evidence-document [evidence]="evidence" [edit]="true" />
+      <evidence-document [evidence]="evidence" [edit]="true" [index]="1" />
     }
     @default {
       <p class="text-color-secundary">No exite ese tipo de evidencia</p>
