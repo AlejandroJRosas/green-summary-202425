@@ -76,6 +76,7 @@ export class CreateEvidencesComponent
   }
 
   ngOnInit() {
+    this.DataSharingEvidence.clearEvidences()
     this.getInformationCollectionById()
   }
 
@@ -103,7 +104,6 @@ export class CreateEvidencesComponent
     this.createColletionInformation.evidences = this.evidences
   }
   goBack() {
-    this.DataSharingEvidence.clearEvidences()
     this.router.navigateByUrl(
       `pages/information-collection/recopilation/${this.recopilationId}/category/${this.categoryId}`
     )
