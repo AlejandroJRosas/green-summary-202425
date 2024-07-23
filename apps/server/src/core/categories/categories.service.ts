@@ -63,7 +63,8 @@ export class CategoriesService {
   async getOneCategory(id: number): Promise<Category> {
     const category = await this.categoryRepository.findOne({
       where: { id },
-      relations: ['indicator']
+      relations: ['indicator'],
+      withDeleted: true
     })
     if (!category) {
       throw new NotFoundException(`Category with ID ${id} not found`)
