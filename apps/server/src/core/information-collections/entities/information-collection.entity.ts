@@ -18,7 +18,8 @@ export class InformationCollection {
 
   @ManyToOne(
     () => Recopilation,
-    (recopilation) => recopilation.informationCollections
+    (recopilation) => recopilation.informationCollections,
+    { onDelete: 'CASCADE', onUpdate: 'CASCADE' }
   )
   recopilation: Recopilation
 
