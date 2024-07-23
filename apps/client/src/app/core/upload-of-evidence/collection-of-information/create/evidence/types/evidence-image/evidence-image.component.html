@@ -11,43 +11,27 @@
         class="flex flex-row justify-content-start align-items-center gap-4 w-full"
       >
         <h3 class="text-lg">Evidencia {{ index + 1 }}</h3>
-        <div class="flex flex-row gap-1">
-          <button
-            class="p-panel-header-icon p-link mr-2"
+        <div class="flex flex-row gap-2">
+          <p-button
+            (click)="createdEvidence || editedEvience ? enableForm() : ''"
+            pTooltip="Editar"
+            icon="pi pi-pencil"
+            [rounded]="true"
+            severity="success"
+            [outlined]="true"
+            tooltipPosition="left"
             [disabled]="!(createdEvidence || editedEvience)"
-          >
-            <span
-              class="pi pi-pencil"
-              (click)="createdEvidence || editedEvience ? enableForm() : ''"
-              [style.color]="
-                createdEvidence || editedEvience ? '#22c55e' : 'darkgrey'
-              "
-              [style.border]="
-                createdEvidence || editedEvience
-                  ? 'solid 1.5px #22c55e'
-                  : 'solid 1.5px darkgrey'
-              "
-              style="border-radius: 100%; padding: 7px"
-            ></span>
-          </button>
-          <button
-            class="p-panel-header-icon p-link mr-2"
+          />
+          <p-button
+            (click)="!(createdEvidence || editedEvience) ? '' : onDelete()"
             [disabled]="!(createdEvidence || editedEvience)"
-          >
-            <span
-              class="pi pi-trash"
-              (click)="!(createdEvidence || editedEvience) ? '' : onDelete()"
-              [style.color]="
-                createdEvidence || editedEvience ? '#ef4444' : 'darkgrey'
-              "
-              [style.border]="
-                createdEvidence || editedEvience
-                  ? 'solid 1.5px #ef4444'
-                  : 'solid 1.5px darkgrey'
-              "
-              style="border-radius: 100%; padding: 6px"
-            ></span>
-          </button>
+            pTooltip="Eliminar"
+            icon="pi pi-trash"
+            [rounded]="true"
+            severity="danger"
+            [outlined]="true"
+            tooltipPosition="left"
+          />
         </div>
       </div>
     </ng-template>

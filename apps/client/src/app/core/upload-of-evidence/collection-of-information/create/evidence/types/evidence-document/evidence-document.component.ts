@@ -105,7 +105,6 @@ export class EvidenceDocumentComponent
     if (this.edit) {
       this.initialValueEdit = true
       this.enableEdit = true
-      // this.createdEvidence = true
       this.evidenceId = this.evidence.id
       if (this.evidence.fileLink !== null) {
         this.nameFileByUrl = this.getFileNameByUrl(this.evidence.fileLink)
@@ -243,7 +242,7 @@ export class EvidenceDocumentComponent
             this.toast.show(
               'success',
               'Creado',
-              'Evidencia tipo imagen editada con éxito'
+              'Evidencia tipo documento editado con éxito'
             )
             this.editedEvience = true
             this.disableForm()

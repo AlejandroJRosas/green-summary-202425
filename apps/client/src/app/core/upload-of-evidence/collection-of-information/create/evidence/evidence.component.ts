@@ -12,6 +12,8 @@ import { DataSharingEvidenceService } from '../../../../../services/evidence/dat
 import { Toast } from '../../../../../common/toast/toast.component'
 import { DetailedRecopilation } from '../../../../../services/recopilation.service'
 import { RecopilationService } from '../../../../../services/recopilation.service'
+import { TooltipModule } from 'primeng/tooltip'
+import { ScrollTopModule } from 'primeng/scrolltop'
 
 @Component({
   selector: 'evidence',
@@ -25,7 +27,9 @@ import { RecopilationService } from '../../../../../services/recopilation.servic
     FieldsetModule,
     FormsModule,
     ReactiveFormsModule,
-    PanelModule
+    PanelModule,
+    TooltipModule,
+    ScrollTopModule
   ],
   templateUrl: './evidence.component.html',
   styles: ``

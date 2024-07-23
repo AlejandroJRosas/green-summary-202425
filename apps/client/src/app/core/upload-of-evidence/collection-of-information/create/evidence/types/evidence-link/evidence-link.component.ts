@@ -122,6 +122,7 @@ export class EvidenceLinkComponent
     this.formGroup.get('externalLink')?.disable()
   }
   enableForm() {
+    this.enableEditButton()
     this.formGroup.get('description')?.enable()
     this.formGroup.get('externalLink')?.enable()
   }
