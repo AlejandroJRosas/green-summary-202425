@@ -63,12 +63,19 @@ export class HomeComponent implements OnInit {
       next: (recopilations) => {
         if (recopilations.status === 'success') {
           this.recopilations = recopilations.data
+
+          const isEmptyLocalStorage = this.selectedRecopilation === 0
+          const recopilationInLocalStorage = this.recopilations.find(
+            (recopilation) => recopilation.id === this.selectedRecopilation
+          )
+
+          if (!recopilationInLocalStorage) {
+            this.selectedRecopilation = 0
+          }
+
           if (
             this.recopilations.length === 1 &&
-            (this.selectedRecopilation === 0 ||
-              this.recopilations.find(
-                (recopilation) => recopilation.id === this.selectedRecopilation
-              ) === undefined)
+            (isEmptyLocalStorage || !recopilationInLocalStorage)
           ) {
             this.updateLocalSelectedRecopilation()
             this.selectedRecopilation = this.recopilations[0].id
