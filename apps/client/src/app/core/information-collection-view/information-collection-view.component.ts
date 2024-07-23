@@ -177,7 +177,7 @@ export class InformationCollectionViewComponent
     this.router.navigateByUrl(
       //* Ignore line because changes in indicator signature break working code
       // @ts-ignore
-      `pages/records?recopilationId=${this.recopilationId}&indicatorId=${this.indicator.id}`
+      `pages/records?recopilationId=${this.recopilationId}&indicatorId=${this.category.indicator.id}`
     )
   }
 
