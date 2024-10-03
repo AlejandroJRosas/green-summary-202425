@@ -23,7 +23,7 @@ jobs:
             pnpm install
             pnpm build
             pm2 restart summary-backend
-            cp /var/apps/green-summary-202425/apps/client/.htaccess /var/apps/green-summary-202425/apps/client/dist/browser/.htaccess
+            cp /var/apps/green-summary-202425/apps/client/.htaccess /var/apps/green-summary-202425/apps/client/dist/client/browser/.htaccess
             rm /var/www/green-summary-client -rf
             mv /var/apps/green-summary-202425/apps/client/dist /var/www/green-summary-client
             pnpm generate:docs
